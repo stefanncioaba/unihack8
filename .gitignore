@@ -107,6 +107,8 @@ yarn-error.*
 infra/otp/*.pbf
 infra/otp/*.zip
 infra/otp/*.obj
+# Except the STPT timetable (~2 MB): the backend's "last tram/bus" answers need it on every machine.
+!infra/otp/stpt-gtfs.zip
 
 # =========================================================
 #  OS files

@@ -11,7 +11,7 @@ Only the Spring backend calls it (`otp.base-url` in `application-local.propertie
 |---|---|---|
 | `docker-compose.yml` | yes | `otp-build` builds the graph once, `otp` serves it. Image `opentripplanner/opentripplanner:2.7.0`. |
 | `get-data.sh` | yes | Downloads the two data files below. |
-| `stpt-gtfs.zip` | no | STPT/SMTT timetable (GTFS, ~2 MB) from `https://smtt.ro/transit/gtfs/maps/smtt-timisoara-ro.zip` (listed in the Mobility Database as `mdb-2868`; the script falls back to its mirror). |
+| `stpt-gtfs.zip` | **yes** | STPT/SMTT timetable (GTFS, 1.8 MB) from `https://smtt.ro/transit/gtfs/maps/smtt-timisoara-ro.zip` (listed in the Mobility Database as `mdb-2868`; the script falls back to its mirror). Committed because the Spring backend also reads it for "last tram/bus" answers; `get-data.sh` overwrites it with a fresh copy — commit that when it changes. |
 | `timisoara.osm.pbf` | no | Street map (~6 MB), cut from Geofabrik's Romania extract to the GTFS area `20.85,45.46,21.43,45.98`. |
 | `graph.obj` | no | The routing graph OTP builds from the two files (~15 MB). |
 
@@ -27,7 +27,7 @@ docker compose up -d otp                           # 3. serve on http://localhos
 
 - Check: `http://localhost:8081/` opens OTP's debug map.
 - Stop: `docker compose down`.
-- **The GTFS timetable has an end date** (the 2026-11-13 download covers 2026-11-05 to 2026-12-31). After that, transit routes stop appearing: re-run steps 1 and 2.
+- **The GTFS timetable has an end date** (the 2026-11-13 download covers 2026-11-05 to 2026-12-31). After that, transit routes stop appearing: re-run steps 1 and 2, and commit the new `stpt-gtfs.zip`.
 - If `get-data.sh` finds no local `osmium`, it runs osmium in the official `debian:bookworm-slim` image.
 
 ## What the backend sends
