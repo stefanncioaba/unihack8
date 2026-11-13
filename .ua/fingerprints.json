@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "828d6ab9dac65c0431da783cab804314882531c7",
-  "generatedAt": "2026-11-13T18:50:21+00:00",
+  "gitCommitHash": "54ed9208d27350071b458fd640a5ce17d0c740de",
+  "generatedAt": "2026-11-13T18:56:02+00:00",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -15,27 +15,27 @@
     },
     "AGENTS.md": {
       "filePath": "AGENTS.md",
-      "contentHash": "60a9c4fedec4c3ed54a29035374c59f83be94d042d685a8250c440978e3db0c6",
+      "contentHash": "068ccd03a4514e23941f5f6df9430d9f024204a650516f2a583a6b009dc66f56",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 49,
+      "totalLines": 50,
       "hasStructuralAnalysis": false
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "c56ff275934f2cc39f97e3af0943a5b217129f20920b1b2d7cbba073f36c191b",
+      "contentHash": "9f21a5229364d322517f8688f8f826b5afc36d4346a2c0b23a33880d6fa31ab8",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 186,
+      "totalLines": 221,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "e549b08a5d0bc8bc73b38bbea1eaf853911267a1da9231c050b5ae1ee65218b6",
+      "contentHash": "128ae10ee7c9affede2839e974fb4031330ff8721a60d92d6c420a5c2a6be32a",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -864,6 +864,189 @@
       "totalLines": 141,
       "hasStructuralAnalysis": true
     },
+    "backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "contentHash": "63b612f286a8ece0ec07aefc4a1ad50e44f78f33ad38fbc2b46b4a10b0669ad5",
+      "functions": [
+        {
+          "name": "parse",
+          "params": [
+            "value",
+            "parameterName"
+          ],
+          "returnType": "BoundingBox",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "contains",
+          "params": [
+            "lat",
+            "lon"
+          ],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "BoundingBox",
+          "methods": [
+            "parse",
+            "contains"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 20
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        }
+      ],
+      "exports": [
+        "parse",
+        "contains",
+        "BoundingBox"
+      ],
+      "totalLines": 30,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java",
+      "contentHash": "8d2de91be060eb757bfd97e9177b50498d050b278ca39ab7a60675c40aaafbe3",
+      "functions": [
+        {
+          "name": "GeoParsing",
+          "params": [],
+          "exported": false,
+          "lineCount": 2
+        },
+        {
+          "name": "numbers",
+          "params": [
+            "value",
+            "count",
+            "parameterName",
+            "format"
+          ],
+          "returnType": "double[]",
+          "exported": false,
+          "lineCount": 22
+        }
+      ],
+      "classes": [
+        {
+          "name": "GeoParsing",
+          "methods": [
+            "GeoParsing",
+            "numbers"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 30
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 37,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "contentHash": "12287c3a92ab38adc2b4323f2140f81e94646469c120feda482ae5c69b8a9186",
+      "functions": [
+        {
+          "name": "parse",
+          "params": [
+            "value",
+            "parameterName"
+          ],
+          "returnType": "GeoPoint",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "distanceMetersTo",
+          "params": [
+            "other"
+          ],
+          "returnType": "double",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "boxAround",
+          "params": [
+            "radiusMeters"
+          ],
+          "returnType": "BoundingBox",
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "GeoPoint",
+          "methods": [
+            "parse",
+            "distanceMetersTo",
+            "boxAround"
+          ],
+          "properties": [
+            "EARTH_RADIUS_METERS"
+          ],
+          "exported": true,
+          "lineCount": 40
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        }
+      ],
+      "exports": [
+        "parse",
+        "distanceMetersTo",
+        "boxAround",
+        "GeoPoint"
+      ],
+      "totalLines": 49,
+      "hasStructuralAnalysis": true
+    },
     "backend/src/main/java/com/unihack8/backend/common/security/CurrentUser.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/security/CurrentUser.java",
       "contentHash": "84b9cbcaee4f9b7b2e293d7efb47953c54b484ae086b68db6a43005356377014",
@@ -1503,6 +1686,2172 @@
       "totalLines": 17,
       "hasStructuralAnalysis": true
     },
+    "backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java",
+      "contentHash": "137f8b50573c0b8f7a31e4642ff5a7eb98d6be8a728e6a974d2e832c775f304b",
+      "functions": [],
+      "classes": [
+        {
+          "name": "OverpassClient",
+          "methods": [
+            "fetchPlaces"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.places.client.dto.OverpassResponse",
+          "specifiers": [
+            "OverpassResponse"
+          ]
+        }
+      ],
+      "exports": [
+        "OverpassClient"
+      ],
+      "totalLines": 11,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java",
+      "contentHash": "1768110feb825d465856f91c5dffa66e180fe49cd663a027a458f61ac2aed5ba",
+      "functions": [],
+      "classes": [
+        {
+          "name": "OverpassElement",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 14
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.fasterxml.jackson.annotation.JsonIgnoreProperties",
+          "specifiers": [
+            "JsonIgnoreProperties"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        }
+      ],
+      "exports": [
+        "OverpassElement"
+      ],
+      "totalLines": 30,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassResponse.java",
+      "contentHash": "02add404cbb06dbdb75c16140a59d179a9df19b2b9f8b412320e004e8173144a",
+      "functions": [],
+      "classes": [
+        {
+          "name": "OverpassResponse",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.fasterxml.jackson.annotation.JsonIgnoreProperties",
+          "specifiers": [
+            "JsonIgnoreProperties"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "OverpassResponse"
+      ],
+      "totalLines": 19,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
+      "contentHash": "e63e4b3e40acde2f1b9e83be7a75d54cf0ec0e3bc78833674cf2029b5efbfa6d",
+      "functions": [
+        {
+          "name": "OverpassClientImpl",
+          "params": [
+            "properties"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "fetchPlaces",
+          "params": [],
+          "returnType": "OverpassResponse",
+          "exported": true,
+          "lineCount": 22
+        },
+        {
+          "name": "parse",
+          "params": [
+            "json"
+          ],
+          "returnType": "OverpassResponse",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "buildQuery",
+          "params": [
+            "bbox"
+          ],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 13
+        }
+      ],
+      "classes": [
+        {
+          "name": "OverpassClientImpl",
+          "methods": [
+            "OverpassClientImpl",
+            "fetchPlaces",
+            "parse",
+            "buildQuery"
+          ],
+          "properties": [
+            "USER_AGENT",
+            "log",
+            "CONNECT_TIMEOUT",
+            "READ_TIMEOUT",
+            "JSON",
+            "properties",
+            "restClient"
+          ],
+          "exported": true,
+          "lineCount": 85
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.places.client.OverpassClient",
+          "specifiers": [
+            "OverpassClient"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.client.dto.OverpassResponse",
+          "specifiers": [
+            "OverpassResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.config.PlaceImportProperties",
+          "specifiers": [
+            "PlaceImportProperties"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.PlaceCategory",
+          "specifiers": [
+            "PlaceCategory"
+          ]
+        },
+        {
+          "source": "java.net.http.HttpClient",
+          "specifiers": [
+            "HttpClient"
+          ]
+        },
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "java.util.LinkedHashMap",
+          "specifiers": [
+            "LinkedHashMap"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.TreeSet",
+          "specifiers": [
+            "TreeSet"
+          ]
+        },
+        {
+          "source": "org.springframework.http.HttpHeaders",
+          "specifiers": [
+            "HttpHeaders"
+          ]
+        },
+        {
+          "source": "org.springframework.http.MediaType",
+          "specifiers": [
+            "MediaType"
+          ]
+        },
+        {
+          "source": "org.springframework.http.client.JdkClientHttpRequestFactory",
+          "specifiers": [
+            "JdkClientHttpRequestFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        },
+        {
+          "source": "org.springframework.util.LinkedMultiValueMap",
+          "specifiers": [
+            "LinkedMultiValueMap"
+          ]
+        },
+        {
+          "source": "org.springframework.util.MultiValueMap",
+          "specifiers": [
+            "MultiValueMap"
+          ]
+        },
+        {
+          "source": "org.slf4j.Logger",
+          "specifiers": [
+            "Logger"
+          ]
+        },
+        {
+          "source": "org.slf4j.LoggerFactory",
+          "specifiers": [
+            "LoggerFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.web.client.HttpServerErrorException",
+          "specifiers": [
+            "HttpServerErrorException"
+          ]
+        },
+        {
+          "source": "org.springframework.web.client.ResourceAccessException",
+          "specifiers": [
+            "ResourceAccessException"
+          ]
+        },
+        {
+          "source": "org.springframework.web.client.RestClient",
+          "specifiers": [
+            "RestClient"
+          ]
+        },
+        {
+          "source": "tools.jackson.databind.DeserializationFeature",
+          "specifiers": [
+            "DeserializationFeature"
+          ]
+        },
+        {
+          "source": "tools.jackson.databind.json.JsonMapper",
+          "specifiers": [
+            "JsonMapper"
+          ]
+        }
+      ],
+      "exports": [
+        "USER_AGENT",
+        "OverpassClientImpl",
+        "fetchPlaces",
+        "parse",
+        "buildQuery",
+        "OverpassClientImpl"
+      ],
+      "totalLines": 112,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportConfig.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportConfig.java",
+      "contentHash": "5239eda9a8b0de62801df03cd2495805d66a643e12783cba61f1cf8901fcc2b9",
+      "functions": [],
+      "classes": [
+        {
+          "name": "PlaceImportConfig",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.springframework.boot.context.properties.EnableConfigurationProperties",
+          "specifiers": [
+            "EnableConfigurationProperties"
+          ]
+        },
+        {
+          "source": "org.springframework.context.annotation.Configuration",
+          "specifiers": [
+            "Configuration"
+          ]
+        }
+      ],
+      "exports": [
+        "PlaceImportConfig"
+      ],
+      "totalLines": 11,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportProperties.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportProperties.java",
+      "contentHash": "f47708a37460692a6799368bd4df233a06eaea427a46bf7acaf26b2dfb6c1b4d",
+      "functions": [
+        {
+          "name": "overpassUrls",
+          "params": [],
+          "returnType": "java.util.List<String>",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "defaults",
+          "params": [],
+          "returnType": "PlaceImportProperties",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "PlaceImportProperties",
+          "methods": [
+            "overpassUrls",
+            "defaults"
+          ],
+          "properties": [
+            "DEFAULT_OVERPASS_URL",
+            "DEFAULT_BBOX"
+          ],
+          "exported": true,
+          "lineCount": 28
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.springframework.boot.context.properties.ConfigurationProperties",
+          "specifiers": [
+            "ConfigurationProperties"
+          ]
+        }
+      ],
+      "exports": [
+        "DEFAULT_OVERPASS_URL",
+        "DEFAULT_BBOX",
+        "overpassUrls",
+        "defaults",
+        "PlaceImportProperties"
+      ],
+      "totalLines": 40,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java",
+      "contentHash": "a73a4b43d8263f044504a0bb710d00ae8f29e99862e4d23604d02d0e55c3b266",
+      "functions": [
+        {
+          "name": "PlaceImportRunner",
+          "params": [
+            "placeImportService"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "run",
+          "params": [
+            "args"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "classes": [
+        {
+          "name": "PlaceImportRunner",
+          "methods": [
+            "PlaceImportRunner",
+            "run"
+          ],
+          "properties": [
+            "log",
+            "placeImportService"
+          ],
+          "exported": true,
+          "lineCount": 25
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.places.service.PlaceImportService",
+          "specifiers": [
+            "PlaceImportService"
+          ]
+        },
+        {
+          "source": "org.slf4j.Logger",
+          "specifiers": [
+            "Logger"
+          ]
+        },
+        {
+          "source": "org.slf4j.LoggerFactory",
+          "specifiers": [
+            "LoggerFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.ApplicationArguments",
+          "specifiers": [
+            "ApplicationArguments"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.ApplicationRunner",
+          "specifiers": [
+            "ApplicationRunner"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.autoconfigure.condition.ConditionalOnProperty",
+          "specifiers": [
+            "ConditionalOnProperty"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        }
+      ],
+      "exports": [
+        "PlaceImportRunner",
+        "run",
+        "PlaceImportRunner"
+      ],
+      "totalLines": 41,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "contentHash": "8f1e3ad414c4660d663f99117e4e84cd2787f0051db33b6050385d876730c5b0",
+      "functions": [
+        {
+          "name": "PlaceController",
+          "params": [
+            "placeService"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "search",
+          "params": [
+            "category",
+            "bbox",
+            "near",
+            "radius",
+            "q",
+            "page",
+            "size"
+          ],
+          "returnType": "PageResponse<PlaceSummaryDto>",
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "get",
+          "params": [
+            "id"
+          ],
+          "returnType": "PlaceDetailDto",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "parseCategories",
+          "params": [
+            "values"
+          ],
+          "returnType": "Set<PlaceCategory>",
+          "exported": false,
+          "lineCount": 17
+        },
+        {
+          "name": "parseRadius",
+          "params": [
+            "radius",
+            "near"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "allCategoryNames",
+          "params": [],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "PlaceController",
+          "methods": [
+            "PlaceController",
+            "search",
+            "get",
+            "parseCategories",
+            "parseRadius",
+            "allCategoryNames"
+          ],
+          "properties": [
+            "placeService"
+          ],
+          "exported": true,
+          "lineCount": 77
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.dto.PageParams",
+          "specifiers": [
+            "PageParams"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.dto.PageResponse",
+          "specifiers": [
+            "PageResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.BoundingBox",
+          "specifiers": [
+            "BoundingBox"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.PlaceCategory",
+          "specifiers": [
+            "PlaceCategory"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceDetailDto",
+          "specifiers": [
+            "PlaceDetailDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceSearchCriteria",
+          "specifiers": [
+            "PlaceSearchCriteria"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceSummaryDto",
+          "specifiers": [
+            "PlaceSummaryDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.service.PlaceService",
+          "specifiers": [
+            "PlaceService"
+          ]
+        },
+        {
+          "source": "java.util.Arrays",
+          "specifiers": [
+            "Arrays"
+          ]
+        },
+        {
+          "source": "java.util.EnumSet",
+          "specifiers": [
+            "EnumSet"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Set",
+          "specifiers": [
+            "Set"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "java.util.stream.Collectors",
+          "specifiers": [
+            "Collectors"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.GetMapping",
+          "specifiers": [
+            "GetMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.PathVariable",
+          "specifiers": [
+            "PathVariable"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RequestMapping",
+          "specifiers": [
+            "RequestMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RequestParam",
+          "specifiers": [
+            "RequestParam"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RestController",
+          "specifiers": [
+            "RestController"
+          ]
+        }
+      ],
+      "exports": [
+        "PlaceController",
+        "search",
+        "get",
+        "PlaceController"
+      ],
+      "totalLines": 104,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/domain/OsmPlaceData.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/OsmPlaceData.java",
+      "contentHash": "2e3700f809cff1966d584cfd4cc98e64fda9574d480968b584987c17ae583850",
+      "functions": [
+        {
+          "name": "applyTo",
+          "params": [
+            "place"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "OsmPlaceData",
+          "methods": [
+            "applyTo"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.places.domain.entity.Place",
+          "specifiers": [
+            "Place"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        }
+      ],
+      "exports": [
+        "applyTo",
+        "OsmPlaceData"
+      ],
+      "totalLines": 26,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "contentHash": "5c5d979d329a7ccfff85cf55b53da92e261360b43233418ec48b4a4dc19625d5",
+      "functions": [
+        {
+          "name": "PlaceCategory",
+          "params": [
+            "apiName",
+            "osmKey",
+            "osmValues"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "apiName",
+          "params": [],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "osmKey",
+          "params": [],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "osmValues",
+          "params": [],
+          "returnType": "Set<String>",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "fromApiName",
+          "params": [
+            "name"
+          ],
+          "returnType": "Optional<PlaceCategory>",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "fromOsmTags",
+          "params": [
+            "tags"
+          ],
+          "returnType": "Optional<PlaceCategory>",
+          "exported": true,
+          "lineCount": 12
+        }
+      ],
+      "classes": [
+        {
+          "name": "PlaceCategory",
+          "methods": [
+            "PlaceCategory",
+            "apiName",
+            "osmKey",
+            "osmValues",
+            "fromApiName",
+            "fromOsmTags"
+          ],
+          "properties": [
+            "apiName",
+            "osmKey",
+            "osmValues"
+          ],
+          "exported": true,
+          "lineCount": 65
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.Arrays",
+          "specifiers": [
+            "Arrays"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.Set",
+          "specifiers": [
+            "Set"
+          ]
+        }
+      ],
+      "exports": [
+        "apiName",
+        "osmKey",
+        "osmValues",
+        "fromApiName",
+        "fromOsmTags",
+        "PlaceCategory"
+      ],
+      "totalLines": 77,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceDetailDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceDetailDto.java",
+      "contentHash": "c85b130201f2140e5ca83b80b3a21cff4460641b4f7dbeb5d015f8fe7528ce31",
+      "functions": [],
+      "classes": [
+        {
+          "name": "PlaceDetailDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 11
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "PlaceDetailDto"
+      ],
+      "totalLines": 23,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java",
+      "contentHash": "0baf88701eb72ae83a4638df5dcaec2a593977245ab95e41b17960b2dcc50545",
+      "functions": [],
+      "classes": [
+        {
+          "name": "PlaceSearchCriteria",
+          "methods": [],
+          "properties": [
+            "DEFAULT_RADIUS_METERS",
+            "MAX_RADIUS_METERS"
+          ],
+          "exported": true,
+          "lineCount": 16
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.geo.BoundingBox",
+          "specifiers": [
+            "BoundingBox"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.PlaceCategory",
+          "specifiers": [
+            "PlaceCategory"
+          ]
+        },
+        {
+          "source": "java.util.Set",
+          "specifiers": [
+            "Set"
+          ]
+        }
+      ],
+      "exports": [
+        "DEFAULT_RADIUS_METERS",
+        "MAX_RADIUS_METERS",
+        "PlaceSearchCriteria"
+      ],
+      "totalLines": 34,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java",
+      "contentHash": "506c22ce931897931387e048137867e034ea1a777185fe10cb0e2eb408dff851",
+      "functions": [],
+      "classes": [
+        {
+          "name": "PlaceSummaryDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "PlaceSummaryDto"
+      ],
+      "totalLines": 20,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
+      "contentHash": "3e188d8a153aa7db696b10bac705657879707924849fe65130d8b41b51d2899a",
+      "functions": [
+        {
+          "name": "Place",
+          "params": [],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "Place",
+          "params": [
+            "osmId"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "update",
+          "params": [
+            "name",
+            "category",
+            "lat",
+            "lon",
+            "address",
+            "openingHours",
+            "tags"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "getId",
+          "params": [],
+          "returnType": "UUID",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "getOsmId",
+          "params": [],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "getName",
+          "params": [],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "getCategory",
+          "params": [],
+          "returnType": "PlaceCategory",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "getLat",
+          "params": [],
+          "returnType": "double",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "getLon",
+          "params": [],
+          "returnType": "double",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "getAddress",
+          "params": [],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "getOpeningHours",
+          "params": [],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "getTags",
+          "params": [],
+          "returnType": "Map<String, String>",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "Place",
+          "methods": [
+            "Place",
+            "Place",
+            "update",
+            "getId",
+            "getOsmId",
+            "getName",
+            "getCategory",
+            "getLat",
+            "getLon",
+            "getAddress",
+            "getOpeningHours",
+            "getTags"
+          ],
+          "properties": [
+            "id",
+            "osmId",
+            "name",
+            "category",
+            "lat",
+            "lon",
+            "address",
+            "openingHours",
+            "tags"
+          ],
+          "exported": true,
+          "lineCount": 102
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.places.domain.PlaceCategory",
+          "specifiers": [
+            "PlaceCategory"
+          ]
+        },
+        {
+          "source": "jakarta.persistence.Column",
+          "specifiers": [
+            "Column"
+          ]
+        },
+        {
+          "source": "jakarta.persistence.Convert",
+          "specifiers": [
+            "Convert"
+          ]
+        },
+        {
+          "source": "jakarta.persistence.Entity",
+          "specifiers": [
+            "Entity"
+          ]
+        },
+        {
+          "source": "jakarta.persistence.GeneratedValue",
+          "specifiers": [
+            "GeneratedValue"
+          ]
+        },
+        {
+          "source": "jakarta.persistence.GenerationType",
+          "specifiers": [
+            "GenerationType"
+          ]
+        },
+        {
+          "source": "jakarta.persistence.Id",
+          "specifiers": [
+            "Id"
+          ]
+        },
+        {
+          "source": "jakarta.persistence.Table",
+          "specifiers": [
+            "Table"
+          ]
+        },
+        {
+          "source": "java.util.HashMap",
+          "specifiers": [
+            "HashMap"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.hibernate.annotations.JdbcTypeCode",
+          "specifiers": [
+            "JdbcTypeCode"
+          ]
+        },
+        {
+          "source": "org.hibernate.type.SqlTypes",
+          "specifiers": [
+            "SqlTypes"
+          ]
+        }
+      ],
+      "exports": [
+        "Place",
+        "update",
+        "getId",
+        "getOsmId",
+        "getName",
+        "getCategory",
+        "getLat",
+        "getLon",
+        "getAddress",
+        "getOpeningHours",
+        "getTags",
+        "Place"
+      ],
+      "totalLines": 123,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/domain/entity/PlaceCategoryConverter.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/entity/PlaceCategoryConverter.java",
+      "contentHash": "00bb389ac186e775d492470dd961f37e6980474f1959987c0656c7195b84a48c",
+      "functions": [
+        {
+          "name": "convertToDatabaseColumn",
+          "params": [
+            "category"
+          ],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "convertToEntityAttribute",
+          "params": [
+            "value"
+          ],
+          "returnType": "PlaceCategory",
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "classes": [
+        {
+          "name": "PlaceCategoryConverter",
+          "methods": [
+            "convertToDatabaseColumn",
+            "convertToEntityAttribute"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 19
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.places.domain.PlaceCategory",
+          "specifiers": [
+            "PlaceCategory"
+          ]
+        },
+        {
+          "source": "jakarta.persistence.AttributeConverter",
+          "specifiers": [
+            "AttributeConverter"
+          ]
+        },
+        {
+          "source": "jakarta.persistence.Converter",
+          "specifiers": [
+            "Converter"
+          ]
+        }
+      ],
+      "exports": [
+        "convertToDatabaseColumn",
+        "convertToEntityAttribute",
+        "PlaceCategoryConverter"
+      ],
+      "totalLines": 27,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/mapper/OsmElementMapper.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/OsmElementMapper.java",
+      "contentHash": "1248c85cab85e45e96d56eb0b3b8a7e85223c3a6e74a19e51e72a47baf7cea34",
+      "functions": [],
+      "classes": [
+        {
+          "name": "OsmElementMapper",
+          "methods": [
+            "toPlaceData"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.places.client.dto.OverpassElement",
+          "specifiers": [
+            "OverpassElement"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.OsmPlaceData",
+          "specifiers": [
+            "OsmPlaceData"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        }
+      ],
+      "exports": [
+        "OsmElementMapper"
+      ],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/mapper/PlaceMapper.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/PlaceMapper.java",
+      "contentHash": "25832e56257152dfc9eef92c0ce0a66af7a691a8be58461db2b934fa38f5737e",
+      "functions": [],
+      "classes": [
+        {
+          "name": "PlaceMapper",
+          "methods": [
+            "toSummary",
+            "toDetail"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceDetailDto",
+          "specifiers": [
+            "PlaceDetailDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceSummaryDto",
+          "specifiers": [
+            "PlaceSummaryDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.entity.Place",
+          "specifiers": [
+            "Place"
+          ]
+        }
+      ],
+      "exports": [
+        "PlaceMapper"
+      ],
+      "totalLines": 16,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
+      "contentHash": "e82d0ad956fa5d219b31805ad2804250efc1bc801686c927f5eadbfaeb7fe28a",
+      "functions": [
+        {
+          "name": "toPlaceData",
+          "params": [
+            "element"
+          ],
+          "returnType": "Optional<OsmPlaceData>",
+          "exported": true,
+          "lineCount": 28
+        },
+        {
+          "name": "position",
+          "params": [
+            "element"
+          ],
+          "returnType": "double[]",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "name",
+          "params": [
+            "tags",
+            "category"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "address",
+          "params": [
+            "tags"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "blankToNull",
+          "params": [
+            "value"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "OsmElementMapperImpl",
+          "methods": [
+            "toPlaceData",
+            "position",
+            "name",
+            "address",
+            "blankToNull"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 76
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.places.client.dto.OverpassElement",
+          "specifiers": [
+            "OverpassElement"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.OsmPlaceData",
+          "specifiers": [
+            "OsmPlaceData"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.PlaceCategory",
+          "specifiers": [
+            "PlaceCategory"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.mapper.OsmElementMapper",
+          "specifiers": [
+            "OsmElementMapper"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        }
+      ],
+      "exports": [
+        "toPlaceData",
+        "OsmElementMapperImpl"
+      ],
+      "totalLines": 92,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java",
+      "contentHash": "4be57d691f7a77aa2f6391af78446ad2d7008596a7661390315bbf2c0062eaed",
+      "functions": [
+        {
+          "name": "toSummary",
+          "params": [
+            "place",
+            "distanceMeters"
+          ],
+          "returnType": "PlaceSummaryDto",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "toDetail",
+          "params": [
+            "place"
+          ],
+          "returnType": "PlaceDetailDto",
+          "exported": true,
+          "lineCount": 21
+        }
+      ],
+      "classes": [
+        {
+          "name": "PlaceMapperImpl",
+          "methods": [
+            "toSummary",
+            "toDetail"
+          ],
+          "properties": [
+            "PUBLIC_TAGS"
+          ],
+          "exported": true,
+          "lineCount": 49
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceDetailDto",
+          "specifiers": [
+            "PlaceDetailDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceSummaryDto",
+          "specifiers": [
+            "PlaceSummaryDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.entity.Place",
+          "specifiers": [
+            "Place"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.mapper.PlaceMapper",
+          "specifiers": [
+            "PlaceMapper"
+          ]
+        },
+        {
+          "source": "java.util.LinkedHashMap",
+          "specifiers": [
+            "LinkedHashMap"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        }
+      ],
+      "exports": [
+        "toSummary",
+        "toDetail",
+        "PlaceMapperImpl"
+      ],
+      "totalLines": 62,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java",
+      "contentHash": "187e95635f40ddfce3cf6c7e98e6782ac78c9624aea302cefef002fd14fc49f2",
+      "functions": [],
+      "classes": [
+        {
+          "name": "PlaceRepository",
+          "methods": [
+            "findByOsmIdIn",
+            "findByOsmIdNotIn"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.places.domain.entity.Place",
+          "specifiers": [
+            "Place"
+          ]
+        },
+        {
+          "source": "java.util.Collection",
+          "specifiers": [
+            "Collection"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.springframework.data.jpa.repository.JpaRepository",
+          "specifiers": [
+            "JpaRepository"
+          ]
+        },
+        {
+          "source": "org.springframework.data.jpa.repository.JpaSpecificationExecutor",
+          "specifiers": [
+            "JpaSpecificationExecutor"
+          ]
+        }
+      ],
+      "exports": [
+        "PlaceRepository"
+      ],
+      "totalLines": 19,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java",
+      "contentHash": "995f49b1dac77f00a275831d2c32da642954c5327efc0610579094c13cc57147",
+      "functions": [],
+      "classes": [
+        {
+          "name": "PlaceImportService",
+          "methods": [
+            "importPlaces",
+            "importElements"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 20
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.places.client.dto.OverpassElement",
+          "specifiers": [
+            "OverpassElement"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "PlaceImportService"
+      ],
+      "totalLines": 27,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java",
+      "contentHash": "d2eed49e1c5060daeed37cf162defe07c21168fbc4dd472e39898fc957a1f78e",
+      "functions": [],
+      "classes": [
+        {
+          "name": "PlaceService",
+          "methods": [
+            "search",
+            "get"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.dto.PageParams",
+          "specifiers": [
+            "PageParams"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.dto.PageResponse",
+          "specifiers": [
+            "PageResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceDetailDto",
+          "specifiers": [
+            "PlaceDetailDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceSearchCriteria",
+          "specifiers": [
+            "PlaceSearchCriteria"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceSummaryDto",
+          "specifiers": [
+            "PlaceSummaryDto"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "PlaceService"
+      ],
+      "totalLines": 19,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java",
+      "contentHash": "4c494e675c0a3f2565e5f65acf55d149ef570748734f9b540c5d49664acdbac4",
+      "functions": [
+        {
+          "name": "PlaceImportServiceImpl",
+          "params": [
+            "overpassClient",
+            "osmElementMapper",
+            "placeRepository",
+            "transactionManager"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "importPlaces",
+          "params": [],
+          "returnType": "Result",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "importElements",
+          "params": [
+            "elements"
+          ],
+          "returnType": "Result",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "store",
+          "params": [
+            "elements"
+          ],
+          "returnType": "Result",
+          "exported": false,
+          "lineCount": 31
+        }
+      ],
+      "classes": [
+        {
+          "name": "PlaceImportServiceImpl",
+          "methods": [
+            "PlaceImportServiceImpl",
+            "importPlaces",
+            "importElements",
+            "store"
+          ],
+          "properties": [
+            "log",
+            "overpassClient",
+            "osmElementMapper",
+            "placeRepository",
+            "transactionTemplate"
+          ],
+          "exported": true,
+          "lineCount": 69
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.places.client.OverpassClient",
+          "specifiers": [
+            "OverpassClient"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.client.dto.OverpassElement",
+          "specifiers": [
+            "OverpassElement"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.OsmPlaceData",
+          "specifiers": [
+            "OsmPlaceData"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.entity.Place",
+          "specifiers": [
+            "Place"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.mapper.OsmElementMapper",
+          "specifiers": [
+            "OsmElementMapper"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.repository.PlaceRepository",
+          "specifiers": [
+            "PlaceRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.service.PlaceImportService",
+          "specifiers": [
+            "PlaceImportService"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.LinkedHashMap",
+          "specifiers": [
+            "LinkedHashMap"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.function.Function",
+          "specifiers": [
+            "Function"
+          ]
+        },
+        {
+          "source": "java.util.stream.Collectors",
+          "specifiers": [
+            "Collectors"
+          ]
+        },
+        {
+          "source": "org.slf4j.Logger",
+          "specifiers": [
+            "Logger"
+          ]
+        },
+        {
+          "source": "org.slf4j.LoggerFactory",
+          "specifiers": [
+            "LoggerFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Service",
+          "specifiers": [
+            "Service"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.PlatformTransactionManager",
+          "specifiers": [
+            "PlatformTransactionManager"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.support.TransactionTemplate",
+          "specifiers": [
+            "TransactionTemplate"
+          ]
+        }
+      ],
+      "exports": [
+        "PlaceImportServiceImpl",
+        "importPlaces",
+        "importElements",
+        "PlaceImportServiceImpl"
+      ],
+      "totalLines": 95,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "contentHash": "fd8e9fce9d1e2dba2b9bbb9e48e4760e5c5cc975128413d7bfb5a7755da850a8",
+      "functions": [
+        {
+          "name": "PlaceServiceImpl",
+          "params": [
+            "places",
+            "mapper"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "search",
+          "params": [
+            "criteria",
+            "page"
+          ],
+          "returnType": "PageResponse<PlaceSummaryDto>",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "get",
+          "params": [
+            "id"
+          ],
+          "returnType": "PlaceDetailDto",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "searchNear",
+          "params": [
+            "criteria",
+            "filters",
+            "page"
+          ],
+          "returnType": "PageResponse<PlaceSummaryDto>",
+          "exported": false,
+          "lineCount": 19
+        }
+      ],
+      "classes": [
+        {
+          "name": "PlaceServiceImpl",
+          "methods": [
+            "PlaceServiceImpl",
+            "search",
+            "get",
+            "searchNear"
+          ],
+          "properties": [
+            "places",
+            "mapper"
+          ],
+          "exported": true,
+          "lineCount": 57
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.dto.PageParams",
+          "specifiers": [
+            "PageParams"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.dto.PageResponse",
+          "specifiers": [
+            "PageResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.BoundingBox",
+          "specifiers": [
+            "BoundingBox"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceDetailDto",
+          "specifiers": [
+            "PlaceDetailDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceSearchCriteria",
+          "specifiers": [
+            "PlaceSearchCriteria"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceSummaryDto",
+          "specifiers": [
+            "PlaceSummaryDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.entity.Place",
+          "specifiers": [
+            "Place"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.mapper.PlaceMapper",
+          "specifiers": [
+            "PlaceMapper"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.repository.PlaceRepository",
+          "specifiers": [
+            "PlaceRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.service.PlaceService",
+          "specifiers": [
+            "PlaceService"
+          ]
+        },
+        {
+          "source": "java.util.Comparator",
+          "specifiers": [
+            "Comparator"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.springframework.data.domain.Page",
+          "specifiers": [
+            "Page"
+          ]
+        },
+        {
+          "source": "org.springframework.data.domain.Sort",
+          "specifiers": [
+            "Sort"
+          ]
+        },
+        {
+          "source": "org.springframework.data.jpa.domain.Specification",
+          "specifiers": [
+            "Specification"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Service",
+          "specifiers": [
+            "Service"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.annotation.Transactional",
+          "specifiers": [
+            "Transactional"
+          ]
+        }
+      ],
+      "exports": [
+        "PlaceServiceImpl",
+        "search",
+        "get",
+        "PlaceServiceImpl"
+      ],
+      "totalLines": 86,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java",
+      "contentHash": "2635224f2b4ee28bea5c227cbcc6355ca668e10e4db4f90d5e1b76df7e95461e",
+      "functions": [
+        {
+          "name": "PlaceSpecifications",
+          "params": [],
+          "exported": false,
+          "lineCount": 2
+        },
+        {
+          "name": "matching",
+          "params": [
+            "criteria"
+          ],
+          "returnType": "Specification<Place>",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "inBox",
+          "params": [
+            "box"
+          ],
+          "returnType": "Specification<Place>",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "escapeLike",
+          "params": [
+            "text"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "PlaceSpecifications",
+          "methods": [
+            "PlaceSpecifications",
+            "matching",
+            "inBox",
+            "escapeLike"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 34
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.geo.BoundingBox",
+          "specifiers": [
+            "BoundingBox"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceSearchCriteria",
+          "specifiers": [
+            "PlaceSearchCriteria"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.entity.Place",
+          "specifiers": [
+            "Place"
+          ]
+        },
+        {
+          "source": "java.util.Locale",
+          "specifiers": [
+            "Locale"
+          ]
+        },
+        {
+          "source": "org.springframework.data.jpa.domain.Specification",
+          "specifiers": [
+            "Specification"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 44,
+      "hasStructuralAnalysis": true
+    },
     "backend/src/main/resources/application-local.properties.example": {
       "filePath": "backend/src/main/resources/application-local.properties.example",
       "contentHash": "a67a386c27ee9aee8e64735d15b734ed9fb790b8cc35de0899d8754579c8203e",
@@ -1877,6 +4226,97 @@
       "totalLines": 109,
       "hasStructuralAnalysis": true
     },
+    "backend/src/test/java/com/unihack8/backend/common/geo/GeoTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/common/geo/GeoTest.java",
+      "contentHash": "59c2101a899cdcddc1250a38437620f7b2a3d42a367ef125b3c083039315422c",
+      "functions": [
+        {
+          "name": "haversineDistanceMatchesKnownValue",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "boxAroundCoversTheRadius",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "parsesPoint",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "rejectsBadPoints",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "parsesBoundingBox",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        }
+      ],
+      "classes": [
+        {
+          "name": "GeoTest",
+          "methods": [
+            "haversineDistanceMatchesKnownValue",
+            "boxAroundCoversTheRadius",
+            "parsesPoint",
+            "rejectsBadPoints",
+            "parsesBoundingBox"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 47
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "org.assertj.core.api.Assertions.assertThatThrownBy",
+          "specifiers": [
+            "assertThatThrownBy"
+          ]
+        },
+        {
+          "source": "org.assertj.core.api.Assertions.within",
+          "specifiers": [
+            "within"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 58,
+      "hasStructuralAnalysis": true
+    },
     "backend/src/test/java/com/unihack8/backend/common/security/CurrentUserTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/common/security/CurrentUserTest.java",
       "contentHash": "5c87b2d984e567eb59199ab5b7cb776eb60a117261b1f8ac7f482c44ebaffe06",
@@ -2233,6 +4673,1064 @@
       "totalLines": 24,
       "hasStructuralAnalysis": true
     },
+    "backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "contentHash": "209ea8a2a4299019134087532da6dfda563b570139e2595578cab7a6de30efec",
+      "functions": [
+        {
+          "name": "parsesFixture",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "parsesWayCenter",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "parseIsLenient",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "queryContainsEveryCategory",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "propertiesDefaults",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "fallsBackToNextServerWhenFirstIsBusy",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 31
+        },
+        {
+          "name": "throwsWhenAllServersFail",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "fetchPlacesPostsQueryToConfiguredUrl",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 33
+        }
+      ],
+      "classes": [
+        {
+          "name": "OverpassClientImplTest",
+          "methods": [
+            "parsesFixture",
+            "parsesWayCenter",
+            "parseIsLenient",
+            "queryContainsEveryCategory",
+            "propertiesDefaults",
+            "fallsBackToNextServerWhenFirstIsBusy",
+            "throwsWhenAllServersFail",
+            "fetchPlacesPostsQueryToConfiguredUrl"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 154
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "org.assertj.core.api.Assertions.assertThatThrownBy",
+          "specifiers": [
+            "assertThatThrownBy"
+          ]
+        },
+        {
+          "source": "com.sun.net.httpserver.HttpServer",
+          "specifiers": [
+            "HttpServer"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.client.dto.OverpassElement",
+          "specifiers": [
+            "OverpassElement"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.client.dto.OverpassResponse",
+          "specifiers": [
+            "OverpassResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.client.impl.OverpassClientImpl",
+          "specifiers": [
+            "OverpassClientImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.config.PlaceImportProperties",
+          "specifiers": [
+            "PlaceImportProperties"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.PlaceCategory",
+          "specifiers": [
+            "PlaceCategory"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.support.OverpassFixtures",
+          "specifiers": [
+            "OverpassFixtures"
+          ]
+        },
+        {
+          "source": "java.net.InetSocketAddress",
+          "specifiers": [
+            "InetSocketAddress"
+          ]
+        },
+        {
+          "source": "java.net.URLDecoder",
+          "specifiers": [
+            "URLDecoder"
+          ]
+        },
+        {
+          "source": "java.nio.charset.StandardCharsets",
+          "specifiers": [
+            "StandardCharsets"
+          ]
+        },
+        {
+          "source": "java.util.concurrent.atomic.AtomicInteger",
+          "specifiers": [
+            "AtomicInteger"
+          ]
+        },
+        {
+          "source": "java.util.concurrent.atomic.AtomicReference",
+          "specifiers": [
+            "AtomicReference"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.web.client.HttpServerErrorException",
+          "specifiers": [
+            "HttpServerErrorException"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 176,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java",
+      "contentHash": "3e60e7dc0c49c71da4313cd61ebb7e0c909c69140a9044d9ab17a787ba6368ec",
+      "functions": [
+        {
+          "name": "seed",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "place",
+          "params": [
+            "osmId",
+            "name",
+            "category",
+            "lat",
+            "lon",
+            "tags"
+          ],
+          "returnType": "Place",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "listsAllPlacesByNameWithoutToken",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "filtersByCategories",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "filtersByBoundingBox",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "nearSortsByDistanceWithinRadius",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "nearPagesThroughSortedResults",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "searchesByName",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "unknownCategoryIs400",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "badGeoParametersAre400",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "pageSizeLimitDependsOnBbox",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "returnsPlaceDetail",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "unknownOrInvalidIdIsRejected",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        }
+      ],
+      "classes": [
+        {
+          "name": "PlaceControllerTest",
+          "methods": [
+            "seed",
+            "place",
+            "listsAllPlacesByNameWithoutToken",
+            "filtersByCategories",
+            "filtersByBoundingBox",
+            "nearSortsByDistanceWithinRadius",
+            "nearPagesThroughSortedResults",
+            "searchesByName",
+            "unknownCategoryIs400",
+            "badGeoParametersAre400",
+            "pageSizeLimitDependsOnBbox",
+            "returnsPlaceDetail",
+            "unknownOrInvalidIdIsRejected"
+          ],
+          "properties": [
+            "CENTRE",
+            "mvc",
+            "places",
+            "cafeId"
+          ],
+          "exported": false,
+          "lineCount": 154
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.hamcrest.Matchers.contains",
+          "specifiers": [
+            "contains"
+          ]
+        },
+        {
+          "source": "org.hamcrest.Matchers.containsInAnyOrder",
+          "specifiers": [
+            "containsInAnyOrder"
+          ]
+        },
+        {
+          "source": "org.hamcrest.Matchers.hasSize",
+          "specifiers": [
+            "hasSize"
+          ]
+        },
+        {
+          "source": "org.hamcrest.Matchers.nullValue",
+          "specifiers": [
+            "nullValue"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get",
+          "specifiers": [
+            "get"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath",
+          "specifiers": [
+            "jsonPath"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.status",
+          "specifiers": [
+            "status"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.PlaceCategory",
+          "specifiers": [
+            "PlaceCategory"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.entity.Place",
+          "specifiers": [
+            "Place"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.repository.PlaceRepository",
+          "specifiers": [
+            "PlaceRepository"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.BeforeEach",
+          "specifiers": [
+            "BeforeEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Autowired",
+          "specifiers": [
+            "Autowired"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.test.context.SpringBootTest",
+          "specifiers": [
+            "SpringBootTest"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc",
+          "specifiers": [
+            "AutoConfigureMockMvc"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.MockMvc",
+          "specifiers": [
+            "MockMvc"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 178,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/places/domain/PlaceCategoryTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/domain/PlaceCategoryTest.java",
+      "contentHash": "1cea4d9b26ceccf3a55d4e298ed5b4fad6db87ac4cdbbcd0c6ae1ca555974f9e",
+      "functions": [
+        {
+          "name": "apiNamesMatchTheContract",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "mapsOsmTags",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "unmatchedAmenityFallsThroughToTourism",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "findsByApiName",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "PlaceCategoryTest",
+          "methods": [
+            "apiNamesMatchTheContract",
+            "mapsOsmTags",
+            "unmatchedAmenityFallsThroughToTourism",
+            "findsByApiName"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 37
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "java.util.Arrays",
+          "specifiers": [
+            "Arrays"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 47,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
+      "contentHash": "dc1f75fc91cf82412097f71b88d4212fda38f8be910e70d56389342e03aed469",
+      "functions": [
+        {
+          "name": "mapped",
+          "params": [
+            "osmId"
+          ],
+          "returnType": "OsmPlaceData",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "mapsFixture",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "mapsRestaurantNode",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "picksCategories",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "wayUsesCenter",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "skipsUnnamedPark",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "namesUnnamedAtms",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "streetWithoutNumber",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "skipsWithoutPositionOrCategory",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        }
+      ],
+      "classes": [
+        {
+          "name": "OsmElementMapperImplTest",
+          "methods": [
+            "mapped",
+            "mapsFixture",
+            "mapsRestaurantNode",
+            "picksCategories",
+            "wayUsesCenter",
+            "skipsUnnamedPark",
+            "namesUnnamedAtms",
+            "streetWithoutNumber",
+            "skipsWithoutPositionOrCategory"
+          ],
+          "properties": [
+            "mapper",
+            "elements"
+          ],
+          "exported": false,
+          "lineCount": 105
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.client.dto.OverpassElement",
+          "specifiers": [
+            "OverpassElement"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.OsmPlaceData",
+          "specifiers": [
+            "OsmPlaceData"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.PlaceCategory",
+          "specifiers": [
+            "PlaceCategory"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.mapper.impl.OsmElementMapperImpl",
+          "specifiers": [
+            "OsmElementMapperImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.support.OverpassFixtures",
+          "specifiers": [
+            "OverpassFixtures"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 121,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/places/service/PlaceImportRunnerTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/service/PlaceImportRunnerTest.java",
+      "contentHash": "d82489ab9d44a2f54f37a6591419dbb3f030323b1d4cfedb30d04cad22c77f3d",
+      "functions": [
+        {
+          "name": "runsImport",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "failureIsNotFatal",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "PlaceImportRunnerTest",
+          "methods": [
+            "runsImport",
+            "failureIsNotFatal"
+          ],
+          "properties": [
+            "service",
+            "runner"
+          ],
+          "exported": false,
+          "lineCount": 23
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThatCode",
+          "specifiers": [
+            "assertThatCode"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.mock",
+          "specifiers": [
+            "mock"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.verify",
+          "specifiers": [
+            "verify"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.when",
+          "specifiers": [
+            "when"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.config.PlaceImportRunner",
+          "specifiers": [
+            "PlaceImportRunner"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.DefaultApplicationArguments",
+          "specifiers": [
+            "DefaultApplicationArguments"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 36,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "contentHash": "4330f8889c324ab700d24a0612eee08413dc1c3dc6185c59cb8849dc51f946be",
+      "functions": [
+        {
+          "name": "setUp",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "overpassReturns",
+          "params": [
+            "elements"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "flushAndClear",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "firstRunInserts",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 16
+        },
+        {
+          "name": "secondRunUpdatesWithoutDuplicates",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 22
+        },
+        {
+          "name": "removesVanishedPlaces",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "emptyFetchRemovesNothing",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 17
+        },
+        {
+          "name": "duplicateElementsStoredOnce",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        }
+      ],
+      "classes": [
+        {
+          "name": "PlaceImportServiceImplTest",
+          "methods": [
+            "setUp",
+            "overpassReturns",
+            "flushAndClear",
+            "firstRunInserts",
+            "secondRunUpdatesWithoutDuplicates",
+            "removesVanishedPlaces",
+            "emptyFetchRemovesNothing",
+            "duplicateElementsStoredOnce"
+          ],
+          "properties": [
+            "placeRepository",
+            "transactionManager",
+            "entityManager",
+            "overpassClient",
+            "service",
+            "fixture"
+          ],
+          "exported": false,
+          "lineCount": 129
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.mock",
+          "specifiers": [
+            "mock"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.when",
+          "specifiers": [
+            "when"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.client.OverpassClient",
+          "specifiers": [
+            "OverpassClient"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.client.dto.OverpassElement",
+          "specifiers": [
+            "OverpassElement"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.client.dto.OverpassResponse",
+          "specifiers": [
+            "OverpassResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.PlaceCategory",
+          "specifiers": [
+            "PlaceCategory"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.entity.Place",
+          "specifiers": [
+            "Place"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.mapper.impl.OsmElementMapperImpl",
+          "specifiers": [
+            "OsmElementMapperImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.repository.PlaceRepository",
+          "specifiers": [
+            "PlaceRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.service.impl.PlaceImportServiceImpl",
+          "specifiers": [
+            "PlaceImportServiceImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.support.OverpassFixtures",
+          "specifiers": [
+            "OverpassFixtures"
+          ]
+        },
+        {
+          "source": "jakarta.persistence.EntityManager",
+          "specifiers": [
+            "EntityManager"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.BeforeEach",
+          "specifiers": [
+            "BeforeEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Autowired",
+          "specifiers": [
+            "Autowired"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest",
+          "specifiers": [
+            "DataJpaTest"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase",
+          "specifiers": [
+            "AutoConfigureTestDatabase"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.PlatformTransactionManager",
+          "specifiers": [
+            "PlatformTransactionManager"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 157,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/places/support/OverpassFixtures.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/support/OverpassFixtures.java",
+      "contentHash": "97f66c9e925feb06cb0d8e256d7dc321717e2b3d9c0321bee5c8b902979d0360",
+      "functions": [
+        {
+          "name": "OverpassFixtures",
+          "params": [],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "json",
+          "params": [
+            "path"
+          ],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "timisoaraSample",
+          "params": [],
+          "returnType": "OverpassResponse",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "OverpassFixtures",
+          "methods": [
+            "OverpassFixtures",
+            "json",
+            "timisoaraSample"
+          ],
+          "properties": [
+            "TIMISOARA_SAMPLE"
+          ],
+          "exported": true,
+          "lineCount": 22
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.places.client.dto.OverpassResponse",
+          "specifiers": [
+            "OverpassResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.client.impl.OverpassClientImpl",
+          "specifiers": [
+            "OverpassClientImpl"
+          ]
+        },
+        {
+          "source": "java.io.IOException",
+          "specifiers": [
+            "IOException"
+          ]
+        },
+        {
+          "source": "java.io.UncheckedIOException",
+          "specifiers": [
+            "UncheckedIOException"
+          ]
+        },
+        {
+          "source": "java.nio.charset.StandardCharsets",
+          "specifiers": [
+            "StandardCharsets"
+          ]
+        },
+        {
+          "source": "org.springframework.core.io.ClassPathResource",
+          "specifiers": [
+            "ClassPathResource"
+          ]
+        }
+      ],
+      "exports": [
+        "TIMISOARA_SAMPLE",
+        "json",
+        "timisoaraSample",
+        "OverpassFixtures"
+      ],
+      "totalLines": 33,
+      "hasStructuralAnalysis": true
+    },
     "backend/src/test/java/com/unihack8/backend/support/JwtTestTokens.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/support/JwtTestTokens.java",
       "contentHash": "f708986ceae1decbf2ef0e01405e0fde396349e91e03244fc2576ffcb8c9506b",
@@ -2538,9 +6036,19 @@
       "totalLines": 17,
       "hasStructuralAnalysis": false
     },
+    "backend/src/test/resources/overpass/timisoara-sample.json": {
+      "filePath": "backend/src/test/resources/overpass/timisoara-sample.json",
+      "contentHash": "87e0d704e0c6d2d8e1139b8c6d2a2038605f33d4a06801eb9c8602cbce679653",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 153,
+      "hasStructuralAnalysis": false
+    },
     "docs/API.md": {
       "filePath": "docs/API.md",
-      "contentHash": "114b58216de5c900ca936d5994c399735192364c0161277a294f867084450de5",
+      "contentHash": "9223e5265a1d35eb8530f4bc0068d022ce5fa9cdb22de7c54c26120227e4e985",
       "functions": [],
       "classes": [],
       "imports": [],

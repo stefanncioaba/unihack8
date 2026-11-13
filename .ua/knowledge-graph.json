@@ -23,8 +23,8 @@
       "Expo Router"
     ],
     "description": "Hackathon mobile app for Timișoara (Connected Communities): events with QR check-in and reliability points, a filterable map of places, live STPT public transport, directions, and an AI guide. Spring Boot backend + Supabase Postgres; Expo frontend.",
-    "analyzedAt": "2026-11-13T18:50:21+00:00",
-    "gitCommitHash": "828d6ab9dac65c0431da783cab804314882531c7"
+    "analyzedAt": "2026-11-13T18:56:02+00:00",
+    "gitCommitHash": "54ed9208d27350071b458fd640a5ce17d0c740de"
   },
   "nodes": [
     {
@@ -1150,49 +1150,6 @@
       "complexity": "simple"
     },
     {
-      "id": "document:AGENTS.md",
-      "type": "document",
-      "name": "AGENTS.md",
-      "filePath": "AGENTS.md",
-      "summary": "Contributor and agent rules for the hackathon project: the Connected Communities problem statement, team rules (update DOCS.md, keep the knowledge graph current, write tests, comment functions), the core feature list and the Spring Boot + Supabase + Expo tech stack with its package layout convention.",
-      "tags": [
-        "documentation",
-        "development",
-        "guidelines",
-        "project-overview"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "document:DOCS.md",
-      "type": "document",
-      "name": "DOCS.md",
-      "filePath": "DOCS.md",
-      "summary": "Main project documentation covering architecture, backend configuration and running instructions, the shared backend foundation classes, Supabase MCP setup, database tables, external data sources (STPT, LiveTickets, OpenStreetMap, Gemini), reliability point rules and knowledge-graph maintenance.",
-      "tags": [
-        "documentation",
-        "architecture",
-        "configuration",
-        "database",
-        "external-apis"
-      ],
-      "complexity": "complex"
-    },
-    {
-      "id": "document:PLAN.md",
-      "type": "document",
-      "name": "PLAN.md",
-      "filePath": "PLAN.md",
-      "summary": "Project plan and task list split into three tracks (backend, data/AI services, mobile), with 17 numbered steps from foundation, database and security through events, QR check-in, places, transit, routing, AI and frontend pages, plus a dependency map, cut order and open questions.",
-      "tags": [
-        "documentation",
-        "planning",
-        "roadmap",
-        "task-tracking"
-      ],
-      "complexity": "complex"
-    },
-    {
       "id": "document:README.md",
       "type": "document",
       "name": "README.md",
@@ -1627,20 +1584,6 @@
       "complexity": "simple"
     },
     {
-      "id": "document:docs/API.md",
-      "type": "document",
-      "name": "API.md",
-      "filePath": "docs/API.md",
-      "summary": "REST API contract for the backend: conventions, paged and error answer shapes, shared objects, and endpoints for users, events and check-in, places, STPT transit, routing and the AI assistant, mapped to PLAN tasks.",
-      "tags": [
-        "documentation",
-        "api-schema",
-        "contract",
-        "rest"
-      ],
-      "complexity": "complex"
-    },
-    {
       "id": "file:frontend/eslint.config.js",
       "type": "file",
       "name": "eslint.config.js",
@@ -1712,6 +1655,1911 @@
         "schema-validation"
       ],
       "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java",
+      "type": "file",
+      "name": "OverpassClient.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java",
+      "summary": "Interface for the client that downloads raw OpenStreetMap place elements for the import area from the Overpass API.",
+      "tags": [
+        "service",
+        "api-client",
+        "interface",
+        "openstreetmap"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java:OverpassClient",
+      "type": "class",
+      "name": "OverpassClient",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java",
+      "lineRange": [
+        6,
+        10
+      ],
+      "summary": "Contract with a single fetchPlaces() method returning the parsed Overpass response.",
+      "tags": [
+        "interface",
+        "api-client",
+        "openstreetmap"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java",
+      "type": "file",
+      "name": "OverpassElement.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java",
+      "summary": "Record DTO for one Overpass element (node, way or relation) with id, coordinates, optional center point and OSM tags.",
+      "tags": [
+        "data-model",
+        "dto",
+        "serialization",
+        "openstreetmap"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java:OverpassElement",
+      "type": "class",
+      "name": "OverpassElement",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java",
+      "lineRange": [
+        16,
+        29
+      ],
+      "summary": "Immutable record mirroring an Overpass JSON element, including the nested center for ways and relations.",
+      "tags": [
+        "dto",
+        "data-model",
+        "record"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassResponse.java",
+      "type": "file",
+      "name": "OverpassResponse.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassResponse.java",
+      "summary": "Record DTO wrapping the elements array of an Overpass JSON answer, tolerant of a missing list.",
+      "tags": [
+        "data-model",
+        "dto",
+        "serialization",
+        "openstreetmap"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassResponse.java:OverpassResponse",
+      "type": "class",
+      "name": "OverpassResponse",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassResponse.java",
+      "lineRange": [
+        11,
+        18
+      ],
+      "summary": "Top-level Overpass response record holding the list of OverpassElement items.",
+      "tags": [
+        "dto",
+        "data-model",
+        "record"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
+      "type": "file",
+      "name": "OverpassClientImpl.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
+      "summary": "Spring component that POSTs one Overpass QL union query covering all place categories, falling back across configured Overpass servers and parsing the JSON leniently.",
+      "tags": [
+        "service",
+        "api-client",
+        "http",
+        "openstreetmap",
+        "resilience",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java:OverpassClientImpl",
+      "type": "class",
+      "name": "OverpassClientImpl",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
+      "lineRange": [
+        27,
+        111
+      ],
+      "summary": "Overpass HTTP client with long timeouts, a custom User-Agent, multi-server failover and static query/parse helpers.",
+      "tags": [
+        "service",
+        "api-client",
+        "http"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java:OverpassClientImpl",
+      "type": "function",
+      "name": "OverpassClientImpl",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
+      "lineRange": [
+        46,
+        55
+      ],
+      "summary": "Constructs the RestClient on a JDK HttpClient with connect/read timeouts and the import User-Agent header.",
+      "tags": [
+        "factory",
+        "http",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java:fetchPlaces",
+      "type": "function",
+      "name": "fetchPlaces",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
+      "lineRange": [
+        62,
+        83
+      ],
+      "summary": "Tries each configured Overpass URL in order, returning the first parsed answer and rethrowing the last 5xx/IO failure if all fail.",
+      "tags": [
+        "http",
+        "failover",
+        "api-client"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java:buildQuery",
+      "type": "function",
+      "name": "buildQuery",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
+      "lineRange": [
+        98,
+        110
+      ],
+      "summary": "Builds an Overpass QL query grouping category OSM values by key (amenity, shop, leisure, tourism) within the bbox, with out center tags.",
+      "tags": [
+        "query-builder",
+        "openstreetmap",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportProperties.java",
+      "type": "file",
+      "name": "PlaceImportProperties.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportProperties.java",
+      "summary": "Configuration properties record (prefix places.import) for the OSM import: enabled flag, comma-separated Overpass URLs with defaults, and the Timisoara bounding box.",
+      "tags": [
+        "config",
+        "configuration-properties",
+        "openstreetmap",
+        "record",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportProperties.java:PlaceImportProperties",
+      "type": "class",
+      "name": "PlaceImportProperties",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportProperties.java",
+      "lineRange": [
+        12,
+        39
+      ],
+      "summary": "Record binding places.import.* settings, filling defaults in its compact constructor and exposing the URL list.",
+      "tags": [
+        "config",
+        "record",
+        "configuration-properties"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/domain/OsmPlaceData.java",
+      "type": "file",
+      "name": "OsmPlaceData.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/OsmPlaceData.java",
+      "summary": "Record holding a place extracted from one OSM element (osmId, name, category, coordinates, address, opening hours, tags) that can be applied onto a Place entity.",
+      "tags": [
+        "data-model",
+        "domain",
+        "record",
+        "openstreetmap"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/domain/OsmPlaceData.java:OsmPlaceData",
+      "type": "class",
+      "name": "OsmPlaceData",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/OsmPlaceData.java",
+      "lineRange": [
+        18,
+        25
+      ],
+      "summary": "Intermediate value object between the OSM mapper and the Place entity, with applyTo() copying values onto a row.",
+      "tags": [
+        "data-model",
+        "record",
+        "domain"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "type": "file",
+      "name": "PlaceCategory.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "summary": "Enum of the 10 app place categories (restaurant, cafe, bar, ...) binding each API name to the OpenStreetMap key and values that qualify a place for it.",
+      "tags": [
+        "domain",
+        "enum",
+        "type-definition",
+        "openstreetmap",
+        "validation",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java:PlaceCategory",
+      "type": "class",
+      "name": "PlaceCategory",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "lineRange": [
+        12,
+        76
+      ],
+      "summary": "Category enum with API-name lookup and OSM-tag classification in amenity, shop, leisure, tourism priority order.",
+      "tags": [
+        "enum",
+        "domain",
+        "type-definition"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java:fromOsmTags",
+      "type": "function",
+      "name": "fromOsmTags",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "lineRange": [
+        64,
+        75
+      ],
+      "summary": "Picks the first category whose OSM key/value matches the given tags, so amenity wins over tourism.",
+      "tags": [
+        "classification",
+        "openstreetmap",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
+      "type": "file",
+      "name": "Place.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
+      "summary": "JPA entity for the places table storing imported OpenStreetMap places with unique osmId, category via converter, coordinates, address, opening hours and jsonb tags.",
+      "tags": [
+        "data-model",
+        "entity",
+        "jpa",
+        "database"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java:Place",
+      "type": "class",
+      "name": "Place",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
+      "lineRange": [
+        21,
+        122
+      ],
+      "summary": "Place entity with a UUID id, osmId identity for re-imports, an update() method and getters.",
+      "tags": [
+        "entity",
+        "jpa",
+        "data-model"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java:update",
+      "type": "function",
+      "name": "update",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
+      "lineRange": [
+        67,
+        76
+      ],
+      "summary": "Copies the latest OpenStreetMap values onto this row for inserts and re-imports.",
+      "tags": [
+        "mutation",
+        "entity"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/PlaceCategoryConverter.java",
+      "type": "file",
+      "name": "PlaceCategoryConverter.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/entity/PlaceCategoryConverter.java",
+      "summary": "JPA AttributeConverter that stores PlaceCategory as its lowercase API name in the database and reads it back.",
+      "tags": [
+        "jpa",
+        "converter",
+        "serialization",
+        "database"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/domain/entity/PlaceCategoryConverter.java:PlaceCategoryConverter",
+      "type": "class",
+      "name": "PlaceCategoryConverter",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/entity/PlaceCategoryConverter.java",
+      "lineRange": [
+        8,
+        26
+      ],
+      "summary": "Converts between PlaceCategory enum values and their apiName column strings.",
+      "tags": [
+        "converter",
+        "jpa",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/mapper/OsmElementMapper.java",
+      "type": "file",
+      "name": "OsmElementMapper.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/OsmElementMapper.java",
+      "summary": "Mapper interface turning an OverpassElement into optional OsmPlaceData, empty when the element should be skipped.",
+      "tags": [
+        "mapper",
+        "interface",
+        "openstreetmap",
+        "transformation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/mapper/OsmElementMapper.java:OsmElementMapper",
+      "type": "class",
+      "name": "OsmElementMapper",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/OsmElementMapper.java",
+      "lineRange": [
+        8,
+        12
+      ],
+      "summary": "Contract for converting raw Overpass elements to storable place data.",
+      "tags": [
+        "mapper",
+        "interface"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
+      "type": "file",
+      "name": "OsmElementMapperImpl.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
+      "summary": "Implements the OSM-to-place mapping rules: osmId as type/id, position from node or way centre, category from tags, ATM naming from operator/brand and street address composition.",
+      "tags": [
+        "mapper",
+        "transformation",
+        "openstreetmap",
+        "validation",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java:OsmElementMapperImpl",
+      "type": "class",
+      "name": "OsmElementMapperImpl",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
+      "lineRange": [
+        16,
+        91
+      ],
+      "summary": "Spring component applying the OSM element mapping rules and skipping elements without position, category or name.",
+      "tags": [
+        "mapper",
+        "component",
+        "transformation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java:toPlaceData",
+      "type": "function",
+      "name": "toPlaceData",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
+      "lineRange": [
+        20,
+        47
+      ],
+      "summary": "Maps one element to OsmPlaceData, returning empty when position, category or name is missing.",
+      "tags": [
+        "mapper",
+        "transformation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java:position",
+      "type": "function",
+      "name": "position",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
+      "lineRange": [
+        50,
+        59
+      ],
+      "summary": "Returns lat/lon from a node or the centre of a way/relation, or null.",
+      "tags": [
+        "geo",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java:name",
+      "type": "function",
+      "name": "name",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
+      "lineRange": [
+        62,
+        75
+      ],
+      "summary": "Uses the name tag, naming unnamed ATMs after their operator or brand and skipping other unnamed places.",
+      "tags": [
+        "naming",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java",
+      "type": "file",
+      "name": "PlaceRepository.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java",
+      "summary": "Spring Data JPA repository for Place with Specification support and osmId-based lookups used by the import to upsert and remove vanished places.",
+      "tags": [
+        "repository",
+        "jpa",
+        "database",
+        "data-access",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java:PlaceRepository",
+      "type": "class",
+      "name": "PlaceRepository",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java",
+      "lineRange": [
+        11,
+        18
+      ],
+      "summary": "JpaRepository plus JpaSpecificationExecutor with findByOsmIdIn and findByOsmIdNotIn queries.",
+      "tags": [
+        "repository",
+        "jpa",
+        "data-access"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java",
+      "type": "file",
+      "name": "PlaceImportService.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java",
+      "summary": "Service interface for the OSM places import, defining importPlaces(), importElements() and the Result record of fetched/inserted/updated/skipped/removed counts.",
+      "tags": [
+        "service",
+        "interface",
+        "import",
+        "openstreetmap"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java:PlaceImportService",
+      "type": "class",
+      "name": "PlaceImportService",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java",
+      "lineRange": [
+        7,
+        26
+      ],
+      "summary": "Import service contract with a nested Result record summarising each run.",
+      "tags": [
+        "service",
+        "interface"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java",
+      "type": "file",
+      "name": "PlaceImportServiceImpl.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java",
+      "summary": "Service that downloads places from Overpass outside a transaction, then maps, de-duplicates, upserts by osmId and deletes vanished places inside one transaction.",
+      "tags": [
+        "service",
+        "import",
+        "transaction",
+        "openstreetmap",
+        "upsert",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java:PlaceImportServiceImpl",
+      "type": "class",
+      "name": "PlaceImportServiceImpl",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java",
+      "lineRange": [
+        26,
+        94
+      ],
+      "summary": "Import orchestrator wiring OverpassClient, OsmElementMapper, PlaceRepository and a TransactionTemplate.",
+      "tags": [
+        "service",
+        "orchestration",
+        "transaction"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java:store",
+      "type": "function",
+      "name": "store",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java",
+      "lineRange": [
+        63,
+        93
+      ],
+      "summary": "Transactional part: dedupes by osmId, inserts or updates Place rows, and removes rows no longer in OSM unless nothing valid came back.",
+      "tags": [
+        "upsert",
+        "database",
+        "transaction"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "type": "file",
+      "name": "OverpassClientImplTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "summary": "Unit tests for OverpassClientImpl covering fixture parsing, way centres, lenient parsing, query contents, property defaults, server failover and request posting via a mock server.",
+      "tags": [
+        "test",
+        "api-client",
+        "http",
+        "openstreetmap"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java:OverpassClientImplTest",
+      "type": "class",
+      "name": "OverpassClientImplTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "lineRange": [
+        22,
+        175
+      ],
+      "summary": "JUnit test class verifying Overpass parsing, query building and multi-server fallback behaviour.",
+      "tags": [
+        "test",
+        "junit"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java:parsesFixture",
+      "type": "function",
+      "name": "parsesFixture",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "lineRange": [
+        25,
+        35
+      ],
+      "summary": "Test case in OverpassClientImplTest checking that parses fixture.",
+      "tags": [
+        "test",
+        "junit",
+        "test-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java:parseIsLenient",
+      "type": "function",
+      "name": "parseIsLenient",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "lineRange": [
+        49,
+        58
+      ],
+      "summary": "Test case in OverpassClientImplTest checking that parse is lenient.",
+      "tags": [
+        "test",
+        "junit",
+        "test-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java:queryContainsEveryCategory",
+      "type": "function",
+      "name": "queryContainsEveryCategory",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "lineRange": [
+        61,
+        75
+      ],
+      "summary": "Test case in OverpassClientImplTest checking that query contains every category.",
+      "tags": [
+        "test",
+        "junit",
+        "test-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java:fallsBackToNextServerWhenFirstIsBusy",
+      "type": "function",
+      "name": "fallsBackToNextServerWhenFirstIsBusy",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "lineRange": [
+        89,
+        119
+      ],
+      "summary": "Test case in OverpassClientImplTest checking that falls back to next server when first is busy.",
+      "tags": [
+        "test",
+        "junit",
+        "test-case"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java:throwsWhenAllServersFail",
+      "type": "function",
+      "name": "throwsWhenAllServersFail",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "lineRange": [
+        122,
+        139
+      ],
+      "summary": "Test case in OverpassClientImplTest checking that throws when all servers fail.",
+      "tags": [
+        "test",
+        "junit",
+        "test-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java:fetchPlacesPostsQueryToConfiguredUrl",
+      "type": "function",
+      "name": "fetchPlacesPostsQueryToConfiguredUrl",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "lineRange": [
+        142,
+        174
+      ],
+      "summary": "Test case in OverpassClientImplTest checking that fetch places posts query to configured url.",
+      "tags": [
+        "test",
+        "junit",
+        "test-case"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java",
+      "type": "file",
+      "name": "PlaceControllerTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java",
+      "summary": "Spring Boot MockMvc integration tests for the places API: listing, category and bbox filters, near-me distance sorting and paging, name search, validation errors and detail lookup.",
+      "tags": [
+        "test",
+        "integration-test",
+        "api-handler",
+        "mockmvc"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java:PlaceControllerTest",
+      "type": "class",
+      "name": "PlaceControllerTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java",
+      "lineRange": [
+        24,
+        177
+      ],
+      "summary": "SpringBootTest seeding Place rows and exercising GET /places search and detail endpoints.",
+      "tags": [
+        "test",
+        "integration-test",
+        "mockmvc"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java:listsAllPlacesByNameWithoutToken",
+      "type": "function",
+      "name": "listsAllPlacesByNameWithoutToken",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java",
+      "lineRange": [
+        59,
+        70
+      ],
+      "summary": "Test case in PlaceControllerTest checking that lists all places by name without token.",
+      "tags": [
+        "test",
+        "junit",
+        "test-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java:returnsPlaceDetail",
+      "type": "function",
+      "name": "returnsPlaceDetail",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java",
+      "lineRange": [
+        153,
+        165
+      ],
+      "summary": "Test case in PlaceControllerTest checking that returns place detail.",
+      "tags": [
+        "test",
+        "junit",
+        "test-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
+      "type": "file",
+      "name": "OsmElementMapperImplTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
+      "summary": "Unit tests for OsmElementMapperImpl checking fixture mapping, category picking, way centres, ATM naming, address formatting and skipping invalid elements.",
+      "tags": [
+        "test",
+        "mapper",
+        "openstreetmap"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java:OsmElementMapperImplTest",
+      "type": "class",
+      "name": "OsmElementMapperImplTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
+      "lineRange": [
+        16,
+        120
+      ],
+      "summary": "JUnit test class for the OSM element mapping rules.",
+      "tags": [
+        "test",
+        "junit",
+        "mapper"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java:mapsRestaurantNode",
+      "type": "function",
+      "name": "mapsRestaurantNode",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
+      "lineRange": [
+        41,
+        52
+      ],
+      "summary": "Test case in OsmElementMapperImplTest checking that maps restaurant node.",
+      "tags": [
+        "test",
+        "junit",
+        "test-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java:wayUsesCenter",
+      "type": "function",
+      "name": "wayUsesCenter",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
+      "lineRange": [
+        65,
+        75
+      ],
+      "summary": "Test case in OsmElementMapperImplTest checking that way uses center.",
+      "tags": [
+        "test",
+        "junit",
+        "test-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java:namesUnnamedAtms",
+      "type": "function",
+      "name": "namesUnnamedAtms",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
+      "lineRange": [
+        86,
+        98
+      ],
+      "summary": "Test case in OsmElementMapperImplTest checking that names unnamed atms.",
+      "tags": [
+        "test",
+        "junit",
+        "test-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java:skipsWithoutPositionOrCategory",
+      "type": "function",
+      "name": "skipsWithoutPositionOrCategory",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
+      "lineRange": [
+        110,
+        119
+      ],
+      "summary": "Test case in OsmElementMapperImplTest checking that skips without position or category.",
+      "tags": [
+        "test",
+        "junit",
+        "test-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "type": "file",
+      "name": "PlaceImportServiceImplTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "summary": "Database-backed tests for PlaceImportServiceImpl verifying first-run inserts, re-import updates without duplicates, removal of vanished places, empty-fetch safety and duplicate handling.",
+      "tags": [
+        "test",
+        "integration-test",
+        "import",
+        "database"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java:PlaceImportServiceImplTest",
+      "type": "class",
+      "name": "PlaceImportServiceImplTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "lineRange": [
+        28,
+        156
+      ],
+      "summary": "Test class with a mocked OverpassClient and real repository asserting upsert and delete semantics.",
+      "tags": [
+        "test",
+        "integration-test",
+        "import"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java:firstRunInserts",
+      "type": "function",
+      "name": "firstRunInserts",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "lineRange": [
+        66,
+        81
+      ],
+      "summary": "Test case in PlaceImportServiceImplTest checking that first run inserts.",
+      "tags": [
+        "test",
+        "junit",
+        "test-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java:secondRunUpdatesWithoutDuplicates",
+      "type": "function",
+      "name": "secondRunUpdatesWithoutDuplicates",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "lineRange": [
+        84,
+        105
+      ],
+      "summary": "Test case in PlaceImportServiceImplTest checking that second run updates without duplicates.",
+      "tags": [
+        "test",
+        "junit",
+        "test-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java:removesVanishedPlaces",
+      "type": "function",
+      "name": "removesVanishedPlaces",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "lineRange": [
+        108,
+        122
+      ],
+      "summary": "Test case in PlaceImportServiceImplTest checking that removes vanished places.",
+      "tags": [
+        "test",
+        "junit",
+        "test-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java:emptyFetchRemovesNothing",
+      "type": "function",
+      "name": "emptyFetchRemovesNothing",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "lineRange": [
+        125,
+        141
+      ],
+      "summary": "Test case in PlaceImportServiceImplTest checking that empty fetch removes nothing.",
+      "tags": [
+        "test",
+        "junit",
+        "test-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java:duplicateElementsStoredOnce",
+      "type": "function",
+      "name": "duplicateElementsStoredOnce",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "lineRange": [
+        144,
+        155
+      ],
+      "summary": "Test case in PlaceImportServiceImplTest checking that duplicate elements stored once.",
+      "tags": [
+        "test",
+        "junit",
+        "test-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/places/support/OverpassFixtures.java",
+      "type": "file",
+      "name": "OverpassFixtures.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/support/OverpassFixtures.java",
+      "summary": "Test helper loading the Timisoara Overpass JSON fixture from test resources and parsing it into an OverpassResponse.",
+      "tags": [
+        "test",
+        "fixture",
+        "utility",
+        "openstreetmap"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/places/support/OverpassFixtures.java:OverpassFixtures",
+      "type": "class",
+      "name": "OverpassFixtures",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/support/OverpassFixtures.java",
+      "lineRange": [
+        11,
+        32
+      ],
+      "summary": "Static utility exposing the raw fixture JSON and its parsed timisoaraSample() response.",
+      "tags": [
+        "test",
+        "fixture",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "type": "file",
+      "name": "BoundingBox.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "summary": "Java record for a map viewport that parses the API bbox=minLon,minLat,maxLon,maxLat parameter with range and order validation, and tests point containment.",
+      "tags": [
+        "data-model",
+        "geo",
+        "validation",
+        "value-object",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java",
+      "type": "file",
+      "name": "GeoParsing.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java",
+      "summary": "Package-private helper that splits comma-separated coordinate parameters into a fixed number of finite doubles, throwing 400 VALIDATION_FAILED errors on bad input.",
+      "tags": [
+        "utility",
+        "geo",
+        "parsing",
+        "validation",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "type": "file",
+      "name": "GeoPoint.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "summary": "Latitude/longitude record that parses near=lat,lon, computes haversine distances in meters, and builds a bounding box around a radius for cheap pre-filtering.",
+      "tags": [
+        "data-model",
+        "geo",
+        "value-object",
+        "utility",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "type": "file",
+      "name": "PlaceController.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "summary": "REST controller exposing GET /places (category, bbox, near+radius, name query, paging) and GET /places/{id}, parsing and validating query parameters before delegating to PlaceService.",
+      "tags": [
+        "api-handler",
+        "controller",
+        "places",
+        "validation",
+        "rest",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java",
+      "type": "file",
+      "name": "PlaceSearchCriteria.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java",
+      "summary": "Immutable record bundling validated place-search filters (categories, bbox, near point, radius, name query) with default and max radius constants and normalisation in its compact constructor.",
+      "tags": [
+        "dto",
+        "data-model",
+        "places",
+        "search"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java",
+      "type": "file",
+      "name": "PlaceService.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java",
+      "summary": "Service interface for reading places: filtered paged search and single-place detail lookup; also intended for the AI assistant search_places tool.",
+      "tags": [
+        "service",
+        "interface",
+        "places",
+        "type-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "type": "file",
+      "name": "PlaceServiceImpl.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "summary": "Transactional place search implementation: runs category, viewport and name filters in the database via JPA Specifications, and for near-searches pre-filters by bounding box then sorts and pages by exact haversine distance in memory.",
+      "tags": [
+        "service",
+        "places",
+        "search",
+        "geo",
+        "jpa",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java",
+      "type": "file",
+      "name": "PlaceSpecifications.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java",
+      "summary": "Package-private factory of JPA Specifications for place search: category IN, bounding-box lat/lon BETWEEN, and escaped case-insensitive LIKE on name.",
+      "tags": [
+        "utility",
+        "jpa",
+        "query-builder",
+        "places"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/common/geo/GeoTest.java",
+      "type": "file",
+      "name": "GeoTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/common/geo/GeoTest.java",
+      "summary": "JUnit tests for geo utilities: haversine distance against a known Timisoara distance, boxAround coverage, and GeoPoint/BoundingBox parsing and rejection of bad inputs.",
+      "tags": [
+        "test",
+        "geo",
+        "unit-test",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java:BoundingBox",
+      "type": "class",
+      "name": "BoundingBox",
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "lineRange": [
+        10,
+        29
+      ],
+      "summary": "Record of min/max lon/lat representing a map viewport with parse and contains helpers.",
+      "tags": [
+        "geo",
+        "value-object",
+        "record"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java:GeoParsing",
+      "type": "class",
+      "name": "GeoParsing",
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java",
+      "lineRange": [
+        7,
+        36
+      ],
+      "summary": "Non-instantiable utility class for parsing comma-separated numeric coordinate strings.",
+      "tags": [
+        "utility",
+        "geo",
+        "parsing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java:GeoPoint",
+      "type": "class",
+      "name": "GeoPoint",
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "lineRange": [
+        9,
+        48
+      ],
+      "summary": "Validated lat/lon record with parsing, haversine distance and radius bounding-box computation.",
+      "tags": [
+        "geo",
+        "value-object",
+        "record"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java:PlaceController",
+      "type": "class",
+      "name": "PlaceController",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "lineRange": [
+        27,
+        103
+      ],
+      "summary": "Spring @RestController mapped to /places handling search and detail requests.",
+      "tags": [
+        "controller",
+        "api-handler",
+        "places"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java:PlaceSearchCriteria",
+      "type": "class",
+      "name": "PlaceSearchCriteria",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java",
+      "lineRange": [
+        18,
+        33
+      ],
+      "summary": "Record of place search filters with DEFAULT_RADIUS_METERS=1500 and MAX_RADIUS_METERS=10000.",
+      "tags": [
+        "dto",
+        "record",
+        "search"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java:PlaceService",
+      "type": "class",
+      "name": "PlaceService",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java",
+      "lineRange": [
+        11,
+        18
+      ],
+      "summary": "Interface declaring search(criteria, page) and get(id) for places.",
+      "tags": [
+        "interface",
+        "service",
+        "places"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java:PlaceServiceImpl",
+      "type": "class",
+      "name": "PlaceServiceImpl",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "lineRange": [
+        29,
+        85
+      ],
+      "summary": "Spring @Service implementing PlaceService with database filtering and in-memory distance sorting for near-searches.",
+      "tags": [
+        "service",
+        "implementation",
+        "places"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java:PlaceSpecifications",
+      "type": "class",
+      "name": "PlaceSpecifications",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java",
+      "lineRange": [
+        10,
+        43
+      ],
+      "summary": "Final utility class building composable JPA Specification<Place> filters.",
+      "tags": [
+        "utility",
+        "jpa",
+        "specification"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/common/geo/GeoTest.java:GeoTest",
+      "type": "class",
+      "name": "GeoTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/common/geo/GeoTest.java",
+      "lineRange": [
+        11,
+        57
+      ],
+      "summary": "JUnit test class covering GeoPoint and BoundingBox parsing and distance maths.",
+      "tags": [
+        "test",
+        "geo",
+        "junit"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java:parse",
+      "type": "function",
+      "name": "parse",
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "lineRange": [
+        13,
+        23
+      ],
+      "summary": "Parses a bbox string into a BoundingBox, rejecting out-of-range coordinates or min > max with VALIDATION_FAILED.",
+      "tags": [
+        "parsing",
+        "validation",
+        "geo"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java:numbers",
+      "type": "function",
+      "name": "numbers",
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java",
+      "lineRange": [
+        14,
+        35
+      ],
+      "summary": "Splits a comma-separated string into exactly N finite doubles or throws a 400 ApiException describing the expected format.",
+      "tags": [
+        "parsing",
+        "validation",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java:parse",
+      "type": "function",
+      "name": "parse",
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "lineRange": [
+        21,
+        28
+      ],
+      "summary": "Parses a lat,lon string into a GeoPoint, mapping out-of-range coordinates to VALIDATION_FAILED.",
+      "tags": [
+        "parsing",
+        "validation",
+        "geo"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java:distanceMetersTo",
+      "type": "function",
+      "name": "distanceMetersTo",
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "lineRange": [
+        31,
+        38
+      ],
+      "summary": "Computes great-circle (haversine) distance in meters to another point.",
+      "tags": [
+        "geo",
+        "math",
+        "distance"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java:boxAround",
+      "type": "function",
+      "name": "boxAround",
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "lineRange": [
+        41,
+        47
+      ],
+      "summary": "Builds the smallest BoundingBox containing all points within a radius, clamped to valid coordinates.",
+      "tags": [
+        "geo",
+        "math",
+        "pre-filter"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java:search",
+      "type": "function",
+      "name": "search",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "lineRange": [
+        42,
+        57
+      ],
+      "summary": "GET /places handler that parses bbox, near, radius and categories into PlaceSearchCriteria, picks map or normal paging, and calls PlaceService.search.",
+      "tags": [
+        "api-handler",
+        "search",
+        "endpoint"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java:parseCategories",
+      "type": "function",
+      "name": "parseCategories",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "lineRange": [
+        66,
+        82
+      ],
+      "summary": "Parses repeatable or comma-separated category names into an EnumSet, rejecting unknown names with a helpful 400.",
+      "tags": [
+        "parsing",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java:parseRadius",
+      "type": "function",
+      "name": "parseRadius",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "lineRange": [
+        85,
+        97
+      ],
+      "summary": "Validates the radius parameter: defaults to 1500 m, requires near, and caps at 10000 m.",
+      "tags": [
+        "validation",
+        "parsing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java:search",
+      "type": "function",
+      "name": "search",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "lineRange": [
+        43,
+        51
+      ],
+      "summary": "Dispatches to distance search when near is set, otherwise runs a name-sorted paged database query.",
+      "tags": [
+        "service",
+        "search",
+        "paging"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java:searchNear",
+      "type": "function",
+      "name": "searchNear",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "lineRange": [
+        62,
+        80
+      ],
+      "summary": "Loads places in a bounding box around the point, filters by exact haversine radius, sorts by distance then name, and pages in memory.",
+      "tags": [
+        "geo",
+        "search",
+        "sorting",
+        "paging"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java:matching",
+      "type": "function",
+      "name": "matching",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java",
+      "lineRange": [
+        17,
+        30
+      ],
+      "summary": "Combines category, bbox and escaped name LIKE filters from the criteria into one Specification (near is handled by the service).",
+      "tags": [
+        "jpa",
+        "query-builder",
+        "search"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceDetailDto.java",
+      "type": "file",
+      "name": "PlaceDetailDto.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceDetailDto.java",
+      "summary": "Defines the immutable response record for GET /places/{id}, carrying a place's identity, coordinates, address, raw opening hours and a filtered map of public OpenStreetMap tags.",
+      "tags": [
+        "dto",
+        "data-model",
+        "places",
+        "api-contract"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Uses a Java record, giving an immutable carrier with generated accessors, equals and hashCode."
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceDetailDto.java:PlaceDetailDto",
+      "type": "class",
+      "name": "PlaceDetailDto",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceDetailDto.java",
+      "lineRange": [
+        12,
+        22
+      ],
+      "summary": "Record holding full place details (id, osmId, name, category, lat/lon, address, openingHours, tags) returned by the place detail endpoint.",
+      "tags": [
+        "dto",
+        "record",
+        "places",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java",
+      "type": "file",
+      "name": "PlaceSummaryDto.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java",
+      "summary": "Defines the compact place record used in map and list responses, including an optional distance from the caller's near point.",
+      "tags": [
+        "dto",
+        "data-model",
+        "places",
+        "api-contract"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java:PlaceSummaryDto",
+      "type": "class",
+      "name": "PlaceSummaryDto",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java",
+      "lineRange": [
+        10,
+        19
+      ],
+      "summary": "Record with the list/map fields of a place (id, osmId, name, category, coordinates, address) plus a nullable distanceMeters.",
+      "tags": [
+        "dto",
+        "record",
+        "places",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/mapper/PlaceMapper.java",
+      "type": "file",
+      "name": "PlaceMapper.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/PlaceMapper.java",
+      "summary": "Declares the mapper contract that converts Place entities into the summary and detail API shapes described in docs/API.md.",
+      "tags": [
+        "mapper",
+        "interface",
+        "places",
+        "type-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/mapper/PlaceMapper.java:PlaceMapper",
+      "type": "class",
+      "name": "PlaceMapper",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/PlaceMapper.java",
+      "lineRange": [
+        8,
+        15
+      ],
+      "summary": "Interface with toSummary(place, distanceMeters) and toDetail(place) for turning Place entities into PlaceSummaryDto and PlaceDetailDto.",
+      "tags": [
+        "mapper",
+        "interface",
+        "places",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java",
+      "type": "file",
+      "name": "PlaceMapperImpl.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java",
+      "summary": "Hand-written Spring component implementing PlaceMapper; copies entity fields into DTOs and whitelists a fixed, ordered set of public OpenStreetMap tags for place details.",
+      "tags": [
+        "mapper",
+        "service",
+        "places",
+        "serialization",
+        "spring-component",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java:PlaceMapperImpl",
+      "type": "class",
+      "name": "PlaceMapperImpl",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java",
+      "lineRange": [
+        13,
+        61
+      ],
+      "summary": "@Component implementation of PlaceMapper that holds the PUBLIC_TAGS whitelist (cuisine, website, phone, diet, etc.) and builds summary and detail DTOs from Place entities.",
+      "tags": [
+        "mapper",
+        "spring-component",
+        "places",
+        "serialization"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Uses List.of for an immutable ordered whitelist and LinkedHashMap to preserve tag ordering in the JSON output."
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java:toSummary",
+      "type": "function",
+      "name": "toSummary",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java",
+      "lineRange": [
+        26,
+        37
+      ],
+      "summary": "Builds a PlaceSummaryDto from a Place, converting the category to its API name and attaching the optional distance in meters.",
+      "tags": [
+        "mapper",
+        "serialization",
+        "places"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java:toDetail",
+      "type": "function",
+      "name": "toDetail",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java",
+      "lineRange": [
+        40,
+        60
+      ],
+      "summary": "Builds a PlaceDetailDto from a Place, null-safely filtering the entity's OSM tags down to non-blank PUBLIC_TAGS entries in whitelist order.",
+      "tags": [
+        "mapper",
+        "serialization",
+        "filtering",
+        "places"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:AGENTS.md",
+      "type": "document",
+      "name": "AGENTS.md",
+      "filePath": "AGENTS.md",
+      "summary": "Project brief and contributor/agent rules for the Timișoara Connected Communities hackathon app: core feature list (filterable map, live STPT transit, directions, AI guide, events with QR check-in and reliability points, profiles) and the mandated Spring Boot + Supabase + Expo stack with its package layout.",
+      "tags": [
+        "documentation",
+        "development",
+        "project-rules",
+        "architecture"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:DOCS.md",
+      "type": "document",
+      "name": "DOCS.md",
+      "filePath": "DOCS.md",
+      "summary": "Living project documentation covering architecture, configuration and run guide, backend foundation classes, Supabase MCP and database schema, external data sources (STPT, LiveTickets, OSM, Gemini), reliability rules, the Places feature (categories, Overpass import, search) and the knowledge graph workflow.",
+      "tags": [
+        "documentation",
+        "architecture",
+        "configuration",
+        "database",
+        "external-apis"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:PLAN.md",
+      "type": "document",
+      "name": "PLAN.md",
+      "filePath": "PLAN.md",
+      "summary": "Task plan split into three tracks with dependency map and definition of done, listing 17 numbered work areas from foundation, database and backend foundation through users, events, QR reliability, imports, places, transit, routing, AI and the mobile pages, plus cut order and open questions.",
+      "tags": [
+        "documentation",
+        "planning",
+        "roadmap",
+        "task-tracking"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportConfig.java",
+      "type": "file",
+      "name": "PlaceImportConfig.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportConfig.java",
+      "summary": "Spring @Configuration that enables binding of the places.import.* properties into PlaceImportProperties.",
+      "tags": [
+        "config",
+        "spring-configuration",
+        "places",
+        "import"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportConfig.java:PlaceImportConfig",
+      "type": "class",
+      "name": "PlaceImportConfig",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportConfig.java",
+      "lineRange": [
+        7,
+        10
+      ],
+      "summary": "Empty configuration class annotated with @EnableConfigurationProperties to register the OpenStreetMap import settings.",
+      "tags": [
+        "config",
+        "spring-configuration",
+        "places"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java",
+      "type": "file",
+      "name": "PlaceImportRunner.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java",
+      "summary": "Startup ApplicationRunner that triggers the OpenStreetMap (Overpass) places import once when places.import.enabled=true, logging failures instead of crashing the server.",
+      "tags": [
+        "service",
+        "startup",
+        "places",
+        "import",
+        "data-pipeline",
+        "tested"
+      ],
+      "complexity": "simple",
+      "languageNotes": "@ConditionalOnProperty makes the bean exist only when the import flag is set, so the runner is opt-in."
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java:PlaceImportRunner",
+      "type": "class",
+      "name": "PlaceImportRunner",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java",
+      "lineRange": [
+        16,
+        40
+      ],
+      "summary": "Conditional Spring component implementing ApplicationRunner that delegates to PlaceImportService and keeps existing places if the import throws.",
+      "tags": [
+        "service",
+        "startup",
+        "places",
+        "error-handling"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java:run",
+      "type": "function",
+      "name": "run",
+      "filePath": "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java",
+      "lineRange": [
+        30,
+        39
+      ],
+      "summary": "Runs the places import at application startup and logs the result, catching RuntimeExceptions so a failed Overpass call is non-fatal.",
+      "tags": [
+        "startup",
+        "places",
+        "import",
+        "error-handling"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/places/domain/PlaceCategoryTest.java",
+      "type": "file",
+      "name": "PlaceCategoryTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/domain/PlaceCategoryTest.java",
+      "summary": "Unit tests for PlaceCategory verifying the 10 API category names, OSM tag-to-category mapping with fallthrough to tourism, and case-insensitive API name lookup.",
+      "tags": [
+        "test",
+        "places",
+        "data-model",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/places/domain/PlaceCategoryTest.java:PlaceCategoryTest",
+      "type": "class",
+      "name": "PlaceCategoryTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/domain/PlaceCategoryTest.java",
+      "lineRange": [
+        10,
+        46
+      ],
+      "summary": "JUnit 5 test class checking PlaceCategory names match docs/API.md and that OpenStreetMap tags map to the expected categories.",
+      "tags": [
+        "test",
+        "places",
+        "junit"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/places/domain/PlaceCategoryTest.java:mapsOsmTags",
+      "type": "function",
+      "name": "mapsOsmTags",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/domain/PlaceCategoryTest.java",
+      "lineRange": [
+        21,
+        30
+      ],
+      "summary": "Asserts typical OSM tags (pub, nightclub, supermarket, park, museum) map to categories and unmatched or null tags yield empty.",
+      "tags": [
+        "test",
+        "places",
+        "osm"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportRunnerTest.java",
+      "type": "file",
+      "name": "PlaceImportRunnerTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/service/PlaceImportRunnerTest.java",
+      "summary": "Unit tests for PlaceImportRunner using a mocked PlaceImportService, checking the import runs once and that a failing import does not throw.",
+      "tags": [
+        "test",
+        "places",
+        "startup",
+        "mocking"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportRunnerTest.java:PlaceImportRunnerTest",
+      "type": "class",
+      "name": "PlaceImportRunnerTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/places/service/PlaceImportRunnerTest.java",
+      "lineRange": [
+        13,
+        35
+      ],
+      "summary": "Mockito-based test class verifying the startup runner delegates to the import service and swallows import failures.",
+      "tags": [
+        "test",
+        "mocking",
+        "places"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:backend/src/test/resources/overpass/timisoara-sample.json",
+      "type": "config",
+      "name": "timisoara-sample.json",
+      "filePath": "backend/src/test/resources/overpass/timisoara-sample.json",
+      "summary": "Sample Overpass API JSON response with OpenStreetMap nodes for Timisoara places (restaurants, cafes, etc.) used as a test fixture for the places import.",
+      "tags": [
+        "test-fixture",
+        "osm",
+        "places",
+        "sample-data"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/API.md",
+      "type": "document",
+      "name": "API.md",
+      "filePath": "docs/API.md",
+      "summary": "REST API contract between the Expo frontend and Spring Boot backend: conventions, paged and error answers, shared objects, and endpoints for users, events, check-in, places, STPT transit, routing and the AI assistant.",
+      "tags": [
+        "documentation",
+        "api-schema",
+        "contract",
+        "rest"
+      ],
+      "complexity": "complex"
     },
     {
       "id": "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
@@ -3479,195 +5327,6 @@
       "weight": 0.7
     },
     {
-      "source": "document:DOCS.md",
-      "target": "document:docs/API.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "document:infra/otp/README.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "document:frontend/AGENTS.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "document:PLAN.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "document:AGENTS.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "config:.mcp.json",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/security/CurrentUser.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/PageParams.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/resources/application-local.properties.example",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:supabase/tests/schema_checks.sql",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:supabase/migrations/20261113000001_profiles.sql",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:supabase/migrations/20261113000002_events.sql",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:supabase/migrations/20261113000003_participation_reliability.sql",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:supabase/migrations/20261113000004_places.sql",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "document:docs/API.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "document:infra/otp/README.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "document:DOCS.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "document:AGENTS.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "config:backend/build.gradle",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "file:backend/src/main/resources/application-local.properties.example",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "config:.mcp.json",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:AGENTS.md",
-      "target": "document:PLAN.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:AGENTS.md",
-      "target": "document:DOCS.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:README.md",
-      "target": "document:DOCS.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "file:backend/gradlew.bat",
       "target": "function:backend/gradlew.bat:findJavaFromJavaHome",
       "type": "contains",
@@ -3899,34 +5558,6 @@
       "weight": 0.5
     },
     {
-      "source": "document:docs/API.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/API.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/API.md",
-      "target": "file:frontend/src/lib/api.js",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/API.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/PageResponse.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "file:backend/src/main/resources/application-local.properties.example",
       "target": "file:backend/src/main/java/com/unihack8/backend/config/SupabaseProperties.java",
       "type": "configures",
@@ -3972,6 +5603,2043 @@
       "source": "file:frontend/src/app/_layout.jsx",
       "target": "file:frontend/src/app/index.jsx",
       "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java:OverpassClient",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java:OverpassClient",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java:OverpassElement",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java:OverpassElement",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassResponse.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassResponse.java:OverpassResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassResponse.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassResponse.java:OverpassResponse",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportProperties.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java:OverpassClientImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java:OverpassClientImpl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java:OverpassClientImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java:fetchPlaces",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java:buildQuery",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportProperties.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportProperties.java:PlaceImportProperties",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportProperties.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportProperties.java:PlaceImportProperties",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/OsmPlaceData.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/OsmPlaceData.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/domain/OsmPlaceData.java:OsmPlaceData",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/OsmPlaceData.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/domain/OsmPlaceData.java:OsmPlaceData",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java:PlaceCategory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java:PlaceCategory",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java:fromOsmTags",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java:Place",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java:Place",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java:update",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/PlaceCategoryConverter.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/PlaceCategoryConverter.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/domain/entity/PlaceCategoryConverter.java:PlaceCategoryConverter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/PlaceCategoryConverter.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/domain/entity/PlaceCategoryConverter.java:PlaceCategoryConverter",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/OsmElementMapper.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/OsmElementMapper.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/OsmPlaceData.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/OsmElementMapper.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/mapper/OsmElementMapper.java:OsmElementMapper",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/OsmElementMapper.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/mapper/OsmElementMapper.java:OsmElementMapper",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java:OverpassClientImpl",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java:OverpassClient",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java:buildQuery",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java:PlaceCategory",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/OsmPlaceData.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java:update",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/PlaceCategoryConverter.java",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportProperties.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/OsmPlaceData.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/mapper/OsmElementMapper.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java:OsmElementMapperImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java:OsmElementMapperImpl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java:toPlaceData",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java:position",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java:name",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java:PlaceRepository",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java:PlaceRepository",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java:PlaceImportService",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java:PlaceImportService",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/OsmPlaceData.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/mapper/OsmElementMapper.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java:PlaceImportServiceImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java:PlaceImportServiceImpl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java:store",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportProperties.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/places/support/OverpassFixtures.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java:OverpassClientImplTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java:parsesFixture",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java:parseIsLenient",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java:queryContainsEveryCategory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java:fallsBackToNextServerWhenFirstIsBusy",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java:throwsWhenAllServersFail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java:fetchPlacesPostsQueryToConfiguredUrl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java:PlaceControllerTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java:listsAllPlacesByNameWithoutToken",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java:returnsPlaceDetail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/OsmPlaceData.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/places/support/OverpassFixtures.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java:OsmElementMapperImplTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java:mapsRestaurantNode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java:wayUsesCenter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java:namesUnnamedAtms",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java:skipsWithoutPositionOrCategory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/places/support/OverpassFixtures.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java:PlaceImportServiceImplTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java:firstRunInserts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java:secondRunUpdatesWithoutDuplicates",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java:removesVanishedPlaces",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java:emptyFetchRemovesNothing",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java:duplicateElementsStoredOnce",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/support/OverpassFixtures.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/support/OverpassFixtures.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/support/OverpassFixtures.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/places/support/OverpassFixtures.java:OverpassFixtures",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java:OsmElementMapperImpl",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/mapper/OsmElementMapper.java:OsmElementMapper",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java:PlaceImportServiceImpl",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java:PlaceImportService",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java:store",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java:toPlaceData",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java:toPlaceData",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java:fromOsmTags",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/support/OverpassFixtures.java",
+      "target": "config:backend/src/test/resources/overpass/timisoara-sample.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java:BoundingBox",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java:BoundingBox",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java:GeoParsing",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java:GeoPoint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java:GeoPoint",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java:PlaceController",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java:PlaceController",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java:PlaceSearchCriteria",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java:PlaceSearchCriteria",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java:PlaceService",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java:PlaceService",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java:PlaceServiceImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java:PlaceServiceImpl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java:PlaceSpecifications",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/common/geo/GeoTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/common/geo/GeoTest.java:GeoTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java:parse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java:parse",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java:numbers",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java:parse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java:parse",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java:distanceMetersTo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java:distanceMetersTo",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java:boxAround",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java:boxAround",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java:search",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java:search",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java:parseCategories",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java:parseRadius",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java:search",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java:search",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java:searchNear",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java:matching",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/PageParams.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/PageResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceDetailDto.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/PageParams.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/PageResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceDetailDto.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/PageParams.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/PageResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceDetailDto.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/mapper/PlaceMapper.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/common/geo/GeoTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java:PlaceServiceImpl",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java:PlaceService",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java:parse",
+      "target": "function:backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java:numbers",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java:parse",
+      "target": "function:backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java:numbers",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java:search",
+      "target": "function:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java:parse",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java:search",
+      "target": "function:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java:parse",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java:search",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java:parseCategories",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java:search",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java:parseRadius",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java:search",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java:search",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java:search",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java:matching",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java:search",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java:searchNear",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java:searchNear",
+      "target": "function:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java:boxAround",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java:searchNear",
+      "target": "function:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java:distanceMetersTo",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/common/geo/GeoTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/common/geo/GeoTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/common/geo/GeoTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceDetailDto.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceDetailDto.java:PlaceDetailDto",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceDetailDto.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceDetailDto.java:PlaceDetailDto",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java:PlaceSummaryDto",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java:PlaceSummaryDto",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/PlaceMapper.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/mapper/PlaceMapper.java:PlaceMapper",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/PlaceMapper.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/mapper/PlaceMapper.java:PlaceMapper",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java:PlaceMapperImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java:toSummary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java:toDetail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java:PlaceMapperImpl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/PlaceMapper.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceDetailDto.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/PlaceMapper.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/PlaceMapper.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceDetailDto.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/mapper/PlaceMapper.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java:PlaceMapperImpl",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/mapper/PlaceMapper.java:PlaceMapper",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java:toSummary",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java:PlaceSummaryDto",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java:toDetail",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceDetailDto.java:PlaceDetailDto",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:AGENTS.md",
+      "target": "document:PLAN.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:AGENTS.md",
+      "target": "document:DOCS.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "document:PLAN.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "document:AGENTS.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "document:docs/API.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "document:infra/otp/README.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "document:frontend/AGENTS.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "config:.mcp.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/resources/application-local.properties.example",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:supabase/tests/schema_checks.sql",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:supabase/migrations/20261113000001_profiles.sql",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:supabase/migrations/20261113000002_events.sql",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:supabase/migrations/20261113000003_participation_reliability.sql",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:supabase/migrations/20261113000004_places.sql",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/security/CurrentUser.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/PageParams.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "document:DOCS.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "document:AGENTS.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "document:docs/API.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "document:infra/otp/README.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportConfig.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportConfig.java:PlaceImportConfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportConfig.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportConfig.java:PlaceImportConfig",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java:PlaceImportRunner",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java:PlaceImportRunner",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java:run",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java:run",
+      "target": "class:backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java:PlaceImportService",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/domain/PlaceCategoryTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/places/domain/PlaceCategoryTest.java:PlaceCategoryTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/domain/PlaceCategoryTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/places/domain/PlaceCategoryTest.java:mapsOsmTags",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportRunnerTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportRunnerTest.java:PlaceImportRunnerTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportRunnerTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/places/domain/PlaceCategoryTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportRunnerTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:backend/src/test/resources/overpass/timisoara-sample.json",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:backend/src/test/resources/overpass/timisoara-sample.json",
+      "target": "file:backend/src/test/java/com/unihack8/backend/places/support/OverpassFixtures.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/PageResponse.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:frontend/src/lib/api.js",
+      "type": "documents",
       "direction": "forward",
       "weight": 0.5
     },
@@ -5009,7 +8677,42 @@
         "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
         "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
         "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorResponseFactory.java",
-        "file:backend/src/main/java/com/unihack8/backend/common/exception/GlobalExceptionHandler.java"
+        "file:backend/src/main/java/com/unihack8/backend/common/exception/GlobalExceptionHandler.java",
+        "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+        "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java",
+        "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java"
+      ]
+    },
+    {
+      "id": "layer:places-feature",
+      "name": "Places Feature",
+      "description": "OpenStreetMap places: category list, Overpass import (client, mapper, import service and runner), the Place entity and repository, and the public GET /places search and detail endpoints.",
+      "nodeIds": [
+        "file:backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassResponse.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportProperties.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/domain/OsmPlaceData.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/PlaceCategoryConverter.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/mapper/OsmElementMapper.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceDetailDto.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/mapper/PlaceMapper.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportConfig.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java"
       ]
     },
     {
@@ -5026,6 +8729,15 @@
         "file:backend/src/test/java/com/unihack8/backend/support/JwtTestTokens.java",
         "file:backend/src/test/java/com/unihack8/backend/support/TestProbeController.java",
         "config:backend/src/test/resources/application.properties",
+        "file:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
+        "file:backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java",
+        "file:backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
+        "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
+        "file:backend/src/test/java/com/unihack8/backend/places/support/OverpassFixtures.java",
+        "file:backend/src/test/java/com/unihack8/backend/common/geo/GeoTest.java",
+        "file:backend/src/test/java/com/unihack8/backend/places/domain/PlaceCategoryTest.java",
+        "file:backend/src/test/java/com/unihack8/backend/places/service/PlaceImportRunnerTest.java",
+        "config:backend/src/test/resources/overpass/timisoara-sample.json",
         "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
         "file:backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
         "file:backend/src/test/java/com/unihack8/backend/users/repository/ProfileRepositoryTest.java",
@@ -5244,19 +8956,6 @@
     },
     {
       "order": 13,
-      "title": "The Users and Profiles Feature",
-      "description": "The first feature built on the foundation. UserController exposes GET /users/username-available (public) and GET/PATCH /users/me, /users/search and /users/{id} (token required). UserServiceImpl holds the rules: usernames are 3-20 letters, digits or underscores, case-insensitive duplicates answer USERNAME_TAKEN even when two requests race, and search stops at 20 results. Errors are plain ApiException codes, so the shared handler produces the standard error JSON. Profiles come from the Supabase profiles table through JPA, while attended events come from a JDBC query over events and event_participants that returns the EventSummary shape.",
-      "nodeIds": [
-        "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
-        "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
-        "file:backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java",
-        "file:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
-        "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java"
-      ],
-      "languageLesson": "Keeping the attended-events query as plain JDBC means the users feature needs no JPA entity for tables another feature owns, so the two features can change independently."
-    },
-    {
-      "order": 14,
       "title": "Backend Tests with Real JWTs",
       "description": "The foundation is covered by tests that run on an in-memory H2 database in PostgreSQL mode with a fake Supabase secret. JwtTestTokens signs HS256 tokens shaped like real Supabase access tokens, and TestProbeController (test-only, never shipped) exposes probe endpoints so SecurityConfigTest and GlobalExceptionHandlerTest can hit public and protected routes with MockMvc and check the exact error JSON.",
       "nodeIds": [
@@ -5268,7 +8967,7 @@
       ]
     },
     {
-      "order": 15,
+      "order": 14,
       "title": "Backend Build and Tooling",
       "description": "build.gradle targets Java 21 and Spring Boot with JPA, Security and Validation, while the Gradle wrapper pins a fixed Gradle version so every teammate builds the same way. The application-local properties example lists the Supabase URL, JWT secret and pooler connection each developer fills into a git-ignored local profile.",
       "nodeIds": [
@@ -5281,7 +8980,33 @@
       "languageLesson": "The Gradle wrapper (gradlew plus gradle-wrapper.properties) downloads the pinned Gradle version on first run, so nobody needs Gradle installed globally."
     },
     {
+      "title": "Places: From OpenStreetMap to the Map",
+      "description": "The places feature turns OpenStreetMap data into searchable map points. PlaceCategory defines the 10 app categories and which OSM tags select them. The import (PlaceImportService with OverpassClient and OsmElementMapper) downloads Timișoara once from the Overpass API, falling back to a mirror when the main server is busy, and upserts rows by osm_id so re-runs never duplicate. PlaceController exposes GET /places (category, viewport, name and near-me filters, closest first) and GET /places/{id}; PlaceServiceImpl does the search using the shared GeoPoint and BoundingBox helpers.",
+      "nodeIds": [
+        "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+        "file:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java"
+      ],
+      "order": 15
+    },
+    {
       "order": 16,
+      "title": "The Users and Profiles Feature",
+      "description": "The first feature built on the foundation. UserController exposes GET /users/username-available (public) and GET/PATCH /users/me, /users/search and /users/{id} (token required). UserServiceImpl holds the rules: usernames are 3-20 letters, digits or underscores, case-insensitive duplicates answer USERNAME_TAKEN even when two requests race, and search stops at 20 results. Errors are plain ApiException codes, so the shared handler produces the standard error JSON. Profiles come from the Supabase profiles table through JPA, while attended events come from a JDBC query over events and event_participants that returns the EventSummary shape.",
+      "nodeIds": [
+        "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
+        "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
+        "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java"
+      ],
+      "languageLesson": "Keeping the attended-events query as plain JDBC means the users feature needs no JPA entity for tables another feature owns, so the two features can change independently."
+    },
+    {
+      "order": 17,
       "title": "Expo App Shell and Discover",
       "description": "Switching to the mobile app, _layout.jsx is the Expo Router root that sets up the status bar and native Stack navigator, and index.jsx is the Discover home screen rendering a react-native-maps MapView centered on Timișoara. map.js supplies the frozen TIMISOARA_CENTER coordinates and a validated region builder, keeping map math out of the UI.",
       "nodeIds": [
@@ -5292,7 +9017,7 @@
       "languageLesson": "Expo Router uses file-based routing: _layout.jsx wraps every screen in its folder, and index.jsx becomes the default route."
     },
     {
-      "order": 17,
+      "order": 18,
       "title": "Talking to the Backend",
       "description": "api.js is the app's minimal HTTP client: it resolves the backend base URL from EXPO_PUBLIC_API_URL, defined in .env.example as the LAN address of the Spring Boot server, and wraps GET requests. setup.test.mjs uses node:test to check both the URL handling here and the coordinate validation in map.js.",
       "nodeIds": [
@@ -5303,7 +9028,7 @@
       "languageLesson": "Expo only exposes environment variables prefixed with EXPO_PUBLIC_ to app code, and they are inlined at build time, so never put secrets in them."
     },
     {
-      "order": 18,
+      "order": 19,
       "title": "Frontend Configuration",
       "description": "package.json pins Expo SDK 54, React Native 0.81, expo-router, expo-location and react-native-maps, and app.json is the Expo manifest naming the app 'Connected Communities' with its deep-link scheme and icons. jsconfig.json turns on type checking for plain JS files, and frontend/AGENTS.md reminds contributors to follow versioned Expo docs and use expo install.",
       "nodeIds": [
@@ -5315,7 +9040,7 @@
       ]
     },
     {
-      "order": 19,
+      "order": 20,
       "title": "Transit Routing and Dev Tooling",
       "description": "infra/otp/README.md describes the planned OpenTripPlanner 2 server on port 8081, called only by the backend, that will compute walking and public transport directions for Timișoara. .mcp.json registers the hosted Supabase MCP server for this project, which is how AI tooling inspects and migrates the database you studied earlier.",
       "nodeIds": [

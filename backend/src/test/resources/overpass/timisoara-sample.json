@@ -1,0 +1,153 @@
+{
+ "version": 0.6,
+ "generator": "Overpass API 0.7.62.11 87bfad18",
+ "osm3s": {
+  "timestamp_osm_base": "2026-11-13T18:20:03Z",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+ },
+ "elements": [
+  {
+   "type": "node",
+   "id": 380526548,
+   "lat": 45.7710081,
+   "lon": 21.2221875,
+   "tags": {
+    "addr:city": "Timișoara",
+    "addr:housenumber": "51",
+    "addr:street": "Calea Aradului",
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Restaurant Tinecz",
+    "opening_hours": "Mo-Su 11:00-23:00",
+    "phone": "0736 660 787",
+    "website": "https://www.restauranttinecz.ro/"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1239892209,
+   "lat": 45.7491878,
+   "lon": 21.2399927,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Barista"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1205464644,
+   "lat": 45.7567825,
+   "lon": 21.230642,
+   "tags": {
+    "addr:city": "Timișoara",
+    "addr:housenumber": "4",
+    "addr:street": "Strada Eugeniu de Savoya",
+    "amenity": "pub",
+    "check_date": "2026-08-24",
+    "check_date:opening_hours": "2025-10-12",
+    "contact:facebook": "irishpubtimisoara",
+    "email": "theirishpublic@gmail.com",
+    "level": "0",
+    "name": "The Irish PUBlic House",
+    "opening_hours": "Mo-Th 08:00-24:00, Fr 08:00-02:00, Sa 14:00-02:00, Su 14:00-24:00",
+    "outdoor_seating": "yes",
+    "phone": "+40 769 222 586",
+    "website": "https://www.facebook.com/irishpubtimisoara"
+   }
+  },
+  {
+   "type": "way",
+   "id": 4975934,
+   "center": {
+    "lat": 45.751529,
+    "lon": 21.2204933
+   },
+   "tags": {
+    "leisure": "park",
+    "name": "Parcul Central Anton von Scudier",
+    "name:de": "Zentralpark Anton von Scudier",
+    "name:en": "Central Park Anton von Scudier",
+    "wikidata": "Q12737520"
+   }
+  },
+  {
+   "type": "way",
+   "id": 24378130,
+   "center": {
+    "lat": 45.750264,
+    "lon": 21.2363438
+   },
+   "tags": {
+    "leisure": "park"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1310278904,
+   "lat": 45.7402965,
+   "lon": 21.2391446,
+   "tags": {
+    "amenity": "atm",
+    "brand": "UniCredit",
+    "brand:wikidata": "Q45568",
+    "operator": "UniCredit",
+    "operator:wikidata": "Q45568"
+   }
+  },
+  {
+   "type": "way",
+   "id": 191194846,
+   "center": {
+    "lat": 45.7581257,
+    "lon": 21.2303972
+   },
+   "tags": {
+    "alt_name": "Domul Catolic",
+    "alt_name:de": "Dom zum Heiligen Georg",
+    "amenity": "place_of_worship",
+    "building": "cathedral",
+    "building:facade:colour": "beige",
+    "building:material": "brick",
+    "check_date": "2023-08-30",
+    "denomination": "roman_catholic",
+    "is_in:city": "Timișoara",
+    "name": "Domul Sfântul Gheorghe - Catedrala romano-catolică",
+    "name:de": "Temeswarer Dom",
+    "name:en": "St. George's Cathedral",
+    "name:hu": "Szent György székesegyház",
+    "name:ro": "Domul Sfântul Gheorghe - Catedrala romano-catolică",
+    "religion": "christian",
+    "tourism": "attraction",
+    "wikidata": "Q1062101",
+    "wikipedia": "en:St. George's Cathedral, Timișoara"
+   }
+  },
+  {
+   "type": "node",
+   "id": 255740036,
+   "lat": 45.7672724,
+   "lon": 21.2283321,
+   "tags": {
+    "brand": "Auchan",
+    "brand:wikidata": "Q758603",
+    "brand:wikipedia": "en:Auchan",
+    "is_in:city": "Timișoara",
+    "name": "Auchan",
+    "opening_hours": "Mo-Su 07:00-23:00",
+    "operator": "Auchan",
+    "shop": "supermarket",
+    "website": "https://www.auchan.ro/magazin/b72d3bc5-536d-11ed-83ab-16de79fa5733"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5140855129,
+   "lat": 45.7540379,
+   "lon": 21.2474487,
+   "tags": {
+    "amenity": "nightclub",
+    "name": "database"
+   }
+  }
+ ]
+}
