@@ -103,7 +103,7 @@ Tasks 8, 9 and 10 do not need the database to start: B can build and test them a
 **Needs:** 1.3, and 2.1 for the first real query. Spring Boot 4.1.2 / Java 21 / Gradle are already set up.
 
 - [x] **3.1 Dependencies and config:** add the OAuth2 resource-server starter; keys are read from `application-local.properties`, which Spring loads when the app runs with the `local` profile (set in the IntelliJ run configuration — `application.properties` stays free of secrets, so tests never load real keys); JPA `ddl-auto=validate` (the schema lives in Supabase, not in Hibernate).
-- [ ] **3.2 Package layout** — created by each member as their feature is built (shared `common` and `config` packages exist). One package per feature, same shape everywhere:
+- [x] **3.2 Package layout** — created by each member as their feature is built; all feature packages now exist (`ai` was the last, 2026-11-14), plus shared `common` and `config`. One package per feature, same shape everywhere:
   ```
   com.unihack8.backend.<feature>/
     domain/entity/     domain/dto/
