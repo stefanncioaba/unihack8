@@ -1,0 +1,317 @@
+# PLAN
+
+Mobile app for the "Connected Communities" theme: events, places, live public transport and an AI guide for Timișoara.
+
+## How to use this plan
+
+- Big tasks are numbered `1, 2, 3…`, their steps `1.1, 1.2…`. Tick a box when the step is merged.
+- Every big task has an **owner track** (A, B or C) and a **needs** line. If "needs" is already done, nobody is waiting on anybody.
+- Task 1 is done **together, first**. After it, the three tracks run in parallel.
+- The mobile track builds against **mock data** that follows `docs/API.md` (task 1.6), so it never waits for the backend. Swapping a mock for the real endpoint is one line per feature.
+
+### Tracks (who is A, B, C is up to you)
+
+| Track | Area | Big tasks |
+|---|---|---|
+| **A** | Supabase, auth, users, events, QR + reliability | 2, 3, 4, 5, 6, 7 |
+| **B** | City data: places, STPT live transit, routing, AI | 8, 9, 10, 11 |
+| **C** | Mobile app (React Native + Expo Go) | 12, 13, 14, 15, 16 |
+| All | Foundation and final integration | 1, 17 |
+
+Track C has the most screens. Whoever finishes their backend tasks first takes screens from C, in this order: QR screens (13.6, 13.7), create-event form (13.5), route panel (14.5).
+
+### Rules to avoid blocking each other
+
+- One branch per person (`<name>_dev`). Branches are merged into `main` **only when Stefan says so** — never on a schedule and never by an agent on its own. After a merge, everyone pulls `main` into their branch.
+- Each track only edits its own folders: A and B own separate backend packages, C owns `mobile/`.
+- Shared files (`build.gradle`, `application.properties`, `SecurityConfig`, `docs/API.md`) belong to track A. Others change them through a small PR and say so in chat.
+- `DOCS.md` has one section per feature. Edit only your own section.
+- A change to an endpoint's shape is made in `docs/API.md` **first**, then in code.
+
+### Definition of done (from AGENTS.md, applies to every step)
+
+- Tests written and passing.
+- `DOCS.md` updated.
+- Knowledge graph updated.
+- A short comment before every function.
+- Commits are never co-authored.
+
+### Dependency map
+
+```
+1 Foundation ──┬─> 2 Database ─> 3 Backend base ─┬─> 4 Users ──────┐
+               │                                 ├─> 5 Events ─> 6 QR + reliability
+               │                                 ├─> 7 LiveTickets import
+               │                                 ├─> 8 Places ─────┐
+               │                                 ├─> 9 STPT live ──┼─> 11 AI
+               │                                 └─> 10 Routing ───┘
+               └─> 12 Mobile base ─> 13 Home, 14 Map, 15 AI chat, 16 Profile (all on mocks)
+                                                         everything ─> 17 Integration + demo
+```
+
+Tasks 8, 9 and 10 do not need the database to start: B can build and test them against the external sources while A is still on tasks 2 and 3.
+
+---
+
+## 1. Foundation — all three, together, before anything else
+
+**Needs:** nothing. **Goal:** everyone can run the project and knows the API shapes.
+
+- [ ] **1.1 Create the Supabase project** (manual, in the Supabase dashboard). Region: Frankfurt (`eu-central-1`). Save the database password in a password manager, not in the repo.
+- [ ] **1.2 Connect the Supabase MCP server to Claude Code.** Add the hosted Supabase MCP server scoped to this project's ref, log in through the browser prompt, then check that it can list tables. Keep it scoped to this one project. Each teammate who wants to run migrations repeats this on their machine.
+- [ ] **1.3 Collect the keys.**
+  - **Backend:** all keys live in `backend/src/main/resources/application-local.properties` (already git-ignored). Commit an `application-local.properties.example` with the same names and empty values:
+    - Supabase URL and JWKS URL (for token validation)
+    - database URL, user, password (session pooler connection string)
+    - Gemini API key and model names (backend only — never in the mobile app)
+    - OpenTripPlanner base URL
+  - **Mobile:** only the Supabase URL, the Supabase publishable key and the backend address, in `mobile/.env` (git-ignored) with a committed `.env.example`.
+- [ ] **1.4 Configure Supabase Auth:** email + password sign-in. Turn off "confirm email" for the hackathon so demo accounts work instantly.
+- [ ] **1.5 Repo layout and branches.** Create the folders below and one `<name>_dev` branch per person.
+  ```
+  backend/              Spring Boot API (exists)
+  mobile/               Expo app
+  infra/otp/            OpenTripPlanner data + docker-compose
+  supabase/migrations/  SQL of every migration applied through MCP
+  docs/API.md           API contract
+  ```
+- [ ] **1.6 Write the API contract** in `docs/API.md`: every endpoint listed in tasks 4–11 with request and response JSON examples and the error shape. Track C copies the examples into `mobile/src/mocks/`. **This step is what removes the waiting — do not skip it.**
+- [ ] **1.7 Agree the reliability rules** (proposal — confirm or change): start at 100, attended `+5`, no-show `−10`, cancel less than 2 h before start `−2`, never below 0.
+- [ ] **1.8 Docs and knowledge graph baseline:** fill the `DOCS.md` skeleton, generate the first knowledge graph once the folders exist.
+
+---
+
+## 2. Database (Supabase, through MCP) — Track A
+
+**Needs:** 1.1, 1.2. Every migration is applied through MCP **and** saved as a `.sql` file in `supabase/migrations/`. Every `id` column is a UUID.
+
+- [ ] **2.1 `profiles`**: `id` (uuid, = `auth.users.id`), `username` (unique, case-insensitive), `reliability_score` (int, default 100), `created_at`. No profile picture column for now — the app shows one default picture for everyone; custom pictures only if time is left.
+- [ ] **2.2 Trigger** on `auth.users` insert that creates the matching `profiles` row (username taken from sign-up metadata).
+- [ ] **2.3 `events`**: `id`, `source` (`USER` | `EXTERNAL`), `external_id` (the event's id on the platform it came from, prefixed with the platform name, e.g. `livetickets:<id>`; unique; null for user events), `title`, `description`, `category`, `venue_name`, `address`, `lat`, `lon`, `starts_at`, `ends_at`, `capacity` (null = unlimited), `organizer_id` (null for imported events), `image_url`, `price_min`, `price_max`, `external_url`, `created_at`.
+- [ ] **2.4 `event_participants`**: `event_id`, `user_id` (unique pair), `status` (`JOINED` | `ATTENDED` | `NO_SHOW` | `CANCELLED` | `BANNED`), `qr_token` (unique, random), `joined_at`, `checked_in_at`.
+- [ ] **2.5 `reliability_log`**: `id`, `user_id`, `event_id`, `points_change` (how many points were added or removed, e.g. `+5` or `-10`), `reason`, `created_at` — the history behind each score.
+- [ ] **2.6 `places`**: `id` (our UUID, how the app refers to the place), `osm_id` (text, unique — the id OpenStreetMap gave the place, e.g. `node/2845091337`; it is how the import recognises a place it already saved, so re-running it updates rows instead of creating duplicates), `name`, `category`, `lat`, `lon`, `address`, `opening_hours`, `tags` (jsonb). Filled by task 8.
+- [ ] **2.7 Indexes:** events by `starts_at` and by `lat`/`lon`, places by `category` and `lat`/`lon`, trigram index on `profiles.username` and `events.title` for search.
+- [ ] **2.8 Row Level Security:** enable RLS on every table with no public policies. The app reads and writes only through the Spring API; the mobile app talks to Supabase for sign-in only.
+- [ ] **2.9 Security check:** run the Supabase security advisor and fix what it reports. **No seed data** — no mock users and no mock events in the database. We create our own accounts in the app; events arrive from the LiveTickets import (task 7) and from the create-event form.
+
+---
+
+## 3. Backend foundation — Track A
+
+**Needs:** 1.3, and 2.1 for the first real query. Spring Boot 4.1.2 / Java 21 / Gradle are already set up.
+
+- [ ] **3.1 Dependencies and config:** add the OAuth2 resource-server starter; make `application.properties` import the optional `application-local.properties` and read every key from it (1.3); JPA `ddl-auto=validate` (the schema lives in Supabase, not in Hibernate).
+- [ ] **3.2 Package layout** — one package per feature, same shape everywhere:
+  ```
+  com.unihack8.backend.<feature>/
+    domain/entity/     domain/dto/
+    controller/
+    mapper/            mapper/impl/      (interface + hand-written implementation)
+    repository/
+    service/           service/impl/     (interface + implementation)
+  ```
+  Features: `users`, `events`, `reliability`, `places`, `transit`, `routing`, `ai`, plus `common` and `config`.
+- [ ] **3.3 Security:** validate the Supabase access token (JWT) against the project's JWKS URL; the user id is the token's `sub`. Public: `GET` on events, places, transit. Everything else needs a token. CORS open for development.
+- [ ] **3.4 Common pieces:** one error response shape, a global exception handler, a "current user" helper, pagination parameters.
+- [ ] **3.5 Test setup:** service unit tests with Mockito, controller tests with MockMvc and a fake JWT. No test may need the real Supabase database.
+- [ ] **3.6 Run guide** in `DOCS.md`: how to start the API on a laptop and reach it from a phone running Expo Go on the same Wi-Fi. No health endpoint for now — nothing is deployed.
+
+---
+
+## 4. Users and profiles — Track A
+
+**Needs:** 3.
+
+- [ ] **4.1** `GET /users/me` — own profile.
+- [ ] **4.2** `PATCH /users/me` — change username (3–20 characters, letters/digits/underscore, unique; clear error when taken).
+- [ ] **4.3** `GET /users/search?q=` — search by username prefix, max 20 results.
+- [ ] **4.4** `GET /users/{id}` — public profile: username, reliability score, attended events.
+- [ ] **4.5** Tests for each endpoint, including "username taken" and "no token".
+
+---
+
+## 5. Events and participation — Track A
+
+**Needs:** 3.
+
+- [ ] **5.1** `GET /events` — filters: `q` (text), `category`, `from`/`to` dates, `bbox` (for the map), `source`; paged; sorted by start time.
+- [ ] **5.2** `GET /events/{id}` — details, free spots, organiser summary, and whether the caller has joined.
+- [ ] **5.3** `POST /events` — create a user event (title, description, category, location, start/end, optional capacity). `PATCH` and `DELETE` for the organiser only.
+- [ ] **5.4** `POST /events/{id}/join` — fails when full, banned, or already joined; must be safe when two people take the last spot at once. Creates the participant's `qr_token`.
+- [ ] **5.5** `DELETE /events/{id}/join` — leave; applies the late-cancel penalty from 1.7.
+- [ ] **5.6** `GET /events/{id}/participants` — username + reliability score of each participant (so the organiser can decide whom to trust).
+- [ ] **5.7** `POST /events/{id}/participants/{userId}/ban` — organiser only; frees the spot.
+- [ ] **5.8** `GET /users/me/events` — events I joined and events I organise.
+- [ ] **5.9** Tests: capacity limit, double join, ban, organiser-only rules.
+
+---
+
+## 6. QR check-in and reliability — Track A
+
+**Needs:** 5. Flow: the participant shows a QR code, the organiser scans it at the venue.
+
+- [ ] **6.1** `GET /events/{id}/my-ticket` — returns the caller's `qr_token` (the mobile app draws it as a QR code).
+- [ ] **6.2** `POST /events/{id}/check-in` with `{ token }` — organiser only; marks `ATTENDED`, adds points, writes `reliability_log`. Rejects wrong event, unknown token, and a second scan.
+- [ ] **6.3 No-show job:** a scheduled task that, after an event ends, turns every remaining `JOINED` into `NO_SHOW` and subtracts points. Runs every few minutes and is safe to run twice.
+- [ ] **6.4** `GET /users/{id}/reliability` — score plus the recent log entries.
+- [ ] **6.5** Tests: check-in happy path, duplicate scan, no-show job, score never below 0.
+
+---
+
+## 7. LiveTickets events import — Track A
+
+**Needs:** 3 and 2.3. Source details are in `DOCS.md` → "External data sources".
+
+- [ ] **7.1 Client** for the LiveTickets public events endpoint; keep only events whose `city` is Timișoara. Imported rows get `source = EXTERNAL`. Save one real response as a test fixture.
+- [ ] **7.2 Mapping** to our `events` row: title, cleaned description (the source sends HTML), venue name, dates, prices, image, link back to the ticket page.
+- [ ] **7.3 Geocoding** (turning a venue name into map coordinates): only for events that are **new** in this import — events already saved keep their coordinates, so no separate cache table is needed. First look for the venue by name in our own `places` table; if it is not there, ask OpenStreetMap Nominatim (at most 1 request per second, identify the app in the request header). Events that cannot be located are saved without coordinates and appear in lists but not on the map.
+- [ ] **7.4 Import job:** on startup and every 6 hours; upsert on (`source`, `external_id`) so nothing is duplicated.
+- [ ] **7.5** Tests with the saved fixture (no network in tests).
+
+---
+
+## 8. Places (OpenStreetMap) — Track B
+
+**Needs:** nothing to start (work against a local JSON file); 2.6 to store.
+
+Restaurants, cafés and the other places are stored in our database from OpenStreetMap: name, category, position, opening hours. OpenStreetMap has no prices, menus or reviews — for those the AI looks on the web itself (task 11.3). We do not copy places out of Google Maps: its terms forbid bulk extraction and saving its place data.
+
+- [ ] **8.1 Category list** shared with mobile: restaurant, café, bar/pub, fast food, club, pharmacy, supermarket, park, museum/attraction, ATM. Map each to its OSM tags.
+- [ ] **8.2 Import script:** one Overpass query for the Timișoara area per category, normalised into `places`. Run once (and re-runnable); do not call Overpass on every user request.
+- [ ] **8.3** `GET /places` — filters: `category` (multiple), `bbox`, `near=lat,lon` + `radius`, `q`; returns distance when `near` is given.
+- [ ] **8.4** `GET /places/{id}` — details including opening hours when OSM has them.
+- [ ] **8.5** Tests for filtering and distance sorting.
+
+---
+
+## 9. Live public transport (STPT) — Track B
+
+**Needs:** nothing to start. The backend calls `live.stpt.ro` and caches; the mobile app never calls it directly. Endpoints are in `DOCS.md` → "External data sources".
+
+- [ ] **9.1 STPT client** with short caches (vehicles 10 s, arrivals 20 s, alerts 5 min, stops/routes 24 h) and a timeout, so a slow source never hangs our API.
+- [ ] **9.2** `GET /transit/stops` (optional `bbox`) and `GET /transit/routes`.
+- [ ] **9.3** `GET /transit/vehicles?route=` — live positions for the map.
+- [ ] **9.4** `GET /transit/stops/{id}/arrivals` — next arrivals at a stop.
+- [ ] **9.5** `GET /transit/alerts` — current service alerts.
+- [ ] **9.6 "Last tram/bus" info:** `GET /transit/last-departures?stopId=` and `GET /transit/summary?near=lat,lon` (home page line such as "Last tram 1 from Gara de Nord leaves at 23:41"). Computed from the GTFS timetable used in task 10; before the GTFS file is available, return the last arrival known from 9.4.
+- [ ] **9.7** Tests with saved sample responses; test the fallback when the source is down (serve the last cached value and flag it as stale).
+
+---
+
+## 10. Routing (OpenStreetMap + OpenTripPlanner 2) — Track B
+
+**Needs:** nothing to start; Docker on one machine.
+
+- [ ] **10.1 Get the data:** a Timișoara street extract from OpenStreetMap (`.osm.pbf`, cut from the Romania extract) and the STPT GTFS zip. The live site is generated from a file named `smtt-timisoara-ro.zip`; **finding a download for it is the first thing to do in this task** (see open question 2).
+- [ ] **10.2 Run OTP 2** with `infra/otp/docker-compose.yml`: build the graph once, save it, serve it. Document the two commands. OTP is its own server, separate from the Spring API: only the Spring backend calls it (address set in `application-local.properties`), the mobile app never does. Both use port 8080 by default, so run OTP on 8081.
+- [ ] **10.3** `GET /routes/plan?from=lat,lon&to=lat,lon&mode=WALK|TRANSIT` — the backend calls OTP's GraphQL API and returns a small shape: total minutes, and legs (mode, line, from/to stop, start/end time, polyline).
+- [ ] **10.4 Walking-only fallback:** if OTP is down or the GTFS file was not found, still answer `mode=WALK` (OTP with streets only, or straight-line distance × walking speed) so the demo never shows an error.
+- [ ] **10.5** Tests: mapping of a saved OTP response, and the fallback path.
+
+---
+
+## 11. AI assistant — Track B
+
+**Needs:** 8 and 5 for real answers (start with stubbed tools). Uses the **Gemini API** (free tier). No chat history is stored: the mobile app sends the whole conversation each time and "New chat" just clears it.
+
+- [ ] **11.1** `POST /ai/chat` with `{ messages, location }` → `{ reply, places[], events[] }`. Needs a token; rate-limited per user.
+- [ ] **11.2 Database tools the model can call:** `search_places` (task 8), `search_events` (task 5), `transit_info` (task 9), `plan_route` (task 10). The model answers from tool results, so it cannot invent venues.
+- [ ] **11.3 Web lookup tool:** `web_lookup(question)` for what our database does not have — prices, menus, reviews (e.g. "prices at Pizzeria X Timișoara"). Inside, it makes a separate Gemini request with Google Search switched on and returns the answer with its source links. Built as its own request so it works with any chat model; the model name for it is a separate setting, set to `gemini-2.5-flash` — the model whose web search is free (500 requests per day, shared by the whole team, so do not burn them in automated tests). If it fails or the daily limit is reached, the AI still answers from the database and says prices are unavailable.
+- [ ] **11.4 System prompt:** Timișoara guide, current date/time and user location included, short answers, reply in the user's language (Romanian or English).
+- [ ] **11.5 Structured results:** return the ids of the places/events mentioned, so the app can show cards and a "show on map" button.
+- [ ] **11.6** Tests with a fake Gemini client: tool call loop, empty results, web lookup failure, provider error.
+
+---
+
+## 12. Mobile foundation — Track C
+
+**Needs:** 1.3 for keys, 1.6 for mocks. Everything must run in **Expo Go** (no custom native code).
+
+- [ ] **12.1 Create the Expo app** in `mobile/` (TypeScript, Expo Router) with four tabs: Home, Map, AI, Profile.
+- [ ] **12.2 Auth:** sign-up (email, password, username), sign-in, sign-out with the Supabase client; session kept on the device; signed-out users see only the auth screens.
+- [ ] **12.3 API layer:** one client that adds the Supabase token to every request, plus a `USE_MOCKS` switch that serves `mobile/src/mocks/` instead. Data fetching with TanStack Query.
+- [ ] **12.4 Shared UI:** colours, typography, buttons, cards, loading / empty / error states, and the one default profile picture used for every user.
+- [ ] **12.5 Location permission** and a "current position" hook, defaulting to Piața Victoriei when denied.
+- [ ] **12.6 Test setup:** Jest + React Native Testing Library, one test per screen at minimum.
+
+---
+
+## 13. Home page — Track C
+
+**Needs:** 12. Real data from 4, 5, 6, 9.
+
+- [ ] **13.1 City info strip:** last tram/bus near you, active transit alerts (from 9.5, 9.6).
+- [ ] **13.2 Upcoming events** list with image, date, place, free spots.
+- [ ] **13.3 "All events" screen:** search box, category and date filters, endless scroll.
+- [ ] **13.4 Event details:** description, location with "show on map", organiser, participants with reliability scores (tap opens their profile), join / leave.
+- [ ] **13.5 Create event form:** title, description, category, date/time, capacity, location picked on a map.
+- [ ] **13.6 My ticket:** the participant's QR code for an event.
+- [ ] **13.7 Organiser scanner:** camera QR scan → check-in result (success, already scanned, wrong event); ban button in the participant list.
+- [ ] **13.8 User search:** search by username → opens the public profile (16.4).
+
+---
+
+## 14. Map page — Track C
+
+**Needs:** 12. Real data from 5, 8, 9, 10. Use `react-native-maps` (works in Expo Go).
+
+- [ ] **14.1 Map** centred on Timișoara with the user's position.
+- [ ] **14.2 Category filter chips** (list from 8.1) and place markers loaded for the visible area only.
+- [ ] **14.3 Event markers** with a separate on/off toggle; tap opens event details.
+- [ ] **14.4 Transit layer:** stops, live vehicles for a chosen line (refresh every 10 s), tap a stop for next arrivals and last departure.
+- [ ] **14.5 Directions:** pick a destination (marker or long-press) → walking vs walking + public transport, with time estimate, steps and the route drawn on the map.
+- [ ] **14.6 Performance:** cluster markers when zoomed out; debounce reloads while the map moves.
+
+---
+
+## 15. AI chat page — Track C
+
+**Needs:** 12. Real data from 11.
+
+- [ ] **15.1 Chat screen:** message list, input, "thinking" indicator, error + retry.
+- [ ] **15.2 "New chat" button** that clears the conversation (kept in memory only — nothing is saved).
+- [ ] **15.3 Suggested questions** on an empty chat ("Where can I eat pizza near me?", "What can I do this weekend?").
+- [ ] **15.4 Result cards** for places and events in an answer, with "show on map" and "open event".
+
+---
+
+## 16. Profile page — Track C
+
+**Needs:** 12. Real data from 4, 6.
+
+- [ ] **16.1 My profile:** username, reliability score with a short explanation of how it changes.
+- [ ] **16.2 Change username** with inline validation and the "already taken" error.
+- [ ] **16.3 Events I attended** and upcoming events I joined or organise.
+- [ ] **16.4 Public profile screen** (other users): username, score, attended events. Reused from 13.4 and 13.8.
+- [ ] **16.5 Sign out.**
+
+---
+
+## 17. Integration, polish and demo — all three
+
+**Needs:** everything above, but start switching mocks off feature by feature as soon as an endpoint is merged.
+
+- [ ] **17.1** Turn `USE_MOCKS` off per feature; fix contract mismatches in `docs/API.md` first.
+- [ ] **17.2 Demo setup (no deployment):** backend + OTP run on one laptop at the hackathon; phones open the app in Expo Go on the same Wi-Fi. Create our own accounts in the app, run the LiveTickets import, and add a few events through the create-event form.
+- [ ] **17.3 Full walkthrough on two real phones:** sign up → find an event → join → organiser scans the QR → score goes up → no-show loses points → ask the AI → get directions by tram.
+- [ ] **17.4** Handle offline / slow network and empty states on every screen.
+- [ ] **17.5** Final `DOCS.md`, knowledge graph and README (how to run everything).
+- [ ] **17.6** Pitch: 3-minute demo script and a backup screen recording.
+
+---
+
+## If time runs short — cut in this order
+
+1. Marker clustering (14.6) and AI result cards (15.4).
+2. Late-cancel penalty (5.5) and reliability log screen (6.4).
+3. Transit routing through OTP (keep walking-only, 10.4).
+4. LiveTickets import (the demo then shows only events created in the app).
+
+Never cut: sign-in, events + join, QR check-in with reliability, map with filters, live vehicles, AI chat. These are the pitch.
+
+## Open questions (need an answer from the team)
+
+1. **Prices, menus and reviews come from the AI's web lookup (11.3), not from stored data.** Answers depend on what Google Search finds at that moment and take a few seconds longer. Good enough for the demo?
+2. **STPT GTFS file.** Is there an official download or contact for `smtt-timisoara-ro.zip`? Without it OTP can route walking only.
+3. **Permission.** The STPT and LiveTickets endpoints are the ones their own websites use; they are not documented public APIs. For a hackathon demo with caching this is low-volume, but ask both for permission if the app goes beyond the demo.4. **Reliability numbers** in 1.7 — confirm or change.
