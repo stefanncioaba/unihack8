@@ -49,6 +49,7 @@ Every error has this shape. `code` is stable — the app switches on it; `messag
 }
 ```
 
+The codes live in `backend/.../common/exception/ErrorCode.java` — keep both in sync.
 For `VALIDATION_FAILED`, `fields` lists what is wrong: `{ "title": "must not be blank" }`.
 
 | Status | Code | When |
@@ -56,11 +57,13 @@ For `VALIDATION_FAILED`, `fields` lists what is wrong: `{ "title": "must not be 
 | 400 | `VALIDATION_FAILED` | Body or query parameters are invalid. |
 | 400 | `INVALID_USERNAME` | Username is not 3–20 letters, digits or `_`. |
 | 401 | `UNAUTHORIZED` | Missing, expired or invalid token. |
+| 403 | `FORBIDDEN` | Signed in, but not allowed (generic). |
 | 403 | `NOT_ORGANIZER` | Only the event's organiser may do this. |
 | 403 | `BANNED` | The organiser banned you from this event. |
 | 403 | `EXTERNAL_EVENT` | Imported events cannot be edited, joined or scanned (tickets are sold on the source site). |
 | 404 | `NOT_FOUND` | The user, event, place, stop or route does not exist. |
 | 404 | `TICKET_NOT_FOUND` | The scanned QR code is not a ticket. |
+| 405 | `METHOD_NOT_ALLOWED` | The path exists but not for this HTTP method. |
 | 409 | `USERNAME_TAKEN` | Someone else has this username (case-insensitive). |
 | 409 | `EVENT_FULL` | No free spots. |
 | 409 | `ALREADY_JOINED` | You are already in this event. |
@@ -70,6 +73,7 @@ For `VALIDATION_FAILED`, `fields` lists what is wrong: `{ "title": "must not be 
 | 409 | `WRONG_EVENT` | The scanned ticket belongs to another event. |
 | 409 | `ALREADY_CHECKED_IN` | This ticket was already scanned. |
 | 429 | `RATE_LIMITED` | Too many AI requests; try again in a minute. |
+| 500 | `INTERNAL_ERROR` | Unexpected server error (details are only in the backend log). |
 | 503 | `AI_UNAVAILABLE` | Gemini did not answer. |
 | 503 | `SOURCE_UNAVAILABLE` | STPT or OpenTripPlanner is down and nothing is cached. |
 

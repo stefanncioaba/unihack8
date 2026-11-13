@@ -125,3 +125,9 @@ tmp/
 
 # --- Added: generated graph data ---
 .ua/
+
+# --- Added: frontend noise (generated or binary) ---
+frontend/package-lock.json
+frontend/assets/
+frontend/LICENSE
+frontend/.npmrc

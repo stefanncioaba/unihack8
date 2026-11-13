@@ -102,8 +102,8 @@ Tasks 8, 9 and 10 do not need the database to start: B can build and test them a
 
 **Needs:** 1.3, and 2.1 for the first real query. Spring Boot 4.1.2 / Java 21 / Gradle are already set up.
 
-- [ ] **3.1 Dependencies and config:** add the OAuth2 resource-server starter; keys are read from `application-local.properties`, which Spring loads when the app runs with the `local` profile (set in the IntelliJ run configuration — `application.properties` stays free of secrets, so tests never load real keys); JPA `ddl-auto=validate` (the schema lives in Supabase, not in Hibernate).
-- [ ] **3.2 Package layout** — one package per feature, same shape everywhere:
+- [x] **3.1 Dependencies and config:** add the OAuth2 resource-server starter; keys are read from `application-local.properties`, which Spring loads when the app runs with the `local` profile (set in the IntelliJ run configuration — `application.properties` stays free of secrets, so tests never load real keys); JPA `ddl-auto=validate` (the schema lives in Supabase, not in Hibernate).
+- [ ] **3.2 Package layout** — created by each member as their feature is built (shared `common` and `config` packages exist). One package per feature, same shape everywhere:
   ```
   com.unihack8.backend.<feature>/
     domain/entity/     domain/dto/
@@ -113,10 +113,10 @@ Tasks 8, 9 and 10 do not need the database to start: B can build and test them a
     service/           service/impl/     (interface + implementation)
   ```
   Features: `users`, `events`, `reliability`, `places`, `transit`, `routing`, `ai`, plus `common` and `config`.
-- [ ] **3.3 Security:** validate the Supabase access token (JWT) with the project's **legacy JWT secret** (HS256, `supabase.jwt-secret` in `application-local.properties`): a `JwtDecoder` bean built with `NimbusJwtDecoder.withSecretKey(...)` and `MacAlgorithm.HS256`. Before this works, the project's current signing key in Supabase (Project Settings → JWT Keys) must be the legacy HS256 secret — see `DOCS.md`. The user id is the token's `sub`. Public: `GET` on events, places, transit, and `GET /users/username-available` (see `docs/API.md`). Everything else needs a token. CORS open for development.
-- [ ] **3.4 Common pieces:** one error response shape, a global exception handler, a "current user" helper, pagination parameters.
-- [ ] **3.5 Test setup:** service unit tests with Mockito, controller tests with MockMvc and a fake JWT. No test may need the real Supabase database.
-- [ ] **3.6 Run guide** in `DOCS.md`: how to start the API on a laptop and reach it from a phone running Expo Go on the same Wi-Fi. No health endpoint for now — nothing is deployed.
+- [x] **3.3 Security:** validate the Supabase access token (JWT) with the project's **legacy JWT secret** (HS256, `supabase.jwt-secret` in `application-local.properties`): a `JwtDecoder` bean built with `NimbusJwtDecoder.withSecretKey(...)` and `MacAlgorithm.HS256`. Before this works, the project's current signing key in Supabase (Project Settings → JWT Keys) must be the legacy HS256 secret — see `DOCS.md`. The user id is the token's `sub`. Public: `GET` on events, places, transit, and `GET /users/username-available` (see `docs/API.md`). Everything else needs a token. CORS open for development.
+- [x] **3.4 Common pieces:** one error response shape, a global exception handler, a "current user" helper, pagination parameters.
+- [x] **3.5 Test setup:** service unit tests with Mockito, controller tests with MockMvc and real HS256 test tokens (`support/JwtTestTokens`). Tests run on an in-memory H2 database (`src/test/resources/application.properties`) — no test may need the real Supabase database.
+- [x] **3.6 Run guide** in `DOCS.md`: how to start the API on a laptop and reach it from a phone running Expo Go on the same Wi-Fi. No health endpoint for now — nothing is deployed.
 
 ---
 
