@@ -1,0 +1,9 @@
+supabase.url=
+supabase.jwks-url=
+database.url=
+database.user=
+database.password=
+gemini.api-key=
+gemini.chat-model=
+gemini.web-model=
+otp.base-url=

@@ -28,16 +28,17 @@ The mobile app never calls third-party data sources directly; the backend proxie
 ## Configuration and running
 
 - **Backend keys:** `backend/src/main/resources/application-local.properties` (git-ignored). Never commit real values.
-- **Mobile keys:** `mobile/.env` (git-ignored) — Supabase URL, Supabase publishable key, backend address only.
+- **Mobile keys:** `frontend/.env` (git-ignored) — Supabase URL, Supabase publishable key, backend address only. Add the variable names to the existing `frontend/.env.example`.
 - **No deployment:** the backend runs on a laptop and the app runs in Expo Go on phones on the same Wi-Fi.
 - **No seed data:** accounts are created in the app; events come from the LiveTickets import and the create-event form.
 - **Merging:** branches go into `main` only when Stefan says so.
 
 ## Current state
 
-- `backend/`: empty Spring Boot 4.1.2 skeleton (Java 21, Gradle; web, security, validation, JPA, PostgreSQL driver). No features yet.
-- `mobile/`, `infra/`, `supabase/`, `docs/`: not created yet.
-- Supabase project: not created yet.
+- `backend/`: Spring Boot 4.1.2 API with the users/profile endpoints and JWT resource-server configuration. The remaining features are not implemented.
+- `frontend/`: existing Expo SDK 54 app written in JavaScript (`.js`/`.jsx`), with Expo Router, a map screen, location support, and an API helper. The planned tabs and feature screens are not built yet.
+- `docs/API.md`: users/profile contract added; contracts for the other features are pending. `infra/` and `supabase/` are not created yet.
+- Supabase project and schema: Stefan is creating them; not verified in this checkout.
 
 ## External data sources
 
@@ -85,8 +86,29 @@ Checked against Google's documentation on 2026-11-13.
 
 ## Features
 
-Sections are added here as each PLAN task is implemented: Users, Events, Reliability, Places, Transit, Routing, AI, Mobile.
+### Users and profiles (PLAN 4)
+
+- `GET /users/me` and `GET /users/{id}` return a profile with username, reliability score, creation time, and confirmed attended events. `GET /users/search?q=` returns up to 20 username-prefix matches. `PATCH /users/me` changes a username matching `[A-Za-z0-9_]{3,20}` and returns `409 USERNAME_TAKEN` on conflict.
+- All `/users/**` requests require a Supabase JWT. Spring Security validates the signature through the project JWKS URL and the issuer through the Supabase URL. Only event list/detail, place list/detail, and transit GET endpoints are public; event tickets remain protected. The JWT `sub` is the profile UUID. Stefan's Supabase project must use asymmetric JWT signing keys for JWKS validation and enforce case-insensitive uniqueness of `profiles.username` in the database.
+- The API assumes `profiles(id, username, reliability_score, created_at)`, `event_participants(event_id, user_id, status)`, and `events(id, title, starts_at)`, as specified in PLAN 2. The attended-events query selects only `ATTENDED` rows. These tables and the auth-user profile trigger are being created separately; live integration is pending.
+- Endpoint examples and current error codes are in `docs/API.md`. The remaining feature contracts are still pending under PLAN 1.6.
+- Local secrets go in ignored `backend/src/main/resources/application-local.properties`; copy the names from the committed `.example` file. Run `cd backend` then `.\gradlew.bat bootRun` on Windows. For a phone in Expo Go, use the laptop's LAN IP in `frontend/.env` as `EXPO_PUBLIC_API_URL=http://<laptop-ip>:8080`; both devices must be on the same Wi-Fi. The API needs the Supabase database and JWKS settings to serve real requests.
+- Tests use Mockito and an in-memory H2 database; no test connects to Supabase. Run `cd backend` then `.\gradlew.bat test`.
+
+Other feature sections are added as PLAN tasks are implemented: Events, Reliability, Places, Transit, Routing, AI, Mobile.
 
 ## Knowledge graph
 
-Not generated yet — there is no feature code. First graph is created in PLAN task 1.8 and updated with every change after that.
+Current project and planned integration paths (PLAN task 1.8 will expand this as features are implemented):
+
+```mermaid
+flowchart LR
+    F[frontend/: JavaScript Expo app] -->|sign-in| S[Supabase Auth]
+    F -->|REST + JWT| B[backend/: Spring Boot API]
+    B --> DB[Supabase Postgres]
+    B --> STPT[STPT live transit]
+    B --> LT[LiveTickets events]
+    B --> OSM[OpenStreetMap places]
+    B --> OTP[OpenTripPlanner routing]
+    B --> AI[Gemini API]
+```

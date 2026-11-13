@@ -23,7 +23,7 @@ Track C has the most screens. Whoever finishes their backend tasks first takes s
 ### Rules to avoid blocking each other
 
 - One branch per person (`<name>_dev`). Branches are merged into `main` **only when Stefan says so** — never on a schedule and never by an agent on its own. After a merge, everyone pulls `main` into their branch.
-- Each track only edits its own folders: A and B own separate backend packages, C owns `mobile/`.
+- Each track only edits its own folders: A and B own separate backend packages, C owns `frontend/`.
 - Shared files (`build.gradle`, `application.properties`, `SecurityConfig`, `docs/API.md`) belong to track A. Others change them through a small PR and say so in chat.
 - `DOCS.md` has one section per feature. Edit only your own section.
 - A change to an endpoint's shape is made in `docs/API.md` **first**, then in code.
@@ -65,17 +65,17 @@ Tasks 8, 9 and 10 do not need the database to start: B can build and test them a
     - database URL, user, password (session pooler connection string)
     - Gemini API key and model names (backend only — never in the mobile app)
     - OpenTripPlanner base URL
-  - **Mobile:** only the Supabase URL, the Supabase publishable key and the backend address, in `mobile/.env` (git-ignored) with a committed `.env.example`.
+  - **Mobile:** only the Supabase URL, the Supabase publishable key and the backend address, in `frontend/.env` (git-ignored). Extend the existing committed `frontend/.env.example` with the same variable names and empty values.
 - [ ] **1.4 Configure Supabase Auth:** email + password sign-in. Turn off "confirm email" for the hackathon so demo accounts work instantly.
-- [ ] **1.5 Repo layout and branches.** Create the folders below and one `<name>_dev` branch per person.
+- [ ] **1.5 Repo layout and branches.** Use the existing `backend/` and `frontend/` folders, create the remaining folders below, and use one `<name>_dev` branch per person.
   ```
   backend/              Spring Boot API (exists)
-  mobile/               Expo app
+  frontend/             Existing JavaScript Expo SDK 54 app
   infra/otp/            OpenTripPlanner data + docker-compose
   supabase/migrations/  SQL of every migration applied through MCP
   docs/API.md           API contract
   ```
-- [ ] **1.6 Write the API contract** in `docs/API.md`: every endpoint listed in tasks 4–11 with request and response JSON examples and the error shape. Track C copies the examples into `mobile/src/mocks/`. **This step is what removes the waiting — do not skip it.**
+- [ ] **1.6 Write the API contract** in `docs/API.md`: every endpoint listed in tasks 4–11 with request and response JSON examples and the error shape. Track C copies the examples into `frontend/src/mocks/`. **This step is what removes the waiting — do not skip it.**
 - [ ] **1.7 Agree the reliability rules** (proposal — confirm or change): start at 100, attended `+5`, no-show `−10`, cancel less than 2 h before start `−2`, never below 0.
 - [ ] **1.8 Docs and knowledge graph baseline:** fill the `DOCS.md` skeleton, generate the first knowledge graph once the folders exist.
 
@@ -228,9 +228,9 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 **Needs:** 1.3 for keys, 1.6 for mocks. Everything must run in **Expo Go** (no custom native code).
 
-- [ ] **12.1 Create the Expo app** in `mobile/` (TypeScript, Expo Router) with four tabs: Home, Map, AI, Profile.
+- [ ] **12.1 Extend the existing Expo app** in `frontend/` (JavaScript `.js`/`.jsx`, Expo Router) with four tabs: Home, Map, AI, Profile.
 - [ ] **12.2 Auth:** sign-up (email, password, username), sign-in, sign-out with the Supabase client; session kept on the device; signed-out users see only the auth screens.
-- [ ] **12.3 API layer:** one client that adds the Supabase token to every request, plus a `USE_MOCKS` switch that serves `mobile/src/mocks/` instead. Data fetching with TanStack Query.
+- [ ] **12.3 API layer:** one client that adds the Supabase token to every request, plus a `USE_MOCKS` switch that serves `frontend/src/mocks/` instead. Data fetching with TanStack Query.
 - [ ] **12.4 Shared UI:** colours, typography, buttons, cards, loading / empty / error states, and the one default profile picture used for every user.
 - [ ] **12.5 Location permission** and a "current position" hook, defaulting to Piața Victoriei when denied.
 - [ ] **12.6 Test setup:** Jest + React Native Testing Library, one test per screen at minimum.
