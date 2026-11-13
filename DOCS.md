@@ -105,7 +105,7 @@ Applied to Supabase on 2026-11-13 from `supabase/migrations/` (four migrations, 
 
 ## Current state
 
-- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging), places (task 8, 1003 Timișoara places imported into Supabase) live transit (task 9, `/transit/**`) and routing (task 10, `/routes/plan`). 173 tests passing.
+- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging), places (task 8, 1003 Timișoara places imported into Supabase) live transit (task 9, `/transit/**`) and routing (task 10, `/routes/plan`). 162 tests passing.
 - `supabase/`: migrations and schema tests for task 2, applied.
 - `docs/API.md`: API contract (task 1.6).
 - `infra/otp/`: OpenTripPlanner 2.7 setup (docker-compose, data download script). Its large data files are git-ignored. `GET /routes/plan` is implemented (task 10).
@@ -268,7 +268,7 @@ Public endpoints (no token) under `/transit`, contract in `docs/API.md` → Tran
 One graph for the whole repo, made with the **Understand-Anything** plugin (rule from AGENTS.md: keep it updated with every change).
 
 - **Files:** `.ua/knowledge-graph.json` (the graph), `.ua/meta.json` and `.ua/fingerprints.json` (let the next run update only changed files), `.ua/.understandignore` (what is left out: secrets such as `application-local.properties` and `.env`, build output, `.claude/`). Scratch folders under `.ua/` are git-ignored.
-- **Current version (2026-11-13, commit `b209f2b`, after task 8 places, task 9 transit with the GTFS timetable and task 10 routing):** 160 files, 413 nodes, 953 edges, 13 layers (Project Documentation, API Contract, Backend App Security & Config, Backend Shared Web Layer, Places Feature, Backend Transit Feature, **Backend Routing Feature** (new), Backend Tests, Backend Build & Config, Database Schema, Infrastructure & Tooling, Frontend App, Frontend Config), 23-step guided tour (transit 16–18, routing 19). Updated by re-analysing only the 39 files changed since the previous graph.
+- **Current version (2026-11-13, commit `ba62f16`, after task 8 places, task 9 transit with the GTFS timetable and task 10 routing):** 160 files, 412 nodes, 957 edges, 13 layers (Project Documentation, API Contract, Backend App Security & Config, Backend Shared Web Layer, Places Feature, Backend Transit Feature, Backend Routing Feature, Backend Tests, Backend Build & Config, Database Schema, Infrastructure & Tooling, Frontend App, Frontend Config), 23-step guided tour (transit 16–18, routing 19). Last update re-analysed the routing files after they moved to the shared `common.geo.GeoPoint`.
 - **Left out on purpose** (`.ua/.understandignore`): secrets, build output, `.claude/`, and frontend noise (`package-lock.json`, `assets/`, `LICENSE`, `.npmrc`).
 - **Update it** after each change: run `/understand` (Claude Code) or the same command in Codex; it only reanalyzes changed files. `/understand-dashboard` opens the interactive view.
 - **Codex:** the plugin's README lists Codex as supported (install it with the plugin's install script for `codex`); not tested by us yet.

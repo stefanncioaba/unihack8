@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "b209f2b2fd9483ba7a8d3473646c2bc6b1108685",
-  "generatedAt": "2026-11-13T19:13:20.348Z",
+  "gitCommitHash": "ba62f164a925bdb235a30c51f3cba871769d393c",
+  "generatedAt": "2026-11-13T19:21:13.982Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,7 +25,7 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "d301d2ded9666ae1df7567eea6cd396bbd4c07ce66f492ff6dc7927bfed5153c",
+      "contentHash": "d71404868fa94e334ac7c0943af9be08d874e645d46c829d82c7af627de6941c",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -3967,7 +3967,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/routing/client/OtpClient.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/routing/client/OtpClient.java",
-      "contentHash": "22ae2536899d2980609a8753fb9813cc30e75cdab31e4706ba1130689f5e1d45",
+      "contentHash": "72b15b547f47bc5e00241e6de7e7226e83667c7839f411e8d36c1ab90db030ca",
       "functions": [],
       "classes": [
         {
@@ -3982,7 +3982,7 @@
       ],
       "imports": [
         {
-          "source": "com.unihack8.backend.routing.domain.model.GeoPoint",
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
           "specifiers": [
             "GeoPoint"
           ]
@@ -4053,7 +4053,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/routing/client/impl/OtpGraphQlClient.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/routing/client/impl/OtpGraphQlClient.java",
-      "contentHash": "7fa16854705bd11bb30e12d5df829c4e0624ae5abaab6a59a008facfaf247004",
+      "contentHash": "93d6612acb6fcbfc369f0c2c9cb4f15668650e3a13c05d61893276e3bd06f06d",
       "functions": [
         {
           "name": "OtpGraphQlClient",
@@ -4142,7 +4142,7 @@
           ]
         },
         {
-          "source": "com.unihack8.backend.routing.domain.model.GeoPoint",
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
           "specifiers": [
             "GeoPoint"
           ]
@@ -4351,7 +4351,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/routing/controller/RoutingController.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/routing/controller/RoutingController.java",
-      "contentHash": "aa65f692cc16ade6962a516812b11eaf0781bdb877daa32bfd7e3bc0aacd841d",
+      "contentHash": "6ab3690dccc943979a65a8dce73c0629c6c40138526d2f2475fe99aca1f59cd4",
       "functions": [
         {
           "name": "RoutingController",
@@ -4396,7 +4396,7 @@
           ]
         },
         {
-          "source": "com.unihack8.backend.routing.domain.model.GeoPoint",
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
           "specifiers": [
             "GeoPoint"
           ]
@@ -4538,76 +4538,6 @@
       "totalLines": 21,
       "hasStructuralAnalysis": true
     },
-    "backend/src/main/java/com/unihack8/backend/routing/domain/model/GeoPoint.java": {
-      "filePath": "backend/src/main/java/com/unihack8/backend/routing/domain/model/GeoPoint.java",
-      "contentHash": "c99d54d511912b86e22866f6658058410557d97a804e12d73775a0aa85b342bf",
-      "functions": [
-        {
-          "name": "parse",
-          "params": [
-            "name",
-            "value"
-          ],
-          "returnType": "GeoPoint",
-          "exported": true,
-          "lineCount": 18
-        },
-        {
-          "name": "distanceMetersTo",
-          "params": [
-            "other"
-          ],
-          "returnType": "double",
-          "exported": true,
-          "lineCount": 8
-        },
-        {
-          "name": "invalid",
-          "params": [
-            "name"
-          ],
-          "returnType": "ApiException",
-          "exported": false,
-          "lineCount": 4
-        }
-      ],
-      "classes": [
-        {
-          "name": "GeoPoint",
-          "methods": [
-            "parse",
-            "distanceMetersTo",
-            "invalid"
-          ],
-          "properties": [
-            "EARTH_RADIUS_METERS"
-          ],
-          "exported": true,
-          "lineCount": 40
-        }
-      ],
-      "imports": [
-        {
-          "source": "com.unihack8.backend.common.exception.ApiException",
-          "specifiers": [
-            "ApiException"
-          ]
-        },
-        {
-          "source": "com.unihack8.backend.common.exception.ErrorCode",
-          "specifiers": [
-            "ErrorCode"
-          ]
-        }
-      ],
-      "exports": [
-        "parse",
-        "distanceMetersTo",
-        "GeoPoint"
-      ],
-      "totalLines": 47,
-      "hasStructuralAnalysis": true
-    },
     "backend/src/main/java/com/unihack8/backend/routing/domain/model/TravelMode.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/routing/domain/model/TravelMode.java",
       "contentHash": "d262346c8ce7855abfa7c15775ed144f95b234a96cbdd47f1be1e83b7450f94c",
@@ -4657,7 +4587,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/routing/mapper/RoutePlanMapper.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/routing/mapper/RoutePlanMapper.java",
-      "contentHash": "c5279d472f7c93268c481574f54519253db31a33eb8ba8b3b0f4273d1ebda8c8",
+      "contentHash": "db6df08cf739066c91691d46bb19836cbe1c868a8b68b7db886aa92864932d63",
       "functions": [],
       "classes": [
         {
@@ -4679,7 +4609,7 @@
           ]
         },
         {
-          "source": "com.unihack8.backend.routing.domain.model.GeoPoint",
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
           "specifiers": [
             "GeoPoint"
           ]
@@ -4705,7 +4635,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/routing/mapper/impl/RoutePlanMapperImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/routing/mapper/impl/RoutePlanMapperImpl.java",
-      "contentHash": "b39da8445723bc587914710d39ea790cd86a3c656b182432c441985213c410fd",
+      "contentHash": "6c62e43ce2fc59faeb550b218d7b75abc4c30c7d12c438a1141d65c79535754f",
       "functions": [
         {
           "name": "toResponse",
@@ -4814,7 +4744,7 @@
           ]
         },
         {
-          "source": "com.unihack8.backend.routing.domain.model.GeoPoint",
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
           "specifiers": [
             "GeoPoint"
           ]
@@ -4884,7 +4814,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/routing/service/RoutingService.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/routing/service/RoutingService.java",
-      "contentHash": "b35b3d88b91ec94ca0d5b0ba5f51fe301d815c616bc723b2aab79e2f355f03d8",
+      "contentHash": "0b7848e89484eead4969c1aa25648bbd89359871f063463e1080378933f5c3e8",
       "functions": [],
       "classes": [
         {
@@ -4905,7 +4835,7 @@
           ]
         },
         {
-          "source": "com.unihack8.backend.routing.domain.model.GeoPoint",
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
           "specifiers": [
             "GeoPoint"
           ]
@@ -4931,7 +4861,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/routing/service/impl/RoutingServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/routing/service/impl/RoutingServiceImpl.java",
-      "contentHash": "55c727fc780faad8dcaa88ec592e48c256a066ee8fcdf507a305e4552a557872",
+      "contentHash": "85eff7bb3551269e6628b68972e33448877c1981b98fa686c296070c2c93b8df",
       "functions": [
         {
           "name": "RoutingServiceImpl",
@@ -5027,7 +4957,7 @@
           ]
         },
         {
-          "source": "com.unihack8.backend.routing.domain.model.GeoPoint",
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
           "specifiers": [
             "GeoPoint"
           ]
@@ -5115,7 +5045,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/routing/util/PolylineEncoder.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/routing/util/PolylineEncoder.java",
-      "contentHash": "3a2272596a7bb275ca8293da23088d966de548160bb0c72bfab360d3d4622f42",
+      "contentHash": "cdd06668de8129c17edbc2a9319ac0c8b69efa35f889c011e53aabbd3484833b",
       "functions": [
         {
           "name": "PolylineEncoder",
@@ -5179,7 +5109,7 @@
       ],
       "imports": [
         {
-          "source": "com.unihack8.backend.routing.domain.model.GeoPoint",
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
           "specifiers": [
             "GeoPoint"
           ]
@@ -9645,7 +9575,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/routing/client/impl/OtpGraphQlClientTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/routing/client/impl/OtpGraphQlClientTest.java",
-      "contentHash": "9576fe91c0c9b2696622d16994122be373519f3c0449960eee2c30d574e2207c",
+      "contentHash": "d6662de20409139fd8eeb2f5c5703cb187383268de8ebc36bb40c1e322edb008",
       "functions": [
         {
           "name": "setUp",
@@ -9766,7 +9696,7 @@
           ]
         },
         {
-          "source": "com.unihack8.backend.routing.domain.model.GeoPoint",
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
           "specifiers": [
             "GeoPoint"
           ]
@@ -10037,104 +9967,9 @@
       "totalLines": 124,
       "hasStructuralAnalysis": true
     },
-    "backend/src/test/java/com/unihack8/backend/routing/domain/model/GeoPointTest.java": {
-      "filePath": "backend/src/test/java/com/unihack8/backend/routing/domain/model/GeoPointTest.java",
-      "contentHash": "876c2d56618eb4e54cb49343bc51a8b67f4800c19b1dc0eb66e545cad09821a8",
-      "functions": [
-        {
-          "name": "parsesLatLon",
-          "params": [],
-          "returnType": "void",
-          "exported": false,
-          "lineCount": 4
-        },
-        {
-          "name": "rejectsBadValues",
-          "params": [
-            "value"
-          ],
-          "returnType": "void",
-          "exported": false,
-          "lineCount": 10
-        },
-        {
-          "name": "distanceBetweenTwoTimisoaraPoints",
-          "params": [],
-          "returnType": "void",
-          "exported": false,
-          "lineCount": 7
-        }
-      ],
-      "classes": [
-        {
-          "name": "GeoPointTest",
-          "methods": [
-            "parsesLatLon",
-            "rejectsBadValues",
-            "distanceBetweenTwoTimisoaraPoints"
-          ],
-          "properties": [],
-          "exported": false,
-          "lineCount": 29
-        }
-      ],
-      "imports": [
-        {
-          "source": "org.assertj.core.api.Assertions.assertThat",
-          "specifiers": [
-            "assertThat"
-          ]
-        },
-        {
-          "source": "org.assertj.core.api.Assertions.assertThatThrownBy",
-          "specifiers": [
-            "assertThatThrownBy"
-          ]
-        },
-        {
-          "source": "com.unihack8.backend.common.exception.ApiException",
-          "specifiers": [
-            "ApiException"
-          ]
-        },
-        {
-          "source": "com.unihack8.backend.common.exception.ErrorCode",
-          "specifiers": [
-            "ErrorCode"
-          ]
-        },
-        {
-          "source": "org.junit.jupiter.api.Test",
-          "specifiers": [
-            "Test"
-          ]
-        },
-        {
-          "source": "org.junit.jupiter.params.ParameterizedTest",
-          "specifiers": [
-            "ParameterizedTest"
-          ]
-        },
-        {
-          "source": "org.junit.jupiter.params.provider.NullSource",
-          "specifiers": [
-            "NullSource"
-          ]
-        },
-        {
-          "source": "org.junit.jupiter.params.provider.ValueSource",
-          "specifiers": [
-            "ValueSource"
-          ]
-        }
-      ],
-      "exports": [],
-      "totalLines": 43,
-      "hasStructuralAnalysis": true
-    },
     "backend/src/test/java/com/unihack8/backend/routing/mapper/impl/RoutePlanMapperImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/routing/mapper/impl/RoutePlanMapperImplTest.java",
-      "contentHash": "ab0557d83a9eb807678a12055972110f05220b1c4bb3a64a750aa23e83bcf55d",
+      "contentHash": "5288a66d911910b36956f155392edabbb5801c73d53f14c44be27378da5232a3",
       "functions": [
         {
           "name": "transitItinerary",
@@ -10237,7 +10072,7 @@
           ]
         },
         {
-          "source": "com.unihack8.backend.routing.domain.model.GeoPoint",
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
           "specifiers": [
             "GeoPoint"
           ]
@@ -10282,7 +10117,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/routing/service/impl/RoutingServiceImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/routing/service/impl/RoutingServiceImplTest.java",
-      "contentHash": "9bceb5e96cd4e88186cc30520e330581859cc97aaed23b7783daae6d16dc6417",
+      "contentHash": "954b5e7fb04c598722585a668ae9627f643f8a4e33e9879966274e238e4d159f",
       "functions": [
         {
           "name": "setUp",
@@ -10453,7 +10288,7 @@
           ]
         },
         {
-          "source": "com.unihack8.backend.routing.domain.model.GeoPoint",
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
           "specifiers": [
             "GeoPoint"
           ]
@@ -10611,7 +10446,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/routing/util/PolylineEncoderTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/routing/util/PolylineEncoderTest.java",
-      "contentHash": "a518065bb2486bfca078fe0bab6f64472c433335be5d270f97f58e857eb46e6a",
+      "contentHash": "11ce2492cd8468a60595279ca516105c6a7772de17e5c530edf4172cb338c691",
       "functions": [
         {
           "name": "encodesGoogleExample",
@@ -10666,7 +10501,7 @@
           ]
         },
         {
-          "source": "com.unihack8.backend.routing.domain.model.GeoPoint",
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
           "specifiers": [
             "GeoPoint"
           ]
