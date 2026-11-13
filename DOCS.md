@@ -51,6 +51,9 @@ The mobile app never calls third-party data sources directly; the backend proxie
 3. **Terminal** (from `backend/`): `./gradlew bootRun --args='--spring.profiles.active=local'`
 4. The API listens on **port 8080 on all network interfaces**. From a phone on the same Wi-Fi use `http://<laptop Wi-Fi IPv4>:8080` (find it with `ipconfig`, Wi-Fi adapter). If the phone cannot connect, allow Java through the Windows Firewall for private networks.
 5. **Quick check:** `GET http://<ip>:8080/test` without a token must answer `401` with `{"code":"UNAUTHORIZED",...}` — that proves the server is reachable and security is on. (There is no health endpoint: nothing is deployed.)
+6. **Timetable file (once per machine, not in git):** the "last tram/bus" answers read `infra/otp/stpt-gtfs.zip` (~2 MB), which is git-ignored, so a fresh checkout does not have it. Download only the timetable, from the repo root in Git Bash:
+   `curl -fL -o infra/otp/stpt-gtfs.zip https://smtt.ro/transit/gtfs/maps/smtt-timisoara-ro.zip`
+   (mirror if that fails: `https://files.mobilitydatabase.org/mdb-2868/latest.zip`). Whoever also runs the routing server uses `infra/otp/get-data.sh` instead, which fetches this file plus the street map (see `infra/otp/README.md`). Without the file the backend still starts: it logs `GTFS timetable not found …` and `/transit/last-departures` falls back to live estimates (`source: LIVE_ESTIMATE`). With it, the log shows `GTFS timetable loaded …` on the first last-departures request. The file expires on 2026-12-31; download it again after that.
 
 **Tests:** `./gradlew test` from `backend/`. They use an in-memory H2 database and a fake Supabase secret (`src/test/resources/application.properties`), so they never need the real database or your local keys.
 
