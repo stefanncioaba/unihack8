@@ -23,7 +23,7 @@ Track C has the most screens. Whoever finishes their backend tasks first takes s
 ### Rules to avoid blocking each other
 
 - One branch per person (`<name>_dev`). Branches are merged into `main` **only when Stefan says so** — never on a schedule and never by an agent on its own. After a merge, everyone pulls `main` into their branch.
-- Each track only edits its own folders: A and B own separate backend packages, C owns `mobile/`.
+- Each track only edits its own folders: A and B own separate backend packages, C owns `frontend/`.
 - Shared files (`build.gradle`, `application.properties`, `SecurityConfig`, `docs/API.md`) belong to track A. Others change them through a small PR and say so in chat.
 - `DOCS.md` has one section per feature. Edit only your own section.
 - A change to an endpoint's shape is made in `docs/API.md` **first**, then in code.
@@ -57,27 +57,28 @@ Tasks 8, 9 and 10 do not need the database to start: B can build and test them a
 
 **Needs:** nothing. **Goal:** everyone can run the project and knows the API shapes.
 
-- [ ] **1.1 Create the Supabase project** (manual, in the Supabase dashboard). Region: Frankfurt (`eu-central-1`). Save the database password in a password manager, not in the repo.
-- [ ] **1.2 Connect the Supabase MCP server to Claude Code.** Add the hosted Supabase MCP server scoped to this project's ref, log in through the browser prompt, then check that it can list tables. Keep it scoped to this one project. Each teammate who wants to run migrations repeats this on their machine.
-- [ ] **1.3 Collect the keys.**
+- [x] **1.1 Create the Supabase project** (manual, in the Supabase dashboard). Region: Frankfurt (`eu-central-1`). Save the database password in a password manager, not in the repo.
+- [x] **1.2 Connect the Supabase MCP server to Claude Code.** Add the hosted Supabase MCP server scoped to this project's ref, log in through the browser prompt, then check that it can list tables. Keep it scoped to this one project. Each teammate who wants to run migrations repeats this on their machine.
+- [x] **1.3 Collect the keys.** Example files committed; each person copies them and fills in the database password, pooler host and Gemini key (see `DOCS.md` → "Configuration and running").
   - **Backend:** all keys live in `backend/src/main/resources/application-local.properties` (already git-ignored). Commit an `application-local.properties.example` with the same names and empty values:
-    - Supabase URL and JWKS URL (for token validation)
+    - Supabase URL and the legacy JWT secret (for token validation)
     - database URL, user, password (session pooler connection string)
     - Gemini API key and model names (backend only — never in the mobile app)
     - OpenTripPlanner base URL
-  - **Mobile:** only the Supabase URL, the Supabase publishable key and the backend address, in `mobile/.env` (git-ignored) with a committed `.env.example`.
-- [ ] **1.4 Configure Supabase Auth:** email + password sign-in. Turn off "confirm email" for the hackathon so demo accounts work instantly.
-- [ ] **1.5 Repo layout and branches.** Create the folders below and one `<name>_dev` branch per person.
+  - **Mobile:** done later, in step 12.1.
+- [x] **1.4 Configure Supabase Auth:** email + password sign-in. Turn off "confirm email" for the hackathon so demo accounts work instantly.
+- [x] **1.5 Repo layout and branches** — each teammate creates their own `<name>_dev` branch; `frontend/` is created by the frontend teammates (task 12.1). Layout:
   ```
   backend/              Spring Boot API (exists)
-  mobile/               Expo app
-  infra/otp/            OpenTripPlanner data + docker-compose
-  supabase/migrations/  SQL of every migration applied through MCP
-  docs/API.md           API contract
+  frontend/             Expo app (task 12.1, created by the frontend teammates)
+  infra/otp/            OpenTripPlanner data + docker-compose (exists, filled in task 10)
+  supabase/migrations/  SQL of every migration applied through MCP (exists)
+  supabase/tests/       schema checks (exists)
+  docs/API.md           API contract (exists)
   ```
-- [ ] **1.6 Write the API contract** in `docs/API.md`: every endpoint listed in tasks 4–11 with request and response JSON examples and the error shape. Track C copies the examples into `mobile/src/mocks/`. **This step is what removes the waiting — do not skip it.**
-- [ ] **1.7 Agree the reliability rules** (proposal — confirm or change): start at 100, attended `+5`, no-show `−10`, cancel less than 2 h before start `−2`, never below 0.
-- [ ] **1.8 Docs and knowledge graph baseline:** fill the `DOCS.md` skeleton, generate the first knowledge graph once the folders exist.
+- [x] **1.6 Write the API contract** in `docs/API.md`: every endpoint listed in tasks 4–11 with request and response JSON examples and the error shape. Track C copies the examples into `frontend/src/mocks/`. **This step is what removes the waiting — do not skip it.**
+- [x] **1.7 Agree the reliability rules** (agreed 2026-11-13): start at 100, attended `+5`, no-show `−10`, cancel less than 2 h before start `−2`, never below 0. Details in `DOCS.md` → "Reliability rules".
+- [x] **1.8 Docs and knowledge graph baseline:** `DOCS.md` skeleton done; first knowledge graph generated in `.ua/` with Understand-Anything (see `DOCS.md` → "Knowledge graph").
 
 ---
 
@@ -85,15 +86,15 @@ Tasks 8, 9 and 10 do not need the database to start: B can build and test them a
 
 **Needs:** 1.1, 1.2. Every migration is applied through MCP **and** saved as a `.sql` file in `supabase/migrations/`. Every `id` column is a UUID.
 
-- [ ] **2.1 `profiles`**: `id` (uuid, = `auth.users.id`), `username` (unique, case-insensitive), `reliability_score` (int, default 100), `created_at`. No profile picture column for now — the app shows one default picture for everyone; custom pictures only if time is left.
-- [ ] **2.2 Trigger** on `auth.users` insert that creates the matching `profiles` row (username taken from sign-up metadata).
-- [ ] **2.3 `events`**: `id`, `source` (`USER` | `EXTERNAL`), `external_id` (the event's id on the platform it came from, prefixed with the platform name, e.g. `livetickets:<id>`; unique; null for user events), `title`, `description`, `category`, `venue_name`, `address`, `lat`, `lon`, `starts_at`, `ends_at`, `capacity` (null = unlimited), `organizer_id` (null for imported events), `image_url`, `price_min`, `price_max`, `external_url`, `created_at`.
-- [ ] **2.4 `event_participants`**: `event_id`, `user_id` (unique pair), `status` (`JOINED` | `ATTENDED` | `NO_SHOW` | `CANCELLED` | `BANNED`), `qr_token` (unique, random), `joined_at`, `checked_in_at`.
-- [ ] **2.5 `reliability_log`**: `id`, `user_id`, `event_id`, `points_change` (how many points were added or removed, e.g. `+5` or `-10`), `reason`, `created_at` — the history behind each score.
-- [ ] **2.6 `places`**: `id` (our UUID, how the app refers to the place), `osm_id` (text, unique — the id OpenStreetMap gave the place, e.g. `node/2845091337`; it is how the import recognises a place it already saved, so re-running it updates rows instead of creating duplicates), `name`, `category`, `lat`, `lon`, `address`, `opening_hours`, `tags` (jsonb). Filled by task 8.
-- [ ] **2.7 Indexes:** events by `starts_at` and by `lat`/`lon`, places by `category` and `lat`/`lon`, trigram index on `profiles.username` and `events.title` for search.
-- [ ] **2.8 Row Level Security:** enable RLS on every table with no public policies. The app reads and writes only through the Spring API; the mobile app talks to Supabase for sign-in only.
-- [ ] **2.9 Security check:** run the Supabase security advisor and fix what it reports. **No seed data** — no mock users and no mock events in the database. We create our own accounts in the app; events arrive from the LiveTickets import (task 7) and from the create-event form.
+- [x] **2.1 `profiles`**: `id` (uuid, = `auth.users.id`), `username` (unique, case-insensitive), `reliability_score` (int, default 100), `created_at`. No profile picture column for now — the app shows one default picture for everyone; custom pictures only if time is left.
+- [x] **2.2 Trigger** on `auth.users` insert that creates the matching `profiles` row (username taken from sign-up metadata).
+- [x] **2.3 `events`**: `id`, `source` (`USER` | `EXTERNAL`), `external_id` (the event's id on the platform it came from, prefixed with the platform name, e.g. `livetickets:<id>`; unique; null for user events), `title`, `description`, `category`, `venue_name`, `address`, `lat`, `lon`, `starts_at`, `ends_at`, `capacity` (null = unlimited), `organizer_id` (null for imported events), `image_url`, `price_min`, `price_max`, `external_url`, `created_at`.
+- [x] **2.4 `event_participants`**: `event_id`, `user_id` (unique pair), `status` (`JOINED` | `ATTENDED` | `NO_SHOW` | `CANCELLED` | `BANNED`), `qr_token` (unique, random), `joined_at`, `checked_in_at`.
+- [x] **2.5 `reliability_log`**: `id`, `user_id`, `event_id`, `points_change` (how many points were added or removed, e.g. `+5` or `-10`), `reason`, `created_at` — the history behind each score.
+- [x] **2.6 `places`**: `id` (our UUID, how the app refers to the place), `osm_id` (text, unique — the id OpenStreetMap gave the place, e.g. `node/2845091337`; it is how the import recognises a place it already saved, so re-running it updates rows instead of creating duplicates), `name`, `category`, `lat`, `lon`, `address`, `opening_hours`, `tags` (jsonb). Filled by task 8.
+- [x] **2.7 Indexes:** events by `starts_at` and by `lat`/`lon`, places by `category` and `lat`/`lon`, trigram index on `profiles.username` and `events.title` for search.
+- [x] **2.8 Row Level Security:** enable RLS on every table with no public policies. The app reads and writes only through the Spring API; the mobile app talks to Supabase for sign-in only.
+- [x] **2.9 Security check:** run the Supabase security advisor and fix what it reports. **No seed data** — no mock users and no mock events in the database. We create our own accounts in the app; events arrive from the LiveTickets import (task 7) and from the create-event form.
 
 ---
 
@@ -101,8 +102,8 @@ Tasks 8, 9 and 10 do not need the database to start: B can build and test them a
 
 **Needs:** 1.3, and 2.1 for the first real query. Spring Boot 4.1.2 / Java 21 / Gradle are already set up.
 
-- [ ] **3.1 Dependencies and config:** add the OAuth2 resource-server starter; make `application.properties` import the optional `application-local.properties` and read every key from it (1.3); JPA `ddl-auto=validate` (the schema lives in Supabase, not in Hibernate).
-- [ ] **3.2 Package layout** — one package per feature, same shape everywhere:
+- [x] **3.1 Dependencies and config:** add the OAuth2 resource-server starter; keys are read from `application-local.properties`, which Spring loads when the app runs with the `local` profile (set in the IntelliJ run configuration — `application.properties` stays free of secrets, so tests never load real keys); JPA `ddl-auto=validate` (the schema lives in Supabase, not in Hibernate).
+- [ ] **3.2 Package layout** — created by each member as their feature is built (shared `common` and `config` packages exist). One package per feature, same shape everywhere:
   ```
   com.unihack8.backend.<feature>/
     domain/entity/     domain/dto/
@@ -112,10 +113,10 @@ Tasks 8, 9 and 10 do not need the database to start: B can build and test them a
     service/           service/impl/     (interface + implementation)
   ```
   Features: `users`, `events`, `reliability`, `places`, `transit`, `routing`, `ai`, plus `common` and `config`.
-- [ ] **3.3 Security:** validate the Supabase access token (JWT) against the project's JWKS URL; the user id is the token's `sub`. Public: `GET` on events, places, transit. Everything else needs a token. CORS open for development.
-- [ ] **3.4 Common pieces:** one error response shape, a global exception handler, a "current user" helper, pagination parameters.
-- [ ] **3.5 Test setup:** service unit tests with Mockito, controller tests with MockMvc and a fake JWT. No test may need the real Supabase database.
-- [ ] **3.6 Run guide** in `DOCS.md`: how to start the API on a laptop and reach it from a phone running Expo Go on the same Wi-Fi. No health endpoint for now — nothing is deployed.
+- [x] **3.3 Security:** validate the Supabase access token (JWT) with the project's **legacy JWT secret** (HS256, `supabase.jwt-secret` in `application-local.properties`): a `JwtDecoder` bean built with `NimbusJwtDecoder.withSecretKey(...)` and `MacAlgorithm.HS256`. Before this works, the project's current signing key in Supabase (Project Settings → JWT Keys) must be the legacy HS256 secret — see `DOCS.md`. The user id is the token's `sub`. Public: `GET` on events, places, transit, and `GET /users/username-available` (see `docs/API.md`). Everything else needs a token. CORS open for development.
+- [x] **3.4 Common pieces:** one error response shape, a global exception handler, a "current user" helper, pagination parameters.
+- [x] **3.5 Test setup:** service unit tests with Mockito, controller tests with MockMvc and real HS256 test tokens (`support/JwtTestTokens`). Tests run on an in-memory H2 database (`src/test/resources/application.properties`) — no test may need the real Supabase database.
+- [x] **3.6 Run guide** in `DOCS.md`: how to start the API on a laptop and reach it from a phone running Expo Go on the same Wi-Fi. No health endpoint for now — nothing is deployed.
 
 ---
 
@@ -226,11 +227,11 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 ## 12. Mobile foundation — Track C
 
-**Needs:** 1.3 for keys, 1.6 for mocks. Everything must run in **Expo Go** (no custom native code).
+**Needs:** 1.6 for mocks. Everything must run in **Expo Go** (no custom native code).
 
-- [ ] **12.1 Create the Expo app** in `mobile/` (TypeScript, Expo Router) with four tabs: Home, Map, AI, Profile.
+- [ ] **12.1 Create the Expo app** in `frontend/` (TypeScript, Expo Router) with four tabs: Home, Map, AI, Profile. Add `frontend/.env` (git-ignored) with a committed `.env.example`: Supabase URL, Supabase publishable key, and the backend laptop's Wi-Fi address (`http://<ip>:8080`). Public values only — Expo bundles every `EXPO_PUBLIC_` variable into the app.
 - [ ] **12.2 Auth:** sign-up (email, password, username), sign-in, sign-out with the Supabase client; session kept on the device; signed-out users see only the auth screens.
-- [ ] **12.3 API layer:** one client that adds the Supabase token to every request, plus a `USE_MOCKS` switch that serves `mobile/src/mocks/` instead. Data fetching with TanStack Query.
+- [ ] **12.3 API layer:** one client that adds the Supabase token to every request, plus a `USE_MOCKS` switch that serves `frontend/src/mocks/` instead. Data fetching with TanStack Query.
 - [ ] **12.4 Shared UI:** colours, typography, buttons, cards, loading / empty / error states, and the one default profile picture used for every user.
 - [ ] **12.5 Location permission** and a "current position" hook, defaulting to Piața Victoriei when denied.
 - [ ] **12.6 Test setup:** Jest + React Native Testing Library, one test per screen at minimum.

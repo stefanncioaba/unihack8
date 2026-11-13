@@ -95,6 +95,20 @@ yarn-error.*
 
 
 # =========================================================
+#  Knowledge graph scratch files (the graph itself is committed)
+# =========================================================
+.ua/intermediate/
+.ua/tmp/
+.ua/.trash-*/
+
+# =========================================================
+#  OpenTripPlanner data (large, downloaded or generated)
+# =========================================================
+infra/otp/*.pbf
+infra/otp/*.zip
+infra/otp/*.obj
+
+# =========================================================
 #  OS files
 # =========================================================
 .DS_Store
