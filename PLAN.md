@@ -61,7 +61,7 @@ Tasks 8, 9 and 10 do not need the database to start: B can build and test them a
 - [x] **1.2 Connect the Supabase MCP server to Claude Code.** Add the hosted Supabase MCP server scoped to this project's ref, log in through the browser prompt, then check that it can list tables. Keep it scoped to this one project. Each teammate who wants to run migrations repeats this on their machine.
 - [x] **1.3 Collect the keys.** Example files committed; each person copies them and fills in the database password, pooler host and Gemini key (see `DOCS.md` → "Configuration and running").
   - **Backend:** all keys live in `backend/src/main/resources/application-local.properties` (already git-ignored). Commit an `application-local.properties.example` with the same names and empty values:
-    - Supabase URL and JWKS URL (for token validation)
+    - Supabase URL and the legacy JWT secret (for token validation)
     - database URL, user, password (session pooler connection string)
     - Gemini API key and model names (backend only — never in the mobile app)
     - OpenTripPlanner base URL
@@ -112,7 +112,7 @@ Tasks 8, 9 and 10 do not need the database to start: B can build and test them a
     service/           service/impl/     (interface + implementation)
   ```
   Features: `users`, `events`, `reliability`, `places`, `transit`, `routing`, `ai`, plus `common` and `config`.
-- [ ] **3.3 Security:** validate the Supabase access token (JWT) against the project's JWKS URL — our project signs tokens with **ES256**, so set `spring.security.oauth2.resourceserver.jwt.jws-algorithms=ES256` (Spring assumes RS256 otherwise and rejects every token); the user id is the token's `sub`. Public: `GET` on events, places, transit. Everything else needs a token. CORS open for development.
+- [ ] **3.3 Security:** validate the Supabase access token (JWT) with the project's **legacy JWT secret** (HS256, `supabase.jwt-secret` in `application-local.properties`): a `JwtDecoder` bean built with `NimbusJwtDecoder.withSecretKey(...)` and `MacAlgorithm.HS256`. Before this works, the project's current signing key in Supabase (Project Settings → JWT Keys) must be the legacy HS256 secret — see `DOCS.md`. The user id is the token's `sub`. Public: `GET` on events, places, transit. Everything else needs a token. CORS open for development.
 - [ ] **3.4 Common pieces:** one error response shape, a global exception handler, a "current user" helper, pagination parameters.
 - [ ] **3.5 Test setup:** service unit tests with Mockito, controller tests with MockMvc and a fake JWT. No test may need the real Supabase database.
 - [ ] **3.6 Run guide** in `DOCS.md`: how to start the API on a laptop and reach it from a phone running Expo Go on the same Wi-Fi. No health endpoint for now — nothing is deployed.

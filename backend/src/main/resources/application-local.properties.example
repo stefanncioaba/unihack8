@@ -3,8 +3,10 @@
 
 # --- Supabase ---------------------------------------------------------------
 supabase.url=https://mjurmmhilnolicncywsw.supabase.co
-# Public keys Supabase signs access tokens with (used to validate the app's JWTs).
-spring.security.oauth2.resourceserver.jwt.jwk-set-uri=https://mjurmmhilnolicncywsw.supabase.co/auth/v1/.well-known/jwks.json
+# Legacy JWT secret (HS256) used to validate the app's access tokens.
+# Supabase dashboard -> Project Settings -> JWT Keys -> "Legacy JWT Secret".
+# Secret: backend only, never in the mobile app.
+supabase.jwt-secret=
 
 # --- Database (Supabase session pooler) -------------------------------------
 # Supabase dashboard -> Connect -> "Session pooler". Copy the host from there, e.g.

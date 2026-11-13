@@ -30,11 +30,13 @@ The mobile app never calls third-party data sources directly; the backend proxie
 - **Backend keys:** copy `backend/src/main/resources/application-local.properties.example` to `application-local.properties` (git-ignored) and fill in:
   - `spring.datasource.url` — Supabase dashboard → Connect → "Session pooler" (port 5432), written as `jdbc:postgresql://<host>:5432/postgres`.
   - `spring.datasource.password` — the database password set when the project was created.
+  - `supabase.jwt-secret` — Supabase dashboard → Project Settings → JWT Keys → "Legacy JWT Secret".
   - `gemini.api-key` — from Google AI Studio.
-  - Already filled: Supabase URL, JWKS URL, database user, Gemini model names, OpenTripPlanner URL.
+  - Already filled: Supabase URL, database user, Gemini model names, OpenTripPlanner URL.
 - **Mobile keys:** set up with the Expo app (PLAN step 12.1).
-- **Token validation:** Supabase signs access tokens with **ES256**; public keys at `https://mjurmmhilnolicncywsw.supabase.co/auth/v1/.well-known/jwks.json` (checked 2026-11-13).
-- **Never in mobile:** database password, Gemini key, legacy `service_role` / secret keys.
+- **Token validation:** the backend checks access tokens with the **legacy JWT secret (HS256)**, by team decision. On 2026-11-13 the project's signing key was rotated: **HS256 (Shared Secret) is the current key**, ECC (P-256) is the previous key (kept, not revoked). Do not rotate back to ECC — the backend would reject every login token with 401. Not yet confirmed with a real login token; that test belongs to PLAN step 3.3.
+- **API keys:** the mobile app uses the legacy `anon` key (public). The legacy `service_role` key is not needed: the backend talks to the database directly.
+- **Never in mobile:** database password, JWT secret, Gemini key, `service_role` key.
 - **No deployment:** the backend runs on a laptop and the app runs in Expo Go on phones on the same Wi-Fi.
 - **No seed data:** accounts are created in the app; events come from the LiveTickets import and the create-event form.
 - **Merging:** branches go into `main` only when Stefan says so.
