@@ -105,7 +105,7 @@ Applied to Supabase on 2026-11-13 from `supabase/migrations/` (four migrations, 
 
 ## Current state
 
-- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging) and the live transit endpoints of task 9 (`/transit/**`).
+- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging), places (task 8, 1003 Timișoara places imported into Supabase) and live transit (task 9, `/transit/**`). 119 tests passing.
 - `supabase/`: migrations and schema tests for task 2, applied.
 - `docs/API.md`: API contract (task 1.6).
 - `infra/otp/`: folder for OpenTripPlanner (README only; the server is set up in task 10). Its large data files are git-ignored.
@@ -142,7 +142,7 @@ Events carry a venue name and city but **no coordinates** — they are geocoded 
 
 ### OpenStreetMap
 
-- **Places:** Overpass API, imported once into the `places` table (PLAN task 8). Counted for the Timișoara area on 2026-11-13: 239 restaurants, 121 cafés, 89 bars/pubs, 134 fast-food places, 123 pharmacies. Only 82 of the 239 restaurants have opening hours. Freshness of the 583 food and drink places: 125 last edited in 2026, 296 since January 2025, 401 since January 2023; 182 untouched since before 2023, so some of those may have closed or changed.
+- **Places:** Overpass API, imported into the `places` table (PLAN task 8, see Features → Places). Counted for the Timișoara area on 2026-11-13: 239 restaurants, 121 cafés, 89 bars/pubs, 134 fast-food places, 123 pharmacies. Only 82 of the 239 restaurants have opening hours. Freshness of the 583 food and drink places: 125 last edited in 2026, 296 since January 2025, 401 since January 2023; 182 untouched since before 2023, so some of those may have closed or changed.
 - **Geocoding:** Nominatim, max 1 request/second, only for newly imported events; the coordinates are saved on the event row.
 - **Streets for routing:** `.osm.pbf` extract of Timișoara for OpenTripPlanner 2 (PLAN task 10).
 - OSM has no prices, menus or reviews — the AI looks those up on the web (Gemini, below).
@@ -175,6 +175,40 @@ Checked against Google's documentation on 2026-11-13.
 
 Sections are added here as each PLAN task is implemented: Users, Events, Reliability, Places, Transit, Routing, AI, Frontend.
 
+### Places (PLAN task 8)
+
+Restaurants, cafés, bars, parks… from OpenStreetMap, stored in the `places` table and served by `GET /places` and `GET /places/{id}` (public; shapes in `docs/API.md` → Places).
+
+**Categories** (`places/domain/PlaceCategory`) and the OpenStreetMap tags that select them:
+
+| API name | OpenStreetMap tags |
+|---|---|
+| `restaurant` | `amenity=restaurant` |
+| `cafe` | `amenity=cafe` |
+| `bar` | `amenity=bar`, `pub`, `biergarten` |
+| `fast_food` | `amenity=fast_food` |
+| `club` | `amenity=nightclub` |
+| `pharmacy` | `amenity=pharmacy` |
+| `atm` | `amenity=atm` |
+| `supermarket` | `shop=supermarket` |
+| `park` | `leisure=park` |
+| `attraction` | `tourism=museum`, `attraction`, `gallery`, `zoo`, `viewpoint` |
+
+Checked in that order (amenity first), so a church tagged `amenity=place_of_worship` + `tourism=attraction` is an attraction.
+
+**Import** (`places/service/PlaceImportService`, `places/client/OverpassClient`):
+- **Run it** (from `backend/`, with your `application-local.properties` filled in): `./gradlew bootRun --args='--spring.profiles.active=local --places.import.enabled=true'`. It runs once at startup, then the API keeps running normally. Takes 1–4 minutes. In IntelliJ: add `--places.import.enabled=true` to the run configuration's program arguments for that one run.
+- **One query** to the Overpass API (OpenStreetMap's public search service) for the Timișoara area (`places.import.bbox`, default `45.69,21.14,45.81,21.31`). Servers in `places.import.overpass-url` are tried in order; default: `overpass-api.de`, then the `overpass.kumi.systems` mirror (the main server often answers "at capacity").
+- **Rules:** places without a name are skipped, except ATMs ("UniCredit ATM", or "ATM"); ways and areas use their centre point; address = street + number; all OSM tags are stored in `tags` (jsonb).
+- **Re-runnable:** rows are matched by `osm_id`, so a second run updates instead of duplicating, and places deleted from OpenStreetMap are removed. If Overpass fails or returns nothing, the table is left untouched.
+- **First import (2026-11-13):** 1158 fetched, **1003 stored**, 155 skipped (mostly unnamed parks).
+
+**Search** (`places/service/PlaceService`): category, viewport (`bbox`) and name (`q`, case-insensitive) filters run in the database; `near` + `radius` narrows to a box in the database, then measures exact distances in Java and sorts closest first. Shared helpers for every map feature: `common/geo/GeoPoint` (parse `near`, haversine distance) and `common/geo/BoundingBox` (parse `bbox`).
+
+**Detail tags:** only a whitelist of useful tags is sent to the app (`places/mapper/impl/PlaceMapperImpl.PUBLIC_TAGS`); the rest stays in the database for the AI.
+
+**Tests:** 43 tests across `PlaceControllerTest`, `GeoTest`, `PlaceCategoryTest`, `OverpassClientImplTest` (local fake HTTP server, incl. busy-server fallback), `OsmElementMapperImplTest` and `PlaceImportServiceImplTest`, `PlaceImportRunnerTest` (real Overpass response saved in `src/test/resources/overpass/timisoara-sample.json`). Tests never call the real Overpass API.
+
 ### Transit — live STPT data (PLAN task 9, Track B)
 
 Public endpoints (no token) under `/transit`, contract in `docs/API.md` → Transit. The backend calls `live.stpt.ro`; the app never does.
@@ -191,9 +225,9 @@ Public endpoints (no token) under `/transit`, contract in `docs/API.md` → Tran
 
 **Package `com.unihack8.backend.transit`:** `client/StptClient` (+ `impl/`) makes the raw calls and reads STPT's JSON leniently; `mapper/TransitMapper` (+ `impl/`) converts to the API shapes; `service/TransitService` (+ `impl/`) caches and computes; `controller/TransitController`; `config/StptProperties` and `StptClientConfig` (HTTP client). No database table — everything is live.
 
-**Shared helpers added to `common` (reuse them in places/routing):**
-- `common.cache.StaleCache` — per-key cache: fresh for its lifetime; if the source then fails, the last value is served with `stale: true`; if nothing was ever cached, `503 SOURCE_UNAVAILABLE`. One request per key reaches the source at a time.
-- `common.geo.GeoPoint` (`near=lat,lon` parsing, haversine distance) and `common.geo.BoundingBox` (`bbox=` parsing) — bad values answer `400 VALIDATION_FAILED`.
+**Shared helpers in `common`:**
+- `common.cache.StaleCache` (added by transit; reuse it for routing/OTP) — per-key cache: fresh for its lifetime; if the source then fails, the last value is served with `stale: true`; if nothing was ever cached, `503 SOURCE_UNAVAILABLE`. One request per key reaches the source at a time.
+- Transit uses the places feature's `common.geo.GeoPoint` (`near`, `distanceMetersTo`) and `common.geo.BoundingBox` (`bbox`).
 
 **Settings** (all optional, defaults in `StptProperties`): `stpt.base-url`, `stpt.connect-timeout` (3 s), `stpt.read-timeout` (5 s), `stpt.user-agent`, `stpt.ttl.vehicles|arrivals|alerts|static-data`.
 
@@ -204,14 +238,14 @@ Public endpoints (no token) under `/transit`, contract in `docs/API.md` → Tran
 - `from` / `to` come from the GTFS long name (`"Gara de Nord - Piața Gh. Domășneanu (AEM)"`). The older `/routes/capeti-linie.json` is not used: it still lists pre-diversion end stations.
 - **Last departures:** no GTFS timetable yet (PLAN open question 2), so `source` is always `LIVE_ESTIMATE` = the latest of the next few arrivals STPT reports (about the next 30–60 minutes). The summary sentence ("Last tram 2 from … leaves at 21:41") is therefore an estimate until the GTFS file is used. STPT's vehicles answer also has a per-line `service_window.last_arrival` (e.g. `24:30`) that could improve this later; not used yet.
 
-**Tests (52 new, 81 total, all passing on 2026-11-13):** `StptClientImplTest` parses real STPT answers saved in `src/test/resources/stpt/` (no network); `TransitMapperImplTest` (types, time zones, midnight, duplicates); `TransitServiceImplTest` (sorting, bbox, caching, stale fallback when STPT is down, 503 with no cache, 404 stop, last departures, summary in English and Romanian); `TransitControllerTest` (JSON shapes, no token needed, 400/404/503); `StaleCacheTest`; `GeoParsingTest`. A one-off run against the real STPT on 2026-11-13 returned 74 lines, 926 stops, live vehicles, arrivals and 5 alerts.
+**Tests (47 for transit):** `StptClientImplTest` parses real STPT answers saved in `src/test/resources/stpt/` (no network); `TransitMapperImplTest` (types, time zones, midnight, duplicates); `TransitServiceImplTest` (sorting, bbox, caching, stale fallback when STPT is down, 503 with no cache, 404 stop, last departures, summary in English and Romanian); `TransitControllerTest` (JSON shapes, no token needed, 400/404/503); `StaleCacheTest`. A one-off run against the real STPT on 2026-11-13 returned 74 lines, 926 stops, live vehicles, arrivals and 5 alerts.
 
 ## Knowledge graph
 
 One graph for the whole repo, made with the **Understand-Anything** plugin (rule from AGENTS.md: keep it updated with every change).
 
 - **Files:** `.ua/knowledge-graph.json` (the graph), `.ua/meta.json` and `.ua/fingerprints.json` (let the next run update only changed files), `.ua/.understandignore` (what is left out: secrets such as `application-local.properties` and `.env`, build output, `.claude/`). Scratch folders under `.ua/` are git-ignored.
-- **Current version (2026-11-13, commit `10d68bf`, after task 9 live transit):** 94 files, 205 nodes, 451 edges, 10 layers (Project Documentation — now also holds `docs/API.md`, Backend App Security & Config, Backend Shared Web Layer — now with `common/cache` and `common/geo`, **Backend Transit Feature** (new), Backend Tests, Backend Build & Config, Database Schema, Infrastructure & Tooling, Frontend App, Frontend Config), 18-step guided tour (steps 12–16 walk through transit).
+- **Current version:** KGLINE
 - **Left out on purpose** (`.ua/.understandignore`): secrets, build output, `.claude/`, and frontend noise (`package-lock.json`, `assets/`, `LICENSE`, `.npmrc`).
 - **Update it** after each change: run `/understand` (Claude Code) or the same command in Codex; it only reanalyzes changed files. `/understand-dashboard` opens the interactive view.
 - **Codex:** the plugin's README lists Codex as supported (install it with the plugin's install script for `codex`); not tested by us yet.

@@ -89,7 +89,7 @@ class TransitServiceImplTest {
     @Test
     void stopsFilteredByBbox() {
         assertThat(service.stops(null)).hasSize(3);
-        assertThat(service.stops(BoundingBox.parseOptional("21.19,45.735,21.20,45.745")))
+        assertThat(service.stops(BoundingBox.parse("21.19,45.735,21.20,45.745", "bbox")))
                 .singleElement().satisfies(s -> assertThat(s.id()).isEqualTo("1"));
     }
 

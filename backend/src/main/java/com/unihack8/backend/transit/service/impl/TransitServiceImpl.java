@@ -141,10 +141,10 @@ public class TransitServiceImpl implements TransitService {
     @Override
     public TransitSummaryResponse summary(GeoPoint near, Locale locale) {
         StptStop nearest = allStops().stream()
-                .min(Comparator.comparingDouble(s -> near.distanceMeters(s.lat(), s.lon())))
+                .min(Comparator.comparingDouble(s -> distance(near, s)))
                 .orElseThrow(() -> ApiException.notFound("Stop"));
         NearestStopDto stop = new NearestStopDto(nearest.stopCode(), nearest.stopName(),
-                (int) Math.round(near.distanceMeters(nearest.lat(), nearest.lon())));
+                (int) Math.round(distance(near, nearest)));
         List<LastDepartureDto> departures = lastDepartures(nearest.stopCode()).departures();
         boolean romanian = locale != null && "ro".equals(locale.getLanguage());
         return new TransitSummaryResponse(stop, departures, activeAlertCount(),
@@ -198,6 +198,11 @@ public class TransitServiceImpl implements TransitService {
         } catch (ApiException e) {
             return 0;
         }
+    }
+
+    // Meters from a point to a stop.
+    private static double distance(GeoPoint from, StptStop stop) {
+        return from.distanceMetersTo(new GeoPoint(stop.lat(), stop.lon()));
     }
 
     // Cached stop list.

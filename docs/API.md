@@ -380,14 +380,14 @@ Errors: `403 NOT_ORGANIZER`, `404 TICKET_NOT_FOUND`, `409 WRONG_EVENT`, `409 ALR
 
 ### `GET /places` — public
 
-Query (all optional): `category` (repeatable), `bbox`, `near` + `radius` (meters, default 1500, max 10000), `q` (name search), `page`, `size`.
-With `near`, sorted by distance; otherwise by name.
+Query (all optional): `category` (repeatable or comma-separated, e.g. `category=cafe&category=bar` or `category=cafe,bar`), `bbox`, `near` + `radius` (meters, default 1500, max 10000; `radius` without `near` is a `400`), `q` (part of the name, case-insensitive), `page`, `size`.
+With `near`, only places within `radius` are returned, closest first, with `distanceMeters`; otherwise sorted by name and `distanceMeters` is `null`. Filters combine (AND).
 
-Answer: paged list of **PlaceSummary**.
+Answer: paged list of **PlaceSummary**. Errors: `400 VALIDATION_FAILED` for an unknown category (the message lists the valid ones) or a malformed `bbox` / `near` / `radius`.
 
 ### `GET /places/{id}` — public
 
-`openingHours` is OpenStreetMap's raw text (or `null`). `tags` holds the useful extra OpenStreetMap tags when present.
+`openingHours` is OpenStreetMap's raw text (or `null`). `tags` holds only these OpenStreetMap tags, when present: `cuisine`, `website`, `contact:website`, `phone`, `contact:phone`, `email`, `wheelchair`, `outdoor_seating`, `takeaway`, `delivery`, `diet:vegetarian`, `diet:vegan`, `brand`, `operator`, `description`. Errors: `404 NOT_FOUND`, `400 VALIDATION_FAILED` for a non-UUID id.
 
 ```json
 {

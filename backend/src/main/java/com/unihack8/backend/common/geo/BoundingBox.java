@@ -4,30 +4,22 @@ import com.unihack8.backend.common.exception.ApiException;
 import com.unihack8.backend.common.exception.ErrorCode;
 
 /**
- * Map viewport from the {@code bbox=minLon,minLat,maxLon,maxLat} query format (docs/API.md).
+ * Map viewport. Parses the API's {@code bbox=minLon,minLat,maxLon,maxLat} format
+ * (docs/API.md -> Conventions).
  */
 public record BoundingBox(double minLon, double minLat, double maxLon, double maxLat) {
 
-    // Parses "minLon,minLat,maxLon,maxLat"; null or blank means "no filter" and returns null.
-    public static BoundingBox parseOptional(String text) {
-        if (text == null || text.isBlank()) {
-            return null;
+    /** Parses "minLon,minLat,maxLon,maxLat"; 400 VALIDATION_FAILED naming the parameter when bad. */
+    public static BoundingBox parse(String value, String parameterName) {
+        double[] n = GeoParsing.numbers(value, 4, parameterName, "minLon,minLat,maxLon,maxLat");
+        if (n[0] < -180 || n[2] > 180 || n[1] < -90 || n[3] > 90) {
+            throw new ApiException(ErrorCode.VALIDATION_FAILED, parameterName + " is outside valid coordinates.");
         }
-        String[] parts = text.split(",");
-        if (parts.length != 4) {
-            throw new ApiException(ErrorCode.VALIDATION_FAILED, "bbox must be minLon,minLat,maxLon,maxLat.");
+        if (n[0] > n[2] || n[1] > n[3]) {
+            throw new ApiException(ErrorCode.VALIDATION_FAILED,
+                    parameterName + " must be minLon,minLat,maxLon,maxLat with min <= max.");
         }
-        try {
-            BoundingBox box = new BoundingBox(
-                    Double.parseDouble(parts[0].trim()), Double.parseDouble(parts[1].trim()),
-                    Double.parseDouble(parts[2].trim()), Double.parseDouble(parts[3].trim()));
-            if (box.minLon > box.maxLon || box.minLat > box.maxLat) {
-                throw new ApiException(ErrorCode.VALIDATION_FAILED, "bbox minimums must not exceed maximums.");
-            }
-            return box;
-        } catch (NumberFormatException e) {
-            throw new ApiException(ErrorCode.VALIDATION_FAILED, "bbox must contain four numbers.");
-        }
+        return new BoundingBox(n[0], n[1], n[2], n[3]);
     }
 
     // True when the point lies inside the box (edges included).

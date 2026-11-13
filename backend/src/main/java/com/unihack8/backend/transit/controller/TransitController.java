@@ -41,7 +41,7 @@ public class TransitController {
     // GET /transit/stops?bbox= — stops, optionally only in the map viewport.
     @GetMapping("/stops")
     public List<TransitStopDto> stops(@RequestParam(required = false) String bbox) {
-        return transit.stops(BoundingBox.parseOptional(bbox));
+        return transit.stops(bbox == null || bbox.isBlank() ? null : BoundingBox.parse(bbox, "bbox"));
     }
 
     // GET /transit/vehicles?route= — live vehicles of one line.
