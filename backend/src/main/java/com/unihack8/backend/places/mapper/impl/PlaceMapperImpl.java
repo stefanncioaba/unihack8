@@ -1,6 +1,8 @@
 package com.unihack8.backend.places.mapper.impl;
 
 import com.unihack8.backend.places.domain.dto.PlaceDetailDto;
+import com.unihack8.backend.places.domain.dto.PriceDto;
+import com.unihack8.backend.places.domain.entity.PlacePrice;
 import com.unihack8.backend.places.domain.dto.PlaceSummaryDto;
 import com.unihack8.backend.places.domain.entity.Place;
 import com.unihack8.backend.places.mapper.PlaceMapper;
@@ -57,5 +59,12 @@ public class PlaceMapperImpl implements PlaceMapper {
                 place.getAddress(),
                 place.getOpeningHours(),
                 tags);
+    }
+
+    // Copies a stored price row.
+    @Override
+    public PriceDto toPrice(PlacePrice price) {
+        return new PriceDto(price.getItem(), price.getItemType(), price.getPriceLei(), price.getSize(),
+                price.getSourceType(), price.getSourceUrl(), price.getSourceDate(), price.getNote());
     }
 }

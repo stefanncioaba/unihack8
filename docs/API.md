@@ -582,15 +582,15 @@ Request:
 }
 ```
 
-Answer — `places` and `events` are the ones mentioned in `reply`, for cards and "show on map"; `sources` are the web pages the web lookup used:
+Answer — `reply` is plain text (no markdown) in the user's language (Romanian or English). `places` and `events` are the ones named in `reply`, in the order they appear, for cards and "show on map" (`places[].distanceMeters` is from the user, or from Piața Victoriei when `location` is `null`). `sources` are the pages the quoted prices come from (stored price list, PLAN 11.3). Lists are empty, never `null`.
 
 ```json
 {
-  "reply": "Pizzeria Napoli is 420 m away; reviews mention good prices, pizzas around 30–40 lei...",
+  "reply": "- 5 to go: 127 m away (2 min walk). Espresso about 5 lei. Open until 19:00.\nPrices may have changed.",
   "places": [ { "...": "PlaceSummary" } ],
   "events": [],
-  "sources": [ { "title": "Pizzeria Napoli – meniu", "url": "https://example.ro/meniu" } ]
+  "sources": [ { "title": "5 to go prices (playtech.ro)", "url": "https://playtech.ro/..." } ]
 }
 ```
 
-Errors: `429 RATE_LIMITED` (more than 10 requests per minute per user), `503 AI_UNAVAILABLE`.
+Takes 2–10 s (the model may call several tools). Errors: `400 VALIDATION_FAILED` (empty `messages`, a `role` other than `user`/`assistant`, a message over 2000 characters, or the last message not from the user), `429 RATE_LIMITED` (more than 10 requests per minute per user), `503 AI_UNAVAILABLE` (Gemini down or busy; the message says to try again in a minute).

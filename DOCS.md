@@ -84,7 +84,7 @@ Shared code every feature uses. Feature packages (`users`, `events`, …) are cr
 
 ## Database (PLAN task 2)
 
-Applied to Supabase on 2026-11-13 from `supabase/migrations/` (four migrations, in file order).
+Applied to Supabase from `supabase/migrations/` in file order: the four schema migrations on 2026-11-13, the three `place_prices` migrations (table + data, PLAN 11.3) on 2026-11-14.
 
 | Table | Purpose |
 |---|---|
@@ -93,6 +93,7 @@ Applied to Supabase on 2026-11-13 from `supabase/migrations/` (four migrations, 
 | `event_participants` | Who joined which event (one row per pair), `status` (`JOINED`, `ATTENDED`, `NO_SHOW`, `CANCELLED`, `BANNED`), auto-generated `qr_token`. `checked_in_at` is set only for `ATTENDED`. |
 | `reliability_log` | Every score change: `points_change` (e.g. +5, −10) and `reason`. Kept when its event is deleted. |
 | `places` | Places imported from OpenStreetMap; `osm_id` (e.g. `node/2845091337`) is unique so re-imports update rows. |
+| `place_prices` | Researched menu prices for the AI (PLAN 11.3): `place_name` (matches `places.name` or the OSM `brand` tag, case-insensitive), `item`, `item_type` (`COFFEE`, `PIZZA`, `FOOD`, `BEER`, `DRINK`), `price_lei`, `size`, `source_type`, `source_url`, `source_date`, `note`. See Features → AI assistant. |
 
 - **Every `id` is a UUID.**
 - **Sign-up creates the profile automatically** (trigger `on_auth_user_created`). The username comes from sign-up metadata `{ "username": "..." }`. If it is missing, invalid or already taken, a generated `user_xxxxxxxx` is used so sign-up never fails; the app should check availability first and the user can rename later.
@@ -107,7 +108,7 @@ Applied to Supabase on 2026-11-13 from `supabase/migrations/` (four migrations, 
 
 ## Current state
 
-- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging), users/profile endpoints (task 4), events and participation (task 5), QR check-in, no-show job and reliability history (task 6), LiveTickets events import (task 7, 38 events), places (task 8, 1003 Timișoara places imported into Supabase), live transit (task 9, `/transit/**`) and routing (task 10, `/routes/plan`). The combined backend has 291 passing tests.
+- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging), users/profile endpoints (task 4), events and participation (task 5), QR check-in, no-show job and reliability history (task 6), LiveTickets events import (task 7, 38 events), places (task 8, 1003 Timișoara places imported into Supabase), live transit (task 9, `/transit/**`) and routing (task 10, `/routes/plan`) and the AI assistant (task 11, `POST /ai/chat`, Gemini + our own tools + 232 stored menu prices). The combined backend has 339 passing tests (2026-11-14).
 - `supabase/`: migrations and schema tests for task 2, applied.
 - `docs/API.md`: API contract (task 1.6).
 - `infra/otp/`: OpenTripPlanner 2.7 setup (docker-compose, data download script). Its large data files are git-ignored. `GET /routes/plan` is implemented (task 10).
@@ -148,15 +149,17 @@ The GTFS zip itself is not on `live.stpt.ro`, but SMTT publishes it at `https://
 - **Places:** Overpass API, imported into the `places` table (PLAN task 8, see Features → Places). Counted for the Timișoara area on 2026-11-13: 239 restaurants, 121 cafés, 89 bars/pubs, 134 fast-food places, 123 pharmacies. Only 82 of the 239 restaurants have opening hours. Freshness of the 583 food and drink places: 125 last edited in 2026, 296 since January 2025, 401 since January 2023; 182 untouched since before 2023, so some of those may have closed or changed.
 - **Geocoding:** Nominatim, max 1 request/second, only for newly imported events; the coordinates are saved on the event row.
 - **Streets for routing:** `.osm.pbf` extract of Timișoara for OpenTripPlanner 2 (PLAN task 10).
-- OSM has no prices, menus or reviews — the AI looks those up on the web (Gemini, below).
+- OSM has no prices, menus or reviews — prices come from our researched `place_prices` table (Features → AI assistant); reviews are not available.
 
 ### Gemini API (AI assistant)
 
-Checked against Google's documentation on 2026-11-13.
+Checked by calling the API with our key on 2026-11-13 (this replaces the earlier plan based on Google's docs).
 
-- **Chat:** a free-tier Gemini model with function calling; it calls our own tools (places, events, transit, routes) — PLAN task 11.2.
-- **Web lookup:** a separate Gemini request with Google Search switched on, used for prices, menus and reviews — PLAN task 11.3. Kept separate because only the Gemini 3 and 4 models can mix Google Search with our own tools in one request.
-- **Free-tier limit on web search:** free only on `gemini-2.5-flash` / `gemini-2.5-flash-lite` (500 requests per day); both are redirected to newer models on 1 December 2026. On the newer free models it is listed as not available; on a paid account 5,000 searches per month are free. The hackathon ends on 15 November 2026, before that date, so the web lookup uses `gemini-2.5-flash` for free. The price page was long and only partly read — test one web lookup early to confirm.
+- **Chat:** free-tier Gemini with function calling; it calls our own tools (places, events, transit, routes) — PLAN task 11.2. Models tried in order (`gemini.chat-models`): `gemini-3.5-flash-lite` (answers in about 1 s per round), then `gemini-3.5-flash` (works but took 20–40 s). `gemini-3.7-flash` / `3.8-flash` / `flash-latest` answered 503 "high demand" when tested.
+- **`gemini-2.5-flash` and `2.5-flash-lite` are gone for our key** (404 "no longer available to new users").
+- **No web search on the free tier:** Google Search grounding answers 429 on every model the key can use. So the web lookup of PLAN 11.3 was replaced by a **stored price list** (team decision 2026-11-13, see Features → AI assistant). It would work on a paid key; not built.
+- **Free-tier per-minute quota:** a burst of questions can get 429 with a `retryDelay`; the backend waits it out once (max 12 s) before trying the next model.
+- **Gemini 3 function calling** returns a `thoughtSignature` with each call and an `id`; both are sent back unchanged (the backend echoes the model's whole turn).
 - **Why not Google Maps data directly:** Google's terms forbid scraping or bulk-downloading its places and saving their names, addresses and reviews, and its Places API has no menu or dish-price data.
 
 ## Reliability rules (PLAN task 1.7, agreed 2026-11-13)
@@ -320,6 +323,45 @@ Public endpoints (no token) under `/transit`, contract in `docs/API.md` → Tran
 - **Timetable expiry:** the 2026-11-13 GTFS covers 2026-11-05 to 2026-12-31. Re-run `get-data.sh` and rebuild the graph after that date.
 - **Code:** package `routing`: `controller/RoutingController`, `service/impl/RoutingServiceImpl` (fallback rules), `client/impl/OtpGraphQlClient` (GraphQL `planConnection`), `mapper/impl/RoutePlanMapperImpl`, `config/OtpProperties` + `OtpClientConfig`, `util/PolylineEncoder`. Coordinates use the shared `common.geo.GeoPoint` (from the places feature).
 - **Tests (10.5):** 28 tests across `PolylineEncoderTest`, `OtpGraphQlClientTest` (mock server), `RoutePlanMapperImplTest`, `RoutingServiceImplTest` and `RoutingControllerTest`. The fixture `src/test/resources/otp/plan-transit.json` is a **real OTP answer** recorded from our server: Piața Victoriei → Gara de Nord, 2026-11-16 at 10:00. With places and transit (incl. the GTFS timetable) merged in, the backend has 162 tests, all passing on 2026-11-13. On the same day the real client was also checked by hand against the running OTP: bus 33, walk, night and outside-the-map cases.
+
+### AI assistant (PLAN task 11, Track B)
+
+`POST /ai/chat` (needs a token; shape in `docs/API.md` → AI assistant). Answers questions like "where can I drink cheap coffee near me and how much will it cost", "where can I go out this weekend", "last tram near me" from **our own data only**: the model calls tools, and every venue, price, time and line it names comes from a tool result.
+
+**How a request runs** (`ai/service/impl/AiChatServiceImpl`):
+1. Rate limit: 10 requests per user per minute (`InMemoryChatRateLimiter`, in memory) → `429 RATE_LIMITED`.
+2. The app's conversation (last 20 messages; leading assistant messages dropped; last must be the user's) + a system prompt (`SystemPrompt`: Romanian local time, user location or "city centre", rules) go to Gemini with the tool declarations.
+3. While the model asks for tools, they run **in parallel** (virtual threads, 15 s each) and the results go back; tool errors go back as `{"error": ...}` so the model can recover. After `ai.max-tool-rounds` (5) rounds, tools are switched off (`mode: NONE`) so it must answer.
+4. `ChatResultMapperImpl` builds the answer: the prompt asks for **bold** names; bold names are matched to what the tools returned → `places[]` / `events[]` cards in reply order (whole-word matching if the model used no bold). Bold markers are removed from `reply`. `sources[]` = the price pages of the mentioned places.
+5. Gemini errors: busy/quota (429/5xx/timeout) → next model (a 429 with a short `retryDelay` is waited out once first); anything else or all models down → `503 AI_UNAVAILABLE`.
+
+**Tools** (`ai/tool/impl`, every `AiTool` bean is offered to the model):
+
+| Tool | Uses | Gives the model |
+|---|---|---|
+| `search_places` | `PlaceService.explore` (task 8 + prices) | Places in a radius (default 1500 m) by category and keyword (name, cuisine, brand), with distance + walking minutes, opening hours, **`open_now` / `closes_at`** (closed places left out by default), cuisine, and stored prices of one `price_item_type`; `sort = price` puts the cheapest first. Chain branches are merged (nearest kept). |
+| `search_events` | `EventService.search` (task 5) | Upcoming events in a local-time window, optional radius, with price range, free spots, distance. |
+| `transit_info` | `TransitService` (task 9) | Nearest stops (or by name, accent-insensitive), each line labelled TRAM / TROLLEYBUS / BUS, next arrivals, today's last departures, alerts. `vehicle_type = TRAM` answers "last tram". |
+| `plan_route` | `RoutingService` (task 10) | Walking or transit route: minutes, distance, leave/arrive time, steps. TRANSIT falls back to walking when OTP is down. |
+
+**Opening hours** (`places/domain/OpeningHours`): reads the usual OSM forms (`Mo-Fr 08:00-22:00; Sa,Su 10:00-22:00`, `24:00`, after-midnight ranges, `off`, `24/7`); anything else (holidays, months, sunset) is "unknown", never a wrong yes/no. Added after a live test at 23:44 recommended two cafés that had closed hours earlier.
+
+**Stored prices** (table `place_prices`, migrations `20261114000001`–`03`): 232 prices for 79 places (cafés, pizza, fast food, restaurants, a few bars), researched on 2026-11-13 by reading each source page (mostly Glovo/Bolt Food Timișoara store pages, a few official menus; never estimated). Matching is by place name or OSM `brand`, so a chain price covers every branch. Rules kept in the data:
+- `source_type = delivery_app` prices are often a bit higher than in the shop; the AI says prices are approximate.
+- Regular prices are stored; promo prices are only in `note`.
+- A `note` starting with `OTHER CITY:` (Ted's Coffee, three Tucano cafés) is a chain price read on another city's listing; `search_places` adds a `caution` and the AI repeats it.
+- Left out on purpose: Glovo stores whose name might be a different venue (Antalya, Sultan Shawarma, Nuova Mama Mia). Plain-dough "pizza" breads are `FOOD`, not `PIZZA`, so they never win "cheapest pizza".
+- **Coverage is partial**: most of the 560 food/drink places have no menu online that could be read; places without a price are shown as "price unknown". To add prices, insert rows (with a `source_url`) — no code change.
+
+**Settings** (`application-local.properties`; all optional except the key): `gemini.api-key`, `gemini.chat-models` (default `gemini-3.5-flash-lite,gemini-3.5-flash`), `gemini.read-timeout` (40 s), `ai.max-tool-rounds` (5), `ai.requests-per-minute` (10), `ai.max-messages` (20), `ai.tool-timeout-seconds` (15), `ai.max-retry-wait` (12 s). The old `gemini.chat-model` / `gemini.lookup-model` keys are no longer read.
+
+**Code:** package `ai`: `controller/AiController`, `service/AiChatService` + `impl/AiChatServiceImpl`, `service/ChatRateLimiter` + `impl/InMemoryChatRateLimiter`, `service/impl/SystemPrompt`, `mapper/ChatResultMapper` + `impl/ChatResultMapperImpl`, `client/GeminiClient` + `impl/GeminiRestClient`, `tool/AiTool` + `impl/*Tool`, `tool/ToolArgs` (lenient argument reading, local times), `domain/ToolContext`, `domain/gemini/*` (wire types), `config/GeminiProperties`, `AiProperties`, `GeminiClientConfig`. In `places`: `PlaceService.explore`, `PlacePrice` + `PlacePriceRepository`, `PriceItemType`, `OpeningHours`. Shared: `common/text/TextMatch` (accent-insensitive matching).
+
+**Tests (PLAN 11.6, 48 new):** `AiChatServiceImplTest` (fake Gemini: tool loop with id + thought signature echoed, empty results, tool errors, forced last round, empty answer, model fallback, 429 wait, provider error, conversation rules), `GeminiRestClientTest` (local fake server: headers/body, parsing, 429 `retryDelay`, 503/404, missing key), `AiControllerTest` (401, JSON shape, optional location, 400s, 429/503), tool tests (`SearchPlacesToolTest`, `TransitInfoToolTest`, `PlanRouteAndEventsToolTest`), `ChatResultMapperImplTest`, `InMemoryChatRateLimiterTest`, `PlaceExploreTest` (H2), `OpeningHoursTest`, `TextMatchTest`. No test calls Gemini.
+
+**Checked live on 2026-11-13/14** (real Gemini, real Supabase data, around midnight on a Friday), 20+ questions in English and Romanian: cheap coffee / pizza / beer / burger with prices and sources, "how much is a Margherita at Cora", "tomorrow at 9" (noticed 5 to go opens at 10:00 on Saturday), weekend events and "concerts tonight" (none, offered parties), last tram near me / from Gara de Nord (real lines 1, 8, 9 and 2, 4, 7), Starbucks + route from Gara de Nord, follow-up "how do I get there on foot?", no location, off-topic request (politely refused). Typical answer time 2–4 s; 7–10 s for transit questions (live STPT calls).
+
+**Known limits:** `gemini-3.5-flash-lite` sometimes lists a near café before a cheaper far one; Romanian grammar is occasionally a bit off; the free-tier per-minute quota can make a burst of questions slow or answer 503 "busy".
 
 ### Frontend (PLAN tasks 12 and 13)
 

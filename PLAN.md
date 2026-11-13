@@ -176,7 +176,7 @@ Tasks 8, 9 and 10 do not need the database to start: B can build and test them a
 
 **Needs:** nothing to start (work against a local JSON file); 2.6 to store.
 
-Restaurants, cafés and the other places are stored in our database from OpenStreetMap: name, category, position, opening hours. OpenStreetMap has no prices, menus or reviews — for those the AI looks on the web itself (task 11.3). We do not copy places out of Google Maps: its terms forbid bulk extraction and saving its place data.
+Restaurants, cafés and the other places are stored in our database from OpenStreetMap: name, category, position, opening hours. OpenStreetMap has no prices, menus or reviews — prices come from a researched, stored price list (task 11.3). We do not copy places out of Google Maps: its terms forbid bulk extraction and saving its place data.
 
 - [x] **8.1 Category list** shared with mobile: restaurant, café, bar/pub, fast food, club, pharmacy, supermarket, park, museum/attraction, ATM. Map each to its OSM tags.
 - [x] **8.2 Import script:** one Overpass query for the Timișoara area covering all categories, normalised into `places`. Run once (and re-runnable, no duplicates); do not call Overpass on every user request. Run with `--places.import.enabled=true` (see `DOCS.md` → Places). Falls back to a mirror server when the main Overpass server is busy.
@@ -216,12 +216,12 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 **Needs:** 8 and 5 for real answers (start with stubbed tools). Uses the **Gemini API** (free tier). No chat history is stored: the mobile app sends the whole conversation each time and "New chat" just clears it.
 
-- [ ] **11.1** `POST /ai/chat` with `{ messages, location }` → `{ reply, places[], events[] }`. Needs a token; rate-limited per user.
-- [ ] **11.2 Database tools the model can call:** `search_places` (task 8), `search_events` (task 5), `transit_info` (task 9), `plan_route` (task 10). The model answers from tool results, so it cannot invent venues.
-- [ ] **11.3 Web lookup tool:** `web_lookup(question)` for what our database does not have — prices, menus, reviews (e.g. "prices at Pizzeria X Timișoara"). Inside, it makes a separate Gemini request with Google Search switched on and returns the answer with its source links. Built as its own request so it works with any chat model; the model name for it is a separate setting, set to `gemini-2.5-flash` — the model whose web search is free (500 requests per day, shared by the whole team, so do not burn them in automated tests). If it fails or the daily limit is reached, the AI still answers from the database and says prices are unavailable.
-- [ ] **11.4 System prompt:** Timișoara guide, current date/time and user location included, short answers, reply in the user's language (Romanian or English).
-- [ ] **11.5 Structured results:** return the ids of the places/events mentioned, so the app can show cards and a "show on map" button.
-- [ ] **11.6** Tests with a fake Gemini client: tool call loop, empty results, web lookup failure, provider error.
+- [x] **11.1** `POST /ai/chat` with `{ messages, location }` → `{ reply, places[], events[], sources[] }`. Needs a token; rate-limited per user (10/min).
+- [x] **11.2 Database tools the model can call:** `search_places` (task 8, with stored prices and open-now), `search_events` (task 5), `transit_info` (task 9), `plan_route` (task 10). The model answers from tool results, so it cannot invent venues.
+- [x] **11.3 Prices** — *changed 2026-11-13 (team decision):* Gemini's Google Search is not in the free tier any more and `gemini-2.5-flash` is retired for our key, so instead of a `web_lookup` tool, prices come from a **stored, researched price list** (table `place_prices`, 232 prices for 79 places, each with its source link). `search_places` returns them; places without a stored price are answered as "price unknown". See `DOCS.md` → AI assistant.
+- [x] **11.4 System prompt:** Timișoara guide, current date/time and user location included, short answers, reply in the user's language (Romanian or English).
+- [x] **11.5 Structured results:** return the places/events mentioned (bold names matched to tool results), so the app can show cards and a "show on map" button; `sources[]` lists the price pages.
+- [x] **11.6** Tests with a fake Gemini client: tool call loop, empty results, tool errors, provider error, model fallback and quota retry (48 new tests). Also checked live against real Gemini and Supabase data (see `DOCS.md`).
 
 ---
 
@@ -313,6 +313,6 @@ Never cut: sign-in, events + join, QR check-in with reliability, map with filter
 
 ## Open questions (need an answer from the team)
 
-1. **Prices, menus and reviews come from the AI's web lookup (11.3), not from stored data.** Answers depend on what Google Search finds at that moment and take a few seconds longer. Good enough for the demo?
+1. ~~**Prices, menus and reviews come from the AI's web lookup (11.3).**~~ Answered 2026-11-13: web search is not free any more; prices come from a stored, researched price list instead (11.3). Reviews are not available.
 2. ~~**STPT GTFS file.**~~ Answered 2026-11-13: SMTT publishes it at `https://smtt.ro/transit/gtfs/maps/smtt-timisoara-ro.zip` (Mobility Database `mdb-2868`). Transit routing works; see `DOCS.md` → Routing.
 3. **Permission.** The STPT and LiveTickets endpoints are the ones their own websites use; they are not documented public APIs. For a hackathon demo with caching this is low-volume, but ask both for permission if the app goes beyond the demo.4. **Reliability numbers** in 1.7 — confirm or change.

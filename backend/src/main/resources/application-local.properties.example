@@ -19,9 +19,12 @@ spring.datasource.password=
 # --- Gemini (AI assistant, PLAN task 11) ------------------------------------
 # Create a key at https://aistudio.google.com/apikey
 gemini.api-key=
-gemini.chat-model=gemini-2.5-flash
-# Model used for the web lookup tool; web search is free on this one.
-gemini.lookup-model=gemini-2.5-flash
+# Free-tier models tried in order; the next one is used when one is busy (429/503).
+# gemini-2.5-* are no longer available to new keys (checked 2026-11-13).
+gemini.chat-models=gemini-3.5-flash-lite,gemini-3.5-flash
+# Optional AI limits (defaults shown):
+#ai.max-tool-rounds=5
+#ai.requests-per-minute=10
 
 # --- OpenTripPlanner (PLAN task 10) -----------------------------------------
 otp.base-url=http://localhost:8081

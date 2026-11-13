@@ -1,6 +1,8 @@
 package com.unihack8.backend.places.mapper;
 
 import com.unihack8.backend.places.domain.dto.PlaceDetailDto;
+import com.unihack8.backend.places.domain.dto.PriceDto;
+import com.unihack8.backend.places.domain.entity.PlacePrice;
 import com.unihack8.backend.places.domain.dto.PlaceSummaryDto;
 import com.unihack8.backend.places.domain.entity.Place;
 
@@ -12,4 +14,7 @@ public interface PlaceMapper {
 
     // Detail shape with opening hours and the useful OpenStreetMap tags.
     PlaceDetailDto toDetail(Place place);
+
+    // Stored menu price shape used by the AI assistant.
+    PriceDto toPrice(PlacePrice price);
 }
