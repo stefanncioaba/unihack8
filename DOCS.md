@@ -500,7 +500,7 @@ Built on `stefan_dev` after merging `frontend/tibi`, in the spots Tibi's map she
 One graph for the whole repo, made with the **Understand-Anything** plugin (rule from AGENTS.md: keep it updated with every change).
 
 - **Files:** `.ua/knowledge-graph.json` (the graph), `.ua/meta.json` and `.ua/fingerprints.json` (let the next run update only changed files), `.ua/.understandignore` (what is left out: secrets such as `application-local.properties` and `.env`, build output, `.claude/`). Scratch folders under `.ua/` are git-ignored.
-- **Current version (2026-11-14, after task 11 AI assistant merged with the map, transit, directions, AI chat and profile frontend work of tasks 14–16):** 440 files, 1294 nodes, 3075 edges, 20 layers (new: AI Assistant Feature), 32-step guided tour. The 80 new or changed frontend files from main were analysed in the same update; main's graph did not include them yet.
+- **Current version (2026-11-14, after task 17 integration: no mock data in the app, offline handling, README and demo docs):** 444 files, 1304 nodes, 3161 edges, 20 layers, 32-step guided tour. The moved mock files (`frontend/src/mocks` → `frontend/testing/mocks`, unchanged content) kept their nodes under the new paths, tagged `test-only`.
 - **Left out on purpose** (`.ua/.understandignore`): secrets, build output, `.claude/`, and frontend noise (`package-lock.json`, `assets/`, `LICENSE`, `.npmrc`).
 - **Update it** after each change: run `/understand` (Claude Code) or the same command in Codex; it only reanalyzes changed files. `/understand-dashboard` opens the interactive view.
 - **Codex:** the plugin's README lists Codex as supported (install it with the plugin's install script for `codex`); not tested by us yet.

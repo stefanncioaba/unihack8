@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "e5872a5f435f99a6cdd8e50e6ea7d1e35d2ef65f",
-  "generatedAt": "2026-11-13T22:24:43.586Z",
+  "gitCommitHash": "0a33f158bd4ff8c7294f7098ea64a6895049358e",
+  "generatedAt": "2026-11-13T22:47:06.310Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,17 +25,17 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "8ed0ec6a70e6be365e72b4311a66c45eccb64c57036286e1182d17843bdba0c1",
+      "contentHash": "fd60aeefe68be15b64cdf6ebf3dc057c571e6790580e21d8f55c2a5f04af0db8",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 483,
+      "totalLines": 507,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "c305681a95a1f9039351719bf5e287d51753de2bf3d41c3e9829b335e912ca33",
+      "contentHash": "614908eee9ae2752f79ec287d5dc14b89d1218aca2e5bf2f3ac7235ed3f41b17",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -45,12 +45,12 @@
     },
     "README.md": {
       "filePath": "README.md",
-      "contentHash": "053154b11874e37aeba87c7d9a6c1cd34f06a9bf864931eb84b5cf13d02edcf0",
+      "contentHash": "709e46827e62ae5228299f24d80ad31061a403df8f8a6088723bb7efe260b4e1",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 2,
+      "totalLines": 56,
       "hasStructuralAnalysis": false
     },
     "backend/.gitattributes": {
@@ -7891,7 +7891,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
-      "contentHash": "4d238a06a1d9401e708d1efdb9e38ab6d15c022538c4f4c4a29956c734b17901",
+      "contentHash": "c6d0ce8998851285f13f2be7e98e2e74a9943815a0c5e59938489a4e7cb971cf",
       "functions": [
         {
           "name": "EventRepositoryImpl",
@@ -7910,7 +7910,7 @@
           ],
           "returnType": "Page<Event>",
           "exported": true,
-          "lineCount": 33
+          "lineCount": 36
         },
         {
           "name": "find",
@@ -8045,7 +8045,7 @@
             "named"
           ],
           "exported": true,
-          "lineCount": 141
+          "lineCount": 144
         }
       ],
       "imports": [
@@ -8189,7 +8189,7 @@
         "activeCounts",
         "EventRepositoryImpl"
       ],
-      "totalLines": 167,
+      "totalLines": 170,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java": {
@@ -22168,7 +22168,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/events/service/EventDatabaseIntegrationTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/events/service/EventDatabaseIntegrationTest.java",
-      "contentHash": "0c25b53cdbeffb3de8e28c3ea2bf06696e8fe501b0e3c72860d3d3fed4205482",
+      "contentHash": "26fbd9400552d8fd520aea3d79f22adbe13ae4fb76834a3ea1305d73ab905d28",
       "functions": [
         {
           "name": "setUp",
@@ -22183,6 +22183,13 @@
           "returnType": "void",
           "exported": false,
           "lineCount": 15
+        },
+        {
+          "name": "otherCategoryIncludesUncategorizedImports",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
         },
         {
           "name": "eventLifecycleAndFilters",
@@ -22239,6 +22246,7 @@
           "methods": [
             "setUp",
             "concurrentJoinNeverOverbooks",
+            "otherCategoryIncludesUncategorizedImports",
             "eventLifecycleAndFilters",
             "patchClearsCapacity",
             "filtersAndPagesEvents",
@@ -22254,7 +22262,7 @@
             "service"
           ],
           "exported": false,
-          "lineCount": 155
+          "lineCount": 168
         }
       ],
       "imports": [
@@ -22374,7 +22382,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 180,
+      "totalLines": 193,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java": {
@@ -28182,7 +28190,7 @@
     },
     "docs/API.md": {
       "filePath": "docs/API.md",
-      "contentHash": "0f0d538e83592873d439849b068b32892c6c7d2f66423a0cd13a5ba024452f22",
+      "contentHash": "6a4bc540454368db3166d0669f4fe36e4417d0bdf49424562ac49a546555edb3",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -28190,14 +28198,24 @@
       "totalLines": 597,
       "hasStructuralAnalysis": false
     },
-    "frontend/.env.example": {
-      "filePath": "frontend/.env.example",
-      "contentHash": "3ff0776d038a605e4a24692e4de68e54bc109549c70fc607cf3cb6b67033ac35",
+    "docs/DEMO.md": {
+      "filePath": "docs/DEMO.md",
+      "contentHash": "89c19229070a208e0a00a145dc777504962c9040d93e54942615af0b0a8ad676",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 16,
+      "totalLines": 47,
+      "hasStructuralAnalysis": false
+    },
+    "frontend/.env.example": {
+      "filePath": "frontend/.env.example",
+      "contentHash": "27fb460995464184a5c07fcd1b8a0e3e7502f056b261e0098beb6856d5a3f52b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 15,
       "hasStructuralAnalysis": false
     },
     "frontend/AGENTS.md": {
@@ -28212,7 +28230,7 @@
     },
     "frontend/__tests__/ai.chat.test.tsx": {
       "filePath": "frontend/__tests__/ai.chat.test.tsx",
-      "contentHash": "47754d2eaf1bdcdd527173b4d7cf74ca542396ebcfaad06c1d0b361deafc8edc",
+      "contentHash": "efff28b3b988feb7fe2b2b2460fa69b2d658460ef2facc022628f4743d6eebd3",
       "functions": [
         {
           "name": "say",
@@ -28266,14 +28284,14 @@
           ]
         },
         {
-          "source": "@/mocks",
+          "source": "@test/mocks",
           "specifiers": [
             "mockRequest",
             "setMockLatency"
           ]
         },
         {
-          "source": "@/mocks/placesSeed",
+          "source": "@test/mocks/placesSeed",
           "specifiers": [
             "placeId"
           ]
@@ -28293,16 +28311,8 @@
     },
     "frontend/__tests__/api.client.test.ts": {
       "filePath": "frontend/__tests__/api.client.test.ts",
-      "contentHash": "cdfd00fa5fd873bcc469814d75eee272814cb004349ca51fa2b86b0c6b969272",
+      "contentHash": "8f70493aa48454241f34f2f8bad168ac9f2657d26770bb483f595e09e0021951",
       "functions": [
-        {
-          "name": "useMocks",
-          "params": [
-            "on"
-          ],
-          "exported": false,
-          "lineCount": 1
-        },
         {
           "name": "signedInWith",
           "params": [
@@ -28335,12 +28345,35 @@
         }
       ],
       "exports": [],
-      "totalLines": 106,
+      "totalLines": 89,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/__tests__/api.config.test.ts": {
+      "filePath": "frontend/__tests__/api.config.test.ts",
+      "contentHash": "8269cc45a3bca1a9c32cfa8742867e680a9e90d6637f3998d20a90dd957a6913",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/client",
+          "specifiers": [
+            "api"
+          ]
+        },
+        {
+          "source": "@/api/errors",
+          "specifiers": [
+            "friendlyError"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 18,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/api.users.real.test.ts": {
       "filePath": "frontend/__tests__/api.users.real.test.ts",
-      "contentHash": "6210dfe9e6681f8773469ca70d19afe61461ae3276231b1612dc5e5759046c2d",
+      "contentHash": "572d43db27d0905d3e31cb84b583a025441d4c2f2b994472a88bf6a1b1ed7b1c",
       "functions": [
         {
           "name": "respond",
@@ -28385,12 +28418,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 80,
+      "totalLines": 75,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/auth.provider.test.tsx": {
       "filePath": "frontend/__tests__/auth.provider.test.tsx",
-      "contentHash": "4af1cec32e0da4d5842902ab6546044ccc380b29c062b5536886b866d2d8ec9d",
+      "contentHash": "c4e02ff03fd2f72083a8690683e75de0ae57c71d2f721581bf21097dc19a6be6",
       "functions": [
         {
           "name": "setup",
@@ -28431,7 +28464,7 @@
           ]
         },
         {
-          "source": "@/mocks",
+          "source": "@test/mocks",
           "specifiers": [
             "* as mocks"
           ]
@@ -28449,7 +28482,7 @@
     },
     "frontend/__tests__/layout.root.test.tsx": {
       "filePath": "frontend/__tests__/layout.root.test.tsx",
-      "contentHash": "7acd042bb4cb53b547e353762e5d832989011dc82a1850bb2191d158fad481da",
+      "contentHash": "4ec4a516a9b45fb48535260034c6e523da3903ac8c79017f7583ad11f0503036",
       "functions": [],
       "classes": [],
       "imports": [
@@ -28486,7 +28519,7 @@
     },
     "frontend/__tests__/lib.cluster.test.ts": {
       "filePath": "frontend/__tests__/lib.cluster.test.ts",
-      "contentHash": "9d80e3703e65664a092d8a8c35ef3b12c8a4388030094a2487a5309e39bf5e03",
+      "contentHash": "9a1c60e38c9ce81d8972e7193c70a6f821814d2073365ae7858b1fdc54c43d15",
       "functions": [
         {
           "name": "pt",
@@ -28516,7 +28549,7 @@
     },
     "frontend/__tests__/lib.format.test.ts": {
       "filePath": "frontend/__tests__/lib.format.test.ts",
-      "contentHash": "d8be12355d88b9a069d4d5439b76e4cdca074b20001a0be7c3a8c5811192bc4f",
+      "contentHash": "8b4a5d490bc85b703cf3acf865a2f904bd230874aa02d6b7b547b85d659a2d42",
       "functions": [],
       "classes": [],
       "imports": [
@@ -28533,7 +28566,7 @@
     },
     "frontend/__tests__/lib.misc.test.ts": {
       "filePath": "frontend/__tests__/lib.misc.test.ts",
-      "contentHash": "7a22a0ddd57789bcd5432f351d11e6a0ee3b37070e0e175bbaf2619b5564ccac",
+      "contentHash": "2e805b407a7587226f24c8c2711bd751fa221d7211711d26a5b21f2514e168c2",
       "functions": [],
       "classes": [],
       "imports": [
@@ -28608,28 +28641,9 @@
       "totalLines": 157,
       "hasStructuralAnalysis": true
     },
-    "frontend/__tests__/lib.mockAreas.test.ts": {
-      "filePath": "frontend/__tests__/lib.mockAreas.test.ts",
-      "contentHash": "a914bf3fea80c6ab84bcbf8b9b578277d19caddf2030ea6bbc49fd7a3f646d7b",
-      "functions": [],
-      "classes": [],
-      "imports": [
-        {
-          "source": "@/lib/mockAreas",
-          "specifiers": [
-            "areaOf",
-            "isMockedPath",
-            "parseMockAreas"
-          ]
-        }
-      ],
-      "exports": [],
-      "totalLines": 33,
-      "hasStructuralAnalysis": true
-    },
     "frontend/__tests__/lib.polyline.test.ts": {
       "filePath": "frontend/__tests__/lib.polyline.test.ts",
-      "contentHash": "6d0f0bae8d1b82d19aba61df3702cea89c9c3d8672fde9131e95feca41c8f6bf",
+      "contentHash": "096e36ed0a81ced1832e0e96434363b641ec9df14c4c069e700a44f26df1e9c4",
       "functions": [],
       "classes": [],
       "imports": [
@@ -28653,7 +28667,7 @@
     },
     "frontend/__tests__/lib.time.test.ts": {
       "filePath": "frontend/__tests__/lib.time.test.ts",
-      "contentHash": "1e1572385d1d9b9425d3b8253e1db5ba8e605e42709f51ead67ea962b70790c1",
+      "contentHash": "28b69e9c61ad507d712f8a827461f4d82684a06cc23606f2f9817a1d9f5a7403",
       "functions": [],
       "classes": [],
       "imports": [
@@ -28676,9 +28690,90 @@
       "totalLines": 92,
       "hasStructuralAnalysis": true
     },
+    "frontend/__tests__/live.backend.test.ts": {
+      "filePath": "frontend/__tests__/live.backend.test.ts",
+      "contentHash": "b43c5c8b53333864493614b57437cb4e0b1d5f0e401ce63a5593ffee20779441",
+      "functions": [
+        {
+          "name": "expectKeys",
+          "params": [
+            "value",
+            "keys"
+          ],
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/endpoints.ai",
+          "specifiers": [
+            "sendChat"
+          ]
+        },
+        {
+          "source": "@/api/endpoints.places",
+          "specifiers": [
+            "getPlace",
+            "listPlaces"
+          ]
+        },
+        {
+          "source": "@/api/endpoints.routing",
+          "specifiers": [
+            "planRoute"
+          ]
+        },
+        {
+          "source": "@/api/endpoints.transit",
+          "specifiers": [
+            "getLastDepartures",
+            "getStopArrivals",
+            "getTransitAlerts",
+            "getTransitRoutes",
+            "getTransitStops",
+            "getTransitSummary",
+            "getTransitVehicles"
+          ]
+        },
+        {
+          "source": "@/api/endpoints",
+          "specifiers": [
+            "checkUsername",
+            "getEvent",
+            "getParticipants",
+            "listEvents",
+            "searchUsers"
+          ]
+        },
+        {
+          "source": "@/lib/polyline",
+          "specifiers": [
+            "decodePolyline"
+          ]
+        },
+        {
+          "source": "@/lib/time",
+          "specifiers": [
+            "formatEventDate",
+            "formatTime"
+          ]
+        },
+        {
+          "source": "@/lib/supabase",
+          "specifiers": [
+            "supabase"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 111,
+      "hasStructuralAnalysis": true
+    },
     "frontend/__tests__/location.test.tsx": {
       "filePath": "frontend/__tests__/location.test.tsx",
-      "contentHash": "15a5733b179f808eab33440a5ee71e7875865a620cd0d6a3ebf59f4ae7e12733",
+      "contentHash": "eadd471d1f13fc4c595840f7472017f539c2761836d83e9a4e3f43f98828ad58",
       "functions": [
         {
           "name": "Probe",
@@ -28723,7 +28818,7 @@
     },
     "frontend/__tests__/map.directions.test.tsx": {
       "filePath": "frontend/__tests__/map.directions.test.tsx",
-      "contentHash": "35ee97bde120410b3089d562dff76c6161fb25e4a92ae06049e2c88f3fc70b90",
+      "contentHash": "afeaaf053492ea516ad517df1ce51328d24139fa31bc26954d3ddde3f6f61e48",
       "functions": [
         {
           "name": "plan",
@@ -28779,13 +28874,13 @@
           ]
         },
         {
-          "source": "@/mocks",
+          "source": "@test/mocks",
           "specifiers": [
             "mockRequest"
           ]
         },
         {
-          "source": "@/mocks/placesSeed",
+          "source": "@test/mocks/placesSeed",
           "specifiers": [
             "placeId"
           ]
@@ -28803,7 +28898,7 @@
     },
     "frontend/__tests__/map.layers.test.tsx": {
       "filePath": "frontend/__tests__/map.layers.test.tsx",
-      "contentHash": "28d4694b4541970597883949a0046158d822a5fd8c6bbca5de70d03a6812b010",
+      "contentHash": "69b1fea55a0dfbd87d9f944f1d5e806d0daed48367b192159a355a18e207e100",
       "functions": [
         {
           "name": "call",
@@ -28854,13 +28949,13 @@
           ]
         },
         {
-          "source": "@/mocks",
+          "source": "@test/mocks",
           "specifiers": [
             "mockRequest"
           ]
         },
         {
-          "source": "@/mocks/placesSeed",
+          "source": "@test/mocks/placesSeed",
           "specifiers": [
             "placeId"
           ]
@@ -28881,7 +28976,7 @@
     },
     "frontend/__tests__/map.shell.test.tsx": {
       "filePath": "frontend/__tests__/map.shell.test.tsx",
-      "contentHash": "9ae7f961ed10a3ec9a43ada335739007eb60b1f9cae8b7f0c114ea8ad409219a",
+      "contentHash": "3de0ed25625d1831ff4dcd9f976af9cac27f7cd20ac60c59ca98ad6c7d82cfb2",
       "functions": [
         {
           "name": "setup",
@@ -28956,7 +29051,7 @@
     },
     "frontend/__tests__/map.transit.test.tsx": {
       "filePath": "frontend/__tests__/map.transit.test.tsx",
-      "contentHash": "326d6d04a80a10a4f760c168f97b298dcfc2ea2d798b07e2de073d3f75bc777a",
+      "contentHash": "f4f2ee13bca15be5b4573ebdc88d9aebe314080c198be2968fe88e2458e3c872",
       "functions": [
         {
           "name": "call",
@@ -29013,13 +29108,13 @@
           ]
         },
         {
-          "source": "@/mocks",
+          "source": "@test/mocks",
           "specifiers": [
             "mockRequest"
           ]
         },
         {
-          "source": "@/mocks/transitSeed",
+          "source": "@test/mocks/transitSeed",
           "specifiers": [
             "LINE_STOPS",
             "MOCK_STOPS"
@@ -29038,7 +29133,7 @@
     },
     "frontend/__tests__/mocks.backend.test.ts": {
       "filePath": "frontend/__tests__/mocks.backend.test.ts",
-      "contentHash": "bf0ba9eb606c17b4bf8acb92f0607f9647d4b5b836b2889464113dfb367ac438",
+      "contentHash": "52d7c3cac53f670c3857292417a34a2571e69c1e51ad8acf6485701e7ee00102",
       "functions": [
         {
           "name": "call",
@@ -29061,7 +29156,7 @@
           ]
         },
         {
-          "source": "@/mocks",
+          "source": "@test/mocks",
           "specifiers": [
             "mockRequest"
           ]
@@ -29079,7 +29174,7 @@
     },
     "frontend/__tests__/mocks.users.test.ts": {
       "filePath": "frontend/__tests__/mocks.users.test.ts",
-      "contentHash": "e15ca1123118dc565538854f0819a673d9c07842918ae7fdd4b9b56fdbe9857e",
+      "contentHash": "79cb1ba4a09cbf78655ce4ba0007cdf349383346455a162d31ba73e30e4e7d21",
       "functions": [
         {
           "name": "call",
@@ -29102,7 +29197,7 @@
           ]
         },
         {
-          "source": "@/mocks",
+          "source": "@test/mocks",
           "specifiers": [
             "getMockState",
             "mockRequest"
@@ -29119,9 +29214,59 @@
       "totalLines": 97,
       "hasStructuralAnalysis": true
     },
+    "frontend/__tests__/network.offline.test.tsx": {
+      "filePath": "frontend/__tests__/network.offline.test.tsx",
+      "contentHash": "3d0c80ab8889143b48121b431ec8886aaf0f94e12a8681cffe6eadf1f728d185",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@react-native-community/netinfo",
+          "specifiers": [
+            "NetInfo"
+          ]
+        },
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "onlineManager"
+          ]
+        },
+        {
+          "source": "@testing-library/react-native",
+          "specifiers": [
+            "act",
+            "render",
+            "screen"
+          ]
+        },
+        {
+          "source": "react-native-safe-area-context",
+          "specifiers": [
+            "SafeAreaProvider"
+          ]
+        },
+        {
+          "source": "@/lib/network",
+          "specifiers": [
+            "isOnline",
+            "startNetworkSync"
+          ]
+        },
+        {
+          "source": "@/ui/OfflineBanner",
+          "specifiers": [
+            "OfflineBanner"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 44,
+      "hasStructuralAnalysis": true
+    },
     "frontend/__tests__/screens.auth.test.tsx": {
       "filePath": "frontend/__tests__/screens.auth.test.tsx",
-      "contentHash": "ae1c43b6bc979340b86a9828462223926616a7d90f0eaa12a59d4a8345ad3701",
+      "contentHash": "197df5b864a3038b4d4625de034cd662300076846184a8f366ea4fc082a4289e",
       "functions": [],
       "classes": [],
       "imports": [
@@ -29160,7 +29305,7 @@
     },
     "frontend/__tests__/screens.event.test.tsx": {
       "filePath": "frontend/__tests__/screens.event.test.tsx",
-      "contentHash": "48ed02660f793c5137c6b18e665c9e3f68e000dfdf15ff029d931bef30e958b3",
+      "contentHash": "edcf987a2b873fa4294ab83a8c66dd8cb9abff1054de2357ec31d99e986611a1",
       "functions": [
         {
           "name": "confirmAlert",
@@ -29231,7 +29376,7 @@
     },
     "frontend/__tests__/screens.home.test.tsx": {
       "filePath": "frontend/__tests__/screens.home.test.tsx",
-      "contentHash": "97f328839fa37c85548651f8c2ee31608848c1b79480d08cbdc2ae31dace6529",
+      "contentHash": "24fe416f1562234b093f72c4f0d0fa87984bc906bb6739da7481d798996bc711",
       "functions": [],
       "classes": [],
       "imports": [
@@ -29272,7 +29417,7 @@
     },
     "frontend/__tests__/screens.profile.test.tsx": {
       "filePath": "frontend/__tests__/screens.profile.test.tsx",
-      "contentHash": "3a0299635bd3041d613154aff1ee7925b8657e041ad43d98d6ffbd2db86543a6",
+      "contentHash": "03cded811ae58f0f5f1ac718b8dd821ba9656039b0761df90e046aa55bb7beb0",
       "functions": [
         {
           "name": "startEditing",
@@ -29338,7 +29483,7 @@
           ]
         },
         {
-          "source": "@/mocks",
+          "source": "@test/mocks",
           "specifiers": [
             "getMockState"
           ]
@@ -29358,7 +29503,7 @@
     },
     "frontend/__tests__/screens.users.test.tsx": {
       "filePath": "frontend/__tests__/screens.users.test.tsx",
-      "contentHash": "5991157c437a5439edac10322e337464e50eb5602432a42fe05d597e82539a25",
+      "contentHash": "08606517204ffb62b8198b12f5784ac07fae2ae530f5a64ffbfc46d94cd49eb4",
       "functions": [],
       "classes": [],
       "imports": [
@@ -29423,7 +29568,7 @@
     },
     "frontend/__tests__/testUtils.tsx": {
       "filePath": "frontend/__tests__/testUtils.tsx",
-      "contentHash": "e7b1e9ec03d1346b453b16b79a7a1bc301e6e07c7e9fcd8fd3b2407c4a9e85e1",
+      "contentHash": "92d2a98b31f77a3c618d2896ebd2ad1ae7b1d899a8e547ef33aa8781032adf3f",
       "functions": [
         {
           "name": "setParams",
@@ -29525,7 +29670,7 @@
     },
     "frontend/jest.setup.ts": {
       "filePath": "frontend/jest.setup.ts",
-      "contentHash": "b2e1fca452fc41c8aa0bcda23790747bcb207557a169b9df0b97707781c44a85",
+      "contentHash": "b5dc1f0b00b24cf2fe25332ea33d37adfbdf748383fa6ed51fe6fca0437f2eec",
       "functions": [],
       "classes": [],
       "imports": [
@@ -29536,7 +29681,7 @@
           ]
         },
         {
-          "source": "@/mocks",
+          "source": "@test/mocks",
           "specifiers": [
             "resetMocks",
             "setMockLatency"
@@ -29544,22 +29689,22 @@
         }
       ],
       "exports": [],
-      "totalLines": 108,
+      "totalLines": 122,
       "hasStructuralAnalysis": true
     },
     "frontend/package.json": {
       "filePath": "frontend/package.json",
-      "contentHash": "3c32c33cede01f88bfb66330d09f10d58a58f5db80f99d03c9295370d1acf703",
+      "contentHash": "135d57c2f19740fb11b2c8d422c8e9c95e90ec8c704b5257b43483ae360588fd",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 66,
+      "totalLines": 68,
       "hasStructuralAnalysis": false
     },
     "frontend/src/api/client.ts": {
       "filePath": "frontend/src/api/client.ts",
-      "contentHash": "b7f969a813db9e0916c12f0a91c96f6258842f557a8aa5c1dfbf7c54e1cee184",
+      "contentHash": "f1e15aa3e45230d489d1276aa66580ef76eccc8fcb2e12447aba10810f0d04c1",
       "functions": [
         {
           "name": "buildQuery",
@@ -29596,7 +29741,7 @@
           ],
           "returnType": "Promise<T>",
           "exported": true,
-          "lineCount": 35
+          "lineCount": 37
         },
         {
           "name": "safeJson",
@@ -29613,26 +29758,13 @@
         {
           "source": "@/config",
           "specifiers": [
-            "API_URL",
-            "MOCK_AREAS"
-          ]
-        },
-        {
-          "source": "@/lib/mockAreas",
-          "specifiers": [
-            "isMockedPath"
+            "API_URL"
           ]
         },
         {
           "source": "@/lib/supabase",
           "specifiers": [
             "supabase"
-          ]
-        },
-        {
-          "source": "@/mocks",
-          "specifiers": [
-            "mockRequest"
           ]
         },
         {
@@ -30080,7 +30212,7 @@
     },
     "frontend/src/api/errors.ts": {
       "filePath": "frontend/src/api/errors.ts",
-      "contentHash": "fedd263ce2d6ceaeaf14ad063c037c9ccaf5ff0fb0b6c517778ccaaef514ef7c",
+      "contentHash": "174fc80660790a4b95a40a7159a30c0df6704b7bbb273595f131521db3f51348",
       "functions": [
         {
           "name": "friendlyError",
@@ -30112,12 +30244,12 @@
         "ApiError",
         "friendlyError"
       ],
-      "totalLines": 54,
+      "totalLines": 55,
       "hasStructuralAnalysis": true
     },
     "frontend/src/api/types.ai.ts": {
       "filePath": "frontend/src/api/types.ai.ts",
-      "contentHash": "fa64d665dfb68b9d785b4d9fbdddedcf272c6fe68715c1e2018d1cd9c3bda700",
+      "contentHash": "feb97efd8c351fbad027c827c951e530b81720782a6411edd4622539a3e31e4c",
       "functions": [],
       "classes": [],
       "imports": [
@@ -30135,9 +30267,10 @@
         }
       ],
       "exports": [
-        "MAX_CHAT_MESSAGES"
+        "MAX_CHAT_MESSAGES",
+        "MAX_CHAT_MESSAGE_CHARS"
       ],
-      "totalLines": 30,
+      "totalLines": 33,
       "hasStructuralAnalysis": true
     },
     "frontend/src/api/types.places.ts": {
@@ -30154,7 +30287,7 @@
     },
     "frontend/src/api/types.routing.ts": {
       "filePath": "frontend/src/api/types.routing.ts",
-      "contentHash": "a097e56fdb3541e8e385a194859576393c2df781e9ef9408cd2b835701848210",
+      "contentHash": "c5a0c5a13d791cb61a22a5c7fef6cac76828266969401512a84619254d4b60e0",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -30978,7 +31111,7 @@
     },
     "frontend/src/app/_layout.tsx": {
       "filePath": "frontend/src/app/_layout.tsx",
-      "contentHash": "2a18208a9cb4fe748c62ad46bba4f4450a90983c03b0a5ed571812ae777070cf",
+      "contentHash": "9c53138eeb12bebee1bc0406c5379b9858a8ce9f8cc89079127b0fc4dee614c7",
       "functions": [
         {
           "name": "Gate",
@@ -30990,7 +31123,7 @@
           "name": "RootLayout",
           "params": [],
           "exported": true,
-          "lineCount": 12
+          "lineCount": 13
         }
       ],
       "classes": [],
@@ -31039,9 +31172,21 @@
           ]
         },
         {
+          "source": "@/lib/network",
+          "specifiers": [
+            "startNetworkSync"
+          ]
+        },
+        {
           "source": "@/lib/queryClient",
           "specifiers": [
             "queryClient"
+          ]
+        },
+        {
+          "source": "@/ui/OfflineBanner",
+          "specifiers": [
+            "OfflineBanner"
           ]
         },
         {
@@ -31066,7 +31211,7 @@
       "exports": [
         "RootLayout"
       ],
-      "totalLines": 62,
+      "totalLines": 68,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/events/[id]/index.tsx": {
@@ -31975,25 +32120,16 @@
     },
     "frontend/src/config.ts": {
       "filePath": "frontend/src/config.ts",
-      "contentHash": "3235383564fac7251631cf1ed54baaebe774b29f46c4aacbc775dd3561ee48c7",
+      "contentHash": "2c4aa114de855cd1743a97c5870fa3b9dfadcb588df9eed05a25730b93d6c6dc",
       "functions": [],
       "classes": [],
-      "imports": [
-        {
-          "source": "@/lib/mockAreas",
-          "specifiers": [
-            "parseMockAreas"
-          ]
-        }
-      ],
+      "imports": [],
       "exports": [
         "API_URL",
         "SUPABASE_URL",
-        "SUPABASE_KEY",
-        "MOCK_AREAS",
-        "USE_MOCKS"
+        "SUPABASE_KEY"
       ],
-      "totalLines": 23,
+      "totalLines": 12,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/ai/ChatBubble.tsx": {
@@ -32102,7 +32238,7 @@
     },
     "frontend/src/features/ai/ChatInput.tsx": {
       "filePath": "frontend/src/features/ai/ChatInput.tsx",
-      "contentHash": "59447a39e841e32c05e1c7a951f19d5073b1291cc0ede5fcdff1f6c7d20bff65",
+      "contentHash": "e74fb3f1a8231861813face3ac4a608dbfdd871c1c342ed7d65ae547bb27c843",
       "functions": [
         {
           "name": "ChatInput",
@@ -32110,7 +32246,7 @@
             "{ onSend, disabled }"
           ],
           "exported": true,
-          "lineCount": 39
+          "lineCount": 40
         }
       ],
       "classes": [],
@@ -32137,6 +32273,12 @@
           ]
         },
         {
+          "source": "@/api/types.ai",
+          "specifiers": [
+            "MAX_CHAT_MESSAGE_CHARS"
+          ]
+        },
+        {
           "source": "@/ui/theme",
           "specifiers": [
             "colors",
@@ -32147,7 +32289,7 @@
       "exports": [
         "ChatInput"
       ],
-      "totalLines": 68,
+      "totalLines": 70,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/ai/ChatMotif.tsx": {
@@ -32610,7 +32752,7 @@
     },
     "frontend/src/features/directions/DirectionsPanel.tsx": {
       "filePath": "frontend/src/features/directions/DirectionsPanel.tsx",
-      "contentHash": "fca8e44740b0d2122625c44fd2e4c10e7d45346c3e93443674126cf08522b7fe",
+      "contentHash": "645ffee3645c5aa5d9addda5808943b2a0c6542f29538ff6fa8a6595b7d0b9bb",
       "functions": [
         {
           "name": "legIcon",
@@ -32628,7 +32770,7 @@
           ],
           "returnType": "string",
           "exported": true,
-          "lineCount": 5
+          "lineCount": 6
         },
         {
           "name": "legDetail",
@@ -32637,7 +32779,7 @@
           ],
           "returnType": "string",
           "exported": false,
-          "lineCount": 4
+          "lineCount": 5
         },
         {
           "name": "ModeTab",
@@ -32760,7 +32902,7 @@
         "legTitle",
         "DirectionsPanel"
       ],
-      "totalLines": 153,
+      "totalLines": 155,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/events/DateTimeField.tsx": {
@@ -34172,7 +34314,7 @@
     },
     "frontend/src/features/transit/StopPanel.tsx": {
       "filePath": "frontend/src/features/transit/StopPanel.tsx",
-      "contentHash": "44ce291a03df7b3d81f0216baf8ce16e7c957a3885957188f50676acc1d59d35",
+      "contentHash": "840fc3d00fab8a1269258d1ae393cd42839f6f9d27e9220e2aabf9697a3e7ff0",
       "functions": [
         {
           "name": "arrivalLabel",
@@ -34267,7 +34409,8 @@
         {
           "source": "@/lib/time",
           "specifiers": [
-            "formatTime"
+            "formatTime",
+            "parseIso"
           ]
         }
       ],
@@ -34404,7 +34547,7 @@
     },
     "frontend/src/features/users/MyEvents.tsx": {
       "filePath": "frontend/src/features/users/MyEvents.tsx",
-      "contentHash": "d3987d8b10c192d8e1e0b15294473b3f06d6fa09ac1d2d6eaf477d8f77985fb0",
+      "contentHash": "4a5e5b688425317d4ba17eb2718678d799b26e97245b3edafd89649721cab54b",
       "functions": [
         {
           "name": "endOf",
@@ -34443,6 +34586,12 @@
       ],
       "classes": [],
       "imports": [
+        {
+          "source": "@/lib/time",
+          "specifiers": [
+            "parseIso"
+          ]
+        },
         {
           "source": "react-native",
           "specifiers": [
@@ -34493,7 +34642,7 @@
         "groupMyEvents",
         "MyEvents"
       ],
-      "totalLines": 69,
+      "totalLines": 70,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/users/ReliabilityGauge.tsx": {
@@ -34932,7 +35081,7 @@
     },
     "frontend/src/hooks/useAi.ts": {
       "filePath": "frontend/src/hooks/useAi.ts",
-      "contentHash": "132a679e52fe4c248fbfd7d69cba8bc03ff28e6c2b3d94278e9bd797b5700846",
+      "contentHash": "054508e963a903686bc7feb156ef1075774623a9c56af64428eddb9caffb26f8",
       "functions": [
         {
           "name": "newId",
@@ -34946,7 +35095,7 @@
             "location"
           ],
           "exported": true,
-          "lineCount": 66
+          "lineCount": 69
         }
       ],
       "classes": [],
@@ -34974,6 +35123,7 @@
         {
           "source": "@/api/types.ai",
           "specifiers": [
+            "MAX_CHAT_MESSAGE_CHARS",
             "MAX_CHAT_MESSAGES",
             "ChatRole",
             "ChatSource"
@@ -34989,7 +35139,7 @@
       "exports": [
         "useAiChat"
       ],
-      "totalLines": 93,
+      "totalLines": 96,
       "hasStructuralAnalysis": true
     },
     "frontend/src/hooks/useDebounced.ts": {
@@ -35524,61 +35674,62 @@
       "totalLines": 29,
       "hasStructuralAnalysis": true
     },
-    "frontend/src/lib/mockAreas.ts": {
-      "filePath": "frontend/src/lib/mockAreas.ts",
-      "contentHash": "d190853c0c89468a0864d4b65227372fee4998d0a93a88c56b155957a2b6d5e7",
+    "frontend/src/lib/network.ts": {
+      "filePath": "frontend/src/lib/network.ts",
+      "contentHash": "1c68b0d851589218bc34481d0d6c9db8a90b3590fae0d9a0bff7f6b73aa78ba8",
       "functions": [
         {
-          "name": "parseMockAreas",
+          "name": "isOnline",
           "params": [
-            "raw"
-          ],
-          "returnType": "MockAreas",
-          "exported": true,
-          "lineCount": 9
-        },
-        {
-          "name": "areaOf",
-          "params": [
-            "path"
-          ],
-          "returnType": "string",
-          "exported": true,
-          "lineCount": 3
-        },
-        {
-          "name": "isMockedPath",
-          "params": [
-            "areas",
-            "path"
+            "state"
           ],
           "returnType": "boolean",
           "exported": true,
           "lineCount": 3
+        },
+        {
+          "name": "startNetworkSync",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
         }
       ],
       "classes": [],
-      "imports": [],
-      "exports": [
-        "parseMockAreas",
-        "areaOf",
-        "isMockedPath"
+      "imports": [
+        {
+          "source": "@react-native-community/netinfo",
+          "specifiers": [
+            "NetInfo",
+            "NetInfoState"
+          ]
+        },
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "onlineManager"
+          ]
+        }
       ],
-      "totalLines": 28,
+      "exports": [
+        "isOnline",
+        "startNetworkSync"
+      ],
+      "totalLines": 19,
       "hasStructuralAnalysis": true
     },
     "frontend/src/lib/polyline.ts": {
       "filePath": "frontend/src/lib/polyline.ts",
-      "contentHash": "d2246b2d3b65b3683c04e753e0178ba4592e20211dd538e213447d43b78743f7",
+      "contentHash": "1320bb7fa47ad9290e96d48850b783a80f40f066b37cbb5d59b323bb2362912e",
       "functions": [
         {
           "name": "decodePolyline",
           "params": [
-            "encoded"
+            "input"
           ],
           "returnType": "Coordinates[]",
           "exported": true,
-          "lineCount": 31
+          "lineCount": 33
         },
         {
           "name": "encodePolyline",
@@ -35603,7 +35754,7 @@
         "decodePolyline",
         "encodePolyline"
       ],
-      "totalLines": 64,
+      "totalLines": 66,
       "hasStructuralAnalysis": true
     },
     "frontend/src/lib/queryClient.ts": {
@@ -35679,7 +35830,7 @@
     },
     "frontend/src/lib/time.ts": {
       "filePath": "frontend/src/lib/time.ts",
-      "contentHash": "b141d73d3df194a4d499dbb1d06ce83d45160c8c378658f05cb990e0b19289e1",
+      "contentHash": "e1aa115732037adacb994b493972ece2ee8b9fa2898fa36195d7cbc3c685593a",
       "functions": [
         {
           "name": "lastSundayAt01Utc",
@@ -35699,6 +35850,15 @@
           "returnType": "number",
           "exported": true,
           "lineCount": 6
+        },
+        {
+          "name": "parseIso",
+          "params": [
+            "iso"
+          ],
+          "returnType": "number",
+          "exported": true,
+          "lineCount": 3
         },
         {
           "name": "toBucharest",
@@ -35798,6 +35958,7 @@
       "imports": [],
       "exports": [
         "bucharestOffsetMs",
+        "parseIso",
         "toBucharest",
         "bucharestToUtcIso",
         "formatTime",
@@ -35809,7 +35970,7 @@
         "dateRangeFor",
         "minutesUntil"
       ],
-      "totalLines": 127,
+      "totalLines": 135,
       "hasStructuralAnalysis": true
     },
     "frontend/src/lib/validation.ts": {
@@ -35852,966 +36013,6 @@
         "validatePassword"
       ],
       "totalLines": 20,
-      "hasStructuralAnalysis": true
-    },
-    "frontend/src/mocks/core.ts": {
-      "filePath": "frontend/src/mocks/core.ts",
-      "contentHash": "e8d54adf7dbf642080e8c20ce4fe3a4e27258acbe7e9d672b9ac1ce4ed011a26",
-      "functions": [
-        {
-          "name": "getState",
-          "params": [],
-          "returnType": "MockState",
-          "exported": true,
-          "lineCount": 3
-        },
-        {
-          "name": "resetMocks",
-          "params": [],
-          "returnType": "void",
-          "exported": true,
-          "lineCount": 3
-        },
-        {
-          "name": "setMockLatency",
-          "params": [
-            "ms"
-          ],
-          "returnType": "void",
-          "exported": true,
-          "lineCount": 3
-        },
-        {
-          "name": "getMockLatency",
-          "params": [],
-          "returnType": "number",
-          "exported": true,
-          "lineCount": 3
-        },
-        {
-          "name": "me",
-          "params": [],
-          "returnType": "UserSummary",
-          "exported": true,
-          "lineCount": 3
-        },
-        {
-          "name": "userById",
-          "params": [
-            "id"
-          ],
-          "returnType": "UserSummary",
-          "exported": true,
-          "lineCount": 5
-        },
-        {
-          "name": "eventById",
-          "params": [
-            "id"
-          ],
-          "returnType": "MockEvent",
-          "exported": true,
-          "lineCount": 5
-        },
-        {
-          "name": "taken",
-          "params": [
-            "e"
-          ],
-          "returnType": "number",
-          "exported": true,
-          "lineCount": 3
-        },
-        {
-          "name": "toSummary",
-          "params": [
-            "e"
-          ],
-          "returnType": "EventSummary",
-          "exported": true,
-          "lineCount": 18
-        },
-        {
-          "name": "toDetail",
-          "params": [
-            "e"
-          ],
-          "returnType": "EventDetail",
-          "exported": true,
-          "lineCount": 12
-        },
-        {
-          "name": "asList",
-          "params": [
-            "value"
-          ],
-          "returnType": "string[]",
-          "exported": true,
-          "lineCount": 5
-        },
-        {
-          "name": "asNumber",
-          "params": [
-            "value",
-            "fallback"
-          ],
-          "returnType": "number",
-          "exported": true,
-          "lineCount": 4
-        },
-        {
-          "name": "paginate",
-          "params": [
-            "all",
-            "query"
-          ],
-          "returnType": "Paged<T>",
-          "exported": true,
-          "lineCount": 11
-        },
-        {
-          "name": "requireOrganizer",
-          "params": [
-            "e"
-          ],
-          "returnType": "void",
-          "exported": true,
-          "lineCount": 4
-        },
-        {
-          "name": "endOf",
-          "params": [
-            "e"
-          ],
-          "returnType": "number",
-          "exported": true,
-          "lineCount": 3
-        },
-        {
-          "name": "logReliability",
-          "params": [
-            "userId",
-            "pointsChange",
-            "reason",
-            "e"
-          ],
-          "returnType": "void",
-          "exported": true,
-          "lineCount": 5
-        }
-      ],
-      "classes": [],
-      "imports": [
-        {
-          "source": "@/api/errors",
-          "specifiers": [
-            "ApiError"
-          ]
-        },
-        {
-          "source": "@/api/types",
-          "specifiers": [
-            "EventDetail",
-            "EventSummary",
-            "Paged",
-            "UserSummary"
-          ]
-        },
-        {
-          "source": "@/api/types.users",
-          "specifiers": [
-            "ReliabilityEntry"
-          ]
-        },
-        {
-          "source": "./data",
-          "specifiers": [
-            "MOCK_ME_ID",
-            "seed",
-            "MockEvent",
-            "MockState"
-          ]
-        }
-      ],
-      "exports": [
-        "getState",
-        "resetMocks",
-        "setMockLatency",
-        "getMockLatency",
-        "me",
-        "userById",
-        "eventById",
-        "taken",
-        "toSummary",
-        "toDetail",
-        "asList",
-        "asNumber",
-        "paginate",
-        "requireOrganizer",
-        "endOf",
-        "logReliability"
-      ],
-      "totalLines": 139,
-      "hasStructuralAnalysis": true
-    },
-    "frontend/src/mocks/data.ts": {
-      "filePath": "frontend/src/mocks/data.ts",
-      "contentHash": "a493ad84917cea435089b5bb11e83d2f09f47424df7200bced80af47bfa88b7a",
-      "functions": [
-        {
-          "name": "at",
-          "params": [
-            "days",
-            "hour",
-            "minute"
-          ],
-          "returnType": "string",
-          "exported": false,
-          "lineCount": 5
-        },
-        {
-          "name": "eventId",
-          "params": [
-            "n"
-          ],
-          "exported": false,
-          "lineCount": 1
-        },
-        {
-          "name": "userId",
-          "params": [
-            "n"
-          ],
-          "exported": false,
-          "lineCount": 1
-        },
-        {
-          "name": "seed",
-          "params": [],
-          "returnType": "MockState",
-          "exported": true,
-          "lineCount": 164
-        }
-      ],
-      "classes": [],
-      "imports": [
-        {
-          "source": "@/api/types",
-          "specifiers": [
-            "EventCategory",
-            "EventSource",
-            "ParticipantStatus",
-            "UserSummary"
-          ]
-        },
-        {
-          "source": "@/api/types.transit",
-          "specifiers": [
-            "TransitAlert"
-          ]
-        },
-        {
-          "source": "@/api/types.users",
-          "specifiers": [
-            "ReliabilityEntry"
-          ]
-        },
-        {
-          "source": "@/lib/time",
-          "specifiers": [
-            "bucharestToUtcIso",
-            "toBucharest"
-          ]
-        }
-      ],
-      "exports": [
-        "MOCK_ME_ID",
-        "USER_IDS",
-        "seed"
-      ],
-      "totalLines": 225,
-      "hasStructuralAnalysis": true
-    },
-    "frontend/src/mocks/index.ts": {
-      "filePath": "frontend/src/mocks/index.ts",
-      "contentHash": "2ba2131a5f40aaa68751051a3a35831296701167f609f78d997856028edc5a35",
-      "functions": [
-        {
-          "name": "mockRequest",
-          "params": [
-            "method",
-            "path",
-            "query",
-            "body"
-          ],
-          "returnType": "Promise<unknown>",
-          "exported": true,
-          "lineCount": 10
-        },
-        {
-          "name": "structuredCloneSafe",
-          "params": [
-            "value"
-          ],
-          "returnType": "T",
-          "exported": false,
-          "lineCount": 3
-        }
-      ],
-      "classes": [],
-      "imports": [
-        {
-          "source": "@/api/errors",
-          "specifiers": [
-            "ApiError"
-          ]
-        },
-        {
-          "source": "./core",
-          "specifiers": [
-            "getMockLatency",
-            "Query",
-            "Route"
-          ]
-        },
-        {
-          "source": "./routes/ai",
-          "specifiers": [
-            "aiRoutes"
-          ]
-        },
-        {
-          "source": "./routes/events",
-          "specifiers": [
-            "eventsRoutes"
-          ]
-        },
-        {
-          "source": "./routes/places",
-          "specifiers": [
-            "placesRoutes"
-          ]
-        },
-        {
-          "source": "./routes/routing",
-          "specifiers": [
-            "routingRoutes"
-          ]
-        },
-        {
-          "source": "./routes/transit",
-          "specifiers": [
-            "transitRoutes"
-          ]
-        },
-        {
-          "source": "./routes/users",
-          "specifiers": [
-            "usersRoutes"
-          ]
-        }
-      ],
-      "exports": [
-        "MOCK_ME_ID",
-        "getMockLatency",
-        "getMockState",
-        "resetMocks",
-        "setMockLatency",
-        "mockRequest"
-      ],
-      "totalLines": 36,
-      "hasStructuralAnalysis": true
-    },
-    "frontend/src/mocks/placesSeed.ts": {
-      "filePath": "frontend/src/mocks/placesSeed.ts",
-      "contentHash": "2153773509d043877253bb39312e03d8394b93fd2028fb2a80f3d78089538bda",
-      "functions": [
-        {
-          "name": "placeId",
-          "params": [
-            "n"
-          ],
-          "exported": true,
-          "lineCount": 1
-        },
-        {
-          "name": "seedPlaces",
-          "params": [],
-          "returnType": "PlaceDetail[]",
-          "exported": true,
-          "lineCount": 13
-        }
-      ],
-      "classes": [],
-      "imports": [
-        {
-          "source": "@/api/types.places",
-          "specifiers": [
-            "PlaceCategory",
-            "PlaceDetail"
-          ]
-        }
-      ],
-      "exports": [
-        "placeId",
-        "seedPlaces"
-      ],
-      "totalLines": 61,
-      "hasStructuralAnalysis": true
-    },
-    "frontend/src/mocks/routes/ai.ts": {
-      "filePath": "frontend/src/mocks/routes/ai.ts",
-      "contentHash": "777d7740c5df05cb4a1f80e7484267a357c1af6eb57b3e63f212dac0c07a2220",
-      "functions": [
-        {
-          "name": "metersBetween",
-          "params": [
-            "aLat",
-            "aLon",
-            "bLat",
-            "bLon"
-          ],
-          "returnType": "number",
-          "exported": false,
-          "lineCount": 5
-        },
-        {
-          "name": "placeSummary",
-          "params": [
-            "p",
-            "location"
-          ],
-          "returnType": "PlaceSummary",
-          "exported": false,
-          "lineCount": 12
-        },
-        {
-          "name": "closest",
-          "params": [
-            "category",
-            "count",
-            "location"
-          ],
-          "returnType": "PlaceSummary[]",
-          "exported": false,
-          "lineCount": 6
-        },
-        {
-          "name": "upcomingEvents",
-          "params": [
-            "count"
-          ],
-          "returnType": "EventSummary[]",
-          "exported": false,
-          "lineCount": 7
-        },
-        {
-          "name": "answer",
-          "params": [
-            "request"
-          ],
-          "returnType": "ChatAnswer",
-          "exported": false,
-          "lineCount": 34
-        }
-      ],
-      "classes": [],
-      "imports": [
-        {
-          "source": "@/api/errors",
-          "specifiers": [
-            "ApiError"
-          ]
-        },
-        {
-          "source": "@/api/types",
-          "specifiers": [
-            "EventSummary"
-          ]
-        },
-        {
-          "source": "@/api/types.ai",
-          "specifiers": [
-            "ChatAnswer",
-            "ChatRequest"
-          ]
-        },
-        {
-          "source": "@/api/types.places",
-          "specifiers": [
-            "PlaceDetail",
-            "PlaceSummary"
-          ]
-        },
-        {
-          "source": "../core",
-          "specifiers": [
-            "getState",
-            "toSummary",
-            "Route"
-          ]
-        },
-        {
-          "source": "../placesSeed",
-          "specifiers": [
-            "seedPlaces"
-          ]
-        }
-      ],
-      "exports": [
-        "aiRoutes"
-      ],
-      "totalLines": 101,
-      "hasStructuralAnalysis": true
-    },
-    "frontend/src/mocks/routes/events.ts": {
-      "filePath": "frontend/src/mocks/routes/events.ts",
-      "contentHash": "dd6f7299e10c4368a549168b80728184a9c7718a44125902ee669f3bb627a305",
-      "functions": [],
-      "classes": [],
-      "imports": [
-        {
-          "source": "@/api/errors",
-          "specifiers": [
-            "ApiError"
-          ]
-        },
-        {
-          "source": "@/api/types",
-          "specifiers": [
-            "CheckInResult",
-            "EventCategory",
-            "EventDetail",
-            "EventSummary",
-            "NewEvent",
-            "Paged",
-            "Participant"
-          ]
-        },
-        {
-          "source": "@/api/types",
-          "specifiers": [
-            "EVENT_CATEGORIES"
-          ]
-        },
-        {
-          "source": "../core",
-          "specifiers": [
-            "asList",
-            "endOf",
-            "eventById",
-            "getState",
-            "logReliability",
-            "me",
-            "paginate",
-            "requireOrganizer",
-            "taken",
-            "toDetail",
-            "toSummary",
-            "userById",
-            "Route"
-          ]
-        },
-        {
-          "source": "../data",
-          "specifiers": [
-            "MOCK_ME_ID",
-            "MockEvent"
-          ]
-        }
-      ],
-      "exports": [
-        "eventsRoutes"
-      ],
-      "totalLines": 169,
-      "hasStructuralAnalysis": true
-    },
-    "frontend/src/mocks/routes/places.ts": {
-      "filePath": "frontend/src/mocks/routes/places.ts",
-      "contentHash": "80eb2cf0f1011a3696a93b3b37e4a518b40f1210f3206ec042d71a38a6be46fb",
-      "functions": [
-        {
-          "name": "distance",
-          "params": [
-            "aLat",
-            "aLon",
-            "bLat",
-            "bLon"
-          ],
-          "returnType": "number",
-          "exported": false,
-          "lineCount": 5
-        },
-        {
-          "name": "numbers",
-          "params": [
-            "raw",
-            "count",
-            "name"
-          ],
-          "returnType": "number[]",
-          "exported": false,
-          "lineCount": 7
-        },
-        {
-          "name": "summary",
-          "params": [
-            "p",
-            "distanceMeters"
-          ],
-          "returnType": "PlaceSummary",
-          "exported": false,
-          "lineCount": 3
-        }
-      ],
-      "classes": [],
-      "imports": [
-        {
-          "source": "@/api/errors",
-          "specifiers": [
-            "ApiError"
-          ]
-        },
-        {
-          "source": "@/api/types",
-          "specifiers": [
-            "Paged"
-          ]
-        },
-        {
-          "source": "@/api/types.places",
-          "specifiers": [
-            "PLACE_CATEGORIES",
-            "PlaceDetail",
-            "PlaceSummary"
-          ]
-        },
-        {
-          "source": "../core",
-          "specifiers": [
-            "asList",
-            "asNumber",
-            "Route"
-          ]
-        },
-        {
-          "source": "../placesSeed",
-          "specifiers": [
-            "seedPlaces"
-          ]
-        }
-      ],
-      "exports": [
-        "placesRoutes"
-      ],
-      "totalLines": 84,
-      "hasStructuralAnalysis": true
-    },
-    "frontend/src/mocks/routes/routing.ts": {
-      "filePath": "frontend/src/mocks/routes/routing.ts",
-      "contentHash": "1c43803b757e7519277c3c08f652bc2e276305c378687afc4c0e1f4bd7aa164e",
-      "functions": [
-        {
-          "name": "point",
-          "params": [
-            "raw",
-            "name"
-          ],
-          "returnType": "Coordinates",
-          "exported": false,
-          "lineCount": 7
-        },
-        {
-          "name": "nearestStop",
-          "params": [
-            "p"
-          ],
-          "returnType": "TransitStop",
-          "exported": false,
-          "lineCount": 3
-        },
-        {
-          "name": "leg",
-          "params": [
-            "mode",
-            "from",
-            "to",
-            "startMs",
-            "minutes",
-            "route",
-            "headsign"
-          ],
-          "returnType": "RouteLeg",
-          "exported": false,
-          "lineCount": 13
-        },
-        {
-          "name": "plan",
-          "params": [
-            "mode",
-            "legs",
-            "distance"
-          ],
-          "returnType": "RoutePlan",
-          "exported": false,
-          "lineCount": 13
-        },
-        {
-          "name": "walkPlan",
-          "params": [
-            "from",
-            "to",
-            "now"
-          ],
-          "returnType": "RoutePlan",
-          "exported": false,
-          "lineCount": 5
-        },
-        {
-          "name": "transitPlan",
-          "params": [
-            "from",
-            "to",
-            "now"
-          ],
-          "returnType": "RoutePlan",
-          "exported": false,
-          "lineCount": 33
-        }
-      ],
-      "classes": [],
-      "imports": [
-        {
-          "source": "@/api/errors",
-          "specifiers": [
-            "ApiError"
-          ]
-        },
-        {
-          "source": "@/api/types.routing",
-          "specifiers": [
-            "LegMode",
-            "PlanMode",
-            "RouteLeg",
-            "RoutePlan"
-          ]
-        },
-        {
-          "source": "@/api/types.transit",
-          "specifiers": [
-            "TransitStop"
-          ]
-        },
-        {
-          "source": "@/lib/geo",
-          "specifiers": [
-            "DEFAULT_POSITION",
-            "distanceMeters",
-            "isValidCoordinate",
-            "Coordinates"
-          ]
-        },
-        {
-          "source": "@/lib/polyline",
-          "specifiers": [
-            "encodePolyline"
-          ]
-        },
-        {
-          "source": "../core",
-          "specifiers": [
-            "Route"
-          ]
-        },
-        {
-          "source": "../transitSeed",
-          "specifiers": [
-            "LINE_STOPS",
-            "MOCK_ROUTES",
-            "MOCK_STOPS"
-          ]
-        }
-      ],
-      "exports": [
-        "routingRoutes"
-      ],
-      "totalLines": 122,
-      "hasStructuralAnalysis": true
-    },
-    "frontend/src/mocks/routes/transit.ts": {
-      "filePath": "frontend/src/mocks/routes/transit.ts",
-      "contentHash": "c6eaa97e3cce9b938e3003b82d8fbdee3b864f537d54b29d76b8b7fce21412b9",
-      "functions": [
-        {
-          "name": "hash",
-          "params": [
-            "s"
-          ],
-          "returnType": "number",
-          "exported": false,
-          "lineCount": 5
-        },
-        {
-          "name": "stopById",
-          "params": [
-            "id"
-          ],
-          "returnType": "TransitStop",
-          "exported": false,
-          "lineCount": 5
-        },
-        {
-          "name": "headsignFrom",
-          "params": [
-            "route",
-            "stopId"
-          ],
-          "returnType": "string",
-          "exported": false,
-          "lineCount": 5
-        },
-        {
-          "name": "parseBbox",
-          "params": [
-            "raw"
-          ],
-          "returnType": "number[]",
-          "exported": false,
-          "lineCount": 7
-        },
-        {
-          "name": "vehiclesFor",
-          "params": [
-            "route",
-            "now"
-          ],
-          "returnType": "TransitVehicles['vehicles']",
-          "exported": false,
-          "lineCount": 22
-        }
-      ],
-      "classes": [],
-      "imports": [
-        {
-          "source": "@/api/errors",
-          "specifiers": [
-            "ApiError"
-          ]
-        },
-        {
-          "source": "@/api/types.transit",
-          "specifiers": [
-            "LastDepartures",
-            "StopArrivals",
-            "TransitArrival",
-            "TransitStop",
-            "TransitSummary",
-            "TransitVehicles"
-          ]
-        },
-        {
-          "source": "@/lib/time",
-          "specifiers": [
-            "bucharestToUtcIso",
-            "toBucharest"
-          ]
-        },
-        {
-          "source": "../core",
-          "specifiers": [
-            "getState",
-            "Route"
-          ]
-        },
-        {
-          "source": "../transitSeed",
-          "specifiers": [
-            "LINE_STOPS",
-            "LINES_NOT_RUNNING",
-            "MOCK_ROUTES",
-            "MOCK_STOPS"
-          ]
-        }
-      ],
-      "exports": [
-        "transitRoutes"
-      ],
-      "totalLines": 138,
-      "hasStructuralAnalysis": true
-    },
-    "frontend/src/mocks/routes/users.ts": {
-      "filePath": "frontend/src/mocks/routes/users.ts",
-      "contentHash": "7d615fe7a795a39b10ebd7bd2b0e157db42e1054b6a035c9be809076964ac9e0",
-      "functions": [],
-      "classes": [],
-      "imports": [
-        {
-          "source": "@/api/errors",
-          "specifiers": [
-            "ApiError"
-          ]
-        },
-        {
-          "source": "@/api/types",
-          "specifiers": [
-            "Me",
-            "PublicProfile",
-            "UserSummary"
-          ]
-        },
-        {
-          "source": "@/api/types.users",
-          "specifiers": [
-            "MyEvents",
-            "ReliabilityHistory"
-          ]
-        },
-        {
-          "source": "../core",
-          "specifiers": [
-            "eventById",
-            "getState",
-            "me",
-            "toSummary",
-            "userById",
-            "Route"
-          ]
-        },
-        {
-          "source": "../data",
-          "specifiers": [
-            "MOCK_ME_ID",
-            "MockEvent"
-          ]
-        }
-      ],
-      "exports": [
-        "usersRoutes"
-      ],
-      "totalLines": 88,
-      "hasStructuralAnalysis": true
-    },
-    "frontend/src/mocks/transitSeed.ts": {
-      "filePath": "frontend/src/mocks/transitSeed.ts",
-      "contentHash": "e925009695d564734b106b01c7788f00a2bb8d234fa4fbea99614d25daaaf2f1",
-      "functions": [],
-      "classes": [],
-      "imports": [
-        {
-          "source": "@/api/types.transit",
-          "specifiers": [
-            "TransitRoute",
-            "TransitStop"
-          ]
-        }
-      ],
-      "exports": [
-        "MOCK_ROUTES",
-        "LINE_STOPS",
-        "MOCK_STOPS",
-        "LINES_NOT_RUNNING"
-      ],
-      "totalLines": 48,
       "hasStructuralAnalysis": true
     },
     "frontend/src/ui/Avatar.tsx": {
@@ -37106,6 +36307,76 @@
         "Icon"
       ],
       "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/ui/OfflineBanner.tsx": {
+      "filePath": "frontend/src/ui/OfflineBanner.tsx",
+      "contentHash": "997ef4bb9cd2e52e413f36596d8cb888d792f874d629d36f1337fabd7c11fd9a",
+      "functions": [
+        {
+          "name": "useOnline",
+          "params": [],
+          "returnType": "boolean",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "OfflineBanner",
+          "params": [],
+          "exported": true,
+          "lineCount": 13
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "onlineManager"
+          ]
+        },
+        {
+          "source": "react",
+          "specifiers": [
+            "useSyncExternalStore"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "react-native-safe-area-context",
+          "specifiers": [
+            "useSafeAreaInsets"
+          ]
+        },
+        {
+          "source": "./Icon",
+          "specifiers": [
+            "Icon"
+          ]
+        },
+        {
+          "source": "./Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "./theme",
+          "specifiers": [
+            "colors"
+          ]
+        }
+      ],
+      "exports": [
+        "OfflineBanner"
+      ],
+      "totalLines": 44,
       "hasStructuralAnalysis": true
     },
     "frontend/src/ui/ReliabilityBadge.tsx": {
@@ -37524,14 +36795,974 @@
       "totalLines": 55,
       "hasStructuralAnalysis": true
     },
+    "frontend/testing/mocks/core.ts": {
+      "filePath": "frontend/testing/mocks/core.ts",
+      "contentHash": "e8d54adf7dbf642080e8c20ce4fe3a4e27258acbe7e9d672b9ac1ce4ed011a26",
+      "functions": [
+        {
+          "name": "getState",
+          "params": [],
+          "returnType": "MockState",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "resetMocks",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "setMockLatency",
+          "params": [
+            "ms"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "getMockLatency",
+          "params": [],
+          "returnType": "number",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "me",
+          "params": [],
+          "returnType": "UserSummary",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "userById",
+          "params": [
+            "id"
+          ],
+          "returnType": "UserSummary",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "eventById",
+          "params": [
+            "id"
+          ],
+          "returnType": "MockEvent",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "taken",
+          "params": [
+            "e"
+          ],
+          "returnType": "number",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "toSummary",
+          "params": [
+            "e"
+          ],
+          "returnType": "EventSummary",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "toDetail",
+          "params": [
+            "e"
+          ],
+          "returnType": "EventDetail",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "asList",
+          "params": [
+            "value"
+          ],
+          "returnType": "string[]",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "asNumber",
+          "params": [
+            "value",
+            "fallback"
+          ],
+          "returnType": "number",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "paginate",
+          "params": [
+            "all",
+            "query"
+          ],
+          "returnType": "Paged<T>",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "requireOrganizer",
+          "params": [
+            "e"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "endOf",
+          "params": [
+            "e"
+          ],
+          "returnType": "number",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "logReliability",
+          "params": [
+            "userId",
+            "pointsChange",
+            "reason",
+            "e"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/errors",
+          "specifiers": [
+            "ApiError"
+          ]
+        },
+        {
+          "source": "@/api/types",
+          "specifiers": [
+            "EventDetail",
+            "EventSummary",
+            "Paged",
+            "UserSummary"
+          ]
+        },
+        {
+          "source": "@/api/types.users",
+          "specifiers": [
+            "ReliabilityEntry"
+          ]
+        },
+        {
+          "source": "./data",
+          "specifiers": [
+            "MOCK_ME_ID",
+            "seed",
+            "MockEvent",
+            "MockState"
+          ]
+        }
+      ],
+      "exports": [
+        "getState",
+        "resetMocks",
+        "setMockLatency",
+        "getMockLatency",
+        "me",
+        "userById",
+        "eventById",
+        "taken",
+        "toSummary",
+        "toDetail",
+        "asList",
+        "asNumber",
+        "paginate",
+        "requireOrganizer",
+        "endOf",
+        "logReliability"
+      ],
+      "totalLines": 139,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/testing/mocks/data.ts": {
+      "filePath": "frontend/testing/mocks/data.ts",
+      "contentHash": "a493ad84917cea435089b5bb11e83d2f09f47424df7200bced80af47bfa88b7a",
+      "functions": [
+        {
+          "name": "at",
+          "params": [
+            "days",
+            "hour",
+            "minute"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "eventId",
+          "params": [
+            "n"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "userId",
+          "params": [
+            "n"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "seed",
+          "params": [],
+          "returnType": "MockState",
+          "exported": true,
+          "lineCount": 164
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/types",
+          "specifiers": [
+            "EventCategory",
+            "EventSource",
+            "ParticipantStatus",
+            "UserSummary"
+          ]
+        },
+        {
+          "source": "@/api/types.transit",
+          "specifiers": [
+            "TransitAlert"
+          ]
+        },
+        {
+          "source": "@/api/types.users",
+          "specifiers": [
+            "ReliabilityEntry"
+          ]
+        },
+        {
+          "source": "@/lib/time",
+          "specifiers": [
+            "bucharestToUtcIso",
+            "toBucharest"
+          ]
+        }
+      ],
+      "exports": [
+        "MOCK_ME_ID",
+        "USER_IDS",
+        "seed"
+      ],
+      "totalLines": 225,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/testing/mocks/index.ts": {
+      "filePath": "frontend/testing/mocks/index.ts",
+      "contentHash": "2ba2131a5f40aaa68751051a3a35831296701167f609f78d997856028edc5a35",
+      "functions": [
+        {
+          "name": "mockRequest",
+          "params": [
+            "method",
+            "path",
+            "query",
+            "body"
+          ],
+          "returnType": "Promise<unknown>",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "structuredCloneSafe",
+          "params": [
+            "value"
+          ],
+          "returnType": "T",
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/errors",
+          "specifiers": [
+            "ApiError"
+          ]
+        },
+        {
+          "source": "./core",
+          "specifiers": [
+            "getMockLatency",
+            "Query",
+            "Route"
+          ]
+        },
+        {
+          "source": "./routes/ai",
+          "specifiers": [
+            "aiRoutes"
+          ]
+        },
+        {
+          "source": "./routes/events",
+          "specifiers": [
+            "eventsRoutes"
+          ]
+        },
+        {
+          "source": "./routes/places",
+          "specifiers": [
+            "placesRoutes"
+          ]
+        },
+        {
+          "source": "./routes/routing",
+          "specifiers": [
+            "routingRoutes"
+          ]
+        },
+        {
+          "source": "./routes/transit",
+          "specifiers": [
+            "transitRoutes"
+          ]
+        },
+        {
+          "source": "./routes/users",
+          "specifiers": [
+            "usersRoutes"
+          ]
+        }
+      ],
+      "exports": [
+        "MOCK_ME_ID",
+        "getMockLatency",
+        "getMockState",
+        "resetMocks",
+        "setMockLatency",
+        "mockRequest"
+      ],
+      "totalLines": 36,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/testing/mocks/placesSeed.ts": {
+      "filePath": "frontend/testing/mocks/placesSeed.ts",
+      "contentHash": "2153773509d043877253bb39312e03d8394b93fd2028fb2a80f3d78089538bda",
+      "functions": [
+        {
+          "name": "placeId",
+          "params": [
+            "n"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "seedPlaces",
+          "params": [],
+          "returnType": "PlaceDetail[]",
+          "exported": true,
+          "lineCount": 13
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/types.places",
+          "specifiers": [
+            "PlaceCategory",
+            "PlaceDetail"
+          ]
+        }
+      ],
+      "exports": [
+        "placeId",
+        "seedPlaces"
+      ],
+      "totalLines": 61,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/testing/mocks/routes/ai.ts": {
+      "filePath": "frontend/testing/mocks/routes/ai.ts",
+      "contentHash": "777d7740c5df05cb4a1f80e7484267a357c1af6eb57b3e63f212dac0c07a2220",
+      "functions": [
+        {
+          "name": "metersBetween",
+          "params": [
+            "aLat",
+            "aLon",
+            "bLat",
+            "bLon"
+          ],
+          "returnType": "number",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "placeSummary",
+          "params": [
+            "p",
+            "location"
+          ],
+          "returnType": "PlaceSummary",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "closest",
+          "params": [
+            "category",
+            "count",
+            "location"
+          ],
+          "returnType": "PlaceSummary[]",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "upcomingEvents",
+          "params": [
+            "count"
+          ],
+          "returnType": "EventSummary[]",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "answer",
+          "params": [
+            "request"
+          ],
+          "returnType": "ChatAnswer",
+          "exported": false,
+          "lineCount": 34
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/errors",
+          "specifiers": [
+            "ApiError"
+          ]
+        },
+        {
+          "source": "@/api/types",
+          "specifiers": [
+            "EventSummary"
+          ]
+        },
+        {
+          "source": "@/api/types.ai",
+          "specifiers": [
+            "ChatAnswer",
+            "ChatRequest"
+          ]
+        },
+        {
+          "source": "@/api/types.places",
+          "specifiers": [
+            "PlaceDetail",
+            "PlaceSummary"
+          ]
+        },
+        {
+          "source": "../core",
+          "specifiers": [
+            "getState",
+            "toSummary",
+            "Route"
+          ]
+        },
+        {
+          "source": "../placesSeed",
+          "specifiers": [
+            "seedPlaces"
+          ]
+        }
+      ],
+      "exports": [
+        "aiRoutes"
+      ],
+      "totalLines": 101,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/testing/mocks/routes/events.ts": {
+      "filePath": "frontend/testing/mocks/routes/events.ts",
+      "contentHash": "dd6f7299e10c4368a549168b80728184a9c7718a44125902ee669f3bb627a305",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/errors",
+          "specifiers": [
+            "ApiError"
+          ]
+        },
+        {
+          "source": "@/api/types",
+          "specifiers": [
+            "CheckInResult",
+            "EventCategory",
+            "EventDetail",
+            "EventSummary",
+            "NewEvent",
+            "Paged",
+            "Participant"
+          ]
+        },
+        {
+          "source": "@/api/types",
+          "specifiers": [
+            "EVENT_CATEGORIES"
+          ]
+        },
+        {
+          "source": "../core",
+          "specifiers": [
+            "asList",
+            "endOf",
+            "eventById",
+            "getState",
+            "logReliability",
+            "me",
+            "paginate",
+            "requireOrganizer",
+            "taken",
+            "toDetail",
+            "toSummary",
+            "userById",
+            "Route"
+          ]
+        },
+        {
+          "source": "../data",
+          "specifiers": [
+            "MOCK_ME_ID",
+            "MockEvent"
+          ]
+        }
+      ],
+      "exports": [
+        "eventsRoutes"
+      ],
+      "totalLines": 169,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/testing/mocks/routes/places.ts": {
+      "filePath": "frontend/testing/mocks/routes/places.ts",
+      "contentHash": "80eb2cf0f1011a3696a93b3b37e4a518b40f1210f3206ec042d71a38a6be46fb",
+      "functions": [
+        {
+          "name": "distance",
+          "params": [
+            "aLat",
+            "aLon",
+            "bLat",
+            "bLon"
+          ],
+          "returnType": "number",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "numbers",
+          "params": [
+            "raw",
+            "count",
+            "name"
+          ],
+          "returnType": "number[]",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "summary",
+          "params": [
+            "p",
+            "distanceMeters"
+          ],
+          "returnType": "PlaceSummary",
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/errors",
+          "specifiers": [
+            "ApiError"
+          ]
+        },
+        {
+          "source": "@/api/types",
+          "specifiers": [
+            "Paged"
+          ]
+        },
+        {
+          "source": "@/api/types.places",
+          "specifiers": [
+            "PLACE_CATEGORIES",
+            "PlaceDetail",
+            "PlaceSummary"
+          ]
+        },
+        {
+          "source": "../core",
+          "specifiers": [
+            "asList",
+            "asNumber",
+            "Route"
+          ]
+        },
+        {
+          "source": "../placesSeed",
+          "specifiers": [
+            "seedPlaces"
+          ]
+        }
+      ],
+      "exports": [
+        "placesRoutes"
+      ],
+      "totalLines": 84,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/testing/mocks/routes/routing.ts": {
+      "filePath": "frontend/testing/mocks/routes/routing.ts",
+      "contentHash": "e71e06b25412f25f671875f6f2aabab01bff5ba1229ae975dc94dbbeacfd7422",
+      "functions": [
+        {
+          "name": "point",
+          "params": [
+            "raw",
+            "name"
+          ],
+          "returnType": "Coordinates",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "nearestStop",
+          "params": [
+            "p"
+          ],
+          "returnType": "TransitStop",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "leg",
+          "params": [
+            "mode",
+            "from",
+            "to",
+            "startMs",
+            "minutes",
+            "route",
+            "headsign"
+          ],
+          "returnType": "RouteLeg",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "plan",
+          "params": [
+            "mode",
+            "legs",
+            "distance"
+          ],
+          "returnType": "RoutePlan",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "walkPlan",
+          "params": [
+            "from",
+            "to",
+            "now"
+          ],
+          "returnType": "RoutePlan",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "transitPlan",
+          "params": [
+            "from",
+            "to",
+            "now"
+          ],
+          "returnType": "RoutePlan",
+          "exported": false,
+          "lineCount": 33
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/errors",
+          "specifiers": [
+            "ApiError"
+          ]
+        },
+        {
+          "source": "@/api/types.routing",
+          "specifiers": [
+            "LegMode",
+            "PlanMode",
+            "RouteLeg",
+            "RoutePlan"
+          ]
+        },
+        {
+          "source": "@/api/types.transit",
+          "specifiers": [
+            "TransitStop"
+          ]
+        },
+        {
+          "source": "@/lib/geo",
+          "specifiers": [
+            "DEFAULT_POSITION",
+            "distanceMeters",
+            "isValidCoordinate",
+            "Coordinates"
+          ]
+        },
+        {
+          "source": "@/lib/polyline",
+          "specifiers": [
+            "encodePolyline"
+          ]
+        },
+        {
+          "source": "../core",
+          "specifiers": [
+            "Route"
+          ]
+        },
+        {
+          "source": "../transitSeed",
+          "specifiers": [
+            "LINE_STOPS",
+            "MOCK_ROUTES",
+            "MOCK_STOPS"
+          ]
+        }
+      ],
+      "exports": [
+        "routingRoutes"
+      ],
+      "totalLines": 123,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/testing/mocks/routes/transit.ts": {
+      "filePath": "frontend/testing/mocks/routes/transit.ts",
+      "contentHash": "c6eaa97e3cce9b938e3003b82d8fbdee3b864f537d54b29d76b8b7fce21412b9",
+      "functions": [
+        {
+          "name": "hash",
+          "params": [
+            "s"
+          ],
+          "returnType": "number",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "stopById",
+          "params": [
+            "id"
+          ],
+          "returnType": "TransitStop",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "headsignFrom",
+          "params": [
+            "route",
+            "stopId"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "parseBbox",
+          "params": [
+            "raw"
+          ],
+          "returnType": "number[]",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "vehiclesFor",
+          "params": [
+            "route",
+            "now"
+          ],
+          "returnType": "TransitVehicles['vehicles']",
+          "exported": false,
+          "lineCount": 22
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/errors",
+          "specifiers": [
+            "ApiError"
+          ]
+        },
+        {
+          "source": "@/api/types.transit",
+          "specifiers": [
+            "LastDepartures",
+            "StopArrivals",
+            "TransitArrival",
+            "TransitStop",
+            "TransitSummary",
+            "TransitVehicles"
+          ]
+        },
+        {
+          "source": "@/lib/time",
+          "specifiers": [
+            "bucharestToUtcIso",
+            "toBucharest"
+          ]
+        },
+        {
+          "source": "../core",
+          "specifiers": [
+            "getState",
+            "Route"
+          ]
+        },
+        {
+          "source": "../transitSeed",
+          "specifiers": [
+            "LINE_STOPS",
+            "LINES_NOT_RUNNING",
+            "MOCK_ROUTES",
+            "MOCK_STOPS"
+          ]
+        }
+      ],
+      "exports": [
+        "transitRoutes"
+      ],
+      "totalLines": 138,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/testing/mocks/routes/users.ts": {
+      "filePath": "frontend/testing/mocks/routes/users.ts",
+      "contentHash": "7d615fe7a795a39b10ebd7bd2b0e157db42e1054b6a035c9be809076964ac9e0",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/errors",
+          "specifiers": [
+            "ApiError"
+          ]
+        },
+        {
+          "source": "@/api/types",
+          "specifiers": [
+            "Me",
+            "PublicProfile",
+            "UserSummary"
+          ]
+        },
+        {
+          "source": "@/api/types.users",
+          "specifiers": [
+            "MyEvents",
+            "ReliabilityHistory"
+          ]
+        },
+        {
+          "source": "../core",
+          "specifiers": [
+            "eventById",
+            "getState",
+            "me",
+            "toSummary",
+            "userById",
+            "Route"
+          ]
+        },
+        {
+          "source": "../data",
+          "specifiers": [
+            "MOCK_ME_ID",
+            "MockEvent"
+          ]
+        }
+      ],
+      "exports": [
+        "usersRoutes"
+      ],
+      "totalLines": 88,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/testing/mocks/transitSeed.ts": {
+      "filePath": "frontend/testing/mocks/transitSeed.ts",
+      "contentHash": "e925009695d564734b106b01c7788f00a2bb8d234fa4fbea99614d25daaaf2f1",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/types.transit",
+          "specifiers": [
+            "TransitRoute",
+            "TransitStop"
+          ]
+        }
+      ],
+      "exports": [
+        "MOCK_ROUTES",
+        "LINE_STOPS",
+        "MOCK_STOPS",
+        "LINES_NOT_RUNNING"
+      ],
+      "totalLines": 48,
+      "hasStructuralAnalysis": true
+    },
     "frontend/tsconfig.json": {
       "filePath": "frontend/tsconfig.json",
-      "contentHash": "155f3e4e0932e3915c559ff07a50e6bb9b4320323f69d18acd0dedbbf0a24659",
+      "contentHash": "b753975ebf719fd30c2d99b2bc09e64489e0804856e3ad42abef2d6074d2f9dd",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 19,
+      "totalLines": 22,
       "hasStructuralAnalysis": false
     },
     "infra/otp/README.md": {
