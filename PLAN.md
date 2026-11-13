@@ -57,15 +57,15 @@ Tasks 8, 9 and 10 do not need the database to start: B can build and test them a
 
 **Needs:** nothing. **Goal:** everyone can run the project and knows the API shapes.
 
-- [ ] **1.1 Create the Supabase project** (manual, in the Supabase dashboard). Region: Frankfurt (`eu-central-1`). Save the database password in a password manager, not in the repo.
+- [x] **1.1 Create the Supabase project** (manual, in the Supabase dashboard). Region: Frankfurt (`eu-central-1`). Save the database password in a password manager, not in the repo.
 - [x] **1.2 Connect the Supabase MCP server to Claude Code.** Add the hosted Supabase MCP server scoped to this project's ref, log in through the browser prompt, then check that it can list tables. Keep it scoped to this one project. Each teammate who wants to run migrations repeats this on their machine.
-- [ ] **1.3 Collect the keys.**
+- [x] **1.3 Collect the keys.** Example files committed; each person copies them and fills in the database password, pooler host and Gemini key (see `DOCS.md` → "Configuration and running").
   - **Backend:** all keys live in `backend/src/main/resources/application-local.properties` (already git-ignored). Commit an `application-local.properties.example` with the same names and empty values:
     - Supabase URL and JWKS URL (for token validation)
     - database URL, user, password (session pooler connection string)
     - Gemini API key and model names (backend only — never in the mobile app)
     - OpenTripPlanner base URL
-  - **Mobile:** only the Supabase URL, the Supabase publishable key and the backend address, in `mobile/.env` (git-ignored) with a committed `.env.example`.
+  - **Mobile:** done later, in step 12.1.
 - [ ] **1.4 Configure Supabase Auth:** email + password sign-in. Turn off "confirm email" for the hackathon so demo accounts work instantly.
 - [ ] **1.5 Repo layout and branches.** Create the folders below and one `<name>_dev` branch per person.
   ```
@@ -112,7 +112,7 @@ Tasks 8, 9 and 10 do not need the database to start: B can build and test them a
     service/           service/impl/     (interface + implementation)
   ```
   Features: `users`, `events`, `reliability`, `places`, `transit`, `routing`, `ai`, plus `common` and `config`.
-- [ ] **3.3 Security:** validate the Supabase access token (JWT) against the project's JWKS URL; the user id is the token's `sub`. Public: `GET` on events, places, transit. Everything else needs a token. CORS open for development.
+- [ ] **3.3 Security:** validate the Supabase access token (JWT) against the project's JWKS URL — our project signs tokens with **ES256**, so set `spring.security.oauth2.resourceserver.jwt.jws-algorithms=ES256` (Spring assumes RS256 otherwise and rejects every token); the user id is the token's `sub`. Public: `GET` on events, places, transit. Everything else needs a token. CORS open for development.
 - [ ] **3.4 Common pieces:** one error response shape, a global exception handler, a "current user" helper, pagination parameters.
 - [ ] **3.5 Test setup:** service unit tests with Mockito, controller tests with MockMvc and a fake JWT. No test may need the real Supabase database.
 - [ ] **3.6 Run guide** in `DOCS.md`: how to start the API on a laptop and reach it from a phone running Expo Go on the same Wi-Fi. No health endpoint for now — nothing is deployed.
@@ -226,9 +226,9 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 ## 12. Mobile foundation — Track C
 
-**Needs:** 1.3 for keys, 1.6 for mocks. Everything must run in **Expo Go** (no custom native code).
+**Needs:** 1.6 for mocks. Everything must run in **Expo Go** (no custom native code).
 
-- [ ] **12.1 Create the Expo app** in `mobile/` (TypeScript, Expo Router) with four tabs: Home, Map, AI, Profile.
+- [ ] **12.1 Create the Expo app** in `mobile/` (TypeScript, Expo Router) with four tabs: Home, Map, AI, Profile. Add `mobile/.env` (git-ignored) with a committed `.env.example`: Supabase URL, Supabase publishable key, and the backend laptop's Wi-Fi address (`http://<ip>:8080`). Public values only — Expo bundles every `EXPO_PUBLIC_` variable into the app.
 - [ ] **12.2 Auth:** sign-up (email, password, username), sign-in, sign-out with the Supabase client; session kept on the device; signed-out users see only the auth screens.
 - [ ] **12.3 API layer:** one client that adds the Supabase token to every request, plus a `USE_MOCKS` switch that serves `mobile/src/mocks/` instead. Data fetching with TanStack Query.
 - [ ] **12.4 Shared UI:** colours, typography, buttons, cards, loading / empty / error states, and the one default profile picture used for every user.

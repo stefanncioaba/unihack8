@@ -1,0 +1,25 @@
+# Copy this file to application-local.properties (same folder) and fill in the values.
+# application-local.properties is git-ignored: never commit real keys.
+
+# --- Supabase ---------------------------------------------------------------
+supabase.url=https://mjurmmhilnolicncywsw.supabase.co
+# Public keys Supabase signs access tokens with (used to validate the app's JWTs).
+spring.security.oauth2.resourceserver.jwt.jwk-set-uri=https://mjurmmhilnolicncywsw.supabase.co/auth/v1/.well-known/jwks.json
+
+# --- Database (Supabase session pooler) -------------------------------------
+# Supabase dashboard -> Connect -> "Session pooler". Copy the host from there, e.g.
+# jdbc:postgresql://aws-1-eu-central-1.pooler.supabase.com:5432/postgres
+spring.datasource.url=
+spring.datasource.username=postgres.mjurmmhilnolicncywsw
+# Database password chosen when the project was created (ask Stefan).
+spring.datasource.password=
+
+# --- Gemini (AI assistant, PLAN task 11) ------------------------------------
+# Create a key at https://aistudio.google.com/apikey
+gemini.api-key=
+gemini.chat-model=gemini-2.5-flash
+# Model used for the web lookup tool; web search is free on this one.
+gemini.lookup-model=gemini-2.5-flash
+
+# --- OpenTripPlanner (PLAN task 10) -----------------------------------------
+otp.base-url=http://localhost:8081
