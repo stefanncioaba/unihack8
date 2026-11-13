@@ -105,7 +105,7 @@ Applied to Supabase on 2026-11-13 from `supabase/migrations/` (four migrations, 
 
 ## Current state
 
-- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging), places (task 8, 1003 Timișoara places imported into Supabase) and live transit (task 9, `/transit/**`). 119 tests passing.
+- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging), places (task 8, 1003 Timișoara places imported into Supabase) live transit (task 9, `/transit/**`) and routing (task 10, `/routes/plan`). 173 tests passing.
 - `supabase/`: migrations and schema tests for task 2, applied.
 - `docs/API.md`: API contract (task 1.6).
 - `infra/otp/`: OpenTripPlanner 2.7 setup (docker-compose, data download script). Its large data files are git-ignored. `GET /routes/plan` is implemented (task 10).
@@ -223,22 +223,23 @@ Public endpoints (no token) under `/transit`, contract in `docs/API.md` → Tran
 | `GET /transit/last-departures?stopId=` | computed from arrivals | — |
 | `GET /transit/summary?near=lat,lon` | nearest stop + its last departures + alert count | — |
 
-**Package `com.unihack8.backend.transit`:** `client/StptClient` (+ `impl/`) makes the raw calls and reads STPT's JSON leniently; `mapper/TransitMapper` (+ `impl/`) converts to the API shapes; `service/TransitService` (+ `impl/`) caches and computes; `controller/TransitController`; `config/StptProperties` and `StptClientConfig` (HTTP client). No database table — everything is live.
+**Package `com.unihack8.backend.transit`:** `client/StptClient` (+ `impl/`) makes the raw calls and reads STPT's JSON leniently; `mapper/TransitMapper` (+ `impl/`) converts to the API shapes; `service/TransitService` (+ `impl/`) caches and computes; `controller/TransitController`; `repository/TimetableRepository` (+ `impl/GtfsTimetableRepository`) reads the GTFS timetable; `config/StptProperties` and `StptClientConfig` (HTTP client). No database table: live data plus the timetable file.
 
 **Shared helpers in `common`:**
 - `common.cache.StaleCache` (added by transit; reuse it for routing/OTP) — per-key cache: fresh for its lifetime; if the source then fails, the last value is served with `stale: true`; if nothing was ever cached, `503 SOURCE_UNAVAILABLE`. One request per key reaches the source at a time.
 - Transit uses the places feature's `common.geo.GeoPoint` (`near`, `distanceMetersTo`) and `common.geo.BoundingBox` (`bbox`).
 
-**Settings** (all optional, defaults in `StptProperties`): `stpt.base-url`, `stpt.connect-timeout` (3 s), `stpt.read-timeout` (5 s), `stpt.user-agent`, `stpt.ttl.vehicles|arrivals|alerts|static-data`.
+**Settings** (all optional, defaults in `StptProperties`): `stpt.base-url`, `stpt.connect-timeout` (3 s), `stpt.read-timeout` (5 s), `stpt.user-agent`, `stpt.ttl.vehicles|arrivals|alerts|static-data`, `stpt.gtfs-path` (default `../infra/otp/stpt-gtfs.zip`, i.e. the file task 10's `infra/otp/get-data.sh` downloads; if missing, `infra/otp/stpt-gtfs.zip` from the repo root is tried).
 
 **How STPT data is read (checked 2026-11-13):**
 - Arrival times come as `"HH:mm|minutes"` in Romanian local time; we turn them into UTC, picking the date nearest to now (so `00:05` seen at 23:50 is tomorrow). Repeated times are dropped.
 - An arrival item has one `vehicleId` for all its times; we mark only its **first** time `live: true` (the vehicle being tracked), the rest are timetable times.
 - Line type comes from STPT's category (tram, trolleybus, express, metropolitan, vaporetto), otherwise from the GTFS `route_type`; school (`S…`) and urban lines are `BUS`.
 - `from` / `to` come from the GTFS long name (`"Gara de Nord - Piața Gh. Domășneanu (AEM)"`). The older `/routes/capeti-linie.json` is not used: it still lists pre-diversion end stations.
-- **Last departures:** no GTFS timetable yet (PLAN open question 2), so `source` is always `LIVE_ESTIMATE` = the latest of the next few arrivals STPT reports (about the next 30–60 minutes). The summary sentence ("Last tram 2 from … leaves at 21:41") is therefore an estimate until the GTFS file is used. STPT's vehicles answer also has a per-line `service_window.last_arrival` (e.g. `24:30`) that could improve this later; not used yet.
+- **Last departures (9.6):** read from the **GTFS timetable** (`source: TIMETABLE`): for each line and direction, the latest scheduled departure from the stop on today's service day. Weekday/Saturday/Sunday services and holiday exceptions (`calendar.txt`, `calendar_dates.txt`) are applied; a trip's final stop is skipped (arriving at the terminus is not a departure); times after midnight (e.g. `24:30`) stay on the same service day, and **before 03:00** the previous day's timetable still applies. The file is loaded once, on first use (about 0.6 s, 890 stops, 13,335 trips). If the file is missing or does not cover today (the 2026-11-13 download ends 2026-12-31), the answer falls back to `LIVE_ESTIMATE` (latest of the next few live arrivals). Checked 2026-11-13 against the real file: last tram 2 from Dâmbovița leaves 23:46 on weekdays.
+- **Summary sentence:** names the line that stops first **among those still running** ("Last trolleybus 16 from Piața Huniade leaves at 23:18"); once all have gone: "No more departures from … tonight." (Romanian: "Nu mai sunt plecări din … în seara asta.").
 
-**Tests (47 for transit):** `StptClientImplTest` parses real STPT answers saved in `src/test/resources/stpt/` (no network); `TransitMapperImplTest` (types, time zones, midnight, duplicates); `TransitServiceImplTest` (sorting, bbox, caching, stale fallback when STPT is down, 503 with no cache, 404 stop, last departures, summary in English and Romanian); `TransitControllerTest` (JSON shapes, no token needed, 400/404/503); `StaleCacheTest`. A one-off run against the real STPT on 2026-11-13 returned 74 lines, 926 stops, live vehicles, arrivals and 5 alerts.
+**Tests (62 for transit):** `GtfsTimetableRepositoryTest` (small GTFS zip built in the test: services, holiday exceptions, terminus skipped, after-midnight times, missing file, quoted CSV); `StptClientImplTest` parses real STPT answers saved in `src/test/resources/stpt/` (no network); `TransitMapperImplTest` (types, time zones, midnight, duplicates); `TransitServiceImplTest` (sorting, bbox, caching, stale fallback when STPT is down, 503 with no cache, 404 stop, last departures from timetable and live fallback, service day before 03:00, summary in English and Romanian); `TransitControllerTest` (JSON shapes, no token needed, 400/404/503); `StaleCacheTest`. A one-off run against the real STPT on 2026-11-13 returned 74 lines, 926 stops, live vehicles, arrivals and 5 alerts.
 
 ### Routing (PLAN task 10, Track B)
 

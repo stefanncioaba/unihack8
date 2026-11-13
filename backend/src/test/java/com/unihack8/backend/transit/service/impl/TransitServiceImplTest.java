@@ -25,11 +25,15 @@ import com.unihack8.backend.transit.domain.dto.stpt.StptArrival;
 import com.unihack8.backend.transit.domain.dto.stpt.StptRoute;
 import com.unihack8.backend.transit.domain.dto.stpt.StptStop;
 import com.unihack8.backend.transit.domain.dto.stpt.StptVehicle;
+import com.unihack8.backend.transit.domain.model.ScheduledDeparture;
 import com.unihack8.backend.transit.mapper.impl.TransitMapperImpl;
+import com.unihack8.backend.transit.repository.TimetableRepository;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -40,6 +44,7 @@ class TransitServiceImplTest {
     private static final Instant NOW = Instant.parse("2026-11-13T18:35:00Z");
 
     private final StptClient stpt = mock(StptClient.class);
+    private final TimetableRepository timetable = mock(TimetableRepository.class);
     private final MutableClock clock = new MutableClock(NOW);
     private TransitServiceImpl service;
 
@@ -48,8 +53,9 @@ class TransitServiceImplTest {
     void setUp() {
         StptProperties props = new StptProperties("https://live.stpt.test", Duration.ofSeconds(3),
                 Duration.ofSeconds(5), "test", new StptProperties.Ttl(Duration.ofSeconds(10),
-                Duration.ofSeconds(20), Duration.ofMinutes(5), Duration.ofHours(24)));
-        service = new TransitServiceImpl(stpt, new TransitMapperImpl(), clock, props);
+                Duration.ofSeconds(20), Duration.ofMinutes(5), Duration.ofHours(24)), "unused.zip");
+        // No timetable unless a test says otherwise (Mockito answers Optional.empty()).
+        service = new TransitServiceImpl(stpt, new TransitMapperImpl(), timetable, clock, props);
 
         when(stpt.fetchStops()).thenReturn(List.of(
                 new StptStop("1", "Dâmbovița (Ion Barac)", 45.74015, 21.19611, List.of("2", "9")),
@@ -206,6 +212,77 @@ class TransitServiceImplTest {
         TransitSummaryResponse r = service.summary(new GeoPoint(45.7537, 21.2257), Locale.ENGLISH);
         assertThat(r.lastDepartures()).isEmpty();
         assertThat(r.message()).isEqualTo("No departures known from City of Mara (Lidl) right now.");
+    }
+
+    // With a timetable covering today: real last departures (23:46 local = 21:46 UTC), source TIMETABLE,
+    // and STPT's arrivals are not needed.
+    @Test
+    void lastDeparturesFromTimetable() {
+        when(timetable.lastDepartures("1", LocalDate.of(2026, 11, 13))).thenReturn(Optional.of(List.of(
+                new ScheduledDeparture("9", "Piața Gh. Domășneanu", 22 * 3600 + 52 * 60),
+                new ScheduledDeparture("2", "Shopping City", 23 * 3600 + 46 * 60))));
+
+        LastDeparturesResponse r = service.lastDepartures("1");
+
+        assertThat(r.source()).isEqualTo("TIMETABLE");
+        assertThat(r.stopName()).isEqualTo("Dâmbovița (Ion Barac)");
+        assertThat(r.departures()).containsExactly(
+                new LastDepartureDto("2", "Shopping City", Instant.parse("2026-11-13T21:46:00Z")),
+                new LastDepartureDto("9", "Piața Gh. Domășneanu", Instant.parse("2026-11-13T20:52:00Z")));
+        verify(stpt, times(0)).fetchArrivals("1");
+    }
+
+    // Times past 24:00 belong to the same service day (00:30 the next calendar day).
+    @Test
+    void timetableTimesAfterMidnight() {
+        when(timetable.lastDepartures("1", LocalDate.of(2026, 11, 13))).thenReturn(Optional.of(List.of(
+                new ScheduledDeparture("2", "Shopping City", 24 * 3600 + 30 * 60))));
+        assertThat(service.lastDepartures("1").departures().get(0).lastDepartureAt())
+                .isEqualTo(Instant.parse("2026-11-13T22:30:00Z"));
+    }
+
+    // Before 03:00 local time the previous day's timetable still applies.
+    @Test
+    void serviceDayStartsAtThree() {
+        assertThat(TransitServiceImpl.serviceDate(Instant.parse("2026-11-13T23:30:00Z"))) // 01:30 on the 14th
+                .isEqualTo(LocalDate.of(2026, 11, 13));
+        assertThat(TransitServiceImpl.serviceDate(Instant.parse("2026-11-14T01:00:00Z"))) // 03:00 on the 14th
+                .isEqualTo(LocalDate.of(2026, 11, 14));
+    }
+
+    // Timetable empty for this stop today: live estimate as before.
+    @Test
+    void emptyTimetableFallsBackToLive() {
+        when(timetable.lastDepartures(org.mockito.ArgumentMatchers.eq("1"), org.mockito.ArgumentMatchers.any()))
+                .thenReturn(Optional.of(List.of()));
+        assertThat(service.lastDepartures("1").source()).isEqualTo("LIVE_ESTIMATE");
+    }
+
+    // A stop STPT's live list does not know, but the timetable does, still answers.
+    @Test
+    void stopKnownOnlyToTimetable() {
+        when(timetable.lastDepartures(org.mockito.ArgumentMatchers.eq("555"), org.mockito.ArgumentMatchers.any()))
+                .thenReturn(Optional.of(List.of(new ScheduledDeparture("33", "Bucovina", 22 * 3600))));
+        when(timetable.stopName("555")).thenReturn(Optional.of("Gara de Nord"));
+        assertThat(service.lastDepartures("555").stopName()).isEqualTo("Gara de Nord");
+    }
+
+    // Summary names the line that stops first among those still running; tram 9 at 22:52 here.
+    @Test
+    void summaryFromTimetable() {
+        when(timetable.lastDepartures("1", LocalDate.of(2026, 11, 13))).thenReturn(Optional.of(List.of(
+                new ScheduledDeparture("9", "Piața Gh. Domășneanu", 22 * 3600 + 52 * 60),
+                new ScheduledDeparture("2", "Shopping City", 23 * 3600 + 46 * 60))));
+        TransitSummaryResponse r = service.summary(new GeoPoint(45.7401, 21.1961), Locale.ENGLISH);
+        assertThat(r.message()).isEqualTo("Last tram 9 from Dâmbovița (Ion Barac) leaves at 22:52");
+
+        clock.advance(Duration.ofMinutes(140)); // 22:55 local: tram 9 has gone
+        assertThat(service.summary(new GeoPoint(45.7401, 21.1961), Locale.ENGLISH).message())
+                .isEqualTo("Last tram 2 from Dâmbovița (Ion Barac) leaves at 23:46");
+
+        clock.advance(Duration.ofHours(1)); // 23:55 local: everything has gone
+        assertThat(service.summary(new GeoPoint(45.7401, 21.1961), Locale.of("ro")).message())
+                .isEqualTo("Nu mai sunt plecări din Dâmbovița (Ion Barac) în seara asta.");
     }
 
     // Line names sort like people expect.

@@ -22,11 +22,15 @@ import com.unihack8.backend.transit.domain.dto.stpt.StptArrival;
 import com.unihack8.backend.transit.domain.dto.stpt.StptRoute;
 import com.unihack8.backend.transit.domain.dto.stpt.StptStop;
 import com.unihack8.backend.transit.domain.dto.stpt.StptVehicle;
+import com.unihack8.backend.transit.domain.model.ScheduledDeparture;
 import com.unihack8.backend.transit.mapper.TransitMapper;
+import com.unihack8.backend.transit.repository.TimetableRepository;
 import com.unihack8.backend.transit.service.TransitService;
 import java.time.Clock;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -41,6 +45,9 @@ import org.springframework.stereotype.Service;
 public class TransitServiceImpl implements TransitService {
 
     static final String SOURCE_LIVE_ESTIMATE = "LIVE_ESTIMATE";
+    static final String SOURCE_TIMETABLE = "TIMETABLE";
+    // Trips after midnight belong to the previous service day until this hour.
+    private static final int SERVICE_DAY_START_HOUR = 3;
     private static final String ALL = "all";
     private static final ZoneId CITY_ZONE = ZoneId.of("Europe/Bucharest");
     private static final DateTimeFormatter HOUR_MINUTE = DateTimeFormatter.ofPattern("HH:mm");
@@ -50,6 +57,7 @@ public class TransitServiceImpl implements TransitService {
 
     private final StptClient stpt;
     private final TransitMapper mapper;
+    private final TimetableRepository timetable;
     private final Clock clock;
     private final StaleCache<String, List<StptStop>> stopsCache;
     private final StaleCache<String, List<StptRoute>> routesCache;
@@ -58,9 +66,11 @@ public class TransitServiceImpl implements TransitService {
     private final StaleCache<String, List<StptArrival>> arrivalsCache;
 
     // One cache per kind of STPT data, with the lifetimes from StptProperties.
-    public TransitServiceImpl(StptClient stpt, TransitMapper mapper, Clock clock, StptProperties props) {
+    public TransitServiceImpl(StptClient stpt, TransitMapper mapper, TimetableRepository timetable, Clock clock,
+                              StptProperties props) {
         this.stpt = stpt;
         this.mapper = mapper;
+        this.timetable = timetable;
         this.clock = clock;
         StptProperties.Ttl ttl = props.ttl();
         this.stopsCache = new StaleCache<>("STPT stops", ttl.staticData(), clock);
@@ -118,9 +128,26 @@ public class TransitServiceImpl implements TransitService {
         return alertsCache.get(ALL, k -> stpt.fetchAlerts()).value().stream().map(mapper::toAlert).toList();
     }
 
-    // Until the GTFS timetable exists (task 10), the latest arrival STPT reports per line and direction.
+    // From the GTFS timetable when it covers today; otherwise the latest arrival STPT reports live.
     @Override
     public LastDeparturesResponse lastDepartures(String stopId) {
+        String id = requireText(stopId, "stopId");
+        LocalDate serviceDate = serviceDate(clock.instant());
+        Optional<List<ScheduledDeparture>> scheduled = timetable.lastDepartures(id, serviceDate);
+        if (scheduled.isPresent() && !scheduled.get().isEmpty()) {
+            List<LastDepartureDto> departures = scheduled.get().stream()
+                    .map(d -> new LastDepartureDto(d.route(), d.headsign(),
+                            serviceDate.atStartOfDay(CITY_ZONE).plusSeconds(d.departureSeconds()).toInstant()))
+                    .sorted(Comparator.comparing(LastDepartureDto::route, TransitServiceImpl::compareLineNames)
+                            .thenComparing(d -> String.valueOf(d.headsign())))
+                    .toList();
+            return new LastDeparturesResponse(id, timetableStopName(id), SOURCE_TIMETABLE, departures);
+        }
+        return liveLastDepartures(id);
+    }
+
+    // Fallback (no timetable file, or it does not cover today): latest arrival seen live per line/direction.
+    private LastDeparturesResponse liveLastDepartures(String stopId) {
         ArrivalsResponse arrivals = arrivals(stopId);
         Map<String, LastDepartureDto> latest = new LinkedHashMap<>();
         for (ArrivalDto a : arrivals.arrivals()) {
@@ -151,14 +178,21 @@ public class TransitServiceImpl implements TransitService {
                 message(stop.name(), departures, romanian));
     }
 
-    // "Last tram 2 from X leaves at 23:41" for the line that stops running first.
+    // "Last tram 2 from X leaves at 23:41" for the line that stops running first among those still running.
     private String message(String stopName, List<LastDepartureDto> departures, boolean romanian) {
-        Optional<LastDepartureDto> first = departures.stream()
-                .min(Comparator.comparing(LastDepartureDto::lastDepartureAt));
-        if (first.isEmpty()) {
+        if (departures.isEmpty()) {
             return romanian
                     ? "Nu există plecări cunoscute din " + stopName + " acum."
                     : "No departures known from " + stopName + " right now.";
+        }
+        Instant now = clock.instant();
+        Optional<LastDepartureDto> first = departures.stream()
+                .filter(d -> !d.lastDepartureAt().isBefore(now))
+                .min(Comparator.comparing(LastDepartureDto::lastDepartureAt));
+        if (first.isEmpty()) {
+            return romanian
+                    ? "Nu mai sunt plecări din " + stopName + " în seara asta."
+                    : "No more departures from " + stopName + " tonight.";
         }
         LastDepartureDto d = first.get();
         String time = HOUR_MINUTE.format(d.lastDepartureAt().atZone(CITY_ZONE));
@@ -197,6 +231,22 @@ public class TransitServiceImpl implements TransitService {
             return alerts().size();
         } catch (ApiException e) {
             return 0;
+        }
+    }
+
+    // Service day for a moment: before 03:00 Timișoara time the previous day's late trips still count.
+    static LocalDate serviceDate(Instant now) {
+        ZonedDateTime local = now.atZone(CITY_ZONE);
+        return local.getHour() < SERVICE_DAY_START_HOUR ? local.toLocalDate().minusDays(1) : local.toLocalDate();
+    }
+
+    // Stop name from STPT's live list, else from the timetable; 404 when neither knows the stop.
+    private String timetableStopName(String stopId) {
+        try {
+            String name = stopName(stopId);
+            return name != null ? name : timetable.stopName(stopId).orElse(null);
+        } catch (ApiException e) {
+            return timetable.stopName(stopId).orElseThrow(() -> e);
         }
     }
 

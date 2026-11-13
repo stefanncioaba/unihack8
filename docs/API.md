@@ -483,7 +483,7 @@ Refresh every 10 s on the map.
 ### `GET /transit/last-departures?stopId=1`
 
 `source` is `TIMETABLE` (from the GTFS file) or `LIVE_ESTIMATE` (fallback, last arrival seen live — PLAN 9.6).
-Until the GTFS file is found (task 10) the answer is always `LIVE_ESTIMATE`: the latest of the next few arrivals STPT reports per line and direction (roughly the next 30–60 minutes), **not** the real end of service.
+Normally `TIMETABLE`: the last scheduled departure of each line and direction on today's service day (lines that already left are still listed; compare `lastDepartureAt` with now). `LIVE_ESTIMATE` only when the backend has no timetable file or it does not cover today: then it is the latest of the next few live arrivals, **not** the real end of service.
 
 ```json
 {
@@ -499,7 +499,7 @@ Until the GTFS file is found (task 10) the answer is always `LIVE_ESTIMATE`: the
 ### `GET /transit/summary?near=45.7537,21.2257`
 
 The home page line. `message` is ready to show (Romanian when `Accept-Language` starts with `ro`, otherwise English). `near` is required.
-The message names the line from `lastDepartures` that stops earliest; with no departures it says none are known. If alerts cannot be loaded, `activeAlerts` is `0`.
+The message names the line from `lastDepartures` that stops earliest among those still running; when all have left it says there are no more departures tonight; with no departures at all it says none are known. If alerts cannot be loaded, `activeAlerts` is `0`.
 
 ```json
 {
