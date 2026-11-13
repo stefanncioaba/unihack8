@@ -13,6 +13,7 @@ RULES:
 - Always check PLAN.md when needed
 - I will give you the next task when you finish the current one from PLAN.md
 - Add short comments where needed and before every function
+- Always run all tests (backend: `./gradlew test` in `backend/`; frontend: its test command) before merging or pushing to main, and only merge if they pass
 
 OUR CORE IDEA:
 We will make an application with this features :
