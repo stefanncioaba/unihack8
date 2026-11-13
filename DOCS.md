@@ -214,7 +214,7 @@ Checked in that order (amenity first), so a church tagged `amenity=place_of_wors
 One graph for the whole repo, made with the **Understand-Anything** plugin (rule from AGENTS.md: keep it updated with every change).
 
 - **Files:** `.ua/knowledge-graph.json` (the graph), `.ua/meta.json` and `.ua/fingerprints.json` (let the next run update only changed files), `.ua/.understandignore` (what is left out: secrets such as `application-local.properties` and `.env`, build output, `.claude/`). Scratch folders under `.ua/` are git-ignored.
-- **Current version (2026-11-13, commit `828d6ab`, after task 3 and the frontend setup):** 54 files, 105 nodes, 214 edges, 10 layers (Project Documentation, API Contract, Backend App Security & Config, Backend Shared Web Layer, Backend Tests, Backend Build & Config, Database Schema, Infrastructure & Tooling, Frontend App, Frontend Config), 18-step guided tour.
+- **Current version (2026-11-13, commit `54ed920`, after task 8):** 91 files, 219 nodes, 474 edges, 11 layers (Project Documentation, API Contract, Backend App Security & Config, Backend Shared Web Layer, Places Feature, Backend Tests, Backend Build & Config, Database Schema, Infrastructure & Tooling, Frontend App, Frontend Config), 19-step guided tour.
 - **Left out on purpose** (`.ua/.understandignore`): secrets, build output, `.claude/`, and frontend noise (`package-lock.json`, `assets/`, `LICENSE`, `.npmrc`).
 - **Update it** after each change: run `/understand` (Claude Code) or the same command in Codex; it only reanalyzes changed files. `/understand-dashboard` opens the interactive view.
 - **Codex:** the plugin's README lists Codex as supported (install it with the plugin's install script for `codex`); not tested by us yet.
