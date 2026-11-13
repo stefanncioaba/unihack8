@@ -58,7 +58,7 @@ Tasks 8, 9 and 10 do not need the database to start: B can build and test them a
 **Needs:** nothing. **Goal:** everyone can run the project and knows the API shapes.
 
 - [ ] **1.1 Create the Supabase project** (manual, in the Supabase dashboard). Region: Frankfurt (`eu-central-1`). Save the database password in a password manager, not in the repo.
-- [ ] **1.2 Connect the Supabase MCP server to Claude Code.** Add the hosted Supabase MCP server scoped to this project's ref, log in through the browser prompt, then check that it can list tables. Keep it scoped to this one project. Each teammate who wants to run migrations repeats this on their machine.
+- [x] **1.2 Connect the Supabase MCP server to Claude Code.** Add the hosted Supabase MCP server scoped to this project's ref, log in through the browser prompt, then check that it can list tables. Keep it scoped to this one project. Each teammate who wants to run migrations repeats this on their machine.
 - [ ] **1.3 Collect the keys.**
   - **Backend:** all keys live in `backend/src/main/resources/application-local.properties` (already git-ignored). Commit an `application-local.properties.example` with the same names and empty values:
     - Supabase URL and JWKS URL (for token validation)
@@ -85,15 +85,15 @@ Tasks 8, 9 and 10 do not need the database to start: B can build and test them a
 
 **Needs:** 1.1, 1.2. Every migration is applied through MCP **and** saved as a `.sql` file in `supabase/migrations/`. Every `id` column is a UUID.
 
-- [ ] **2.1 `profiles`**: `id` (uuid, = `auth.users.id`), `username` (unique, case-insensitive), `reliability_score` (int, default 100), `created_at`. No profile picture column for now — the app shows one default picture for everyone; custom pictures only if time is left.
-- [ ] **2.2 Trigger** on `auth.users` insert that creates the matching `profiles` row (username taken from sign-up metadata).
-- [ ] **2.3 `events`**: `id`, `source` (`USER` | `EXTERNAL`), `external_id` (the event's id on the platform it came from, prefixed with the platform name, e.g. `livetickets:<id>`; unique; null for user events), `title`, `description`, `category`, `venue_name`, `address`, `lat`, `lon`, `starts_at`, `ends_at`, `capacity` (null = unlimited), `organizer_id` (null for imported events), `image_url`, `price_min`, `price_max`, `external_url`, `created_at`.
-- [ ] **2.4 `event_participants`**: `event_id`, `user_id` (unique pair), `status` (`JOINED` | `ATTENDED` | `NO_SHOW` | `CANCELLED` | `BANNED`), `qr_token` (unique, random), `joined_at`, `checked_in_at`.
-- [ ] **2.5 `reliability_log`**: `id`, `user_id`, `event_id`, `points_change` (how many points were added or removed, e.g. `+5` or `-10`), `reason`, `created_at` — the history behind each score.
-- [ ] **2.6 `places`**: `id` (our UUID, how the app refers to the place), `osm_id` (text, unique — the id OpenStreetMap gave the place, e.g. `node/2845091337`; it is how the import recognises a place it already saved, so re-running it updates rows instead of creating duplicates), `name`, `category`, `lat`, `lon`, `address`, `opening_hours`, `tags` (jsonb). Filled by task 8.
-- [ ] **2.7 Indexes:** events by `starts_at` and by `lat`/`lon`, places by `category` and `lat`/`lon`, trigram index on `profiles.username` and `events.title` for search.
-- [ ] **2.8 Row Level Security:** enable RLS on every table with no public policies. The app reads and writes only through the Spring API; the mobile app talks to Supabase for sign-in only.
-- [ ] **2.9 Security check:** run the Supabase security advisor and fix what it reports. **No seed data** — no mock users and no mock events in the database. We create our own accounts in the app; events arrive from the LiveTickets import (task 7) and from the create-event form.
+- [x] **2.1 `profiles`**: `id` (uuid, = `auth.users.id`), `username` (unique, case-insensitive), `reliability_score` (int, default 100), `created_at`. No profile picture column for now — the app shows one default picture for everyone; custom pictures only if time is left.
+- [x] **2.2 Trigger** on `auth.users` insert that creates the matching `profiles` row (username taken from sign-up metadata).
+- [x] **2.3 `events`**: `id`, `source` (`USER` | `EXTERNAL`), `external_id` (the event's id on the platform it came from, prefixed with the platform name, e.g. `livetickets:<id>`; unique; null for user events), `title`, `description`, `category`, `venue_name`, `address`, `lat`, `lon`, `starts_at`, `ends_at`, `capacity` (null = unlimited), `organizer_id` (null for imported events), `image_url`, `price_min`, `price_max`, `external_url`, `created_at`.
+- [x] **2.4 `event_participants`**: `event_id`, `user_id` (unique pair), `status` (`JOINED` | `ATTENDED` | `NO_SHOW` | `CANCELLED` | `BANNED`), `qr_token` (unique, random), `joined_at`, `checked_in_at`.
+- [x] **2.5 `reliability_log`**: `id`, `user_id`, `event_id`, `points_change` (how many points were added or removed, e.g. `+5` or `-10`), `reason`, `created_at` — the history behind each score.
+- [x] **2.6 `places`**: `id` (our UUID, how the app refers to the place), `osm_id` (text, unique — the id OpenStreetMap gave the place, e.g. `node/2845091337`; it is how the import recognises a place it already saved, so re-running it updates rows instead of creating duplicates), `name`, `category`, `lat`, `lon`, `address`, `opening_hours`, `tags` (jsonb). Filled by task 8.
+- [x] **2.7 Indexes:** events by `starts_at` and by `lat`/`lon`, places by `category` and `lat`/`lon`, trigram index on `profiles.username` and `events.title` for search.
+- [x] **2.8 Row Level Security:** enable RLS on every table with no public policies. The app reads and writes only through the Spring API; the mobile app talks to Supabase for sign-in only.
+- [x] **2.9 Security check:** run the Supabase security advisor and fix what it reports. **No seed data** — no mock users and no mock events in the database. We create our own accounts in the app; events arrive from the LiveTickets import (task 7) and from the create-event form.
 
 ---
 

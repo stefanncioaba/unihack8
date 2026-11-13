@@ -33,11 +33,42 @@ The mobile app never calls third-party data sources directly; the backend proxie
 - **No seed data:** accounts are created in the app; events come from the LiveTickets import and the create-event form.
 - **Merging:** branches go into `main` only when Stefan says so.
 
+## Supabase MCP (PLAN task 1.2)
+
+- The Supabase MCP server is configured in `.mcp.json` at the repo root (committed, no secrets inside). It is scoped to our project only (`project_ref=mjurmmhilnolicncywsw`).
+- **Each teammate authenticates once:** in a regular terminal, from the repo root, run `claude /mcp`, choose "Use this MCP server", select `supabase`, then "Authenticate" and log in to Supabase in the browser that opens.
+- **Use it from Claude Code in a terminal** (`claude` in the repo root). The Claude desktop app did not load this project's `.mcp.json` server in our test on 2026-11-13; the terminal CLI did, and listed the (still empty) tables.
+- Every migration applied through MCP is also saved as a `.sql` file in `supabase/migrations/`.
+
+## Database (PLAN task 2)
+
+Applied to Supabase on 2026-11-13 from `supabase/migrations/` (four migrations, in file order).
+
+| Table | Purpose |
+|---|---|
+| `profiles` | One row per user (`id` = `auth.users.id`): `username`, `reliability_score` (starts at 100, never below 0). |
+| `events` | `source` = `USER` (needs `organizer_id`) or `EXTERNAL` (needs `external_id`, e.g. `livetickets:<id>`, unique). Optional `capacity` (null = unlimited), coordinates both set or both null. |
+| `event_participants` | Who joined which event (one row per pair), `status` (`JOINED`, `ATTENDED`, `NO_SHOW`, `CANCELLED`, `BANNED`), auto-generated `qr_token`. `checked_in_at` is set only for `ATTENDED`. |
+| `reliability_log` | Every score change: `points_change` (e.g. +5, −10) and `reason`. Kept when its event is deleted. |
+| `places` | Places imported from OpenStreetMap; `osm_id` (e.g. `node/2845091337`) is unique so re-imports update rows. |
+
+- **Every `id` is a UUID.**
+- **Sign-up creates the profile automatically** (trigger `on_auth_user_created`). The username comes from sign-up metadata `{ "username": "..." }`. If it is missing, invalid or already taken, a generated `user_xxxxxxxx` is used so sign-up never fails; the app should check availability first and the user can rename later.
+- **Usernames:** 3–20 letters, digits or underscores; unique ignoring case.
+- **Row Level Security** is on for every table with no policies, so the public Supabase keys cannot read or write app data. The Spring API connects with the database password, which bypasses RLS.
+- **Search:** trigram indexes on `profiles.username` and `events.title` (extension `pg_trgm` in schema `extensions`).
+- **No seed data.**
+
+**Tests:** `supabase/tests/schema_checks.sql` (21 checks: sign-up trigger, username rules, event source rules, double join, check-in rule, cascades, RLS). Run it with the Supabase MCP `execute_sql`; it always rolls back and ends with the error `SCHEMA CHECKS PASSED (21 checks)` or `SCHEMA CHECK FAILED: …`. Last run 2026-11-13: passed.
+
+**Advisors (2026-11-13):** security — only "RLS enabled, no policy" (INFO, intended); performance — only "unused index" (INFO, expected on empty tables).
+
 ## Current state
 
 - `backend/`: empty Spring Boot 4.1.2 skeleton (Java 21, Gradle; web, security, validation, JPA, PostgreSQL driver). No features yet.
-- `mobile/`, `infra/`, `supabase/`, `docs/`: not created yet.
-- Supabase project: not created yet.
+- `supabase/`: migrations and schema tests for task 2, applied.
+- `mobile/`, `infra/`, `docs/`: not created yet.
+- Supabase project: created, MCP connected, database schema applied (no data).
 
 ## External data sources
 
