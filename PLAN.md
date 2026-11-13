@@ -190,13 +190,13 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 **Needs:** nothing to start. The backend calls `live.stpt.ro` and caches; the mobile app never calls it directly. Endpoints are in `DOCS.md` → "External data sources".
 
-- [ ] **9.1 STPT client** with short caches (vehicles 10 s, arrivals 20 s, alerts 5 min, stops/routes 24 h) and a timeout, so a slow source never hangs our API.
-- [ ] **9.2** `GET /transit/stops` (optional `bbox`) and `GET /transit/routes`.
-- [ ] **9.3** `GET /transit/vehicles?route=` — live positions for the map.
-- [ ] **9.4** `GET /transit/stops/{id}/arrivals` — next arrivals at a stop.
-- [ ] **9.5** `GET /transit/alerts` — current service alerts.
-- [ ] **9.6 "Last tram/bus" info:** `GET /transit/last-departures?stopId=` and `GET /transit/summary?near=lat,lon` (home page line such as "Last tram 1 from Gara de Nord leaves at 23:41"). Computed from the GTFS timetable used in task 10; before the GTFS file is available, return the last arrival known from 9.4.
-- [ ] **9.7** Tests with saved sample responses; test the fallback when the source is down (serve the last cached value and flag it as stale).
+- [x] **9.1 STPT client** with short caches (vehicles 10 s, arrivals 20 s, alerts 5 min, stops/routes 24 h) and a timeout, so a slow source never hangs our API.
+- [x] **9.2** `GET /transit/stops` (optional `bbox`) and `GET /transit/routes`.
+- [x] **9.3** `GET /transit/vehicles?route=` — live positions for the map.
+- [x] **9.4** `GET /transit/stops/{id}/arrivals` — next arrivals at a stop.
+- [x] **9.5** `GET /transit/alerts` — current service alerts.
+- [x] **9.6 "Last tram/bus" info:** `GET /transit/last-departures?stopId=` and `GET /transit/summary?near=lat,lon` (home page line such as "Last tram 1 from Gara de Nord leaves at 23:41"). Computed from the GTFS timetable used in task 10; before the GTFS file is available, return the last arrival known from 9.4.
+- [x] **9.7** Tests with saved sample responses; test the fallback when the source is down (serve the last cached value and flag it as stale).
 
 ---
 
