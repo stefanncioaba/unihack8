@@ -107,12 +107,12 @@ Applied to Supabase on 2026-11-13 from `supabase/migrations/` (four migrations, 
 
 ## Current state
 
-- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging), users/profile endpoints (task 4), places (task 8, 1003 Timișoara places imported into Supabase), live transit (task 9, `/transit/**`) and routing (task 10, `/routes/plan`). 190 backend tests passing.
+- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging), users/profile endpoints (task 4), events and participation (task 5), places (task 8, 1003 Timișoara places imported into Supabase), live transit (task 9, `/transit/**`) and routing (task 10, `/routes/plan`). The combined backend has 224 passing tests.
 - `supabase/`: migrations and schema tests for task 2, applied.
 - `docs/API.md`: API contract (task 1.6).
 - `infra/otp/`: OpenTripPlanner 2.7 setup (docker-compose, data download script). Its large data files are git-ignored. `GET /routes/plan` is implemented (task 10).
 - `frontend/`: Expo app (SDK 54, TypeScript, Expo Router) — foundation (task 12) and Home page (task 13) done on mock data; Map and AI tabs are placeholders until tasks 14–15. See Features → Frontend and `frontend/AGENTS.md`. Each teammate works on their own `<name>_dev` branch.
-- Supabase project: created, MCP connected, email sign-in on with "Confirm email" off, database schema applied (no data).
+- Supabase project: created, MCP connected, email sign-in on with "Confirm email" off, database schema applied. The places import stored 1003 places; there are no seeded users or events.
 
 ## External data sources
 
@@ -184,10 +184,22 @@ Package `com.unihack8.backend.users` (`controller`, `service` + `impl`, `reposit
 - `PATCH /users/me` — `{ "username" }`, 3–20 letters, digits or `_`. `400 INVALID_USERNAME` for a bad or missing name; `409 USERNAME_TAKEN` when someone else has it, ignoring case — also when two requests race (the database unique index answers).
 - `GET /users/search?q=` — username prefix, case-insensitive, `_` and `%` taken literally, **sorted by username**, at most 20. A blank or missing `q` is `400 VALIDATION_FAILED`.
 - All of these except `username-available` need a token. Errors use the shared shape (`ApiException` + `ErrorCode`); the users package has no exception classes of its own.
-- Profiles are read through JPA (`Profile` → `profiles`). Attended events come from one plain SQL query over `events` and `event_participants` (`AttendedEventRepositoryImpl`), so this package needs no entities for tables the events feature will own. `GET /users/me/events` (PLAN 5.8) and `GET /users/{id}/reliability` (PLAN 6.4) are not built yet.
+- Profiles are read through JPA (`Profile` → `profiles`). Attended events come from one plain SQL query over `events` and `event_participants` (`AttendedEventRepositoryImpl`), so this package needs no entities for tables the events feature owns. `GET /users/me/events` is implemented by the events package (PLAN 5.8); `GET /users/{id}/reliability` (PLAN 6.4) is not built yet.
 - **Tests** (`src/test/.../users`): `UserServiceImplTest` (Mockito rules), `UserControllerTest` (MockMvc with real HS256 test tokens), `ProfileRepositoryTest` and `AttendedEventRepositoryImplTest` (H2). No test touches Supabase.
 
-Sections are added here as each PLAN task is implemented: Events, Reliability, Transit, Routing, AI, Frontend.
+Sections are added here as each PLAN task is implemented: Reliability, Transit, Routing, AI, Frontend.
+
+### Events and participation (PLAN task 5)
+
+Package `com.unihack8.backend.events`: `controller`, `domain/entity`, `domain/dto`, `repository` + `impl`, `mapper` + `impl`, and `service` + `impl`. Request and response shapes are in `docs/API.md` → Events.
+
+- Public `GET /events` filters by title, one or more categories, start-time range, viewport and source. It defaults to upcoming events, pages by start time, excludes events without coordinates from viewport results, and counts occupied spots for a page in one query. `GET /events/{id}` adds spots left, participant count, organizer summary, and caller status when signed in; cancelled rows appear as no current participation, while a banned caller sees `BANNED`. Imported events show no app capacity or organizer.
+- Authenticated users create events with `POST /events`; the mobile form requires the venue name to match this rule. Only the organizer can `PATCH` or `DELETE`; imported events are read-only. A patch can clear optional description, address, end time or capacity with `null`, but cannot reduce capacity below occupied spots. Deleting an event cascades its participation without a reliability penalty.
+- `POST /events/{id}/join` locks the event row before counting `JOINED` and `ATTENDED` spots. This serializes simultaneous last-spot joins. Duplicate joins and organizer self-joins fail; cancelled users can rejoin using the same QR token, while banned users cannot.
+- `DELETE /events/{id}/join` cancels a `JOINED` entry. Leaving within two hours of the start applies `-2` to reliability and writes `LATE_CANCEL`; the score floors at zero. Earlier cancellations cost nothing. Imported events cannot be joined.
+- Signed-in users can see non-cancelled participants and their reliability scores. The organizer can ban a `JOINED` participant, which frees a spot and has no reliability penalty. Checked-in participants cannot be banned.
+- `GET /users/me/events` lists the caller's non-cancelled joined events with status and their organized events, both sorted by start time.
+- **Tests:** service rule tests, MockMvc HTTP/security tests with signed HS256 tokens, and H2 database integration tests including two concurrent joins for one spot, patching capacity to unlimited, and the reliability score floor. No test contacts Supabase.
 
 ### Places (PLAN task 8)
 
@@ -339,7 +351,7 @@ Also built: Profile tab (username, gauge, find people, sign out) and the public 
 One graph for the whole repo, made with the **Understand-Anything** plugin (rule from AGENTS.md: keep it updated with every change).
 
 - **Files:** `.ua/knowledge-graph.json` (the graph), `.ua/meta.json` and `.ua/fingerprints.json` (let the next run update only changed files), `.ua/.understandignore` (what is left out: secrets such as `application-local.properties` and `.env`, build output, `.claude/`). Scratch folders under `.ua/` are git-ignored.
-- **Current version (2026-11-13, after merging main: users task 4, places task 8, transit task 9, routing task 10):** 176 files, 456 nodes, 1080 edges, 14 layers (Project Documentation, API Contract, Backend App, Security & Config, Backend Shared Web Layer, Places Feature, Backend Transit Feature, Backend Routing Feature, Users Feature, Backend Tests, Backend Build & Config, Database Schema, Infrastructure & Tooling, Frontend App, Frontend Config), 24-step guided tour.
+- **Current version (2026-11-13):** The existing graph covers the combined backend and TypeScript frontend: 272 analyzed files, 829 nodes, 1743 edges, 17 layers and 27 guided tour steps. It includes users (task 4), events and participation (task 5), places (task 8), transit (task 9), routing (task 10), and the Expo foundation and Home screens (tasks 12–13). The file inventory and structural fingerprints were refreshed for the integrated tree.
 - **Left out on purpose** (`.ua/.understandignore`): secrets, build output, `.claude/`, and frontend noise (`package-lock.json`, `assets/`, `LICENSE`, `.npmrc`).
 - **Update it** after each change: run `/understand` (Claude Code) or the same command in Codex; it only reanalyzes changed files. `/understand-dashboard` opens the interactive view.
 - **Codex:** the plugin's README lists Codex as supported (install it with the plugin's install script for `codex`); not tested by us yet.

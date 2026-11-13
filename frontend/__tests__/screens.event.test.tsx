@@ -127,6 +127,7 @@ describe('NewEventScreen', () => {
     fireEvent.press(screen.getByRole('button', { name: 'Create event' }));
     expect(screen.getByText('Give your event a title.')).toBeTruthy();
     expect(screen.getByText('Pick a category.')).toBeTruthy();
+    expect(screen.getByText('Give your event a venue name.')).toBeTruthy();
     expect(screen.getByText('Choose the location on the map.')).toBeTruthy();
     expect(mockRouter.replace).not.toHaveBeenCalled();
   });
@@ -134,6 +135,7 @@ describe('NewEventScreen', () => {
   it('creates an event with a picked location and opens it', async () => {
     renderScreen(<NewEventScreen />);
     fireEvent.changeText(screen.getByLabelText('Title'), 'Chess in the park');
+    fireEvent.changeText(screen.getByLabelText('Venue name'), 'Central Park');
     fireEvent.press(screen.getByRole('button', { name: 'Games' }));
     fireEvent.press(screen.getByRole('button', { name: 'Limited' }));
     fireEvent.changeText(screen.getByLabelText('Capacity'), '8');

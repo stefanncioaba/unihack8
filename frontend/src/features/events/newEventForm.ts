@@ -17,7 +17,7 @@ export type EventForm = {
   point: Coordinates | null;
 };
 
-export type FormErrors = Partial<Record<'title' | 'category' | 'startsAt' | 'capacity' | 'point', string>>;
+export type FormErrors = Partial<Record<'title' | 'category' | 'startsAt' | 'capacity' | 'point' | 'venueName', string>>;
 
 /** Tomorrow at 19:00 (Bucharest time), the suggested start. */
 export function defaultStart(now: number = Date.now()): string {
@@ -48,6 +48,7 @@ export function validateEventForm(form: EventForm, now: number = Date.now()): { 
   if (!title) errors.title = 'Give your event a title.';
   else if (title.length > 120) errors.title = 'Keep the title under 120 characters.';
   if (!form.category) errors.category = 'Pick a category.';
+  if (!form.venueName.trim()) errors.venueName = 'Give your event a venue name.';
   if (Date.parse(form.startsAt) <= now) errors.startsAt = 'The start must be in the future.';
   if (!form.point) errors.point = 'Choose the location on the map.';
 
@@ -66,7 +67,7 @@ export function validateEventForm(form: EventForm, now: number = Date.now()): { 
     lon: form.point.lon,
     startsAt: form.startsAt,
     ...(form.description.trim() ? { description: form.description.trim() } : {}),
-    ...(form.venueName.trim() ? { venueName: form.venueName.trim() } : {}),
+    venueName: form.venueName.trim(),
     ...(form.address.trim() ? { address: form.address.trim() } : {}),
     ...(capacity !== undefined ? { capacity } : {}),
   };

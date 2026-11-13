@@ -204,6 +204,7 @@ const routes: Route[] = [
       const fields: Record<string, string> = {};
       if (!b.title || !b.title.trim()) fields.title = 'must not be blank';
       if (!b.category || !EVENT_CATEGORIES.includes(b.category as EventCategory)) fields.category = 'is not a valid category';
+      if (!b.venueName?.trim()) fields.venueName = 'must not be blank';
       if (typeof b.lat !== 'number' || typeof b.lon !== 'number') fields.lat = 'location is required';
       if (!b.startsAt || Date.parse(b.startsAt) <= Date.now()) fields.startsAt = 'must be in the future';
       if (b.capacity !== undefined && b.capacity !== null && b.capacity < 1) fields.capacity = 'must be at least 1';

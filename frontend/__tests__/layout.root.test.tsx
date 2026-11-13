@@ -10,6 +10,9 @@ const getSession = supabase.auth.getSession as jest.Mock;
 describe('RootLayout', () => {
   beforeEach(() => getSession.mockResolvedValue({ data: { session: null } }));
 
+  // Clear query garbage-collection timers so the Jest process exits after the suite.
+  afterEach(() => queryClient.clear());
+
   it('shows a loading screen while the stored session is read, then leaves it', async () => {
     render(<RootLayout />);
     expect(screen.getByText('Starting…')).toBeTruthy();

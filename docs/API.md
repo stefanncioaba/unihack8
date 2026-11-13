@@ -50,7 +50,7 @@ Every error has this shape. `code` is stable — the app switches on it; `messag
 ```
 
 The codes live in `backend/.../common/exception/ErrorCode.java` — keep both in sync.
-For `VALIDATION_FAILED`, `fields` lists what is wrong: `{ "title": "must not be blank" }`.
+For `VALIDATION_FAILED`, `fields` lists per-field errors when available (for example `{ "title": "must not be blank" }`); it is `null` for whole-request rules such as an invalid date range.
 
 | Status | Code | When |
 |---|---|---|
@@ -242,7 +242,7 @@ Answer: paged list of **EventSummary**.
 
 ### `GET /events/{id}` — public
 
-`myStatus` is the caller's participation status (`null` if not joined or no token).
+`myStatus` is the caller's participation status (`null` if not joined, cancelled, or no token). A banned caller sees `BANNED` so the app can explain why joining is blocked.
 `participantCount` counts `JOINED` + `ATTENDED`.
 
 ```json
@@ -291,11 +291,11 @@ Request (`description`, `address`, `endsAt`, `capacity` optional):
 }
 ```
 
-Rules: `startsAt` in the future; `endsAt` after `startsAt`; `capacity` ≥ 1. Answer: `201` with the event detail.
+Rules: `venueName` is required for a user event; `startsAt` in the future; `endsAt` after `startsAt`; `capacity` ≥ 1. Answer: `201` with the event detail.
 
 ### `PATCH /events/{id}`
 
-Organiser only. Any subset of the `POST` fields. `capacity` cannot go below the current participant count. Answer: event detail. Errors: `403 NOT_ORGANIZER`, `403 EXTERNAL_EVENT`.
+Organiser only. Any subset of the `POST` fields. Omitted fields stay unchanged. Send `null` to clear `description`, `address`, `endsAt`, or `capacity` (unlimited spots); required fields and coordinates cannot be cleared. `capacity` cannot go below the current participant count. A changed `startsAt` must be in the future. Answer: event detail. Errors: `400 VALIDATION_FAILED`, `403 NOT_ORGANIZER`, `403 EXTERNAL_EVENT`.
 
 ### `DELETE /events/{id}`
 
@@ -338,7 +338,7 @@ Any signed-in user. Everyone except `CANCELLED`, ordered by `joinedAt`.
 
 ### `POST /events/{id}/participants/{userId}/ban`
 
-Organiser only. Frees the spot; the user cannot join again.
+Organiser only. Bans a `JOINED` participant, frees the spot, and prevents rejoining. An already checked-in participant cannot be banned (`409 ALREADY_CHECKED_IN`); a cancelled, already banned, or unknown participant answers `404 NOT_FOUND`.
 
 ```json
 { "userId": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d", "status": "BANNED" }

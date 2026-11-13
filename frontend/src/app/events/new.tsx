@@ -86,7 +86,7 @@ export default function NewEventScreen() {
           )}
         </View>
 
-        <TextField label="Venue name (optional)" value={form.venueName} onChangeText={(v) => set('venueName', v)} placeholder="Scârț Loc Lejer" />
+        <TextField label="Venue name" value={form.venueName} onChangeText={(v) => set('venueName', v)} error={errors.venueName} placeholder="Scârț Loc Lejer" />
         <TextField label="Address (optional)" value={form.address} onChangeText={(v) => set('address', v)} placeholder="Strada Mărășești 1" />
 
         <View style={{ gap: 8 }}>

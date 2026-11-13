@@ -76,7 +76,7 @@ describe('create-event form', () => {
   it('reports every missing required field', () => {
     const { errors, payload } = validateEventForm(emptyForm(now), now);
     expect(payload).toBeNull();
-    expect(Object.keys(errors).sort()).toEqual(['category', 'point', 'title']);
+    expect(Object.keys(errors).sort()).toEqual(['category', 'point', 'title', 'venueName']);
   });
 
   it('rejects a start in the past and a bad capacity', () => {
@@ -102,7 +102,7 @@ describe('create-event form', () => {
   });
 
   it('omits capacity when unlimited', () => {
-    const form = { ...emptyForm(now), title: 'Run', category: 'SPORT' as const, point: { lat: 45.7, lon: 21.2 } };
+    const form = { ...emptyForm(now), title: 'Run', category: 'SPORT' as const, point: { lat: 45.7, lon: 21.2 }, venueName: 'Park' };
     expect(validateEventForm(form, now).payload).not.toHaveProperty('capacity');
   });
 });

@@ -66,7 +66,7 @@ export type NewEvent = {
   title: string;
   description?: string;
   category: EventCategory;
-  venueName?: string;
+  venueName: string;
   address?: string;
   lat: number;
   lon: number;

@@ -74,7 +74,7 @@ describe('mock backend: join and leave', () => {
 });
 
 describe('mock backend: create, participants, ban, check-in', () => {
-  const payload = { title: 'New', category: 'GAMES', lat: 45.7, lon: 21.2, startsAt: new Date(Date.now() + 86_400_000).toISOString(), capacity: 5 };
+  const payload = { title: 'New', category: 'GAMES', venueName: 'Central Park', lat: 45.7, lon: 21.2, startsAt: new Date(Date.now() + 86_400_000).toISOString(), capacity: 5 };
 
   it('creates an event organised by me and validates the body', async () => {
     const created = await call('POST', '/events', {}, payload);
@@ -85,6 +85,7 @@ describe('mock backend: create, participants, ban, check-in', () => {
     const error = await call('POST', '/events', {}, { ...payload, title: ' ', startsAt: '2020-01-01T00:00:00Z', capacity: 0 }).catch((e) => e);
     expect(error).toBeInstanceOf(ApiError);
     expect(Object.keys(error.fields).sort()).toEqual(['capacity', 'startsAt', 'title']);
+    await expect(call('POST', '/events', {}, { ...payload, venueName: '' })).rejects.toMatchObject({ code: 'VALIDATION_FAILED' });
   });
 
   it('lists participants with reliability scores', async () => {
