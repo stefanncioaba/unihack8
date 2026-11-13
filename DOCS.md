@@ -245,7 +245,7 @@ Public endpoints (no token) under `/transit`, contract in `docs/API.md` → Tran
 One graph for the whole repo, made with the **Understand-Anything** plugin (rule from AGENTS.md: keep it updated with every change).
 
 - **Files:** `.ua/knowledge-graph.json` (the graph), `.ua/meta.json` and `.ua/fingerprints.json` (let the next run update only changed files), `.ua/.understandignore` (what is left out: secrets such as `application-local.properties` and `.env`, build output, `.claude/`). Scratch folders under `.ua/` are git-ignored.
-- **Current version:** KGLINE
+- **Current version (2026-11-13, merge commit `e44f472`, after task 8 places and task 9 transit):** 128 files, 316 nodes, 757 edges, 12 layers (Project Documentation, API Contract, Backend App Security & Config, Backend Shared Web Layer, Places Feature, Backend Transit Feature, Backend Tests, Backend Build & Config, Database Schema, Infrastructure & Tooling, Frontend App, Frontend Config), 22-step guided tour (steps 16–18 cover transit). Built by combining the places and transit graphs (both analysed from the same base) instead of a full re-run.
 - **Left out on purpose** (`.ua/.understandignore`): secrets, build output, `.claude/`, and frontend noise (`package-lock.json`, `assets/`, `LICENSE`, `.npmrc`).
 - **Update it** after each change: run `/understand` (Claude Code) or the same command in Codex; it only reanalyzes changed files. `/understand-dashboard` opens the interactive view.
 - **Codex:** the plugin's README lists Codex as supported (install it with the plugin's install script for `codex`); not tested by us yet.

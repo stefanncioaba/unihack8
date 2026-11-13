@@ -1,11 +1,11 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "54ed9208d27350071b458fd640a5ce17d0c740de",
-  "generatedAt": "2026-11-13T18:47:17.653Z",
+  "gitCommitHash": "e44f472edd1f47649355d81b1e419bdd0c1cb971",
+  "generatedAt": "2026-11-13T18:58:01.697Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
-      "contentHash": "34bc53e312d8287a2b46b4d9b7a7734eebef46da1d63c3da3fbe9ddda47e0d73",
+      "contentHash": "db5114be1d214c109f73f83ac908cee9ca7775a791eb5528f1340d16a619f688",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -25,12 +25,12 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "9f21a5229364d322517f8688f8f826b5afc36d4346a2c0b23a33880d6fa31ab8",
+      "contentHash": "3be2dad440a46dbfd0ebdabfed063e612ef66555f82f601db4fccc19fa97140b",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 221,
+      "totalLines": 252,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
@@ -159,9 +159,122 @@
       "totalLines": 14,
       "hasStructuralAnalysis": true
     },
+    "backend/src/main/java/com/unihack8/backend/common/cache/StaleCache.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/cache/StaleCache.java",
+      "contentHash": "3509c6132a39423d26e790f9e13c337f0587152c57ca52b563ee1d653ef91504",
+      "functions": [
+        {
+          "name": "StaleCache",
+          "params": [
+            "name",
+            "ttl",
+            "clock"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "get",
+          "params": [
+            "key",
+            "loader"
+          ],
+          "returnType": "Result<V>",
+          "exported": true,
+          "lineCount": 25
+        }
+      ],
+      "classes": [
+        {
+          "name": "StaleCache",
+          "methods": [
+            "StaleCache",
+            "get"
+          ],
+          "properties": [
+            "log",
+            "name",
+            "ttl",
+            "clock",
+            "slots"
+          ],
+          "exported": true,
+          "lineCount": 53
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.concurrent.ConcurrentHashMap",
+          "specifiers": [
+            "ConcurrentHashMap"
+          ]
+        },
+        {
+          "source": "java.util.function.Function",
+          "specifiers": [
+            "Function"
+          ]
+        },
+        {
+          "source": "org.slf4j.Logger",
+          "specifiers": [
+            "Logger"
+          ]
+        },
+        {
+          "source": "org.slf4j.LoggerFactory",
+          "specifiers": [
+            "LoggerFactory"
+          ]
+        }
+      ],
+      "exports": [
+        "StaleCache",
+        "get",
+        "StaleCache"
+      ],
+      "totalLines": 73,
+      "hasStructuralAnalysis": true
+    },
     "backend/src/main/java/com/unihack8/backend/common/dto/ErrorResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/dto/ErrorResponse.java",
-      "contentHash": "505dc09c37f0970b6ee35e036fd03207f829be0b3194de04918835ed1854f1ae",
+      "contentHash": "b092f07bc6eaf0486f7e12c09196b342b6e9f78dfda1b09ca1a06ae4b7286cea",
       "functions": [],
       "classes": [
         {
@@ -194,7 +307,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/dto/PageParams.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/dto/PageParams.java",
-      "contentHash": "1ad49c290cc8b5500036b0031c67a30d51dd8ff31b4eb9582704874a832449a8",
+      "contentHash": "5827fad2157c79bf7a4f071aa6059b3a123bb68a1cd78956eacc6fd835b17852",
       "functions": [
         {
           "name": "of",
@@ -301,7 +414,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/dto/PageResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/dto/PageResponse.java",
-      "contentHash": "e29c15742df03e0f4b9c5dae9e2f351ec6ad7e50e2558de55d623e976ba8aca7",
+      "contentHash": "c1bfd6d5f0bddc34d5a1826ae1203a58175f1eb7701c3d5691ff06874a4f1dfd",
       "functions": [
         {
           "name": "of",
@@ -354,7 +467,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
-      "contentHash": "e0d63aab0f780d3ca92f0ac35d0ed0bcca51aef3fad316eb735c2379c2a6e93a",
+      "contentHash": "8ac408471bfda613be28af0f5f6ccbc11f898d2172caf312283613e3955d7fa9",
       "functions": [
         {
           "name": "ApiException",
@@ -419,7 +532,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
-      "contentHash": "e42ddb4da25446fb1b542f01c7e7b1d49f8efe1128aa29c0123d6cbf93185da0",
+      "contentHash": "adfcebfe9cab34ec6783cadb9e1c388c75c7f72875468aa9aad252eabec617d4",
       "functions": [
         {
           "name": "ErrorCode",
@@ -479,7 +592,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/exception/ErrorResponseFactory.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/exception/ErrorResponseFactory.java",
-      "contentHash": "c423d0a8cf43a89281bd928c9a172ef330fb06fae6cdc85563d4c81ced307f67",
+      "contentHash": "855ca6c4ef40715c7fc0e2dd772346c1367fde37ce750c6ae9525f244667ec1e",
       "functions": [
         {
           "name": "ErrorResponseFactory",
@@ -571,7 +684,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/exception/GlobalExceptionHandler.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/exception/GlobalExceptionHandler.java",
-      "contentHash": "97227a2e81743f4c7641535d210a205ce128f63551f88a5e871a63564f35ce1d",
+      "contentHash": "8f93866385fb598414d47dcc583a1c6227f76d558388dd70074d4f254b080471",
       "functions": [
         {
           "name": "GlobalExceptionHandler",
@@ -866,7 +979,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
-      "contentHash": "63b612f286a8ece0ec07aefc4a1ad50e44f78f33ad38fbc2b46b4a10b0669ad5",
+      "contentHash": "0da465e01aa8d3c280a57af560814917a9612231f203dbcd0137969ba23986a5",
       "functions": [
         {
           "name": "parse",
@@ -925,7 +1038,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java",
-      "contentHash": "8d2de91be060eb757bfd97e9177b50498d050b278ca39ab7a60675c40aaafbe3",
+      "contentHash": "8811b1564c260b02f148207d26f5bb397cb11666dc04b211a89631727ad5d90f",
       "functions": [
         {
           "name": "GeoParsing",
@@ -978,7 +1091,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
-      "contentHash": "12287c3a92ab38adc2b4323f2140f81e94646469c120feda482ae5c69b8a9186",
+      "contentHash": "25c6c0cb7512eaf26237775c82bf31b283bb34e0d134514a6c0f1b1c90ed654b",
       "functions": [
         {
           "name": "parse",
@@ -1049,7 +1162,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/security/CurrentUser.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/security/CurrentUser.java",
-      "contentHash": "84b9cbcaee4f9b7b2e293d7efb47953c54b484ae086b68db6a43005356377014",
+      "contentHash": "bcb389f27ccb66d30345b35cc3b72029a27026c762f00dec3e9911126ad8dd30",
       "functions": [
         {
           "name": "id",
@@ -1138,7 +1251,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/security/JsonAccessDeniedHandler.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/security/JsonAccessDeniedHandler.java",
-      "contentHash": "c9016bdc4efdf83bcce9c144abbe6382913bf9c1b1a2b0b066a2109072330c4b",
+      "contentHash": "48fc3a4151071bf02b0e67deaf02a0556b6c871d9ce7ea43d32bc7352eb981de",
       "functions": [
         {
           "name": "JsonAccessDeniedHandler",
@@ -1248,7 +1361,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/security/JsonAuthenticationEntryPoint.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/security/JsonAuthenticationEntryPoint.java",
-      "contentHash": "74558005de6ebd6e51dabf1d31838623874412ff480ad5f33f3602527d37ffad",
+      "contentHash": "3a91c1be72607ed7afaa9b9d187aba05f8b0a63dd22ea22d4c5fbcd607f12780",
       "functions": [
         {
           "name": "JsonAuthenticationEntryPoint",
@@ -1358,7 +1471,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java",
-      "contentHash": "135e6351d30ba7228311abd2b022040f56f3f199beb2934259e1f2e5711cdd33",
+      "contentHash": "e3dcdc6b95b676a2f99d0fdc02f451e900d2d3929f17c9aec8f9a72af2115d56",
       "functions": [
         {
           "name": "securityFilterChain",
@@ -1582,7 +1695,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/config/SupabaseProperties.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/config/SupabaseProperties.java",
-      "contentHash": "434eff6af30cafc6a032634c16714108c961ca29446fdd48cfbb462cbe66d6c2",
+      "contentHash": "435ff1600ebbd2de684ecf4c30c01336ebbd198c0eb4d15977bf0f0f969e8913",
       "functions": [
         {
           "name": "issuer",
@@ -1638,7 +1751,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/config/TimeConfig.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/config/TimeConfig.java",
-      "contentHash": "01c9c2c1dc59a7131d6c4e4f1d34d1ce4d9ebf33649be7300500d2312813c80f",
+      "contentHash": "2a23422edf0af49172b71ee00cb2923796379fbf9824aecc0adff4a37d2cca65",
       "functions": [
         {
           "name": "clock",
@@ -1688,7 +1801,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java",
-      "contentHash": "137f8b50573c0b8f7a31e4642ff5a7eb98d6be8a728e6a974d2e832c775f304b",
+      "contentHash": "b7ee62ed46d9ec37998589585bea18440253d8cbf8b8b40221dce5da58b7501a",
       "functions": [],
       "classes": [
         {
@@ -1717,7 +1830,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java",
-      "contentHash": "1768110feb825d465856f91c5dffa66e180fe49cd663a027a458f61ac2aed5ba",
+      "contentHash": "d1896787db97b2d2c09c3b22c63484d9a30a19fd62b30d70d4b7caa70c73e05c",
       "functions": [],
       "classes": [
         {
@@ -1750,7 +1863,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassResponse.java",
-      "contentHash": "02add404cbb06dbdb75c16140a59d179a9df19b2b9f8b412320e004e8173144a",
+      "contentHash": "be026916179ad2d85123bcfefa716ea497b27737fe7c5fb4d8e67fc6feda1d65",
       "functions": [],
       "classes": [
         {
@@ -1783,7 +1896,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
-      "contentHash": "e63e4b3e40acde2f1b9e83be7a75d54cf0ec0e3bc78833674cf2029b5efbfa6d",
+      "contentHash": "2ced85bedc4933cc4cafa6bf42301970630ea2c7ccfbc9adda21fea2923ca31f",
       "functions": [
         {
           "name": "OverpassClientImpl",
@@ -1988,7 +2101,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportConfig.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportConfig.java",
-      "contentHash": "5239eda9a8b0de62801df03cd2495805d66a643e12783cba61f1cf8901fcc2b9",
+      "contentHash": "5370470d69d832b67ebcf01afbb64868f0a883691acbada9c222ce23f02728f1",
       "functions": [],
       "classes": [
         {
@@ -2021,7 +2134,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportProperties.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportProperties.java",
-      "contentHash": "f47708a37460692a6799368bd4df233a06eaea427a46bf7acaf26b2dfb6c1b4d",
+      "contentHash": "a75171d22f9705e1ab5700f8cc248a7805cd48724fb08cac67a7deef87dfcae1",
       "functions": [
         {
           "name": "overpassUrls",
@@ -2073,7 +2186,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java",
-      "contentHash": "a73a4b43d8263f044504a0bb710d00ae8f29e99862e4d23604d02d0e55c3b266",
+      "contentHash": "7234d2f507e78ecb72b600f5a60723bc8bf2b3bbfca105b812474cd4f9e14320",
       "functions": [
         {
           "name": "PlaceImportRunner",
@@ -2162,7 +2275,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
-      "contentHash": "8f1e3ad414c4660d663f99117e4e84cd2787f0051db33b6050385d876730c5b0",
+      "contentHash": "1f57d495954dfea0d2263527ea4cfeb927b56fdf0fc38c84373a2e633f30b7ad",
       "functions": [
         {
           "name": "PlaceController",
@@ -2386,7 +2499,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/domain/OsmPlaceData.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/OsmPlaceData.java",
-      "contentHash": "2e3700f809cff1966d584cfd4cc98e64fda9574d480968b584987c17ae583850",
+      "contentHash": "c69260c13676aefa28c10a501a2835e0db2dc725e904ef0463b2a1cddd635718",
       "functions": [
         {
           "name": "applyTo",
@@ -2432,7 +2545,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
-      "contentHash": "5c5d979d329a7ccfff85cf55b53da92e261360b43233418ec48b4a4dc19625d5",
+      "contentHash": "10b00627f5a6b93c1f97f07b69a0f73e2956461065f64953d018cf80b0784283",
       "functions": [
         {
           "name": "PlaceCategory",
@@ -2543,7 +2656,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceDetailDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceDetailDto.java",
-      "contentHash": "c85b130201f2140e5ca83b80b3a21cff4460641b4f7dbeb5d015f8fe7528ce31",
+      "contentHash": "7e0fc67fbd1786275700dbe2e60758fe3399f223e16dde74a6f42948abdbca4c",
       "functions": [],
       "classes": [
         {
@@ -2576,7 +2689,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java",
-      "contentHash": "0baf88701eb72ae83a4638df5dcaec2a593977245ab95e41b17960b2dcc50545",
+      "contentHash": "49194b18ffa49afc11244cfb063c6a2b6999d0daa12fc23870b5c847718c1483",
       "functions": [],
       "classes": [
         {
@@ -2626,7 +2739,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java",
-      "contentHash": "506c22ce931897931387e048137867e034ea1a777185fe10cb0e2eb408dff851",
+      "contentHash": "fbd9b3aea3e30ea576fc3887352c800a6b42889c7cc432b67ba046bde5aa572d",
       "functions": [],
       "classes": [
         {
@@ -2653,7 +2766,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
-      "contentHash": "3e188d8a153aa7db696b10bac705657879707924849fe65130d8b41b51d2899a",
+      "contentHash": "b4eab7ec57cfde89950cdba22ab6acde066a91db47b554bdf83ee3cb65cb6b61",
       "functions": [
         {
           "name": "Place",
@@ -2879,7 +2992,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/domain/entity/PlaceCategoryConverter.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/entity/PlaceCategoryConverter.java",
-      "contentHash": "00bb389ac186e775d492470dd961f37e6980474f1959987c0656c7195b84a48c",
+      "contentHash": "b7c60587c7ecc8464a24c51299569b7a13ec5ca521b3eec400c8bd31ddce0667",
       "functions": [
         {
           "name": "convertToDatabaseColumn",
@@ -2942,7 +3055,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/mapper/OsmElementMapper.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/OsmElementMapper.java",
-      "contentHash": "1248c85cab85e45e96d56eb0b3b8a7e85223c3a6e74a19e51e72a47baf7cea34",
+      "contentHash": "8bc49765d317b49e4c66b680f1202cf22a7ed175fb9764ed63cfd2cacd1066e4",
       "functions": [],
       "classes": [
         {
@@ -2983,7 +3096,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/mapper/PlaceMapper.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/PlaceMapper.java",
-      "contentHash": "25832e56257152dfc9eef92c0ce0a66af7a691a8be58461db2b934fa38f5737e",
+      "contentHash": "3e751c13f83b19ed8a3cdc269dfc40eb2ea2f2a4a1c0dd0458d37cb8063e3ad7",
       "functions": [],
       "classes": [
         {
@@ -3025,7 +3138,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
-      "contentHash": "e82d0ad956fa5d219b31805ad2804250efc1bc801686c927f5eadbfaeb7fe28a",
+      "contentHash": "80ec29710d747307b573686e8f064b472ca5ab5aa8cac291540f076a68df6ee0",
       "functions": [
         {
           "name": "toPlaceData",
@@ -3142,7 +3255,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java",
-      "contentHash": "4be57d691f7a77aa2f6391af78446ad2d7008596a7661390315bbf2c0062eaed",
+      "contentHash": "4b9ecb539bc9ca141fe958e87027ea335790fb7b3adc78997d0d4aad73dad9fc",
       "functions": [
         {
           "name": "toSummary",
@@ -3238,7 +3351,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java",
-      "contentHash": "187e95635f40ddfce3cf6c7e98e6782ac78c9624aea302cefef002fd14fc49f2",
+      "contentHash": "5a4ddebbc7215533e687a621a4c84c1cf81a8cdfb47c0323a10fff153af5f6c8",
       "functions": [],
       "classes": [
         {
@@ -3298,7 +3411,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java",
-      "contentHash": "995f49b1dac77f00a275831d2c32da642954c5327efc0610579094c13cc57147",
+      "contentHash": "1c168150ff5d5cf6b548005a046f1059595c0ffacb64466c9f63870ad4bb315b",
       "functions": [],
       "classes": [
         {
@@ -3334,7 +3447,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java",
-      "contentHash": "d2eed49e1c5060daeed37cf162defe07c21168fbc4dd472e39898fc957a1f78e",
+      "contentHash": "23f5b69900bde40b7856c35e53ab39f18a59519e00fd065f0c03446a467124e9",
       "functions": [],
       "classes": [
         {
@@ -3394,7 +3507,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java",
-      "contentHash": "4c494e675c0a3f2565e5f65acf55d149ef570748734f9b540c5d49664acdbac4",
+      "contentHash": "1aa30eaaaf5c3cba69f90854aa0ff8b5d4336e6560e543fd588dafe437da30a9",
       "functions": [
         {
           "name": "PlaceImportServiceImpl",
@@ -3574,7 +3687,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
-      "contentHash": "fd8e9fce9d1e2dba2b9bbb9e48e4760e5c5cc975128413d7bfb5a7755da850a8",
+      "contentHash": "b89e08fd40149e76dd8d431a8364f74f1be79bba43f5d8a0dfcade5707a1ff62",
       "functions": [
         {
           "name": "PlaceServiceImpl",
@@ -3766,7 +3879,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java",
-      "contentHash": "2635224f2b4ee28bea5c227cbcc6355ca668e10e4db4f90d5e1b76df7e95461e",
+      "contentHash": "2d6e3466e605ab059a10a04d9785f15ce9635c65bce3f5aea5b72bb319891483",
       "functions": [
         {
           "name": "PlaceSpecifications",
@@ -3852,9 +3965,1940 @@
       "totalLines": 44,
       "hasStructuralAnalysis": true
     },
+    "backend/src/main/java/com/unihack8/backend/transit/client/StptClient.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/client/StptClient.java",
+      "contentHash": "37d03cb5e932da2eb99886d66b3c08f4356324d50365cebbbf80600bbb625ae3",
+      "functions": [],
+      "classes": [
+        {
+          "name": "StptClient",
+          "methods": [
+            "fetchStops",
+            "fetchRoutes",
+            "fetchVehicles",
+            "fetchArrivals",
+            "fetchAlerts"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 17
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptAlert",
+          "specifiers": [
+            "StptAlert"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptArrival",
+          "specifiers": [
+            "StptArrival"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptRoute",
+          "specifiers": [
+            "StptRoute"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptStop",
+          "specifiers": [
+            "StptStop"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptVehicle",
+          "specifiers": [
+            "StptVehicle"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "StptClient"
+      ],
+      "totalLines": 31,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/client/impl/StptClientImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/client/impl/StptClientImpl.java",
+      "contentHash": "db57cbdf8d112d74ab60c2be4c067df9e0bd9f5c22f1c31186b6edd7bc08c12b",
+      "functions": [
+        {
+          "name": "StptClientImpl",
+          "params": [
+            "http",
+            "json"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "fetchStops",
+          "params": [],
+          "returnType": "List<StptStop>",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "fetchRoutes",
+          "params": [],
+          "returnType": "List<StptRoute>",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "fetchVehicles",
+          "params": [
+            "route"
+          ],
+          "returnType": "List<StptVehicle>",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "fetchArrivals",
+          "params": [
+            "stopId"
+          ],
+          "returnType": "List<StptArrival>",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "fetchAlerts",
+          "params": [],
+          "returnType": "List<StptAlert>",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "get",
+          "params": [
+            "path"
+          ],
+          "returnType": "JsonNode",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "parse",
+          "params": [
+            "body"
+          ],
+          "returnType": "JsonNode",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "text",
+          "params": [
+            "node",
+            "field"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "number",
+          "params": [
+            "node",
+            "field"
+          ],
+          "returnType": "Double",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "strings",
+          "params": [
+            "array"
+          ],
+          "returnType": "List<String>",
+          "exported": false,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "StptClientImpl",
+          "methods": [
+            "StptClientImpl",
+            "fetchStops",
+            "fetchRoutes",
+            "fetchVehicles",
+            "fetchArrivals",
+            "fetchAlerts",
+            "get",
+            "parse",
+            "text",
+            "number",
+            "strings"
+          ],
+          "properties": [
+            "http",
+            "json"
+          ],
+          "exported": true,
+          "lineCount": 120
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.transit.client.StptClient",
+          "specifiers": [
+            "StptClient"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptAlert",
+          "specifiers": [
+            "StptAlert"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptArrival",
+          "specifiers": [
+            "StptArrival"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptRoute",
+          "specifiers": [
+            "StptRoute"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptStop",
+          "specifiers": [
+            "StptStop"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptVehicle",
+          "specifiers": [
+            "StptVehicle"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Qualifier",
+          "specifiers": [
+            "Qualifier"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        },
+        {
+          "source": "org.springframework.web.client.RestClient",
+          "specifiers": [
+            "RestClient"
+          ]
+        },
+        {
+          "source": "tools.jackson.databind.JsonNode",
+          "specifiers": [
+            "JsonNode"
+          ]
+        },
+        {
+          "source": "tools.jackson.databind.ObjectMapper",
+          "specifiers": [
+            "ObjectMapper"
+          ]
+        }
+      ],
+      "exports": [
+        "StptClientImpl",
+        "fetchStops",
+        "fetchRoutes",
+        "fetchVehicles",
+        "fetchArrivals",
+        "fetchAlerts",
+        "StptClientImpl"
+      ],
+      "totalLines": 142,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/config/StptClientConfig.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/config/StptClientConfig.java",
+      "contentHash": "78b7b3bdaa711fdc12ff18f728a126fec183a013f9234c0d2e637d5021bfec19",
+      "functions": [
+        {
+          "name": "stptRestClient",
+          "params": [
+            "props"
+          ],
+          "returnType": "RestClient",
+          "exported": true,
+          "lineCount": 14
+        }
+      ],
+      "classes": [
+        {
+          "name": "StptClientConfig",
+          "methods": [
+            "stptRestClient"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 20
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.net.http.HttpClient",
+          "specifiers": [
+            "HttpClient"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.context.properties.EnableConfigurationProperties",
+          "specifiers": [
+            "EnableConfigurationProperties"
+          ]
+        },
+        {
+          "source": "org.springframework.context.annotation.Bean",
+          "specifiers": [
+            "Bean"
+          ]
+        },
+        {
+          "source": "org.springframework.context.annotation.Configuration",
+          "specifiers": [
+            "Configuration"
+          ]
+        },
+        {
+          "source": "org.springframework.http.HttpHeaders",
+          "specifiers": [
+            "HttpHeaders"
+          ]
+        },
+        {
+          "source": "org.springframework.http.client.JdkClientHttpRequestFactory",
+          "specifiers": [
+            "JdkClientHttpRequestFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.web.client.RestClient",
+          "specifiers": [
+            "RestClient"
+          ]
+        }
+      ],
+      "exports": [
+        "stptRestClient",
+        "StptClientConfig"
+      ],
+      "totalLines": 32,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/config/StptProperties.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/config/StptProperties.java",
+      "contentHash": "8c477ebbdf0b5bf3c49afc5266338dffce36f3ce9dca2b64f7237a0781aba09b",
+      "functions": [],
+      "classes": [
+        {
+          "name": "StptProperties",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 16
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.context.properties.ConfigurationProperties",
+          "specifiers": [
+            "ConfigurationProperties"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.context.properties.bind.DefaultValue",
+          "specifiers": [
+            "DefaultValue"
+          ]
+        }
+      ],
+      "exports": [
+        "StptProperties"
+      ],
+      "totalLines": 32,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/controller/TransitController.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/controller/TransitController.java",
+      "contentHash": "8e821c4c81a8e26afe88da739effa7ba7b962e7508d35920683ce7cba8c91cdb",
+      "functions": [
+        {
+          "name": "TransitController",
+          "params": [
+            "transit"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "routes",
+          "params": [],
+          "returnType": "List<TransitRouteDto>",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "stops",
+          "params": [
+            "bbox"
+          ],
+          "returnType": "List<TransitStopDto>",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "vehicles",
+          "params": [
+            "route"
+          ],
+          "returnType": "VehiclesResponse",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "arrivals",
+          "params": [
+            "id"
+          ],
+          "returnType": "ArrivalsResponse",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "alerts",
+          "params": [],
+          "returnType": "List<AlertDto>",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "lastDepartures",
+          "params": [
+            "stopId"
+          ],
+          "returnType": "LastDeparturesResponse",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "summary",
+          "params": [
+            "near",
+            "acceptLanguage"
+          ],
+          "returnType": "TransitSummaryResponse",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "language",
+          "params": [
+            "acceptLanguage"
+          ],
+          "returnType": "Locale",
+          "exported": false,
+          "lineCount": 5
+        }
+      ],
+      "classes": [
+        {
+          "name": "TransitController",
+          "methods": [
+            "TransitController",
+            "routes",
+            "stops",
+            "vehicles",
+            "arrivals",
+            "alerts",
+            "lastDepartures",
+            "summary",
+            "language"
+          ],
+          "properties": [
+            "transit"
+          ],
+          "exported": true,
+          "lineCount": 62
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.geo.BoundingBox",
+          "specifiers": [
+            "BoundingBox"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.AlertDto",
+          "specifiers": [
+            "AlertDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.ArrivalsResponse",
+          "specifiers": [
+            "ArrivalsResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.LastDeparturesResponse",
+          "specifiers": [
+            "LastDeparturesResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitRouteDto",
+          "specifiers": [
+            "TransitRouteDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitStopDto",
+          "specifiers": [
+            "TransitStopDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitSummaryResponse",
+          "specifiers": [
+            "TransitSummaryResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.VehiclesResponse",
+          "specifiers": [
+            "VehiclesResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.service.TransitService",
+          "specifiers": [
+            "TransitService"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Locale",
+          "specifiers": [
+            "Locale"
+          ]
+        },
+        {
+          "source": "org.springframework.http.HttpHeaders",
+          "specifiers": [
+            "HttpHeaders"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.GetMapping",
+          "specifiers": [
+            "GetMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RequestHeader",
+          "specifiers": [
+            "RequestHeader"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.PathVariable",
+          "specifiers": [
+            "PathVariable"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RequestMapping",
+          "specifiers": [
+            "RequestMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RequestParam",
+          "specifiers": [
+            "RequestParam"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RestController",
+          "specifiers": [
+            "RestController"
+          ]
+        }
+      ],
+      "exports": [
+        "TransitController",
+        "routes",
+        "stops",
+        "vehicles",
+        "arrivals",
+        "alerts",
+        "lastDepartures",
+        "summary",
+        "TransitController"
+      ],
+      "totalLines": 86,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/AlertDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/AlertDto.java",
+      "contentHash": "b46433281bf66b6f74154cc3f501737f27ae0e8a4d1029e0bc4c14df3374853e",
+      "functions": [],
+      "classes": [
+        {
+          "name": "AlertDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "AlertDto"
+      ],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/ArrivalDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/ArrivalDto.java",
+      "contentHash": "f3cbf9cd8bd3cd800258b1e4dab675a830b186096a10abfe0329b7966b4bd221",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ArrivalDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        }
+      ],
+      "exports": [
+        "ArrivalDto"
+      ],
+      "totalLines": 8,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/ArrivalsResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/ArrivalsResponse.java",
+      "contentHash": "4ea473335dc83e211b2f09da72e70bcc39934a0545c875fdd6d13c1f94573456",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ArrivalsResponse",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "ArrivalsResponse"
+      ],
+      "totalLines": 10,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/LastDepartureDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/LastDepartureDto.java",
+      "contentHash": "ec5bd76e27bcacd7a19166602914df72721899d5e2c5b7556bdf96675631412b",
+      "functions": [],
+      "classes": [
+        {
+          "name": "LastDepartureDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        }
+      ],
+      "exports": [
+        "LastDepartureDto"
+      ],
+      "totalLines": 8,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/LastDeparturesResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/LastDeparturesResponse.java",
+      "contentHash": "46f023daefc462543d3be2b6d53bf28726f5afd3d65d160b05c7a57d328f4d41",
+      "functions": [],
+      "classes": [
+        {
+          "name": "LastDeparturesResponse",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "LastDeparturesResponse"
+      ],
+      "totalLines": 9,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/NearestStopDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/NearestStopDto.java",
+      "contentHash": "a284c8aee99ab6042f186fa9f965d305ff929a4eba664cc4e46023d0f2b54915",
+      "functions": [],
+      "classes": [
+        {
+          "name": "NearestStopDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "NearestStopDto"
+      ],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitRouteDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitRouteDto.java",
+      "contentHash": "4fff6e1416d28de686470c9d5a3d5c123ca341faa5d951c5c5279a60e176087c",
+      "functions": [],
+      "classes": [
+        {
+          "name": "TransitRouteDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "TransitRouteDto"
+      ],
+      "totalLines": 11,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitStopDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitStopDto.java",
+      "contentHash": "141676cb6019baa0e073e850ad9e6703bf0a3cf32151d7b615ddb84383d45196",
+      "functions": [],
+      "classes": [
+        {
+          "name": "TransitStopDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "TransitStopDto"
+      ],
+      "totalLines": 8,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitSummaryResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitSummaryResponse.java",
+      "contentHash": "6fcbc36451b2b9a61a86b8b86d8ae8a8fa302ba938e2c53e9abad2dd51011eeb",
+      "functions": [],
+      "classes": [
+        {
+          "name": "TransitSummaryResponse",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "TransitSummaryResponse"
+      ],
+      "totalLines": 9,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/VehicleDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/VehicleDto.java",
+      "contentHash": "e2a98b8a0ca8c257341fc7e283cde71cf2c5620bfdb684ed88859f6e9ca197d9",
+      "functions": [],
+      "classes": [
+        {
+          "name": "VehicleDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        }
+      ],
+      "exports": [
+        "VehicleDto"
+      ],
+      "totalLines": 9,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/VehiclesResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/VehiclesResponse.java",
+      "contentHash": "9acee54620b847e87496da53bf54e769d4fbcbb0a347b94e2e80bbea4ed4b4c6",
+      "functions": [],
+      "classes": [
+        {
+          "name": "VehiclesResponse",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "VehiclesResponse"
+      ],
+      "totalLines": 9,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/stpt/StptAlert.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/stpt/StptAlert.java",
+      "contentHash": "776b8010535c1374bdc5375c581659ff1aa1f315976d0fda6fb735a80cd9c941",
+      "functions": [],
+      "classes": [
+        {
+          "name": "StptAlert",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "StptAlert"
+      ],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/stpt/StptArrival.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/stpt/StptArrival.java",
+      "contentHash": "b636ea3c4196e8b613e723f58f467f2c8c2f92ef02535c000e582161267876c8",
+      "functions": [],
+      "classes": [
+        {
+          "name": "StptArrival",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "StptArrival"
+      ],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/stpt/StptRoute.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/stpt/StptRoute.java",
+      "contentHash": "7a5b90599b2049a7cec58a37e1ad59f568d001d96f8b1d80863b4f3832c1df5e",
+      "functions": [],
+      "classes": [
+        {
+          "name": "StptRoute",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "StptRoute"
+      ],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/stpt/StptStop.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/stpt/StptStop.java",
+      "contentHash": "ecdfb76a475389a322373fc096cc27e2fdc9f6befd15f262e6e70aabbd6d9dee",
+      "functions": [],
+      "classes": [
+        {
+          "name": "StptStop",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "StptStop"
+      ],
+      "totalLines": 8,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/stpt/StptVehicle.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/stpt/StptVehicle.java",
+      "contentHash": "e3af630033586d3a87291f0e7dda4153977dba9776323b31292f49a4e88463f1",
+      "functions": [],
+      "classes": [
+        {
+          "name": "StptVehicle",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "StptVehicle"
+      ],
+      "totalLines": 7,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/mapper/TransitMapper.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/mapper/TransitMapper.java",
+      "contentHash": "5784533a7783efeae6ae8477e64e3b6afe48d086fd2bd4c255b6f231033430e8",
+      "functions": [],
+      "classes": [
+        {
+          "name": "TransitMapper",
+          "methods": [
+            "toRoute",
+            "toStop",
+            "toVehicle",
+            "toArrivals",
+            "toAlert"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 17
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.AlertDto",
+          "specifiers": [
+            "AlertDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.ArrivalDto",
+          "specifiers": [
+            "ArrivalDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitRouteDto",
+          "specifiers": [
+            "TransitRouteDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitStopDto",
+          "specifiers": [
+            "TransitStopDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.VehicleDto",
+          "specifiers": [
+            "VehicleDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptAlert",
+          "specifiers": [
+            "StptAlert"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptArrival",
+          "specifiers": [
+            "StptArrival"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptRoute",
+          "specifiers": [
+            "StptRoute"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptStop",
+          "specifiers": [
+            "StptStop"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptVehicle",
+          "specifiers": [
+            "StptVehicle"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "TransitMapper"
+      ],
+      "totalLines": 34,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/mapper/impl/TransitMapperImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/mapper/impl/TransitMapperImpl.java",
+      "contentHash": "69320de68fff2446c57088d84c48fc546ce188a091b728ff8b5a621869341508",
+      "functions": [
+        {
+          "name": "toRoute",
+          "params": [
+            "route"
+          ],
+          "returnType": "TransitRouteDto",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "routeType",
+          "params": [
+            "route"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "toStop",
+          "params": [
+            "stop"
+          ],
+          "returnType": "TransitStopDto",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "toVehicle",
+          "params": [
+            "v"
+          ],
+          "returnType": "VehicleDto",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "toArrivals",
+          "params": [
+            "arrival",
+            "now"
+          ],
+          "returnType": "List<ArrivalDto>",
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "arrivalInstant",
+          "params": [
+            "raw",
+            "now"
+          ],
+          "returnType": "Instant",
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "parseMinutes",
+          "params": [
+            "raw"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "toAlert",
+          "params": [
+            "alert"
+          ],
+          "returnType": "AlertDto",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "TransitMapperImpl",
+          "methods": [
+            "toRoute",
+            "routeType",
+            "toStop",
+            "toVehicle",
+            "toArrivals",
+            "arrivalInstant",
+            "parseMinutes",
+            "toAlert"
+          ],
+          "properties": [
+            "CITY_ZONE"
+          ],
+          "exported": true,
+          "lineCount": 127
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.AlertDto",
+          "specifiers": [
+            "AlertDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.ArrivalDto",
+          "specifiers": [
+            "ArrivalDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitRouteDto",
+          "specifiers": [
+            "TransitRouteDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitStopDto",
+          "specifiers": [
+            "TransitStopDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.VehicleDto",
+          "specifiers": [
+            "VehicleDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptAlert",
+          "specifiers": [
+            "StptAlert"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptArrival",
+          "specifiers": [
+            "StptArrival"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptRoute",
+          "specifiers": [
+            "StptRoute"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptStop",
+          "specifiers": [
+            "StptStop"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptVehicle",
+          "specifiers": [
+            "StptVehicle"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.mapper.TransitMapper",
+          "specifiers": [
+            "TransitMapper"
+          ]
+        },
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.time.LocalTime",
+          "specifiers": [
+            "LocalTime"
+          ]
+        },
+        {
+          "source": "java.time.ZoneId",
+          "specifiers": [
+            "ZoneId"
+          ]
+        },
+        {
+          "source": "java.time.ZonedDateTime",
+          "specifiers": [
+            "ZonedDateTime"
+          ]
+        },
+        {
+          "source": "java.time.format.DateTimeParseException",
+          "specifiers": [
+            "DateTimeParseException"
+          ]
+        },
+        {
+          "source": "java.time.temporal.ChronoUnit",
+          "specifiers": [
+            "ChronoUnit"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.LinkedHashSet",
+          "specifiers": [
+            "LinkedHashSet"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Locale",
+          "specifiers": [
+            "Locale"
+          ]
+        },
+        {
+          "source": "java.util.Set",
+          "specifiers": [
+            "Set"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        }
+      ],
+      "exports": [
+        "toRoute",
+        "toStop",
+        "toVehicle",
+        "toArrivals",
+        "toAlert",
+        "TransitMapperImpl"
+      ],
+      "totalLines": 156,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/service/TransitService.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/TransitService.java",
+      "contentHash": "689dac364fe2dbcbb2f227048d5aeeee3d867621941b31100e6826ea72173154",
+      "functions": [],
+      "classes": [
+        {
+          "name": "TransitService",
+          "methods": [
+            "routes",
+            "stops",
+            "vehicles",
+            "arrivals",
+            "alerts",
+            "lastDepartures",
+            "summary"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 23
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.geo.BoundingBox",
+          "specifiers": [
+            "BoundingBox"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.AlertDto",
+          "specifiers": [
+            "AlertDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.ArrivalsResponse",
+          "specifiers": [
+            "ArrivalsResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.LastDeparturesResponse",
+          "specifiers": [
+            "LastDeparturesResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitRouteDto",
+          "specifiers": [
+            "TransitRouteDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitStopDto",
+          "specifiers": [
+            "TransitStopDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitSummaryResponse",
+          "specifiers": [
+            "TransitSummaryResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.VehiclesResponse",
+          "specifiers": [
+            "VehiclesResponse"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Locale",
+          "specifiers": [
+            "Locale"
+          ]
+        }
+      ],
+      "exports": [
+        "TransitService"
+      ],
+      "totalLines": 42,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "contentHash": "674d3de25f885673c78db0ed4b0e2fd9b26d974d104704cdece02e89ab77544e",
+      "functions": [
+        {
+          "name": "TransitServiceImpl",
+          "params": [
+            "stpt",
+            "mapper",
+            "clock",
+            "props"
+          ],
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "routes",
+          "params": [],
+          "returnType": "List<TransitRouteDto>",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "stops",
+          "params": [
+            "bbox"
+          ],
+          "returnType": "List<TransitStopDto>",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "vehicles",
+          "params": [
+            "route"
+          ],
+          "returnType": "VehiclesResponse",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "arrivals",
+          "params": [
+            "stopId"
+          ],
+          "returnType": "ArrivalsResponse",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "alerts",
+          "params": [],
+          "returnType": "List<AlertDto>",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "lastDepartures",
+          "params": [
+            "stopId"
+          ],
+          "returnType": "LastDeparturesResponse",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "summary",
+          "params": [
+            "near",
+            "locale"
+          ],
+          "returnType": "TransitSummaryResponse",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "message",
+          "params": [
+            "stopName",
+            "departures",
+            "romanian"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "typeOf",
+          "params": [
+            "route"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "vehicleWord",
+          "params": [
+            "type",
+            "romanian"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "activeAlertCount",
+          "params": [],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "distance",
+          "params": [
+            "from",
+            "stop"
+          ],
+          "returnType": "double",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "allStops",
+          "params": [],
+          "returnType": "List<StptStop>",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "stopName",
+          "params": [
+            "stopId"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "requireText",
+          "params": [
+            "value",
+            "name"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "typeRank",
+          "params": [
+            "type"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "compareLineNames",
+          "params": [
+            "a",
+            "b"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "leadingNumber",
+          "params": [
+            "text"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "TransitServiceImpl",
+          "methods": [
+            "TransitServiceImpl",
+            "routes",
+            "stops",
+            "vehicles",
+            "arrivals",
+            "alerts",
+            "lastDepartures",
+            "summary",
+            "message",
+            "typeOf",
+            "vehicleWord",
+            "activeAlertCount",
+            "distance",
+            "allStops",
+            "stopName",
+            "requireText",
+            "typeRank",
+            "compareLineNames",
+            "leadingNumber"
+          ],
+          "properties": [
+            "SOURCE_LIVE_ESTIMATE",
+            "ALL",
+            "CITY_ZONE",
+            "HOUR_MINUTE",
+            "TYPE_ORDER",
+            "stpt",
+            "mapper",
+            "clock",
+            "stopsCache",
+            "routesCache",
+            "alertsCache",
+            "vehiclesCache",
+            "arrivalsCache"
+          ],
+          "exported": true,
+          "lineCount": 224
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.cache.StaleCache",
+          "specifiers": [
+            "StaleCache"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.BoundingBox",
+          "specifiers": [
+            "BoundingBox"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.client.StptClient",
+          "specifiers": [
+            "StptClient"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.config.StptProperties",
+          "specifiers": [
+            "StptProperties"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.AlertDto",
+          "specifiers": [
+            "AlertDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.ArrivalDto",
+          "specifiers": [
+            "ArrivalDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.ArrivalsResponse",
+          "specifiers": [
+            "ArrivalsResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.LastDepartureDto",
+          "specifiers": [
+            "LastDepartureDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.LastDeparturesResponse",
+          "specifiers": [
+            "LastDeparturesResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.NearestStopDto",
+          "specifiers": [
+            "NearestStopDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitRouteDto",
+          "specifiers": [
+            "TransitRouteDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitStopDto",
+          "specifiers": [
+            "TransitStopDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitSummaryResponse",
+          "specifiers": [
+            "TransitSummaryResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.VehiclesResponse",
+          "specifiers": [
+            "VehiclesResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptAlert",
+          "specifiers": [
+            "StptAlert"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptArrival",
+          "specifiers": [
+            "StptArrival"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptRoute",
+          "specifiers": [
+            "StptRoute"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptStop",
+          "specifiers": [
+            "StptStop"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptVehicle",
+          "specifiers": [
+            "StptVehicle"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.mapper.TransitMapper",
+          "specifiers": [
+            "TransitMapper"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.service.TransitService",
+          "specifiers": [
+            "TransitService"
+          ]
+        },
+        {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.time.ZoneId",
+          "specifiers": [
+            "ZoneId"
+          ]
+        },
+        {
+          "source": "java.time.format.DateTimeFormatter",
+          "specifiers": [
+            "DateTimeFormatter"
+          ]
+        },
+        {
+          "source": "java.util.Comparator",
+          "specifiers": [
+            "Comparator"
+          ]
+        },
+        {
+          "source": "java.util.LinkedHashMap",
+          "specifiers": [
+            "LinkedHashMap"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Locale",
+          "specifiers": [
+            "Locale"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Service",
+          "specifiers": [
+            "Service"
+          ]
+        }
+      ],
+      "exports": [
+        "TransitServiceImpl",
+        "routes",
+        "stops",
+        "vehicles",
+        "arrivals",
+        "alerts",
+        "lastDepartures",
+        "summary",
+        "TransitServiceImpl"
+      ],
+      "totalLines": 264,
+      "hasStructuralAnalysis": true
+    },
     "backend/src/main/resources/application-local.properties.example": {
       "filePath": "backend/src/main/resources/application-local.properties.example",
-      "contentHash": "a67a386c27ee9aee8e64735d15b734ed9fb790b8cc35de0899d8754579c8203e",
+      "contentHash": "65eb1c71b4c07040f0cbee35536d0a4105a24758ca7f0bb985912005399c0c3e",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -3864,7 +5908,7 @@
     },
     "backend/src/main/resources/application.properties": {
       "filePath": "backend/src/main/resources/application.properties",
-      "contentHash": "6d0903e11bbf3ed383a0e91bd76d94cfa2961321e3c9365623d3622c3cee664b",
+      "contentHash": "68458636c3e3ed544df2d429f53b1ac31808754629fb4496149ed821d7ef90b0",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -3913,9 +5957,136 @@
       "totalLines": 16,
       "hasStructuralAnalysis": true
     },
+    "backend/src/test/java/com/unihack8/backend/common/cache/StaleCacheTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/common/cache/StaleCacheTest.java",
+      "contentHash": "86f80e59f4903548ebbbb5fccab127cef716358a30fb9e1463f01365162eb81d",
+      "functions": [
+        {
+          "name": "freshValueIsServedFromCache",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "expiredValueIsReloaded",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "sourceFailureServesStaleValue",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "sourceFailureWithoutCacheIs503",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "apiExceptionsPassThrough",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "keysAreIndependent",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        }
+      ],
+      "classes": [
+        {
+          "name": "StaleCacheTest",
+          "methods": [
+            "freshValueIsServedFromCache",
+            "expiredValueIsReloaded",
+            "sourceFailureServesStaleValue",
+            "sourceFailureWithoutCacheIs503",
+            "apiExceptionsPassThrough",
+            "keysAreIndependent"
+          ],
+          "properties": [
+            "clock",
+            "cache",
+            "calls"
+          ],
+          "exported": false,
+          "lineCount": 73
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "org.assertj.core.api.Assertions.assertThatThrownBy",
+          "specifiers": [
+            "assertThatThrownBy"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.support.MutableClock",
+          "specifiers": [
+            "MutableClock"
+          ]
+        },
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.concurrent.atomic.AtomicInteger",
+          "specifiers": [
+            "AtomicInteger"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 88,
+      "hasStructuralAnalysis": true
+    },
     "backend/src/test/java/com/unihack8/backend/common/dto/PageParamsTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/common/dto/PageParamsTest.java",
-      "contentHash": "0f31a8f8b87d7aa635deccf15f7c2ee58bd89c22c33775639f0e99bba6ca24b0",
+      "contentHash": "8313d59e28fa3f0c0e978a074f1555765f31d2f9622b25fc9eb12b10fbcbff3d",
       "functions": [
         {
           "name": "defaultsWhenMissing",
@@ -4044,7 +6215,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/common/exception/GlobalExceptionHandlerTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/common/exception/GlobalExceptionHandlerTest.java",
-      "contentHash": "4157da3a0c10947d189b79875a8d23a5e1fcbaa900178952066e41b851972dd8",
+      "contentHash": "f7a89664bd09843f9b7997661f884c2ed32ef25d4faa7025650b9c81557e84e1",
       "functions": [
         {
           "name": "apiExceptionUsesItsCodeAndStatus",
@@ -4228,7 +6399,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/common/geo/GeoTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/common/geo/GeoTest.java",
-      "contentHash": "59c2101a899cdcddc1250a38437620f7b2a3d42a367ef125b3c083039315422c",
+      "contentHash": "6ce8a9809635f6b24154e5a35a2f18e1a9a79a7070df0a183b52b06bee3950e0",
       "functions": [
         {
           "name": "haversineDistanceMatchesKnownValue",
@@ -4319,7 +6490,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/common/security/CurrentUserTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/common/security/CurrentUserTest.java",
-      "contentHash": "5c87b2d984e567eb59199ab5b7cb776eb60a117261b1f8ac7f482c44ebaffe06",
+      "contentHash": "9009136aa60d0a2c800a93d6ff006c08766343018446a7de4cfcc8c093ff3b72",
       "functions": [
         {
           "name": "clearContext",
@@ -4450,7 +6621,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/config/SecurityConfigTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/config/SecurityConfigTest.java",
-      "contentHash": "e03270130554afa8a345d6576748a28059457336269b48f85f6db6427a4c89df",
+      "contentHash": "94e880853a5b7ee2794aee59500c4f54f4c0ab9a427fa4c15b1d6c6d055c52e7",
       "functions": [
         {
           "name": "protectedEndpointWithoutTokenIs401",
@@ -4626,7 +6797,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/config/SupabasePropertiesTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/config/SupabasePropertiesTest.java",
-      "contentHash": "a9892acd94959077f20b1e43951b2f05a8decc3d53b49417cd53151910164970",
+      "contentHash": "0cc9d8c2f5d044343672fa4b5823e7fe712817e02f16248d5a88fa50a9622209",
       "functions": [
         {
           "name": "issuerAppendsAuthPath",
@@ -4675,7 +6846,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
-      "contentHash": "209ea8a2a4299019134087532da6dfda563b570139e2595578cab7a6de30efec",
+      "contentHash": "a9bb4805b26ca32620cba66d3981719f745329dfe5a57d07de99bcc7a8058666",
       "functions": [
         {
           "name": "parsesFixture",
@@ -4856,7 +7027,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java",
-      "contentHash": "3e60e7dc0c49c71da4313cd61ebb7e0c909c69140a9044d9ab17a787ba6368ec",
+      "contentHash": "cdf59a2f5812a12208e7106df0e4337b8c4774f3dc2ac541aa5249f52558a88a",
       "functions": [
         {
           "name": "seed",
@@ -5101,7 +7272,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/places/domain/PlaceCategoryTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/places/domain/PlaceCategoryTest.java",
-      "contentHash": "1cea4d9b26ceccf3a55d4e298ed5b4fad6db87ac4cdbbcd0c6ae1ca555974f9e",
+      "contentHash": "db867f9dcab8c1789dff81cf43482cfa37955e2e585634149d5ecc9581dc3dc2",
       "functions": [
         {
           "name": "apiNamesMatchTheContract",
@@ -5178,7 +7349,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
-      "contentHash": "dc1f75fc91cf82412097f71b88d4212fda38f8be910e70d56389342e03aed469",
+      "contentHash": "5791089103133849481cb5be9f3004f5701ac2379eec1f50a384640d5e6c751d",
       "functions": [
         {
           "name": "mapped",
@@ -5336,7 +7507,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/places/service/PlaceImportRunnerTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/places/service/PlaceImportRunnerTest.java",
-      "contentHash": "d82489ab9d44a2f54f37a6591419dbb3f030323b1d4cfedb30d04cad22c77f3d",
+      "contentHash": "eca7debcab1c9a903abe332b7dd2e53f1bc9b8aa2ccaa4130d5e9002cd85e8c0",
       "functions": [
         {
           "name": "runsImport",
@@ -5418,7 +7589,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
-      "contentHash": "4330f8889c324ab700d24a0612eee08413dc1c3dc6185c59cb8849dc51f946be",
+      "contentHash": "b72b0573e5a37863160c2cbae68395d3e71194d121823aa8e0a47a3740056b39",
       "functions": [
         {
           "name": "setUp",
@@ -5644,7 +7815,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/places/support/OverpassFixtures.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/places/support/OverpassFixtures.java",
-      "contentHash": "97f66c9e925feb06cb0d8e256d7dc321717e2b3d9c0321bee5c8b902979d0360",
+      "contentHash": "267359f955d2f71c3124f7f6bf867476212f1d5e3f765d91cec69341c22e2b8d",
       "functions": [
         {
           "name": "OverpassFixtures",
@@ -5733,7 +7904,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/support/JwtTestTokens.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/support/JwtTestTokens.java",
-      "contentHash": "f708986ceae1decbf2ef0e01405e0fde396349e91e03244fc2576ffcb8c9506b",
+      "contentHash": "0acee891c267672e03f8fa75527f040857937f6a21c35957e0a8972a77188872",
       "functions": [
         {
           "name": "JwtTestTokens",
@@ -5854,9 +8025,114 @@
       "totalLines": 52,
       "hasStructuralAnalysis": true
     },
+    "backend/src/test/java/com/unihack8/backend/support/MutableClock.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/support/MutableClock.java",
+      "contentHash": "8a346be858b0a80fbb80848156025eecb5be3d4ca6562b03ba4474afb26fca68",
+      "functions": [
+        {
+          "name": "MutableClock",
+          "params": [
+            "start"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "advance",
+          "params": [
+            "by"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "getZone",
+          "params": [],
+          "returnType": "ZoneId",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "withZone",
+          "params": [
+            "zone"
+          ],
+          "returnType": "Clock",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "instant",
+          "params": [],
+          "returnType": "Instant",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "MutableClock",
+          "methods": [
+            "MutableClock",
+            "advance",
+            "getZone",
+            "withZone",
+            "instant"
+          ],
+          "properties": [
+            "now"
+          ],
+          "exported": true,
+          "lineCount": 32
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.time.ZoneId",
+          "specifiers": [
+            "ZoneId"
+          ]
+        },
+        {
+          "source": "java.time.ZoneOffset",
+          "specifiers": [
+            "ZoneOffset"
+          ]
+        }
+      ],
+      "exports": [
+        "MutableClock",
+        "advance",
+        "getZone",
+        "withZone",
+        "instant",
+        "MutableClock"
+      ],
+      "totalLines": 42,
+      "hasStructuralAnalysis": true
+    },
     "backend/src/test/java/com/unihack8/backend/support/TestProbeController.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/support/TestProbeController.java",
-      "contentHash": "83d17190acc2ed7b023ea733acf82c664a2a3214c8f8be43bf337ded7db8112c",
+      "contentHash": "e55715948cf029a78ea4662fa7f489ac1b8d8f8428be0905f0f4f89e9303f189",
       "functions": [
         {
           "name": "TestProbeController",
@@ -6026,9 +8302,1023 @@
       "totalLines": 72,
       "hasStructuralAnalysis": true
     },
+    "backend/src/test/java/com/unihack8/backend/transit/client/impl/StptClientImplTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/client/impl/StptClientImplTest.java",
+      "contentHash": "75c2828cf3b902ad18f1be6841bcbff6e66b77397f6e6ebc05b73f4981988e53",
+      "functions": [
+        {
+          "name": "setUp",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "fixture",
+          "params": [
+            "name"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "parsesStops",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "parsesRoutes",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "parsesVehicles",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "unsuccessfulVehiclesAnswerFails",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "parsesArrivals",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "parsesAlerts",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "serverErrorAndEmptyBodyFail",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        }
+      ],
+      "classes": [
+        {
+          "name": "StptClientImplTest",
+          "methods": [
+            "setUp",
+            "fixture",
+            "parsesStops",
+            "parsesRoutes",
+            "parsesVehicles",
+            "unsuccessfulVehiclesAnswerFails",
+            "parsesArrivals",
+            "parsesAlerts",
+            "serverErrorAndEmptyBodyFail"
+          ],
+          "properties": [
+            "BASE",
+            "server",
+            "client"
+          ],
+          "exported": false,
+          "lineCount": 117
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "org.assertj.core.api.Assertions.assertThatThrownBy",
+          "specifiers": [
+            "assertThatThrownBy"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo",
+          "specifiers": [
+            "requestTo"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.client.response.MockRestResponseCreators.withServerError",
+          "specifiers": [
+            "withServerError"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess",
+          "specifiers": [
+            "withSuccess"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptAlert",
+          "specifiers": [
+            "StptAlert"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptArrival",
+          "specifiers": [
+            "StptArrival"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptRoute",
+          "specifiers": [
+            "StptRoute"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptStop",
+          "specifiers": [
+            "StptStop"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptVehicle",
+          "specifiers": [
+            "StptVehicle"
+          ]
+        },
+        {
+          "source": "java.io.IOException",
+          "specifiers": [
+            "IOException"
+          ]
+        },
+        {
+          "source": "java.nio.charset.StandardCharsets",
+          "specifiers": [
+            "StandardCharsets"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.BeforeEach",
+          "specifiers": [
+            "BeforeEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.core.io.ClassPathResource",
+          "specifiers": [
+            "ClassPathResource"
+          ]
+        },
+        {
+          "source": "org.springframework.http.MediaType",
+          "specifiers": [
+            "MediaType"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.client.MockRestServiceServer",
+          "specifiers": [
+            "MockRestServiceServer"
+          ]
+        },
+        {
+          "source": "org.springframework.web.client.RestClient",
+          "specifiers": [
+            "RestClient"
+          ]
+        },
+        {
+          "source": "tools.jackson.databind.json.JsonMapper",
+          "specifiers": [
+            "JsonMapper"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 143,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "contentHash": "e4637e4957ea55967f1c95d5dfc1c5bbf133793b2ac77b5fbea9a51cbcbfb6c9",
+      "functions": [
+        {
+          "name": "routes",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "stops",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "vehicles",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 16
+        },
+        {
+          "name": "sourceUnavailable",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "arrivals",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "alerts",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "lastDepartures",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "summary",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 21
+        },
+        {
+          "name": "languageChoice",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "TransitControllerTest",
+          "methods": [
+            "routes",
+            "stops",
+            "vehicles",
+            "sourceUnavailable",
+            "arrivals",
+            "alerts",
+            "lastDepartures",
+            "summary",
+            "languageChoice"
+          ],
+          "properties": [
+            "T",
+            "mvc",
+            "transit"
+          ],
+          "exported": false,
+          "lineCount": 135
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "org.mockito.ArgumentMatchers.any",
+          "specifiers": [
+            "any"
+          ]
+        },
+        {
+          "source": "org.mockito.ArgumentMatchers.eq",
+          "specifiers": [
+            "eq"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.verify",
+          "specifiers": [
+            "verify"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.when",
+          "specifiers": [
+            "when"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get",
+          "specifiers": [
+            "get"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath",
+          "specifiers": [
+            "jsonPath"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.status",
+          "specifiers": [
+            "status"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.AlertDto",
+          "specifiers": [
+            "AlertDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.ArrivalDto",
+          "specifiers": [
+            "ArrivalDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.ArrivalsResponse",
+          "specifiers": [
+            "ArrivalsResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.LastDepartureDto",
+          "specifiers": [
+            "LastDepartureDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.LastDeparturesResponse",
+          "specifiers": [
+            "LastDeparturesResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.NearestStopDto",
+          "specifiers": [
+            "NearestStopDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitRouteDto",
+          "specifiers": [
+            "TransitRouteDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitStopDto",
+          "specifiers": [
+            "TransitStopDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitSummaryResponse",
+          "specifiers": [
+            "TransitSummaryResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.VehicleDto",
+          "specifiers": [
+            "VehicleDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.VehiclesResponse",
+          "specifiers": [
+            "VehiclesResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.service.TransitService",
+          "specifiers": [
+            "TransitService"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Locale",
+          "specifiers": [
+            "Locale"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Autowired",
+          "specifiers": [
+            "Autowired"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.test.context.SpringBootTest",
+          "specifiers": [
+            "SpringBootTest"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc",
+          "specifiers": [
+            "AutoConfigureMockMvc"
+          ]
+        },
+        {
+          "source": "org.springframework.test.context.bean.override.mockito.MockitoBean",
+          "specifiers": [
+            "MockitoBean"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.MockMvc",
+          "specifiers": [
+            "MockMvc"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 173,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/transit/mapper/impl/TransitMapperImplTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/mapper/impl/TransitMapperImplTest.java",
+      "contentHash": "5d56024301f8c40ae694b999298d64b4ff9ba672b325105097f541da281336dc",
+      "functions": [
+        {
+          "name": "routeEndsAndColour",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "routeWithoutDetails",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "routeTypes",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "type",
+          "params": [
+            "category",
+            "routeType"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "vehicle",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "arrivalsConvertLocalTimes",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "timetableArrivalsAreNotLive",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "arrivalAfterMidnightIsNextDay",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "arrivalsWithMissingParts",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        }
+      ],
+      "classes": [
+        {
+          "name": "TransitMapperImplTest",
+          "methods": [
+            "routeEndsAndColour",
+            "routeWithoutDetails",
+            "routeTypes",
+            "type",
+            "vehicle",
+            "arrivalsConvertLocalTimes",
+            "timetableArrivalsAreNotLive",
+            "arrivalAfterMidnightIsNextDay",
+            "arrivalsWithMissingParts"
+          ],
+          "properties": [
+            "mapper"
+          ],
+          "exported": false,
+          "lineCount": 99
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.ArrivalDto",
+          "specifiers": [
+            "ArrivalDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitRouteDto",
+          "specifiers": [
+            "TransitRouteDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.VehicleDto",
+          "specifiers": [
+            "VehicleDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptArrival",
+          "specifiers": [
+            "StptArrival"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptRoute",
+          "specifiers": [
+            "StptRoute"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptVehicle",
+          "specifiers": [
+            "StptVehicle"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 115,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "contentHash": "bbbc4c560b5fd57af40b37cd9474b0a4e0a5a95cca811e7ea8f6d4a8fab66a04",
+      "functions": [
+        {
+          "name": "setUp",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "routesSortedByTypeThenNumber",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "routesAreCached",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "stopsFilteredByBbox",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "vehiclesFresh",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "vehiclesStaleWhenSourceDown",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "vehiclesUnavailableWithoutCache",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "vehiclesNeedRoute",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "arrivalsMergedAndSorted",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "arrivalsUnknownStop",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "arrivalsWithoutStopList",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "lastDeparturesFromLiveData",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "summaryInEnglish",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "summaryInRomanianWithAlertsDown",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "summaryWithoutDepartures",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "lineNameOrder",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "vehicleWords",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "TransitServiceImplTest",
+          "methods": [
+            "setUp",
+            "routesSortedByTypeThenNumber",
+            "routesAreCached",
+            "stopsFilteredByBbox",
+            "vehiclesFresh",
+            "vehiclesStaleWhenSourceDown",
+            "vehiclesUnavailableWithoutCache",
+            "vehiclesNeedRoute",
+            "arrivalsMergedAndSorted",
+            "arrivalsUnknownStop",
+            "arrivalsWithoutStopList",
+            "lastDeparturesFromLiveData",
+            "summaryInEnglish",
+            "summaryInRomanianWithAlertsDown",
+            "summaryWithoutDepartures",
+            "lineNameOrder",
+            "vehicleWords"
+          ],
+          "properties": [
+            "NOW",
+            "stpt",
+            "clock",
+            "service"
+          ],
+          "exported": false,
+          "lineCount": 190
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "org.assertj.core.api.Assertions.assertThatThrownBy",
+          "specifiers": [
+            "assertThatThrownBy"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.mock",
+          "specifiers": [
+            "mock"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.times",
+          "specifiers": [
+            "times"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.verify",
+          "specifiers": [
+            "verify"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.when",
+          "specifiers": [
+            "when"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.BoundingBox",
+          "specifiers": [
+            "BoundingBox"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.support.MutableClock",
+          "specifiers": [
+            "MutableClock"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.client.StptClient",
+          "specifiers": [
+            "StptClient"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.config.StptProperties",
+          "specifiers": [
+            "StptProperties"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.ArrivalsResponse",
+          "specifiers": [
+            "ArrivalsResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.LastDepartureDto",
+          "specifiers": [
+            "LastDepartureDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.LastDeparturesResponse",
+          "specifiers": [
+            "LastDeparturesResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitRouteDto",
+          "specifiers": [
+            "TransitRouteDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitSummaryResponse",
+          "specifiers": [
+            "TransitSummaryResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.VehiclesResponse",
+          "specifiers": [
+            "VehiclesResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptAlert",
+          "specifiers": [
+            "StptAlert"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptArrival",
+          "specifiers": [
+            "StptArrival"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptRoute",
+          "specifiers": [
+            "StptRoute"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptStop",
+          "specifiers": [
+            "StptStop"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.stpt.StptVehicle",
+          "specifiers": [
+            "StptVehicle"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.mapper.impl.TransitMapperImpl",
+          "specifiers": [
+            "TransitMapperImpl"
+          ]
+        },
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Locale",
+          "specifiers": [
+            "Locale"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.BeforeEach",
+          "specifiers": [
+            "BeforeEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 227,
+      "hasStructuralAnalysis": true
+    },
     "backend/src/test/resources/application.properties": {
       "filePath": "backend/src/test/resources/application.properties",
-      "contentHash": "50c191d7bcb33d60ef85ef2a2ef6c8069ccfa114d90402a87d4c2c8d6929ee21",
+      "contentHash": "d7fdd2adaee3a74f14e47a2377a52c1c20e4c8885772f9772765795f1859ab47",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -6046,14 +9336,64 @@
       "totalLines": 153,
       "hasStructuralAnalysis": false
     },
-    "docs/API.md": {
-      "filePath": "docs/API.md",
-      "contentHash": "9223e5265a1d35eb8530f4bc0068d022ce5fa9cdb22de7c54c26120227e4e985",
+    "backend/src/test/resources/stpt/alerts.json": {
+      "filePath": "backend/src/test/resources/stpt/alerts.json",
+      "contentHash": "09c5f4056152744a7209f1b66ca382441e71bb997163074bb962e532985f8a26",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 591,
+      "totalLines": 43,
+      "hasStructuralAnalysis": false
+    },
+    "backend/src/test/resources/stpt/arrivals-stop-1.json": {
+      "filePath": "backend/src/test/resources/stpt/arrivals-stop-1.json",
+      "contentHash": "5924a2a5157b1e3201657fe8bd9376b1a6f2545d91c7c238672302abd220c96f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 24,
+      "hasStructuralAnalysis": false
+    },
+    "backend/src/test/resources/stpt/route-manifest.json": {
+      "filePath": "backend/src/test/resources/stpt/route-manifest.json",
+      "contentHash": "3c675576cb85fbba8ff02c9cf68d6216a9a5a17fd63057aabc33cafe55344757",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 219,
+      "hasStructuralAnalysis": false
+    },
+    "backend/src/test/resources/stpt/stops-index.json": {
+      "filePath": "backend/src/test/resources/stpt/stops-index.json",
+      "contentHash": "da4ae1ae48a3b5f2b93b2d785ec6392c3ed093513699945f1c5858ea8e2a28be",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 58,
+      "hasStructuralAnalysis": false
+    },
+    "backend/src/test/resources/stpt/vehicles-route-1.json": {
+      "filePath": "backend/src/test/resources/stpt/vehicles-route-1.json",
+      "contentHash": "2406a25af59799778b091797864b35bb5da7bb0e316b10b5416173003d085b02",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 58,
+      "hasStructuralAnalysis": false
+    },
+    "docs/API.md": {
+      "filePath": "docs/API.md",
+      "contentHash": "378e99a50802dc08fcc5453894605f83d702a388c7031688eafaab1cf173c8f4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 595,
       "hasStructuralAnalysis": false
     },
     "frontend/.env.example": {
@@ -6299,7 +9639,7 @@
     },
     "infra/otp/README.md": {
       "filePath": "infra/otp/README.md",
-      "contentHash": "39e85e0962abd886185055bde477e371f27e5dce1c85d323bc6713b2869594b0",
+      "contentHash": "d71292ba7505ccfa7252e9deab1acbe77703eed46248e8248bd2a7ad5f1ebfc2",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -6309,7 +9649,7 @@
     },
     "supabase/migrations/20261113000001_profiles.sql": {
       "filePath": "supabase/migrations/20261113000001_profiles.sql",
-      "contentHash": "b2d0bc872db2b968c0d62a6f89c513734f9fec68499846e5379fcf265f1b5688",
+      "contentHash": "51ab64aa310a769874f71652552bb18837ac4e24a6d0cdc362cce28837f33d5b",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -6319,7 +9659,7 @@
     },
     "supabase/migrations/20261113000002_events.sql": {
       "filePath": "supabase/migrations/20261113000002_events.sql",
-      "contentHash": "6092919ff59aef6bc0506066f9bffa8a2ebb1e6c9abee1fd2d3184f2574d78db",
+      "contentHash": "65f0f8cc390f56c8a35b66321d988750c8c3f7d4e82faafec060c868bfef6887",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -6329,7 +9669,7 @@
     },
     "supabase/migrations/20261113000003_participation_reliability.sql": {
       "filePath": "supabase/migrations/20261113000003_participation_reliability.sql",
-      "contentHash": "b7d48c6b4bd3d2d4d8b750eb0f2c34feb724861d734f1297ef7f602d7da4c207",
+      "contentHash": "6155e4a3272070258e878bea3fc49cc1efe52f8cd4f7327e21c68af4c14d781e",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -6339,7 +9679,7 @@
     },
     "supabase/migrations/20261113000004_places.sql": {
       "filePath": "supabase/migrations/20261113000004_places.sql",
-      "contentHash": "137a4938a0891306f86c8734905dfda63a671b2d6a79dcd53045068f5ebbc0cc",
+      "contentHash": "833405bb889636cc9d50dc0b5c0e7310f330acd47a108e822d33d16350c58fdd",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -6349,7 +9689,7 @@
     },
     "supabase/tests/schema_checks.sql": {
       "filePath": "supabase/tests/schema_checks.sql",
-      "contentHash": "50b54f360da1ae14d4ebc2ecc5049acf47983bc935dd771521ac0452f11fdbb3",
+      "contentHash": "e685de959f3bdf405833263229049b28e359a3559382bc17b62887d42715ce86",
       "functions": [],
       "classes": [],
       "imports": [],
