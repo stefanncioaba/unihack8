@@ -2,8 +2,8 @@
 import { act, fireEvent, screen, waitFor, within } from '@testing-library/react-native';
 
 import MapScreen from '@/app/(tabs)/map';
-import { mockRequest } from '@/mocks';
-import { placeId } from '@/mocks/placesSeed';
+import { mockRequest } from '@test/mocks';
+import { placeId } from '@test/mocks/placesSeed';
 
 import { IDS, mockRouter, renderScreen, setParams } from './testUtils';
 

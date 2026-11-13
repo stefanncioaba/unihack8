@@ -363,6 +363,31 @@ Public endpoints (no token) under `/transit`, contract in `docs/API.md` → Tran
 
 **Known limits:** `gemini-3.5-flash-lite` sometimes lists a near café before a cheaper far one; Romanian grammar is occasionally a bit off; the free-tier per-minute quota can make a burst of questions slow or answer 503 "busy".
 
+### Integration: real data only (PLAN task 17)
+
+**17.1 No mock data in the app (2026-11-14).**
+- `src/api/client.ts` always calls the Spring API. The `EXPO_PUBLIC_USE_MOCKS` switch, `src/config.ts` → `MOCK_AREAS` / `USE_MOCKS` and `lib/mockAreas.ts` are gone. Without `EXPO_PUBLIC_API_URL`, every call fails with `NOT_CONFIGURED` ("The app has no backend address…") and never falls back to fake data.
+- The mock backend moved from `frontend/src/mocks/` to `frontend/testing/mocks/` (alias `@test/*`). It is only for Jest: `jest.setup.ts` routes `api()` to it. Tests of the real client opt out with `jest.unmock('@/api/client')` (`api.client.test.ts`, `api.users.real.test.ts`, `api.config.test.ts`).
+- **Checked in the Android bundle** (`npx expo export --platform android`): none of the mock strings (`mockRequest`, `demo_user`, `placesSeed`, `mock-ticket`, `USE_MOCKS`) appear, while the app's own strings do.
+
+**Contract check:** every one of the app's 30 API calls was compared with the backend records, and 20 were also called live. No field names, paths or paging shapes differed. The real backend behaved differently from the mocks in a few places, fixed as follows:
+
+| Issue | Fix |
+|---|---|
+| `/ai/chat` rejects messages over 2000 characters, so one long reply in the history broke the rest of the chat | The input has `maxLength` 2000, and history messages are cut to 2000 before sending (`MAX_CHAT_MESSAGE_CHARS`). |
+| `/routes/plan` legs can have `null` `polyline`, `from`/`to` or times when OpenTripPlanner leaves them out | The types say so; `decodePolyline(null)` returns `[]` and the directions panel shows fallback text instead of crashing. |
+| `/transit/summary` answers in Romanian when the phone sends `Accept-Language: ro` (iOS does) | The client sends `Accept-Language: en`. |
+| Filtering events by `OTHER` missed imported events with no category (shown as OTHER) | Backend: `OTHER` also matches `category IS NULL` (`EventRepositoryImpl`, new test in `EventDatabaseIntegrationTest`). |
+| Postgres times can have microseconds (`…:00.123456Z`) | `lib/time.ts` → `parseIso()` cuts the fraction to milliseconds; used wherever API times are parsed. |
+
+Known differences that need no change: the mocks let you join an event in progress (the backend says `EVENT_ENDED` from the start time) and ban anyone (the backend refuses checked-in participants). Mock ticket codes are not UUIDs. The backend's own validation errors for event creation have no per-field `fields` (the app validates first).
+
+**Live test:** `frontend/__tests__/live.backend.test.ts` runs the app's own endpoint functions and real client against a running backend. It is skipped normally. Run it with `LIVE_API_URL=http://localhost:8080 LIVE_TOKEN=<access token> npx jest live.backend`; without `LIVE_TOKEN` only the public endpoints run. It checks places, events (incl. the OTHER filter), transit (English summary), username check, walk + transit routes (polylines decode, times format), user search and a real AI answer. **Run on 2026-11-14 against the real backend + Supabase: 7/7 passed.**
+
+**17.4 Offline and slow network:** `lib/network.ts` connects NetInfo (`@react-native-community/netinfo` 11.4.1, included in Expo Go) to TanStack Query's `onlineManager`. While offline, queries pause and keep their cached data, and they refetch by themselves when the connection is back. `ui/OfflineBanner.tsx` shows "You're offline — showing saved data…" above every screen. Slow answers time out after 15 s with "The server took too long to answer. Try again." Every data screen already had loading, error with **Try again**, and empty states (checked screen by screen).
+
+**Still to do by people (17.2, 17.3, 17.6):** run the demo on two real phones, create the accounts in the app, record the backup video. The steps and the 3-minute script are in `docs/DEMO.md`.
+
 ### Frontend (PLAN tasks 12 and 13)
 
 Expo SDK 54 app in `frontend/`, TypeScript (strict), Expo Router, runs in **Expo Go** (no custom native code). Look and feel follow the dark-neon design reference (`dark-neon-mobile-app-design-prompt.md`, design only — no features come from it).
@@ -375,8 +400,7 @@ Expo SDK 54 app in `frontend/`, TypeScript (strict), Expo Router, runs in **Expo
 |---|---|
 | `EXPO_PUBLIC_SUPABASE_URL` | `https://<project-ref>.supabase.co` (sign-in only) |
 | `EXPO_PUBLIC_SUPABASE_KEY` | Legacy `anon` or publishable key. Never the `service_role` key. Without it the sign-in screens show a setup warning. |
-| `EXPO_PUBLIC_API_URL` | `http://<laptop Wi-Fi IPv4>:8080` — only used when mocks are off |
-| `EXPO_PUBLIC_USE_MOCKS` | `true` = serve `src/mocks/` for everything; `false` = call the Spring API; or a list of areas to mock, e.g. `ai,events` (areas: `events`, `users`, `places`, `transit`, `routes`, `ai`). |
+| `EXPO_PUBLIC_API_URL` | `http://<laptop Wi-Fi IPv4>:8080` — the Spring API. **Required**: the app has no mock mode (PLAN 17.1); without it every call fails with "The app has no backend address". |
 
 3. `npx expo start`, scan the QR code with Expo Go (phone and laptop on the same Wi-Fi). Restart Expo after changing `.env`.
 4. Checks: `npm test` (Jest), `npm run typecheck`, `npm run lint`.
@@ -388,15 +412,15 @@ Expo SDK 54 app in `frontend/`, TypeScript (strict), Expo Router, runs in **Expo
 | `app/` | Routes only. `(auth)/sign-in`, `(auth)/sign-up`; `(tabs)/` Home, Map, AI, Profile; `events/` (list, `new`, `[id]`, `[id]/ticket`, `[id]/scan`); `users/` (`search`, `[id]`). |
 | `api/` | `client.ts` (the single request function), `endpoints.ts` (typed calls), `types.ts` (shapes from `docs/API.md`), `errors.ts` (`ApiError`, friendly messages). |
 | `hooks/` | `queries.ts` — one TanStack Query hook per endpoint, plus cache keys. |
-| `mocks/` | In-memory fake backend with the same shapes and error codes as `docs/API.md`. |
+| `../testing/mocks/` | **Test-only** in-memory fake backend (same shapes and error codes as `docs/API.md`). Moved out of `src/` in PLAN 17.1, so it is never bundled into the app; Jest routes `api()` to it in `jest.setup.ts`. |
 | `features/` | `auth`, `location`, `events`, `transit`, `users` — feature components and logic. |
 | `ui/` | Design tokens (`theme.ts`), text, buttons, chips, cards, inputs, loading/empty/error states, default avatar, glow background. |
 | `lib/` | Supabase client, query client, time (Romanian time), geo, validation. |
 
 **How it works**
 - **Auth (12.2):** `features/auth/AuthProvider` wraps the Supabase client. The session is stored on the device (AsyncStorage) and refreshed while the app is in the foreground. The root layout uses `Stack.Protected`, so signed-out users can only reach the `(auth)` screens; on sign-out the query cache is cleared. Sign-up first calls `GET /users/username-available` (the database trigger would silently replace a taken username) and then sends the username as sign-up metadata. If the username cannot be checked (backend down) sign-up stops with a message instead of guessing.
-- **API layer (12.3):** `api(method, path, {query, body})` adds `Authorization: Bearer <Supabase token>`, a 15 s timeout, and turns every failure into an `ApiError` (`NETWORK` and `TIMEOUT` are added for transport problems). With `EXPO_PUBLIC_USE_MOCKS=true` the same call is answered by `src/mocks/` and never touches the network. Each API area can be switched on its own: `EXPO_PUBLIC_USE_MOCKS=ai` mocks only `/ai/*` and calls the real backend for everything else (`lib/mockAreas.ts`). The mock backend is split into `src/mocks/core.ts` (state + helpers) and one file per area in `src/mocks/routes/`.
-- **Mock backend:** stateful until the app reloads — join, leave, create, ban and check-in really change the data. The mock user is `demo_user` (independent of the Supabase account). Tickets you can scan as organiser of "Sunset run by the Bega": `demo-ticket-stella`, `demo-ticket-andrei`, `demo-ticket-maria` (type one in the manual field of the scanner, or turn it into a QR code). "Art walk through the old town" is already joined by the mock user, so "My ticket" works there.
+- **API layer (12.3):** `api(method, path, {query, body})` adds `Authorization: Bearer <Supabase token>`, a 15 s timeout, and turns every failure into an `ApiError` (`NETWORK` and `TIMEOUT` are added for transport problems). Since PLAN 17.1 it **always** calls the Spring API (the `EXPO_PUBLIC_USE_MOCKS` switch and `lib/mockAreas.ts` were removed). It also sends `Accept-Language: en` so server-made sentences match the English UI.
+- **Mock backend (tests only since PLAN 17.1):** stateful until the test resets it — join, leave, create, ban and check-in really change the data. The mock user is `demo_user` (independent of the Supabase account). Tickets you can scan as organiser of "Sunset run by the Bega": `demo-ticket-stella`, `demo-ticket-andrei`, `demo-ticket-maria` (type one in the manual field of the scanner, or turn it into a QR code). "Art walk through the old town" is already joined by the mock user, so "My ticket" works there.
 - **Times:** shown in Europe/Bucharest using our own EET/EEST rules (`lib/time.ts`), not `Intl`, so every phone shows the same hour. The create form's date/time picker is built from day chips and hour/minute steppers for the same reason (no native date-picker module).
 - **Location (12.5):** `LocationProvider` asks for foreground permission after sign-in; `useCurrentPosition()` returns the phone position, or Piața Victoriei (45.7537, 21.2257) with `isFallback: true` when permission is denied or the GPS fails.
 - **Reliability gauge:** semicircle fills to 150 points (scores above are capped visually); the "How it works" text repeats the rules from "Reliability rules".
@@ -431,7 +455,7 @@ Also built: Profile tab (username, gauge, find people, sign out) and the public 
 - **Theme:** dark Google style on Android (`ui/mapStyle.ts`), `userInterfaceStyle="dark"` on iOS.
 
 **AI tab (PLAN 15.1–15.4)** — `src/app/(tabs)/ai.tsx`, `src/features/ai/`, `src/hooks/useAi.ts`.
-- **Backend task 11 is not built yet**, so `/ai/*` is answered by `src/mocks/routes/ai.ts` (keywords: *pizza/eat* → 3 restaurants sorted by distance with a source link, *coffee* → cafés, *weekend/event* → 3 upcoming events, anything else → a generic reply; the words `ratelimit` and `unavailable` trigger the documented 429 / 503 errors). Run only this area on mocks with `EXPO_PUBLIC_USE_MOCKS=ai` once the backend answers the rest.
+- *(Superseded by PLAN 17.1: the app now always calls the real `POST /ai/chat`; what follows describes the test-only mock.)* `/ai/*` in the tests is answered by `testing/mocks/routes/ai.ts` (keywords: *pizza/eat* → 3 restaurants sorted by distance with a source link, *coffee* → cafés, *weekend/event* → 3 upcoming events, anything else → a generic reply; the words `ratelimit` and `unavailable` trigger the documented 429 / 503 errors). Run only this area on mocks with `EXPO_PUBLIC_USE_MOCKS=ai` once the backend answers the rest.
 - **Conversation (15.1, 15.2):** `useAiChat(location)` keeps the messages in memory only, sends the whole conversation (newest 20) with `{lat, lon}` (or `null` when location permission was denied), shows a "Thinking…" bubble, and on failure an error bubble with **Try again** that repeats the same conversation. **New chat** clears everything; an answer that arrives after it is ignored.
 - **Suggestions (15.3):** three chips above the input on an empty chat; tapping one sends it.
 - **Result cards (15.4):** under an assistant bubble, one card per place (name, category, distance, address) and per event (standard event card), each with **Show on map** (opens the Map tab with the panel open); tapping an event card opens the event. Sources the assistant used are listed as links in the bubble.
@@ -443,7 +467,7 @@ Also built: Profile tab (username, gauge, find people, sign out) and the public 
 
 #### Transit and directions on the map (PLAN 14.4, 14.5)
 
-Built on `stefan_dev` after merging `frontend/tibi`, in the spots Tibi's map shell left for them. Mock data on the phone until `EXPO_PUBLIC_USE_MOCKS` leaves out `transit` and `routes`; the field names match the backend records (`TransitStopDto`, `VehiclesResponse`, `ArrivalsResponse`, `LastDeparturesResponse`, `RoutePlanResponse`).
+Built on `stefan_dev` after merging `frontend/tibi`, in the spots Tibi's map shell left for them. Uses the real backend since PLAN 17.1 (the mock data below is for the Jest tests only); the field names match the backend records (`TransitStopDto`, `VehiclesResponse`, `ArrivalsResponse`, `LastDeparturesResponse`, `RoutePlanResponse`).
 
 | Step | What | Where |
 |---|---|---|

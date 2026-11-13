@@ -14,12 +14,12 @@ export type RouteLeg = {
   mode: LegMode;
   route: string | null;
   headsign: string | null;
-  from: LegPlace;
-  to: LegPlace;
-  startsAt: string;
-  endsAt: string;
+  from: LegPlace | null;
+  to: LegPlace | null;
+  startsAt: string | null;
+  endsAt: string | null;
   durationMinutes: number;
-  polyline: string;
+  polyline: string | null;
 };
 
 /** The route that arrives first. `mode` is what it really uses; `fallback` = straight-line walking estimate. */

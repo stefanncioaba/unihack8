@@ -4,14 +4,9 @@ import { changeUsername, getMyEvents, getReliability } from '@/api/endpoints.use
 import { ApiError } from '@/api/errors';
 import { supabase } from '@/lib/supabase';
 
-// Real HTTP path: mocks switched off.
-jest.mock('@/config', () => ({
-  API_URL: 'http://api.test:8080',
-  SUPABASE_URL: '',
-  SUPABASE_KEY: '',
-  MOCK_AREAS: [],
-  USE_MOCKS: false,
-}));
+// Real HTTP path: opt out of the Jest-only mock routing (jest.setup.ts).
+jest.unmock('@/api/client');
+jest.mock('@/config', () => ({ API_URL: 'http://api.test:8080', SUPABASE_URL: '', SUPABASE_KEY: '' }));
 
 /** A minimal fetch Response. */
 const respond = (status: number, body: unknown) =>

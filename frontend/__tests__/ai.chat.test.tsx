@@ -6,8 +6,8 @@ import * as endpoints from '@/api/endpoints.ai';
 import { ApiError } from '@/api/errors';
 import AiScreen from '@/app/(tabs)/ai';
 import { useAiChat } from '@/hooks/useAi';
-import { mockRequest, setMockLatency } from '@/mocks';
-import { placeId } from '@/mocks/placesSeed';
+import { mockRequest, setMockLatency } from '@test/mocks';
+import { placeId } from '@test/mocks/placesSeed';
 
 import { IDS, mockRouter, renderScreen } from './testUtils';
 

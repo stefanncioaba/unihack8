@@ -1,7 +1,7 @@
 # API contract
 
 The contract between the Spring backend (`backend/`) and the Expo app (`frontend/`).
-The frontend builds against mock data copied from the examples below (`frontend/src/mocks/`),
+The app always calls the real backend (PLAN 17.1); the Jest tests use a mock backend built from the examples below (`frontend/testing/mocks/`),
 so **change this file first, then the code**, and tell the team when you do.
 
 Covers PLAN tasks 4–11. Sign-up and login are not here: the app does them directly with Supabase.
@@ -110,7 +110,7 @@ Used in lists, on the map and inside other answers. `spotsLeft` is `null` when t
 }
 ```
 
-`source` is `USER` or `EXTERNAL`. Event `category` is one of:
+`source` is `USER` or `EXTERNAL`. Event `category` is one of (filtering by `OTHER` also returns imported events stored without a category):
 `PARTY`, `CONCERT`, `THEATRE`, `SPORT`, `GAMES`, `FOOD`, `ART`, `MEETUP`, `OTHER`.
 Imported events that cannot be classified get `OTHER`.
 

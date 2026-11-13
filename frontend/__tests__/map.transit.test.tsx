@@ -3,8 +3,8 @@ import { act, fireEvent, screen, waitFor, within } from '@testing-library/react-
 
 import MapScreen from '@/app/(tabs)/map';
 import { arrivalLabel } from '@/features/transit/StopPanel';
-import { mockRequest } from '@/mocks';
-import { LINE_STOPS, MOCK_STOPS } from '@/mocks/transitSeed';
+import { mockRequest } from '@test/mocks';
+import { LINE_STOPS, MOCK_STOPS } from '@test/mocks/transitSeed';
 
 import { renderScreen } from './testUtils';
 

@@ -3,8 +3,10 @@
 import type { Coordinates } from './geo';
 
 /** Turns an encoded polyline into points. Stops at the first malformed chunk instead of throwing. */
-export function decodePolyline(encoded: string): Coordinates[] {
+export function decodePolyline(input: string | null | undefined): Coordinates[] {
   const points: Coordinates[] = [];
+  if (!input) return points; // the backend sends null when OpenTripPlanner has no geometry for a leg
+  const encoded = input;
   let index = 0;
   let lat = 0;
   let lon = 0;

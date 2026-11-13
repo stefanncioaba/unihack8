@@ -1,10 +1,22 @@
-// Global Jest setup: turns on the mock backend and replaces native modules that Expo Go provides.
-process.env.EXPO_PUBLIC_USE_MOCKS = 'true';
+// Global Jest setup: answers API calls from the test-only mock backend (testing/mocks) and replaces native
+// modules that Expo Go provides. The app itself has no mock mode (PLAN 17.1); only tests route `api()` here.
+// Tests of the real HTTP client opt out with `jest.unmock('@/api/client')`.
 process.env.EXPO_PUBLIC_API_URL = 'http://test-host:8080';
 
 import { configure } from '@testing-library/react-native';
 
-import { resetMocks, setMockLatency } from '@/mocks';
+import { resetMocks, setMockLatency } from '@test/mocks';
+
+jest.mock('@/api/client', () => {
+  const actual = jest.requireActual('@/api/client');
+  const mocks = jest.requireActual('@test/mocks');
+  return {
+    ...actual,
+    // Looked up on every call so tests can jest.spyOn(mocks, 'mockRequest').
+    api: (method: string, path: string, options: { query?: object; body?: unknown } = {}) =>
+      mocks.mockRequest(method, path, options.query ?? {}, options.body),
+  };
+});
 
 // Rendering the SVG backgrounds is slow on some machines; give async queries more time.
 configure({ asyncUtilTimeout: 15000 });
@@ -16,6 +28,8 @@ beforeEach(() => {
   setMockLatency(0);
   (globalThis as { __routeParams?: Record<string, string> }).__routeParams = {};
 });
+
+jest.mock('@react-native-community/netinfo', () => require('@react-native-community/netinfo/jest/netinfo-mock.js'));
 
 jest.mock('@react-native-async-storage/async-storage', () => require('@react-native-async-storage/async-storage/jest/async-storage-mock'));
 

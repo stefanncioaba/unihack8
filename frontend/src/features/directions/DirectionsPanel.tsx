@@ -29,15 +29,17 @@ export function legIcon(mode: RouteLeg['mode']): IconName {
 
 /** One readable line per leg: `Walk to Piața Libertății` / `Tram 1 → Gara de Nord`. */
 export function legTitle(leg: RouteLeg): string {
-  if (leg.mode === 'WALK') return `Walk to ${leg.to.name}`;
+  const to = leg.to?.name ?? 'your stop';
+  if (leg.mode === 'WALK') return `Walk to ${leg.to?.name ?? 'the destination'}`;
   const kind = leg.mode === 'TRAM' ? 'Tram' : leg.mode === 'TROLLEYBUS' ? 'Trolleybus' : 'Bus';
-  return `${kind} ${leg.route ?? ''} → ${leg.headsign ?? leg.to.name}`.replace('  ', ' ');
+  return `${kind} ${leg.route ?? ''} → ${leg.headsign ?? to}`.replace('  ', ' ');
 }
 
 /** The detail under a leg's title. */
 function legDetail(leg: RouteLeg): string {
   if (leg.mode === 'WALK') return `${leg.durationMinutes} min`;
-  return `From ${leg.from.name} at ${formatTime(leg.startsAt)} · get off at ${leg.to.name} · ${leg.durationMinutes} min`;
+  const at = leg.startsAt ? ` at ${formatTime(leg.startsAt)}` : '';
+  return `From ${leg.from?.name ?? 'the stop'}${at} · get off at ${leg.to?.name ?? 'your stop'} · ${leg.durationMinutes} min`;
 }
 
 /** One of the two mode tabs, with that mode's time (or a short status). */

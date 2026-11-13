@@ -5,8 +5,8 @@ import type { RouteLeg } from '@/api/types.routing';
 import MapScreen from '@/app/(tabs)/map';
 import { legTitle } from '@/features/directions/DirectionsPanel';
 import { decodePolyline } from '@/lib/polyline';
-import { mockRequest } from '@/mocks';
-import { placeId } from '@/mocks/placesSeed';
+import { mockRequest } from '@test/mocks';
+import { placeId } from '@test/mocks/placesSeed';
 
 import { renderScreen } from './testUtils';
 

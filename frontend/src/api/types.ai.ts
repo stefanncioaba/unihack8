@@ -27,3 +27,6 @@ export type ChatAnswer = {
 
 /** The backend accepts at most this many messages per request. */
 export const MAX_CHAT_MESSAGES = 20;
+
+/** Longest message the API accepts (backend ChatMessageDto @Size(max = 2000)). */
+export const MAX_CHAT_MESSAGE_CHARS = 2000;

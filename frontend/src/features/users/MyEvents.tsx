@@ -1,4 +1,5 @@
 // "My events" on the profile: upcoming events I joined, events I organise, and events I attended (PLAN 16.3).
+import { parseIso } from '@/lib/time';
 import { StyleSheet, View } from 'react-native';
 
 import type { EventSummary } from '@/api/types';
@@ -14,7 +15,7 @@ export type MyEventGroups = { upcoming: EventSummary[]; organizing: EventSummary
 
 /** End of an event: its end time, or 3 hours after the start (same rule as the backend). */
 function endOf(e: EventSummary): number {
-  return e.endsAt ? Date.parse(e.endsAt) : Date.parse(e.startsAt) + 3 * 3_600_000;
+  return e.endsAt ? parseIso(e.endsAt) : parseIso(e.startsAt) + 3 * 3_600_000;
 }
 
 /** Splits the answer: joined and not yet over (upcoming), organised by me and not over, and attended (newest first). */
@@ -25,7 +26,7 @@ export function groupMyEvents(joined: JoinedEvent[], organizing: EventSummary[],
     attended: joined
       .filter((j) => j.status === 'ATTENDED')
       .map((j) => j.event)
-      .sort((a, b) => Date.parse(b.startsAt) - Date.parse(a.startsAt)),
+      .sort((a, b) => parseIso(b.startsAt) - parseIso(a.startsAt)),
   };
 }
 

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 
 import { Icon } from '@/ui/Icon';
+import { MAX_CHAT_MESSAGE_CHARS } from '@/api/types.ai';
 import { colors, radius } from '@/ui/theme';
 
 type Props = { onSend: (text: string) => void; disabled?: boolean };
@@ -32,6 +33,7 @@ export function ChatInput({ onSend, disabled }: Props) {
         returnKeyType="send"
         blurOnSubmit={false}
         multiline
+        maxLength={MAX_CHAT_MESSAGE_CHARS}
         style={styles.input}
       />
       <Pressable

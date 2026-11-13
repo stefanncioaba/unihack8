@@ -8,7 +8,7 @@ import { ApiError } from '@/api/errors';
 import type { EventSummary } from '@/api/types';
 import { groupMyEvents } from '@/features/users/MyEvents';
 import { formatPoints, reasonLabel } from '@/features/users/reliability';
-import { getMockState } from '@/mocks';
+import { getMockState } from '@test/mocks';
 
 import { IDS, mockRouter, renderScreen } from './testUtils';
 

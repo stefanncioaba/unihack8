@@ -1,6 +1,6 @@
 // The mock backend must behave like docs/API.md, because screens are built against it.
 import { ApiError } from '@/api/errors';
-import { mockRequest } from '@/mocks';
+import { mockRequest } from '@test/mocks';
 
 import { IDS } from './testUtils';
 

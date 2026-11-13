@@ -7,7 +7,7 @@ import { StatusChip } from '@/ui/Chip';
 import { ErrorState, LoadingState } from '@/ui/States';
 import { Text } from '@/ui/Text';
 import { colors } from '@/ui/theme';
-import { formatTime } from '@/lib/time';
+import { formatTime, parseIso } from '@/lib/time';
 
 /** How many arrivals fit in the panel. */
 const MAX_ARRIVALS = 6;
@@ -52,11 +52,11 @@ function Arrivals({ arrivals }: { arrivals: TransitArrival[] }) {
 /** Last departure of each line today; lines that already left are greyed out. */
 function LastDepartureRows({ departures, now }: { departures: TransitDeparture[]; now: number }) {
   if (departures.length === 0) return <Text tone="muted">No departures known for today.</Text>;
-  const sorted = [...departures].sort((a, b) => Date.parse(a.lastDepartureAt) - Date.parse(b.lastDepartureAt));
+  const sorted = [...departures].sort((a, b) => parseIso(a.lastDepartureAt) - parseIso(b.lastDepartureAt));
   return (
     <View style={{ gap: 6 }}>
       {sorted.map((d) => {
-        const gone = Date.parse(d.lastDepartureAt) < now;
+        const gone = parseIso(d.lastDepartureAt) < now;
         return (
           <LineRow
             key={`${d.route}-${d.headsign}`}

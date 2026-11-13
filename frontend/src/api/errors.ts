@@ -1,4 +1,4 @@
-// Error type shared by the real client and the mocks, plus human-friendly messages per error code.
+// Error type of the API client (also thrown by the test-only mock backend), plus human-friendly messages per error code.
 
 /** An error answer from the API (or a network failure, status 0). `code` is stable, `message` is for people. */
 export class ApiError extends Error {
@@ -19,6 +19,7 @@ export class ApiError extends Error {
 const FRIENDLY: Record<string, string> = {
   NETWORK: 'Cannot reach the server. Check your Wi-Fi and the backend address.',
   TIMEOUT: 'The server took too long to answer. Try again.',
+  NOT_CONFIGURED: 'The app has no backend address. Set EXPO_PUBLIC_API_URL in frontend/.env.',
   UNAUTHORIZED: 'Your session expired. Please sign in again.',
   NOT_ORGANIZER: 'Only the organiser can do this.',
   BANNED: 'The organiser banned you from this event.',

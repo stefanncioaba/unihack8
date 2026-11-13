@@ -1,6 +1,6 @@
 // Mock backend for the profile endpoints (docs/API.md → Users): change username, my events, reliability history.
 import { ApiError } from '@/api/errors';
-import { getMockState, mockRequest } from '@/mocks';
+import { getMockState, mockRequest } from '@test/mocks';
 
 import { IDS } from './testUtils';
 

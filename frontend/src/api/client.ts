@@ -1,9 +1,7 @@
-// The single API client. Adds the Supabase token to every request and, for mocked areas
-// (EXPO_PUBLIC_USE_MOCKS), answers from src/mocks/ instead of the network.
-import { API_URL, MOCK_AREAS } from '@/config';
-import { isMockedPath } from '@/lib/mockAreas';
+// The single API client. Every request goes to the Spring API (PLAN 17.1: the app never serves mock data;
+// the mock backend lives in testing/mocks and is used by Jest only). Adds the Supabase token to every request.
+import { API_URL } from '@/config';
 import { supabase } from '@/lib/supabase';
-import { mockRequest } from '@/mocks';
 
 import { ApiError } from './errors';
 
@@ -40,10 +38,10 @@ function toApiError(status: number, body: unknown): ApiError {
   return new ApiError(status, b.code ?? 'INTERNAL_ERROR', b.message ?? `Request failed (${status})`, b.fields ?? null);
 }
 
-/** Calls the API (or the mocks) and returns the parsed JSON. Throws ApiError on any failure. */
+/** Calls the Spring API and returns the parsed JSON. Throws ApiError on any failure. */
 export async function api<T>(method: Method, path: string, options: RequestOptions = {}): Promise<T> {
-  if (isMockedPath(MOCK_AREAS, path)) {
-    return (await mockRequest(method, path, options.query ?? {}, options.body)) as T;
+  if (!API_URL) {
+    throw new ApiError(0, 'NOT_CONFIGURED', 'EXPO_PUBLIC_API_URL is not set (see frontend/.env.example).');
   }
 
   const controller = new AbortController();
@@ -57,6 +55,8 @@ export async function api<T>(method: Method, path: string, options: RequestOptio
       signal: controller.signal,
       headers: {
         Accept: 'application/json',
+        // The UI is English; without this, iOS sends the phone locale and /transit/summary answers in Romanian.
+        'Accept-Language': 'en',
         ...(options.body !== undefined ? { 'Content-Type': 'application/json' } : {}),
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },

@@ -48,8 +48,9 @@ function leg(mode: LegMode, from: Coordinates & { name: string }, to: Coordinate
 
 /** Builds the answer from its legs (total duration and distance). */
 function plan(mode: PlanMode, legs: RouteLeg[], distance: number): RoutePlan {
-  const startsAt = legs[0].startsAt;
-  const endsAt = legs[legs.length - 1].endsAt;
+  // The mock builds every leg with times, so these are never null here.
+  const startsAt = legs[0].startsAt as string;
+  const endsAt = legs[legs.length - 1].endsAt as string;
   return {
     mode,
     durationMinutes: Math.round((Date.parse(endsAt) - Date.parse(startsAt)) / 60_000),

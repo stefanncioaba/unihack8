@@ -294,12 +294,12 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 **Needs:** everything above, but start switching mocks off feature by feature as soon as an endpoint is merged.
 
-- [ ] **17.1** Turn `USE_MOCKS` off per feature; fix contract mismatches in `docs/API.md` first.
-- [ ] **17.2 Demo setup (no deployment):** backend + OTP run on one laptop at the hackathon; phones open the app in Expo Go on the same Wi-Fi. Create our own accounts in the app, run the LiveTickets import, and add a few events through the create-event form.
-- [ ] **17.3 Full walkthrough on two real phones:** sign up → find an event → join → organiser scans the QR → score goes up → no-show loses points → ask the AI → get directions by tram.
-- [ ] **17.4** Handle offline / slow network and empty states on every screen.
-- [ ] **17.5** Final `DOCS.md`, knowledge graph and README (how to run everything).
-- [ ] **17.6** Pitch: 3-minute demo script and a backup screen recording.
+- [x] **17.1** Turn `USE_MOCKS` off per feature; fix contract mismatches in `docs/API.md` first. *Done 2026-11-14: the app has no mock mode at all (mocks moved to `frontend/testing/`, test-only, absent from the Android bundle); 30 calls compared with the backend, mismatches fixed; live test 7/7 against the real backend. See `DOCS.md` → Integration.*
+- [ ] **17.2 Demo setup (no deployment):** backend + OTP run on one laptop at the hackathon; phones open the app in Expo Go on the same Wi-Fi. Create our own accounts in the app, run the LiveTickets import, and add a few events through the create-event form. *Checklist ready in `docs/DEMO.md`; to do on demo morning with the real phones.*
+- [ ] **17.3 Full walkthrough on two real phones:** sign up → find an event → join → organiser scans the QR → score goes up → no-show loses points → ask the AI → get directions by tram. *Steps in `docs/DEMO.md`; needs two phones.*
+- [x] **17.4** Handle offline / slow network and empty states on every screen. *Offline banner + queries pause/refetch with NetInfo; 15 s timeout message; loading/error/empty states checked on every screen.*
+- [x] **17.5** Final `DOCS.md`, knowledge graph and README (how to run everything).
+- [ ] **17.6** Pitch: 3-minute demo script and a backup screen recording. *Script written in `docs/DEMO.md`; the recording is still to do (needs the phones).*
 
 ---
 

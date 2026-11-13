@@ -4,7 +4,7 @@ import { Text } from 'react-native';
 
 import { AuthProvider, useAuth, type AuthState } from '@/features/auth/AuthProvider';
 import { supabase } from '@/lib/supabase';
-import * as mocks from '@/mocks';
+import * as mocks from '@test/mocks';
 import { ApiError } from '@/api/errors';
 
 const auth = supabase.auth as unknown as Record<string, jest.Mock>;

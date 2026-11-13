@@ -74,6 +74,19 @@ class EventDatabaseIntegrationTest {
         }
     }
 
+    // Imported events without a category are shown as OTHER, so filtering by OTHER must find them (PLAN 17.1).
+    @Test
+    void otherCategoryIncludesUncategorizedImports() {
+        UUID imported = UUID.randomUUID();
+        jdbc.update("INSERT INTO events (id,source,external_id,title,category,starts_at,created_at) "
+                        + "VALUES (?,'EXTERNAL',?,?,NULL,?,?)", imported, "livetickets:x1", "Mystery night",
+                java.sql.Timestamp.from(Instant.now().plusSeconds(86_400)), java.sql.Timestamp.from(Instant.now()));
+        var other = service.search(null, List.of("OTHER"), null, null, null, null, 0, 20).items();
+        assertEquals(List.of(imported), other.stream().map(e -> e.id()).toList());
+        assertEquals("OTHER", other.getFirst().category());
+        assertEquals(0, service.search(null, List.of("PARTY"), null, null, null, null, 0, 20).items().size());
+    }
+
     // Real SQL covers filtering, capacity change, cancellation and organizer-only delete.
     @Test
     void eventLifecycleAndFilters() {

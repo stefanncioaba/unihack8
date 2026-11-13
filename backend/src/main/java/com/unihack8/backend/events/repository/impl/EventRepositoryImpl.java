@@ -46,7 +46,10 @@ public class EventRepositoryImpl implements EventRepository {
             p.addValue("q", "%" + escapeLike(c.query().toLowerCase(Locale.ROOT)) + "%");
         }
         if (!c.categories().isEmpty()) {
-            where.append(" AND category IN (:categories)");
+            // Imported events with no category are shown as OTHER (EventMapperImpl), so OTHER must also match NULL.
+            where.append(c.categories().contains("OTHER")
+                    ? " AND (category IN (:categories) OR category IS NULL)"
+                    : " AND category IN (:categories)");
             p.addValue("categories", c.categories());
         }
         where.append(" AND starts_at >= :from");

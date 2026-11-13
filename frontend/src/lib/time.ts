@@ -24,9 +24,17 @@ export function bucharestOffsetMs(utcMs: number): number {
   return utcMs >= dstStart && utcMs < dstEnd ? 3 * HOUR : 2 * HOUR;
 }
 
+/**
+ * Parses an ISO time from the API. Postgres times can carry microseconds (`…:00.123456Z`); fractions are cut to
+ * milliseconds first because not every JS engine accepts more than 3 fraction digits.
+ */
+export function parseIso(iso: string): number {
+  return Date.parse(iso.replace(/(\.\d{3})\d+/, '$1'));
+}
+
 /** Breaks a UTC instant into Bucharest wall-clock parts. */
 export function toBucharest(input: string | number | Date): WallTime {
-  const utcMs = input instanceof Date ? input.getTime() : typeof input === 'number' ? input : Date.parse(input);
+  const utcMs = input instanceof Date ? input.getTime() : typeof input === 'number' ? input : parseIso(input);
   const shifted = new Date(utcMs + bucharestOffsetMs(utcMs));
   return {
     year: shifted.getUTCFullYear(),

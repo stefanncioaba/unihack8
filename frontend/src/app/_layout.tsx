@@ -7,7 +7,9 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { AuthProvider, useAuth } from '@/features/auth/AuthProvider';
 import { LocationProvider } from '@/features/location/LocationProvider';
+import { startNetworkSync } from '@/lib/network';
 import { queryClient } from '@/lib/queryClient';
+import { OfflineBanner } from '@/ui/OfflineBanner';
 import { LoadingState } from '@/ui/States';
 import { Screen } from '@/ui/Screen';
 import { colors } from '@/ui/theme';
@@ -46,13 +48,17 @@ function Gate() {
   );
 }
 
-/** App entry: query cache, auth and safe-area providers around the gate. */
+// Queries pause while offline and refetch when the connection returns (PLAN 17.4).
+startNetworkSync();
+
+/** App entry: query cache, auth and safe-area providers around the gate, plus the offline banner. */
 export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <StatusBar style="light" />
+          <OfflineBanner />
           <Gate />
         </AuthProvider>
       </QueryClientProvider>

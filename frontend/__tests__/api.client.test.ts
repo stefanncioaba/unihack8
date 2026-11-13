@@ -1,20 +1,12 @@
-// API client: query building, token header, error mapping (real fetch path), and the USE_MOCKS switch.
+// API client: query building, token header, error mapping and timeouts on the real fetch path.
+// The app has no mock mode (PLAN 17.1); this test opts out of the Jest-only mock routing in jest.setup.ts.
+jest.unmock('@/api/client');
+
 import { api, buildQuery } from '@/api/client';
 import { ApiError } from '@/api/errors';
 import { supabase } from '@/lib/supabase';
 
-// `USE_MOCKS` is read through a getter so each test can flip it.
-jest.mock('@/config', () => ({
-  API_URL: 'http://api.test:8080',
-  SUPABASE_URL: '',
-  SUPABASE_KEY: '',
-  get MOCK_AREAS() {
-    return (globalThis as { __useMocks?: boolean }).__useMocks === false ? [] : 'all';
-  },
-}));
-
-/** Switches the client between the mock backend and real HTTP. */
-const useMocks = (on: boolean) => ((globalThis as { __useMocks?: boolean }).__useMocks = on);
+jest.mock('@/config', () => ({ API_URL: 'http://api.test:8080', SUPABASE_URL: '', SUPABASE_KEY: '' }));
 
 /** Makes the mocked Supabase session return this access token (or none). */
 const signedInWith = (token: string | null) =>
@@ -34,24 +26,8 @@ describe('buildQuery', () => {
   });
 });
 
-describe('USE_MOCKS on', () => {
-  beforeEach(() => useMocks(true));
-
-  it('serves data from src/mocks without touching fetch', async () => {
-    const fetchSpy = jest.spyOn(globalThis, 'fetch');
-    const me = await api<{ username: string }>('GET', '/users/me');
-    expect(me.username).toBe('demo_user');
-    expect(fetchSpy).not.toHaveBeenCalled();
-    fetchSpy.mockRestore();
-  });
-});
-
-describe('USE_MOCKS off (real HTTP)', () => {
-  beforeEach(() => useMocks(false));
-  afterEach(() => {
-    jest.restoreAllMocks();
-    useMocks(true);
-  });
+describe('real HTTP', () => {
+  afterEach(() => jest.restoreAllMocks());
 
   /** A minimal fetch Response. */
   const respond = (status: number, body: unknown) =>
@@ -101,5 +77,12 @@ describe('USE_MOCKS off (real HTTP)', () => {
     signedInWith('t');
     jest.spyOn(globalThis, 'fetch').mockRejectedValue(new TypeError('Network request failed'));
     await expect(api('GET', '/events')).rejects.toMatchObject({ status: 0, code: 'NETWORK' });
+  });
+
+  it('never serves mock data: every call goes to fetch', async () => {
+    signedInWith('t');
+    const fetchMock = jest.spyOn(globalThis, 'fetch').mockResolvedValue(respond(200, { username: 'real_user' }));
+    await expect(api('GET', '/users/me')).resolves.toEqual({ username: 'real_user' });
+    expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 });

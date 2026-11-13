@@ -4,7 +4,7 @@ import { useCallback, useRef, useState } from 'react';
 
 import { sendChat } from '@/api/endpoints.ai';
 import type { EventSummary } from '@/api/types';
-import { MAX_CHAT_MESSAGES, type ChatRole, type ChatSource } from '@/api/types.ai';
+import { MAX_CHAT_MESSAGE_CHARS, MAX_CHAT_MESSAGES, type ChatRole, type ChatSource } from '@/api/types.ai';
 import type { PlaceSummary } from '@/api/types.places';
 
 /** A message as the chat screen shows it (assistant messages can carry result cards and sources). */
@@ -44,7 +44,10 @@ export function useAiChat(location: Location) {
       const mine = generation.current;
       setThinking(true);
       try {
-        const payload = history.slice(-MAX_CHAT_MESSAGES).map(({ role, content }) => ({ role, content }));
+        // The API accepts at most MAX_CHAT_MESSAGE_CHARS per message (docs/API.md); trim long history entries.
+        const payload = history
+          .slice(-MAX_CHAT_MESSAGES)
+          .map(({ role, content }) => ({ role, content: content.slice(0, MAX_CHAT_MESSAGE_CHARS) }));
         const answer = await sendChat({ messages: payload, location });
         if (mine !== generation.current) return;
         commit([
