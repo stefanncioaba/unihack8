@@ -1,0 +1,58 @@
+{
+  "success": true,
+  "data": {
+    "vehicles": [
+      {
+        "id": "1010",
+        "lat": 45.73386001586914,
+        "lng": 21.257930755615234,
+        "bearing": 307,
+        "speed": 0,
+        "route": "1",
+        "directionId": "1",
+        "headsign": "Gara de Nord",
+        "stop": "Piața Gheorghe Domășneanu (Liviu Rebreanu - AEM)",
+        "timestamp": 1794594883000,
+        "isAccessible": true,
+        "routeId": "R_TV_1",
+        "tripId": "1.1_WDSC_R_01_14",
+        "shapeId": "1.1_R"
+      },
+      {
+        "id": "1002",
+        "lat": 45.74842071533203,
+        "lng": 21.21851921081543,
+        "bearing": 51.55723571777344,
+        "speed": 4,
+        "route": "1",
+        "directionId": "0",
+        "headsign": "Piața Gh. Domășneanu",
+        "stop": "Piața Sfânta Maria (16 Decembrie 1989)",
+        "timestamp": 1794594885000,
+        "isAccessible": true,
+        "routeId": "R_TV_1",
+        "tripId": "1.1_WDSC_T_03_15",
+        "shapeId": "1.1_T"
+      }
+    ],
+    "total": 5,
+    "byLine": {
+      "1": 5
+    },
+    "generated_at": 1794594900,
+    "server_time": 1794594900,
+    "age_seconds": 12,
+    "is_stale": false,
+    "newest_vehicle_ts": 1794594888,
+    "vehicle_data_age_seconds": 12,
+    "live_status": "ok",
+    "live_status_reason": null,
+    "service_expected_now": true,
+    "service_window": {
+      "first_departure": "04:10",
+      "last_arrival": "24:30"
+    },
+    "upstream_status": "ok",
+    "upstream_status_reason": null
+  }
+}

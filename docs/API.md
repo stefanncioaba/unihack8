@@ -411,11 +411,12 @@ All public. `stale: true` means STPT did not answer and this is the last cached 
 
 ### `GET /transit/routes`
 
-`type` is `TRAM`, `TROLLEYBUS`, `BUS`, `EXPRESS`, `METROPOLITAN` or `BOAT`.
+`type` is `TRAM`, `TROLLEYBUS`, `BUS`, `EXPRESS`, `METROPOLITAN` or `BOAT`. Sorted by type (trams first), then by line number.
+`from` / `to` are the line's two end stations (either can be `null`). `color` is STPT's line colour for drawing on the map (`null` when STPT has none).
 
 ```json
 [
-  { "id": "1", "type": "TRAM", "name": "1", "from": "Stația Meteo", "to": "Gara de Nord" }
+  { "id": "1", "type": "TRAM", "name": "1", "from": "Gara de Nord", "to": "Piața Gh. Domășneanu (AEM)", "color": "#e3a900" }
 ]
 ```
 
@@ -456,7 +457,8 @@ Refresh every 10 s on the map.
 
 ### `GET /transit/stops/{id}/arrivals`
 
-`live: false` means the time comes from the timetable, not a vehicle's position.
+`live: false` means the time comes from the timetable, not a vehicle's position. Sorted soonest first.
+`stopName` is `null` only when STPT's stop list could not be loaded. Errors: `404 NOT_FOUND` for an unknown stop.
 
 ```json
 {
@@ -481,6 +483,7 @@ Refresh every 10 s on the map.
 ### `GET /transit/last-departures?stopId=1`
 
 `source` is `TIMETABLE` (from the GTFS file) or `LIVE_ESTIMATE` (fallback, last arrival seen live — PLAN 9.6).
+Until the GTFS file is found (task 10) the answer is always `LIVE_ESTIMATE`: the latest of the next few arrivals STPT reports per line and direction (roughly the next 30–60 minutes), **not** the real end of service.
 
 ```json
 {
@@ -495,7 +498,8 @@ Refresh every 10 s on the map.
 
 ### `GET /transit/summary?near=45.7537,21.2257`
 
-The home page line. `message` is ready to show (Romanian or English chosen by the `Accept-Language` header, default English).
+The home page line. `message` is ready to show (Romanian when `Accept-Language` starts with `ro`, otherwise English). `near` is required.
+The message names the line from `lastDepartures` that stops earliest; with no departures it says none are known. If alerts cannot be loaded, `activeAlerts` is `0`.
 
 ```json
 {

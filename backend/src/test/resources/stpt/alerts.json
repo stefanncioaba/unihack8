@@ -1,0 +1,43 @@
+{
+  "alerts": [
+    {
+      "id": "A155",
+      "headerText": "Având în vedere reluarea lucrărilor la Pasaj Solventul – închidere buclă Ronaț, precum și închiderea circulației tramvaielor în Piața Traian începând cu data de 3 august 2026 și până la finalul anului, circulația tramvaielor se va desfășura pe trasee deviate după cum urmează:",
+      "descriptionText": "Având în vedere reluarea lucrărilor la Pasaj Solventul – închidere buclă Ronaț, precum și închiderea circulației tramvaielor în Piața Traian începând cu data de 3 august 2026 și până la finalul anului, circulația tramvaielor se va desfășura pe trasee deviate după cum urmează:\n\n-linia 5 se suspendă,\n-liniile 6a și 6b rămân în continuare suspendate,\n-liniile 4, 7, 8 și 9 circulă pe traseele actuale,\n-linia 1 circulă deviată având următorul traseu:\n•\ttraseu tur - retur: Gara de Nord – Piața Sf. Maria – Piața Nicolae Bălcescu – str. Drubeta – b-dul Liviu Rebreanu – AEM\n-linia 2 circulă deviat având următorul traseu: \n•\ttraseu tur – retur: Shopping City – Dâmbovița – b-dul Regele Carol – Piața Regina Maria – str Doctor Iosif Nemoianu – str. Coriolan Brediceanu – Balta Verde – b-dul Cetății – buclă Torontal\n\n       În perioada menționată se introduce linia de autobuz 5c ce va avea următorul traseu:\n-traseu tur: Ronaț – Calea Bogdăneștilor – str. Coriolan Brediceanu – Piața 700 – Piața Libertății – b-dul Revoluției din 1989 – Splaiul Nistrului – str. Johann Heinrich Pestalozzi – str. Iepurelui – str. Baba Dochia – str. Andrei Șaguna – str. Gh. Adam – Meteo – Gara de Est \n-traseu retur: Gara de Est – Meteo – str. Gh. Adam – str. Andrei Șaguna – str. Baba Dochia – str. Iepurelui – str. Johann Heinrich Pestalozzi – Splaiul Nistrului – b-dul Revoluției din 1989 – Piața Libertății – Piața 700 – str. Coriolan Brediceanu 700 – Calea Bogdăneștilor – Ronaț",
+      "cause": "CONSTRUCTION",
+      "effect": "DETOUR",
+      "activePeriod": [
+        {
+          "start": "1785718800",
+          "end": "1798667940"
+        }
+      ],
+      "informedEntity": [
+        {
+          "routeId": "R_TV_1"
+        },
+        {
+          "routeId": "R_TV_2"
+        },
+        {
+          "agencyId": "STPT"
+        },
+        []
+      ],
+      "header_text": {
+        "translation": [
+          {
+            "text": "Având în vedere reluarea lucrărilor la Pasaj Solventul – închidere buclă Ronaț, precum și închiderea circulației tramvaielor în Piața Traian începând cu data de 3 august 2026 și până la finalul anului, circulația tramvaielor se va desfășura pe trasee deviate după cum urmează:"
+          }
+        ]
+      },
+      "description_text": {
+        "translation": [
+          {
+            "text": "Având în vedere reluarea lucrărilor la Pasaj Solventul – închidere buclă Ronaț, precum și închiderea circulației tramvaielor în Piața Traian începând cu data de 3 august 2026 și până la finalul anului, circulația tramvaielor se va desfășura pe trasee deviate după cum urmează:\n\n-linia 5 se suspendă,\n-liniile 6a și 6b rămân în continuare suspendate,\n-liniile 4, 7, 8 și 9 circulă pe traseele actuale,\n-linia 1 circulă deviată având următorul traseu:\n•\ttraseu tur - retur: Gara de Nord – Piața Sf. Maria – Piața Nicolae Bălcescu – str. Drubeta – b-dul Liviu Rebreanu – AEM\n-linia 2 circulă deviat având următorul traseu: \n•\ttraseu tur – retur: Shopping City – Dâmbovița – b-dul Regele Carol – Piața Regina Maria – str Doctor Iosif Nemoianu – str. Coriolan Brediceanu – Balta Verde – b-dul Cetății – buclă Torontal\n\n       În perioada menționată se introduce linia de autobuz 5c ce va avea următorul traseu:\n-traseu tur: Ronaț – Calea Bogdăneștilor – str. Coriolan Brediceanu – Piața 700 – Piața Libertății – b-dul Revoluției din 1989 – Splaiul Nistrului – str. Johann Heinrich Pestalozzi – str. Iepurelui – str. Baba Dochia – str. Andrei Șaguna – str. Gh. Adam – Meteo – Gara de Est \n-traseu retur: Gara de Est – Meteo – str. Gh. Adam – str. Andrei Șaguna – str. Baba Dochia – str. Iepurelui – str. Johann Heinrich Pestalozzi – Splaiul Nistrului – b-dul Revoluției din 1989 – Piața Libertății – Piața 700 – str. Coriolan Brediceanu 700 – Calea Bogdăneștilor – Ronaț"
+          }
+        ]
+      }
+    }
+  ]
+}

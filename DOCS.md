@@ -105,7 +105,7 @@ Applied to Supabase on 2026-11-13 from `supabase/migrations/` (four migrations, 
 
 ## Current state
 
-- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation: token security, error handling, current user, paging, tests. No feature endpoints yet.
+- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging) and the live transit endpoints of task 9 (`/transit/**`).
 - `supabase/`: migrations and schema tests for task 2, applied.
 - `docs/API.md`: API contract (task 1.6).
 - `infra/otp/`: folder for OpenTripPlanner (README only; the server is set up in task 10). Its large data files are git-ignored.
@@ -124,7 +124,7 @@ Checked on 2026-11-13 by calling each endpoint. None of these is a documented pu
 | `/gtfs-data/stops-index.json` | All stops: `stop_code`, `stop_name`, `lat`, `lon`, `routes[]` |
 | `/gtfs-data/route-manifest.json` | Route list plus GTFS feed info (source file `smtt-timisoara-ro.zip`, feed version, service date range) |
 | `/routes/capeti-linie.json` | End stations of each line (`tur` / `retur`) |
-| `/proxy-smtt-cache.php?stopid=<id>` | Arrivals at a stop (seen in the site's script; response not sampled yet) |
+| `/proxy-smtt-cache.php?stopid=<id>` | Arrivals at a stop: array of `route`, `type`, `destination`, `vehicleId` (null = timetable), `times` (`"HH:mm|minutes"`, local time) |
 | `/proxy-alerts.php` | Service alerts: `id`, `headerText`, `descriptionText` |
 | `/api/journey.php?…` | The site's own journey planner (seen in the script; parameters not explored) |
 
@@ -174,6 +174,37 @@ Checked against Google's documentation on 2026-11-13.
 ## Features
 
 Sections are added here as each PLAN task is implemented: Users, Events, Reliability, Places, Transit, Routing, AI, Frontend.
+
+### Transit — live STPT data (PLAN task 9, Track B)
+
+Public endpoints (no token) under `/transit`, contract in `docs/API.md` → Transit. The backend calls `live.stpt.ro`; the app never does.
+
+| Endpoint | Source on live.stpt.ro | Cached for |
+|---|---|---|
+| `GET /transit/routes` | `/gtfs-data/route-manifest.json` | 24 h |
+| `GET /transit/stops?bbox=` | `/gtfs-data/stops-index.json` | 24 h |
+| `GET /transit/vehicles?route=` | `/gtfs-vehicles.php?route=` | 10 s |
+| `GET /transit/stops/{id}/arrivals` | `/proxy-smtt-cache.php?stopid=` | 20 s |
+| `GET /transit/alerts` | `/proxy-alerts.php` | 5 min |
+| `GET /transit/last-departures?stopId=` | computed from arrivals | — |
+| `GET /transit/summary?near=lat,lon` | nearest stop + its last departures + alert count | — |
+
+**Package `com.unihack8.backend.transit`:** `client/StptClient` (+ `impl/`) makes the raw calls and reads STPT's JSON leniently; `mapper/TransitMapper` (+ `impl/`) converts to the API shapes; `service/TransitService` (+ `impl/`) caches and computes; `controller/TransitController`; `config/StptProperties` and `StptClientConfig` (HTTP client). No database table — everything is live.
+
+**Shared helpers added to `common` (reuse them in places/routing):**
+- `common.cache.StaleCache` — per-key cache: fresh for its lifetime; if the source then fails, the last value is served with `stale: true`; if nothing was ever cached, `503 SOURCE_UNAVAILABLE`. One request per key reaches the source at a time.
+- `common.geo.GeoPoint` (`near=lat,lon` parsing, haversine distance) and `common.geo.BoundingBox` (`bbox=` parsing) — bad values answer `400 VALIDATION_FAILED`.
+
+**Settings** (all optional, defaults in `StptProperties`): `stpt.base-url`, `stpt.connect-timeout` (3 s), `stpt.read-timeout` (5 s), `stpt.user-agent`, `stpt.ttl.vehicles|arrivals|alerts|static-data`.
+
+**How STPT data is read (checked 2026-11-13):**
+- Arrival times come as `"HH:mm|minutes"` in Romanian local time; we turn them into UTC, picking the date nearest to now (so `00:05` seen at 23:50 is tomorrow). Repeated times are dropped.
+- An arrival item has one `vehicleId` for all its times; we mark only its **first** time `live: true` (the vehicle being tracked), the rest are timetable times.
+- Line type comes from STPT's category (tram, trolleybus, express, metropolitan, vaporetto), otherwise from the GTFS `route_type`; school (`S…`) and urban lines are `BUS`.
+- `from` / `to` come from the GTFS long name (`"Gara de Nord - Piața Gh. Domășneanu (AEM)"`). The older `/routes/capeti-linie.json` is not used: it still lists pre-diversion end stations.
+- **Last departures:** no GTFS timetable yet (PLAN open question 2), so `source` is always `LIVE_ESTIMATE` = the latest of the next few arrivals STPT reports (about the next 30–60 minutes). The summary sentence ("Last tram 2 from … leaves at 21:41") is therefore an estimate until the GTFS file is used. STPT's vehicles answer also has a per-line `service_window.last_arrival` (e.g. `24:30`) that could improve this later; not used yet.
+
+**Tests (52 new, 81 total, all passing on 2026-11-13):** `StptClientImplTest` parses real STPT answers saved in `src/test/resources/stpt/` (no network); `TransitMapperImplTest` (types, time zones, midnight, duplicates); `TransitServiceImplTest` (sorting, bbox, caching, stale fallback when STPT is down, 503 with no cache, 404 stop, last departures, summary in English and Romanian); `TransitControllerTest` (JSON shapes, no token needed, 400/404/503); `StaleCacheTest`; `GeoParsingTest`. A one-off run against the real STPT on 2026-11-13 returned 74 lines, 926 stops, live vehicles, arrivals and 5 alerts.
 
 ## Knowledge graph
 
