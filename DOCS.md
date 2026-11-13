@@ -107,7 +107,7 @@ Applied to Supabase on 2026-11-13 from `supabase/migrations/` (four migrations, 
 
 ## Current state
 
-- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging), users/profile endpoints (task 4), places (task 8, 1003 Timișoara places imported into Supabase), live transit (task 9, `/transit/**`) and routing (task 10, `/routes/plan`). 190 backend tests passing.
+- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging), users/profile endpoints (task 4), places (task 8, 1003 Timișoara places imported into Supabase), live transit (task 9, `/transit/**`) and routing (task 10, `/routes/plan`), and the LiveTickets events import (task 7, 38 events). 242 backend tests passing.
 - `supabase/`: migrations and schema tests for task 2, applied.
 - `docs/API.md`: API contract (task 1.6).
 - `infra/otp/`: OpenTripPlanner 2.7 setup (docker-compose, data download script). Its large data files are git-ignored. `GET /routes/plan` is implemented (task 10).
@@ -136,11 +136,12 @@ The GTFS zip itself is not on `live.stpt.ro`, but SMTT publishes it at `https://
 
 | Endpoint | Returns |
 |---|---|
-| `/public/events-home-v2?a=1` | Array of events: `event_id`, `url`, `name`, `description` (HTML), `location` (venue name), `city`, `start_date`, `end_date`, `price_min`, `price_max`, `image` |
-| `/public/events` | Event search (seen in the site's script; query parameters not explored) |
-| `/public/events/getbyid?id=<id>` | One event (seen in the site's script) |
+| `/public/event-search?spc.pageNumber=1&spc.numberOfRecords=1000` | **Used by the import.** `{"events": {"items": [...], "totalItems", "hasMorePages"}}`; every upcoming event in Romania (333 on 2026-11-13, 38 in Timișoara). Item fields: `event_id`, `url`, `name`, `description` (HTML), `location` (venue name), `city`, `start_date` / `end_date` (Romanian local time, no zone), `price_min`, `price_max`, `image`, `image_token`, `organizer_name`. |
+| `/public/events-home-v2?a=1` | Only the ~20 featured events of the home page (all cities). |
+| `/public/events/getbyid?id=<id>` | One event (seen in the site's script). |
 
-Events carry a venue name and city but **no coordinates** — they are geocoded with Nominatim (PLAN task 7.3).
+- **No coordinates and no category** in the data — venues are geocoded (Features → Events import) and the category is guessed from words in the title.
+- **Links:** ticket page `https://www.livetickets.ro/bilete/<url>`, image `https://livetickets-cdn.azureedge.net/itemimages/<image>?<image_token>` (both checked 2026-11-13).
 
 ### OpenStreetMap
 
@@ -188,6 +189,20 @@ Package `com.unihack8.backend.users` (`controller`, `service` + `impl`, `reposit
 - **Tests** (`src/test/.../users`): `UserServiceImplTest` (Mockito rules), `UserControllerTest` (MockMvc with real HS256 test tokens), `ProfileRepositoryTest` and `AttendedEventRepositoryImplTest` (H2). No test touches Supabase.
 
 Sections are added here as each PLAN task is implemented: Events, Reliability, Transit, Routing, AI, Frontend.
+
+### Events import (PLAN task 7)
+
+Upcoming Timișoara events from LiveTickets, stored in the `events` table as `source = EXTERNAL` with title, plain-text description, category, venue, start/end time (UTC), prices, image and ticket-page link, and coordinates when the venue can be located. They are read through the events endpoints of task 5 (built separately).
+
+- **Run it** (from `backend/`, with `application-local.properties` filled in): `./gradlew bootRun --args='--spring.profiles.active=local --events.import.enabled=true'`, or in IntelliJ add `--events.import.enabled=true` to the program arguments for one run. Takes about 30 seconds; the API then keeps running normally. Run it once to fill the database and **once more on demo morning**. Both imports at once: `--places.import.enabled=true --events.import.enabled=true`.
+- **Not scheduled** (team decision): the hackathon ends before a weekly job would first run, and a GitHub workflow would need the database password as a secret.
+- **Own package `eventimport`**, writing rows with plain SQL (`ExternalEventRepository`), so it never touches the events feature's code (task 5, built in parallel).
+- **Re-runnable:** rows are matched by `external_id = "livetickets:<event_id>"`, so a re-run updates instead of duplicating. Upcoming imported events LiveTickets no longer lists are deleted (past ones and user events are never touched). If LiveTickets fails or returns nothing for the city, nothing is deleted.
+- **Mapping** (`LiveTicketsEventMapperImpl`): only `city` = Timișoara (ignoring case and diacritics); times converted from Romanian local time to UTC; HTML description to plain text (max 4000 characters); an end time not after the start is dropped; category guessed from the **title first**, then the description: THEATRE, CONCERT, SPORT, GAMES, PARTY, FOOD, ART, MEETUP keyword lists in that order, else OTHER.
+- **Locating venues** (`VenueGeocoderImpl`), in this order: exact name match in our `places` table (ignoring case, diacritics, punctuation and a leading/trailing "Timișoara"); the curated **`backend/src/main/resources/eventimport/venues.txt`** (venue → street address or exact `lat,lon`); OpenStreetMap Nominatim by name; Nominatim by the text in brackets. Nominatim is asked at most once per second and results must lie in `events.import.bbox` (default `45.65,21.10,45.85,21.40`, Timișoara incl. the airport). Venues that are just "Timișoara" are not located. Events without coordinates appear in lists but not on the map.
+- **Add a venue the map misses:** add a line to `venues.txt` (`Venue name | address` or `Venue name | lat, lon`) and re-run the import — only events still without coordinates are geocoded again.
+- **First import (2026-11-13):** 38 Timișoara events, **32 with coordinates**. Not located: Hibana (2 events, address not found), "#altfel Timisoara" (a promoter, not a place), 3 events whose venue is just "Timișoara".
+- **Tests:** 52 (`LiveTicketsClientImplTest`, `LiveTicketsEventMapperImplTest`, `EventImportServiceImplTest` on its own H2 database, `VenueGeocoderImplTest` with a fake Nominatim, `EventImportRunnerTest`), using a real LiveTickets response saved in `src/test/resources/livetickets/event-search-sample.json`. Tests never call LiveTickets or Nominatim.
 
 ### Places (PLAN task 8)
 
