@@ -1,11 +1,11 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "ad982c65023b95c35903882d178bc9683fb43a7c",
-  "generatedAt": "2026-11-13T20:44:29+00:00",
+  "gitCommitHash": "75eaf5bc8a505a52818abab1063ff89493d5c5e8",
+  "generatedAt": "2026-11-13T21:04:36.845Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
-      "contentHash": "db5114be1d214c109f73f83ac908cee9ca7775a791eb5528f1340d16a619f688",
+      "contentHash": "34bc53e312d8287a2b46b4d9b7a7734eebef46da1d63c3da3fbe9ddda47e0d73",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -25,17 +25,17 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "f0552b9628e7e9a2b91641986cb260edafbfc56b820f2d923cd3bf40f3ab67cd",
+      "contentHash": "f02a70a5ded6d498038ac42cd8d5fea5f79532e7d81dad5d5f4a3749108df73b",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 358,
+      "totalLines": 389,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "beffbf9325a966bb86a4e55d6d4ac37cc9681c4af06bc552a340e8987653112c",
+      "contentHash": "6823ec25f50233d555ebedce838978a139743d384954557b1ae0bf7594cf1db1",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -274,7 +274,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/dto/ErrorResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/dto/ErrorResponse.java",
-      "contentHash": "b092f07bc6eaf0486f7e12c09196b342b6e9f78dfda1b09ca1a06ae4b7286cea",
+      "contentHash": "505dc09c37f0970b6ee35e036fd03207f829be0b3194de04918835ed1854f1ae",
       "functions": [],
       "classes": [
         {
@@ -307,7 +307,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/dto/PageParams.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/dto/PageParams.java",
-      "contentHash": "5827fad2157c79bf7a4f071aa6059b3a123bb68a1cd78956eacc6fd835b17852",
+      "contentHash": "1ad49c290cc8b5500036b0031c67a30d51dd8ff31b4eb9582704874a832449a8",
       "functions": [
         {
           "name": "of",
@@ -414,7 +414,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/dto/PageResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/dto/PageResponse.java",
-      "contentHash": "c1bfd6d5f0bddc34d5a1826ae1203a58175f1eb7701c3d5691ff06874a4f1dfd",
+      "contentHash": "e29c15742df03e0f4b9c5dae9e2f351ec6ad7e50e2558de55d623e976ba8aca7",
       "functions": [
         {
           "name": "of",
@@ -467,7 +467,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
-      "contentHash": "8ac408471bfda613be28af0f5f6ccbc11f898d2172caf312283613e3955d7fa9",
+      "contentHash": "e0d63aab0f780d3ca92f0ac35d0ed0bcca51aef3fad316eb735c2379c2a6e93a",
       "functions": [
         {
           "name": "ApiException",
@@ -532,7 +532,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
-      "contentHash": "adfcebfe9cab34ec6783cadb9e1c388c75c7f72875468aa9aad252eabec617d4",
+      "contentHash": "e42ddb4da25446fb1b542f01c7e7b1d49f8efe1128aa29c0123d6cbf93185da0",
       "functions": [
         {
           "name": "ErrorCode",
@@ -592,7 +592,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/exception/ErrorResponseFactory.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/exception/ErrorResponseFactory.java",
-      "contentHash": "855ca6c4ef40715c7fc0e2dd772346c1367fde37ce750c6ae9525f244667ec1e",
+      "contentHash": "c423d0a8cf43a89281bd928c9a172ef330fb06fae6cdc85563d4c81ced307f67",
       "functions": [
         {
           "name": "ErrorResponseFactory",
@@ -684,7 +684,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/exception/GlobalExceptionHandler.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/exception/GlobalExceptionHandler.java",
-      "contentHash": "8f93866385fb598414d47dcc583a1c6227f76d558388dd70074d4f254b080471",
+      "contentHash": "97227a2e81743f4c7641535d210a205ce128f63551f88a5e871a63564f35ce1d",
       "functions": [
         {
           "name": "GlobalExceptionHandler",
@@ -979,7 +979,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
-      "contentHash": "0da465e01aa8d3c280a57af560814917a9612231f203dbcd0137969ba23986a5",
+      "contentHash": "63b612f286a8ece0ec07aefc4a1ad50e44f78f33ad38fbc2b46b4a10b0669ad5",
       "functions": [
         {
           "name": "parse",
@@ -1038,7 +1038,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java",
-      "contentHash": "8811b1564c260b02f148207d26f5bb397cb11666dc04b211a89631727ad5d90f",
+      "contentHash": "8d2de91be060eb757bfd97e9177b50498d050b278ca39ab7a60675c40aaafbe3",
       "functions": [
         {
           "name": "GeoParsing",
@@ -1091,7 +1091,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
-      "contentHash": "25c6c0cb7512eaf26237775c82bf31b283bb34e0d134514a6c0f1b1c90ed654b",
+      "contentHash": "12287c3a92ab38adc2b4323f2140f81e94646469c120feda482ae5c69b8a9186",
       "functions": [
         {
           "name": "parse",
@@ -1162,7 +1162,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/security/CurrentUser.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/security/CurrentUser.java",
-      "contentHash": "bcb389f27ccb66d30345b35cc3b72029a27026c762f00dec3e9911126ad8dd30",
+      "contentHash": "84b9cbcaee4f9b7b2e293d7efb47953c54b484ae086b68db6a43005356377014",
       "functions": [
         {
           "name": "id",
@@ -1251,7 +1251,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/security/JsonAccessDeniedHandler.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/security/JsonAccessDeniedHandler.java",
-      "contentHash": "48fc3a4151071bf02b0e67deaf02a0556b6c871d9ce7ea43d32bc7352eb981de",
+      "contentHash": "c9016bdc4efdf83bcce9c144abbe6382913bf9c1b1a2b0b066a2109072330c4b",
       "functions": [
         {
           "name": "JsonAccessDeniedHandler",
@@ -1361,7 +1361,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/security/JsonAuthenticationEntryPoint.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/security/JsonAuthenticationEntryPoint.java",
-      "contentHash": "3a91c1be72607ed7afaa9b9d187aba05f8b0a63dd22ea22d4c5fbcd607f12780",
+      "contentHash": "74558005de6ebd6e51dabf1d31838623874412ff480ad5f33f3602527d37ffad",
       "functions": [
         {
           "name": "JsonAuthenticationEntryPoint",
@@ -1471,7 +1471,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java",
-      "contentHash": "e3dcdc6b95b676a2f99d0fdc02f451e900d2d3929f17c9aec8f9a72af2115d56",
+      "contentHash": "135e6351d30ba7228311abd2b022040f56f3f199beb2934259e1f2e5711cdd33",
       "functions": [
         {
           "name": "securityFilterChain",
@@ -1695,7 +1695,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/config/SupabaseProperties.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/config/SupabaseProperties.java",
-      "contentHash": "435ff1600ebbd2de684ecf4c30c01336ebbd198c0eb4d15977bf0f0f969e8913",
+      "contentHash": "434eff6af30cafc6a032634c16714108c961ca29446fdd48cfbb462cbe66d6c2",
       "functions": [
         {
           "name": "issuer",
@@ -1751,7 +1751,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/config/TimeConfig.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/config/TimeConfig.java",
-      "contentHash": "2a23422edf0af49172b71ee00cb2923796379fbf9824aecc0adff4a37d2cca65",
+      "contentHash": "01c9c2c1dc59a7131d6c4e4f1d34d1ce4d9ebf33649be7300500d2312813c80f",
       "functions": [
         {
           "name": "clock",
@@ -5696,7 +5696,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java",
-      "contentHash": "b7ee62ed46d9ec37998589585bea18440253d8cbf8b8b40221dce5da58b7501a",
+      "contentHash": "137f8b50573c0b8f7a31e4642ff5a7eb98d6be8a728e6a974d2e832c775f304b",
       "functions": [],
       "classes": [
         {
@@ -5725,7 +5725,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java",
-      "contentHash": "d1896787db97b2d2c09c3b22c63484d9a30a19fd62b30d70d4b7caa70c73e05c",
+      "contentHash": "1768110feb825d465856f91c5dffa66e180fe49cd663a027a458f61ac2aed5ba",
       "functions": [],
       "classes": [
         {
@@ -5758,7 +5758,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassResponse.java",
-      "contentHash": "be026916179ad2d85123bcfefa716ea497b27737fe7c5fb4d8e67fc6feda1d65",
+      "contentHash": "02add404cbb06dbdb75c16140a59d179a9df19b2b9f8b412320e004e8173144a",
       "functions": [],
       "classes": [
         {
@@ -5791,7 +5791,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/client/impl/OverpassClientImpl.java",
-      "contentHash": "2ced85bedc4933cc4cafa6bf42301970630ea2c7ccfbc9adda21fea2923ca31f",
+      "contentHash": "e63e4b3e40acde2f1b9e83be7a75d54cf0ec0e3bc78833674cf2029b5efbfa6d",
       "functions": [
         {
           "name": "OverpassClientImpl",
@@ -5996,7 +5996,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportConfig.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportConfig.java",
-      "contentHash": "5370470d69d832b67ebcf01afbb64868f0a883691acbada9c222ce23f02728f1",
+      "contentHash": "5239eda9a8b0de62801df03cd2495805d66a643e12783cba61f1cf8901fcc2b9",
       "functions": [],
       "classes": [
         {
@@ -6029,7 +6029,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportProperties.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportProperties.java",
-      "contentHash": "a75171d22f9705e1ab5700f8cc248a7805cd48724fb08cac67a7deef87dfcae1",
+      "contentHash": "f47708a37460692a6799368bd4df233a06eaea427a46bf7acaf26b2dfb6c1b4d",
       "functions": [
         {
           "name": "overpassUrls",
@@ -6081,7 +6081,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/config/PlaceImportRunner.java",
-      "contentHash": "7234d2f507e78ecb72b600f5a60723bc8bf2b3bbfca105b812474cd4f9e14320",
+      "contentHash": "a73a4b43d8263f044504a0bb710d00ae8f29e99862e4d23604d02d0e55c3b266",
       "functions": [
         {
           "name": "PlaceImportRunner",
@@ -6170,7 +6170,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
-      "contentHash": "1f57d495954dfea0d2263527ea4cfeb927b56fdf0fc38c84373a2e633f30b7ad",
+      "contentHash": "8f1e3ad414c4660d663f99117e4e84cd2787f0051db33b6050385d876730c5b0",
       "functions": [
         {
           "name": "PlaceController",
@@ -6394,7 +6394,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/domain/OsmPlaceData.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/OsmPlaceData.java",
-      "contentHash": "c69260c13676aefa28c10a501a2835e0db2dc725e904ef0463b2a1cddd635718",
+      "contentHash": "2e3700f809cff1966d584cfd4cc98e64fda9574d480968b584987c17ae583850",
       "functions": [
         {
           "name": "applyTo",
@@ -6440,7 +6440,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
-      "contentHash": "10b00627f5a6b93c1f97f07b69a0f73e2956461065f64953d018cf80b0784283",
+      "contentHash": "5c5d979d329a7ccfff85cf55b53da92e261360b43233418ec48b4a4dc19625d5",
       "functions": [
         {
           "name": "PlaceCategory",
@@ -6551,7 +6551,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceDetailDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceDetailDto.java",
-      "contentHash": "7e0fc67fbd1786275700dbe2e60758fe3399f223e16dde74a6f42948abdbca4c",
+      "contentHash": "c85b130201f2140e5ca83b80b3a21cff4460641b4f7dbeb5d015f8fe7528ce31",
       "functions": [],
       "classes": [
         {
@@ -6584,7 +6584,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSearchCriteria.java",
-      "contentHash": "49194b18ffa49afc11244cfb063c6a2b6999d0daa12fc23870b5c847718c1483",
+      "contentHash": "0baf88701eb72ae83a4638df5dcaec2a593977245ab95e41b17960b2dcc50545",
       "functions": [],
       "classes": [
         {
@@ -6634,7 +6634,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java",
-      "contentHash": "fbd9b3aea3e30ea576fc3887352c800a6b42889c7cc432b67ba046bde5aa572d",
+      "contentHash": "506c22ce931897931387e048137867e034ea1a777185fe10cb0e2eb408dff851",
       "functions": [],
       "classes": [
         {
@@ -6661,7 +6661,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
-      "contentHash": "b4eab7ec57cfde89950cdba22ab6acde066a91db47b554bdf83ee3cb65cb6b61",
+      "contentHash": "3e188d8a153aa7db696b10bac705657879707924849fe65130d8b41b51d2899a",
       "functions": [
         {
           "name": "Place",
@@ -6887,7 +6887,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/domain/entity/PlaceCategoryConverter.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/entity/PlaceCategoryConverter.java",
-      "contentHash": "b7c60587c7ecc8464a24c51299569b7a13ec5ca521b3eec400c8bd31ddce0667",
+      "contentHash": "00bb389ac186e775d492470dd961f37e6980474f1959987c0656c7195b84a48c",
       "functions": [
         {
           "name": "convertToDatabaseColumn",
@@ -6950,7 +6950,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/mapper/OsmElementMapper.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/OsmElementMapper.java",
-      "contentHash": "8bc49765d317b49e4c66b680f1202cf22a7ed175fb9764ed63cfd2cacd1066e4",
+      "contentHash": "1248c85cab85e45e96d56eb0b3b8a7e85223c3a6e74a19e51e72a47baf7cea34",
       "functions": [],
       "classes": [
         {
@@ -6991,7 +6991,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/mapper/PlaceMapper.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/PlaceMapper.java",
-      "contentHash": "3e751c13f83b19ed8a3cdc269dfc40eb2ea2f2a4a1c0dd0458d37cb8063e3ad7",
+      "contentHash": "25832e56257152dfc9eef92c0ce0a66af7a691a8be58461db2b934fa38f5737e",
       "functions": [],
       "classes": [
         {
@@ -7033,7 +7033,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/impl/OsmElementMapperImpl.java",
-      "contentHash": "80ec29710d747307b573686e8f064b472ca5ab5aa8cac291540f076a68df6ee0",
+      "contentHash": "e82d0ad956fa5d219b31805ad2804250efc1bc801686c927f5eadbfaeb7fe28a",
       "functions": [
         {
           "name": "toPlaceData",
@@ -7150,7 +7150,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java",
-      "contentHash": "4b9ecb539bc9ca141fe958e87027ea335790fb7b3adc78997d0d4aad73dad9fc",
+      "contentHash": "4be57d691f7a77aa2f6391af78446ad2d7008596a7661390315bbf2c0062eaed",
       "functions": [
         {
           "name": "toSummary",
@@ -7246,7 +7246,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java",
-      "contentHash": "5a4ddebbc7215533e687a621a4c84c1cf81a8cdfb47c0323a10fff153af5f6c8",
+      "contentHash": "187e95635f40ddfce3cf6c7e98e6782ac78c9624aea302cefef002fd14fc49f2",
       "functions": [],
       "classes": [
         {
@@ -7306,7 +7306,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java",
-      "contentHash": "1c168150ff5d5cf6b548005a046f1059595c0ffacb64466c9f63870ad4bb315b",
+      "contentHash": "995f49b1dac77f00a275831d2c32da642954c5327efc0610579094c13cc57147",
       "functions": [],
       "classes": [
         {
@@ -7342,7 +7342,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java",
-      "contentHash": "23f5b69900bde40b7856c35e53ab39f18a59519e00fd065f0c03446a467124e9",
+      "contentHash": "d2eed49e1c5060daeed37cf162defe07c21168fbc4dd472e39898fc957a1f78e",
       "functions": [],
       "classes": [
         {
@@ -7402,7 +7402,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceImportServiceImpl.java",
-      "contentHash": "1aa30eaaaf5c3cba69f90854aa0ff8b5d4336e6560e543fd588dafe437da30a9",
+      "contentHash": "4c494e675c0a3f2565e5f65acf55d149ef570748734f9b540c5d49664acdbac4",
       "functions": [
         {
           "name": "PlaceImportServiceImpl",
@@ -7582,7 +7582,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java",
-      "contentHash": "b89e08fd40149e76dd8d431a8364f74f1be79bba43f5d8a0dfcade5707a1ff62",
+      "contentHash": "fd8e9fce9d1e2dba2b9bbb9e48e4760e5c5cc975128413d7bfb5a7755da850a8",
       "functions": [
         {
           "name": "PlaceServiceImpl",
@@ -7774,7 +7774,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceSpecifications.java",
-      "contentHash": "2d6e3466e605ab059a10a04d9785f15ce9635c65bce3f5aea5b72bb319891483",
+      "contentHash": "2635224f2b4ee28bea5c227cbcc6355ca668e10e4db4f90d5e1b76df7e95461e",
       "functions": [
         {
           "name": "PlaceSpecifications",
@@ -7858,6 +7858,1441 @@
       ],
       "exports": [],
       "totalLines": 44,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reliability/config/NoShowJob.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reliability/config/NoShowJob.java",
+      "contentHash": "e63dd003640a0af193ec50e35357cd8e1d0c827a06fb22ce4d305a3e7509da64",
+      "functions": [
+        {
+          "name": "NoShowJob",
+          "params": [
+            "noShows"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "run",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [
+        {
+          "name": "NoShowJob",
+          "methods": [
+            "NoShowJob",
+            "run"
+          ],
+          "properties": [
+            "log",
+            "noShows"
+          ],
+          "exported": true,
+          "lineCount": 25
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.reliability.service.NoShowService",
+          "specifiers": [
+            "NoShowService"
+          ]
+        },
+        {
+          "source": "org.slf4j.Logger",
+          "specifiers": [
+            "Logger"
+          ]
+        },
+        {
+          "source": "org.slf4j.LoggerFactory",
+          "specifiers": [
+            "LoggerFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.autoconfigure.condition.ConditionalOnProperty",
+          "specifiers": [
+            "ConditionalOnProperty"
+          ]
+        },
+        {
+          "source": "org.springframework.context.annotation.Configuration",
+          "specifiers": [
+            "Configuration"
+          ]
+        },
+        {
+          "source": "org.springframework.scheduling.annotation.EnableScheduling",
+          "specifiers": [
+            "EnableScheduling"
+          ]
+        },
+        {
+          "source": "org.springframework.scheduling.annotation.Scheduled",
+          "specifiers": [
+            "Scheduled"
+          ]
+        }
+      ],
+      "exports": [
+        "NoShowJob",
+        "run",
+        "NoShowJob"
+      ],
+      "totalLines": 40,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reliability/controller/CheckInController.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reliability/controller/CheckInController.java",
+      "contentHash": "76fe3f82923b4d5efcedc82df5bcbbfc8bbc31e3446eded4b374d983ea4f2489",
+      "functions": [
+        {
+          "name": "CheckInController",
+          "params": [
+            "checkIns",
+            "currentUser"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "myTicket",
+          "params": [
+            "id"
+          ],
+          "returnType": "TicketResponse",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "checkIn",
+          "params": [
+            "id",
+            "request"
+          ],
+          "returnType": "CheckInResponse",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "CheckInController",
+          "methods": [
+            "CheckInController",
+            "myTicket",
+            "checkIn"
+          ],
+          "properties": [
+            "checkIns",
+            "currentUser"
+          ],
+          "exported": true,
+          "lineCount": 24
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.security.CurrentUser",
+          "specifiers": [
+            "CurrentUser"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.dto.CheckInRequest",
+          "specifiers": [
+            "CheckInRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.dto.CheckInResponse",
+          "specifiers": [
+            "CheckInResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.dto.TicketResponse",
+          "specifiers": [
+            "TicketResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.service.CheckInService",
+          "specifiers": [
+            "CheckInService"
+          ]
+        },
+        {
+          "source": "jakarta.validation.Valid",
+          "specifiers": [
+            "Valid"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.GetMapping",
+          "specifiers": [
+            "GetMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.PathVariable",
+          "specifiers": [
+            "PathVariable"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.PostMapping",
+          "specifiers": [
+            "PostMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RequestBody",
+          "specifiers": [
+            "RequestBody"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RestController",
+          "specifiers": [
+            "RestController"
+          ]
+        }
+      ],
+      "exports": [
+        "CheckInController",
+        "myTicket",
+        "checkIn",
+        "CheckInController"
+      ],
+      "totalLines": 41,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reliability/controller/ReliabilityController.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reliability/controller/ReliabilityController.java",
+      "contentHash": "2bd9a3879ae2ade65e94c91a36e329b97179eb36255b81c2a7605684f0e12f1d",
+      "functions": [
+        {
+          "name": "ReliabilityController",
+          "params": [
+            "reliability"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "history",
+          "params": [
+            "id"
+          ],
+          "returnType": "ReliabilityResponse",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "ReliabilityController",
+          "methods": [
+            "ReliabilityController",
+            "history"
+          ],
+          "properties": [
+            "reliability"
+          ],
+          "exported": true,
+          "lineCount": 16
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.reliability.domain.dto.ReliabilityResponse",
+          "specifiers": [
+            "ReliabilityResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.service.ReliabilityService",
+          "specifiers": [
+            "ReliabilityService"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.GetMapping",
+          "specifiers": [
+            "GetMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.PathVariable",
+          "specifiers": [
+            "PathVariable"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RestController",
+          "specifiers": [
+            "RestController"
+          ]
+        }
+      ],
+      "exports": [
+        "ReliabilityController",
+        "history",
+        "ReliabilityController"
+      ],
+      "totalLines": 27,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reliability/domain/ReliabilityRules.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reliability/domain/ReliabilityRules.java",
+      "contentHash": "4d21b01ad0863139df43e82e73d5336fd2947a5a7e1c20c54d915cd0149efb61",
+      "functions": [
+        {
+          "name": "ReliabilityRules",
+          "params": [],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "effectiveEnd",
+          "params": [
+            "startsAt",
+            "endsAt"
+          ],
+          "returnType": "Instant",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "ReliabilityRules",
+          "methods": [
+            "ReliabilityRules",
+            "effectiveEnd"
+          ],
+          "properties": [
+            "ATTENDED_POINTS",
+            "NO_SHOW_POINTS",
+            "ATTENDED_REASON",
+            "NO_SHOW_REASON",
+            "DEFAULT_EVENT_LENGTH"
+          ],
+          "exported": true,
+          "lineCount": 18
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        }
+      ],
+      "exports": [
+        "ATTENDED_POINTS",
+        "NO_SHOW_POINTS",
+        "ATTENDED_REASON",
+        "NO_SHOW_REASON",
+        "DEFAULT_EVENT_LENGTH",
+        "effectiveEnd",
+        "ReliabilityRules"
+      ],
+      "totalLines": 28,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reliability/domain/dto/CheckInRequest.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reliability/domain/dto/CheckInRequest.java",
+      "contentHash": "e249f01178ddad11ac8561343351ffe66d0b2af5b491bb580859252799328af9",
+      "functions": [],
+      "classes": [
+        {
+          "name": "CheckInRequest",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "jakarta.validation.constraints.NotBlank",
+          "specifiers": [
+            "NotBlank"
+          ]
+        }
+      ],
+      "exports": [
+        "CheckInRequest"
+      ],
+      "totalLines": 12,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reliability/domain/dto/CheckInResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reliability/domain/dto/CheckInResponse.java",
+      "contentHash": "e63f49ece1910dee4c249b6d2693b27aa7d8acf7de44051ced7eb501619d4368",
+      "functions": [],
+      "classes": [
+        {
+          "name": "CheckInResponse",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.events.domain.dto.UserSummary",
+          "specifiers": [
+            "UserSummary"
+          ]
+        }
+      ],
+      "exports": [
+        "CheckInResponse"
+      ],
+      "totalLines": 14,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reliability/domain/dto/ReliabilityResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reliability/domain/dto/ReliabilityResponse.java",
+      "contentHash": "d328fc1557debfb7a93e926d776660960b3afca43a84b7ebd0c179848f80915a",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ReliabilityResponse",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 12
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "ReliabilityResponse"
+      ],
+      "totalLines": 22,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reliability/domain/dto/TicketResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reliability/domain/dto/TicketResponse.java",
+      "contentHash": "33f228f995ce58929ca822d3aa9645bb8871803e623866da5e8b51c65a9faa12",
+      "functions": [],
+      "classes": [
+        {
+          "name": "TicketResponse",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "TicketResponse"
+      ],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reliability/domain/entity/OverdueParticipant.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reliability/domain/entity/OverdueParticipant.java",
+      "contentHash": "d5a5dde6a0b277cf3e8f6e5641067ef4a8c374b0eae81d51848f46fc6f9dbeff",
+      "functions": [],
+      "classes": [
+        {
+          "name": "OverdueParticipant",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "OverdueParticipant"
+      ],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reliability/domain/entity/ReliabilityLogEntry.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reliability/domain/entity/ReliabilityLogEntry.java",
+      "contentHash": "38032d5af56a91ec066e8fa9408dd1f92ef828cc5396c68b199e1296666f72f7",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ReliabilityLogEntry",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "ReliabilityLogEntry"
+      ],
+      "totalLines": 12,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reliability/mapper/ReliabilityMapper.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reliability/mapper/ReliabilityMapper.java",
+      "contentHash": "d5dc444d960a0be67d576f629ae4b82a6ecf97edd5d8d653b71fc2ef0d3f1a9d",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ReliabilityMapper",
+          "methods": [
+            "toResponse"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.reliability.domain.dto.ReliabilityResponse",
+          "specifiers": [
+            "ReliabilityResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.entity.ReliabilityLogEntry",
+          "specifiers": [
+            "ReliabilityLogEntry"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "ReliabilityMapper"
+      ],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reliability/mapper/impl/ReliabilityMapperImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reliability/mapper/impl/ReliabilityMapperImpl.java",
+      "contentHash": "14b2a3f113ac5d57644e0997711374ba8a336df424d6195ab7c007c3d07ff8c3",
+      "functions": [
+        {
+          "name": "toResponse",
+          "params": [
+            "reliabilityScore",
+            "entries"
+          ],
+          "returnType": "ReliabilityResponse",
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "ReliabilityMapperImpl",
+          "methods": [
+            "toResponse"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 12
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.reliability.domain.dto.ReliabilityResponse",
+          "specifiers": [
+            "ReliabilityResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.entity.ReliabilityLogEntry",
+          "specifiers": [
+            "ReliabilityLogEntry"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.mapper.ReliabilityMapper",
+          "specifiers": [
+            "ReliabilityMapper"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        }
+      ],
+      "exports": [
+        "toResponse",
+        "ReliabilityMapperImpl"
+      ],
+      "totalLines": 22,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reliability/repository/CheckInRepository.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reliability/repository/CheckInRepository.java",
+      "contentHash": "f32f05fee1c12338ebbb8f6bc4e5da34c948a5e28c8a1bdae34438e09d66ac84",
+      "functions": [],
+      "classes": [
+        {
+          "name": "CheckInRepository",
+          "methods": [
+            "findByToken",
+            "markAttended",
+            "joinedInStartedEvents",
+            "markNoShow",
+            "recentLog"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 17
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.events.domain.entity.EventParticipant",
+          "specifiers": [
+            "EventParticipant"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.entity.OverdueParticipant",
+          "specifiers": [
+            "OverdueParticipant"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.entity.ReliabilityLogEntry",
+          "specifiers": [
+            "ReliabilityLogEntry"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "CheckInRepository"
+      ],
+      "totalLines": 32,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reliability/repository/impl/CheckInRepositoryImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reliability/repository/impl/CheckInRepositoryImpl.java",
+      "contentHash": "ca8acaf94b21860c0bbc26fab569030e28c932a975d4a83705addc6a9b088528",
+      "functions": [
+        {
+          "name": "CheckInRepositoryImpl",
+          "params": [
+            "jdbc"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "findByToken",
+          "params": [
+            "qrToken"
+          ],
+          "returnType": "Optional<EventParticipant>",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "markAttended",
+          "params": [
+            "eventId",
+            "userId",
+            "checkedInAt"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "joinedInStartedEvents",
+          "params": [
+            "now"
+          ],
+          "returnType": "List<OverdueParticipant>",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "markNoShow",
+          "params": [
+            "eventId",
+            "userId"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "recentLog",
+          "params": [
+            "userId",
+            "limit"
+          ],
+          "returnType": "List<ReliabilityLogEntry>",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "instant",
+          "params": [
+            "rs",
+            "column"
+          ],
+          "returnType": "Instant",
+          "exported": false,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "CheckInRepositoryImpl",
+          "methods": [
+            "CheckInRepositoryImpl",
+            "findByToken",
+            "markAttended",
+            "joinedInStartedEvents",
+            "markNoShow",
+            "recentLog",
+            "instant"
+          ],
+          "properties": [
+            "jdbc"
+          ],
+          "exported": true,
+          "lineCount": 65
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.events.domain.entity.EventParticipant",
+          "specifiers": [
+            "EventParticipant"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.entity.OverdueParticipant",
+          "specifiers": [
+            "OverdueParticipant"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.entity.ReliabilityLogEntry",
+          "specifiers": [
+            "ReliabilityLogEntry"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.repository.CheckInRepository",
+          "specifiers": [
+            "CheckInRepository"
+          ]
+        },
+        {
+          "source": "java.sql.ResultSet",
+          "specifiers": [
+            "ResultSet"
+          ]
+        },
+        {
+          "source": "java.sql.SQLException",
+          "specifiers": [
+            "SQLException"
+          ]
+        },
+        {
+          "source": "java.sql.Timestamp",
+          "specifiers": [
+            "Timestamp"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.springframework.jdbc.core.JdbcTemplate",
+          "specifiers": [
+            "JdbcTemplate"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Repository",
+          "specifiers": [
+            "Repository"
+          ]
+        }
+      ],
+      "exports": [
+        "CheckInRepositoryImpl",
+        "findByToken",
+        "markAttended",
+        "joinedInStartedEvents",
+        "markNoShow",
+        "recentLog",
+        "CheckInRepositoryImpl"
+      ],
+      "totalLines": 87,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reliability/service/CheckInService.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reliability/service/CheckInService.java",
+      "contentHash": "5bc9dc27060ac00c6afcca95839c9d46a2f59eb6e8ae90ac08e72915310357e4",
+      "functions": [],
+      "classes": [
+        {
+          "name": "CheckInService",
+          "methods": [
+            "myTicket",
+            "checkIn"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.reliability.domain.dto.CheckInResponse",
+          "specifiers": [
+            "CheckInResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.dto.TicketResponse",
+          "specifiers": [
+            "TicketResponse"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "CheckInService"
+      ],
+      "totalLines": 16,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reliability/service/NoShowService.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reliability/service/NoShowService.java",
+      "contentHash": "fec3bc5d0980786125ebab7efd4941245351d0692b1e926fce8c2b2e5df9de1f",
+      "functions": [],
+      "classes": [
+        {
+          "name": "NoShowService",
+          "methods": [
+            "markNoShows"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "NoShowService"
+      ],
+      "totalLines": 9,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reliability/service/ReliabilityService.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reliability/service/ReliabilityService.java",
+      "contentHash": "4c5214f258a6ce34ee1398e9dbdd4132ba9f7164a4eceedec6f0b706637a1730",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ReliabilityService",
+          "methods": [
+            "history"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.reliability.domain.dto.ReliabilityResponse",
+          "specifiers": [
+            "ReliabilityResponse"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "ReliabilityService"
+      ],
+      "totalLines": 12,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reliability/service/impl/CheckInServiceImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reliability/service/impl/CheckInServiceImpl.java",
+      "contentHash": "91de8ff440cf76d6e8dbb90f56b11cd19af1e05d4e89632da5c61e31f4d292ca",
+      "functions": [
+        {
+          "name": "CheckInServiceImpl",
+          "params": [
+            "events",
+            "participations",
+            "checkIns",
+            "profiles",
+            "clock"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "myTicket",
+          "params": [
+            "eventId",
+            "caller"
+          ],
+          "returnType": "TicketResponse",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "checkIn",
+          "params": [
+            "eventId",
+            "organizer",
+            "token"
+          ],
+          "returnType": "CheckInResponse",
+          "exported": true,
+          "lineCount": 37
+        },
+        {
+          "name": "parseToken",
+          "params": [
+            "token"
+          ],
+          "returnType": "UUID",
+          "exported": false,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "CheckInServiceImpl",
+          "methods": [
+            "CheckInServiceImpl",
+            "myTicket",
+            "checkIn",
+            "parseToken"
+          ],
+          "properties": [
+            "events",
+            "participations",
+            "checkIns",
+            "profiles",
+            "clock"
+          ],
+          "exported": true,
+          "lineCount": 83
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.domain.dto.UserSummary",
+          "specifiers": [
+            "UserSummary"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.domain.entity.Event",
+          "specifiers": [
+            "Event"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.domain.entity.EventParticipant",
+          "specifiers": [
+            "EventParticipant"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.repository.EventRepository",
+          "specifiers": [
+            "EventRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.repository.ParticipationRepository",
+          "specifiers": [
+            "ParticipationRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.ReliabilityRules",
+          "specifiers": [
+            "ReliabilityRules"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.dto.CheckInResponse",
+          "specifiers": [
+            "CheckInResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.dto.TicketResponse",
+          "specifiers": [
+            "TicketResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.repository.CheckInRepository",
+          "specifiers": [
+            "CheckInRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.service.CheckInService",
+          "specifiers": [
+            "CheckInService"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.entity.Profile",
+          "specifiers": [
+            "Profile"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.repository.ProfileRepository",
+          "specifiers": [
+            "ProfileRepository"
+          ]
+        },
+        {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Service",
+          "specifiers": [
+            "Service"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.annotation.Transactional",
+          "specifiers": [
+            "Transactional"
+          ]
+        }
+      ],
+      "exports": [
+        "CheckInServiceImpl",
+        "myTicket",
+        "checkIn",
+        "CheckInServiceImpl"
+      ],
+      "totalLines": 110,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reliability/service/impl/NoShowServiceImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reliability/service/impl/NoShowServiceImpl.java",
+      "contentHash": "8b69e2f39937fb52efd8f3b7753eeecb88acb23aaec510e1fecceaeb12d2e5fe",
+      "functions": [
+        {
+          "name": "NoShowServiceImpl",
+          "params": [
+            "checkIns",
+            "participations",
+            "transactionManager",
+            "clock"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "markNoShows",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 26
+        }
+      ],
+      "classes": [
+        {
+          "name": "NoShowServiceImpl",
+          "methods": [
+            "NoShowServiceImpl",
+            "markNoShows"
+          ],
+          "properties": [
+            "log",
+            "checkIns",
+            "participations",
+            "transaction",
+            "clock"
+          ],
+          "exported": true,
+          "lineCount": 47
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.events.repository.ParticipationRepository",
+          "specifiers": [
+            "ParticipationRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.ReliabilityRules",
+          "specifiers": [
+            "ReliabilityRules"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.entity.OverdueParticipant",
+          "specifiers": [
+            "OverdueParticipant"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.repository.CheckInRepository",
+          "specifiers": [
+            "CheckInRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.service.NoShowService",
+          "specifiers": [
+            "NoShowService"
+          ]
+        },
+        {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "org.slf4j.Logger",
+          "specifiers": [
+            "Logger"
+          ]
+        },
+        {
+          "source": "org.slf4j.LoggerFactory",
+          "specifiers": [
+            "LoggerFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Service",
+          "specifiers": [
+            "Service"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.PlatformTransactionManager",
+          "specifiers": [
+            "PlatformTransactionManager"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.support.TransactionTemplate",
+          "specifiers": [
+            "TransactionTemplate"
+          ]
+        }
+      ],
+      "exports": [
+        "NoShowServiceImpl",
+        "markNoShows",
+        "NoShowServiceImpl"
+      ],
+      "totalLines": 68,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reliability/service/impl/ReliabilityServiceImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reliability/service/impl/ReliabilityServiceImpl.java",
+      "contentHash": "c5ad29bd715c72e19549fc10e6857dbe4b60eee79aee86724282ba17d4fcf09a",
+      "functions": [
+        {
+          "name": "ReliabilityServiceImpl",
+          "params": [
+            "profiles",
+            "checkIns",
+            "mapper"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "history",
+          "params": [
+            "userId"
+          ],
+          "returnType": "ReliabilityResponse",
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "ReliabilityServiceImpl",
+          "methods": [
+            "ReliabilityServiceImpl",
+            "history"
+          ],
+          "properties": [
+            "HISTORY_LIMIT",
+            "profiles",
+            "checkIns",
+            "mapper"
+          ],
+          "exported": true,
+          "lineCount": 24
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.dto.ReliabilityResponse",
+          "specifiers": [
+            "ReliabilityResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.mapper.ReliabilityMapper",
+          "specifiers": [
+            "ReliabilityMapper"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.repository.CheckInRepository",
+          "specifiers": [
+            "CheckInRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.service.ReliabilityService",
+          "specifiers": [
+            "ReliabilityService"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.entity.Profile",
+          "specifiers": [
+            "Profile"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.repository.ProfileRepository",
+          "specifiers": [
+            "ProfileRepository"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Service",
+          "specifiers": [
+            "Service"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.annotation.Transactional",
+          "specifiers": [
+            "Transactional"
+          ]
+        }
+      ],
+      "exports": [
+        "ReliabilityServiceImpl",
+        "history",
+        "ReliabilityServiceImpl"
+      ],
+      "totalLines": 39,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/routing/client/OtpClient.java": {
@@ -12523,7 +13958,7 @@
     },
     "backend/src/main/resources/application.properties": {
       "filePath": "backend/src/main/resources/application.properties",
-      "contentHash": "68458636c3e3ed544df2d429f53b1ac31808754629fb4496149ed821d7ef90b0",
+      "contentHash": "6d0903e11bbf3ed383a0e91bd76d94cfa2961321e3c9365623d3622c3cee664b",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -12711,7 +14146,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/common/dto/PageParamsTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/common/dto/PageParamsTest.java",
-      "contentHash": "8313d59e28fa3f0c0e978a074f1555765f31d2f9622b25fc9eb12b10fbcbff3d",
+      "contentHash": "0f31a8f8b87d7aa635deccf15f7c2ee58bd89c22c33775639f0e99bba6ca24b0",
       "functions": [
         {
           "name": "defaultsWhenMissing",
@@ -12840,7 +14275,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/common/exception/GlobalExceptionHandlerTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/common/exception/GlobalExceptionHandlerTest.java",
-      "contentHash": "f7a89664bd09843f9b7997661f884c2ed32ef25d4faa7025650b9c81557e84e1",
+      "contentHash": "4157da3a0c10947d189b79875a8d23a5e1fcbaa900178952066e41b851972dd8",
       "functions": [
         {
           "name": "apiExceptionUsesItsCodeAndStatus",
@@ -13024,7 +14459,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/common/geo/GeoTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/common/geo/GeoTest.java",
-      "contentHash": "6ce8a9809635f6b24154e5a35a2f18e1a9a79a7070df0a183b52b06bee3950e0",
+      "contentHash": "59c2101a899cdcddc1250a38437620f7b2a3d42a367ef125b3c083039315422c",
       "functions": [
         {
           "name": "haversineDistanceMatchesKnownValue",
@@ -13115,7 +14550,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/common/security/CurrentUserTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/common/security/CurrentUserTest.java",
-      "contentHash": "9009136aa60d0a2c800a93d6ff006c08766343018446a7de4cfcc8c093ff3b72",
+      "contentHash": "5c87b2d984e567eb59199ab5b7cb776eb60a117261b1f8ac7f482c44ebaffe06",
       "functions": [
         {
           "name": "clearContext",
@@ -13246,7 +14681,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/config/SecurityConfigTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/config/SecurityConfigTest.java",
-      "contentHash": "94e880853a5b7ee2794aee59500c4f54f4c0ab9a427fa4c15b1d6c6d055c52e7",
+      "contentHash": "e03270130554afa8a345d6576748a28059457336269b48f85f6db6427a4c89df",
       "functions": [
         {
           "name": "protectedEndpointWithoutTokenIs401",
@@ -13422,7 +14857,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/config/SupabasePropertiesTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/config/SupabasePropertiesTest.java",
-      "contentHash": "0cc9d8c2f5d044343672fa4b5823e7fe712817e02f16248d5a88fa50a9622209",
+      "contentHash": "a9892acd94959077f20b1e43951b2f05a8decc3d53b49417cd53151910164970",
       "functions": [
         {
           "name": "issuerAppendsAuthPath",
@@ -15619,7 +17054,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
-      "contentHash": "a9bb4805b26ca32620cba66d3981719f745329dfe5a57d07de99bcc7a8058666",
+      "contentHash": "209ea8a2a4299019134087532da6dfda563b570139e2595578cab7a6de30efec",
       "functions": [
         {
           "name": "parsesFixture",
@@ -15800,7 +17235,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/places/controller/PlaceControllerTest.java",
-      "contentHash": "cdf59a2f5812a12208e7106df0e4337b8c4774f3dc2ac541aa5249f52558a88a",
+      "contentHash": "3e60e7dc0c49c71da4313cd61ebb7e0c909c69140a9044d9ab17a787ba6368ec",
       "functions": [
         {
           "name": "seed",
@@ -16045,7 +17480,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/places/domain/PlaceCategoryTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/places/domain/PlaceCategoryTest.java",
-      "contentHash": "db867f9dcab8c1789dff81cf43482cfa37955e2e585634149d5ecc9581dc3dc2",
+      "contentHash": "1cea4d9b26ceccf3a55d4e298ed5b4fad6db87ac4cdbbcd0c6ae1ca555974f9e",
       "functions": [
         {
           "name": "apiNamesMatchTheContract",
@@ -16122,7 +17557,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/places/mapper/OsmElementMapperImplTest.java",
-      "contentHash": "5791089103133849481cb5be9f3004f5701ac2379eec1f50a384640d5e6c751d",
+      "contentHash": "dc1f75fc91cf82412097f71b88d4212fda38f8be910e70d56389342e03aed469",
       "functions": [
         {
           "name": "mapped",
@@ -16280,7 +17715,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/places/service/PlaceImportRunnerTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/places/service/PlaceImportRunnerTest.java",
-      "contentHash": "eca7debcab1c9a903abe332b7dd2e53f1bc9b8aa2ccaa4130d5e9002cd85e8c0",
+      "contentHash": "d82489ab9d44a2f54f37a6591419dbb3f030323b1d4cfedb30d04cad22c77f3d",
       "functions": [
         {
           "name": "runsImport",
@@ -16362,14 +17797,14 @@
     },
     "backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/places/service/PlaceImportServiceImplTest.java",
-      "contentHash": "b72b0573e5a37863160c2cbae68395d3e71194d121823aa8e0a47a3740056b39",
+      "contentHash": "36fe9990f9f11f02ef7ee04964aa9423813d288af91fc62fe3f0599ddcb3a9c2",
       "functions": [
         {
           "name": "setUp",
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 6
+          "lineCount": 7
         },
         {
           "name": "overpassReturns",
@@ -16445,7 +17880,7 @@
             "fixture"
           ],
           "exported": false,
-          "lineCount": 129
+          "lineCount": 131
         }
       ],
       "imports": [
@@ -16583,12 +18018,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 157,
+      "totalLines": 159,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/places/support/OverpassFixtures.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/places/support/OverpassFixtures.java",
-      "contentHash": "267359f955d2f71c3124f7f6bf867476212f1d5e3f765d91cec69341c22e2b8d",
+      "contentHash": "97f66c9e925feb06cb0d8e256d7dc321717e2b3d9c0321bee5c8b902979d0360",
       "functions": [
         {
           "name": "OverpassFixtures",
@@ -16673,6 +18108,470 @@
         "OverpassFixtures"
       ],
       "totalLines": 33,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/reliability/ReliabilityIntegrationTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/reliability/ReliabilityIntegrationTest.java",
+      "contentHash": "a82a7638c4be90e36893259a471fee602fed9d9ef8c37e81b8480fdb71e754c5",
+      "functions": [
+        {
+          "name": "setUp",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 25
+        },
+        {
+          "name": "event",
+          "params": [
+            "source",
+            "organizer",
+            "startsAt",
+            "endsAt"
+          ],
+          "returnType": "UUID",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "runningEvent",
+          "params": [],
+          "returnType": "UUID",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "participant",
+          "params": [
+            "eventId",
+            "userId",
+            "status"
+          ],
+          "returnType": "UUID",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "auth",
+          "params": [
+            "user"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "scan",
+          "params": [
+            "eventId",
+            "organizer",
+            "token"
+          ],
+          "returnType": "org.springframework.test.web.servlet.ResultActions",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "score",
+          "params": [
+            "user"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "statusOf",
+          "params": [
+            "eventId",
+            "user"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "noShowsAt",
+          "params": [
+            "at"
+          ],
+          "returnType": "NoShowService",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "myTicketReturnsToken",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "myTicketErrors",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 16
+        },
+        {
+          "name": "checkInAddsPoints",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "secondScanIsRejected",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "checkInValidatesOrganiserAndTicket",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 25
+        },
+        {
+          "name": "checkInRejectsWrongStates",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 19
+        },
+        {
+          "name": "checkInWithoutEndTimeUsesThreeHours",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "noShowJobPenalisesOnlyAfterTheEnd",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 22
+        },
+        {
+          "name": "noShowJobIsSafeToRepeat",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "noShowWithoutEndTimeWaitsThreeHours",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "scoreNeverBelowZero",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "reliabilityHistory",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "reliabilityHistoryErrors",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "ReliabilityIntegrationTest",
+          "methods": [
+            "setUp",
+            "event",
+            "runningEvent",
+            "participant",
+            "auth",
+            "scan",
+            "score",
+            "statusOf",
+            "noShowsAt",
+            "myTicketReturnsToken",
+            "myTicketErrors",
+            "checkInAddsPoints",
+            "secondScanIsRejected",
+            "checkInValidatesOrganiserAndTicket",
+            "checkInRejectsWrongStates",
+            "checkInWithoutEndTimeUsesThreeHours",
+            "noShowJobPenalisesOnlyAfterTheEnd",
+            "noShowJobIsSafeToRepeat",
+            "noShowWithoutEndTimeWaitsThreeHours",
+            "scoreNeverBelowZero",
+            "reliabilityHistory",
+            "reliabilityHistoryErrors"
+          ],
+          "properties": [
+            "HOST",
+            "GUEST",
+            "OTHER",
+            "mvc",
+            "jdbc",
+            "checkIns",
+            "participations",
+            "transactionManager",
+            "now"
+          ],
+          "exported": false,
+          "lineCount": 324
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get",
+          "specifiers": [
+            "get"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post",
+          "specifiers": [
+            "post"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath",
+          "specifiers": [
+            "jsonPath"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.status",
+          "specifiers": [
+            "status"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.repository.ParticipationRepository",
+          "specifiers": [
+            "ParticipationRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.repository.CheckInRepository",
+          "specifiers": [
+            "CheckInRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.service.NoShowService",
+          "specifiers": [
+            "NoShowService"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.service.impl.NoShowServiceImpl",
+          "specifiers": [
+            "NoShowServiceImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.support.JwtTestTokens",
+          "specifiers": [
+            "JwtTestTokens"
+          ]
+        },
+        {
+          "source": "java.sql.Timestamp",
+          "specifiers": [
+            "Timestamp"
+          ]
+        },
+        {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.time.ZoneOffset",
+          "specifiers": [
+            "ZoneOffset"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.BeforeEach",
+          "specifiers": [
+            "BeforeEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Autowired",
+          "specifiers": [
+            "Autowired"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.test.context.SpringBootTest",
+          "specifiers": [
+            "SpringBootTest"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc",
+          "specifiers": [
+            "AutoConfigureMockMvc"
+          ]
+        },
+        {
+          "source": "org.springframework.http.MediaType",
+          "specifiers": [
+            "MediaType"
+          ]
+        },
+        {
+          "source": "org.springframework.jdbc.core.JdbcTemplate",
+          "specifiers": [
+            "JdbcTemplate"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.MockMvc",
+          "specifiers": [
+            "MockMvc"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.PlatformTransactionManager",
+          "specifiers": [
+            "PlatformTransactionManager"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 360,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/reliability/config/NoShowJobTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/reliability/config/NoShowJobTest.java",
+      "contentHash": "d4056d665fac401893c166f057ac5050bf304c5098e6804efbe64b562c6c1a9e",
+      "functions": [
+        {
+          "name": "runCallsTheService",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "failureIsSwallowed",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "NoShowJobTest",
+          "methods": [
+            "runCallsTheService",
+            "failureIsSwallowed"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 18
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThatCode",
+          "specifiers": [
+            "assertThatCode"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.mock",
+          "specifiers": [
+            "mock"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.verify",
+          "specifiers": [
+            "verify"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.when",
+          "specifiers": [
+            "when"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.service.NoShowService",
+          "specifiers": [
+            "NoShowService"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 30,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/routing/client/impl/OtpGraphQlClientTest.java": {
@@ -17627,7 +19526,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/support/JwtTestTokens.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/support/JwtTestTokens.java",
-      "contentHash": "0acee891c267672e03f8fa75527f040857937f6a21c35957e0a8972a77188872",
+      "contentHash": "f708986ceae1decbf2ef0e01405e0fde396349e91e03244fc2576ffcb8c9506b",
       "functions": [
         {
           "name": "JwtTestTokens",
@@ -17855,7 +19754,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/support/TestProbeController.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/support/TestProbeController.java",
-      "contentHash": "e55715948cf029a78ea4662fa7f489ac1b8d8f8428be0905f0f4f89e9303f189",
+      "contentHash": "83d17190acc2ed7b023ea733acf82c664a2a3214c8f8be43bf337ded7db8112c",
       "functions": [
         {
           "name": "TestProbeController",
@@ -20197,12 +22096,12 @@
     },
     "backend/src/test/resources/application.properties": {
       "filePath": "backend/src/test/resources/application.properties",
-      "contentHash": "d7fdd2adaee3a74f14e47a2377a52c1c20e4c8885772f9772765795f1859ab47",
+      "contentHash": "50de2333a86aa997cfc40c7ca2c2ff889583435f40e29aff61778b023f5a08f3",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 17,
+      "totalLines": 20,
       "hasStructuralAnalysis": false
     },
     "backend/src/test/resources/livetickets/event-search-sample.json": {
@@ -20287,12 +22186,12 @@
     },
     "docs/API.md": {
       "filePath": "docs/API.md",
-      "contentHash": "869e2267e49dee071c1163d923f15cc8f722cc2f84892cfc05b894b6ed0d421b",
+      "contentHash": "0e6aba64ff3590ce7d232286c7396e828412cb224403901eb80b76aa0f0d848a",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 596,
+      "totalLines": 597,
       "hasStructuralAnalysis": false
     },
     "frontend/.env.example": {
@@ -20307,7 +22206,7 @@
     },
     "frontend/AGENTS.md": {
       "filePath": "frontend/AGENTS.md",
-      "contentHash": "b7d381dd55800d242252e8bf89a40b026586d254e34908210931bc35582396a3",
+      "contentHash": "74906b75b99ef669200f05cc9131ae74b4a6e8c7a6827d65cb0389d6d2740202",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -20956,7 +22855,7 @@
     },
     "frontend/eslint.config.js": {
       "filePath": "frontend/eslint.config.js",
-      "contentHash": "87a6f84a2759949d9fdb4744e27ccd82a9553724033533ce5cb5044c210421a2",
+      "contentHash": "7cbf8e569149adb38a3f948af341eecd55cf2bc3bd03c1b25157242a8f4f0711",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -25468,7 +27367,7 @@
     },
     "supabase/migrations/20261113000001_profiles.sql": {
       "filePath": "supabase/migrations/20261113000001_profiles.sql",
-      "contentHash": "51ab64aa310a769874f71652552bb18837ac4e24a6d0cdc362cce28837f33d5b",
+      "contentHash": "b2d0bc872db2b968c0d62a6f89c513734f9fec68499846e5379fcf265f1b5688",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -25478,7 +27377,7 @@
     },
     "supabase/migrations/20261113000002_events.sql": {
       "filePath": "supabase/migrations/20261113000002_events.sql",
-      "contentHash": "65f0f8cc390f56c8a35b66321d988750c8c3f7d4e82faafec060c868bfef6887",
+      "contentHash": "6092919ff59aef6bc0506066f9bffa8a2ebb1e6c9abee1fd2d3184f2574d78db",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -25488,7 +27387,7 @@
     },
     "supabase/migrations/20261113000003_participation_reliability.sql": {
       "filePath": "supabase/migrations/20261113000003_participation_reliability.sql",
-      "contentHash": "6155e4a3272070258e878bea3fc49cc1efe52f8cd4f7327e21c68af4c14d781e",
+      "contentHash": "b7d48c6b4bd3d2d4d8b750eb0f2c34feb724861d734f1297ef7f602d7da4c207",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -25498,7 +27397,7 @@
     },
     "supabase/migrations/20261113000004_places.sql": {
       "filePath": "supabase/migrations/20261113000004_places.sql",
-      "contentHash": "833405bb889636cc9d50dc0b5c0e7310f330acd47a108e822d33d16350c58fdd",
+      "contentHash": "137a4938a0891306f86c8734905dfda63a671b2d6a79dcd53045068f5ebbc0cc",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -25508,7 +27407,7 @@
     },
     "supabase/tests/schema_checks.sql": {
       "filePath": "supabase/tests/schema_checks.sql",
-      "contentHash": "e685de959f3bdf405833263229049b28e359a3559382bc17b62887d42715ce86",
+      "contentHash": "50b54f360da1ae14d4ebc2ecc5049acf47983bc935dd771521ac0452f11fdbb3",
       "functions": [],
       "classes": [],
       "imports": [],
