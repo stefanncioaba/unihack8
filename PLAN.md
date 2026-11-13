@@ -229,12 +229,12 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 **Needs:** 1.6 for mocks. Everything must run in **Expo Go** (no custom native code).
 
-- [ ] **12.1 Create the Expo app** in `frontend/` (TypeScript, Expo Router) with four tabs: Home, Map, AI, Profile. Add `frontend/.env` (git-ignored) with a committed `.env.example`: Supabase URL, Supabase publishable key, and the backend laptop's Wi-Fi address (`http://<ip>:8080`). Public values only — Expo bundles every `EXPO_PUBLIC_` variable into the app.
-- [ ] **12.2 Auth:** sign-up (email, password, username), sign-in, sign-out with the Supabase client; session kept on the device; signed-out users see only the auth screens.
-- [ ] **12.3 API layer:** one client that adds the Supabase token to every request, plus a `USE_MOCKS` switch that serves `frontend/src/mocks/` instead. Data fetching with TanStack Query.
-- [ ] **12.4 Shared UI:** colours, typography, buttons, cards, loading / empty / error states, and the one default profile picture used for every user.
-- [ ] **12.5 Location permission** and a "current position" hook, defaulting to Piața Victoriei when denied.
-- [ ] **12.6 Test setup:** Jest + React Native Testing Library, one test per screen at minimum.
+- [x] **12.1 Create the Expo app** in `frontend/` (TypeScript, Expo Router) with four tabs: Home, Map, AI, Profile. Add `frontend/.env` (git-ignored) with a committed `.env.example`: Supabase URL, Supabase publishable key, and the backend laptop's Wi-Fi address (`http://<ip>:8080`). Public values only — Expo bundles every `EXPO_PUBLIC_` variable into the app.
+- [x] **12.2 Auth:** sign-up (email, password, username), sign-in, sign-out with the Supabase client; session kept on the device; signed-out users see only the auth screens.
+- [x] **12.3 API layer:** one client that adds the Supabase token to every request, plus a `USE_MOCKS` switch that serves `frontend/src/mocks/` instead. Data fetching with TanStack Query.
+- [x] **12.4 Shared UI:** colours, typography, buttons, cards, loading / empty / error states, and the one default profile picture used for every user.
+- [x] **12.5 Location permission** and a "current position" hook, defaulting to Piața Victoriei when denied.
+- [x] **12.6 Test setup:** Jest + React Native Testing Library, one test per screen at minimum.
 
 ---
 
@@ -242,14 +242,14 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 **Needs:** 12. Real data from 4, 5, 6, 9.
 
-- [ ] **13.1 City info strip:** last tram/bus near you, active transit alerts (from 9.5, 9.6).
-- [ ] **13.2 Upcoming events** list with image, date, place, free spots.
-- [ ] **13.3 "All events" screen:** search box, category and date filters, endless scroll.
-- [ ] **13.4 Event details:** description, location with "show on map", organiser, participants with reliability scores (tap opens their profile), join / leave.
-- [ ] **13.5 Create event form:** title, description, category, date/time, capacity, location picked on a map.
-- [ ] **13.6 My ticket:** the participant's QR code for an event.
-- [ ] **13.7 Organiser scanner:** camera QR scan → check-in result (success, already scanned, wrong event); ban button in the participant list.
-- [ ] **13.8 User search:** search by username → opens the public profile (16.4).
+- [x] **13.1 City info strip:** last tram/bus near you, active transit alerts (from 9.5, 9.6).
+- [x] **13.2 Upcoming events** list with image, date, place, free spots.
+- [x] **13.3 "All events" screen:** search box, category and date filters, endless scroll.
+- [x] **13.4 Event details:** description, location with "show on map", organiser, participants with reliability scores (tap opens their profile), join / leave.
+- [x] **13.5 Create event form:** title, description, category, date/time, capacity, location picked on a map.
+- [x] **13.6 My ticket:** the participant's QR code for an event.
+- [x] **13.7 Organiser scanner:** camera QR scan → check-in result (success, already scanned, wrong event); ban button in the participant list.
+- [x] **13.8 User search:** search by username → opens the public profile (16.4).
 
 ---
 
@@ -284,8 +284,8 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 - [ ] **16.1 My profile:** username, reliability score with a short explanation of how it changes.
 - [ ] **16.2 Change username** with inline validation and the "already taken" error.
 - [ ] **16.3 Events I attended** and upcoming events I joined or organise.
-- [ ] **16.4 Public profile screen** (other users): username, score, attended events. Reused from 13.4 and 13.8.
-- [ ] **16.5 Sign out.**
+- [x] **16.4 Public profile screen** (other users): username, score, attended events. Reused from 13.4 and 13.8.
+- [x] **16.5 Sign out.**
 
 ---
 

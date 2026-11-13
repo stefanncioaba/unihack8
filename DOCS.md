@@ -33,7 +33,7 @@ The mobile app never calls third-party data sources directly; the backend proxie
   - `supabase.jwt-secret` — Supabase dashboard → Project Settings → JWT Keys → "Legacy JWT Secret".
   - `gemini.api-key` — from Google AI Studio.
   - Already filled: Supabase URL, database user, Gemini model names, OpenTripPlanner URL.
-- **Mobile keys:** set up with the Expo app (PLAN step 12.1).
+- **Mobile keys:** copy `frontend/.env.example` to `frontend/.env` (git-ignored) and fill in the Supabase URL, the Supabase key (legacy `anon` or publishable) and the backend address — see "Frontend" below. Public values only.
 - **Token validation:** the backend checks access tokens with the **legacy JWT secret (HS256)**, by team decision. On 2026-11-13 the project's signing key was rotated: **HS256 (Shared Secret) is the current key**, ECC (P-256) is the previous key (kept, not revoked). Do not rotate back to ECC — the backend would reject every login token with 401. Automated tests check HS256 tokens signed with a test secret; a real Supabase login token has not been tried yet (first chance: when the app's sign-in works, task 12.2).
 - **API keys:** the mobile app uses the legacy `anon` key (public). The legacy `service_role` key is not needed: the backend talks to the database directly.
 - **Never in mobile:** database password, JWT secret, Gemini key, `service_role` key.
@@ -111,7 +111,7 @@ Applied to Supabase on 2026-11-13 from `supabase/migrations/` (four migrations, 
 - `supabase/`: migrations and schema tests for task 2, applied.
 - `docs/API.md`: API contract (task 1.6).
 - `infra/otp/`: OpenTripPlanner 2.7 setup (docker-compose, data download script). Its large data files are git-ignored. `GET /routes/plan` is implemented (task 10).
-- `frontend/`: Expo app (SDK 54) set up by the frontend teammates — see `frontend/AGENTS.md`. Each teammate works on their own `<name>_dev` branch.
+- `frontend/`: Expo app (SDK 54, TypeScript, Expo Router) — foundation (task 12) and Home page (task 13) done on mock data; Map and AI tabs are placeholders until tasks 14–15. See Features → Frontend and `frontend/AGENTS.md`. Each teammate works on their own `<name>_dev` branch.
 - Supabase project: created, MCP connected, email sign-in on with "Confirm email" off, database schema applied (no data).
 
 ## External data sources
@@ -291,6 +291,63 @@ Public endpoints (no token) under `/transit`, contract in `docs/API.md` → Tran
 - **Timetable expiry:** the 2026-11-13 GTFS covers 2026-11-05 to 2026-12-31. Re-run `get-data.sh` and rebuild the graph after that date.
 - **Code:** package `routing`: `controller/RoutingController`, `service/impl/RoutingServiceImpl` (fallback rules), `client/impl/OtpGraphQlClient` (GraphQL `planConnection`), `mapper/impl/RoutePlanMapperImpl`, `config/OtpProperties` + `OtpClientConfig`, `util/PolylineEncoder`. Coordinates use the shared `common.geo.GeoPoint` (from the places feature).
 - **Tests (10.5):** 28 tests across `PolylineEncoderTest`, `OtpGraphQlClientTest` (mock server), `RoutePlanMapperImplTest`, `RoutingServiceImplTest` and `RoutingControllerTest`. The fixture `src/test/resources/otp/plan-transit.json` is a **real OTP answer** recorded from our server: Piața Victoriei → Gara de Nord, 2026-11-16 at 10:00. With places and transit (incl. the GTFS timetable) merged in, the backend has 162 tests, all passing on 2026-11-13. On the same day the real client was also checked by hand against the running OTP: bus 33, walk, night and outside-the-map cases.
+
+### Frontend (PLAN tasks 12 and 13)
+
+Expo SDK 54 app in `frontend/`, TypeScript (strict), Expo Router, runs in **Expo Go** (no custom native code). Look and feel follow the dark-neon design reference (`dark-neon-mobile-app-design-prompt.md`, design only — no features come from it).
+
+**Run it**
+1. `cd frontend && npm install` (the `.npmrc` sets `legacy-peer-deps`).
+2. Copy `.env.example` to `.env` and fill it in:
+
+| Variable | Meaning |
+|---|---|
+| `EXPO_PUBLIC_SUPABASE_URL` | `https://<project-ref>.supabase.co` (sign-in only) |
+| `EXPO_PUBLIC_SUPABASE_KEY` | Legacy `anon` or publishable key. Never the `service_role` key. Without it the sign-in screens show a setup warning. |
+| `EXPO_PUBLIC_API_URL` | `http://<laptop Wi-Fi IPv4>:8080` — only used when mocks are off |
+| `EXPO_PUBLIC_USE_MOCKS` | `true` = serve `src/mocks/`; `false` = call the Spring API |
+
+3. `npx expo start`, scan the QR code with Expo Go (phone and laptop on the same Wi-Fi). Restart Expo after changing `.env`.
+4. Checks: `npm test` (Jest), `npm run typecheck`, `npm run lint`.
+
+**Layout** (`frontend/src/`)
+
+| Folder | Content |
+|---|---|
+| `app/` | Routes only. `(auth)/sign-in`, `(auth)/sign-up`; `(tabs)/` Home, Map, AI, Profile; `events/` (list, `new`, `[id]`, `[id]/ticket`, `[id]/scan`); `users/` (`search`, `[id]`). |
+| `api/` | `client.ts` (the single request function), `endpoints.ts` (typed calls), `types.ts` (shapes from `docs/API.md`), `errors.ts` (`ApiError`, friendly messages). |
+| `hooks/` | `queries.ts` — one TanStack Query hook per endpoint, plus cache keys. |
+| `mocks/` | In-memory fake backend with the same shapes and error codes as `docs/API.md`. |
+| `features/` | `auth`, `location`, `events`, `transit`, `users` — feature components and logic. |
+| `ui/` | Design tokens (`theme.ts`), text, buttons, chips, cards, inputs, loading/empty/error states, default avatar, glow background. |
+| `lib/` | Supabase client, query client, time (Romanian time), geo, validation. |
+
+**How it works**
+- **Auth (12.2):** `features/auth/AuthProvider` wraps the Supabase client. The session is stored on the device (AsyncStorage) and refreshed while the app is in the foreground. The root layout uses `Stack.Protected`, so signed-out users can only reach the `(auth)` screens; on sign-out the query cache is cleared. Sign-up first calls `GET /users/username-available` (the database trigger would silently replace a taken username) and then sends the username as sign-up metadata. If the username cannot be checked (backend down) sign-up stops with a message instead of guessing.
+- **API layer (12.3):** `api(method, path, {query, body})` adds `Authorization: Bearer <Supabase token>`, a 15 s timeout, and turns every failure into an `ApiError` (`NETWORK` and `TIMEOUT` are added for transport problems). With `EXPO_PUBLIC_USE_MOCKS=true` the same call is answered by `src/mocks/` and never touches the network. Switching one feature to the real backend later means making `USE_MOCKS` false (it is one global switch today).
+- **Mock backend:** stateful until the app reloads — join, leave, create, ban and check-in really change the data. The mock user is `demo_user` (independent of the Supabase account). Tickets you can scan as organiser of "Sunset run by the Bega": `demo-ticket-stella`, `demo-ticket-andrei`, `demo-ticket-maria` (type one in the manual field of the scanner, or turn it into a QR code). "Art walk through the old town" is already joined by the mock user, so "My ticket" works there.
+- **Times:** shown in Europe/Bucharest using our own EET/EEST rules (`lib/time.ts`), not `Intl`, so every phone shows the same hour. The create form's date/time picker is built from day chips and hour/minute steppers for the same reason (no native date-picker module).
+- **Location (12.5):** `LocationProvider` asks for foreground permission after sign-in; `useCurrentPosition()` returns the phone position, or Piața Victoriei (45.7537, 21.2257) with `isFallback: true` when permission is denied or the GPS fails.
+- **Reliability gauge:** semicircle fills to 150 points (scores above are capped visually); the "How it works" text repeats the rules from "Reliability rules".
+
+**Screens (PLAN 13)**
+
+| Step | Screen | Notes |
+|---|---|---|
+| 13.1 | Home, city info strip | Calls `GET /transit/summary` (refreshed every minute) and `GET /transit/alerts`; the alert pill expands the list. |
+| 13.2 | Home, upcoming events | Horizontal cards: date, place, spots left (user events) or price (imported). Category chips filter the row. |
+| 13.3 | `/events` | Debounced search, multi-select category chips, date chips (today, tomorrow, weekend, next 7 days), endless scroll (pages of 10). |
+| 13.4 | `/events/[id]` | Description, "Show on map" (opens the Map tab on the event), organiser, participants with scores (tap opens the profile), join / leave (late-leave warning). Imported events show "Get tickets" instead. |
+| 13.5 | `/events/new` | Title, description, category, date/time, spots, venue, location picked by tapping a map. Validation mirrors the API rules. |
+| 13.6 | `/events/[id]/ticket` | QR code that contains only the `qrToken`. |
+| 13.7 | `/events/[id]/scan` | Camera QR scan → success / already scanned / wrong event / not a ticket. A manual code field is the fallback. Ban button in the participant list (organiser only, asks first). |
+| 13.8 | `/users/search`, `/users/[id]` | Username prefix search → public profile (score gauge, attended events). |
+
+Also built: Profile tab (username, gauge, find people, sign out) and the public profile (PLAN 16.4, 16.5). Map and AI tabs only show their page frame; the real work is PLAN tasks 14 and 15.
+
+**Tests:** 138 Jest tests in `frontend/__tests__/` (jest-expo + React Native Testing Library 13): every screen, the auth provider, location, API client (real HTTP path with a faked `fetch`), the mock backend, and the pure helpers. Native modules (maps, camera, location, Supabase, router) are mocked in `jest.setup.ts`. Last run 2026-11-13: all passing, `tsc` and `expo lint` clean, Android bundle builds with `expo export`.
+
+**Not verified yet:** nothing was run on a phone in Expo Go (camera scan, map tap, real Supabase sign-in against the HS256 secret — see "Token validation" above). Do this first when the keys are in `.env`.
 
 ## Knowledge graph
 
