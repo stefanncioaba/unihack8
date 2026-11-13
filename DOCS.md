@@ -361,6 +361,21 @@ Also built: Profile tab (username, gauge, find people, sign out) and the public 
 
 **Not verified yet:** nothing was run on a phone in Expo Go (camera scan, map tap, real Supabase sign-in against the HS256 secret — see "Token validation" above). Do this first when the keys are in `.env`.
 
+#### Frontend — profile, transit and directions (Track C, Person 2)
+
+**My profile (PLAN 16.1–16.3)** — the Profile tab (`app/(tabs)/profile.tsx`) shows, top to bottom: username with a pencil button, the reliability gauge, **My events**, **Reliability history**, then Find people and Sign out. Each block loads on its own, so a failing block shows its own error with "Try again" and the rest of the page still works.
+
+| Step | What | Where |
+|---|---|---|
+| 16.1 | "How it works" under the gauge lists the three rules (`+5` checked in, `−10` missed, `−2` left less than 2 h before) from `features/users/reliability.ts`. The history lists the latest changes (reason, event, date, points); tapping an entry opens the event. | `ReliabilityGauge.tsx`, `ReliabilityLog.tsx` |
+| 16.2 | Pencil → inline form. The format (3–20 letters, digits, `_`) is checked while typing; the server's `USERNAME_TAKEN` / `INVALID_USERNAME` answers are shown under the field and cleared on the next keystroke. An unchanged name closes the form without a request. After a save the profile, participant lists, event details and search results are refreshed. | `UsernameEditor.tsx`, `PATCH /users/me` |
+| 16.3 | Sections **Upcoming** (joined, not over), **Organising** (mine, not over) and **Attended** (newest first), each hidden when empty; missed events show only in the history. Refetched every time the tab opens. | `MyEvents.tsx`, `GET /users/me/events` |
+
+- **Endpoints used:** `PATCH /users/me`, `GET /users/me/events` (backend 5.8, done), `GET /users/{id}/reliability` (**backend 6.4, not merged yet** — with `EXPO_PUBLIC_USE_MOCKS=false` the history block shows its error state until then; everything else works).
+- **New files** (per-feature, so they do not collide with other people's): `api/types.users.ts`, `api/endpoints.users.ts`, `hooks/useUsers.ts`.
+- **Mock backend additions:** the three routes above. Seed: `demo_user` attended "Autumn photo walk" and "Retro gaming evening" (+5 each) and missed "Open mic night" (−10), so the score stays 100. A check-in adds an `ATTENDED` line to the history and leaving less than 2 h before the start adds `LATE_CANCEL` (−2).
+- **Tests:** `__tests__/screens.profile.test.tsx` (explanation, history incl. empty and error, username change: success, taken, invalid, unchanged, cancel; my events: groups, empty, error, refresh after join) and `__tests__/mocks.users.test.ts`.
+
 ## Knowledge graph
 
 One graph for the whole repo, made with the **Understand-Anything** plugin (rule from AGENTS.md: keep it updated with every change).

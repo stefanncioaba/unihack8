@@ -6,6 +6,8 @@ import Svg, { Defs, LinearGradient, Path, Stop } from 'react-native-svg';
 import { Text } from '@/ui/Text';
 import { colors } from '@/ui/theme';
 
+import { formatPoints, RELIABILITY_RULES, START_SCORE } from './reliability';
+
 /** Scores at or above this fill the gauge completely. */
 export const GAUGE_MAX = 150;
 const RADIUS = 50;
@@ -60,9 +62,21 @@ export function ReliabilityGauge({ score }: { score: number }) {
         </View>
       </View>
       {open && (
-        <Text variant="caption" tone="muted" style={styles.explain} testID="score-explainer">
-          Everyone starts at 100. Being checked in at an event adds 5 points, missing an event you joined removes 10, and leaving less than 2 hours before the start removes 2. The score never drops below 0.
-        </Text>
+        <View style={styles.explain} testID="score-explainer">
+          {RELIABILITY_RULES.map((rule) => (
+            <View key={rule.text} style={styles.rule}>
+              <Text variant="cardTitle" style={[styles.points, { color: rule.points > 0 ? colors.teal : colors.danger }]}>
+                {formatPoints(rule.points)}
+              </Text>
+              <Text variant="caption" tone="muted" style={{ flex: 1 }}>
+                {rule.text}
+              </Text>
+            </View>
+          ))}
+          <Text variant="caption" tone="muted">
+            Everyone starts at {START_SCORE}. The score never drops below 0.
+          </Text>
+        </View>
       )}
     </View>
   );
@@ -74,5 +88,7 @@ const styles = StyleSheet.create({
   divider: { width: StyleSheet.hairlineWidth, alignSelf: 'stretch', backgroundColor: colors.borderStrong },
   numbers: { flex: 1, gap: 2, alignItems: 'flex-start', paddingLeft: 4 },
   big: { fontSize: 34, fontWeight: '800', lineHeight: 40, color: colors.text },
-  explain: { marginTop: 12, lineHeight: 16 },
+  explain: { marginTop: 12, gap: 6 },
+  rule: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  points: { width: 34 },
 });

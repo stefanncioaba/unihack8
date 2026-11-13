@@ -281,9 +281,9 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 **Needs:** 12. Real data from 4, 6.
 
-- [ ] **16.1 My profile:** username, reliability score with a short explanation of how it changes.
-- [ ] **16.2 Change username** with inline validation and the "already taken" error.
-- [ ] **16.3 Events I attended** and upcoming events I joined or organise.
+- [x] **16.1 My profile:** username, reliability score with a short explanation of how it changes.
+- [x] **16.2 Change username** with inline validation and the "already taken" error.
+- [x] **16.3 Events I attended** and upcoming events I joined or organise.
 - [x] **16.4 Public profile screen** (other users): username, score, attended events. Reused from 13.4 and 13.8.
 - [x] **16.5 Sign out.**
 
