@@ -124,11 +124,11 @@ Tasks 8, 9 and 10 do not need the database to start: B can build and test them a
 
 **Needs:** 3.
 
-- [ ] **4.1** `GET /users/me` — own profile.
-- [ ] **4.2** `PATCH /users/me` — change username (3–20 characters, letters/digits/underscore, unique; clear error when taken).
-- [ ] **4.3** `GET /users/search?q=` — search by username prefix, max 20 results.
-- [ ] **4.4** `GET /users/{id}` — public profile: username, reliability score, attended events.
-- [ ] **4.5** Tests for each endpoint, including "username taken" and "no token".
+- [x] **4.1** `GET /users/me` — own profile.
+- [x] **4.2** `PATCH /users/me` — change username (3–20 characters, letters/digits/underscore, unique; clear error when taken).
+- [x] **4.3** `GET /users/search?q=` — search by username prefix, max 20 results.
+- [x] **4.4** `GET /users/{id}` — public profile: username, reliability score, attended events.
+- [x] **4.5** Tests for each endpoint, including "username taken" and "no token".
 
 ---
 
