@@ -1,0 +1,221 @@
+{
+  "data": {
+    "planConnection": {
+      "edges": [
+        {
+          "node": {
+            "start": "2026-11-16T10:00:00+02:00",
+            "end": "2026-11-16T10:20:33+02:00",
+            "duration": 1233,
+            "legs": [
+              {
+                "mode": "WALK",
+                "headsign": null,
+                "duration": 1233.0,
+                "distance": 1510.37,
+                "from": {
+                  "name": "Start",
+                  "lat": 45.7537,
+                  "lon": 21.2257
+                },
+                "to": {
+                  "name": "Destination",
+                  "lat": 45.7505,
+                  "lon": 21.2075
+                },
+                "start": {
+                  "scheduledTime": "2026-11-16T10:00:00+02:00"
+                },
+                "end": {
+                  "scheduledTime": "2026-11-16T10:20:33+02:00"
+                },
+                "route": null,
+                "legGeometry": {
+                  "points": "shgvG}sp`CIp@Iv@FBDHFJDLBNt@`F@J@Hf@|CD\\DTFZd@fCF@BN@LJh@@FF^BN@HCPBVRpAzC~QX~ADFF\\ALT|A?DBBB@HA@LBX@H??MFCB?B@@@@@@??Hz@Bh@TrC@B@L@Pb@jFBR@Xd@`GPpBVhDNhBLtAKRCJAVBVNdBIR@DNzA@Z?B?PADFJ"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "node": {
+            "start": "2026-11-16T10:02:26+02:00",
+            "end": "2026-11-16T10:13:39+02:00",
+            "duration": 673,
+            "legs": [
+              {
+                "mode": "WALK",
+                "headsign": null,
+                "duration": 394.0,
+                "distance": 427.21,
+                "from": {
+                  "name": "Start",
+                  "lat": 45.7537,
+                  "lon": 21.2257
+                },
+                "to": {
+                  "name": "Piața Regina Maria (Spitalul de copii)",
+                  "lat": 45.75288,
+                  "lon": 21.22073
+                },
+                "start": {
+                  "scheduledTime": "2026-11-16T10:02:26+02:00"
+                },
+                "end": {
+                  "scheduledTime": "2026-11-16T10:09:00+02:00"
+                },
+                "route": null,
+                "legGeometry": {
+                  "points": "shgvG}sp`CIp@Iv@FBDHFJDLBNt@`F@J@Hf@|CD\\DTFZd@fCMDGBBL@LJr@@DHh@@NBPBZDVBC"
+                }
+              },
+              {
+                "mode": "TROLLEYBUS",
+                "headsign": "Gheorghe Barițiu",
+                "duration": 240.0,
+                "distance": 1024.29,
+                "from": {
+                  "name": "Piața Regina Maria (Spitalul de copii)",
+                  "lat": 45.75288,
+                  "lon": 21.22073
+                },
+                "to": {
+                  "name": "Gara de Nord",
+                  "lat": 45.75056,
+                  "lon": 21.20797
+                },
+                "start": {
+                  "scheduledTime": "2026-11-16T10:09:00+02:00"
+                },
+                "end": {
+                  "scheduledTime": "2026-11-16T10:13:00+02:00"
+                },
+                "route": {
+                  "shortName": "18"
+                },
+                "legGeometry": {
+                  "points": "mbgvGqto`CbBzK~A`MBV??\\nClAbNtAlPhApM@J"
+                }
+              },
+              {
+                "mode": "WALK",
+                "headsign": null,
+                "duration": 39.0,
+                "distance": 39.16,
+                "from": {
+                  "name": "Gara de Nord",
+                  "lat": 45.75056,
+                  "lon": 21.20797
+                },
+                "to": {
+                  "name": "Destination",
+                  "lat": 45.7505,
+                  "lon": 21.2075
+                },
+                "start": {
+                  "scheduledTime": "2026-11-16T10:13:00+02:00"
+                },
+                "end": {
+                  "scheduledTime": "2026-11-16T10:13:39+02:00"
+                },
+                "route": null,
+                "legGeometry": {
+                  "points": "_tfvGydm`C?@BV??@Z?B?PADFJ"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "node": {
+            "start": "2026-11-16T10:03:26+02:00",
+            "end": "2026-11-16T10:16:39+02:00",
+            "duration": 793,
+            "legs": [
+              {
+                "mode": "WALK",
+                "headsign": null,
+                "duration": 394.0,
+                "distance": 427.21,
+                "from": {
+                  "name": "Start",
+                  "lat": 45.7537,
+                  "lon": 21.2257
+                },
+                "to": {
+                  "name": "Piața Regina Maria (Spitalul de copii)",
+                  "lat": 45.75288,
+                  "lon": 21.22073
+                },
+                "start": {
+                  "scheduledTime": "2026-11-16T10:03:26+02:00"
+                },
+                "end": {
+                  "scheduledTime": "2026-11-16T10:10:00+02:00"
+                },
+                "route": null,
+                "legGeometry": {
+                  "points": "shgvG}sp`CIp@Iv@FBDHFJDLBNt@`F@J@Hf@|CD\\DTFZd@fCMDGBBL@LJr@@DHh@@NBPBZDVBC"
+                }
+              },
+              {
+                "mode": "TROLLEYBUS",
+                "headsign": "Gheorghe Barițiu",
+                "duration": 360.0,
+                "distance": 1024.62,
+                "from": {
+                  "name": "Piața Regina Maria (Spitalul de copii)",
+                  "lat": 45.75288,
+                  "lon": 21.22073
+                },
+                "to": {
+                  "name": "Gara de Nord",
+                  "lat": 45.75056,
+                  "lon": 21.20797
+                },
+                "start": {
+                  "scheduledTime": "2026-11-16T10:10:00+02:00"
+                },
+                "end": {
+                  "scheduledTime": "2026-11-16T10:16:00+02:00"
+                },
+                "route": {
+                  "shortName": "M14"
+                },
+                "legGeometry": {
+                  "points": "kbgvGqto`C??d@|C`AhG|@fGZ|CFf@??JfAf@|ERhBXxCTbC\\`EV`DV~CRjCXlDLhBFh@"
+                }
+              },
+              {
+                "mode": "WALK",
+                "headsign": null,
+                "duration": 39.0,
+                "distance": 39.16,
+                "from": {
+                  "name": "Gara de Nord",
+                  "lat": 45.75056,
+                  "lon": 21.20797
+                },
+                "to": {
+                  "name": "Destination",
+                  "lat": 45.7505,
+                  "lon": 21.2075
+                },
+                "start": {
+                  "scheduledTime": "2026-11-16T10:16:00+02:00"
+                },
+                "end": {
+                  "scheduledTime": "2026-11-16T10:16:39+02:00"
+                },
+                "route": null,
+                "legGeometry": {
+                  "points": "_tfvGydm`C?@BV??@Z?B?PADFJ"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

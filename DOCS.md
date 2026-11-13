@@ -108,7 +108,7 @@ Applied to Supabase on 2026-11-13 from `supabase/migrations/` (four migrations, 
 - `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging), places (task 8, 1003 Timișoara places imported into Supabase) and live transit (task 9, `/transit/**`). 119 tests passing.
 - `supabase/`: migrations and schema tests for task 2, applied.
 - `docs/API.md`: API contract (task 1.6).
-- `infra/otp/`: folder for OpenTripPlanner (README only; the server is set up in task 10). Its large data files are git-ignored.
+- `infra/otp/`: OpenTripPlanner 2.7 setup (docker-compose, data download script). Its large data files are git-ignored. `GET /routes/plan` is implemented (task 10).
 - `frontend/`: Expo app (SDK 54) set up by the frontend teammates — see `frontend/AGENTS.md`. Each teammate works on their own `<name>_dev` branch.
 - Supabase project: created, MCP connected, email sign-in on with "Confirm email" off, database schema applied (no data).
 
@@ -128,7 +128,7 @@ Checked on 2026-11-13 by calling each endpoint. None of these is a documented pu
 | `/proxy-alerts.php` | Service alerts: `id`, `headerText`, `descriptionText` |
 | `/api/journey.php?…` | The site's own journey planner (seen in the script; parameters not explored) |
 
-The GTFS zip itself was not found at an obvious URL on the site — see PLAN open question 2.
+The GTFS zip itself is not on `live.stpt.ro`, but SMTT publishes it at `https://smtt.ro/transit/gtfs/maps/smtt-timisoara-ro.zip` (Mobility Database `mdb-2868`), see Features → Routing.
 
 ### LiveTickets events — `https://api.livetickets.ro`
 
@@ -239,6 +239,28 @@ Public endpoints (no token) under `/transit`, contract in `docs/API.md` → Tran
 - **Last departures:** no GTFS timetable yet (PLAN open question 2), so `source` is always `LIVE_ESTIMATE` = the latest of the next few arrivals STPT reports (about the next 30–60 minutes). The summary sentence ("Last tram 2 from … leaves at 21:41") is therefore an estimate until the GTFS file is used. STPT's vehicles answer also has a per-line `service_window.last_arrival` (e.g. `24:30`) that could improve this later; not used yet.
 
 **Tests (47 for transit):** `StptClientImplTest` parses real STPT answers saved in `src/test/resources/stpt/` (no network); `TransitMapperImplTest` (types, time zones, midnight, duplicates); `TransitServiceImplTest` (sorting, bbox, caching, stale fallback when STPT is down, 503 with no cache, 404 stop, last departures, summary in English and Romanian); `TransitControllerTest` (JSON shapes, no token needed, 400/404/503); `StaleCacheTest`. A one-off run against the real STPT on 2026-11-13 returned 74 lines, 926 stops, live vehicles, arrivals and 5 alerts.
+
+### Routing (PLAN task 10, Track B)
+
+`GET /routes/plan?from=lat,lon&to=lat,lon&mode=WALK|TRANSIT[&departAt=ISO time]`, which needs a token. The shape is in `docs/API.md`. The backend asks our own OpenTripPlanner 2.7 server and returns one route.
+
+- **Data (10.1):** the STPT/SMTT GTFS feed is public: `https://smtt.ro/transit/gtfs/maps/smtt-timisoara-ro.zip`, listed in the Mobility Database as `mdb-2868` (this answers PLAN open question 2). The streets come from Geofabrik's Romania extract, cut to the GTFS area. `infra/otp/get-data.sh` downloads both.
+- **OTP server (10.2):** see `infra/otp/README.md`. It takes three commands (get data, build graph, serve) and serves on port **8081**. The Spring setting is `otp.base-url` (default `http://localhost:8081`); timeouts are `otp.connect-timeout` (2 s) and `otp.read-timeout` (10 s). Built 2026-11-13: 890 stops, 181 route patterns, graph built in 15 s.
+- **Picking the route:** OTP returns up to 3 itineraries, and the backend keeps the one that **arrives first** (the shorter trip on a tie). OTP's own order can put a slower direct walk first: in a real test, a 20-min walk was listed before trolleybus 18, which takes 11 min.
+- **`mode` in the answer** says what the route really uses: `TRANSIT` if any leg rides a vehicle, otherwise `WALK`.
+- **Fallbacks (10.4):**
+
+  | Request | Situation | Answer |
+  |---|---|---|
+  | `WALK` | OTP down, or no route (e.g. a point outside the map) | Straight-line distance × 1.25 at 4.8 km/h, one leg, `fallback: true` |
+  | `TRANSIT` | OTP down | `503 SOURCE_UNAVAILABLE`; the app should offer walking |
+  | `TRANSIT` | no trip found (night, or timetable expired) | OTP's walking route (`mode: "WALK"`), or the straight-line estimate if that fails too |
+
+- **Leg modes:** `WALK`, `TRAM`, `TROLLEYBUS`, `BUS`. Any other vehicle is shown as `BUS`. Times are converted from OTP's local offset to UTC. Durations are rounded to minutes, at least 1 for a non-empty trip.
+- **Gotcha:** OTP answers `400` to chunked request bodies, so the client serializes the GraphQL body to bytes itself, which gives the request a `Content-Length`.
+- **Timetable expiry:** the 2026-11-13 GTFS covers 2026-11-05 to 2026-12-31. Re-run `get-data.sh` and rebuild the graph after that date.
+- **Code:** package `routing`: `controller/RoutingController`, `service/impl/RoutingServiceImpl` (fallback rules), `client/impl/OtpGraphQlClient` (GraphQL `planConnection`), `mapper/impl/RoutePlanMapperImpl`, `config/OtpProperties` + `OtpClientConfig`, `util/PolylineEncoder`.
+- **Tests (10.5):** 39 tests across `GeoPointTest`, `PolylineEncoderTest`, `OtpGraphQlClientTest` (mock server), `RoutePlanMapperImplTest`, `RoutingServiceImplTest` and `RoutingControllerTest`. The fixture `src/test/resources/otp/plan-transit.json` is a **real OTP answer** recorded from our server: Piața Victoriei → Gara de Nord, 2026-11-16 at 10:00. The team total is 69 tests, all passing on 2026-11-13. On the same day the real client was also checked by hand against the running OTP: bus 33, walk, night and outside-the-map cases.
 
 ## Knowledge graph
 

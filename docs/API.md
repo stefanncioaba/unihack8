@@ -519,7 +519,8 @@ The message names the line from `lastDepartures` that stops earliest; with no de
 ### `GET /routes/plan?from=45.7537,21.2257&to=45.7489,21.2318&mode=TRANSIT`
 
 `mode` is `WALK` or `TRANSIT` (walking + public transport). Optional `departAt` (ISO time, default now).
-Returns the best route. `fallback: true` means OpenTripPlanner was unavailable and this is a straight-line walking estimate (`legs[0].polyline` is then just the two points).
+Returns the route that arrives first. The answer's `mode` is what the route really uses: a `TRANSIT` request with no trip found (e.g. at night) answers the walking route with `mode: "WALK"`.
+`fallback: true` means OpenTripPlanner was unavailable (or found no walking route) and this is a straight-line walking estimate (`legs[0].polyline` is then just the two points).
 `polyline` is a Google encoded polyline (as OpenTripPlanner returns it); the app decodes it to draw the line.
 Leg `mode` is `WALK`, `TRAM`, `TROLLEYBUS` or `BUS`; `route` and `headsign` are `null` for walking.
 
