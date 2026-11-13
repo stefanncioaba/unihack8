@@ -4,7 +4,7 @@ Mobile app for the "Connected Communities" theme: events, places, live public tr
 
 ## How to use this plan
 
-- Big tasks are numbered `1, 2, 3…`, their steps `1.1, 1.2…`. Tick a box when the step is merged.
+- Big tasks are numbered `1, 2, 3…`, their steps `1.1, 1.2…`. Tick a box when the step is implemented, documented, represented in the knowledge graph, and tested. Merging still requires Stefan's approval and passing tests.
 - Every big task has an **owner track** (A, B or C) and a **needs** line. If "needs" is already done, nobody is waiting on anybody.
 - Task 1 is done **together, first**. After it, the three tracks run in parallel.
 - The mobile track builds against **mock data** that follows `docs/API.md` (task 1.6), so it never waits for the backend. Swapping a mock for the real endpoint is one line per feature.
@@ -124,11 +124,11 @@ Tasks 8, 9 and 10 do not need the database to start: B can build and test them a
 
 **Needs:** 3.
 
-- [ ] **4.1** `GET /users/me` — own profile.
-- [ ] **4.2** `PATCH /users/me` — change username (3–20 characters, letters/digits/underscore, unique; clear error when taken).
-- [ ] **4.3** `GET /users/search?q=` — search by username prefix, max 20 results.
-- [ ] **4.4** `GET /users/{id}` — public profile: username, reliability score, attended events.
-- [ ] **4.5** Tests for each endpoint, including "username taken" and "no token".
+- [x] **4.1** `GET /users/me` — own profile.
+- [x] **4.2** `PATCH /users/me` — change username (3–20 characters, letters/digits/underscore, unique; clear error when taken).
+- [x] **4.3** `GET /users/search?q=` — search by username prefix, max 20 results.
+- [x] **4.4** `GET /users/{id}` — public profile: username, reliability score, attended events.
+- [x] **4.5** Tests for each endpoint, including "username taken" and "no token".
 
 ---
 
@@ -136,15 +136,15 @@ Tasks 8, 9 and 10 do not need the database to start: B can build and test them a
 
 **Needs:** 3.
 
-- [ ] **5.1** `GET /events` — filters: `q` (text), `category`, `from`/`to` dates, `bbox` (for the map), `source`; paged; sorted by start time.
-- [ ] **5.2** `GET /events/{id}` — details, free spots, organiser summary, and whether the caller has joined.
-- [ ] **5.3** `POST /events` — create a user event (title, description, category, location, start/end, optional capacity). `PATCH` and `DELETE` for the organiser only.
-- [ ] **5.4** `POST /events/{id}/join` — fails when full, banned, or already joined; must be safe when two people take the last spot at once. Creates the participant's `qr_token`.
-- [ ] **5.5** `DELETE /events/{id}/join` — leave; applies the late-cancel penalty from 1.7.
-- [ ] **5.6** `GET /events/{id}/participants` — username + reliability score of each participant (so the organiser can decide whom to trust).
-- [ ] **5.7** `POST /events/{id}/participants/{userId}/ban` — organiser only; frees the spot.
-- [ ] **5.8** `GET /users/me/events` — events I joined and events I organise.
-- [ ] **5.9** Tests: capacity limit, double join, ban, organiser-only rules.
+- [x] **5.1** `GET /events` — filters: `q` (text), `category`, `from`/`to` dates, `bbox` (for the map), `source`; paged; sorted by start time.
+- [x] **5.2** `GET /events/{id}` — details, free spots, organiser summary, and whether the caller has joined.
+- [x] **5.3** `POST /events` — create a user event (title, description, category, location, start/end, optional capacity). `PATCH` and `DELETE` for the organiser only.
+- [x] **5.4** `POST /events/{id}/join` — fails when full, banned, or already joined; must be safe when two people take the last spot at once. Creates the participant's `qr_token`.
+- [x] **5.5** `DELETE /events/{id}/join` — leave; applies the late-cancel penalty from 1.7.
+- [x] **5.6** `GET /events/{id}/participants` — username + reliability score of each participant (so the organiser can decide whom to trust).
+- [x] **5.7** `POST /events/{id}/participants/{userId}/ban` — organiser only; frees the spot.
+- [x] **5.8** `GET /users/me/events` — events I joined and events I organise.
+- [x] **5.9** Tests: capacity limit, double join, ban, organiser-only rules.
 
 ---
 

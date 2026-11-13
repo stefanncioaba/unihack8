@@ -23,8 +23,9 @@
       "Expo Router"
     ],
     "description": "Hackathon mobile app for Timișoara (Connected Communities): events with QR check-in and reliability points, a filterable map of places, live STPT public transport, directions, and an AI guide. Spring Boot backend + Supabase Postgres; Expo frontend.",
-    "analyzedAt": "2026-11-13T18:56:02+00:00",
-    "gitCommitHash": "54ed9208d27350071b458fd640a5ce17d0c740de"
+    "analyzedAt": "2026-11-13T19:49:14.569678+00:00",
+    "gitCommitHash": "54ed9208d27350071b458fd640a5ce17d0c740de",
+    "workingTreeState": "Uncommitted task-5 changes on alex_dev; previous committed baseline retained."
   },
   "nodes": [
     {
@@ -3346,7 +3347,7 @@
       "type": "document",
       "name": "DOCS.md",
       "filePath": "DOCS.md",
-      "summary": "Living project documentation covering architecture, configuration and run guide, backend foundation classes, Supabase MCP and database schema, external data sources (STPT, LiveTickets, OSM, Gemini), reliability rules, the Places feature (categories, Overpass import, search) and the knowledge graph workflow.",
+      "summary": "Living project documentation covering architecture, configuration and run guide, backend foundation classes, Supabase MCP and database schema, external data sources (STPT, LiveTickets, OSM, Gemini), reliability rules, the Places feature (categories, Overpass import, search) and the knowledge graph workflow. Includes task-5 event implementation and tests.",
       "tags": [
         "documentation",
         "architecture",
@@ -3361,7 +3362,7 @@
       "type": "document",
       "name": "PLAN.md",
       "filePath": "PLAN.md",
-      "summary": "Task plan split into three tracks with dependency map and definition of done, listing 17 numbered work areas from foundation, database and backend foundation through users, events, QR reliability, imports, places, transit, routing, AI and the mobile pages, plus cut order and open questions.",
+      "summary": "Task plan split into three tracks with dependency map and definition of done, listing 17 numbered work areas from foundation, database and backend foundation through users, events, QR reliability, imports, places, transit, routing, AI and the mobile pages, plus cut order and open questions. Tasks 4 and 5 are checked complete.",
       "tags": [
         "documentation",
         "planning",
@@ -3552,7 +3553,7 @@
       "type": "document",
       "name": "API.md",
       "filePath": "docs/API.md",
-      "summary": "REST API contract between the Expo frontend and Spring Boot backend: conventions, paged and error answers, shared objects, and endpoints for users, events, check-in, places, STPT transit, routing and the AI assistant.",
+      "summary": "REST API contract between the Expo frontend and Spring Boot backend: conventions, paged and error answers, shared objects, and endpoints for users, events, check-in, places, STPT transit, routing and the AI assistant. The event PATCH and ban rules are clarified.",
       "tags": [
         "documentation",
         "api-schema",
@@ -4350,6 +4351,2032 @@
         "h2"
       ],
       "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java",
+      "type": "file",
+      "name": "EventController.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/controller/EventController.java",
+      "summary": "REST endpoints for public event discovery and authenticated create, edit, join, leave, participant and ban operations.",
+      "tags": [
+        "events",
+        "controller",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:EventController",
+      "type": "class",
+      "name": "EventController",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/controller/EventController.java",
+      "lineRange": [
+        27,
+        99
+      ],
+      "summary": "REST endpoints for public event discovery and authenticated create, edit, join, leave, participant and ban operations.",
+      "tags": [
+        "events",
+        "controller",
+        "class"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:search",
+      "type": "function",
+      "name": "search",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/controller/EventController.java",
+      "lineRange": [
+        39,
+        39
+      ],
+      "summary": "search in EventController.",
+      "tags": [
+        "events",
+        "controller"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:detail",
+      "type": "function",
+      "name": "detail",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/controller/EventController.java",
+      "lineRange": [
+        50,
+        50
+      ],
+      "summary": "detail in EventController.",
+      "tags": [
+        "events",
+        "controller"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:create",
+      "type": "function",
+      "name": "create",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/controller/EventController.java",
+      "lineRange": [
+        57,
+        57
+      ],
+      "summary": "create in EventController.",
+      "tags": [
+        "events",
+        "controller"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:update",
+      "type": "function",
+      "name": "update",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/controller/EventController.java",
+      "lineRange": [
+        63,
+        63
+      ],
+      "summary": "update in EventController.",
+      "tags": [
+        "events",
+        "controller"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:delete",
+      "type": "function",
+      "name": "delete",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/controller/EventController.java",
+      "lineRange": [
+        70,
+        70
+      ],
+      "summary": "delete in EventController.",
+      "tags": [
+        "events",
+        "controller"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:join",
+      "type": "function",
+      "name": "join",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/controller/EventController.java",
+      "lineRange": [
+        77,
+        77
+      ],
+      "summary": "join in EventController.",
+      "tags": [
+        "events",
+        "controller"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:leave",
+      "type": "function",
+      "name": "leave",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/controller/EventController.java",
+      "lineRange": [
+        83,
+        83
+      ],
+      "summary": "leave in EventController.",
+      "tags": [
+        "events",
+        "controller"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:participants",
+      "type": "function",
+      "name": "participants",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/controller/EventController.java",
+      "lineRange": [
+        89,
+        89
+      ],
+      "summary": "participants in EventController.",
+      "tags": [
+        "events",
+        "controller"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:ban",
+      "type": "function",
+      "name": "ban",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/controller/EventController.java",
+      "lineRange": [
+        96,
+        96
+      ],
+      "summary": "ban in EventController.",
+      "tags": [
+        "events",
+        "controller"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/controller/MyEventsController.java",
+      "type": "file",
+      "name": "MyEventsController.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/controller/MyEventsController.java",
+      "summary": "Authenticated GET /users/me/events endpoint for joined and organized events.",
+      "tags": [
+        "events",
+        "controller",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/controller/MyEventsController.java:MyEventsController",
+      "type": "class",
+      "name": "MyEventsController",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/controller/MyEventsController.java",
+      "lineRange": [
+        13,
+        28
+      ],
+      "summary": "Authenticated GET /users/me/events endpoint for joined and organized events.",
+      "tags": [
+        "events",
+        "controller",
+        "class"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/controller/MyEventsController.java:mine",
+      "type": "function",
+      "name": "mine",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/controller/MyEventsController.java",
+      "lineRange": [
+        25,
+        25
+      ],
+      "summary": "mine in MyEventsController.",
+      "tags": [
+        "events",
+        "controller"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/BanResponse.java",
+      "type": "file",
+      "name": "BanResponse.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/BanResponse.java",
+      "summary": "Task-5 events domain type BanResponse.",
+      "tags": [
+        "events",
+        "domain",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/BanResponse.java:BanResponse",
+      "type": "class",
+      "name": "BanResponse",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/BanResponse.java",
+      "lineRange": [
+        6,
+        7
+      ],
+      "summary": "Task-5 events domain type BanResponse.",
+      "tags": [
+        "events",
+        "domain",
+        "record"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/BanResponse.java:BanResponse",
+      "type": "function",
+      "name": "BanResponse",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/BanResponse.java",
+      "lineRange": [
+        6,
+        6
+      ],
+      "summary": "BanResponse in BanResponse.",
+      "tags": [
+        "events",
+        "domain"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/CreateEventRequest.java",
+      "type": "file",
+      "name": "CreateEventRequest.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/CreateEventRequest.java",
+      "summary": "Task-5 events domain type CreateEventRequest.",
+      "tags": [
+        "events",
+        "domain",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/CreateEventRequest.java:CreateEventRequest",
+      "type": "class",
+      "name": "CreateEventRequest",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/CreateEventRequest.java",
+      "lineRange": [
+        6,
+        8
+      ],
+      "summary": "Task-5 events domain type CreateEventRequest.",
+      "tags": [
+        "events",
+        "domain",
+        "record"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/CreateEventRequest.java:CreateEventRequest",
+      "type": "function",
+      "name": "CreateEventRequest",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/CreateEventRequest.java",
+      "lineRange": [
+        6,
+        6
+      ],
+      "summary": "CreateEventRequest in CreateEventRequest.",
+      "tags": [
+        "events",
+        "domain"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventDetail.java",
+      "type": "file",
+      "name": "EventDetail.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/EventDetail.java",
+      "summary": "Task-5 events domain type EventDetail.",
+      "tags": [
+        "events",
+        "domain",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventDetail.java:EventDetail",
+      "type": "class",
+      "name": "EventDetail",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/EventDetail.java",
+      "lineRange": [
+        8,
+        12
+      ],
+      "summary": "Task-5 events domain type EventDetail.",
+      "tags": [
+        "events",
+        "domain",
+        "record"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventDetail.java:EventDetail",
+      "type": "function",
+      "name": "EventDetail",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/EventDetail.java",
+      "lineRange": [
+        8,
+        8
+      ],
+      "summary": "EventDetail in EventDetail.",
+      "tags": [
+        "events",
+        "domain"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSearchCriteria.java",
+      "type": "file",
+      "name": "EventSearchCriteria.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSearchCriteria.java",
+      "summary": "Task-5 events domain type EventSearchCriteria.",
+      "tags": [
+        "events",
+        "domain",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSearchCriteria.java:EventSearchCriteria",
+      "type": "class",
+      "name": "EventSearchCriteria",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSearchCriteria.java",
+      "lineRange": [
+        8,
+        10
+      ],
+      "summary": "Task-5 events domain type EventSearchCriteria.",
+      "tags": [
+        "events",
+        "domain",
+        "record"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSearchCriteria.java:EventSearchCriteria",
+      "type": "function",
+      "name": "EventSearchCriteria",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSearchCriteria.java",
+      "lineRange": [
+        8,
+        8
+      ],
+      "summary": "EventSearchCriteria in EventSearchCriteria.",
+      "tags": [
+        "events",
+        "domain"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSummary.java",
+      "type": "file",
+      "name": "EventSummary.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSummary.java",
+      "summary": "Task-5 events domain type EventSummary.",
+      "tags": [
+        "events",
+        "domain",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSummary.java:EventSummary",
+      "type": "class",
+      "name": "EventSummary",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSummary.java",
+      "lineRange": [
+        8,
+        11
+      ],
+      "summary": "Task-5 events domain type EventSummary.",
+      "tags": [
+        "events",
+        "domain",
+        "record"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSummary.java:EventSummary",
+      "type": "function",
+      "name": "EventSummary",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSummary.java",
+      "lineRange": [
+        8,
+        8
+      ],
+      "summary": "EventSummary in EventSummary.",
+      "tags": [
+        "events",
+        "domain"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/JoinResponse.java",
+      "type": "file",
+      "name": "JoinResponse.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/JoinResponse.java",
+      "summary": "Task-5 events domain type JoinResponse.",
+      "tags": [
+        "events",
+        "domain",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/JoinResponse.java:JoinResponse",
+      "type": "class",
+      "name": "JoinResponse",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/JoinResponse.java",
+      "lineRange": [
+        6,
+        7
+      ],
+      "summary": "Task-5 events domain type JoinResponse.",
+      "tags": [
+        "events",
+        "domain",
+        "record"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/JoinResponse.java:JoinResponse",
+      "type": "function",
+      "name": "JoinResponse",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/JoinResponse.java",
+      "lineRange": [
+        6,
+        6
+      ],
+      "summary": "JoinResponse in JoinResponse.",
+      "tags": [
+        "events",
+        "domain"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/LeaveResponse.java",
+      "type": "file",
+      "name": "LeaveResponse.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/LeaveResponse.java",
+      "summary": "Task-5 events domain type LeaveResponse.",
+      "tags": [
+        "events",
+        "domain",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/LeaveResponse.java:LeaveResponse",
+      "type": "class",
+      "name": "LeaveResponse",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/LeaveResponse.java",
+      "lineRange": [
+        4,
+        5
+      ],
+      "summary": "Task-5 events domain type LeaveResponse.",
+      "tags": [
+        "events",
+        "domain",
+        "record"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/LeaveResponse.java:LeaveResponse",
+      "type": "function",
+      "name": "LeaveResponse",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/LeaveResponse.java",
+      "lineRange": [
+        4,
+        4
+      ],
+      "summary": "LeaveResponse in LeaveResponse.",
+      "tags": [
+        "events",
+        "domain"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/MyEventsResponse.java",
+      "type": "file",
+      "name": "MyEventsResponse.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/MyEventsResponse.java",
+      "summary": "Task-5 events domain type MyEventsResponse.",
+      "tags": [
+        "events",
+        "domain",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/MyEventsResponse.java:MyEventsResponse",
+      "type": "class",
+      "name": "MyEventsResponse",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/MyEventsResponse.java",
+      "lineRange": [
+        6,
+        10
+      ],
+      "summary": "Task-5 events domain type MyEventsResponse.",
+      "tags": [
+        "events",
+        "domain",
+        "record"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/MyEventsResponse.java:MyEventsResponse",
+      "type": "function",
+      "name": "MyEventsResponse",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/MyEventsResponse.java",
+      "lineRange": [
+        6,
+        6
+      ],
+      "summary": "MyEventsResponse in MyEventsResponse.",
+      "tags": [
+        "events",
+        "domain"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/MyEventsResponse.java:JoinedEvent",
+      "type": "function",
+      "name": "JoinedEvent",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/MyEventsResponse.java",
+      "lineRange": [
+        8,
+        8
+      ],
+      "summary": "JoinedEvent in MyEventsResponse.",
+      "tags": [
+        "events",
+        "domain"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/ParticipantResponse.java",
+      "type": "file",
+      "name": "ParticipantResponse.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/ParticipantResponse.java",
+      "summary": "Task-5 events domain type ParticipantResponse.",
+      "tags": [
+        "events",
+        "domain",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/ParticipantResponse.java:ParticipantResponse",
+      "type": "class",
+      "name": "ParticipantResponse",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/ParticipantResponse.java",
+      "lineRange": [
+        6,
+        7
+      ],
+      "summary": "Task-5 events domain type ParticipantResponse.",
+      "tags": [
+        "events",
+        "domain",
+        "record"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/ParticipantResponse.java:ParticipantResponse",
+      "type": "function",
+      "name": "ParticipantResponse",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/ParticipantResponse.java",
+      "lineRange": [
+        6,
+        6
+      ],
+      "summary": "ParticipantResponse in ParticipantResponse.",
+      "tags": [
+        "events",
+        "domain"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/UpdateEventRequest.java",
+      "type": "file",
+      "name": "UpdateEventRequest.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/UpdateEventRequest.java",
+      "summary": "Task-5 events domain type UpdateEventRequest.",
+      "tags": [
+        "events",
+        "domain",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/UpdateEventRequest.java:UpdateEventRequest",
+      "type": "class",
+      "name": "UpdateEventRequest",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/UpdateEventRequest.java",
+      "lineRange": [
+        6,
+        16
+      ],
+      "summary": "Task-5 events domain type UpdateEventRequest.",
+      "tags": [
+        "events",
+        "domain",
+        "record"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/UpdateEventRequest.java:UpdateEventRequest",
+      "type": "function",
+      "name": "UpdateEventRequest",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/UpdateEventRequest.java",
+      "lineRange": [
+        6,
+        6
+      ],
+      "summary": "UpdateEventRequest in UpdateEventRequest.",
+      "tags": [
+        "events",
+        "domain"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/UpdateEventRequest.java:has",
+      "type": "function",
+      "name": "has",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/UpdateEventRequest.java",
+      "lineRange": [
+        8,
+        8
+      ],
+      "summary": "Reports whether the client included a field, even when its value is null.",
+      "tags": [
+        "events",
+        "domain"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/UpdateEventRequest.java:value",
+      "type": "function",
+      "name": "value",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/UpdateEventRequest.java",
+      "lineRange": [
+        13,
+        13
+      ],
+      "summary": "Returns the submitted value for a field.",
+      "tags": [
+        "events",
+        "domain"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java",
+      "type": "file",
+      "name": "UserSummary.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java",
+      "summary": "Task-5 events domain type UserSummary.",
+      "tags": [
+        "events",
+        "domain",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java:UserSummary",
+      "type": "class",
+      "name": "UserSummary",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java",
+      "lineRange": [
+        6,
+        7
+      ],
+      "summary": "Task-5 events domain type UserSummary.",
+      "tags": [
+        "events",
+        "domain",
+        "record"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java:UserSummary",
+      "type": "function",
+      "name": "UserSummary",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java",
+      "lineRange": [
+        6,
+        6
+      ],
+      "summary": "UserSummary in UserSummary.",
+      "tags": [
+        "events",
+        "domain"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/domain/entity/Event.java",
+      "type": "file",
+      "name": "Event.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/entity/Event.java",
+      "summary": "Task-5 events domain type Event.",
+      "tags": [
+        "events",
+        "domain",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/domain/entity/Event.java:Event",
+      "type": "class",
+      "name": "Event",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/entity/Event.java",
+      "lineRange": [
+        8,
+        12
+      ],
+      "summary": "Task-5 events domain type Event.",
+      "tags": [
+        "events",
+        "domain",
+        "record"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/domain/entity/Event.java:Event",
+      "type": "function",
+      "name": "Event",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/entity/Event.java",
+      "lineRange": [
+        8,
+        8
+      ],
+      "summary": "Event in Event.",
+      "tags": [
+        "events",
+        "domain"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/domain/entity/EventParticipant.java",
+      "type": "file",
+      "name": "EventParticipant.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/entity/EventParticipant.java",
+      "summary": "Task-5 events domain type EventParticipant.",
+      "tags": [
+        "events",
+        "domain",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/domain/entity/EventParticipant.java:EventParticipant",
+      "type": "class",
+      "name": "EventParticipant",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/entity/EventParticipant.java",
+      "lineRange": [
+        7,
+        9
+      ],
+      "summary": "Task-5 events domain type EventParticipant.",
+      "tags": [
+        "events",
+        "domain",
+        "record"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/domain/entity/EventParticipant.java:EventParticipant",
+      "type": "function",
+      "name": "EventParticipant",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/entity/EventParticipant.java",
+      "lineRange": [
+        7,
+        7
+      ],
+      "summary": "EventParticipant in EventParticipant.",
+      "tags": [
+        "events",
+        "domain"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/mapper/EventMapper.java",
+      "type": "file",
+      "name": "EventMapper.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/mapper/EventMapper.java",
+      "summary": "Task-5 events mapper type EventMapper.",
+      "tags": [
+        "events",
+        "mapper",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/mapper/EventMapper.java:EventMapper",
+      "type": "class",
+      "name": "EventMapper",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/mapper/EventMapper.java",
+      "lineRange": [
+        10,
+        19
+      ],
+      "summary": "Task-5 events mapper type EventMapper.",
+      "tags": [
+        "events",
+        "mapper",
+        "interface"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java",
+      "type": "file",
+      "name": "EventMapperImpl.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java",
+      "summary": "Hand-written mapping from events and profiles to EventSummary, EventDetail and UserSummary.",
+      "tags": [
+        "events",
+        "mapper",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java:EventMapperImpl",
+      "type": "class",
+      "name": "EventMapperImpl",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java",
+      "lineRange": [
+        13,
+        48
+      ],
+      "summary": "Hand-written mapping from events and profiles to EventSummary, EventDetail and UserSummary.",
+      "tags": [
+        "events",
+        "mapper",
+        "class"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java:summary",
+      "type": "function",
+      "name": "summary",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java",
+      "lineRange": [
+        16,
+        16
+      ],
+      "summary": "summary in EventMapperImpl.",
+      "tags": [
+        "events",
+        "mapper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java:detail",
+      "type": "function",
+      "name": "detail",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java",
+      "lineRange": [
+        25,
+        25
+      ],
+      "summary": "detail in EventMapperImpl.",
+      "tags": [
+        "events",
+        "mapper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java:user",
+      "type": "function",
+      "name": "user",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java",
+      "lineRange": [
+        35,
+        35
+      ],
+      "summary": "user in EventMapperImpl.",
+      "tags": [
+        "events",
+        "mapper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java:spots",
+      "type": "function",
+      "name": "spots",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java",
+      "lineRange": [
+        40,
+        40
+      ],
+      "summary": "Computes available capacity, or null for unlimited events.",
+      "tags": [
+        "events",
+        "mapper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java:category",
+      "type": "function",
+      "name": "category",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java",
+      "lineRange": [
+        45,
+        45
+      ],
+      "summary": "Normalizes a missing imported category to OTHER.",
+      "tags": [
+        "events",
+        "mapper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/repository/EventRepository.java",
+      "type": "file",
+      "name": "EventRepository.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/EventRepository.java",
+      "summary": "Task-5 events repository type EventRepository.",
+      "tags": [
+        "events",
+        "repository",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/repository/EventRepository.java:EventRepository",
+      "type": "class",
+      "name": "EventRepository",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/EventRepository.java",
+      "lineRange": [
+        13,
+        40
+      ],
+      "summary": "Task-5 events repository type EventRepository.",
+      "tags": [
+        "events",
+        "repository",
+        "interface"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+      "type": "file",
+      "name": "EventRepositoryImpl.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+      "summary": "JDBC event search and persistence, including FOR UPDATE row locks and active spot counting.",
+      "tags": [
+        "events",
+        "repository",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:EventRepositoryImpl",
+      "type": "class",
+      "name": "EventRepositoryImpl",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+      "lineRange": [
+        27,
+        166
+      ],
+      "summary": "JDBC event search and persistence, including FOR UPDATE row locks and active spot counting.",
+      "tags": [
+        "events",
+        "repository",
+        "class"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:search",
+      "type": "function",
+      "name": "search",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+      "lineRange": [
+        41,
+        41
+      ],
+      "summary": "search in EventRepositoryImpl.",
+      "tags": [
+        "events",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:find",
+      "type": "function",
+      "name": "find",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+      "lineRange": [
+        76,
+        76
+      ],
+      "summary": "find in EventRepositoryImpl.",
+      "tags": [
+        "events",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:lock",
+      "type": "function",
+      "name": "lock",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+      "lineRange": [
+        82,
+        82
+      ],
+      "summary": "lock in EventRepositoryImpl.",
+      "tags": [
+        "events",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:insert",
+      "type": "function",
+      "name": "insert",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+      "lineRange": [
+        89,
+        89
+      ],
+      "summary": "insert in EventRepositoryImpl.",
+      "tags": [
+        "events",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:update",
+      "type": "function",
+      "name": "update",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+      "lineRange": [
+        99,
+        99
+      ],
+      "summary": "update in EventRepositoryImpl.",
+      "tags": [
+        "events",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:delete",
+      "type": "function",
+      "name": "delete",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+      "lineRange": [
+        108,
+        108
+      ],
+      "summary": "delete in EventRepositoryImpl.",
+      "tags": [
+        "events",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:organizedBy",
+      "type": "function",
+      "name": "organizedBy",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+      "lineRange": [
+        114,
+        114
+      ],
+      "summary": "organizedBy in EventRepositoryImpl.",
+      "tags": [
+        "events",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:activeCount",
+      "type": "function",
+      "name": "activeCount",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+      "lineRange": [
+        121,
+        121
+      ],
+      "summary": "activeCount in EventRepositoryImpl.",
+      "tags": [
+        "events",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:mapper",
+      "type": "function",
+      "name": "mapper",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+      "lineRange": [
+        140,
+        140
+      ],
+      "summary": "Maps a database row to the domain entity.",
+      "tags": [
+        "events",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:instant",
+      "type": "function",
+      "name": "instant",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+      "lineRange": [
+        152,
+        152
+      ],
+      "summary": "Reads a nullable timestamp.",
+      "tags": [
+        "events",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:timestamp",
+      "type": "function",
+      "name": "timestamp",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+      "lineRange": [
+        158,
+        158
+      ],
+      "summary": "Converts a nullable instant for JDBC writes.",
+      "tags": [
+        "events",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:escapeLike",
+      "type": "function",
+      "name": "escapeLike",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+      "lineRange": [
+        163,
+        163
+      ],
+      "summary": "Treats LIKE wildcards in user text as literal characters.",
+      "tags": [
+        "events",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java",
+      "type": "file",
+      "name": "ParticipationRepositoryImpl.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java",
+      "summary": "JDBC participant lifecycle and bounded reliability score updates with an audit log.",
+      "tags": [
+        "events",
+        "repository",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:ParticipationRepositoryImpl",
+      "type": "class",
+      "name": "ParticipationRepositoryImpl",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java",
+      "lineRange": [
+        18,
+        85
+      ],
+      "summary": "JDBC participant lifecycle and bounded reliability score updates with an audit log.",
+      "tags": [
+        "events",
+        "repository",
+        "class"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:find",
+      "type": "function",
+      "name": "find",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java",
+      "lineRange": [
+        29,
+        29
+      ],
+      "summary": "find in ParticipationRepositoryImpl.",
+      "tags": [
+        "events",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:insert",
+      "type": "function",
+      "name": "insert",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java",
+      "lineRange": [
+        36,
+        36
+      ],
+      "summary": "insert in ParticipationRepositoryImpl.",
+      "tags": [
+        "events",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:status",
+      "type": "function",
+      "name": "status",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java",
+      "lineRange": [
+        43,
+        43
+      ],
+      "summary": "status in ParticipationRepositoryImpl.",
+      "tags": [
+        "events",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:participants",
+      "type": "function",
+      "name": "participants",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java",
+      "lineRange": [
+        49,
+        49
+      ],
+      "summary": "participants in ParticipationRepositoryImpl.",
+      "tags": [
+        "events",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:joinedBy",
+      "type": "function",
+      "name": "joinedBy",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java",
+      "lineRange": [
+        56,
+        56
+      ],
+      "summary": "joinedBy in ParticipationRepositoryImpl.",
+      "tags": [
+        "events",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:changeReliability",
+      "type": "function",
+      "name": "changeReliability",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java",
+      "lineRange": [
+        64,
+        64
+      ],
+      "summary": "changeReliability in ParticipationRepositoryImpl.",
+      "tags": [
+        "events",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:mapper",
+      "type": "function",
+      "name": "mapper",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java",
+      "lineRange": [
+        73,
+        73
+      ],
+      "summary": "Maps a participant row to its domain entity.",
+      "tags": [
+        "events",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:instant",
+      "type": "function",
+      "name": "instant",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java",
+      "lineRange": [
+        81,
+        81
+      ],
+      "summary": "Reads a nullable check-in timestamp.",
+      "tags": [
+        "events",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/repository/ParticipationRepository.java",
+      "type": "file",
+      "name": "ParticipationRepository.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/ParticipationRepository.java",
+      "summary": "Task-5 events repository type ParticipationRepository.",
+      "tags": [
+        "events",
+        "repository",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/repository/ParticipationRepository.java:ParticipationRepository",
+      "type": "class",
+      "name": "ParticipationRepository",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/ParticipationRepository.java",
+      "lineRange": [
+        10,
+        28
+      ],
+      "summary": "Task-5 events repository type ParticipationRepository.",
+      "tags": [
+        "events",
+        "repository",
+        "interface"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/service/EventService.java",
+      "type": "file",
+      "name": "EventService.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/EventService.java",
+      "summary": "Task-5 events service type EventService.",
+      "tags": [
+        "events",
+        "service",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/service/EventService.java:EventService",
+      "type": "class",
+      "name": "EventService",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/EventService.java",
+      "lineRange": [
+        11,
+        42
+      ],
+      "summary": "Task-5 events service type EventService.",
+      "tags": [
+        "events",
+        "service",
+        "interface"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "type": "file",
+      "name": "EventServiceImpl.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "summary": "Task-5 business rules: event validation, organizer authorization, capacity locking, cancellation penalty and participant state.",
+      "tags": [
+        "events",
+        "service",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "type": "class",
+      "name": "EventServiceImpl",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        33,
+        326
+      ],
+      "summary": "Task-5 business rules: event validation, organizer authorization, capacity locking, cancellation penalty and participant state.",
+      "tags": [
+        "events",
+        "service",
+        "class"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:search",
+      "type": "function",
+      "name": "search",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        55,
+        55
+      ],
+      "summary": "search in EventServiceImpl.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:detail",
+      "type": "function",
+      "name": "detail",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        79,
+        79
+      ],
+      "summary": "detail in EventServiceImpl.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:create",
+      "type": "function",
+      "name": "create",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        87,
+        87
+      ],
+      "summary": "create in EventServiceImpl.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:update",
+      "type": "function",
+      "name": "update",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        104,
+        104
+      ],
+      "summary": "update in EventServiceImpl.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:delete",
+      "type": "function",
+      "name": "delete",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        138,
+        138
+      ],
+      "summary": "delete in EventServiceImpl.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:join",
+      "type": "function",
+      "name": "join",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        146,
+        146
+      ],
+      "summary": "join in EventServiceImpl.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:leave",
+      "type": "function",
+      "name": "leave",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        173,
+        173
+      ],
+      "summary": "leave in EventServiceImpl.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:participants",
+      "type": "function",
+      "name": "participants",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        191,
+        191
+      ],
+      "summary": "participants in EventServiceImpl.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:ban",
+      "type": "function",
+      "name": "ban",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        201,
+        201
+      ],
+      "summary": "ban in EventServiceImpl.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:mine",
+      "type": "function",
+      "name": "mine",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        215,
+        215
+      ],
+      "summary": "mine in EventServiceImpl.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:required",
+      "type": "function",
+      "name": "required",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        226,
+        226
+      ],
+      "summary": "Fetches an event or gives the shared 404 response.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:editable",
+      "type": "function",
+      "name": "editable",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        231,
+        231
+      ],
+      "summary": "Locks and authorizes an organizer-only edit.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:requireUserEvent",
+      "type": "function",
+      "name": "requireUserEvent",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        239,
+        239
+      ],
+      "summary": "Imported events are read-only and ticketed on their source site.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:detailOf",
+      "type": "function",
+      "name": "detailOf",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        244,
+        244
+      ],
+      "summary": "Combines counts, organizer and caller-specific state in the detail response.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:profile",
+      "type": "function",
+      "name": "profile",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        253,
+        253
+      ],
+      "summary": "Reads a profile required by an event response.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:validate",
+      "type": "function",
+      "name": "validate",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        258,
+        258
+      ],
+      "summary": "Rejects invalid event fields before the database constraints do.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:validCategory",
+      "type": "function",
+      "name": "validCategory",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        271,
+        271
+      ],
+      "summary": "Normalizes and validates the event category against docs/API.md.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:trim",
+      "type": "function",
+      "name": "trim",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        278,
+        278
+      ],
+      "summary": "Trims optional text and preserves null for missing values.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:string",
+      "type": "function",
+      "name": "string",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        283,
+        283
+      ],
+      "summary": "Reads a text PATCH field without coercing objects or numbers.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:number",
+      "type": "function",
+      "name": "number",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        290,
+        290
+      ],
+      "summary": "Reads a finite coordinate from a PATCH body.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:integer",
+      "type": "function",
+      "name": "integer",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        297,
+        297
+      ],
+      "summary": "Reads an integer capacity without accepting fractions.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:time",
+      "type": "function",
+      "name": "time",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        307,
+        307
+      ],
+      "summary": "Parses an ISO timestamp supplied in a PATCH body.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:effectiveEnd",
+      "type": "function",
+      "name": "effectiveEnd",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        318,
+        318
+      ],
+      "summary": "Missing end times count as three hours after the start.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:invalid",
+      "type": "function",
+      "name": "invalid",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "lineRange": [
+        323,
+        323
+      ],
+      "summary": "Creates a contract-compatible 400 response.",
+      "tags": [
+        "events",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/events/controller/EventControllerTest.java",
+      "type": "file",
+      "name": "EventControllerTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/events/controller/EventControllerTest.java",
+      "summary": "MockMvc tests for task-5 JSON shapes, response statuses, JWT access and error codes.",
+      "tags": [
+        "events",
+        "test",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/events/controller/EventControllerTest.java:EventControllerTest",
+      "type": "class",
+      "name": "EventControllerTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/events/controller/EventControllerTest.java",
+      "lineRange": [
+        32,
+        177
+      ],
+      "summary": "MockMvc tests for task-5 JSON shapes, response statuses, JWT access and error codes.",
+      "tags": [
+        "events",
+        "test",
+        "class"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/events/service/EventDatabaseIntegrationTest.java",
+      "type": "file",
+      "name": "EventDatabaseIntegrationTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/events/service/EventDatabaseIntegrationTest.java",
+      "summary": "H2 integration tests for search, lifecycle, score floor, capacity patch and simultaneous last-spot joins.",
+      "tags": [
+        "events",
+        "test",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/events/service/EventDatabaseIntegrationTest.java:EventDatabaseIntegrationTest",
+      "type": "class",
+      "name": "EventDatabaseIntegrationTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/events/service/EventDatabaseIntegrationTest.java",
+      "lineRange": [
+        26,
+        179
+      ],
+      "summary": "H2 integration tests for search, lifecycle, score floor, capacity patch and simultaneous last-spot joins.",
+      "tags": [
+        "events",
+        "test",
+        "class"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java",
+      "type": "file",
+      "name": "EventServiceImplTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java",
+      "summary": "Unit tests for joins, bans, cancellation penalties, organizer authorization and validation.",
+      "tags": [
+        "events",
+        "test",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java:EventServiceImplTest",
+      "type": "class",
+      "name": "EventServiceImplTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java",
+      "lineRange": [
+        33,
+        230
+      ],
+      "summary": "Unit tests for joins, bans, cancellation penalties, organizer authorization and validation.",
+      "tags": [
+        "events",
+        "test",
+        "class"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:activeCounts",
+      "type": "function",
+      "name": "activeCounts",
+      "filePath": "backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+      "lineRange": [
+        128,
+        128
+      ],
+      "summary": "activeCounts in EventRepositoryImpl.",
+      "tags": [
+        "events",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/events/mapper/EventMapperImplTest.java",
+      "type": "file",
+      "name": "EventMapperImplTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/events/mapper/EventMapperImplTest.java",
+      "summary": "Task-5 events test type EventMapperImplTest.",
+      "tags": [
+        "events",
+        "test",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/events/mapper/EventMapperImplTest.java:EventMapperImplTest",
+      "type": "class",
+      "name": "EventMapperImplTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/events/mapper/EventMapperImplTest.java",
+      "lineRange": [
+        12,
+        29
+      ],
+      "summary": "Task-5 events test type EventMapperImplTest.",
+      "tags": [
+        "events",
+        "test",
+        "class"
+      ],
+      "complexity": "simple"
     }
   ],
   "edges": [
@@ -8629,6 +10656,1168 @@
       "type": "related",
       "direction": "forward",
       "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:EventController",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:EventController",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:search",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:EventController",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:detail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:EventController",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:create",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:EventController",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:update",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:EventController",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:delete",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:EventController",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:join",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:EventController",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:leave",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:EventController",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:participants",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:EventController",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java:ban",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/PageResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/security/CurrentUser.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/controller/MyEventsController.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/controller/MyEventsController.java:MyEventsController",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/controller/MyEventsController.java:MyEventsController",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/controller/MyEventsController.java:mine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/controller/MyEventsController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/security/CurrentUser.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/BanResponse.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/BanResponse.java:BanResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/BanResponse.java:BanResponse",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/BanResponse.java:BanResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/CreateEventRequest.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/CreateEventRequest.java:CreateEventRequest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/CreateEventRequest.java:CreateEventRequest",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/CreateEventRequest.java:CreateEventRequest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventDetail.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventDetail.java:EventDetail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventDetail.java:EventDetail",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventDetail.java:EventDetail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSearchCriteria.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSearchCriteria.java:EventSearchCriteria",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSearchCriteria.java:EventSearchCriteria",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSearchCriteria.java:EventSearchCriteria",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSearchCriteria.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSummary.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSummary.java:EventSummary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSummary.java:EventSummary",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSummary.java:EventSummary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/JoinResponse.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/JoinResponse.java:JoinResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/JoinResponse.java:JoinResponse",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/JoinResponse.java:JoinResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/LeaveResponse.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/LeaveResponse.java:LeaveResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/LeaveResponse.java:LeaveResponse",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/LeaveResponse.java:LeaveResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/MyEventsResponse.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/MyEventsResponse.java:MyEventsResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/MyEventsResponse.java:MyEventsResponse",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/MyEventsResponse.java:MyEventsResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/MyEventsResponse.java:MyEventsResponse",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/MyEventsResponse.java:JoinedEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/ParticipantResponse.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/ParticipantResponse.java:ParticipantResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/ParticipantResponse.java:ParticipantResponse",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/ParticipantResponse.java:ParticipantResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/UpdateEventRequest.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/UpdateEventRequest.java:UpdateEventRequest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/UpdateEventRequest.java:UpdateEventRequest",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/UpdateEventRequest.java:UpdateEventRequest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/UpdateEventRequest.java:UpdateEventRequest",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/UpdateEventRequest.java:has",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/UpdateEventRequest.java:UpdateEventRequest",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/UpdateEventRequest.java:value",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java:UserSummary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java:UserSummary",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java:UserSummary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/domain/entity/Event.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/domain/entity/Event.java:Event",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/domain/entity/Event.java:Event",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/domain/entity/Event.java:Event",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/domain/entity/EventParticipant.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/domain/entity/EventParticipant.java:EventParticipant",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/domain/entity/EventParticipant.java:EventParticipant",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/domain/entity/EventParticipant.java:EventParticipant",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/mapper/EventMapper.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/mapper/EventMapper.java:EventMapper",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/mapper/EventMapper.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventDetail.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/mapper/EventMapper.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSummary.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/mapper/EventMapper.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/mapper/EventMapper.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/entity/Event.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/mapper/EventMapper.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java:EventMapperImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java:EventMapperImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java:summary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java:EventMapperImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java:detail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java:EventMapperImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java:user",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java:EventMapperImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java:spots",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java:EventMapperImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java:category",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventDetail.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSummary.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/entity/Event.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/mapper/EventMapper.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/repository/EventRepository.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/repository/EventRepository.java:EventRepository",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/repository/EventRepository.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSearchCriteria.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/repository/EventRepository.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/entity/Event.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:EventRepositoryImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:EventRepositoryImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:search",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:EventRepositoryImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:find",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:EventRepositoryImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:lock",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:EventRepositoryImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:insert",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:EventRepositoryImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:update",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:EventRepositoryImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:delete",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:EventRepositoryImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:organizedBy",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:EventRepositoryImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:activeCount",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:EventRepositoryImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:mapper",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:EventRepositoryImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:instant",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:EventRepositoryImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:timestamp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:EventRepositoryImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:escapeLike",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSearchCriteria.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/entity/Event.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/repository/EventRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+      "target": "table:supabase/migrations/20261113000002_events.sql:events",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:ParticipationRepositoryImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:ParticipationRepositoryImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:find",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:ParticipationRepositoryImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:insert",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:ParticipationRepositoryImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:status",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:ParticipationRepositoryImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:participants",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:ParticipationRepositoryImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:joinedBy",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:ParticipationRepositoryImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:changeReliability",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:ParticipationRepositoryImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:mapper",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:ParticipationRepositoryImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java:instant",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/entity/EventParticipant.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java",
+      "target": "table:supabase/migrations/20261113000003_participation_reliability.sql:event_participants",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/repository/ParticipationRepository.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/repository/ParticipationRepository.java:ParticipationRepository",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/repository/ParticipationRepository.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/entity/EventParticipant.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/service/EventService.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/service/EventService.java:EventService",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/service/EventService.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/PageResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:search",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:detail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:create",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:update",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:delete",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:join",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:leave",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:participants",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:ban",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:mine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:required",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:editable",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:requireUserEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:detailOf",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:profile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:validate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:validCategory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:trim",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:string",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:number",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:integer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:time",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:effectiveEnd",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:EventServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java:invalid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/PageParams.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/PageResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/entity/Event.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/entity/EventParticipant.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/mapper/EventMapper.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/repository/EventRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/repository/ParticipationRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/service/EventService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/controller/EventControllerTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/events/controller/EventControllerTest.java:EventControllerTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/controller/EventControllerTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/PageResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/controller/EventControllerTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/controller/EventControllerTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/controller/EventControllerTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/service/EventService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/service/EventDatabaseIntegrationTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/events/service/EventDatabaseIntegrationTest.java:EventDatabaseIntegrationTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/service/EventDatabaseIntegrationTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/service/EventDatabaseIntegrationTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/service/EventDatabaseIntegrationTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/CreateEventRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/service/EventDatabaseIntegrationTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/UpdateEventRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java:EventServiceImplTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/CreateEventRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/UpdateEventRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/entity/Event.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/entity/EventParticipant.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/mapper/EventMapper.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/repository/EventRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/repository/ParticipationRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:EventRepositoryImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java:activeCounts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/mapper/EventMapperImplTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/events/mapper/EventMapperImplTest.java:EventMapperImplTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/service/EventService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/controller/MyEventsController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/MyEventsResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/controller/MyEventsController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/service/EventService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/repository/ParticipationRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/mapper/EventMapperImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/entity/Event.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/events/mapper/EventMapperImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.8
     }
   ],
   "layers": [
@@ -8718,7 +11907,7 @@
     {
       "id": "layer:backend-tests",
       "name": "Backend Tests",
-      "description": "JUnit tests for the backend context, the users feature (controller, service, repositories), security filter chain, Supabase properties, paging and error handling, plus the support package (JWT test token minting, probe controller) and test properties.",
+      "description": "JUnit tests for the backend context, the users feature (controller, service, repositories), security filter chain, Supabase properties, paging and error handling, plus the support package (JWT test token minting, probe controller) and test properties. Includes events HTTP, service and database concurrency tests.",
       "nodeIds": [
         "file:backend/src/test/java/com/unihack8/backend/BackendApplicationTests.java",
         "file:backend/src/test/java/com/unihack8/backend/config/SecurityConfigTest.java",
@@ -8741,7 +11930,11 @@
         "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
         "file:backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
         "file:backend/src/test/java/com/unihack8/backend/users/repository/ProfileRepositoryTest.java",
-        "file:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java"
+        "file:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java",
+        "file:backend/src/test/java/com/unihack8/backend/events/controller/EventControllerTest.java",
+        "file:backend/src/test/java/com/unihack8/backend/events/service/EventDatabaseIntegrationTest.java",
+        "file:backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java",
+        "file:backend/src/test/java/com/unihack8/backend/events/mapper/EventMapperImplTest.java"
       ]
     },
     {
@@ -8828,6 +12021,36 @@
         "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/UpdateUsernameRequest.java",
         "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/UsernameAvailabilityResponse.java",
         "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java"
+      ]
+    },
+    {
+      "id": "layer:backend-events",
+      "name": "Backend Events & Participation",
+      "description": "Task-5 event REST endpoints, validation, response mapping, JDBC persistence, row-locked joins, cancellation reliability and organizer bans.",
+      "nodeIds": [
+        "file:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/controller/MyEventsController.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/BanResponse.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/CreateEventRequest.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventDetail.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSearchCriteria.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSummary.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/JoinResponse.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/LeaveResponse.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/MyEventsResponse.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/ParticipantResponse.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/UpdateEventRequest.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/domain/entity/Event.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/domain/entity/EventParticipant.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/mapper/EventMapper.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/repository/EventRepository.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/repository/impl/EventRepositoryImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/repository/impl/ParticipationRepositoryImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/repository/ParticipationRepository.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/service/EventService.java",
+        "file:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java"
       ]
     }
   ],

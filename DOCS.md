@@ -105,12 +105,12 @@ Applied to Supabase on 2026-11-13 from `supabase/migrations/` (four migrations, 
 
 ## Current state
 
-- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation: token security, error handling, current user, paging, tests; users/profile endpoints (PLAN 4); places feature (task 8) with 1003 Timișoara places imported into Supabase.
+- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation: token security, error handling, current user, paging, tests; users/profile endpoints (PLAN 4); events and participation endpoints (PLAN 5); places feature (task 8) with 1003 Timișoara places imported into Supabase.
 - `supabase/`: migrations and schema tests for task 2, applied.
 - `docs/API.md`: API contract (task 1.6).
 - `infra/otp/`: folder for OpenTripPlanner (README only; the server is set up in task 10). Its large data files are git-ignored.
 - `frontend/`: Expo app (SDK 54) set up by the frontend teammates — see `frontend/AGENTS.md`. Each teammate works on their own `<name>_dev` branch.
-- Supabase project: created, MCP connected, email sign-in on with "Confirm email" off, database schema applied (no data).
+- Supabase project: created, MCP connected, email sign-in on with "Confirm email" off, database schema applied. The places import stored 1003 places; there are no seeded users or events.
 
 ## External data sources
 
@@ -182,10 +182,22 @@ Package `com.unihack8.backend.users` (`controller`, `service` + `impl`, `reposit
 - `PATCH /users/me` — `{ "username" }`, 3–20 letters, digits or `_`. `400 INVALID_USERNAME` for a bad or missing name; `409 USERNAME_TAKEN` when someone else has it, ignoring case — also when two requests race (the database unique index answers).
 - `GET /users/search?q=` — username prefix, case-insensitive, `_` and `%` taken literally, **sorted by username**, at most 20. A blank or missing `q` is `400 VALIDATION_FAILED`.
 - All of these except `username-available` need a token. Errors use the shared shape (`ApiException` + `ErrorCode`); the users package has no exception classes of its own.
-- Profiles are read through JPA (`Profile` → `profiles`). Attended events come from one plain SQL query over `events` and `event_participants` (`AttendedEventRepositoryImpl`), so this package needs no entities for tables the events feature will own. `GET /users/me/events` (PLAN 5.8) and `GET /users/{id}/reliability` (PLAN 6.4) are not built yet.
+- Profiles are read through JPA (`Profile` → `profiles`). Attended events come from one plain SQL query over `events` and `event_participants` (`AttendedEventRepositoryImpl`), so this package needs no entities for tables the events feature owns. `GET /users/me/events` is implemented by the events package (PLAN 5.8); `GET /users/{id}/reliability` (PLAN 6.4) is not built yet.
 - **Tests** (`src/test/.../users`): `UserServiceImplTest` (Mockito rules), `UserControllerTest` (MockMvc with real HS256 test tokens), `ProfileRepositoryTest` and `AttendedEventRepositoryImplTest` (H2). No test touches Supabase.
 
-Sections are added here as each PLAN task is implemented: Events, Reliability, Transit, Routing, AI, Frontend.
+Sections are added here as each PLAN task is implemented: Reliability, Transit, Routing, AI, Frontend.
+
+### Events and participation (PLAN task 5)
+
+Package `com.unihack8.backend.events`: `controller`, `domain/entity`, `domain/dto`, `repository` + `impl`, `mapper` + `impl`, and `service` + `impl`. Request and response shapes are in `docs/API.md` → Events.
+
+- Public `GET /events` filters by title, one or more categories, start-time range, viewport and source. It defaults to upcoming events, pages by start time, excludes events without coordinates from viewport results, and counts occupied spots for a page in one query. `GET /events/{id}` adds spots left, participant count, organizer summary, and active caller status when signed in; cancelled or banned rows appear as no current participation. Imported events show no app capacity or organizer.
+- Authenticated users create events with `POST /events`. Only the organizer can `PATCH` or `DELETE`; imported events are read-only. A patch can clear optional description, address, end time or capacity with `null`, but cannot reduce capacity below occupied spots. Deleting an event cascades its participation without a reliability penalty.
+- `POST /events/{id}/join` locks the event row before counting `JOINED` and `ATTENDED` spots. This serializes simultaneous last-spot joins. Duplicate joins and organizer self-joins fail; cancelled users can rejoin using the same QR token, while banned users cannot.
+- `DELETE /events/{id}/join` cancels a `JOINED` entry. Leaving within two hours of the start applies `-2` to reliability and writes `LATE_CANCEL`; the score floors at zero. Earlier cancellations cost nothing. Imported events cannot be joined.
+- Signed-in users can see non-cancelled participants and their reliability scores. The organizer can ban a `JOINED` participant, which frees a spot and has no reliability penalty. Checked-in participants cannot be banned.
+- `GET /users/me/events` lists the caller's non-cancelled joined events with status and their organized events, both sorted by start time.
+- **Tests:** service rule tests, MockMvc HTTP/security tests with signed HS256 tokens, and H2 database integration tests including two concurrent joins for one spot, patching capacity to unlimited, and the reliability score floor. No test contacts Supabase.
 
 ### Places (PLAN task 8)
 
@@ -226,7 +238,7 @@ Checked in that order (amenity first), so a church tagged `amenity=place_of_wors
 One graph for the whole repo, made with the **Understand-Anything** plugin (rule from AGENTS.md: keep it updated with every change).
 
 - **Files:** `.ua/knowledge-graph.json` (the graph), `.ua/meta.json` and `.ua/fingerprints.json` (let the next run update only changed files), `.ua/.understandignore` (what is left out: secrets such as `application-local.properties` and `.env`, build output, `.claude/`). Scratch folders under `.ua/` are git-ignored.
-- **Current version (2026-11-13):** Stefan's graph (commit `54ed920`, after task 8, 91 files) continued with the users feature (PLAN 4): 109 files, 266 nodes, 611 edges, 12 layers (Project Documentation, API Contract, Backend App Security & Config, Backend Shared Web Layer, Places Feature, Backend Users & Profiles, Backend Tests, Backend Build & Config, Database Schema, Infrastructure & Tooling, Frontend App, Frontend Config), 20-step guided tour. Files changed after `54ed920` by other work (for example `DOCS.md`, `PLAN.md`) are re-read by the next `/understand` run, because their fingerprints no longer match.
+- **Current version (2026-11-13):** The existing graph includes the users feature and task-5 events work: 136 files, 396 nodes, 777 edges, 13 layers, including Backend Events & Participation. All 266 earlier nodes, 611 earlier edges, 12 earlier layers, and the 20-step guided tour were retained. The task-5 nodes were added from the current uncommitted `alex_dev` source after Understand Anything's incremental helper refused a dirty working tree. Its metadata and fingerprints still point to the previous committed baseline (`54ed920`), so run `/understand` after a later commit to refresh those generated indexes and the tour.
 - **Left out on purpose** (`.ua/.understandignore`): secrets, build output, `.claude/`, and frontend noise (`package-lock.json`, `assets/`, `LICENSE`, `.npmrc`).
 - **Update it** after each change: run `/understand` (Claude Code) or the same command in Codex; it only reanalyzes changed files. `/understand-dashboard` opens the interactive view.
 - **Codex:** the plugin's README lists Codex as supported (install it with the plugin's install script for `codex`); not tested by us yet.
