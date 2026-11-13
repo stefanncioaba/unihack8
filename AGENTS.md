@@ -12,6 +12,7 @@ RULES:
 - Always ask when not sure about something
 - Always check PLAN.md when needed
 - I will give you the next task when you finish the current one from PLAN.md
+- Add short comments where needed and before every function
 
 OUR CORE IDEA:
 We will make an application with this features :
