@@ -8,8 +8,8 @@ jest.mock('@/config', () => ({
   API_URL: 'http://api.test:8080',
   SUPABASE_URL: '',
   SUPABASE_KEY: '',
-  get USE_MOCKS() {
-    return (globalThis as { __useMocks?: boolean }).__useMocks ?? true;
+  get MOCK_AREAS() {
+    return (globalThis as { __useMocks?: boolean }).__useMocks === false ? [] : 'all';
   },
 }));
 

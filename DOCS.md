@@ -111,7 +111,7 @@ Applied to Supabase on 2026-11-13 from `supabase/migrations/` (four migrations, 
 - `supabase/`: migrations and schema tests for task 2, applied.
 - `docs/API.md`: API contract (task 1.6).
 - `infra/otp/`: OpenTripPlanner 2.7 setup (docker-compose, data download script). Its large data files are git-ignored. `GET /routes/plan` is implemented (task 10).
-- `frontend/`: Expo app (SDK 54, TypeScript, Expo Router) — foundation (task 12) and Home page (task 13) done on mock data; Map and AI tabs are placeholders until tasks 14–15. See Features → Frontend and `frontend/AGENTS.md`. Each teammate works on their own `<name>_dev` branch.
+- `frontend/`: Expo app (SDK 54, TypeScript, Expo Router) — foundation (task 12) and Home page (task 13) done on mock data; the Map tab has places, events and clustering (task 14 except transit and directions) and the AI tab has the chat on mock data (task 15). See Features → Frontend and `frontend/AGENTS.md`. Each teammate works on their own `<name>_dev` branch.
 - Supabase project: created, MCP connected, email sign-in on with "Confirm email" off, database schema applied. The places import stored 1003 places; there are no seeded users or events.
 
 ## External data sources
@@ -334,7 +334,7 @@ Expo SDK 54 app in `frontend/`, TypeScript (strict), Expo Router, runs in **Expo
 | `EXPO_PUBLIC_SUPABASE_URL` | `https://<project-ref>.supabase.co` (sign-in only) |
 | `EXPO_PUBLIC_SUPABASE_KEY` | Legacy `anon` or publishable key. Never the `service_role` key. Without it the sign-in screens show a setup warning. |
 | `EXPO_PUBLIC_API_URL` | `http://<laptop Wi-Fi IPv4>:8080` — only used when mocks are off |
-| `EXPO_PUBLIC_USE_MOCKS` | `true` = serve `src/mocks/`; `false` = call the Spring API |
+| `EXPO_PUBLIC_USE_MOCKS` | `true` = serve `src/mocks/` for everything; `false` = call the Spring API; or a list of areas to mock, e.g. `ai,events` (areas: `events`, `users`, `places`, `transit`, `routes`, `ai`). |
 
 3. `npx expo start`, scan the QR code with Expo Go (phone and laptop on the same Wi-Fi). Restart Expo after changing `.env`.
 4. Checks: `npm test` (Jest), `npm run typecheck`, `npm run lint`.
@@ -353,7 +353,7 @@ Expo SDK 54 app in `frontend/`, TypeScript (strict), Expo Router, runs in **Expo
 
 **How it works**
 - **Auth (12.2):** `features/auth/AuthProvider` wraps the Supabase client. The session is stored on the device (AsyncStorage) and refreshed while the app is in the foreground. The root layout uses `Stack.Protected`, so signed-out users can only reach the `(auth)` screens; on sign-out the query cache is cleared. Sign-up first calls `GET /users/username-available` (the database trigger would silently replace a taken username) and then sends the username as sign-up metadata. If the username cannot be checked (backend down) sign-up stops with a message instead of guessing.
-- **API layer (12.3):** `api(method, path, {query, body})` adds `Authorization: Bearer <Supabase token>`, a 15 s timeout, and turns every failure into an `ApiError` (`NETWORK` and `TIMEOUT` are added for transport problems). With `EXPO_PUBLIC_USE_MOCKS=true` the same call is answered by `src/mocks/` and never touches the network. Switching one feature to the real backend later means making `USE_MOCKS` false (it is one global switch today).
+- **API layer (12.3):** `api(method, path, {query, body})` adds `Authorization: Bearer <Supabase token>`, a 15 s timeout, and turns every failure into an `ApiError` (`NETWORK` and `TIMEOUT` are added for transport problems). With `EXPO_PUBLIC_USE_MOCKS=true` the same call is answered by `src/mocks/` and never touches the network. Each API area can be switched on its own: `EXPO_PUBLIC_USE_MOCKS=ai` mocks only `/ai/*` and calls the real backend for everything else (`lib/mockAreas.ts`). The mock backend is split into `src/mocks/core.ts` (state + helpers) and one file per area in `src/mocks/routes/`.
 - **Mock backend:** stateful until the app reloads — join, leave, create, ban and check-in really change the data. The mock user is `demo_user` (independent of the Supabase account). Tickets you can scan as organiser of "Sunset run by the Bega": `demo-ticket-stella`, `demo-ticket-andrei`, `demo-ticket-maria` (type one in the manual field of the scanner, or turn it into a QR code). "Art walk through the old town" is already joined by the mock user, so "My ticket" works there.
 - **Times:** shown in Europe/Bucharest using our own EET/EEST rules (`lib/time.ts`), not `Intl`, so every phone shows the same hour. The create form's date/time picker is built from day chips and hour/minute steppers for the same reason (no native date-picker module).
 - **Location (12.5):** `LocationProvider` asks for foreground permission after sign-in; `useCurrentPosition()` returns the phone position, or Piața Victoriei (45.7537, 21.2257) with `isFallback: true` when permission is denied or the GPS fails.
@@ -372,11 +372,32 @@ Expo SDK 54 app in `frontend/`, TypeScript (strict), Expo Router, runs in **Expo
 | 13.7 | `/events/[id]/scan` | Camera QR scan → success / already scanned / wrong event / not a ticket. A manual code field is the fallback. Ban button in the participant list (organiser only, asks first). |
 | 13.8 | `/users/search`, `/users/[id]` | Username prefix search → public profile (score gauge, attended events). |
 
-Also built: Profile tab (username, gauge, find people, sign out) and the public profile (PLAN 16.4, 16.5). Map and AI tabs only show their page frame; the real work is PLAN tasks 14 and 15.
+Also built: Profile tab (username, gauge, find people, sign out) and the public profile (PLAN 16.4, 16.5). The Map and AI tabs are described in their own sections below.
 
-**Tests:** 138 Jest tests in `frontend/__tests__/` (jest-expo + React Native Testing Library 13): every screen, the auth provider, location, API client (real HTTP path with a faked `fetch`), the mock backend, and the pure helpers. Native modules (maps, camera, location, Supabase, router) are mocked in `jest.setup.ts`. Last run 2026-11-13: all passing, `tsc` and `expo lint` clean, Android bundle builds with `expo export`.
+**Tests:** 138 Jest tests (before the map and AI work, see below) in `frontend/__tests__/` (jest-expo + React Native Testing Library 13): every screen, the auth provider, location, API client (real HTTP path with a faked `fetch`), the mock backend, and the pure helpers. Native modules (maps, camera, location, Supabase, router) are mocked in `jest.setup.ts`. Last run 2026-11-13: all passing, `tsc` and `expo lint` clean, Android bundle builds with `expo export`.
 
 **Not verified yet:** nothing was run on a phone in Expo Go (camera scan, map tap, real Supabase sign-in against the HS256 secret — see "Token validation" above). Do this first when the keys are in `.env`.
+
+#### Map and AI (Person 1)
+
+**Map tab (PLAN 14.1, 14.2, 14.3, 14.6)** — `src/app/(tabs)/map.tsx`, `src/features/map/`.
+- **Shell and joints (14.1):** `MapProvider` / `useMapContext()` (`features/map/MapContext.tsx`) is the contract with the transit and directions work: `bbox` (visible area, debounced 300 ms and rounded to ~100 m so it works as a query key), `userPosition`, `selection` (one of `place`, `event`, `stop`, `destination`), `select()`, `destination` and `setDestination()`. `MapPanel` is the single bottom panel; it mounts `PlacePanel` and `EventPanel`, and has marked spots for `StopPanel` (14.4) and `DirectionsPanel` (14.5). `map.tsx` has two marked spots inside the `MapView` for `<TransitLayer />` and `<DirectionsLayer />` and one below the top row for transit controls.
+- **Places (14.2):** chip row `MapFilterBar` (multi-select categories; none selected = all). `usePlacesInArea(bbox, categories)` calls `GET /places?bbox=&category=` for the visible area only (max 300) and keeps the old pins while panning. Places load only when the view is under ~6 km tall; further out the map says "Zoom in to see places". Tapping a pin opens `PlacePanel` (`GET /places/{id}`: address, raw OSM opening hours or "not listed", cuisine/phone/website/etc.) with a **Directions** button that calls `setDestination`.
+- **Events (14.3):** "Events" chip toggles orange pins (`GET /events?bbox=`, events without coordinates are left out by the API). Tapping opens `EventPanel` (the standard event card, **Open event**, **Directions**).
+- **Clustering and reloads (14.6):** `lib/cluster.ts` groups pins on a 6×6 grid of the visible area (own implementation, no package) while the view is more than ~1.3 km tall; clusters show their count and zoom in when tapped. Name pills appear under pins below ~1.6 km. Region changes only reload after the map has been still for 300 ms.
+- **Opened from elsewhere:** `/map?lat=&lon=&title=` drops a plain violet pin; adding `placeId` or `eventId` opens that panel instead (event details and chat cards send these; `at` is a timestamp so the same request twice still flies there again).
+- **Theme:** dark Google style on Android (`ui/mapStyle.ts`), `userInterfaceStyle="dark"` on iOS.
+
+**AI tab (PLAN 15.1–15.4)** — `src/app/(tabs)/ai.tsx`, `src/features/ai/`, `src/hooks/useAi.ts`.
+- **Backend task 11 is not built yet**, so `/ai/*` is answered by `src/mocks/routes/ai.ts` (keywords: *pizza/eat* → 3 restaurants sorted by distance with a source link, *coffee* → cafés, *weekend/event* → 3 upcoming events, anything else → a generic reply; the words `ratelimit` and `unavailable` trigger the documented 429 / 503 errors). Run only this area on mocks with `EXPO_PUBLIC_USE_MOCKS=ai` once the backend answers the rest.
+- **Conversation (15.1, 15.2):** `useAiChat(location)` keeps the messages in memory only, sends the whole conversation (newest 20) with `{lat, lon}` (or `null` when location permission was denied), shows a "Thinking…" bubble, and on failure an error bubble with **Try again** that repeats the same conversation. **New chat** clears everything; an answer that arrives after it is ignored.
+- **Suggestions (15.3):** three chips above the input on an empty chat; tapping one sends it.
+- **Result cards (15.4):** under an assistant bubble, one card per place (name, category, distance, address) and per event (standard event card), each with **Show on map** (opens the Map tab with the panel open); tapping an event card opens the event. Sources the assistant used are listed as links in the bubble.
+- Layout follows design page 2: warm glow, breathing zone with an abstract cyan/orange motif (no logo), teal user bubbles on the right, charcoal assistant bubbles on the left, dark rounded input bar. On iOS the keyboard may push the input slightly higher than needed because of the tab bar (not checked on a device).
+
+**Mock backend split (shared prep):** `src/mocks/core.ts` holds the state and helpers, each area has its routes in `src/mocks/routes/<area>.ts`, and new types / endpoints / hooks live in `api/types.<area>.ts`, `api/endpoints.<area>.ts` and `hooks/use<Area>.ts`. `EXPO_PUBLIC_USE_MOCKS` can be a list of areas (see the table above); `lib/mockAreas.ts` parses it. The `react-native-maps` Jest mock now also covers `Polyline`, `Circle` and `Callout`.
+
+**Tests:** `map.shell`, `map.layers`, `lib.cluster`, `lib.mockAreas`, `lib.format` and `ai.chat` in `frontend/__tests__/`. The whole frontend suite: 190 tests, all passing, `tsc` and `expo lint` clean, Android bundle builds (2026-11-13). Not tried on a phone yet. After merging `frontend/tibi` and `alex_dev` into `stefan_dev`: 225 tests in 19 suites, all passing, `tsc` and `expo lint` clean.
 
 #### Frontend — profile, transit and directions (Track C, Person 2)
 
@@ -391,7 +412,7 @@ Also built: Profile tab (username, gauge, find people, sign out) and the public 
 - **Endpoints used:** `PATCH /users/me`, `GET /users/me/events` (backend 5.8, done), `GET /users/{id}/reliability` (backend 6.4, done). Checked after merging `alex_dev` into `stefan_dev`: the backend records (`MyEventsResponse`, `ReliabilityResponse`) have the same field names as `api/types.users.ts`, pinned by `ReliabilityIntegrationTest` / `EventControllerTest` on the backend and `mocks.users.test.ts` on the app. Not yet tried on a phone with `EXPO_PUBLIC_USE_MOCKS=false`.
 - **`frontend/.env.example`** was deleted by mistake in commit `25bc900` and restored in the merge; the setup steps and the "Supabase is not configured" message point to it.
 - **New files** (per-feature, so they do not collide with other people's): `api/types.users.ts`, `api/endpoints.users.ts`, `hooks/useUsers.ts`.
-- **Mock backend additions:** the three routes above. Seed: `demo_user` attended "Autumn photo walk" and "Retro gaming evening" (+5 each) and missed "Open mic night" (−10), so the score stays 100. A check-in adds an `ATTENDED` line to the history and leaving less than 2 h before the start adds `LATE_CANCEL` (−2).
+- **Mock backend additions:** the three routes above, in `src/mocks/routes/users.ts` (moved there from the old single `mocks/index.ts` when `frontend/tibi` was merged; `logReliability` is in `mocks/core.ts`). Seed: `demo_user` attended "Autumn photo walk" and "Retro gaming evening" (+5 each) and missed "Open mic night" (−10), so the score stays 100. A check-in adds an `ATTENDED` line to the history and leaving less than 2 h before the start adds `LATE_CANCEL` (−2).
 - **Tests:** `__tests__/screens.profile.test.tsx` (explanation, history incl. empty and error, username change: success, taken, invalid, unchanged, cancel; my events: groups, empty, error, refresh after join) and `__tests__/mocks.users.test.ts`.
 
 ## Knowledge graph

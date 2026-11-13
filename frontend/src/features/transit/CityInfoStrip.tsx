@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
-import { useTransitAlerts, useTransitSummary } from '@/hooks/queries';
+import { useTransitAlerts, useTransitSummary } from '@/hooks/useTransit';
 import { useCurrentPosition } from '@/features/location/LocationProvider';
 import { Card } from '@/ui/Card';
 import { Icon } from '@/ui/Icon';

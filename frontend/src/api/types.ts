@@ -58,6 +58,8 @@ export type EventQuery = {
   from?: string;
   to?: string;
   source?: EventSource;
+  /** Map viewport `minLon,minLat,maxLon,maxLat`; events without coordinates are left out. */
+  bbox?: string;
   page?: number;
   size?: number;
 };
@@ -88,14 +90,3 @@ export type CheckInResult = { user: UserSummary; status: ParticipantStatus; poin
 export type BanResult = { userId: string; status: ParticipantStatus };
 
 export type UsernameAvailability = { username: string; available: boolean };
-
-export type TransitDeparture = { route: string; headsign: string; lastDepartureAt: string };
-
-export type TransitSummary = {
-  nearestStop: { id: string; name: string; distanceMeters: number } | null;
-  lastDepartures: TransitDeparture[];
-  activeAlerts: number;
-  message: string;
-};
-
-export type TransitAlert = { id: string; title: string; description: string | null };

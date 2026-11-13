@@ -1,6 +1,7 @@
-// The single API client. Adds the Supabase token to every request and, when USE_MOCKS is on,
-// answers from src/mocks/ instead of the network.
-import { API_URL, USE_MOCKS } from '@/config';
+// The single API client. Adds the Supabase token to every request and, for mocked areas
+// (EXPO_PUBLIC_USE_MOCKS), answers from src/mocks/ instead of the network.
+import { API_URL, MOCK_AREAS } from '@/config';
+import { isMockedPath } from '@/lib/mockAreas';
 import { supabase } from '@/lib/supabase';
 import { mockRequest } from '@/mocks';
 
@@ -41,7 +42,7 @@ function toApiError(status: number, body: unknown): ApiError {
 
 /** Calls the API (or the mocks) and returns the parsed JSON. Throws ApiError on any failure. */
 export async function api<T>(method: Method, path: string, options: RequestOptions = {}): Promise<T> {
-  if (USE_MOCKS) {
+  if (isMockedPath(MOCK_AREAS, path)) {
     return (await mockRequest(method, path, options.query ?? {}, options.body)) as T;
   }
 

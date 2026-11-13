@@ -44,7 +44,10 @@ describe('EventDetailsScreen', () => {
     setParams({ id: IDS.boardGames });
     renderScreen(<EventDetailsScreen />);
     fireEvent.press(await screen.findByRole('button', { name: 'Show on map' }));
-    expect(mockRouter.push).toHaveBeenCalledWith({ pathname: '/map', params: { lat: '45.7489', lon: '21.2318', title: 'Board games night' } });
+    expect(mockRouter.push).toHaveBeenCalledWith({
+      pathname: '/map',
+      params: { lat: '45.7489', lon: '21.2318', title: 'Board games night', eventId: IDS.boardGames, at: expect.any(String) },
+    });
   });
 
   it('joins, then offers the ticket and leaving', async () => {
