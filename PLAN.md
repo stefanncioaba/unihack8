@@ -286,6 +286,7 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 - [x] **16.3 Events I attended** and upcoming events I joined or organise.
 - [x] **16.4 Public profile screen** (other users): username, score, attended events. Reused from 13.4 and 13.8.
 - [x] **16.5 Sign out.**
+- [x] **16.6 Real data:** 16.1–16.3 call the Spring API (`PATCH /users/me`, `GET /users/me/events`, `GET /users/{id}/reliability`) when `EXPO_PUBLIC_USE_MOCKS=false`; pinned by `__tests__/api.users.real.test.ts`.
 
 ---
 

@@ -15544,6 +15544,137 @@
     "contract"
    ],
    "complexity": "complex"
+  },
+  {
+   "id": "file:frontend/src/api/endpoints.users.ts",
+   "type": "file",
+   "name": "endpoints.users.ts",
+   "filePath": "frontend/src/api/endpoints.users.ts",
+   "summary": "Typed wrappers for the profile endpoints: PATCH /users/me, GET /users/me/events, GET /users/{id}/reliability.",
+   "tags": [
+    "frontend",
+    "api",
+    "code"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:frontend/src/api/types.users.ts",
+   "type": "file",
+   "name": "types.users.ts",
+   "filePath": "frontend/src/api/types.users.ts",
+   "summary": "Response shapes of the profile endpoints (MyEvents, JoinedEvent, ReliabilityHistory), matching the backend records.",
+   "tags": [
+    "frontend",
+    "api",
+    "types",
+    "code"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:frontend/src/hooks/useUsers.ts",
+   "type": "file",
+   "name": "useUsers.ts",
+   "filePath": "frontend/src/hooks/useUsers.ts",
+   "summary": "TanStack Query hooks for my events, reliability history and username change (with cache invalidation).",
+   "tags": [
+    "frontend",
+    "hooks",
+    "code"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:frontend/src/features/users/MyEvents.tsx",
+   "type": "file",
+   "name": "MyEvents.tsx",
+   "filePath": "frontend/src/features/users/MyEvents.tsx",
+   "summary": "Profile block: upcoming, organising and attended events (PLAN 16.3).",
+   "tags": [
+    "frontend",
+    "ui",
+    "code"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:frontend/src/features/users/ReliabilityLog.tsx",
+   "type": "file",
+   "name": "ReliabilityLog.tsx",
+   "filePath": "frontend/src/features/users/ReliabilityLog.tsx",
+   "summary": "Profile block: latest reliability changes with reason, event and points (PLAN 16.1).",
+   "tags": [
+    "frontend",
+    "ui",
+    "code"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:frontend/src/features/users/UsernameEditor.tsx",
+   "type": "file",
+   "name": "UsernameEditor.tsx",
+   "filePath": "frontend/src/features/users/UsernameEditor.tsx",
+   "summary": "Inline username change form with format check and USERNAME_TAKEN error (PLAN 16.2).",
+   "tags": [
+    "frontend",
+    "ui",
+    "code"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:frontend/src/features/users/reliability.ts",
+   "type": "file",
+   "name": "reliability.ts",
+   "filePath": "frontend/src/features/users/reliability.ts",
+   "summary": "Reliability rules (+5 attended, -10 no-show, -2 late cancel) and reason labels.",
+   "tags": [
+    "frontend",
+    "domain",
+    "code"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:frontend/__tests__/screens.profile.test.tsx",
+   "type": "file",
+   "name": "screens.profile.test.tsx",
+   "filePath": "frontend/__tests__/screens.profile.test.tsx",
+   "summary": "Profile tab tests: explanation, history, username change, my events (mock backend).",
+   "tags": [
+    "frontend",
+    "tests",
+    "code"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:frontend/__tests__/mocks.users.test.ts",
+   "type": "file",
+   "name": "mocks.users.test.ts",
+   "filePath": "frontend/__tests__/mocks.users.test.ts",
+   "summary": "Mock backend routes for the profile endpoints.",
+   "tags": [
+    "frontend",
+    "tests",
+    "code"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:frontend/__tests__/api.users.real.test.ts",
+   "type": "file",
+   "name": "api.users.real.test.ts",
+   "filePath": "frontend/__tests__/api.users.real.test.ts",
+   "summary": "Profile endpoints over real HTTP (USE_MOCKS off): URLs, method, bearer token, body and backend-shaped JSON parsing.",
+   "tags": [
+    "frontend",
+    "tests",
+    "code"
+   ],
+   "complexity": "simple"
   }
  ],
  "edges": [
@@ -30261,6 +30392,118 @@
    "type": "tested_by",
    "direction": "forward",
    "weight": 0.5
+  },
+  {
+   "source": "file:frontend/src/api/endpoints.users.ts",
+   "target": "file:frontend/src/api/client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:frontend/src/api/endpoints.users.ts",
+   "target": "file:frontend/src/api/types.users.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:frontend/src/api/endpoints.users.ts",
+   "target": "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:frontend/src/api/endpoints.users.ts",
+   "target": "file:backend/src/main/java/com/unihack8/backend/events/controller/MyEventsController.java",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:frontend/src/api/endpoints.users.ts",
+   "target": "file:backend/src/main/java/com/unihack8/backend/reliability/controller/ReliabilityController.java",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:frontend/src/hooks/useUsers.ts",
+   "target": "file:frontend/src/api/endpoints.users.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:frontend/src/app/(tabs)/profile.tsx",
+   "target": "file:frontend/src/features/users/MyEvents.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:frontend/src/features/users/MyEvents.tsx",
+   "target": "file:frontend/src/hooks/useUsers.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:frontend/src/app/(tabs)/profile.tsx",
+   "target": "file:frontend/src/features/users/ReliabilityLog.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:frontend/src/features/users/ReliabilityLog.tsx",
+   "target": "file:frontend/src/hooks/useUsers.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:frontend/src/app/(tabs)/profile.tsx",
+   "target": "file:frontend/src/features/users/UsernameEditor.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:frontend/src/features/users/UsernameEditor.tsx",
+   "target": "file:frontend/src/hooks/useUsers.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:frontend/src/features/users/ReliabilityLog.tsx",
+   "target": "file:frontend/src/features/users/reliability.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:frontend/src/app/(tabs)/profile.tsx",
+   "target": "file:frontend/__tests__/screens.profile.test.tsx",
+   "type": "tested_by",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:frontend/src/api/endpoints.users.ts",
+   "target": "file:frontend/__tests__/api.users.real.test.ts",
+   "type": "tested_by",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:frontend/src/mocks/index.ts",
+   "target": "file:frontend/__tests__/mocks.users.test.ts",
+   "type": "tested_by",
+   "direction": "forward",
+   "weight": 1
   }
  ],
  "layers": [
@@ -30620,7 +30863,11 @@
     "function:frontend/src/ui/TextField.tsx:SearchField",
     "file:frontend/src/ui/index.ts",
     "file:frontend/src/ui/mapStyle.ts",
-    "file:frontend/src/ui/theme.ts"
+    "file:frontend/src/ui/theme.ts",
+    "file:frontend/src/features/users/MyEvents.tsx",
+    "file:frontend/src/features/users/ReliabilityLog.tsx",
+    "file:frontend/src/features/users/UsernameEditor.tsx",
+    "file:frontend/src/features/users/reliability.ts"
    ]
   },
   {
@@ -30836,7 +31083,10 @@
     "function:frontend/src/mocks/index.ts:asNumber",
     "function:frontend/src/mocks/index.ts:requireOrganizer",
     "function:frontend/src/mocks/index.ts:endOf",
-    "function:frontend/src/mocks/index.ts:mockRequest"
+    "function:frontend/src/mocks/index.ts:mockRequest",
+    "file:frontend/src/api/endpoints.users.ts",
+    "file:frontend/src/api/types.users.ts",
+    "file:frontend/src/hooks/useUsers.ts"
    ]
   },
   {
@@ -30864,7 +31114,10 @@
     "file:frontend/__tests__/testUtils.tsx",
     "function:frontend/__tests__/testUtils.tsx:setParams",
     "function:frontend/__tests__/testUtils.tsx:fakeAuth",
-    "function:frontend/__tests__/testUtils.tsx:renderScreen"
+    "function:frontend/__tests__/testUtils.tsx:renderScreen",
+    "file:frontend/__tests__/screens.profile.test.tsx",
+    "file:frontend/__tests__/mocks.users.test.ts",
+    "file:frontend/__tests__/api.users.real.test.ts"
    ]
   },
   {
