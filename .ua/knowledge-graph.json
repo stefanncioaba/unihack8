@@ -29,9 +29,8 @@
       "Expo Router"
     ],
     "description": "Hackathon mobile app for Timișoara (Connected Communities): Spring Boot API + Supabase + Expo app with events and QR reliability points, places map, live STPT transit, routing and an AI guide.",
-    "analyzedAt": "2026-11-13T20:06:43.451658+00:00",
-    "gitCommitHash": "400c16e873916d5053753284cb45279d9b8437d2",
-    "workingTreeState": "Merge in progress on alex_dev; metadata refresh follows merge commit."
+    "analyzedAt": "2026-11-13T20:09:12.448536+00:00",
+    "gitCommitHash": "26942c60db4cc13e7f345b410fb012fca6d4bd60"
   },
   "nodes": [
     {
@@ -3354,7 +3353,7 @@
       "type": "document",
       "name": "DOCS.md",
       "filePath": "DOCS.md",
-      "summary": "Living project documentation for the Timisoara app: architecture, configuration and running, the shared backend foundation (security, errors, paging), Supabase database schema, external data sources, reliability rules, and per-feature sections for Users, Places, Transit and Routing, plus knowledge-graph upkeep.",
+      "summary": "Living project documentation for the Timișoara app: setup, Supabase schema, users, events and participation, places, STPT transit, routing, reliability rules, tests and the continued knowledge graph.",
       "tags": [
         "documentation",
         "architecture",
@@ -3369,7 +3368,7 @@
       "type": "document",
       "name": "PLAN.md",
       "filePath": "PLAN.md",
-      "summary": "Hackathon implementation plan splitting work into three tracks (backend core, city data, mobile) across 17 numbered tasks with a dependency map, definition of done, cut order if time runs short, and open questions; tasks 8-10 (places, transit, routing) are being checked off.",
+      "summary": "Three-track project plan covering foundation, database, users, events, places, transit, routing, AI, mobile and integration; implemented and verified steps are checked.",
       "tags": [
         "documentation",
         "planning",
