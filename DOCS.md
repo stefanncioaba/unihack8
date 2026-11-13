@@ -105,7 +105,7 @@ Applied to Supabase on 2026-11-13 from `supabase/migrations/` (four migrations, 
 
 ## Current state
 
-- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation: token security, error handling, current user, paging, tests. No feature endpoints yet.
+- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation: token security, error handling, current user, paging, tests; places feature (task 8) with 1003 Timișoara places imported into Supabase. 73 tests passing.
 - `supabase/`: migrations and schema tests for task 2, applied.
 - `docs/API.md`: API contract (task 1.6).
 - `infra/otp/`: folder for OpenTripPlanner (README only; the server is set up in task 10). Its large data files are git-ignored.
@@ -142,7 +142,7 @@ Events carry a venue name and city but **no coordinates** — they are geocoded 
 
 ### OpenStreetMap
 
-- **Places:** Overpass API, imported once into the `places` table (PLAN task 8). Counted for the Timișoara area on 2026-11-13: 239 restaurants, 121 cafés, 89 bars/pubs, 134 fast-food places, 123 pharmacies. Only 82 of the 239 restaurants have opening hours. Freshness of the 583 food and drink places: 125 last edited in 2026, 296 since January 2025, 401 since January 2023; 182 untouched since before 2023, so some of those may have closed or changed.
+- **Places:** Overpass API, imported into the `places` table (PLAN task 8, see Features → Places). Counted for the Timișoara area on 2026-11-13: 239 restaurants, 121 cafés, 89 bars/pubs, 134 fast-food places, 123 pharmacies. Only 82 of the 239 restaurants have opening hours. Freshness of the 583 food and drink places: 125 last edited in 2026, 296 since January 2025, 401 since January 2023; 182 untouched since before 2023, so some of those may have closed or changed.
 - **Geocoding:** Nominatim, max 1 request/second, only for newly imported events; the coordinates are saved on the event row.
 - **Streets for routing:** `.osm.pbf` extract of Timișoara for OpenTripPlanner 2 (PLAN task 10).
 - OSM has no prices, menus or reviews — the AI looks those up on the web (Gemini, below).
@@ -174,6 +174,40 @@ Checked against Google's documentation on 2026-11-13.
 ## Features
 
 Sections are added here as each PLAN task is implemented: Users, Events, Reliability, Places, Transit, Routing, AI, Frontend.
+
+### Places (PLAN task 8)
+
+Restaurants, cafés, bars, parks… from OpenStreetMap, stored in the `places` table and served by `GET /places` and `GET /places/{id}` (public; shapes in `docs/API.md` → Places).
+
+**Categories** (`places/domain/PlaceCategory`) and the OpenStreetMap tags that select them:
+
+| API name | OpenStreetMap tags |
+|---|---|
+| `restaurant` | `amenity=restaurant` |
+| `cafe` | `amenity=cafe` |
+| `bar` | `amenity=bar`, `pub`, `biergarten` |
+| `fast_food` | `amenity=fast_food` |
+| `club` | `amenity=nightclub` |
+| `pharmacy` | `amenity=pharmacy` |
+| `atm` | `amenity=atm` |
+| `supermarket` | `shop=supermarket` |
+| `park` | `leisure=park` |
+| `attraction` | `tourism=museum`, `attraction`, `gallery`, `zoo`, `viewpoint` |
+
+Checked in that order (amenity first), so a church tagged `amenity=place_of_worship` + `tourism=attraction` is an attraction.
+
+**Import** (`places/service/PlaceImportService`, `places/client/OverpassClient`):
+- **Run it** (from `backend/`, with your `application-local.properties` filled in): `./gradlew bootRun --args='--spring.profiles.active=local --places.import.enabled=true'`. It runs once at startup, then the API keeps running normally. Takes 1–4 minutes. In IntelliJ: add `--places.import.enabled=true` to the run configuration's program arguments for that one run.
+- **One query** to the Overpass API (OpenStreetMap's public search service) for the Timișoara area (`places.import.bbox`, default `45.69,21.14,45.81,21.31`). Servers in `places.import.overpass-url` are tried in order; default: `overpass-api.de`, then the `overpass.kumi.systems` mirror (the main server often answers "at capacity").
+- **Rules:** places without a name are skipped, except ATMs ("UniCredit ATM", or "ATM"); ways and areas use their centre point; address = street + number; all OSM tags are stored in `tags` (jsonb).
+- **Re-runnable:** rows are matched by `osm_id`, so a second run updates instead of duplicating, and places deleted from OpenStreetMap are removed. If Overpass fails or returns nothing, the table is left untouched.
+- **First import (2026-11-13):** 1158 fetched, **1003 stored**, 155 skipped (mostly unnamed parks).
+
+**Search** (`places/service/PlaceService`): category, viewport (`bbox`) and name (`q`, case-insensitive) filters run in the database; `near` + `radius` narrows to a box in the database, then measures exact distances in Java and sorts closest first. Shared helpers for every map feature: `common/geo/GeoPoint` (parse `near`, haversine distance) and `common/geo/BoundingBox` (parse `bbox`).
+
+**Detail tags:** only a whitelist of useful tags is sent to the app (`places/mapper/impl/PlaceMapperImpl.PUBLIC_TAGS`); the rest stays in the database for the AI.
+
+**Tests:** 43 tests across `PlaceControllerTest`, `GeoTest`, `PlaceCategoryTest`, `OverpassClientImplTest` (local fake HTTP server, incl. busy-server fallback), `OsmElementMapperImplTest` and `PlaceImportServiceImplTest`, `PlaceImportRunnerTest` (real Overpass response saved in `src/test/resources/overpass/timisoara-sample.json`). Tests never call the real Overpass API.
 
 ## Knowledge graph
 
