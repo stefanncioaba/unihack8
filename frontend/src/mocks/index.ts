@@ -15,6 +15,7 @@ import type {
   UserSummary,
 } from '@/api/types';
 import { EVENT_CATEGORIES } from '@/api/types';
+import type { MyEvents, ReliabilityEntry, ReliabilityHistory } from '@/api/types.users';
 
 import { MOCK_ME_ID, seed, type MockEvent, type MockState } from './data';
 
@@ -139,6 +140,12 @@ function endOf(e: MockEvent): number {
   return e.endsAt ? Date.parse(e.endsAt) : Date.parse(e.startsAt) + 3 * 3_600_000;
 }
 
+/** Adds a line to the top of a user's reliability history (newest first). */
+function logReliability(userId: string, pointsChange: number, reason: ReliabilityEntry['reason'], e: MockEvent): void {
+  const entry: ReliabilityEntry = { pointsChange, reason, eventId: e.id, eventTitle: e.title, createdAt: new Date().toISOString() };
+  state.reliabilityLog[userId] = [entry, ...(state.reliabilityLog[userId] ?? [])];
+}
+
 // ---- routes -----------------------------------------------------------
 
 const routes: Route[] = [
@@ -158,6 +165,48 @@ const routes: Route[] = [
     method: 'GET',
     pattern: /^\/users\/me$/,
     handler: (): Me => ({ ...me(), createdAt: state.createdAt[MOCK_ME_ID] }),
+  },
+  {
+    method: 'PATCH',
+    pattern: /^\/users\/me$/,
+    handler: ({ body }): Me => {
+      const username = String(body?.username ?? '').trim();
+      if (!/^[A-Za-z0-9_]{3,20}$/.test(username)) {
+        throw new ApiError(400, 'INVALID_USERNAME', 'Use 3–20 letters, digits or underscores.');
+      }
+      if (state.users.some((u) => u.id !== MOCK_ME_ID && u.username.toLowerCase() === username.toLowerCase())) {
+        throw new ApiError(409, 'USERNAME_TAKEN', 'That username is already taken.');
+      }
+      me().username = username;
+      return { ...me(), createdAt: state.createdAt[MOCK_ME_ID] };
+    },
+  },
+  {
+    method: 'GET',
+    pattern: /^\/users\/me\/events$/,
+    handler: (): MyEvents => {
+      const byStart = (a: MockEvent, b: MockEvent) => Date.parse(a.startsAt) - Date.parse(b.startsAt);
+      const joined = state.events
+        .flatMap((e) => {
+          const mine = e.participants.find((p) => p.userId === MOCK_ME_ID);
+          return mine && mine.status !== 'CANCELLED' ? [{ e, status: mine.status }] : [];
+        })
+        .sort((a, b) => byStart(a.e, b.e))
+        .map(({ e, status }) => ({ event: toSummary(e), status }));
+      const organizing = state.events
+        .filter((e) => e.organizerId === MOCK_ME_ID)
+        .sort(byStart)
+        .map(toSummary);
+      return { joined, organizing };
+    },
+  },
+  {
+    method: 'GET',
+    pattern: /^\/users\/([^/]+)\/reliability$/,
+    handler: ({ params }): ReliabilityHistory => {
+      const user = userById(params[0]);
+      return { reliabilityScore: user.reliabilityScore, entries: (state.reliabilityLog[user.id] ?? []).slice(0, 20) };
+    },
   },
   {
     method: 'GET',
@@ -272,6 +321,7 @@ const routes: Route[] = [
       mine.status = 'CANCELLED';
       const user = me();
       user.reliabilityScore = Math.max(0, user.reliabilityScore + pointsChange);
+      if (late) logReliability(MOCK_ME_ID, pointsChange, 'LATE_CANCEL', e);
       return { status: 'CANCELLED', pointsChange, reliabilityScore: user.reliabilityScore };
     },
   },
@@ -323,6 +373,7 @@ const routes: Route[] = [
       owner.p.status = 'ATTENDED';
       const user = userById(owner.p.userId);
       user.reliabilityScore += 5;
+      logReliability(user.id, 5, 'ATTENDED', e);
       state.attended[user.id] = [e.id, ...(state.attended[user.id] ?? [])];
       return { user: { ...user }, status: 'ATTENDED', pointsChange: 5 };
     },
