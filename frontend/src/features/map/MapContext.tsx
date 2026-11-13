@@ -3,6 +3,7 @@
 // agreeing it first (docs: Frontend -> Map joints).
 import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from 'react';
 
+import { DirectionsProvider } from '@/features/directions/DirectionsContext';
 import { useDebounced } from '@/hooks/useDebounced';
 import { roundBbox, type Bbox } from '@/lib/bbox';
 import type { Coordinates } from '@/lib/geo';
@@ -36,7 +37,7 @@ const MapContext = createContext<MapContextValue | null>(null);
 
 type ProviderProps = { userPosition: Coordinates; initialBbox: Bbox; children: ReactNode };
 
-/** Holds the selection, destination and debounced visible area for the Map tab. */
+/** Holds the selection, destination and debounced visible area for the Map tab (plus the directions mode). */
 export function MapProvider({ userPosition, initialBbox, children }: ProviderProps) {
   const [rawBbox, setRawBbox] = useState<Bbox>(initialBbox);
   const [selection, setSelection] = useState<MapSelection | null>(null);
@@ -61,7 +62,12 @@ export function MapProvider({ userPosition, initialBbox, children }: ProviderPro
     }),
     [debounced, userPosition, selection, select, setDestination, setVisibleBbox],
   );
-  return <MapContext.Provider value={value}>{children}</MapContext.Provider>;
+  // The directions mode (14.5) lives in its own small context; providing it here keeps every map child working.
+  return (
+    <MapContext.Provider value={value}>
+      <DirectionsProvider>{children}</DirectionsProvider>
+    </MapContext.Provider>
+  );
 }
 
 /** Access the map state. Only valid inside the Map tab. */

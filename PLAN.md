@@ -260,8 +260,8 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 - [x] **14.1 Map** centred on Timișoara with the user's position.
 - [x] **14.2 Category filter chips** (list from 8.1) and place markers loaded for the visible area only.
 - [x] **14.3 Event markers** with a separate on/off toggle; tap opens event details.
-- [ ] **14.4 Transit layer:** stops, live vehicles for a chosen line (refresh every 10 s), tap a stop for next arrivals and last departure.
-- [ ] **14.5 Directions:** pick a destination (marker or long-press) → walking vs walking + public transport, with time estimate, steps and the route drawn on the map.
+- [x] **14.4 Transit layer:** stops, live vehicles for a chosen line (refresh every 10 s), tap a stop for next arrivals and last departure.
+- [x] **14.5 Directions:** pick a destination (marker or long-press) → walking vs walking + public transport, with time estimate, steps and the route drawn on the map.
 - [x] **14.6 Performance:** cluster markers when zoomed out; debounce reloads while the map moves.
 
 ---

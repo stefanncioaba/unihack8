@@ -1,21 +1,25 @@
 // Map tab: dark map with the user's position and the Map joints (context + bottom panel).
-// Layers: places (14.2), events (14.3). Person 2 adds the transit and directions layers (14.4, 14.5) at the
-// marked spots below.
+// Layers: places (14.2), events (14.3), transit stops and live vehicles (14.4) and directions (14.5).
+// Long-press anywhere to get directions to that spot.
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
-import MapView, { Marker, type MapPressEvent, type Region } from 'react-native-maps';
+import MapView, { Marker, type LongPressEvent, type MapPressEvent, type Region } from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import type { PlaceCategory } from '@/api/types.places';
+import { DirectionsLayer } from '@/features/directions/DirectionsLayer';
 import { useCurrentPosition } from '@/features/location/LocationProvider';
 import { EventMarkers } from '@/features/map/EventMarkers';
 import { MapFilterBar } from '@/features/map/MapFilterBar';
 import { MapPanel } from '@/features/map/MapPanel';
 import { MapProvider, useMapContext } from '@/features/map/MapContext';
 import { PlaceMarkers } from '@/features/map/PlaceMarkers';
+import { TransitControls } from '@/features/transit/TransitControls';
+import { TransitLayer } from '@/features/transit/TransitLayer';
 import { useEventsInArea } from '@/hooks/useMapEvents';
 import { usePlacesInArea } from '@/hooks/usePlaces';
+import { useStopsInArea, useTransitRoutes, useVehicles } from '@/hooks/useTransit';
 import { regionToBbox } from '@/lib/bbox';
 import { isValidCoordinate, regionFor } from '@/lib/geo';
 import { Icon } from '@/ui/Icon';
@@ -26,15 +30,19 @@ import { colors } from '@/ui/theme';
 /** Visible span (degrees of latitude) below which places are loaded / pins get name labels. */
 const ZOOM_PLACES_MAX_SPAN = 0.06;
 const ZOOM_LABELS_MAX_SPAN = 0.015;
+/** Visible span below which transit stops are shown (about 3 km). */
+const ZOOM_STOPS_MAX_SPAN = 0.03;
 
 /** The map and its overlays. Must be inside <MapProvider>. */
 function MapBody() {
   const params = useLocalSearchParams<{ lat?: string; lon?: string; title?: string; placeId?: string; eventId?: string; at?: string }>();
   const { position, status, refresh } = useCurrentPosition();
-  const { bbox, selection, setVisibleBbox, select } = useMapContext();
+  const { bbox, selection, setVisibleBbox, select, setDestination } = useMapContext();
   const mapRef = useRef<MapView>(null);
   const [categories, setCategories] = useState<PlaceCategory[]>([]);
   const [eventsOn, setEventsOn] = useState(true);
+  const [transitOn, setTransitOn] = useState(false);
+  const [lineId, setLineId] = useState<string | null>(null);
 
   // Zoomed far out there would be too many pins: ask for places only below this span (about 6 km).
   const span = bbox ? bbox.maxLat - bbox.minLat : 0;
@@ -42,6 +50,17 @@ function MapBody() {
   const places = usePlacesInArea(bbox, categories, zoomedIn);
   const events = useEventsInArea(bbox, eventsOn);
   const labelsVisible = span > 0 && span <= ZOOM_LABELS_MAX_SPAN;
+  const stopsVisible = transitOn && span > 0 && span <= ZOOM_STOPS_MAX_SPAN;
+  const stops = useStopsInArea(bbox, stopsVisible);
+  const lines = useTransitRoutes(transitOn);
+  const line = (transitOn && lines.data?.find((r) => r.id === lineId)) || null;
+  const vehicles = useVehicles(line ? line.id : null);
+
+  /** Turning transit off also forgets the chosen line. */
+  function toggleTransit() {
+    setTransitOn((on) => !on);
+    setLineId(null);
+  }
 
   /** Tapping a cluster zooms in on it (half the current view). */
   function zoomTo(lat: number, lon: number) {
@@ -78,6 +97,12 @@ function MapBody() {
     select(null);
   }
 
+  /** A long press drops a destination there and opens the directions panel. */
+  function onLongPress(e: LongPressEvent) {
+    const { latitude, longitude } = e.nativeEvent.coordinate;
+    setDestination({ coords: { lat: latitude, lon: longitude }, title: 'Dropped pin' });
+  }
+
   /** Remembers the visible area so layers can load only what is on screen. */
   function onRegionChangeComplete(region: Region) {
     setVisibleBbox(regionToBbox(region));
@@ -91,6 +116,7 @@ function MapBody() {
         initialRegion={regionFor(focus ?? position, focus ? 0.012 : 0.035)}
         onRegionChangeComplete={onRegionChangeComplete}
         onPress={onMapPress}
+        onLongPress={onLongPress}
         showsUserLocation={status === 'granted'}
         showsMyLocationButton={false}
         userInterfaceStyle="dark"
@@ -118,7 +144,16 @@ function MapBody() {
             onSelect={(id) => select({ type: 'event', id })}
           />
         )}
-        {/* PERSON 2: <TransitLayer /> and <DirectionsLayer /> go here, inside the MapView. */}
+        {transitOn && (
+          <TransitLayer
+            stops={stopsVisible ? stops.data : undefined}
+            line={line}
+            vehicles={vehicles.data?.vehicles}
+            selectedStopId={selection?.type === 'stop' ? selection.id : undefined}
+            onSelectStop={(id) => select({ type: 'stop', id })}
+          />
+        )}
+        <DirectionsLayer />
       </MapView>
 
       <SafeAreaView style={styles.overlay} edges={['top']} pointerEvents="box-none">
@@ -144,7 +179,21 @@ function MapBody() {
             </Text>
           </View>
         )}
-        {/* PERSON 2: transit controls (line picker) can be rendered here, below the top row. */}
+        <TransitControls transitOn={transitOn} onToggleTransit={toggleTransit} line={lineId} onSelectLine={setLineId} />
+        {transitOn && span > ZOOM_STOPS_MAX_SPAN && !line && (
+          <View style={styles.hint} testID="stops-hint">
+            <Text variant="caption" tone="muted">
+              Zoom in to see stops, or pick a line
+            </Text>
+          </View>
+        )}
+        {line && vehicles.data && (vehicles.data.vehicles.length === 0 || vehicles.data.stale) && (
+          <View style={styles.hint} testID="vehicles-hint">
+            <Text variant="caption" tone="muted">
+              {vehicles.data.vehicles.length === 0 ? `No vehicles on line ${line.name} right now` : 'Live positions are delayed'}
+            </Text>
+          </View>
+        )}
       </SafeAreaView>
 
       <MapPanel />

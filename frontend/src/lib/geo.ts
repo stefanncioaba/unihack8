@@ -19,3 +19,10 @@ export function isValidCoordinate(lat: number, lon: number): boolean {
 export function toNearParam(point: Coordinates): string {
   return `${point.lat.toFixed(5)},${point.lon.toFixed(5)}`;
 }
+
+/** Straight-line distance in metres between two points (haversine). */
+export function distanceMeters(a: Coordinates, b: Coordinates): number {
+  const rad = (d: number) => (d * Math.PI) / 180;
+  const h = Math.sin(rad(b.lat - a.lat) / 2) ** 2 + Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(rad(b.lon - a.lon) / 2) ** 2;
+  return Math.round(2 * 6_371_000 * Math.asin(Math.sqrt(h)));
+}
