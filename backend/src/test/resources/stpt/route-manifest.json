@@ -1,0 +1,219 @@
+{
+  "generated_at": "2026-11-10T12:53:52.485772+00:00",
+  "gtfs_source_file": "smtt-timisoara-ro.zip",
+  "gtfs_feed_version": "4.31.1",
+  "service_date_range": {
+    "start": "20261105",
+    "end": "20261231"
+  },
+  "route_count": 74,
+  "stop_count": 926,
+  "trip_count": 13400,
+  "categories": {
+    "tram": {
+      "label": "Tramvai",
+      "routes": [
+        "1",
+        "2",
+        "4",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    "trolleybus": {
+      "label": "Troleibuz",
+      "routes": [
+        "11",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "M11",
+        "M14"
+      ]
+    },
+    "urban": {
+      "label": "Autobuz Urban",
+      "routes": [
+        "5b",
+        "5c",
+        "13",
+        "21",
+        "23",
+        "24",
+        "28",
+        "32",
+        "33",
+        "33b",
+        "40",
+        "46"
+      ]
+    },
+    "express": {
+      "label": "Expres",
+      "routes": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E4b",
+        "E6",
+        "E7",
+        "E8"
+      ]
+    },
+    "scolar": {
+      "label": "Școlar",
+      "routes": [
+        "S1",
+        "S2",
+        "S2b",
+        "S3",
+        "S4",
+        "S7",
+        "S8",
+        "S9",
+        "S10",
+        "S10b",
+        "S11",
+        "S12",
+        "S13",
+        "S14",
+        "S14b",
+        "S15"
+      ]
+    },
+    "metropolitan": {
+      "label": "Metropolitan",
+      "routes": [
+        "M3",
+        "M22",
+        "M23",
+        "M24",
+        "M27",
+        "M29",
+        "M30",
+        "M32",
+        "M35",
+        "M36",
+        "M37",
+        "M38",
+        "M39",
+        "M41",
+        "M42",
+        "M43",
+        "M44",
+        "M45",
+        "M46",
+        "M47",
+        "M48",
+        "M49",
+        "M50",
+        "M51"
+      ]
+    },
+    "vaporetto": {
+      "label": "Vaporetto",
+      "routes": []
+    },
+    "other": {
+      "label": "Alte linii",
+      "routes": []
+    }
+  },
+  "routes": {
+    "1": {
+      "route_short_name": "1",
+      "route_long_name": "Gara de Nord - Piața Gh. Domășneanu (AEM)",
+      "route_type": "0",
+      "route_type_name": "Tram",
+      "route_color": "e3a900",
+      "route_text_color": "ffffff",
+      "category": "tram",
+      "directions": [
+        "0",
+        "1"
+      ]
+    },
+    "11": {
+      "route_short_name": "11",
+      "route_long_name": "Gheorghe Barițiu - Arena Aquasport (Ștrandul Tineretului)",
+      "route_type": "11",
+      "route_type_name": "Trolleybus",
+      "route_color": "6f2095",
+      "route_text_color": "ffffff",
+      "category": "trolleybus",
+      "directions": [
+        "0",
+        "1"
+      ]
+    },
+    "13": {
+      "route_short_name": "13",
+      "route_long_name": "Spitalul Militar - Pasaj C.F. Mehala",
+      "route_type": "3",
+      "route_type_name": "Bus",
+      "route_color": "4d897f",
+      "route_text_color": "ffffff",
+      "category": "urban",
+      "directions": [
+        "0",
+        "1"
+      ]
+    },
+    "2": {
+      "route_short_name": "2",
+      "route_long_name": "Shopping City - Calea Torontalului (Ciocanul)",
+      "route_type": "0",
+      "route_type_name": "Tram",
+      "route_color": "e3a900",
+      "route_text_color": "ffffff",
+      "category": "tram",
+      "directions": [
+        "0",
+        "1"
+      ]
+    },
+    "E4b": {
+      "route_short_name": "E4b",
+      "route_long_name": "Barițiu - Aeroport",
+      "route_type": "3",
+      "route_type_name": "Bus",
+      "route_color": "f58134",
+      "route_text_color": "ffffff",
+      "category": "express",
+      "directions": [
+        "0",
+        "1"
+      ]
+    },
+    "M14": {
+      "route_short_name": "M14",
+      "route_long_name": "Gheorghe Barițiu - Dumbrăvița (Girație centură)",
+      "route_type": "11",
+      "route_type_name": "Trolleybus",
+      "route_color": "6f2095",
+      "route_text_color": "ffffff",
+      "category": "trolleybus",
+      "directions": [
+        "0",
+        "1"
+      ]
+    },
+    "M22": {
+      "route_short_name": "M22",
+      "route_long_name": "Timișoara - Moșnița Nouă/Moșnița Veche",
+      "route_type": "3",
+      "route_type_name": "Bus",
+      "route_color": "0148a2",
+      "route_text_color": "ffffff",
+      "category": "metropolitan",
+      "directions": [
+        "0",
+        "1"
+      ]
+    }
+  }
+}

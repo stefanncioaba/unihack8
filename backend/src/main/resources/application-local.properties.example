@@ -25,3 +25,6 @@ gemini.lookup-model=gemini-2.5-flash
 
 # --- OpenTripPlanner (PLAN task 10) -----------------------------------------
 otp.base-url=http://localhost:8081
+# Optional: give up on OTP after these and fall back (defaults 2s / 10s).
+#otp.connect-timeout=2s
+#otp.read-timeout=10s

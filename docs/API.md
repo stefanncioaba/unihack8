@@ -411,11 +411,12 @@ All public. `stale: true` means STPT did not answer and this is the last cached 
 
 ### `GET /transit/routes`
 
-`type` is `TRAM`, `TROLLEYBUS`, `BUS`, `EXPRESS`, `METROPOLITAN` or `BOAT`.
+`type` is `TRAM`, `TROLLEYBUS`, `BUS`, `EXPRESS`, `METROPOLITAN` or `BOAT`. Sorted by type (trams first), then by line number.
+`from` / `to` are the line's two end stations (either can be `null`). `color` is STPT's line colour for drawing on the map (`null` when STPT has none).
 
 ```json
 [
-  { "id": "1", "type": "TRAM", "name": "1", "from": "Stația Meteo", "to": "Gara de Nord" }
+  { "id": "1", "type": "TRAM", "name": "1", "from": "Gara de Nord", "to": "Piața Gh. Domășneanu (AEM)", "color": "#e3a900" }
 ]
 ```
 
@@ -456,7 +457,8 @@ Refresh every 10 s on the map.
 
 ### `GET /transit/stops/{id}/arrivals`
 
-`live: false` means the time comes from the timetable, not a vehicle's position.
+`live: false` means the time comes from the timetable, not a vehicle's position. Sorted soonest first.
+`stopName` is `null` only when STPT's stop list could not be loaded. Errors: `404 NOT_FOUND` for an unknown stop.
 
 ```json
 {
@@ -481,6 +483,7 @@ Refresh every 10 s on the map.
 ### `GET /transit/last-departures?stopId=1`
 
 `source` is `TIMETABLE` (from the GTFS file) or `LIVE_ESTIMATE` (fallback, last arrival seen live — PLAN 9.6).
+Normally `TIMETABLE`: the last scheduled departure of each line and direction on today's service day (lines that already left are still listed; compare `lastDepartureAt` with now). `LIVE_ESTIMATE` only when the backend has no timetable file or it does not cover today: then it is the latest of the next few live arrivals, **not** the real end of service.
 
 ```json
 {
@@ -495,7 +498,8 @@ Refresh every 10 s on the map.
 
 ### `GET /transit/summary?near=45.7537,21.2257`
 
-The home page line. `message` is ready to show (Romanian or English chosen by the `Accept-Language` header, default English).
+The home page line. `message` is ready to show (Romanian when `Accept-Language` starts with `ro`, otherwise English). `near` is required.
+The message names the line from `lastDepartures` that stops earliest among those still running; when all have left it says there are no more departures tonight; with no departures at all it says none are known. If alerts cannot be loaded, `activeAlerts` is `0`.
 
 ```json
 {
@@ -515,7 +519,8 @@ The home page line. `message` is ready to show (Romanian or English chosen by th
 ### `GET /routes/plan?from=45.7537,21.2257&to=45.7489,21.2318&mode=TRANSIT`
 
 `mode` is `WALK` or `TRANSIT` (walking + public transport). Optional `departAt` (ISO time, default now).
-Returns the best route. `fallback: true` means OpenTripPlanner was unavailable and this is a straight-line walking estimate (`legs[0].polyline` is then just the two points).
+Returns the route that arrives first. The answer's `mode` is what the route really uses: a `TRANSIT` request with no trip found (e.g. at night) answers the walking route with `mode: "WALK"`.
+`fallback: true` means OpenTripPlanner was unavailable (or found no walking route) and this is a straight-line walking estimate (`legs[0].polyline` is then just the two points).
 `polyline` is a Google encoded polyline (as OpenTripPlanner returns it); the app decodes it to draw the line.
 Leg `mode` is `WALK`, `TRAM`, `TROLLEYBUS` or `BUS`; `route` and `headsign` are `null` for walking.
 

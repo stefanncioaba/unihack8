@@ -51,6 +51,8 @@ The mobile app never calls third-party data sources directly; the backend proxie
 3. **Terminal** (from `backend/`): `./gradlew bootRun --args='--spring.profiles.active=local'`
 4. The API listens on **port 8080 on all network interfaces**. From a phone on the same Wi-Fi use `http://<laptop Wi-Fi IPv4>:8080` (find it with `ipconfig`, Wi-Fi adapter). If the phone cannot connect, allow Java through the Windows Firewall for private networks.
 5. **Quick check:** `GET http://<ip>:8080/test` without a token must answer `401` with `{"code":"UNAUTHORIZED",...}` — that proves the server is reachable and security is on. (There is no health endpoint: nothing is deployed.)
+6. **Timetable file (in git, nothing to do):** the "last tram/bus" answers read `infra/otp/stpt-gtfs.zip` (1.8 MB, SMTT feed version 4.31 downloaded 2026-11-13). It is committed (an exception to the `infra/otp/*.zip` ignore rule), so every checkout has it. The log shows `GTFS timetable loaded …` on the first `/transit/last-departures` request. If the file is ever missing the backend still starts: it logs `GTFS timetable not found …` and falls back to live estimates (`source: LIVE_ESTIMATE`).
+   **Refresh it** when SMTT publishes a new timetable, and at the latest after it expires on 2026-12-31: from the repo root in Git Bash run `curl -fL -o infra/otp/stpt-gtfs.zip https://smtt.ro/transit/gtfs/maps/smtt-timisoara-ro.zip` (mirror: `https://files.mobilitydatabase.org/mdb-2868/latest.zip`), or `infra/otp/get-data.sh`, then commit the new file. The street map and routing graph stay out of git (see `infra/otp/README.md`).
 
 **Tests:** `./gradlew test` from `backend/`. They use an in-memory H2 database and a fake Supabase secret (`src/test/resources/application.properties`), so they never need the real database or your local keys.
 
@@ -105,10 +107,10 @@ Applied to Supabase on 2026-11-13 from `supabase/migrations/` (four migrations, 
 
 ## Current state
 
-- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation: token security, error handling, current user, paging, tests; users/profile endpoints (PLAN 4); events and participation endpoints (PLAN 5); places feature (task 8) with 1003 Timișoara places imported into Supabase.
+- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging), users/profile endpoints (task 4), events and participation (task 5), places (task 8, 1003 Timișoara places imported into Supabase), live transit (task 9, `/transit/**`) and routing (task 10, `/routes/plan`).
 - `supabase/`: migrations and schema tests for task 2, applied.
 - `docs/API.md`: API contract (task 1.6).
-- `infra/otp/`: folder for OpenTripPlanner (README only; the server is set up in task 10). Its large data files are git-ignored.
+- `infra/otp/`: OpenTripPlanner 2.7 setup (docker-compose, data download script). Its large data files are git-ignored. `GET /routes/plan` is implemented (task 10).
 - `frontend/`: Expo app (SDK 54) set up by the frontend teammates — see `frontend/AGENTS.md`. Each teammate works on their own `<name>_dev` branch.
 - Supabase project: created, MCP connected, email sign-in on with "Confirm email" off, database schema applied. The places import stored 1003 places; there are no seeded users or events.
 
@@ -124,11 +126,11 @@ Checked on 2026-11-13 by calling each endpoint. None of these is a documented pu
 | `/gtfs-data/stops-index.json` | All stops: `stop_code`, `stop_name`, `lat`, `lon`, `routes[]` |
 | `/gtfs-data/route-manifest.json` | Route list plus GTFS feed info (source file `smtt-timisoara-ro.zip`, feed version, service date range) |
 | `/routes/capeti-linie.json` | End stations of each line (`tur` / `retur`) |
-| `/proxy-smtt-cache.php?stopid=<id>` | Arrivals at a stop (seen in the site's script; response not sampled yet) |
+| `/proxy-smtt-cache.php?stopid=<id>` | Arrivals at a stop: array of `route`, `type`, `destination`, `vehicleId` (null = timetable), `times` (`"HH:mm|minutes"`, local time) |
 | `/proxy-alerts.php` | Service alerts: `id`, `headerText`, `descriptionText` |
 | `/api/journey.php?…` | The site's own journey planner (seen in the script; parameters not explored) |
 
-The GTFS zip itself was not found at an obvious URL on the site — see PLAN open question 2.
+The GTFS zip itself is not on `live.stpt.ro`, but SMTT publishes it at `https://smtt.ro/transit/gtfs/maps/smtt-timisoara-ro.zip` (Mobility Database `mdb-2868`), see Features → Routing.
 
 ### LiveTickets events — `https://api.livetickets.ro`
 
@@ -233,12 +235,66 @@ Checked in that order (amenity first), so a church tagged `amenity=place_of_wors
 
 **Tests:** 43 tests across `PlaceControllerTest`, `GeoTest`, `PlaceCategoryTest`, `OverpassClientImplTest` (local fake HTTP server, incl. busy-server fallback), `OsmElementMapperImplTest` and `PlaceImportServiceImplTest`, `PlaceImportRunnerTest` (real Overpass response saved in `src/test/resources/overpass/timisoara-sample.json`). Tests never call the real Overpass API.
 
+### Transit — live STPT data (PLAN task 9, Track B)
+
+Public endpoints (no token) under `/transit`, contract in `docs/API.md` → Transit. The backend calls `live.stpt.ro`; the app never does.
+
+| Endpoint | Source on live.stpt.ro | Cached for |
+|---|---|---|
+| `GET /transit/routes` | `/gtfs-data/route-manifest.json` | 24 h |
+| `GET /transit/stops?bbox=` | `/gtfs-data/stops-index.json` | 24 h |
+| `GET /transit/vehicles?route=` | `/gtfs-vehicles.php?route=` | 10 s |
+| `GET /transit/stops/{id}/arrivals` | `/proxy-smtt-cache.php?stopid=` | 20 s |
+| `GET /transit/alerts` | `/proxy-alerts.php` | 5 min |
+| `GET /transit/last-departures?stopId=` | computed from arrivals | — |
+| `GET /transit/summary?near=lat,lon` | nearest stop + its last departures + alert count | — |
+
+**Package `com.unihack8.backend.transit`:** `client/StptClient` (+ `impl/`) makes the raw calls and reads STPT's JSON leniently; `mapper/TransitMapper` (+ `impl/`) converts to the API shapes; `service/TransitService` (+ `impl/`) caches and computes; `controller/TransitController`; `repository/TimetableRepository` (+ `impl/GtfsTimetableRepository`) reads the GTFS timetable; `config/StptProperties` and `StptClientConfig` (HTTP client). No database table: live data plus the timetable file.
+
+**Shared helpers in `common`:**
+- `common.cache.StaleCache` (added by transit; reuse it for routing/OTP) — per-key cache: fresh for its lifetime; if the source then fails, the last value is served with `stale: true`; if nothing was ever cached, `503 SOURCE_UNAVAILABLE`. One request per key reaches the source at a time.
+- Transit uses the places feature's `common.geo.GeoPoint` (`near`, `distanceMetersTo`) and `common.geo.BoundingBox` (`bbox`).
+
+**Settings** (all optional, defaults in `StptProperties`): `stpt.base-url`, `stpt.connect-timeout` (3 s), `stpt.read-timeout` (5 s), `stpt.user-agent`, `stpt.ttl.vehicles|arrivals|alerts|static-data`, `stpt.gtfs-path` (default `../infra/otp/stpt-gtfs.zip`, i.e. the file task 10's `infra/otp/get-data.sh` downloads; if missing, `infra/otp/stpt-gtfs.zip` from the repo root is tried).
+
+**How STPT data is read (checked 2026-11-13):**
+- Arrival times come as `"HH:mm|minutes"` in Romanian local time; we turn them into UTC, picking the date nearest to now (so `00:05` seen at 23:50 is tomorrow). Repeated times are dropped.
+- An arrival item has one `vehicleId` for all its times; we mark only its **first** time `live: true` (the vehicle being tracked), the rest are timetable times.
+- Line type comes from STPT's category (tram, trolleybus, express, metropolitan, vaporetto), otherwise from the GTFS `route_type`; school (`S…`) and urban lines are `BUS`.
+- `from` / `to` come from the GTFS long name (`"Gara de Nord - Piața Gh. Domășneanu (AEM)"`). The older `/routes/capeti-linie.json` is not used: it still lists pre-diversion end stations.
+- **Last departures (9.6):** read from the **GTFS timetable** (`source: TIMETABLE`): for each line and direction, the latest scheduled departure from the stop on today's service day. Weekday/Saturday/Sunday services and holiday exceptions (`calendar.txt`, `calendar_dates.txt`) are applied; a trip's final stop is skipped (arriving at the terminus is not a departure); times after midnight (e.g. `24:30`) stay on the same service day, and **before 03:00** the previous day's timetable still applies. The file is loaded once, on first use (about 0.6 s, 890 stops, 13,335 trips). If the file is missing or does not cover today (the 2026-11-13 download ends 2026-12-31), the answer falls back to `LIVE_ESTIMATE` (latest of the next few live arrivals). Checked 2026-11-13 against the real file: last tram 2 from Dâmbovița leaves 23:46 on weekdays.
+- **Summary sentence:** names the line that stops first **among those still running** ("Last trolleybus 16 from Piața Huniade leaves at 23:18"); once all have gone: "No more departures from … tonight." (Romanian: "Nu mai sunt plecări din … în seara asta.").
+
+**Tests (62 for transit):** `GtfsTimetableRepositoryTest` (small GTFS zip built in the test: services, holiday exceptions, terminus skipped, after-midnight times, missing file, quoted CSV); `StptClientImplTest` parses real STPT answers saved in `src/test/resources/stpt/` (no network); `TransitMapperImplTest` (types, time zones, midnight, duplicates); `TransitServiceImplTest` (sorting, bbox, caching, stale fallback when STPT is down, 503 with no cache, 404 stop, last departures from timetable and live fallback, service day before 03:00, summary in English and Romanian); `TransitControllerTest` (JSON shapes, no token needed, 400/404/503); `StaleCacheTest`. A one-off run against the real STPT on 2026-11-13 returned 74 lines, 926 stops, live vehicles, arrivals and 5 alerts.
+
+### Routing (PLAN task 10, Track B)
+
+`GET /routes/plan?from=lat,lon&to=lat,lon&mode=WALK|TRANSIT[&departAt=ISO time]`, which needs a token. The shape is in `docs/API.md`. The backend asks our own OpenTripPlanner 2.7 server and returns one route.
+
+- **Data (10.1):** the STPT/SMTT GTFS feed is public: `https://smtt.ro/transit/gtfs/maps/smtt-timisoara-ro.zip`, listed in the Mobility Database as `mdb-2868` (this answers PLAN open question 2). The streets come from Geofabrik's Romania extract, cut to the GTFS area. `infra/otp/get-data.sh` downloads both.
+- **OTP server (10.2):** see `infra/otp/README.md`. It takes three commands (get data, build graph, serve) and serves on port **8081**. The Spring setting is `otp.base-url` (default `http://localhost:8081`); timeouts are `otp.connect-timeout` (2 s) and `otp.read-timeout` (10 s). Built 2026-11-13: 890 stops, 181 route patterns, graph built in 15 s.
+- **Picking the route:** OTP returns up to 3 itineraries, and the backend keeps the one that **arrives first** (the shorter trip on a tie). OTP's own order can put a slower direct walk first: in a real test, a 20-min walk was listed before trolleybus 18, which takes 11 min.
+- **`mode` in the answer** says what the route really uses: `TRANSIT` if any leg rides a vehicle, otherwise `WALK`.
+- **Fallbacks (10.4):**
+
+  | Request | Situation | Answer |
+  |---|---|---|
+  | `WALK` | OTP down, or no route (e.g. a point outside the map) | Straight-line distance × 1.25 at 4.8 km/h, one leg, `fallback: true` |
+  | `TRANSIT` | OTP down | `503 SOURCE_UNAVAILABLE`; the app should offer walking |
+  | `TRANSIT` | no trip found (night, or timetable expired) | OTP's walking route (`mode: "WALK"`), or the straight-line estimate if that fails too |
+
+- **Leg modes:** `WALK`, `TRAM`, `TROLLEYBUS`, `BUS`. Any other vehicle is shown as `BUS`. Times are converted from OTP's local offset to UTC. Durations are rounded to minutes, at least 1 for a non-empty trip.
+- **Gotcha:** OTP answers `400` to chunked request bodies, so the client serializes the GraphQL body to bytes itself, which gives the request a `Content-Length`.
+- **Timetable expiry:** the 2026-11-13 GTFS covers 2026-11-05 to 2026-12-31. Re-run `get-data.sh` and rebuild the graph after that date.
+- **Code:** package `routing`: `controller/RoutingController`, `service/impl/RoutingServiceImpl` (fallback rules), `client/impl/OtpGraphQlClient` (GraphQL `planConnection`), `mapper/impl/RoutePlanMapperImpl`, `config/OtpProperties` + `OtpClientConfig`, `util/PolylineEncoder`. Coordinates use the shared `common.geo.GeoPoint` (from the places feature).
+- **Tests (10.5):** 28 tests across `PolylineEncoderTest`, `OtpGraphQlClientTest` (mock server), `RoutePlanMapperImplTest`, `RoutingServiceImplTest` and `RoutingControllerTest`. The fixture `src/test/resources/otp/plan-transit.json` is a **real OTP answer** recorded from our server: Piața Victoriei → Gara de Nord, 2026-11-16 at 10:00. With places and transit (incl. the GTFS timetable) merged in, the backend has 162 tests, all passing on 2026-11-13. On the same day the real client was also checked by hand against the running OTP: bus 33, walk, night and outside-the-map cases.
+
 ## Knowledge graph
 
 One graph for the whole repo, made with the **Understand-Anything** plugin (rule from AGENTS.md: keep it updated with every change).
 
 - **Files:** `.ua/knowledge-graph.json` (the graph), `.ua/meta.json` and `.ua/fingerprints.json` (let the next run update only changed files), `.ua/.understandignore` (what is left out: secrets such as `application-local.properties` and `.env`, build output, `.claude/`). Scratch folders under `.ua/` are git-ignored.
-- **Current version (2026-11-13):** The existing graph includes the users feature and task-5 events work: 136 files, 396 nodes, 777 edges, 13 layers, including Backend Events & Participation. All 266 earlier nodes, 611 earlier edges, 12 earlier layers, and the 20-step guided tour were retained. The task-5 nodes were added from the current uncommitted `alex_dev` source after Understand Anything's incremental helper refused a dirty working tree. Its metadata and fingerprints still point to the previous committed baseline (`54ed920`), so run `/understand` after a later commit to refresh those generated indexes and the tour.
+- **Current version (2026-11-13):** The existing graph continues with users (task 4), events and participation (task 5), places (task 8), transit (task 9) and routing (task 10). The event and main-branch graph nodes, edges and layers were combined during the `alex_dev` merge; the guided tour includes both city-data and event steps. Its fingerprints and metadata are refreshed after the merge commit.
 - **Left out on purpose** (`.ua/.understandignore`): secrets, build output, `.claude/`, and frontend noise (`package-lock.json`, `assets/`, `LICENSE`, `.npmrc`).
 - **Update it** after each change: run `/understand` (Claude Code) or the same command in Codex; it only reanalyzes changed files. `/understand-dashboard` opens the interactive view.
 - **Codex:** the plugin's README lists Codex as supported (install it with the plugin's install script for `codex`); not tested by us yet.

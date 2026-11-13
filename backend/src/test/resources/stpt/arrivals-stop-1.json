@@ -1,0 +1,24 @@
+[
+  {
+    "route": "9",
+    "type": "tv",
+    "destination": "Piața Gh. Domășneanu",
+    "vehicleId": null,
+    "times": [
+      "20:40|5",
+      "20:56|22",
+      "21:10|36",
+      "21:10|36"
+    ]
+  },
+  {
+    "route": "2",
+    "type": "tv",
+    "destination": "Shopping City",
+    "vehicleId": null,
+    "times": [
+      "20:45|10",
+      "21:00|25"
+    ]
+  }
+]
