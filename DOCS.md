@@ -176,6 +176,22 @@ Checked against Google's documentation on 2026-11-13.
 
 ## Features
 
+### QR check-in and reliability (PLAN 6)
+
+Package `reliability`, built on the events feature (task 5): it reuses `EventRepository` (event lookup and row lock) and `ParticipationRepository.changeReliability(...)`, the single place that applies a score change, floors it at 0 and writes `reliability_log`. It does not change any events-feature file.
+
+| Endpoint | Who | What |
+|---|---|---|
+| `GET /events/{id}/my-ticket` | the participant | Their `qrToken` (the QR code contains only this string) and status. |
+| `POST /events/{id}/check-in` `{ "token" }` | the event's organiser | Scanned ticket → `ATTENDED`, `checked_in_at` set, **+5**. |
+| `GET /users/{id}/reliability` | any signed-in user | Score and the 20 newest changes, with event titles. |
+
+- **Check-in rules** (`CheckInServiceImpl`): user events only; organiser only; until the event's end (start + 3 h when it has none); the token must belong to this event; banned or departed participants are refused. The event row is locked and the status change is conditional on `JOINED`, so a ticket scanned twice gets points once.
+- **No-show job** (`NoShowJob` → `NoShowServiceImpl`): runs every 5 minutes while the backend is running (first run 1 minute after start). Participants still `JOINED` after the event is over become `NO_SHOW` with **−10**; each in its own short transaction, conditional on `JOINED`, so repeating the job or a late scan never double-penalises. Imported events are ignored. Settings: `reliability.no-show-job.enabled` (default `true`, `false` in tests), `.interval` (default `PT5M`), `.initial-delay` (default `PT1M`).
+- **SQL** (`CheckInRepositoryImpl`, JdbcTemplate like the events feature): checked on 2026-11-13 against the real Supabase database (read queries run, updates via `EXPLAIN` only, no data changed).
+- **Tests:** 15 — `ReliabilityIntegrationTest` (real endpoints and tokens on the H2 test database: ticket, check-in happy path, double scan, wrong event, unknown/garbage token, not organiser, imported/finished event, banned/left participant, no end time; no-show job, repeat run, 3-hour rule, score floor; history order and deleted events) and `NoShowJobTest`.
+
+
 ### Users and profiles (PLAN 4)
 
 Package `com.unihack8.backend.users` (`controller`, `service` + `impl`, `repository` + `impl`, `mapper` + `impl`, `domain/entity`, `domain/dto`). Request and answer shapes are in `docs/API.md` → Users.

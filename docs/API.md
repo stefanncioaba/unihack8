@@ -352,7 +352,7 @@ The app draws `qrToken` as a QR code. **The QR code contains only the `qrToken` 
 { "eventId": "3f1c2a9e-5b7d-4e2a-9c41-8d6f0b2e7a15", "qrToken": "6e2b9a4c-0f1d-4c3e-8b7a-5d9f2e1c0a3b", "status": "JOINED" }
 ```
 
-Errors: `409 NOT_JOINED`, `403 BANNED`.
+`status` is `JOINED`, `ATTENDED` or `NO_SHOW` (the ticket stays readable after the event). Errors: `409 NOT_JOINED` (never joined, or left), `403 BANNED`, `404 NOT_FOUND` (unknown event).
 
 ### `POST /events/{id}/check-in` — PLAN 6.2
 
@@ -372,7 +372,8 @@ Answer:
 }
 ```
 
-Errors: `403 NOT_ORGANIZER`, `404 TICKET_NOT_FOUND`, `409 WRONG_EVENT`, `409 ALREADY_CHECKED_IN`, `403 BANNED`, `409 EVENT_ENDED`.
+Errors: `403 NOT_ORGANIZER`, `403 EXTERNAL_EVENT`, `404 TICKET_NOT_FOUND` (unknown token, or scanned text that is not a ticket), `409 WRONG_EVENT`, `409 ALREADY_CHECKED_IN`, `403 BANNED`, `409 NOT_JOINED` (the participant left), `409 EVENT_ENDED` (after the event's end, or start + 3 h without an end time), `400 VALIDATION_FAILED` (blank token).
+Scanning the same ticket twice never adds points twice.
 
 ---
 

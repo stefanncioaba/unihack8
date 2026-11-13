@@ -152,11 +152,11 @@ Tasks 8, 9 and 10 do not need the database to start: B can build and test them a
 
 **Needs:** 5. Flow: the participant shows a QR code, the organiser scans it at the venue.
 
-- [ ] **6.1** `GET /events/{id}/my-ticket` — returns the caller's `qr_token` (the mobile app draws it as a QR code).
-- [ ] **6.2** `POST /events/{id}/check-in` with `{ token }` — organiser only; marks `ATTENDED`, adds points, writes `reliability_log`. Rejects wrong event, unknown token, and a second scan.
-- [ ] **6.3 No-show job:** a scheduled task that, after an event ends, turns every remaining `JOINED` into `NO_SHOW` and subtracts points. Runs every few minutes and is safe to run twice.
-- [ ] **6.4** `GET /users/{id}/reliability` — score plus the recent log entries.
-- [ ] **6.5** Tests: check-in happy path, duplicate scan, no-show job, score never below 0.
+- [x] **6.1** `GET /events/{id}/my-ticket` — returns the caller's `qr_token` (the mobile app draws it as a QR code).
+- [x] **6.2** `POST /events/{id}/check-in` with `{ token }` — organiser only; marks `ATTENDED`, adds points, writes `reliability_log`. Rejects wrong event, unknown token, and a second scan.
+- [x] **6.3 No-show job:** a scheduled task that, after an event ends, turns every remaining `JOINED` into `NO_SHOW` and subtracts points. Runs every few minutes and is safe to run twice.
+- [x] **6.4** `GET /users/{id}/reliability` — score plus the recent log entries.
+- [x] **6.5** Tests: check-in happy path, duplicate scan, no-show job, score never below 0.
 
 ---
 
