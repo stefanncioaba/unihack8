@@ -1,0 +1,1182 @@
+{
+ "version": "1.0.0",
+ "project": {
+  "name": "unihack8",
+  "languages": [
+   "sql",
+   "java",
+   "gradle",
+   "markdown",
+   "json",
+   "properties",
+   "batch"
+  ],
+  "frameworks": [
+   "Spring Boot",
+   "Spring Data JPA",
+   "Spring Security",
+   "JUnit",
+   "PostgreSQL",
+   "Supabase"
+  ],
+  "description": "Hackathon mobile app for Timișoara (Connected Communities): events with QR check-in and reliability points, a filterable map of places, live STPT public transport, directions, and an AI guide. Spring Boot backend + Supabase Postgres; Expo frontend planned.",
+  "analyzedAt": "2026-11-13T17:35:06+00:00",
+  "gitCommitHash": "0cfd3cb6748d7dc3bc25805058d122b869cd9adc"
+ },
+ "nodes": [
+  {
+   "id": "table:supabase/migrations/20261113000001_profiles.sql:profiles",
+   "type": "table",
+   "name": "profiles",
+   "filePath": "supabase/migrations/20261113000001_profiles.sql",
+   "lineRange": [
+    1,
+    59
+   ],
+   "summary": "Migration creating the public.profiles table (one row per Supabase auth user) with a case-insensitive unique username, trigram search index, a reliability_score defaulting to 100, and row level security enabled.",
+   "tags": [
+    "database",
+    "migration",
+    "user-profile",
+    "supabase",
+    "reliability"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:supabase/migrations/20261113000001_profiles.sql:handle_new_user",
+   "type": "function",
+   "name": "handle_new_user",
+   "filePath": "supabase/migrations/20261113000001_profiles.sql",
+   "lineRange": [
+    30,
+    52
+   ],
+   "summary": "Security-definer PL/pgSQL trigger function that auto-creates a profile for each new auth.users row, using the sign-up metadata username or falling back to a generated user_xxxxxxxx name on invalid or duplicate input.",
+   "tags": [
+    "database",
+    "trigger",
+    "authentication",
+    "plpgsql",
+    "sign-up"
+   ],
+   "complexity": "moderate",
+   "languageNotes": "Uses security definer with an empty search_path and a nested BEGIN/EXCEPTION block to catch unique_violation, so sign-up never fails; execute is revoked from public roles so only the on_auth_user_created trigger invokes it."
+  },
+  {
+   "id": "table:supabase/migrations/20261113000002_events.sql:events",
+   "type": "table",
+   "name": "events",
+   "filePath": "supabase/migrations/20261113000002_events.sql",
+   "lineRange": [
+    1,
+    49
+   ],
+   "summary": "Migration creating public.events for both user-created (USER) and imported (EXTERNAL) events, with location, capacity, pricing in lei, organizer FK to profiles, consistency check constraints, and indexes for date, map-bbox, organizer and fuzzy title queries.",
+   "tags": [
+    "database",
+    "migration",
+    "events",
+    "geolocation",
+    "schema-definition"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "table:supabase/migrations/20261113000003_participation_reliability.sql:event_participants",
+   "type": "table",
+   "name": "event_participants",
+   "filePath": "supabase/migrations/20261113000003_participation_reliability.sql",
+   "lineRange": [
+    3,
+    20
+   ],
+   "summary": "Join table recording which users joined which events, with a status lifecycle (JOINED, ATTENDED, NO_SHOW, CANCELLED, BANNED), a unique QR token for organizer check-in, and a constraint tying ATTENDED status to a check-in timestamp.",
+   "tags": [
+    "database",
+    "migration",
+    "participation",
+    "qr-check-in",
+    "join-table"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "table:supabase/migrations/20261113000003_participation_reliability.sql:reliability_log",
+   "type": "table",
+   "name": "reliability_log",
+   "filePath": "supabase/migrations/20261113000003_participation_reliability.sql",
+   "lineRange": [
+    22,
+    37
+   ],
+   "summary": "Audit table of signed reliability point changes per user (optionally linked to an event, preserved via ON DELETE SET NULL) that explains the history behind each profile's reliability score.",
+   "tags": [
+    "database",
+    "migration",
+    "reliability",
+    "audit-log",
+    "scoring"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261113000004_places.sql:places",
+   "type": "table",
+   "name": "places",
+   "filePath": "supabase/migrations/20261113000004_places.sql",
+   "lineRange": [
+    1,
+    23
+   ],
+   "summary": "Migration creating public.places for restaurants, cafes and other POIs imported from OpenStreetMap, keyed by a unique osm_id for upserts, with raw opening_hours, a jsonb tags bag, and category and lat/lon indexes for map filtering.",
+   "tags": [
+    "database",
+    "migration",
+    "openstreetmap",
+    "geolocation",
+    "map-data"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "config:.mcp.json",
+   "type": "config",
+   "name": ".mcp.json",
+   "filePath": ".mcp.json",
+   "summary": "Claude Code MCP configuration registering the hosted Supabase MCP server over HTTP, scoped to the project's Supabase project ref with docs, database, debugging, functions and branching features enabled.",
+   "tags": [
+    "configuration",
+    "mcp",
+    "supabase",
+    "tooling"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "document:AGENTS.md",
+   "type": "document",
+   "name": "AGENTS.md",
+   "filePath": "AGENTS.md",
+   "summary": "Contributor and AI-agent rules for the hackathon project: the Connected Communities problem statement, working rules (tests, DOCS.md updates, knowledge graphs, no co-authored commits), the core feature set, and the Spring Boot/Supabase/Expo tech stack with required package layout.",
+   "tags": [
+    "documentation",
+    "development",
+    "guidelines",
+    "project-overview"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "document:DOCS.md",
+   "type": "document",
+   "name": "DOCS.md",
+   "filePath": "DOCS.md",
+   "summary": "Living project documentation covering architecture, configuration and keys, Supabase MCP setup, the applied database schema and its tests, current repo state, external data sources (STPT, LiveTickets, OpenStreetMap, Gemini) and the agreed reliability-point rules.",
+   "tags": [
+    "documentation",
+    "architecture",
+    "database",
+    "configuration",
+    "external-apis"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "document:PLAN.md",
+   "type": "document",
+   "name": "PLAN.md",
+   "filePath": "PLAN.md",
+   "summary": "Step-by-step implementation plan split into three parallel tracks, with a dependency map and 17 task groups spanning foundation, database, backend features (users, events, QR check-in, imports, places, transit, routing, AI) and the Expo mobile pages, plus cut order and open questions.",
+   "tags": [
+    "documentation",
+    "planning",
+    "roadmap",
+    "task-list"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "document:README.md",
+   "type": "document",
+   "name": "README.md",
+   "filePath": "README.md",
+   "summary": "Placeholder README containing only the project title; run instructions are planned for the final polish step.",
+   "tags": [
+    "documentation",
+    "entry-point",
+    "placeholder"
+   ],
+   "complexity": "simple",
+   "languageNotes": "Saved as UTF-16 with a BOM, unlike the other UTF-8 Markdown files."
+  },
+  {
+   "id": "config:backend/build.gradle",
+   "type": "config",
+   "name": "build.gradle",
+   "filePath": "backend/build.gradle",
+   "summary": "Gradle build script for the Spring Boot 4.1.2 backend targeting Java 21, declaring JPA, Security, Validation, Web MVC and PostgreSQL driver dependencies plus their test starters on the JUnit Platform.",
+   "tags": [
+    "configuration",
+    "build-system",
+    "gradle",
+    "spring-boot",
+    "dependencies"
+   ],
+   "complexity": "simple",
+   "languageNotes": "Uses a Gradle Java toolchain to pin JDK 21 and the io.spring.dependency-management plugin so Spring starters are declared without explicit versions."
+  },
+  {
+   "id": "file:backend/gradlew.bat",
+   "type": "file",
+   "name": "gradlew.bat",
+   "filePath": "backend/gradlew.bat",
+   "summary": "Standard auto-generated Gradle Wrapper launcher for Windows that locates a Java installation (JAVA_HOME or PATH) and runs the wrapper jar so the backend builds with the pinned Gradle version.",
+   "tags": [
+    "script",
+    "build-system",
+    "gradle-wrapper",
+    "windows",
+    "boilerplate"
+   ],
+   "complexity": "moderate",
+   "languageNotes": "Windows batch script using goto labels (:findJavaFromJavaHome, :execute) as pseudo-functions and setlocal to scope environment variables."
+  },
+  {
+   "id": "function:backend/gradlew.bat:findJavaFromJavaHome",
+   "type": "function",
+   "name": "findJavaFromJavaHome",
+   "filePath": "backend/gradlew.bat",
+   "lineRange": [
+    84,
+    98
+   ],
+   "summary": "Batch label that resolves java.exe from the JAVA_HOME environment variable and reports an error if JAVA_HOME points to an invalid directory.",
+   "tags": [
+    "java-detection",
+    "environment",
+    "error-handling"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:backend/gradlew.bat:execute",
+   "type": "function",
+   "name": "execute",
+   "filePath": "backend/gradlew.bat",
+   "lineRange": [
+    99,
+    109
+   ],
+   "summary": "Batch label that sets up the classpath to the gradle-wrapper jar and launches the Gradle Wrapper main class with the collected JVM options and command-line arguments.",
+   "tags": [
+    "launcher",
+    "gradle-wrapper",
+    "process-execution"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "config:backend/settings.gradle",
+   "type": "config",
+   "name": "settings.gradle",
+   "filePath": "backend/settings.gradle",
+   "summary": "Gradle settings file that names the root project 'backend' for the single-module Spring Boot build.",
+   "tags": [
+    "configuration",
+    "build-system",
+    "gradle",
+    "project-settings"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:backend/.gitattributes",
+   "type": "file",
+   "name": ".gitattributes",
+   "filePath": "backend/.gitattributes",
+   "summary": "Git attributes for the backend that force LF endings for the gradlew shell script, CRLF for Windows batch files, and treat jars as binary.",
+   "tags": [
+    "configuration",
+    "git",
+    "line-endings",
+    "build-system"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "config:backend/gradle/wrapper/gradle-wrapper.properties",
+   "type": "config",
+   "name": "gradle-wrapper.properties",
+   "filePath": "backend/gradle/wrapper/gradle-wrapper.properties",
+   "summary": "Gradle wrapper settings pinning the Gradle 9.8.2 binary distribution, its download location, network timeout and URL validation.",
+   "tags": [
+    "configuration",
+    "gradle",
+    "build-system",
+    "wrapper"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:backend/gradlew",
+   "type": "file",
+   "name": "gradlew",
+   "filePath": "backend/gradlew",
+   "summary": "Standard generated POSIX shell launcher for the Gradle wrapper that locates Java and runs the pinned Gradle version to build the Spring Boot backend.",
+   "tags": [
+    "script",
+    "build-system",
+    "gradle",
+    "wrapper",
+    "generated"
+   ],
+   "complexity": "moderate",
+   "languageNotes": "Auto-generated by Gradle; written in portable POSIX sh to run across Linux, macOS, Cygwin and MSYS."
+  },
+  {
+   "id": "file:backend/src/main/java/com/unihack8/backend/BackendApplication.java",
+   "type": "file",
+   "name": "BackendApplication.java",
+   "filePath": "backend/src/main/java/com/unihack8/backend/BackendApplication.java",
+   "summary": "Spring Boot entry point for the unihack8 backend API that bootstraps the application context.",
+   "tags": [
+    "entry-point",
+    "spring-boot",
+    "java",
+    "bootstrap",
+    "tested"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:backend/src/main/java/com/unihack8/backend/BackendApplication.java:BackendApplication",
+   "type": "class",
+   "name": "BackendApplication",
+   "filePath": "backend/src/main/java/com/unihack8/backend/BackendApplication.java",
+   "lineRange": [
+    6,
+    13
+   ],
+   "summary": "@SpringBootApplication class whose main method launches the backend with SpringApplication.run.",
+   "tags": [
+    "entry-point",
+    "spring-boot",
+    "bootstrap"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:backend/src/main/resources/application-local.properties.example",
+   "type": "file",
+   "name": "application-local.properties.example",
+   "filePath": "backend/src/main/resources/application-local.properties.example",
+   "summary": "Template for the git-ignored local Spring profile listing the secrets the backend needs: Supabase URL and legacy JWT secret, session-pooler datasource credentials, Gemini API key and models, and the OpenTripPlanner base URL.",
+   "tags": [
+    "configuration",
+    "secrets-template",
+    "supabase",
+    "security",
+    "spring-boot"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "config:backend/src/main/resources/application.properties",
+   "type": "config",
+   "name": "application.properties",
+   "filePath": "backend/src/main/resources/application.properties",
+   "summary": "Base Spring Boot configuration that only sets the application name to backend; real settings come from the local profile file.",
+   "tags": [
+    "configuration",
+    "spring-boot",
+    "properties"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:backend/src/test/java/com/unihack8/backend/BackendApplicationTests.java",
+   "type": "file",
+   "name": "BackendApplicationTests.java",
+   "filePath": "backend/src/test/java/com/unihack8/backend/BackendApplicationTests.java",
+   "summary": "Spring Boot smoke test that verifies the backend application context loads.",
+   "tags": [
+    "test",
+    "spring-boot",
+    "junit",
+    "smoke-test"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:backend/src/test/java/com/unihack8/backend/BackendApplicationTests.java:BackendApplicationTests",
+   "type": "class",
+   "name": "BackendApplicationTests",
+   "filePath": "backend/src/test/java/com/unihack8/backend/BackendApplicationTests.java",
+   "lineRange": [
+    6,
+    13
+   ],
+   "summary": "@SpringBootTest class with a contextLoads test ensuring the Spring context starts without errors.",
+   "tags": [
+    "test",
+    "spring-boot",
+    "junit"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "document:docs/API.md",
+   "type": "document",
+   "name": "API.md",
+   "filePath": "docs/API.md",
+   "summary": "REST API contract for the mobile app covering conventions (paging, errors), shared objects, and endpoints for users, events with join/ban/QR check-in, places, STPT transit, routing plans and the AI chat assistant, each mapped to PLAN tasks.",
+   "tags": [
+    "documentation",
+    "api-schema",
+    "rest",
+    "contract"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "document:infra/otp/README.md",
+   "type": "document",
+   "name": "README.md",
+   "filePath": "infra/otp/README.md",
+   "summary": "Describes the planned OpenTripPlanner 2 routing server on port 8081 for walking and transit directions, its future docker-compose setup, Timisoara OSM extract and STPT GTFS feed, and notes that large data files are git-ignored.",
+   "tags": [
+    "documentation",
+    "infrastructure",
+    "routing",
+    "opentripplanner"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:supabase/tests/schema_checks.sql",
+   "type": "file",
+   "name": "schema_checks.sql",
+   "filePath": "supabase/tests/schema_checks.sql",
+   "summary": "Self-rolling-back PL/pgSQL test block that verifies the Supabase schema: profile creation on sign-up with case-insensitive unique usernames, event constraints and external-source dedupe, participation QR tokens, reliability logging and unique place OSM ids.",
+   "tags": [
+    "test",
+    "database",
+    "schema-definition",
+    "supabase",
+    "plpgsql"
+   ],
+   "complexity": "moderate",
+   "languageNotes": "Runs every check inside one DO block that always raises at the end, so all inserted test rows are rolled back even on the real database."
+  },
+  {
+   "id": "file:supabase/migrations/20261113000001_profiles.sql",
+   "type": "file",
+   "name": "20261113000001_profiles.sql",
+   "filePath": "supabase/migrations/20261113000001_profiles.sql",
+   "lineRange": [
+    1,
+    59
+   ],
+   "summary": "Migration 1: enables pg_trgm, creates the profiles table and the on_auth_user_created trigger (handle_new_user) that creates a profile on Supabase sign-up.",
+   "tags": [
+    "database",
+    "migration",
+    "supabase",
+    "sql",
+    "tested"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:supabase/migrations/20261113000002_events.sql",
+   "type": "file",
+   "name": "20261113000002_events.sql",
+   "filePath": "supabase/migrations/20261113000002_events.sql",
+   "lineRange": [
+    1,
+    49
+   ],
+   "summary": "Migration 2: creates the events table for USER and EXTERNAL events with source rules, coordinate/price checks, search and map indexes, and RLS.",
+   "tags": [
+    "database",
+    "migration",
+    "supabase",
+    "sql",
+    "tested"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:supabase/migrations/20261113000003_participation_reliability.sql",
+   "type": "file",
+   "name": "20261113000003_participation_reliability.sql",
+   "filePath": "supabase/migrations/20261113000003_participation_reliability.sql",
+   "lineRange": [
+    1,
+    37
+   ],
+   "summary": "Migration 3: creates event_participants (join status and QR token) and reliability_log (points history), with RLS.",
+   "tags": [
+    "database",
+    "migration",
+    "supabase",
+    "sql",
+    "tested"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:supabase/migrations/20261113000004_places.sql",
+   "type": "file",
+   "name": "20261113000004_places.sql",
+   "filePath": "supabase/migrations/20261113000004_places.sql",
+   "lineRange": [
+    1,
+    23
+   ],
+   "summary": "Migration 4: creates the places table for OpenStreetMap imports, unique by osm_id, with category and location indexes and RLS.",
+   "tags": [
+    "database",
+    "migration",
+    "supabase",
+    "sql",
+    "tested"
+   ],
+   "complexity": "simple"
+  }
+ ],
+ "edges": [
+  {
+   "source": "table:supabase/migrations/20261113000001_profiles.sql:profiles",
+   "target": "function:supabase/migrations/20261113000001_profiles.sql:handle_new_user",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "function:supabase/migrations/20261113000001_profiles.sql:handle_new_user",
+   "target": "table:supabase/migrations/20261113000001_profiles.sql:profiles",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261113000002_events.sql:events",
+   "target": "table:supabase/migrations/20261113000001_profiles.sql:profiles",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "table:supabase/migrations/20261113000003_participation_reliability.sql:event_participants",
+   "target": "table:supabase/migrations/20261113000002_events.sql:events",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "table:supabase/migrations/20261113000003_participation_reliability.sql:event_participants",
+   "target": "table:supabase/migrations/20261113000001_profiles.sql:profiles",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "table:supabase/migrations/20261113000003_participation_reliability.sql:reliability_log",
+   "target": "table:supabase/migrations/20261113000001_profiles.sql:profiles",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "table:supabase/migrations/20261113000003_participation_reliability.sql:reliability_log",
+   "target": "table:supabase/migrations/20261113000002_events.sql:events",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "table:supabase/migrations/20261113000003_participation_reliability.sql:reliability_log",
+   "target": "table:supabase/migrations/20261113000003_participation_reliability.sql:event_participants",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "table:supabase/migrations/20261113000004_places.sql:places",
+   "target": "table:supabase/migrations/20261113000002_events.sql:events",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:DOCS.md",
+   "target": "config:.mcp.json",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:DOCS.md",
+   "target": "document:PLAN.md",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:DOCS.md",
+   "target": "document:AGENTS.md",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:DOCS.md",
+   "target": "document:docs/API.md",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:DOCS.md",
+   "target": "document:infra/otp/README.md",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:DOCS.md",
+   "target": "config:backend/build.gradle",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:PLAN.md",
+   "target": "document:docs/API.md",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:PLAN.md",
+   "target": "document:AGENTS.md",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:PLAN.md",
+   "target": "config:backend/build.gradle",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:AGENTS.md",
+   "target": "document:PLAN.md",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:AGENTS.md",
+   "target": "document:DOCS.md",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:README.md",
+   "target": "document:DOCS.md",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:DOCS.md",
+   "target": "file:supabase/migrations/20261113000001_profiles.sql",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:DOCS.md",
+   "target": "file:supabase/migrations/20261113000002_events.sql",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:DOCS.md",
+   "target": "file:supabase/migrations/20261113000003_participation_reliability.sql",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:DOCS.md",
+   "target": "file:supabase/migrations/20261113000004_places.sql",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:backend/gradlew.bat",
+   "target": "function:backend/gradlew.bat:findJavaFromJavaHome",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:backend/gradlew.bat",
+   "target": "function:backend/gradlew.bat:execute",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "config:backend/settings.gradle",
+   "target": "config:backend/build.gradle",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:backend/build.gradle",
+   "target": "file:backend/src/main/java/com/unihack8/backend/BackendApplication.java",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:backend/gradlew.bat",
+   "target": "config:backend/gradle/wrapper/gradle-wrapper.properties",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:backend/gradlew.bat",
+   "target": "config:backend/build.gradle",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:backend/src/main/java/com/unihack8/backend/BackendApplication.java",
+   "target": "class:backend/src/main/java/com/unihack8/backend/BackendApplication.java:BackendApplication",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:backend/src/main/java/com/unihack8/backend/BackendApplication.java",
+   "target": "class:backend/src/main/java/com/unihack8/backend/BackendApplication.java:BackendApplication",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:backend/src/test/java/com/unihack8/backend/BackendApplicationTests.java",
+   "target": "class:backend/src/test/java/com/unihack8/backend/BackendApplicationTests.java:BackendApplicationTests",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:backend/src/test/java/com/unihack8/backend/BackendApplicationTests.java",
+   "target": "class:backend/src/test/java/com/unihack8/backend/BackendApplicationTests.java:BackendApplicationTests",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:backend/src/main/java/com/unihack8/backend/BackendApplication.java",
+   "target": "file:backend/src/test/java/com/unihack8/backend/BackendApplicationTests.java",
+   "type": "tested_by",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "config:backend/gradle/wrapper/gradle-wrapper.properties",
+   "target": "file:backend/gradlew",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:backend/gradlew",
+   "target": "config:backend/gradle/wrapper/gradle-wrapper.properties",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:backend/src/main/resources/application.properties",
+   "target": "file:backend/src/main/java/com/unihack8/backend/BackendApplication.java",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:backend/src/main/resources/application-local.properties.example",
+   "target": "file:backend/src/main/java/com/unihack8/backend/BackendApplication.java",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:backend/.gitattributes",
+   "target": "file:backend/gradlew",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "document:docs/API.md",
+   "target": "file:backend/src/main/java/com/unihack8/backend/BackendApplication.java",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:docs/API.md",
+   "target": "document:infra/otp/README.md",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:infra/otp/README.md",
+   "target": "file:backend/src/main/resources/application-local.properties.example",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:supabase/migrations/20261113000001_profiles.sql",
+   "target": "table:supabase/migrations/20261113000001_profiles.sql:profiles",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:supabase/migrations/20261113000001_profiles.sql",
+   "target": "table:supabase/migrations/20261113000001_profiles.sql:profiles",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:supabase/migrations/20261113000001_profiles.sql",
+   "target": "function:supabase/migrations/20261113000001_profiles.sql:handle_new_user",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:supabase/migrations/20261113000002_events.sql",
+   "target": "table:supabase/migrations/20261113000002_events.sql:events",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:supabase/migrations/20261113000002_events.sql",
+   "target": "table:supabase/migrations/20261113000002_events.sql:events",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:supabase/migrations/20261113000003_participation_reliability.sql",
+   "target": "table:supabase/migrations/20261113000003_participation_reliability.sql:event_participants",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:supabase/migrations/20261113000003_participation_reliability.sql",
+   "target": "table:supabase/migrations/20261113000003_participation_reliability.sql:event_participants",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:supabase/migrations/20261113000003_participation_reliability.sql",
+   "target": "table:supabase/migrations/20261113000003_participation_reliability.sql:reliability_log",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:supabase/migrations/20261113000003_participation_reliability.sql",
+   "target": "table:supabase/migrations/20261113000003_participation_reliability.sql:reliability_log",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:supabase/migrations/20261113000004_places.sql",
+   "target": "table:supabase/migrations/20261113000004_places.sql:places",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:supabase/migrations/20261113000004_places.sql",
+   "target": "table:supabase/migrations/20261113000004_places.sql:places",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "document:DOCS.md",
+   "target": "file:backend/src/main/resources/application-local.properties.example",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:PLAN.md",
+   "target": "file:backend/src/main/resources/application-local.properties.example",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:DOCS.md",
+   "target": "file:supabase/tests/schema_checks.sql",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:supabase/migrations/20261113000001_profiles.sql",
+   "target": "file:supabase/tests/schema_checks.sql",
+   "type": "tested_by",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:supabase/migrations/20261113000002_events.sql",
+   "target": "file:supabase/tests/schema_checks.sql",
+   "type": "tested_by",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:supabase/migrations/20261113000003_participation_reliability.sql",
+   "target": "file:supabase/tests/schema_checks.sql",
+   "type": "tested_by",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:supabase/migrations/20261113000004_places.sql",
+   "target": "file:supabase/tests/schema_checks.sql",
+   "type": "tested_by",
+   "direction": "forward",
+   "weight": 0.5
+  }
+ ],
+ "layers": [
+  {
+   "id": "layer:documentation",
+   "name": "Project Documentation",
+   "description": "Hackathon agent rules, the phased feature plan, change log documentation, and the top-level README describing the Timisoara Connected Communities app.",
+   "nodeIds": [
+    "document:AGENTS.md",
+    "document:DOCS.md",
+    "document:PLAN.md",
+    "document:README.md"
+   ]
+  },
+  {
+   "id": "layer:api-contract",
+   "name": "API Contract",
+   "description": "REST API specification for the Spring Boot backend that the planned Expo client will consume (events, check-in, reliability, places, transit).",
+   "nodeIds": [
+    "document:docs/API.md"
+   ]
+  },
+  {
+   "id": "layer:backend-app",
+   "name": "Backend Application",
+   "description": "Spring Boot application entry point and its context-load test, the root of the API that validates Supabase JWTs.",
+   "nodeIds": [
+    "file:backend/src/main/java/com/unihack8/backend/BackendApplication.java",
+    "file:backend/src/test/java/com/unihack8/backend/BackendApplicationTests.java"
+   ]
+  },
+  {
+   "id": "layer:backend-config",
+   "name": "Backend Build & Config",
+   "description": "Gradle build scripts and wrapper plus Spring application properties (including the local Supabase secrets template) that build and configure the backend.",
+   "nodeIds": [
+    "config:backend/build.gradle",
+    "config:backend/settings.gradle",
+    "config:backend/gradle/wrapper/gradle-wrapper.properties",
+    "file:backend/gradlew",
+    "file:backend/gradlew.bat",
+    "file:backend/.gitattributes",
+    "config:backend/src/main/resources/application.properties",
+    "file:backend/src/main/resources/application-local.properties.example"
+   ]
+  },
+  {
+   "id": "layer:database",
+   "name": "Database Schema",
+   "description": "Supabase Postgres migrations defining profiles, events, participation/reliability tracking, and places tables, plus SQL schema checks verifying them.",
+   "nodeIds": [
+    "file:supabase/migrations/20261113000001_profiles.sql",
+    "file:supabase/migrations/20261113000002_events.sql",
+    "file:supabase/migrations/20261113000003_participation_reliability.sql",
+    "file:supabase/migrations/20261113000004_places.sql",
+    "table:supabase/migrations/20261113000001_profiles.sql:profiles",
+    "table:supabase/migrations/20261113000002_events.sql:events",
+    "table:supabase/migrations/20261113000003_participation_reliability.sql:event_participants",
+    "table:supabase/migrations/20261113000003_participation_reliability.sql:reliability_log",
+    "table:supabase/migrations/20261113000004_places.sql:places",
+    "file:supabase/tests/schema_checks.sql"
+   ]
+  },
+  {
+   "id": "layer:infrastructure",
+   "name": "Infrastructure & Tooling",
+   "description": "OpenTripPlanner setup for STPT transit routing and the Supabase MCP server configuration used by development tooling.",
+   "nodeIds": [
+    "document:infra/otp/README.md",
+    "config:.mcp.json"
+   ]
+  }
+ ],
+ "tour": [
+  {
+   "order": 1,
+   "title": "Project Vision and Rules",
+   "description": "The README is only a title, so the real overview lives in AGENTS.md: it states the Connected Communities hackathon problem and the app's core idea for Timisoara, including a filterable map of places, live STPT transit, directions, an AI guide, and community events with QR check-in and reliability points. It also sets the working rules for contributors and AI agents, such as writing tests, updating DOCS.md, and following the prescribed backend package layout.",
+   "nodeIds": [
+    "document:README.md",
+    "document:AGENTS.md"
+   ]
+  },
+  {
+   "order": 2,
+   "title": "The Implementation Plan",
+   "description": "PLAN.md turns the vision from Step 1 into a step-by-step roadmap split into three parallel tracks with a dependency map and 17 task groups spanning foundation, database, backend and frontend work. Read it to understand what already exists (backend skeleton and database) versus what is still planned, such as the Expo mobile client.",
+   "nodeIds": [
+    "document:PLAN.md"
+   ]
+  },
+  {
+   "order": 3,
+   "title": "Living Documentation Hub",
+   "description": "DOCS.md is the most connected file in the project, linking to the architecture, configuration and keys, Supabase MCP setup, the applied database schema and its tests. Because the project rules require updating it with every change, it acts as the authoritative record of what has actually been built so far, complementing the forward-looking plan from Step 2.",
+   "nodeIds": [
+    "document:DOCS.md"
+   ]
+  },
+  {
+   "order": 4,
+   "title": "Users and Profiles Schema",
+   "description": "The data model starts with profiles: one row per Supabase auth user, with a case-insensitive unique username and a trigram index for the user search feature. The handle_new_user trigger automatically creates a profile whenever someone signs up through Supabase Auth, so the backend never has to create profile rows by hand.",
+   "nodeIds": [
+    "file:supabase/migrations/20261113000001_profiles.sql",
+    "table:supabase/migrations/20261113000001_profiles.sql:profiles"
+   ],
+   "languageLesson": "Postgres extensions like pg_trgm enable trigram similarity indexes, which make fuzzy username searches fast. Triggers on auth.users let the database react to sign-ups without any application code."
+  },
+  {
+   "order": 5,
+   "title": "Events on the Map",
+   "description": "The events table stores both user-created (USER) and imported (EXTERNAL) events, with location, capacity, price in lei and an organizer linked to the profiles from Step 4. Check constraints enforce source rules and valid coordinates and prices, while dedicated indexes support map and search queries.",
+   "nodeIds": [
+    "file:supabase/migrations/20261113000002_events.sql",
+    "table:supabase/migrations/20261113000002_events.sql:events"
+   ],
+   "languageLesson": "CHECK constraints push business rules (for example, how USER and EXTERNAL events must be sourced) into the database itself, so invalid rows are rejected no matter which client writes them."
+  },
+  {
+   "order": 6,
+   "title": "Participation and Reliability",
+   "description": "This migration implements the project's signature trust mechanic. event_participants links users to the events from Step 5 with a status lifecycle (JOINED, ATTENDED, NO_SHOW, CANCELLED, BANNED) and a unique QR token used for check-in, while reliability_log is an audit trail of signed point changes that explains each user's reliability score.",
+   "nodeIds": [
+    "file:supabase/migrations/20261113000003_participation_reliability.sql",
+    "table:supabase/migrations/20261113000003_participation_reliability.sql:event_participants",
+    "table:supabase/migrations/20261113000003_participation_reliability.sql:reliability_log"
+   ],
+   "languageLesson": "ON DELETE SET NULL on reliability_log's event reference keeps the point history intact even if the event is later deleted, a common pattern for audit tables."
+  },
+  {
+   "order": 7,
+   "title": "Places from OpenStreetMap",
+   "description": "The places table holds restaurants, cafes and other points of interest imported from OpenStreetMap, powering the category-filtered map. Its unique osm_id makes re-imports safe upserts, and category and location indexes keep map filtering fast; like the other tables, it is protected by Row Level Security.",
+   "nodeIds": [
+    "file:supabase/migrations/20261113000004_places.sql",
+    "table:supabase/migrations/20261113000004_places.sql:places"
+   ]
+  },
+  {
+   "order": 8,
+   "title": "Verifying the Schema",
+   "description": "schema_checks.sql is the most depended-upon node in the graph because it tests the tables introduced in Steps 4-7. It runs as a self-rolling-back PL/pgSQL block that checks behavior such as automatic profile creation on sign-up and case-insensitive unique usernames, leaving the database unchanged afterwards.",
+   "nodeIds": [
+    "file:supabase/tests/schema_checks.sql"
+   ],
+   "languageLesson": "Wrapping SQL tests in a block that rolls back at the end lets you exercise inserts, constraints and triggers against a real database without persisting any test data."
+  },
+  {
+   "order": 9,
+   "title": "The REST API Contract",
+   "description": "docs/API.md defines the contract between the Spring Boot backend and the planned Expo client: paging and error conventions, shared objects, and endpoints for users, events with join, ban and QR check-in, reliability, places and transit. Each endpoint maps onto the tables you just studied, making this the bridge from the data layer to the application layer.",
+   "nodeIds": [
+    "document:docs/API.md"
+   ]
+  },
+  {
+   "order": 10,
+   "title": "Spring Boot Entry Point",
+   "description": "BackendApplication.java bootstraps the Spring application context that will serve the API from Step 9 and validate Supabase JWTs. It is currently a minimal skeleton, and BackendApplicationTests is a smoke test confirming that the context loads, laying the foundation for the domain packages described in AGENTS.md.",
+   "nodeIds": [
+    "file:backend/src/main/java/com/unihack8/backend/BackendApplication.java",
+    "file:backend/src/test/java/com/unihack8/backend/BackendApplicationTests.java"
+   ],
+   "languageLesson": "@SpringBootApplication combines @Configuration, @EnableAutoConfiguration and @ComponentScan, so classes in sub-packages of com.unihack8.backend are discovered automatically."
+  },
+  {
+   "order": 11,
+   "title": "Build and Configuration",
+   "description": "build.gradle declares a Spring Boot 4.1.2 backend on Java 21 with JPA, Security, Validation, Web MVC and the PostgreSQL driver. application.properties holds only the app name, while the git-ignored local profile (templated by application-local.properties.example) supplies the Supabase URL, legacy JWT secret and session-pooler database settings, keeping secrets out of version control.",
+   "nodeIds": [
+    "config:backend/build.gradle",
+    "config:backend/settings.gradle",
+    "config:backend/src/main/resources/application.properties",
+    "file:backend/src/main/resources/application-local.properties.example"
+   ],
+   "languageLesson": "Spring profiles load application-{profile}.properties on top of the base file, so committing only an .example template documents required secrets without leaking them."
+  },
+  {
+   "order": 12,
+   "title": "Gradle Wrapper Tooling",
+   "description": "The Gradle wrapper pins Gradle 9.8.2 so every teammate builds the backend with the same version, using gradlew on macOS/Linux and gradlew.bat on Windows. The .gitattributes file forces the correct line endings for each script so the wrapper works across operating systems.",
+   "nodeIds": [
+    "config:backend/gradle/wrapper/gradle-wrapper.properties",
+    "file:backend/gradlew",
+    "file:backend/gradlew.bat",
+    "file:backend/.gitattributes"
+   ]
+  },
+  {
+   "order": 13,
+   "title": "Transit Routing and Dev Tooling",
+   "description": "infra/otp/README.md describes the planned OpenTripPlanner 2 server on port 8081 that will provide walking and STPT transit directions, completing the routing features promised in Step 1. Meanwhile, .mcp.json registers the hosted Supabase MCP server so AI coding tools can inspect the project's database directly.",
+   "nodeIds": [
+    "document:infra/otp/README.md",
+    "config:.mcp.json"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,294 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "0cfd3cb6748d7dc3bc25805058d122b869cd9adc",
+  "generatedAt": "2026-11-13T17:35:17.487Z",
+  "files": {
+    ".mcp.json": {
+      "filePath": ".mcp.json",
+      "contentHash": "34bc53e312d8287a2b46b4d9b7a7734eebef46da1d63c3da3fbe9ddda47e0d73",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 8,
+      "hasStructuralAnalysis": false
+    },
+    "AGENTS.md": {
+      "filePath": "AGENTS.md",
+      "contentHash": "60a9c4fedec4c3ed54a29035374c59f83be94d042d685a8250c440978e3db0c6",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 49,
+      "hasStructuralAnalysis": false
+    },
+    "DOCS.md": {
+      "filePath": "DOCS.md",
+      "contentHash": "75234313ceb47d5dcb3e4c2fcde2d91318c6f03d8c05897e3117c56554237e49",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 149,
+      "hasStructuralAnalysis": false
+    },
+    "PLAN.md": {
+      "filePath": "PLAN.md",
+      "contentHash": "2e4117ed33b52c49de5972e2bf2857f79de3e68984cd09ebe81fc444fd826b76",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 319,
+      "hasStructuralAnalysis": false
+    },
+    "README.md": {
+      "filePath": "README.md",
+      "contentHash": "053154b11874e37aeba87c7d9a6c1cd34f06a9bf864931eb84b5cf13d02edcf0",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2,
+      "hasStructuralAnalysis": false
+    },
+    "backend/.gitattributes": {
+      "filePath": "backend/.gitattributes",
+      "contentHash": "fe495e43270d435b102b52732f83383357ac97d0633e8644b4b41a65bb03a66f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": false
+    },
+    "backend/build.gradle": {
+      "filePath": "backend/build.gradle",
+      "contentHash": "7eaaa64e9b4b611a4205b4c65d4522dde0e17fffc01b000f94bfa1c91650af8c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 36,
+      "hasStructuralAnalysis": false
+    },
+    "backend/gradle/wrapper/gradle-wrapper.properties": {
+      "filePath": "backend/gradle/wrapper/gradle-wrapper.properties",
+      "contentHash": "ffe4af3144342cf1745fd6627d356f4c3be583cdd8d72a8effa4a91fda724b67",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 10,
+      "hasStructuralAnalysis": false
+    },
+    "backend/gradlew": {
+      "filePath": "backend/gradlew",
+      "contentHash": "a5a5c199ba02189ae8c46a334223371a20599d9c298ef65e7540ede4a3f72d59",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 249,
+      "hasStructuralAnalysis": false
+    },
+    "backend/gradlew.bat": {
+      "filePath": "backend/gradlew.bat",
+      "contentHash": "f17917f8dbe61182b149273ee78090fec1197442c3f38276af907bfa5190db16",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 113,
+      "hasStructuralAnalysis": false
+    },
+    "backend/settings.gradle": {
+      "filePath": "backend/settings.gradle",
+      "contentHash": "3f0d322bb1fc8d36fe4532e8319795aed819bce956f9e390d60942c7bde3ae84",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2,
+      "hasStructuralAnalysis": false
+    },
+    "backend/src/main/java/com/unihack8/backend/BackendApplication.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/BackendApplication.java",
+      "contentHash": "82be85cd51edeab419d8ec4687077a7b3f0d6d2884ba6dcfabbbb77f49d00189",
+      "functions": [
+        {
+          "name": "main",
+          "params": [
+            "args"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "BackendApplication",
+          "methods": [
+            "main"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.springframework.boot.SpringApplication",
+          "specifiers": [
+            "SpringApplication"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.autoconfigure.SpringBootApplication",
+          "specifiers": [
+            "SpringBootApplication"
+          ]
+        }
+      ],
+      "exports": [
+        "main",
+        "BackendApplication"
+      ],
+      "totalLines": 14,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/resources/application-local.properties.example": {
+      "filePath": "backend/src/main/resources/application-local.properties.example",
+      "contentHash": "a67a386c27ee9aee8e64735d15b734ed9fb790b8cc35de0899d8754579c8203e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 28,
+      "hasStructuralAnalysis": false
+    },
+    "backend/src/main/resources/application.properties": {
+      "filePath": "backend/src/main/resources/application.properties",
+      "contentHash": "01c234e5da41f73936e043030d8608f53b47ec50d52f905d1821fdc84c7cecca",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2,
+      "hasStructuralAnalysis": false
+    },
+    "backend/src/test/java/com/unihack8/backend/BackendApplicationTests.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/BackendApplicationTests.java",
+      "contentHash": "a6efd24bf5aa5022eb0c82418bca20540eedf5438be5ab9d28f2006bf2ac1606",
+      "functions": [
+        {
+          "name": "contextLoads",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "BackendApplicationTests",
+          "methods": [
+            "contextLoads"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 8
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.test.context.SpringBootTest",
+          "specifiers": [
+            "SpringBootTest"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 14,
+      "hasStructuralAnalysis": true
+    },
+    "docs/API.md": {
+      "filePath": "docs/API.md",
+      "contentHash": "8f651e22b4c8061488da63b6cdf066a4bbdf9aa05dc43a3dd19897e3d9735731",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 587,
+      "hasStructuralAnalysis": false
+    },
+    "infra/otp/README.md": {
+      "filePath": "infra/otp/README.md",
+      "contentHash": "39e85e0962abd886185055bde477e371f27e5dce1c85d323bc6713b2869594b0",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 15,
+      "hasStructuralAnalysis": false
+    },
+    "supabase/migrations/20261113000001_profiles.sql": {
+      "filePath": "supabase/migrations/20261113000001_profiles.sql",
+      "contentHash": "b2d0bc872db2b968c0d62a6f89c513734f9fec68499846e5379fcf265f1b5688",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 60,
+      "hasStructuralAnalysis": false
+    },
+    "supabase/migrations/20261113000002_events.sql": {
+      "filePath": "supabase/migrations/20261113000002_events.sql",
+      "contentHash": "6092919ff59aef6bc0506066f9bffa8a2ebb1e6c9abee1fd2d3184f2574d78db",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 50,
+      "hasStructuralAnalysis": false
+    },
+    "supabase/migrations/20261113000003_participation_reliability.sql": {
+      "filePath": "supabase/migrations/20261113000003_participation_reliability.sql",
+      "contentHash": "b7d48c6b4bd3d2d4d8b750eb0f2c34feb724861d734f1297ef7f602d7da4c207",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 38,
+      "hasStructuralAnalysis": false
+    },
+    "supabase/migrations/20261113000004_places.sql": {
+      "filePath": "supabase/migrations/20261113000004_places.sql",
+      "contentHash": "137a4938a0891306f86c8734905dfda63a671b2d6a79dcd53045068f5ebbc0cc",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 24,
+      "hasStructuralAnalysis": false
+    },
+    "supabase/tests/schema_checks.sql": {
+      "filePath": "supabase/tests/schema_checks.sql",
+      "contentHash": "50b54f360da1ae14d4ebc2ecc5049acf47983bc935dd771521ac0452f11fdbb3",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 186,
+      "hasStructuralAnalysis": false
+    }
+  }
+}

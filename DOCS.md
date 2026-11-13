@@ -8,7 +8,7 @@ Mobile app for Timișoara: events (imported and user-created) with QR check-in a
 
 - **Plan and task list:** `PLAN.md`
 - **Rules for contributors and agents:** `AGENTS.md`
-- **API contract:** `docs/API.md` (created in PLAN task 1.6)
+- **API contract:** `docs/API.md` — every endpoint with request/response examples, error codes and conventions. Change it before the code.
 
 ## Architecture
 
@@ -75,8 +75,10 @@ Applied to Supabase on 2026-11-13 from `supabase/migrations/` (four migrations, 
 
 - `backend/`: empty Spring Boot 4.1.2 skeleton (Java 21, Gradle; web, security, validation, JPA, PostgreSQL driver). No features yet.
 - `supabase/`: migrations and schema tests for task 2, applied.
-- `mobile/`, `infra/`, `docs/`: not created yet.
-- Supabase project: created, MCP connected, database schema applied (no data).
+- `docs/API.md`: API contract (task 1.6).
+- `infra/otp/`: folder for OpenTripPlanner (README only; the server is set up in task 10). Its large data files are git-ignored.
+- `frontend/` (Expo app, task 12.1): not created yet — the frontend teammates create it. Each teammate creates their own `<name>_dev` branch.
+- Supabase project: created, MCP connected, email sign-in on with "Confirm email" off, database schema applied (no data).
 
 ## External data sources
 
@@ -122,10 +124,30 @@ Checked against Google's documentation on 2026-11-13.
 - **Free-tier limit on web search:** free only on `gemini-2.5-flash` / `gemini-2.5-flash-lite` (500 requests per day); both are redirected to newer models on 1 December 2026. On the newer free models it is listed as not available; on a paid account 5,000 searches per month are free. The hackathon ends on 15 November 2026, before that date, so the web lookup uses `gemini-2.5-flash` for free. The price page was long and only partly read — test one web lookup early to confirm.
 - **Why not Google Maps data directly:** Google's terms forbid scraping or bulk-downloading its places and saving their names, addresses and reviews, and its Places API has no menu or dish-price data.
 
+## Reliability rules (PLAN task 1.7, agreed 2026-11-13)
+
+| Event | Points | Log `reason` |
+|---|---|---|
+| Starting score | 100 | — |
+| Checked in by the organiser (QR scan) | +5 | `ATTENDED` |
+| Still `JOINED` when the event ends (no-show) | −10 | `NO_SHOW` |
+| Leaves less than 2 hours before the start | −2 | `LATE_CANCEL` |
+| Leaves earlier | 0 | — (no log entry) |
+
+- The score never goes below 0: a change that would go lower stops at 0 (the log still records the full rule value).
+- Being banned by an organiser costs no points by itself.
+- Only `USER` events count; imported events cannot be joined.
+- An event with no end time is treated as ending 3 hours after it starts (for no-shows and check-in).
+
 ## Features
 
-Sections are added here as each PLAN task is implemented: Users, Events, Reliability, Places, Transit, Routing, AI, Mobile.
+Sections are added here as each PLAN task is implemented: Users, Events, Reliability, Places, Transit, Routing, AI, Frontend.
 
 ## Knowledge graph
 
-Not generated yet — there is no feature code. First graph is created in PLAN task 1.8 and updated with every change after that.
+One graph for the whole repo, made with the **Understand-Anything** plugin (rule from AGENTS.md: keep it updated with every change).
+
+- **Files:** `.ua/knowledge-graph.json` (the graph), `.ua/meta.json` and `.ua/fingerprints.json` (let the next run update only changed files), `.ua/.understandignore` (what is left out: secrets such as `application-local.properties` and `.env`, build output, `.claude/`). Scratch folders under `.ua/` are git-ignored.
+- **First version (2026-11-13, commit `0cfd3cb` + uncommitted task-1 work):** 22 files, 32 nodes, 62 edges, 6 layers (Project Documentation, API Contract, Backend Application, Backend Build & Config, Database Schema, Infrastructure & Tooling), 13-step guided tour.
+- **Update it** after each change: run `/understand` (Claude Code) or the same command in Codex; it only reanalyzes changed files. `/understand-dashboard` opens the interactive view.
+- **Codex:** the plugin's README lists Codex as supported (install it with the plugin's install script for `codex`); not tested by us yet.
