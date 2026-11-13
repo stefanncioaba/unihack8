@@ -1,46 +1,82 @@
-// AI tab. Foundation only: the chat itself is PLAN task 15, so this shows the page frame with a clear message.
-import { StyleSheet, View } from 'react-native';
-import Svg, { Circle, Defs, LinearGradient, Stop } from 'react-native-svg';
+// AI tab: chat with the city guide (PLAN 15.1–15.3). The conversation lives in memory only; "New chat" clears it.
+import { useRef } from 'react';
+import { FlatList, StyleSheet, View } from 'react-native';
 
+import { ChatBubble, ErrorBubble, ThinkingBubble } from '@/features/ai/ChatBubble';
+import { ChatInput } from '@/features/ai/ChatInput';
+import { ChatMotif } from '@/features/ai/ChatMotif';
+import { ResultCards } from '@/features/ai/ResultCards';
+import { Suggestions } from '@/features/ai/Suggestions';
+import { useCurrentPosition } from '@/features/location/LocationProvider';
+import { useAiChat, type UiMessage } from '@/hooks/useAi';
+import { Button } from '@/ui/Button';
 import { Screen } from '@/ui/Screen';
 import { Text } from '@/ui/Text';
-import { colors } from '@/ui/theme';
 
-/** Abstract cyan/orange light motif for the page's breathing zone. */
-function Motif() {
-  return (
-    <Svg width={160} height={160} viewBox="0 0 160 160">
-      <Defs>
-        <LinearGradient id="aiRing" x1="0" y1="0" x2="1" y2="1">
-          <Stop offset="0" stopColor={colors.teal} />
-          <Stop offset="1" stopColor={colors.orange} />
-        </LinearGradient>
-      </Defs>
-      <Circle cx="80" cy="80" r="62" stroke="url(#aiRing)" strokeWidth="2" fill="none" opacity={0.85} />
-      <Circle cx="80" cy="80" r="40" stroke={colors.teal} strokeWidth="1" fill="none" opacity={0.4} />
-      <Circle cx="80" cy="80" r="18" fill="url(#aiRing)" opacity={0.9} />
-    </Svg>
-  );
-}
-
-/** Placeholder page until the chat is built. */
+/** Chat screen. */
 export default function AiScreen() {
+  const { position, isFallback } = useCurrentPosition();
+  // Without permission the backend gets no location (it then cannot sort by distance).
+  const chat = useAiChat(isFallback ? null : position);
+  const listRef = useRef<FlatList<UiMessage>>(null);
+  const empty = chat.messages.length === 0;
+
   return (
     <Screen glow="warm">
-      <View style={styles.zone}>
-        <Motif />
+      {empty ? (
+        <View style={styles.hero}>
+          <View style={styles.motif} testID="chat-motif">
+            <ChatMotif />
+          </View>
+          <Text variant="title" style={styles.center} accessibilityRole="header">
+            Ask about the city
+          </Text>
+          <Text tone="muted" style={[styles.center, { marginTop: 6 }]}>
+            Places to eat, things to do, how to get there.
+          </Text>
+        </View>
+      ) : (
+        <>
+          <View style={styles.header}>
+            <Text variant="title" accessibilityRole="header">
+              Ask about the city
+            </Text>
+            <Button title="New chat" variant="secondary" small icon="create-outline" iconLeft onPress={chat.reset} />
+          </View>
+          <FlatList
+            ref={listRef}
+            testID="chat-list"
+            data={chat.messages}
+            keyExtractor={(m) => m.id}
+            renderItem={({ item }) => (
+              <ChatBubble message={item}>
+                <ResultCards message={item} />
+              </ChatBubble>
+            )}
+            ListFooterComponent={
+              chat.thinking ? <ThinkingBubble /> : chat.error ? <ErrorBubble error={chat.error} onRetry={chat.retry} /> : null
+            }
+            onContentSizeChange={() => listRef.current?.scrollToEnd({ animated: true })}
+            keyboardShouldPersistTaps="handled"
+            showsVerticalScrollIndicator={false}
+            style={{ flex: 1 }}
+            contentContainerStyle={{ paddingTop: 8 }}
+          />
+        </>
+      )}
+
+      {empty && <Suggestions onPick={chat.send} />}
+      <View style={styles.input}>
+        <ChatInput onSend={chat.send} disabled={chat.thinking} />
       </View>
-      <Text variant="title" style={styles.center} accessibilityRole="header">
-        Ask about the city
-      </Text>
-      <Text tone="muted" style={[styles.center, { marginTop: 8 }]}>
-        Soon you will be able to ask where to eat, what to do this weekend and how to get there. This page is coming next.
-      </Text>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  zone: { alignItems: 'center', paddingTop: 56, paddingBottom: 24 },
+  hero: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingBottom: 24 },
+  motif: { marginBottom: 18 },
   center: { textAlign: 'center' },
+  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingTop: 10, paddingBottom: 6 },
+  input: { paddingBottom: 12 },
 });

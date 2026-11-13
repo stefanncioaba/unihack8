@@ -9,8 +9,6 @@ import {
   getMe,
   getMyTicket,
   getParticipants,
-  getTransitAlerts,
-  getTransitSummary,
   getUser,
   joinEvent,
   leaveEvent,
@@ -18,7 +16,6 @@ import {
   searchUsers,
 } from '@/api/endpoints';
 import type { EventQuery, NewEvent } from '@/api/types';
-import { toNearParam, type Coordinates } from '@/lib/geo';
 
 export const EVENTS_PAGE_SIZE = 10;
 
@@ -31,8 +28,6 @@ export const keys = {
   event: (id: string) => ['events', 'detail', id] as const,
   participants: (id: string) => ['events', 'participants', id] as const,
   ticket: (id: string) => ['events', 'ticket', id] as const,
-  summary: (near: string) => ['transit', 'summary', near] as const,
-  alerts: ['transit', 'alerts'] as const,
 };
 
 /** The signed-in user's profile. */
@@ -85,17 +80,6 @@ export function useParticipants(id: string | undefined, enabled = true) {
 /** My QR ticket for an event. */
 export function useMyTicket(id: string | undefined) {
   return useQuery({ queryKey: keys.ticket(id ?? ''), queryFn: () => getMyTicket(id!), enabled: !!id, retry: false });
-}
-
-/** Home page transit line near a position. */
-export function useTransitSummary(position: Coordinates) {
-  const near = toNearParam(position);
-  return useQuery({ queryKey: keys.summary(near), queryFn: () => getTransitSummary(near), refetchInterval: 60_000 });
-}
-
-/** Active service alerts. */
-export function useTransitAlerts() {
-  return useQuery({ queryKey: keys.alerts, queryFn: getTransitAlerts, refetchInterval: 5 * 60_000 });
 }
 
 /** Refreshes everything that depends on an event after join / leave / ban / check-in. */

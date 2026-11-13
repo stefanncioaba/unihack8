@@ -1,6 +1,8 @@
 // Seed data for the mock backend. Shapes follow docs/API.md. Dates are relative to "now"
 // so the demo always shows upcoming events.
-import type { EventCategory, EventSource, ParticipantStatus, TransitAlert, UserSummary } from '@/api/types';
+import type { EventCategory, EventSource, ParticipantStatus, UserSummary } from '@/api/types';
+import type { TransitAlert } from '@/api/types.transit';
+import type { ReliabilityEntry } from '@/api/types.users';
 import { bucharestToUtcIso, toBucharest } from '@/lib/time';
 
 export const MOCK_ME_ID = '11111111-1111-4111-8111-111111111111';
@@ -35,6 +37,8 @@ export type MockState = {
   createdAt: Record<string, string>;
   events: MockEvent[];
   attended: Record<string, string[]>;
+  /** Reliability history per user id, newest first (docs/API.md → GET /users/{id}/reliability). */
+  reliabilityLog: Record<string, ReliabilityEntry[]>;
   alerts: TransitAlert[];
 };
 
@@ -169,19 +173,46 @@ export function seed(): MockState {
     external(13, 'Vinyl party', 'PARTY', 'Fabrica', at(5, 23), [30, 50], 45.7473, 21.2412),
     external(14, 'Stand-up comedy show', 'THEATRE', 'Sala Capitol', at(6, 20), [70, 110], 45.7561, 21.2271),
     // Past events: hidden from lists, used for the "attended" history of profiles.
-    user(101, 'Autumn photo walk', 'ART', USER_IDS.stefan, 10, 0, at(-10, 15), 'Parcul Rozelor', 45.7507, 21.2297),
-    user(102, 'Retro gaming evening', 'GAMES', USER_IDS.andrei, 10, 0, at(-5, 19), 'Scârț Loc Lejer', 45.7489, 21.2318),
+    user(101, 'Autumn photo walk', 'ART', USER_IDS.stefan, 10, 0, at(-10, 15), 'Parcul Rozelor', 45.7507, 21.2297, [
+      { ...p(MOCK_ME_ID, 'ATTENDED', 'demo-ticket-me-101'), joinedAt: at(-11, 18) },
+    ]),
+    user(102, 'Retro gaming evening', 'GAMES', USER_IDS.andrei, 10, 0, at(-5, 19), 'Scârț Loc Lejer', 45.7489, 21.2318, [
+      { ...p(MOCK_ME_ID, 'ATTENDED', 'demo-ticket-me-102'), joinedAt: at(-6, 18) },
+    ]),
+    user(103, 'Open mic night', 'ART', USER_IDS.andrei, 25, 3, at(-3, 20), 'Café Central', 45.7552, 21.2285, [
+      { ...p(MOCK_ME_ID, 'NO_SHOW', 'demo-ticket-me-103'), joinedAt: at(-4, 18) },
+    ]),
+  ];
+
+  const attended: Record<string, string[]> = {
+    [USER_IDS.me]: [eventId(102), eventId(101)],
+    [USER_IDS.stella]: [eventId(101), eventId(102)],
+    [USER_IDS.stefan]: [eventId(101)],
+    [USER_IDS.andrei]: [eventId(102)],
+  };
+
+  /** Reliability history: +5 for every attended event, plus my one no-show (net zero for me: 100 stays 100). */
+  const reliabilityLog: Record<string, ReliabilityEntry[]> = Object.fromEntries(
+    Object.entries(attended).map(([uid, ids]) => [
+      uid,
+      ids.map((id) => {
+        const ev = events.find((e) => e.id === id)!;
+        return { pointsChange: 5, reason: 'ATTENDED' as const, eventId: ev.id, eventTitle: ev.title, createdAt: ev.endsAt ?? ev.startsAt };
+      }),
+    ]),
+  );
+  const noShow = events.find((e) => e.id === eventId(103))!;
+  reliabilityLog[USER_IDS.me] = [
+    { pointsChange: -10, reason: 'NO_SHOW', eventId: noShow.id, eventTitle: noShow.title, createdAt: noShow.startsAt },
+    ...reliabilityLog[USER_IDS.me],
   ];
 
   return {
     users,
     createdAt: Object.fromEntries(users.map((u) => [u.id, '2026-11-13T15:20:00Z'])),
     events,
-    attended: {
-      [USER_IDS.stella]: [eventId(101), eventId(102)],
-      [USER_IDS.stefan]: [eventId(101)],
-      [USER_IDS.andrei]: [eventId(102)],
-    },
+    attended,
+    reliabilityLog,
     alerts: [
       {
         id: 'A155',

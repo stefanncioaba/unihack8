@@ -257,12 +257,12 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 **Needs:** 12. Real data from 5, 8, 9, 10. Use `react-native-maps` (works in Expo Go).
 
-- [ ] **14.1 Map** centred on Timișoara with the user's position.
-- [ ] **14.2 Category filter chips** (list from 8.1) and place markers loaded for the visible area only.
-- [ ] **14.3 Event markers** with a separate on/off toggle; tap opens event details.
-- [ ] **14.4 Transit layer:** stops, live vehicles for a chosen line (refresh every 10 s), tap a stop for next arrivals and last departure.
-- [ ] **14.5 Directions:** pick a destination (marker or long-press) → walking vs walking + public transport, with time estimate, steps and the route drawn on the map.
-- [ ] **14.6 Performance:** cluster markers when zoomed out; debounce reloads while the map moves.
+- [x] **14.1 Map** centred on Timișoara with the user's position.
+- [x] **14.2 Category filter chips** (list from 8.1) and place markers loaded for the visible area only.
+- [x] **14.3 Event markers** with a separate on/off toggle; tap opens event details.
+- [x] **14.4 Transit layer:** stops, live vehicles for a chosen line (refresh every 10 s), tap a stop for next arrivals and last departure.
+- [x] **14.5 Directions:** pick a destination (marker or long-press) → walking vs walking + public transport, with time estimate, steps and the route drawn on the map.
+- [x] **14.6 Performance:** cluster markers when zoomed out; debounce reloads while the map moves.
 
 ---
 
@@ -270,10 +270,10 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 **Needs:** 12. Real data from 11.
 
-- [ ] **15.1 Chat screen:** message list, input, "thinking" indicator, error + retry.
-- [ ] **15.2 "New chat" button** that clears the conversation (kept in memory only — nothing is saved).
-- [ ] **15.3 Suggested questions** on an empty chat ("Where can I eat pizza near me?", "What can I do this weekend?").
-- [ ] **15.4 Result cards** for places and events in an answer, with "show on map" and "open event".
+- [x] **15.1 Chat screen:** message list, input, "thinking" indicator, error + retry.
+- [x] **15.2 "New chat" button** that clears the conversation (kept in memory only — nothing is saved).
+- [x] **15.3 Suggested questions** on an empty chat ("Where can I eat pizza near me?", "What can I do this weekend?").
+- [x] **15.4 Result cards** for places and events in an answer, with "show on map" and "open event".
 
 ---
 
@@ -281,11 +281,12 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 **Needs:** 12. Real data from 4, 6.
 
-- [ ] **16.1 My profile:** username, reliability score with a short explanation of how it changes.
-- [ ] **16.2 Change username** with inline validation and the "already taken" error.
-- [ ] **16.3 Events I attended** and upcoming events I joined or organise.
+- [x] **16.1 My profile:** username, reliability score with a short explanation of how it changes.
+- [x] **16.2 Change username** with inline validation and the "already taken" error.
+- [x] **16.3 Events I attended** and upcoming events I joined or organise.
 - [x] **16.4 Public profile screen** (other users): username, score, attended events. Reused from 13.4 and 13.8.
 - [x] **16.5 Sign out.**
+- [x] **16.6 Real data:** 16.1–16.3 call the Spring API (`PATCH /users/me`, `GET /users/me/events`, `GET /users/{id}/reliability`) when `EXPO_PUBLIC_USE_MOCKS=false`; pinned by `__tests__/api.users.real.test.ts`.
 
 ---
 

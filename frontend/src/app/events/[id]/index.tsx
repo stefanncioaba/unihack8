@@ -53,7 +53,7 @@ export default function EventDetailsScreen() {
 
   /** Opens the Map tab centred on this event. */
   function showOnMap() {
-    router.push({ pathname: '/map', params: { lat: String(e.lat), lon: String(e.lon), title: e.title } });
+    router.push({ pathname: '/map', params: { lat: String(e.lat), lon: String(e.lon), title: e.title, eventId: e.id, at: String(Date.now()) } });
   }
 
   /** Warns about the late-cancel penalty before leaving. */
