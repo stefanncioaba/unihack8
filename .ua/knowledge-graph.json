@@ -14,6 +14,7 @@
       "properties",
       "shell",
       "sql",
+      "txt",
       "unknown",
       "yaml"
     ],
@@ -29,8 +30,8 @@
       "Expo Router"
     ],
     "description": "Hackathon mobile app for Timișoara (Connected Communities): Spring Boot API + Supabase + Expo app with events and QR reliability points, places map, live STPT transit, routing and an AI guide.",
-    "analyzedAt": "2026-11-13T19:33:33.977Z",
-    "gitCommitHash": "400c16e873916d5053753284cb45279d9b8437d2"
+    "analyzedAt": "2026-11-13T20:25:33.742Z",
+    "gitCommitHash": "08d4274845a60012e2de3431d7f950d4c9035e8d"
   },
   "nodes": [
     {
@@ -5638,20 +5639,6 @@
       "complexity": "simple"
     },
     {
-      "id": "document:PLAN.md",
-      "type": "document",
-      "name": "PLAN.md",
-      "filePath": "PLAN.md",
-      "summary": "Hackathon implementation plan splitting work into three tracks (backend core, city data, mobile) across 17 numbered tasks with a dependency map, definition of done, cut order if time runs short, and open questions; tasks 8-10 (places, transit, routing) are being checked off.",
-      "tags": [
-        "documentation",
-        "planning",
-        "roadmap",
-        "development"
-      ],
-      "complexity": "complex"
-    },
-    {
       "id": "service:infra/otp/docker-compose.yml",
       "type": "service",
       "name": "docker-compose.yml",
@@ -7327,21 +7314,6 @@
       "complexity": "moderate"
     },
     {
-      "id": "document:DOCS.md",
-      "type": "document",
-      "name": "DOCS.md",
-      "filePath": "DOCS.md",
-      "summary": "Living project documentation for the Timisoara app: architecture, configuration and running, the shared backend foundation (security, errors, paging), Supabase database schema, external data sources, reliability rules, and per-feature sections for Users, Places, Transit and Routing, plus knowledge-graph upkeep.",
-      "tags": [
-        "documentation",
-        "architecture",
-        "backend",
-        "database",
-        "development"
-      ],
-      "complexity": "complex"
-    },
-    {
       "id": "document:infra/otp/README.md",
       "type": "document",
       "name": "README.md",
@@ -7370,6 +7342,1494 @@
         "backend"
       ],
       "complexity": "complex"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java",
+      "type": "file",
+      "name": "VenueDirectory.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java",
+      "summary": "Package-private loader for the hand-curated venues.txt resource, mapping normalized LiveTickets venue names to either exact coordinates or a street address to geocode; used by VenueGeocoderImpl for venues OpenStreetMap does not know by name.",
+      "tags": [
+        "data-loader",
+        "geocoding",
+        "event-import",
+        "utility",
+        "tested"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Uses a nested Java record (Entry) as a lightweight value type and an immutable Map.copyOf snapshot for safe concurrent lookups."
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java:VenueDirectory",
+      "type": "class",
+      "name": "VenueDirectory",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java",
+      "lineRange": [
+        19,
+        97
+      ],
+      "summary": "Immutable directory of curated venues keyed by normalized name, built from 'name | address' or 'name | lat,lon' lines and queried with a list of candidate names.",
+      "tags": [
+        "data-model",
+        "geocoding",
+        "event-import",
+        "factory"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java:load",
+      "type": "function",
+      "name": "load",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java",
+      "lineRange": [
+        40,
+        49
+      ],
+      "summary": "Reads the bundled /eventimport/venues.txt classpath resource and parses it, returning an empty directory when the file is missing.",
+      "tags": [
+        "resource-loading",
+        "factory",
+        "event-import"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java:parse",
+      "type": "function",
+      "name": "parse",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java",
+      "lineRange": [
+        52,
+        72
+      ],
+      "summary": "Parses curated venue lines, skipping comments, blanks and malformed lines, and normalizes venue names with the supplied function.",
+      "tags": [
+        "parsing",
+        "validation",
+        "event-import"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java:toEntry",
+      "type": "function",
+      "name": "toEntry",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java",
+      "lineRange": [
+        86,
+        96
+      ],
+      "summary": "Turns a line value into an Entry: two numeric parts become a GeoPoint, anything else is kept as an address to geocode.",
+      "tags": [
+        "parsing",
+        "geocoding",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "type": "file",
+      "name": "VenueGeocoderImplTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "summary": "Data JPA test suite for venue geocoding (PLAN 7.3) against the H2 places table and a local fake Nominatim HTTP server, covering name matching, curated venues.txt entries, bbox filtering, caching, error handling and 1-request-per-second throttling.",
+      "tags": [
+        "test",
+        "geocoding",
+        "event-import",
+        "integration-test"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Spins up a JDK com.sun.net.httpserver.HttpServer as a fake external API and injects a controllable clock and sleeper to test rate limiting deterministically."
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:VenueGeocoderImplTest",
+      "type": "class",
+      "name": "VenueGeocoderImplTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "lineRange": [
+        37,
+        378
+      ],
+      "summary": "JUnit 5 @DataJpaTest class with 24 test cases plus helpers that build VenueGeocoderImpl instances wired to the fake Nominatim server and an optional curated directory.",
+      "tags": [
+        "test",
+        "geocoding",
+        "event-import",
+        "data-jpa-test"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:startServer",
+      "type": "function",
+      "name": "startServer",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "lineRange": [
+        59,
+        73
+      ],
+      "summary": "Starts a fake Nominatim server on 127.0.0.1 that records each request's query and User-Agent and replies with a configurable body and status.",
+      "tags": [
+        "test",
+        "test-fixture",
+        "http-mock"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:matchesPlaceIgnoringCaseAndDiacritics",
+      "type": "function",
+      "name": "matchesPlaceIgnoringCaseAndDiacritics",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "lineRange": [
+        84,
+        95
+      ],
+      "summary": "Verifies a venue resolves to a places-table row by name regardless of case and diacritics, without calling Nominatim.",
+      "tags": [
+        "test",
+        "geocoding"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:matchesPlaceAfterDroppingCityWord",
+      "type": "function",
+      "name": "matchesPlaceAfterDroppingCityWord",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "lineRange": [
+        106,
+        118
+      ],
+      "summary": "Verifies a leading or trailing city word is dropped when matching venue names against places.",
+      "tags": [
+        "test",
+        "geocoding"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:substringDoesNotMatch",
+      "type": "function",
+      "name": "substringDoesNotMatch",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "lineRange": [
+        121,
+        132
+      ],
+      "summary": "Ensures only exact normalized names match places, not substrings.",
+      "tags": [
+        "test",
+        "geocoding"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:asksNominatimWithExpectedParameters",
+      "type": "function",
+      "name": "asksNominatimWithExpectedParameters",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "lineRange": [
+        147,
+        163
+      ],
+      "summary": "Checks the Nominatim request carries the expected query, viewbox, bounded flag, limit and app User-Agent.",
+      "tags": [
+        "test",
+        "geocoding",
+        "http-client"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:serverErrorGivesEmpty",
+      "type": "function",
+      "name": "serverErrorGivesEmpty",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "lineRange": [
+        191,
+        202
+      ],
+      "summary": "Ensures a Nominatim server error yields no coordinates instead of failing the import.",
+      "tags": [
+        "test",
+        "error-handling",
+        "geocoding"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:cityOnlyOrBlankVenueIsNotLookedUp",
+      "type": "function",
+      "name": "cityOnlyOrBlankVenueIsNotLookedUp",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "lineRange": [
+        215,
+        226
+      ],
+      "summary": "Ensures venues that are blank or just the city name are never geocoded.",
+      "tags": [
+        "test",
+        "geocoding"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:cachesHitsAndMisses",
+      "type": "function",
+      "name": "cachesHitsAndMisses",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "lineRange": [
+        229,
+        243
+      ],
+      "summary": "Verifies repeated lookups of the same venue are served from cache for both hits and misses.",
+      "tags": [
+        "test",
+        "caching",
+        "geocoding"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:spacesRequestsOneSecondApart",
+      "type": "function",
+      "name": "spacesRequestsOneSecondApart",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "lineRange": [
+        246,
+        258
+      ],
+      "summary": "Verifies consecutive Nominatim requests are spaced at least one second apart using the injected clock.",
+      "tags": [
+        "test",
+        "rate-limiting",
+        "geocoding"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:curatedAddressIsGeocoded",
+      "type": "function",
+      "name": "curatedAddressIsGeocoded",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "lineRange": [
+        292,
+        301
+      ],
+      "summary": "Verifies a curated venues.txt address entry is sent to Nominatim instead of the venue name.",
+      "tags": [
+        "test",
+        "geocoding"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/LiveTicketsClient.java",
+      "type": "file",
+      "name": "LiveTicketsClient.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/client/LiveTicketsClient.java",
+      "summary": "Interface for the LiveTickets public event-search client, exposing a single call that downloads all upcoming events.",
+      "tags": [
+        "interface",
+        "api-client",
+        "event-import",
+        "external-integration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/eventimport/client/LiveTicketsClient.java:LiveTicketsClient",
+      "type": "class",
+      "name": "LiveTicketsClient",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/client/LiveTicketsClient.java",
+      "lineRange": [
+        7,
+        11
+      ],
+      "summary": "Client contract for fetching upcoming LiveTickets events.",
+      "tags": [
+        "interface",
+        "api-client",
+        "event-import",
+        "external-integration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsEvent.java",
+      "type": "file",
+      "name": "LiveTicketsEvent.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsEvent.java",
+      "summary": "Jackson-mapped record for one event returned by the LiveTickets search API (title, venue, city, dates, prices, image and ticket link).",
+      "tags": [
+        "data-model",
+        "dto",
+        "external-api",
+        "event-import"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Java record used as an immutable DTO for JSON deserialization."
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsEvent.java:LiveTicketsEvent",
+      "type": "class",
+      "name": "LiveTicketsEvent",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsEvent.java",
+      "lineRange": [
+        17,
+        31
+      ],
+      "summary": "Immutable DTO for one LiveTickets API event.",
+      "tags": [
+        "data-model",
+        "dto",
+        "external-api",
+        "event-import"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsSearchResponse.java",
+      "type": "file",
+      "name": "LiveTicketsSearchResponse.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsSearchResponse.java",
+      "summary": "Record wrapping one LiveTickets search results page, with null-safe accessors for the event items and the has-more-pages flag.",
+      "tags": [
+        "dto",
+        "pagination",
+        "external-api",
+        "event-import"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsSearchResponse.java:LiveTicketsSearchResponse",
+      "type": "class",
+      "name": "LiveTicketsSearchResponse",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsSearchResponse.java",
+      "lineRange": [
+        7,
+        24
+      ],
+      "summary": "DTO for a page of LiveTickets search results with null-safe accessors.",
+      "tags": [
+        "dto",
+        "pagination",
+        "external-api",
+        "event-import"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java",
+      "type": "file",
+      "name": "LiveTicketsClientImpl.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java",
+      "summary": "RestClient-based LiveTickets client that pages through the public event-search endpoint and parses each JSON page into LiveTicketsEvent records.",
+      "tags": [
+        "api-client",
+        "http",
+        "pagination",
+        "event-import",
+        "service",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java:LiveTicketsClientImpl",
+      "type": "class",
+      "name": "LiveTicketsClientImpl",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java",
+      "lineRange": [
+        25,
+        85
+      ],
+      "summary": "Spring component paging through the LiveTickets event-search API with a timed RestClient and Jackson parsing.",
+      "tags": [
+        "api-client",
+        "http",
+        "pagination",
+        "event-import"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java:fetchUpcomingEvents",
+      "type": "function",
+      "name": "fetchUpcomingEvents",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java",
+      "lineRange": [
+        55,
+        76
+      ],
+      "summary": "Requests successive pages from the LiveTickets search endpoint until no more pages remain (bounded by a max page count) and collects all events.",
+      "tags": [
+        "http",
+        "pagination",
+        "api-client"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportProperties.java",
+      "type": "file",
+      "name": "EventImportProperties.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportProperties.java",
+      "summary": "Configuration properties record (prefix events.import) for the events import: enable flag, LiveTickets and Nominatim URLs, target city and the Timisoara bounding box, with defaults.",
+      "tags": [
+        "config",
+        "configuration-properties",
+        "event-import",
+        "defaults",
+        "tested"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Compact canonical record constructor normalizes and defaults bound values."
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportProperties.java:EventImportProperties",
+      "type": "class",
+      "name": "EventImportProperties",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportProperties.java",
+      "lineRange": [
+        15,
+        42
+      ],
+      "summary": "Bound events.import settings record with default values.",
+      "tags": [
+        "config",
+        "configuration-properties",
+        "event-import",
+        "defaults"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportRunner.java",
+      "type": "file",
+      "name": "EventImportRunner.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportRunner.java",
+      "summary": "Startup runner, active only when events.import.enabled=true, that triggers one events import and logs failures without stopping the application.",
+      "tags": [
+        "entry-point",
+        "startup",
+        "event-import",
+        "conditional-bean",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportRunner.java:EventImportRunner",
+      "type": "class",
+      "name": "EventImportRunner",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportRunner.java",
+      "lineRange": [
+        16,
+        39
+      ],
+      "summary": "Conditional ApplicationRunner that runs the events import once at startup.",
+      "tags": [
+        "entry-point",
+        "startup",
+        "event-import",
+        "conditional-bean"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/eventimport/domain/dto/ImportedEvent.java",
+      "type": "file",
+      "name": "ImportedEvent.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/domain/dto/ImportedEvent.java",
+      "summary": "Record describing a LiveTickets event normalized for the events table (external id, title, plain-text description, category, venue, times, price and links).",
+      "tags": [
+        "data-model",
+        "dto",
+        "event-import",
+        "domain"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/eventimport/domain/dto/ImportedEvent.java:ImportedEvent",
+      "type": "class",
+      "name": "ImportedEvent",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/domain/dto/ImportedEvent.java",
+      "lineRange": [
+        15,
+        27
+      ],
+      "summary": "Normalized imported-event record ready to be stored in the events table.",
+      "tags": [
+        "data-model",
+        "dto",
+        "event-import",
+        "domain"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapper.java",
+      "type": "file",
+      "name": "LiveTicketsEventMapper.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapper.java",
+      "summary": "Mapper interface converting a raw LiveTickets event into an optional ImportedEvent, empty when the event is outside the city or incomplete.",
+      "tags": [
+        "mapper",
+        "interface",
+        "event-import"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapper.java:LiveTicketsEventMapper",
+      "type": "class",
+      "name": "LiveTicketsEventMapper",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapper.java",
+      "lineRange": [
+        8,
+        12
+      ],
+      "summary": "Contract for converting LiveTickets events to ImportedEvent.",
+      "tags": [
+        "mapper",
+        "interface",
+        "event-import"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "type": "file",
+      "name": "LiveTicketsEventMapperImpl.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "summary": "Maps LiveTickets events into ImportedEvent records: filters by city ignoring diacritics, converts Romanian local time to UTC, strips HTML descriptions, builds image/ticket URLs and guesses a category from keywords.",
+      "tags": [
+        "mapper",
+        "normalization",
+        "categorization",
+        "event-import",
+        "text-processing",
+        "tested"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Uses Unicode normalization (NFD + combining-mark removal) for diacritic-insensitive matching."
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java:LiveTicketsEventMapperImpl",
+      "type": "class",
+      "name": "LiveTicketsEventMapperImpl",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "lineRange": [
+        26,
+        194
+      ],
+      "summary": "Spring component implementing LiveTickets-to-ImportedEvent mapping with city filtering, time-zone conversion and category guessing.",
+      "tags": [
+        "mapper",
+        "normalization",
+        "categorization",
+        "event-import"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java:toImportedEvent",
+      "type": "function",
+      "name": "toImportedEvent",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "lineRange": [
+        73,
+        110
+      ],
+      "summary": "Validates and converts one LiveTickets event into an ImportedEvent if it is in the wanted city and has the required fields.",
+      "tags": [
+        "mapper",
+        "validation",
+        "normalization"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java:categoryOf",
+      "type": "function",
+      "name": "categoryOf",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "lineRange": [
+        122,
+        135
+      ],
+      "summary": "Finds the first category whose keyword list matches a whole word in the normalized text, defaulting to OTHER.",
+      "tags": [
+        "categorization",
+        "keyword-matching",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java:plainText",
+      "type": "function",
+      "name": "plainText",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "lineRange": [
+        138,
+        152
+      ],
+      "summary": "Converts an HTML description into trimmed plain text, preserving line breaks and capping its length.",
+      "tags": [
+        "html",
+        "text-processing",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java:romanianTime",
+      "type": "function",
+      "name": "romanianTime",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "lineRange": [
+        165,
+        174
+      ],
+      "summary": "Parses a LiveTickets local date-time string as Europe/Bucharest time and converts it to an Instant.",
+      "tags": [
+        "time-zone",
+        "parsing",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/ExternalEventRepository.java",
+      "type": "file",
+      "name": "ExternalEventRepository.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/repository/ExternalEventRepository.java",
+      "summary": "Repository interface for externally imported events: find existing ids (with coordinate status), insert, update and delete stale upcoming events.",
+      "tags": [
+        "repository",
+        "interface",
+        "data-access",
+        "event-import"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/eventimport/repository/ExternalEventRepository.java:ExternalEventRepository",
+      "type": "class",
+      "name": "ExternalEventRepository",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/repository/ExternalEventRepository.java",
+      "lineRange": [
+        13,
+        26
+      ],
+      "summary": "Data-access contract for upserting and pruning externally sourced events.",
+      "tags": [
+        "repository",
+        "interface",
+        "data-access",
+        "event-import"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "type": "file",
+      "name": "ExternalEventRepositoryImpl.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "summary": "JdbcTemplate repository over the Supabase events table that upserts imported LiveTickets events and deletes upcoming ones no longer published by the source.",
+      "tags": [
+        "repository",
+        "jdbc",
+        "sql",
+        "data-access",
+        "event-import",
+        "tested"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Plain JdbcTemplate with dynamically built IN placeholders rather than JPA."
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java:ExternalEventRepositoryImpl",
+      "type": "class",
+      "name": "ExternalEventRepositoryImpl",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "lineRange": [
+        22,
+        115
+      ],
+      "summary": "JdbcTemplate implementation of ExternalEventRepository over the events table.",
+      "tags": [
+        "repository",
+        "jdbc",
+        "sql",
+        "data-access"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java:findExisting",
+      "type": "function",
+      "name": "findExisting",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "lineRange": [
+        35,
+        48
+      ],
+      "summary": "Returns, for the given external ids already stored, whether each event has coordinates.",
+      "tags": [
+        "query",
+        "jdbc",
+        "data-access"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java:insert",
+      "type": "function",
+      "name": "insert",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "lineRange": [
+        51,
+        63
+      ],
+      "summary": "Inserts a new imported event row with a generated UUID and optional coordinates.",
+      "tags": [
+        "insert",
+        "jdbc",
+        "data-access"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java:update",
+      "type": "function",
+      "name": "update",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "lineRange": [
+        66,
+        88
+      ],
+      "summary": "Updates the details of an existing imported event, overwriting coordinates only when a new location is supplied.",
+      "tags": [
+        "update",
+        "jdbc",
+        "data-access"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java:deleteUpcomingNotIn",
+      "type": "function",
+      "name": "deleteUpcomingNotIn",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "lineRange": [
+        91,
+        101
+      ],
+      "summary": "Deletes upcoming events from the source whose external ids are no longer in the latest import.",
+      "tags": [
+        "delete",
+        "jdbc",
+        "cleanup"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/EventImportService.java",
+      "type": "file",
+      "name": "EventImportService.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/EventImportService.java",
+      "summary": "Service interface for running the LiveTickets events import, including the Result record summarizing fetched, inserted, updated, located and removed counts.",
+      "tags": [
+        "service",
+        "interface",
+        "event-import",
+        "type-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/eventimport/service/EventImportService.java:EventImportService",
+      "type": "class",
+      "name": "EventImportService",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/EventImportService.java",
+      "lineRange": [
+        4,
+        22
+      ],
+      "summary": "Import service contract plus its Result summary record.",
+      "tags": [
+        "service",
+        "interface",
+        "event-import",
+        "type-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/VenueGeocoder.java",
+      "type": "file",
+      "name": "VenueGeocoder.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/VenueGeocoder.java",
+      "summary": "Interface for locating a venue name as a GeoPoint inside the configured city area.",
+      "tags": [
+        "service",
+        "interface",
+        "geocoding",
+        "event-import"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/eventimport/service/VenueGeocoder.java:VenueGeocoder",
+      "type": "class",
+      "name": "VenueGeocoder",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/VenueGeocoder.java",
+      "lineRange": [
+        11,
+        15
+      ],
+      "summary": "Contract for resolving a venue name to coordinates.",
+      "tags": [
+        "service",
+        "interface",
+        "geocoding",
+        "event-import"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+      "type": "file",
+      "name": "EventImportServiceImpl.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+      "summary": "Orchestrates one import run: downloads LiveTickets events, maps and dedupes them, geocodes venues needing coordinates outside a transaction, then inserts/updates and prunes cancelled events in a single transaction.",
+      "tags": [
+        "service",
+        "orchestration",
+        "event-import",
+        "transaction",
+        "tested"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "TransactionTemplate keeps slow HTTP geocoding outside the database transaction."
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java:EventImportServiceImpl",
+      "type": "class",
+      "name": "EventImportServiceImpl",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+      "lineRange": [
+        28,
+        105
+      ],
+      "summary": "Service orchestrating fetch, map, geocode and transactional persistence of imported events.",
+      "tags": [
+        "service",
+        "orchestration",
+        "event-import",
+        "transaction"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java:importEvents",
+      "type": "function",
+      "name": "importEvents",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+      "lineRange": [
+        53,
+        104
+      ],
+      "summary": "Runs a full import: fetch, map and dedupe, geocode venues needing coordinates, then insert/update and prune in one transaction, returning a Result summary.",
+      "tags": [
+        "orchestration",
+        "transaction",
+        "event-import"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "type": "file",
+      "name": "VenueGeocoderImpl.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "summary": "Venue geocoder that resolves names via the places table, the curated venue directory, then rate-limited Nominatim searches (also by bracketed text), validating hits against the city bounding box and caching results.",
+      "tags": [
+        "geocoding",
+        "service",
+        "external-integration",
+        "rate-limiting",
+        "caching",
+        "tested"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Injectable Sleeper and clock make the 1 request/second Nominatim rate limit testable without real waits."
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:VenueGeocoderImpl",
+      "type": "class",
+      "name": "VenueGeocoderImpl",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "lineRange": [
+        40,
+        301
+      ],
+      "summary": "Multi-source venue geocoder with caching and Nominatim rate limiting.",
+      "tags": [
+        "geocoding",
+        "service",
+        "external-integration",
+        "rate-limiting"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:locate",
+      "type": "function",
+      "name": "locate",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "lineRange": [
+        115,
+        138
+      ],
+      "summary": "Resolves a venue name to coordinates by trying the places table, the venue directory and Nominatim (by name, then bracketed text), caching hits and misses.",
+      "tags": [
+        "geocoding",
+        "caching",
+        "lookup"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:candidateNames",
+      "type": "function",
+      "name": "candidateNames",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "lineRange": [
+        153,
+        166
+      ],
+      "summary": "Builds the normalized name variants of a venue used for directory and places lookups.",
+      "tags": [
+        "normalization",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:findInPlaces",
+      "type": "function",
+      "name": "findInPlaces",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "lineRange": [
+        172,
+        195
+      ],
+      "summary": "Looks up the venue in the places table by normalized name, accepting it only if all matches are inside the area and close together.",
+      "tags": [
+        "database",
+        "lookup",
+        "geocoding"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:findInDirectory",
+      "type": "function",
+      "name": "findInDirectory",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "lineRange": [
+        198,
+        208
+      ],
+      "summary": "Looks up the venue in the curated directory, geocoding its address with Nominatim when no exact coordinates are given.",
+      "tags": [
+        "lookup",
+        "geocoding"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:textInBrackets",
+      "type": "function",
+      "name": "textInBrackets",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "lineRange": [
+        211,
+        222
+      ],
+      "summary": "Extracts the text inside parentheses from a venue name, if any.",
+      "tags": [
+        "parsing",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:askNominatim",
+      "type": "function",
+      "name": "askNominatim",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "lineRange": [
+        225,
+        253
+      ],
+      "summary": "Sends a rate-limited Nominatim search bounded to the city viewbox and returns the first in-area result, never throwing.",
+      "tags": [
+        "http",
+        "geocoding",
+        "rate-limiting"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:parseFirstInside",
+      "type": "function",
+      "name": "parseFirstInside",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "lineRange": [
+        267,
+        282
+      ],
+      "summary": "Parses a Nominatim JSON response and returns the first result lying inside the bounding box.",
+      "tags": [
+        "parsing",
+        "json",
+        "geocoding"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:parseBbox",
+      "type": "function",
+      "name": "parseBbox",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "lineRange": [
+        290,
+        300
+      ],
+      "summary": "Parses the configured south,west,north,east string into a BoundingBox.",
+      "tags": [
+        "parsing",
+        "config",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java",
+      "type": "file",
+      "name": "LiveTicketsClientImplTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java",
+      "summary": "Unit tests for LiveTicketsClientImpl using a mock HTTP server: parsing a saved response, empty bodies, multi-page reads, server errors and property defaults.",
+      "tags": [
+        "test",
+        "api-client",
+        "mock-server",
+        "event-import"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java:LiveTicketsClientImplTest",
+      "type": "class",
+      "name": "LiveTicketsClientImplTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java",
+      "lineRange": [
+        20,
+        106
+      ],
+      "summary": "Test suite for LiveTicketsClientImpl.",
+      "tags": [
+        "test",
+        "api-client",
+        "mock-server",
+        "event-import"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java:readsAllPages",
+      "type": "function",
+      "name": "readsAllPages",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java",
+      "lineRange": [
+        48,
+        77
+      ],
+      "summary": "Verifies that the client follows pagination across multiple mock server pages.",
+      "tags": [
+        "test",
+        "pagination"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java:serverErrorIsThrown",
+      "type": "function",
+      "name": "serverErrorIsThrown",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java",
+      "lineRange": [
+        80,
+        95
+      ],
+      "summary": "Verifies that an HTTP server error from LiveTickets surfaces as an exception.",
+      "tags": [
+        "test",
+        "error-handling"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/eventimport/config/EventImportRunnerTest.java",
+      "type": "file",
+      "name": "EventImportRunnerTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/config/EventImportRunnerTest.java",
+      "summary": "Tests that EventImportRunner triggers the import and that an import failure does not abort application startup.",
+      "tags": [
+        "test",
+        "startup",
+        "event-import"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/eventimport/config/EventImportRunnerTest.java:EventImportRunnerTest",
+      "type": "class",
+      "name": "EventImportRunnerTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/config/EventImportRunnerTest.java",
+      "lineRange": [
+        13,
+        35
+      ],
+      "summary": "Test suite for EventImportRunner.",
+      "tags": [
+        "test",
+        "startup",
+        "event-import"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java",
+      "type": "file",
+      "name": "LiveTicketsEventMapperImplTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java",
+      "summary": "Unit tests for LiveTicketsEventMapperImpl covering city filtering, field mapping, Romanian summer time conversion, invalid end times, HTML to text and category guessing.",
+      "tags": [
+        "test",
+        "mapper",
+        "event-import",
+        "normalization"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java:LiveTicketsEventMapperImplTest",
+      "type": "class",
+      "name": "LiveTicketsEventMapperImplTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java",
+      "lineRange": [
+        19,
+        138
+      ],
+      "summary": "Test suite for LiveTicketsEventMapperImpl.",
+      "tags": [
+        "test",
+        "mapper",
+        "event-import",
+        "normalization"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java:mapsAllFields",
+      "type": "function",
+      "name": "mapsAllFields",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java",
+      "lineRange": [
+        38,
+        56
+      ],
+      "summary": "Checks every ImportedEvent field mapped from a complete LiveTickets event.",
+      "tags": [
+        "test",
+        "mapper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java:handlesMissingLinksAndOddPrices",
+      "type": "function",
+      "name": "handlesMissingLinksAndOddPrices",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java",
+      "lineRange": [
+        93,
+        109
+      ],
+      "summary": "Checks mapping behavior when links are missing and prices are negative or unusual.",
+      "tags": [
+        "test",
+        "edge-cases"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java:guessesCategory",
+      "type": "function",
+      "name": "guessesCategory",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java",
+      "lineRange": [
+        123,
+        137
+      ],
+      "summary": "Checks keyword-based category guessing across several event titles.",
+      "tags": [
+        "test",
+        "categorization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "type": "file",
+      "name": "EventImportServiceImplTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "summary": "Database-backed tests of EventImportServiceImpl: first import inserts, re-runs update without duplicates, late geocoding, and safe removal of cancelled upcoming events.",
+      "tags": [
+        "test",
+        "integration-test",
+        "service",
+        "event-import",
+        "database"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java:EventImportServiceImplTest",
+      "type": "class",
+      "name": "EventImportServiceImplTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "lineRange": [
+        38,
+        179
+      ],
+      "summary": "Test suite for EventImportServiceImpl with a database-backed setup.",
+      "tags": [
+        "test",
+        "integration-test",
+        "service",
+        "event-import"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java:setUp",
+      "type": "function",
+      "name": "setUp",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "lineRange": [
+        50,
+        76
+      ],
+      "summary": "Prepares the database, stubbed client, mapper, geocoder and repository wiring for each import test.",
+      "tags": [
+        "test",
+        "setup",
+        "fixture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java:firstRunInsertsCityEvents",
+      "type": "function",
+      "name": "firstRunInsertsCityEvents",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "lineRange": [
+        84,
+        108
+      ],
+      "summary": "Verifies the first import inserts only events in the city with their coordinates.",
+      "tags": [
+        "test",
+        "insert"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java:secondRunUpdatesWithoutDuplicates",
+      "type": "function",
+      "name": "secondRunUpdatesWithoutDuplicates",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "lineRange": [
+        111,
+        133
+      ],
+      "summary": "Verifies a repeated import updates existing rows instead of duplicating them.",
+      "tags": [
+        "test",
+        "idempotency"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java:laterRunLocatesPreviouslyUnlocatedEvents",
+      "type": "function",
+      "name": "laterRunLocatesPreviouslyUnlocatedEvents",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "lineRange": [
+        136,
+        146
+      ],
+      "summary": "Verifies events stored without coordinates get located on a later run.",
+      "tags": [
+        "test",
+        "geocoding"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java:removesCancelledUpcomingEventsOnly",
+      "type": "function",
+      "name": "removesCancelledUpcomingEventsOnly",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "lineRange": [
+        149,
+        164
+      ],
+      "summary": "Verifies only upcoming events missing from the source are deleted, past ones kept.",
+      "tags": [
+        "test",
+        "cleanup"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java:emptyAnswerRemovesNothing",
+      "type": "function",
+      "name": "emptyAnswerRemovesNothing",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "lineRange": [
+        167,
+        178
+      ],
+      "summary": "Verifies an empty LiveTickets answer leaves stored events untouched.",
+      "tags": [
+        "test",
+        "safety"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/eventimport/support/LiveTicketsFixtures.java",
+      "type": "file",
+      "name": "LiveTicketsFixtures.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/support/LiveTicketsFixtures.java",
+      "summary": "Test fixture helper that loads the saved LiveTickets sample response and parses it into LiveTicketsEvent records.",
+      "tags": [
+        "test",
+        "fixture",
+        "test-support",
+        "event-import"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/eventimport/support/LiveTicketsFixtures.java:LiveTicketsFixtures",
+      "type": "class",
+      "name": "LiveTicketsFixtures",
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/support/LiveTicketsFixtures.java",
+      "lineRange": [
+        15,
+        29
+      ],
+      "summary": "Static helper providing parsed LiveTickets sample events for tests.",
+      "tags": [
+        "test",
+        "fixture",
+        "test-support",
+        "event-import"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:DOCS.md",
+      "type": "document",
+      "name": "DOCS.md",
+      "filePath": "DOCS.md",
+      "summary": "Living project documentation covering architecture, configuration and running, database, external data sources (STPT, LiveTickets, OpenStreetMap, Gemini), reliability rules, and per-feature notes for users, the LiveTickets events import, places, transit and routing.",
+      "tags": [
+        "documentation",
+        "architecture",
+        "configuration",
+        "external-apis",
+        "event-import"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:PLAN.md",
+      "type": "document",
+      "name": "PLAN.md",
+      "filePath": "PLAN.md",
+      "summary": "Team implementation plan split into Tracks A/B/C with 17 numbered tasks and checkboxes, a dependency map, definition of done, cut order and open questions; task 7 (LiveTickets events import) is now fully ticked.",
+      "tags": [
+        "documentation",
+        "planning",
+        "roadmap",
+        "development"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportConfig.java",
+      "type": "file",
+      "name": "EventImportConfig.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportConfig.java",
+      "summary": "Spring @Configuration that registers EventImportProperties as bound configuration properties for the LiveTickets events import.",
+      "tags": [
+        "config",
+        "spring-configuration",
+        "event-import",
+        "bootstrap"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:backend/src/main/resources/eventimport/venues.txt",
+      "type": "config",
+      "name": "venues.txt",
+      "filePath": "backend/src/main/resources/eventimport/venues.txt",
+      "summary": "Hand-curated list of LiveTickets venue names that OpenStreetMap misses, each mapped to a Timisoara street address (geocoded via Nominatim) or exact lat,lon coordinates (e.g. the airport); consulted after the places table and before Nominatim name search.",
+      "tags": [
+        "data",
+        "geocoding",
+        "event-import",
+        "curated-data"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:backend/src/test/resources/livetickets/event-search-sample.json",
+      "type": "config",
+      "name": "event-search-sample.json",
+      "filePath": "backend/src/test/resources/livetickets/event-search-sample.json",
+      "summary": "Saved real LiveTickets event-search API response (events.items with ids, names, venues, Romanian local start/end dates, prices, HTML descriptions and organizer info) used as an offline test fixture.",
+      "tags": [
+        "test-fixture",
+        "test",
+        "event-import",
+        "api-sample"
+      ],
+      "complexity": "moderate"
     }
   ],
   "edges": [
@@ -9432,13 +10892,6 @@
       "weight": 0.5
     },
     {
-      "source": "document:AGENTS.md",
-      "target": "document:PLAN.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "file:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportConfig.java",
       "target": "class:backend/src/main/java/com/unihack8/backend/places/config/PlaceImportConfig.java:PlaceImportConfig",
       "type": "contains",
@@ -10818,41 +12271,6 @@
       "weight": 0.6
     },
     {
-      "source": "document:PLAN.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/transit/controller/TransitController.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "file:frontend/src/app/index.jsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "document:AGENTS.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "service:infra/otp/docker-compose.yml",
       "target": "file:infra/otp/get-data.sh",
       "type": "depends_on",
@@ -11889,6 +13307,1000 @@
       "weight": 0.5
     },
     {
+      "source": "document:infra/otp/README.md",
+      "target": "service:infra/otp/docker-compose.yml",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:infra/otp/README.md",
+      "target": "file:infra/otp/get-data.sh",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:infra/otp/README.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/routing/client/impl/OtpGraphQlClient.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:infra/otp/README.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/routing/config/OtpProperties.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:infra/otp/README.md",
+      "target": "config:backend/src/main/resources/application-local.properties.example",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/transit/controller/TransitController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/routing/controller/RoutingController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/ErrorResponse.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/PageResponse.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/UsernameAvailabilityResponse.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/UpdateUsernameRequest.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitSummaryResponse.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/routing/domain/dto/RoutePlanResponse.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/routing/domain/dto/RouteLegResponse.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java:VenueDirectory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java:load",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java:parse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java:toEntry",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java",
+      "target": "config:backend/src/main/resources/eventimport/venues.txt",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java:toEntry",
+      "target": "class:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java:GeoPoint",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:VenueGeocoderImplTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:startServer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:matchesPlaceIgnoringCaseAndDiacritics",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:matchesPlaceAfterDroppingCityWord",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:substringDoesNotMatch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:asksNominatimWithExpectedParameters",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:serverErrorGivesEmpty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:cityOnlyOrBlankVenueIsNotLookedUp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:cachesHitsAndMisses",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:spacesRequestsOneSecondApart",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java:curatedAddressIsGeocoded",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/LiveTicketsClient.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/client/LiveTicketsClient.java:LiveTicketsClient",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/LiveTicketsClient.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/client/LiveTicketsClient.java:LiveTicketsClient",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsEvent.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsEvent.java:LiveTicketsEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsEvent.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsEvent.java:LiveTicketsEvent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsSearchResponse.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsSearchResponse.java:LiveTicketsSearchResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsSearchResponse.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsSearchResponse.java:LiveTicketsSearchResponse",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java:LiveTicketsClientImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java:LiveTicketsClientImpl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java:fetchUpcomingEvents",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java:fetchUpcomingEvents",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportProperties.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportProperties.java:EventImportProperties",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportProperties.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportProperties.java:EventImportProperties",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportRunner.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportRunner.java:EventImportRunner",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportRunner.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportRunner.java:EventImportRunner",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/domain/dto/ImportedEvent.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/domain/dto/ImportedEvent.java:ImportedEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/domain/dto/ImportedEvent.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/domain/dto/ImportedEvent.java:ImportedEvent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapper.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapper.java:LiveTicketsEventMapper",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapper.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapper.java:LiveTicketsEventMapper",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java:LiveTicketsEventMapperImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java:LiveTicketsEventMapperImpl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java:toImportedEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java:toImportedEvent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java:categoryOf",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java:plainText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java:romanianTime",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/ExternalEventRepository.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/repository/ExternalEventRepository.java:ExternalEventRepository",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/ExternalEventRepository.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/repository/ExternalEventRepository.java:ExternalEventRepository",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java:LiveTicketsClientImpl",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/client/LiveTicketsClient.java:LiveTicketsClient",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java:LiveTicketsEventMapperImpl",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapper.java:LiveTicketsEventMapper",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportRunner.java:EventImportRunner",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java:importEvents",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java:toImportedEvent",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java:plainText",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java:toImportedEvent",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java:romanianTime",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportProperties.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportRunner.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/eventimport/config/EventImportRunnerTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java:ExternalEventRepositoryImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java:ExternalEventRepositoryImpl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java:findExisting",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java:findExisting",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java:insert",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java:insert",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java:update",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java:update",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java:deleteUpcomingNotIn",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java:deleteUpcomingNotIn",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/EventImportService.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/service/EventImportService.java:EventImportService",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/EventImportService.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/service/EventImportService.java:EventImportService",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/VenueGeocoder.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/service/VenueGeocoder.java:VenueGeocoder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/VenueGeocoder.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/service/VenueGeocoder.java:VenueGeocoder",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java:EventImportServiceImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java:EventImportServiceImpl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java:importEvents",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java:importEvents",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:VenueGeocoderImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:VenueGeocoderImpl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:locate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:locate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:candidateNames",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:findInPlaces",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:findInDirectory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:textInBrackets",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:askNominatim",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:parseFirstInside",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:parseBbox",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java:LiveTicketsClientImplTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java:readsAllPages",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java:serverErrorIsThrown",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/config/EventImportRunnerTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/eventimport/config/EventImportRunnerTest.java:EventImportRunnerTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java:LiveTicketsEventMapperImplTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java:mapsAllFields",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java:handlesMissingLinksAndOddPrices",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java:guessesCategory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java:EventImportServiceImplTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java:setUp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java:firstRunInsertsCityEvents",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java:secondRunUpdatesWithoutDuplicates",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java:laterRunLocatesPreviouslyUnlocatedEvents",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java:removesCancelledUpcomingEventsOnly",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java:emptyAnswerRemovesNothing",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/support/LiveTicketsFixtures.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/eventimport/support/LiveTicketsFixtures.java:LiveTicketsFixtures",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/support/LiveTicketsFixtures.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/eventimport/support/LiveTicketsFixtures.java:LiveTicketsFixtures",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java:ExternalEventRepositoryImpl",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/repository/ExternalEventRepository.java:ExternalEventRepository",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java:EventImportServiceImpl",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/service/EventImportService.java:EventImportService",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:VenueGeocoderImpl",
+      "target": "class:backend/src/main/java/com/unihack8/backend/eventimport/service/VenueGeocoder.java:VenueGeocoder",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java:importEvents",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java:findExisting",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java:importEvents",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java:insert",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java:importEvents",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java:update",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java:importEvents",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java:deleteUpcomingNotIn",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java:importEvents",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java:fetchUpcomingEvents",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java:importEvents",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java:toImportedEvent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java:importEvents",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:locate",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:locate",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:findInPlaces",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:locate",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:findInDirectory",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:locate",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:askNominatim",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:locate",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:textInBrackets",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:askNominatim",
+      "target": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:parseFirstInside",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java:findInPlaces",
+      "target": "function:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java:distanceMetersTo",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
       "source": "document:DOCS.md",
       "target": "file:backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java",
       "type": "documents",
@@ -12100,6 +14512,48 @@
     },
     {
       "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/ExternalEventRepository.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/LiveTicketsClient.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportRunner.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
       "target": "file:supabase/migrations/20261113000001_profiles.sql",
       "type": "documents",
       "direction": "forward",
@@ -12176,148 +14630,99 @@
       "weight": 0.5
     },
     {
-      "source": "document:infra/otp/README.md",
-      "target": "service:infra/otp/docker-compose.yml",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:infra/otp/README.md",
-      "target": "file:infra/otp/get-data.sh",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:infra/otp/README.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/routing/client/impl/OtpGraphQlClient.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:infra/otp/README.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/routing/config/OtpProperties.java",
+      "source": "document:DOCS.md",
+      "target": "config:backend/src/main/resources/eventimport/venues.txt",
       "type": "related",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "document:infra/otp/README.md",
-      "target": "config:backend/src/main/resources/application-local.properties.example",
+      "source": "document:DOCS.md",
+      "target": "config:backend/src/test/resources/livetickets/event-search-sample.json",
       "type": "related",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "document:docs/API.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/API.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/API.md",
+      "source": "document:PLAN.md",
       "target": "file:backend/src/main/java/com/unihack8/backend/transit/controller/TransitController.java",
       "type": "documents",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "document:docs/API.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/routing/controller/RoutingController.java",
+      "source": "document:PLAN.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
       "type": "documents",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "document:docs/API.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/API.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/ErrorResponse.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/API.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/PageResponse.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/API.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/API.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/API.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/UsernameAvailabilityResponse.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/API.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/UpdateUsernameRequest.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/API.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/API.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitSummaryResponse.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/API.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/routing/domain/dto/RoutePlanResponse.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/API.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/routing/domain/dto/RouteLegResponse.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/API.md",
+      "source": "document:PLAN.md",
       "target": "file:backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/LiveTicketsClient.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:frontend/src/app/index.jsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "document:AGENTS.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportConfig.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportProperties.java",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:backend/src/main/resources/eventimport/venues.txt",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:backend/src/main/resources/eventimport/venues.txt",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:backend/src/test/resources/livetickets/event-search-sample.json",
+      "target": "file:backend/src/test/java/com/unihack8/backend/eventimport/support/LiveTicketsFixtures.java",
       "type": "related",
       "direction": "forward",
       "weight": 0.5
@@ -12477,6 +14882,262 @@
     {
       "source": "file:backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java",
       "target": "file:backend/src/main/java/com/unihack8/backend/common/security/JsonAuthenticationEntryPoint.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/LiveTicketsClient.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/LiveTicketsClient.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsSearchResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportProperties.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportRunner.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/EventImportService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapper.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapper.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/domain/dto/ImportedEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportProperties.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/domain/dto/ImportedEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapper.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/ExternalEventRepository.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/ExternalEventRepository.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/domain/dto/ImportedEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/domain/dto/ImportedEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/ExternalEventRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/VenueGeocoder.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/LiveTicketsClient.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/domain/dto/ImportedEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapper.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/ExternalEventRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/EventImportService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/VenueGeocoder.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportProperties.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/VenueGeocoder.java",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -14283,6 +16944,206 @@
       "recoveredFromImportMap": true
     },
     {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsSearchResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportProperties.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/config/EventImportRunnerTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/EventImportService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportProperties.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/domain/dto/ImportedEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/eventimport/support/LiveTicketsFixtures.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/LiveTicketsClient.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportProperties.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/EventImportService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/service/VenueGeocoder.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/eventimport/support/LiveTicketsFixtures.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportProperties.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/entity/Place.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/repository/PlaceRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/support/LiveTicketsFixtures.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/eventimport/support/LiveTicketsFixtures.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
       "source": "file:backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java",
       "target": "file:backend/src/main/java/com/unihack8/backend/places/client/dto/OverpassElement.java",
       "type": "imports",
@@ -15473,6 +18334,31 @@
       ]
     },
     {
+      "id": "layer:events-import",
+      "name": "Events Import",
+      "description": "LiveTickets events import: the LiveTickets client, mapping to events rows (times, plain-text description, guessed category, image and ticket links), venue geocoding (places table, curated venues.txt, Nominatim), the plain-SQL events repository and the on-demand startup runner.",
+      "nodeIds": [
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java",
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/client/LiveTicketsClient.java",
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsEvent.java",
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsSearchResponse.java",
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportProperties.java",
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportRunner.java",
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/domain/dto/ImportedEvent.java",
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapper.java",
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/ExternalEventRepository.java",
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/service/EventImportService.java",
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/service/VenueGeocoder.java",
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportConfig.java",
+        "config:backend/src/main/resources/eventimport/venues.txt"
+      ]
+    },
+    {
       "id": "layer:backend-tests",
       "name": "Backend Tests",
       "description": "JUnit tests for the backend context, security filter chain, Supabase properties, paging and error handling, plus the support package (JWT test token minting, probe controller) and test properties.",
@@ -15517,7 +18403,14 @@
         "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
         "file:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java",
         "file:backend/src/test/java/com/unihack8/backend/users/repository/ProfileRepositoryTest.java",
-        "file:backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java"
+        "file:backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
+        "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+        "file:backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java",
+        "file:backend/src/test/java/com/unihack8/backend/eventimport/config/EventImportRunnerTest.java",
+        "file:backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java",
+        "file:backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+        "file:backend/src/test/java/com/unihack8/backend/eventimport/support/LiveTicketsFixtures.java",
+        "config:backend/src/test/resources/livetickets/event-search-sample.json"
       ]
     },
     {
@@ -15659,6 +18552,19 @@
     },
     {
       "order": 8,
+      "title": "Importing Parties and Concerts from LiveTickets",
+      "description": "The events import fills the events table with upcoming Timișoara events from LiveTickets, run on demand with --events.import.enabled=true. LiveTicketsClientImpl downloads every upcoming event, LiveTicketsEventMapperImpl keeps the city, converts Romanian local time to UTC, cleans the HTML description and guesses a category from the title. VenueGeocoderImpl puts venues on the map (places table, the curated venues.txt, then OpenStreetMap Nominatim at one request per second), and EventImportServiceImpl upserts rows by external id through the plain-SQL ExternalEventRepositoryImpl, so re-runs never duplicate.",
+      "nodeIds": [
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+        "config:backend/src/main/resources/eventimport/venues.txt",
+        "file:backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java"
+      ]
+    },
+    {
+      "order": 9,
       "title": "Verifying the Schema",
       "description": "schema_checks.sql is a self-rolling-back PL/pgSQL block that tests the rules from the previous four steps: profile creation on sign-up, username formats and the table constraints. It leaves no data behind, so it can be run safely against the shared Supabase database.",
       "nodeIds": [
@@ -15666,7 +18572,7 @@
       ]
     },
     {
-      "order": 9,
+      "order": 10,
       "title": "The REST API Contract",
       "description": "docs/API.md defines how the mobile app talks to the backend: conventions, the paged and error answer shapes, shared objects and the planned endpoints. The next backend steps implement exactly these shapes, so reading the contract first makes the Java code easy to follow.",
       "nodeIds": [
@@ -15674,7 +18580,7 @@
       ]
     },
     {
-      "order": 10,
+      "order": 11,
       "title": "Spring Boot Entry and Settings",
       "description": "BackendApplication bootstraps the Spring Boot API, and its smoke test checks that the context loads. SupabaseProperties binds the Supabase URL and legacy HS256 JWT secret and derives the token issuer, TimeConfig exposes a shared UTC Clock so time logic can be tested, and application.properties tells Hibernate to only validate against the Supabase migrations instead of creating tables.",
       "nodeIds": [
@@ -15687,7 +18593,7 @@
       "languageLesson": "Java records annotated with @ConfigurationProperties give immutable, validated config objects, and injecting a Clock bean instead of calling Instant.now() lets tests freeze time."
     },
     {
-      "order": 11,
+      "order": 12,
       "title": "Security and the Current User",
       "description": "SecurityConfig makes the backend a stateless JWT resource server: Supabase access tokens are validated with the secret and issuer from the previous step, public GET routes for events and places stay open, and everything else requires a token. CurrentUser then reads the token's sub claim to give services the caller's UUID, and the JSON entry point and access-denied handler make 401 and 403 answers use the same error format as the rest of the API.",
       "nodeIds": [
@@ -15699,7 +18605,7 @@
       "languageLesson": "In modern Spring Security you declare a SecurityFilterChain bean; configuring oauth2ResourceServer with a JWT decoder means every request is authenticated before any controller runs."
     },
     {
-      "order": 12,
+      "order": 13,
       "title": "One Error Format Everywhere",
       "description": "ErrorCode is the most depended-on file in the backend: an enum listing every API error, from validation and auth to QR check-in and rate limiting. Code throws ApiException with a code, GlobalExceptionHandler catches it (plus validation and malformed-body errors), and ErrorResponseFactory builds the ErrorResponse record, the single error JSON shape promised in docs/API.md and shared with the security handlers from Step 10.",
       "nodeIds": [
@@ -15712,7 +18618,7 @@
       "languageLesson": "@RestControllerAdvice with @ExceptionHandler methods centralises error handling, so controllers just throw and never build error bodies themselves."
     },
     {
-      "order": 13,
+      "order": 14,
       "title": "Paging Lists",
       "description": "PageParams is an immutable record that enforces the API paging rules (page starts at 0, default size 20, capped at 100 for lists) and rejects bad input through the error system from the previous step. PageResponse is the matching generic answer shape from docs/API.md, with a factory that converts Spring Data pages so every future list endpoint looks the same.",
       "nodeIds": [
@@ -15723,7 +18629,7 @@
       "languageLesson": "Java records can validate their fields in a compact constructor, and a generic record like PageResponse<T> gives one reusable, type-safe wrapper for any list."
     },
     {
-      "order": 14,
+      "order": 15,
       "title": "Backend Tests with Real JWTs",
       "description": "The foundation is covered by tests that run on an in-memory H2 database in PostgreSQL mode with a fake Supabase secret. JwtTestTokens signs HS256 tokens shaped like real Supabase access tokens, and TestProbeController (test-only, never shipped) exposes probe endpoints so SecurityConfigTest and GlobalExceptionHandlerTest can hit public and protected routes with MockMvc and check the exact error JSON.",
       "nodeIds": [
@@ -15735,7 +18641,7 @@
       ]
     },
     {
-      "order": 15,
+      "order": 16,
       "title": "Backend Build and Tooling",
       "description": "build.gradle targets Java 21 and Spring Boot with JPA, Security and Validation, while the Gradle wrapper pins a fixed Gradle version so every teammate builds the same way. The application-local properties example lists the Supabase URL, JWT secret and pooler connection each developer fills into a git-ignored local profile.",
       "nodeIds": [
@@ -15747,7 +18653,7 @@
       "languageLesson": "The Gradle wrapper (gradlew plus gradle-wrapper.properties) downloads the pinned Gradle version on first run, so nobody needs Gradle installed globally."
     },
     {
-      "order": 16,
+      "order": 17,
       "title": "Places: From OpenStreetMap to the Map",
       "description": "The places feature turns OpenStreetMap data into searchable map points. PlaceCategory defines the 10 app categories and which OSM tags select them. The import (PlaceImportService with OverpassClient and OsmElementMapper) downloads Timișoara once from the Overpass API, falling back to a mirror when the main server is busy, and upserts rows by osm_id so re-runs never duplicate. PlaceController exposes GET /places (category, viewport, name and near-me filters, closest first) and GET /places/{id}; PlaceServiceImpl does the search using the shared GeoPoint and BoundingBox helpers.",
       "nodeIds": [
@@ -15760,7 +18666,7 @@
       ]
     },
     {
-      "order": 17,
+      "order": 18,
       "title": "Live Transit: Caching and the STPT Client",
       "description": "StaleCache is a generic, thread-safe TTL cache built to front unreliable upstreams like the STPT live feed. Fresh entries are served directly, expired ones are reloaded, and if a reload fails the last known value is returned and flagged stale; only when nothing was ever cached does it throw the 503 SOURCE_UNAVAILABLE error from Step 9. StaleCacheTest drives expiry deterministically with MutableClock, a test Clock you advance by hand, building on the injected Clock from Step 7. The transit feature starts at the edge of the system. StptProperties binds the stpt.* settings (base URL, timeouts, user agent, per-data-type cache TTLs), StptClientConfig builds the RestClient with those timeouts and a custom User-Agent, and the StptClient interface with its StptClientImpl calls the undocumented STPT live-site JSON endpoints and leniently parses them into raw Stpt* records such as StptStop.",
       "nodeIds": [
@@ -15775,7 +18681,7 @@
       ]
     },
     {
-      "order": 18,
+      "order": 19,
       "title": "Live Transit: Mapping, Service and Endpoints",
       "description": "The project keeps two DTO families: raw stpt records mirroring the upstream format (like StptArrival with its HH:mm|minutes strings) and clean API records like ArrivalDto and VehicleDto that match docs/API.md. TransitMapperImpl bridges them by hand: it splits route ends, classifies vehicle types and converts local Timișoara arrival times into UTC instants, even across midnight. TransitServiceImpl ties the previous three steps together: it fetches through StptClient, caches each data kind in StaleCache with stale fallback, maps through TransitMapper and builds sorted, bbox-filtered, localized answers. TransitController exposes the public /transit endpoints (routes, stops, vehicles, arrivals, alerts, last departures and a home summary) with Accept-Language-based language selection, and TransitSummaryResponse and LastDeparturesResponse power the 'last tram at this hour' idea from Step 1. The \"last tram\" answers come from the STPT GTFS timetable (TimetableRepository / GtfsTimetableRepository reading infra/otp/stpt-gtfs.zip), falling back to live arrivals when the file is missing or expired.",
       "nodeIds": [
@@ -15794,7 +18700,7 @@
       ]
     },
     {
-      "order": 19,
+      "order": 20,
       "title": "Live Transit: Tests with Saved STPT Answers",
       "description": "Each transit layer has its own tests. StptClientImplTest runs the client against a mocked HTTP server fed saved STPT responses such as arrivals-stop-1.json and vehicles-route-1.json, TransitServiceImplTest mocks the client and uses MutableClock to check caching, stale fallback and last departures, and TransitControllerTest verifies every endpoint and the SOURCE_UNAVAILABLE mapping. Recorded fixtures mean the tests never depend on live.stpt.ro being up.",
       "nodeIds": [
@@ -15806,7 +18712,7 @@
       ]
     },
     {
-      "order": 20,
+      "order": 21,
       "title": "Directions with OpenTripPlanner",
       "description": "GET /routes/plan asks our own OpenTripPlanner 2 server (infra/otp: docker compose plus get-data.sh, which downloads the STPT GTFS timetable and the Timișoara street map). RoutingServiceImpl picks the itinerary that arrives first and falls back to a straight-line walking estimate when OTP is down; OtpGraphQlClient sends the GraphQL planConnection query and RoutePlanMapperImpl shapes legs and polylines for the map.",
       "nodeIds": [
@@ -15819,7 +18725,7 @@
       ]
     },
     {
-      "order": 21,
+      "order": 22,
       "title": "Expo App Shell and Discover",
       "description": "Switching to the mobile app, _layout.jsx is the Expo Router root that sets up the status bar and native Stack navigator, and index.jsx is the Discover home screen rendering a react-native-maps MapView centered on Timișoara. map.js supplies the frozen TIMISOARA_CENTER coordinates and a validated region builder, keeping map math out of the UI.",
       "nodeIds": [
@@ -15830,7 +18736,7 @@
       "languageLesson": "Expo Router uses file-based routing: _layout.jsx wraps every screen in its folder, and index.jsx becomes the default route."
     },
     {
-      "order": 22,
+      "order": 23,
       "title": "Talking to the Backend",
       "description": "api.js is the app's minimal HTTP client: it resolves the backend base URL from EXPO_PUBLIC_API_URL, defined in .env.example as the LAN address of the Spring Boot server, and wraps GET requests. setup.test.mjs uses node:test to check both the URL handling here and the coordinate validation in map.js.",
       "nodeIds": [
@@ -15841,7 +18747,7 @@
       "languageLesson": "Expo only exposes environment variables prefixed with EXPO_PUBLIC_ to app code, and they are inlined at build time, so never put secrets in them."
     },
     {
-      "order": 23,
+      "order": 24,
       "title": "Frontend Configuration",
       "description": "package.json pins Expo SDK 54, React Native 0.81, expo-router, expo-location and react-native-maps, and app.json is the Expo manifest naming the app 'Connected Communities' with its deep-link scheme and icons. jsconfig.json turns on type checking for plain JS files, and frontend/AGENTS.md reminds contributors to follow versioned Expo docs and use expo install.",
       "nodeIds": [
@@ -15853,7 +18759,7 @@
       ]
     },
     {
-      "order": 24,
+      "order": 25,
       "title": "Transit Routing and Dev Tooling",
       "description": "infra/otp/README.md describes the planned OpenTripPlanner 2 server on port 8081, called only by the backend, that will compute walking and public transport directions for Timișoara. .mcp.json registers the hosted Supabase MCP server for this project, which is how AI tooling inspects and migrates the database you studied earlier.",
       "nodeIds": [
