@@ -2,7 +2,7 @@ package com.unihack8.backend.routing.util;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.unihack8.backend.routing.domain.model.GeoPoint;
+import com.unihack8.backend.common.geo.GeoPoint;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 

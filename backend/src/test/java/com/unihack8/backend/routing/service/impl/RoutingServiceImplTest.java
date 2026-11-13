@@ -14,7 +14,7 @@ import com.unihack8.backend.common.exception.ErrorCode;
 import com.unihack8.backend.routing.client.OtpClient;
 import com.unihack8.backend.routing.client.OtpUnavailableException;
 import com.unihack8.backend.routing.domain.dto.RoutePlanResponse;
-import com.unihack8.backend.routing.domain.model.GeoPoint;
+import com.unihack8.backend.common.geo.GeoPoint;
 import com.unihack8.backend.routing.domain.model.TravelMode;
 import com.unihack8.backend.routing.mapper.impl.RoutePlanMapperImpl;
 import com.unihack8.backend.routing.domain.otp.OtpPlanResult;

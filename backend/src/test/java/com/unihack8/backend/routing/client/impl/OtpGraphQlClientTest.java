@@ -11,7 +11,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 import com.unihack8.backend.routing.client.OtpUnavailableException;
-import com.unihack8.backend.routing.domain.model.GeoPoint;
+import com.unihack8.backend.common.geo.GeoPoint;
 import com.unihack8.backend.routing.domain.model.TravelMode;
 import com.unihack8.backend.routing.domain.otp.OtpPlanResult;
 import java.time.Instant;

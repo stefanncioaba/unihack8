@@ -1,7 +1,7 @@
 package com.unihack8.backend.routing.mapper;
 
 import com.unihack8.backend.routing.domain.dto.RoutePlanResponse;
-import com.unihack8.backend.routing.domain.model.GeoPoint;
+import com.unihack8.backend.common.geo.GeoPoint;
 import com.unihack8.backend.routing.domain.otp.OtpPlanResult;
 import java.time.Instant;
 

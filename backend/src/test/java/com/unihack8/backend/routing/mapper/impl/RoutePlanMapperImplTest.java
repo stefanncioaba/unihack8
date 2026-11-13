@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.within;
 import com.unihack8.backend.routing.support.OtpFixtures;
 import com.unihack8.backend.routing.domain.dto.RouteLegResponse;
 import com.unihack8.backend.routing.domain.dto.RoutePlanResponse;
-import com.unihack8.backend.routing.domain.model.GeoPoint;
+import com.unihack8.backend.common.geo.GeoPoint;
 import com.unihack8.backend.routing.domain.otp.OtpPlanResult;
 import com.unihack8.backend.routing.util.PolylineEncoder;
 import java.time.Instant;

@@ -178,11 +178,11 @@ Tasks 8, 9 and 10 do not need the database to start: B can build and test them a
 
 Restaurants, cafés and the other places are stored in our database from OpenStreetMap: name, category, position, opening hours. OpenStreetMap has no prices, menus or reviews — for those the AI looks on the web itself (task 11.3). We do not copy places out of Google Maps: its terms forbid bulk extraction and saving its place data.
 
-- [ ] **8.1 Category list** shared with mobile: restaurant, café, bar/pub, fast food, club, pharmacy, supermarket, park, museum/attraction, ATM. Map each to its OSM tags.
-- [ ] **8.2 Import script:** one Overpass query for the Timișoara area per category, normalised into `places`. Run once (and re-runnable); do not call Overpass on every user request.
-- [ ] **8.3** `GET /places` — filters: `category` (multiple), `bbox`, `near=lat,lon` + `radius`, `q`; returns distance when `near` is given.
-- [ ] **8.4** `GET /places/{id}` — details including opening hours when OSM has them.
-- [ ] **8.5** Tests for filtering and distance sorting.
+- [x] **8.1 Category list** shared with mobile: restaurant, café, bar/pub, fast food, club, pharmacy, supermarket, park, museum/attraction, ATM. Map each to its OSM tags.
+- [x] **8.2 Import script:** one Overpass query for the Timișoara area covering all categories, normalised into `places`. Run once (and re-runnable, no duplicates); do not call Overpass on every user request. Run with `--places.import.enabled=true` (see `DOCS.md` → Places). Falls back to a mirror server when the main Overpass server is busy.
+- [x] **8.3** `GET /places` — filters: `category` (multiple), `bbox`, `near=lat,lon` + `radius`, `q`; returns distance when `near` is given.
+- [x] **8.4** `GET /places/{id}` — details including opening hours when OSM has them.
+- [x] **8.5** Tests for filtering and distance sorting.
 
 ---
 

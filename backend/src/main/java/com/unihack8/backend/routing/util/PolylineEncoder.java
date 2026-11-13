@@ -1,6 +1,6 @@
 package com.unihack8.backend.routing.util;
 
-import com.unihack8.backend.routing.domain.model.GeoPoint;
+import com.unihack8.backend.common.geo.GeoPoint;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.unihack8.backend.routing.controller;
 
 import com.unihack8.backend.routing.domain.dto.RoutePlanResponse;
-import com.unihack8.backend.routing.domain.model.GeoPoint;
+import com.unihack8.backend.common.geo.GeoPoint;
 import com.unihack8.backend.routing.domain.model.TravelMode;
 import com.unihack8.backend.routing.service.RoutingService;
 import java.time.Instant;
@@ -30,6 +30,6 @@ public class RoutingController {
             @RequestParam String to,
             @RequestParam TravelMode mode,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant departAt) {
-        return routing.plan(GeoPoint.parse("from", from), GeoPoint.parse("to", to), mode, departAt);
+        return routing.plan(GeoPoint.parse(from, "from"), GeoPoint.parse(to, "to"), mode, departAt);
     }
 }
