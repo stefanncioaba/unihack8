@@ -107,7 +107,7 @@ Applied to Supabase on 2026-11-13 from `supabase/migrations/` (four migrations, 
 
 ## Current state
 
-- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging), places (task 8, 1003 Timișoara places imported into Supabase) live transit (task 9, `/transit/**`) and routing (task 10, `/routes/plan`). 162 tests passing.
+- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging), users/profile endpoints (task 4), places (task 8, 1003 Timișoara places imported into Supabase), live transit (task 9, `/transit/**`) and routing (task 10, `/routes/plan`). 190 backend tests passing.
 - `supabase/`: migrations and schema tests for task 2, applied.
 - `docs/API.md`: API contract (task 1.6).
 - `infra/otp/`: OpenTripPlanner 2.7 setup (docker-compose, data download script). Its large data files are git-ignored. `GET /routes/plan` is implemented (task 10).
@@ -175,7 +175,19 @@ Checked against Google's documentation on 2026-11-13.
 
 ## Features
 
-Sections are added here as each PLAN task is implemented: Users, Events, Reliability, Places, Transit, Routing, AI, Frontend.
+### Users and profiles (PLAN 4)
+
+Package `com.unihack8.backend.users` (`controller`, `service` + `impl`, `repository` + `impl`, `mapper` + `impl`, `domain/entity`, `domain/dto`). Request and answer shapes are in `docs/API.md` → Users.
+
+- `GET /users/username-available?username=` — **public**. `{ "username", "available" }`; `400 INVALID_USERNAME` for a bad format. Case-insensitive.
+- `GET /users/me`, `GET /users/{id}` — profile: id, username, reliability score, creation time and `attendedEvents`. Only `ATTENDED` rows count; newest first, at most 20, each in the `EventSummary` shape (missing category shows as `OTHER`; `spotsLeft` counts `JOINED` + `ATTENDED` and is `null` without a capacity). `404 NOT_FOUND` for an unknown id.
+- `PATCH /users/me` — `{ "username" }`, 3–20 letters, digits or `_`. `400 INVALID_USERNAME` for a bad or missing name; `409 USERNAME_TAKEN` when someone else has it, ignoring case — also when two requests race (the database unique index answers).
+- `GET /users/search?q=` — username prefix, case-insensitive, `_` and `%` taken literally, **sorted by username**, at most 20. A blank or missing `q` is `400 VALIDATION_FAILED`.
+- All of these except `username-available` need a token. Errors use the shared shape (`ApiException` + `ErrorCode`); the users package has no exception classes of its own.
+- Profiles are read through JPA (`Profile` → `profiles`). Attended events come from one plain SQL query over `events` and `event_participants` (`AttendedEventRepositoryImpl`), so this package needs no entities for tables the events feature will own. `GET /users/me/events` (PLAN 5.8) and `GET /users/{id}/reliability` (PLAN 6.4) are not built yet.
+- **Tests** (`src/test/.../users`): `UserServiceImplTest` (Mockito rules), `UserControllerTest` (MockMvc with real HS256 test tokens), `ProfileRepositoryTest` and `AttendedEventRepositoryImplTest` (H2). No test touches Supabase.
+
+Sections are added here as each PLAN task is implemented: Events, Reliability, Transit, Routing, AI, Frontend.
 
 ### Places (PLAN task 8)
 

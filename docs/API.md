@@ -171,7 +171,7 @@ Answer: same as `GET /users/me`. Errors: `400 INVALID_USERNAME`, `409 USERNAME_T
 
 ### `GET /users/search?q=ste`
 
-Username prefix, case-insensitive, max 20, best match first.
+Username prefix, case-insensitive, max 20, sorted by username. `q` is required and must not be blank (`400 VALIDATION_FAILED`).
 
 ```json
 [
