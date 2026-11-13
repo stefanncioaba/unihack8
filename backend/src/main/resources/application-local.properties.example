@@ -1,9 +1,27 @@
-supabase.url=
-supabase.jwks-url=
-database.url=
-database.user=
-database.password=
+# Copy this file to application-local.properties (same folder) and fill in the values.
+# application-local.properties is git-ignored: never commit real keys.
+
+# --- Supabase ---------------------------------------------------------------
+supabase.url=https://mjurmmhilnolicncywsw.supabase.co
+# Legacy JWT secret (HS256) used to validate the app's access tokens.
+# Supabase dashboard -> Project Settings -> JWT Keys -> "Legacy JWT Secret".
+# Secret: backend only, never in the mobile app.
+supabase.jwt-secret=
+
+# --- Database (Supabase session pooler) -------------------------------------
+# Supabase dashboard -> Connect -> "Session pooler". Copy the host from there, e.g.
+# jdbc:postgresql://aws-1-eu-central-1.pooler.supabase.com:5432/postgres
+spring.datasource.url=
+spring.datasource.username=postgres.mjurmmhilnolicncywsw
+# Database password chosen when the project was created (ask Stefan).
+spring.datasource.password=
+
+# --- Gemini (AI assistant, PLAN task 11) ------------------------------------
+# Create a key at https://aistudio.google.com/apikey
 gemini.api-key=
-gemini.chat-model=
-gemini.web-model=
-otp.base-url=
+gemini.chat-model=gemini-2.5-flash
+# Model used for the web lookup tool; web search is free on this one.
+gemini.lookup-model=gemini-2.5-flash
+
+# --- OpenTripPlanner (PLAN task 10) -----------------------------------------
+otp.base-url=http://localhost:8081

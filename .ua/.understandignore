@@ -2,9 +2,6 @@
 # Syntax: same as .gitignore (globs, # comments, ! negation, trailing / for dirs)
 # Lines below are suggestions — uncomment to activate.
 # Use ! prefix to force-include something excluded by defaults.
-# Keep generated graph data and binary Gradle tooling out of the graph.
-.ua/
-*.jar
 #
 # Built-in defaults (always excluded unless negated):
 #   node_modules/, .git/, dist/, build/, obj/, *.lock, *.min.js, etc.
@@ -17,26 +14,26 @@
 # *.ipr
 # *.code-workspace
 # .history/
-# .claude/
+.claude/
 # !.mvn/wrapper/maven-wrapper.jar
 # !**/src/main/**/target/
 # !**/src/test/**/target/
-# .gradle/
+.gradle/
 # !gradle/wrapper/gradle-wrapper.jar
 # !**/src/main/**/build/
 # !**/src/test/**/build/
 # HELP.md
 # *.class
-# *.jar
+*.jar
 # !gradle/wrapper/gradle-wrapper.jar
 # !.mvn/wrapper/maven-wrapper.jar
 # *.war
 # *.ear
 # hs_err_pid*
 # replay_pid*
-# application-local.properties
-# application-local.yml
-# application-local.yaml
+application-local.properties
+application-local.yml
+application-local.yaml
 # .expo/
 # web-build/
 # expo-env.d.ts
@@ -47,7 +44,7 @@
 # *.jks
 # *.p8
 # *.p12
-# *.key
+*.key
 # *.mobileprovision
 # *.keystore
 # !debug.keystore
@@ -57,16 +54,19 @@
 # yarn-debug.*
 # yarn-error.*
 # .pnpm-debug.log*
-# .env
-# .env.*
-# !.env.example
-# *.pem
+.env
+.env.*
+!.env.example
+*.pem
+infra/otp/*.pbf
+infra/otp/*.zip
+infra/otp/*.obj
 # .DS_Store
 # Thumbs.db
 # desktop.ini
-# logs/
-# tmp/
-# *.tmp
+logs/
+tmp/
+*.tmp
 
 # --- Detected directories (uncomment to exclude) ---
 
@@ -122,3 +122,12 @@
 # Swift
 # **/Tests/**/*.swift
 # **/Specs/**/*.swift
+
+# --- Added: generated graph data ---
+.ua/
+
+# --- Added: frontend noise (generated or binary) ---
+frontend/package-lock.json
+frontend/assets/
+frontend/LICENSE
+frontend/.npmrc

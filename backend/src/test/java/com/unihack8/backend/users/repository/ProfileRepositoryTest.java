@@ -41,6 +41,15 @@ class ProfileRepositoryTest {
         assertTrue(profiles.existsByUsernameIgnoreCaseAndIdNot("ALEX_21", UUID.randomUUID()));
     }
 
+    // The availability check finds a name whatever its case.
+    @Test
+    void findsExistingUsernameIgnoringCase() {
+        profiles.saveAndFlush(profile("Stefan"));
+
+        assertTrue(profiles.existsByUsernameIgnoreCase("stefan"));
+        assertFalse(profiles.existsByUsernameIgnoreCase("someone_else"));
+    }
+
     // Creates a profile row in the in-memory test database.
     private Profile profile(String username) {
         return new Profile(UUID.randomUUID(), username, 100, Instant.parse("2026-11-13T10:00:00Z"));

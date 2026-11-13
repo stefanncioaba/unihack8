@@ -11,6 +11,9 @@ public interface ProfileRepository extends JpaRepository<Profile, UUID> {
     // Checks uniqueness before changing a username.
     boolean existsByUsernameIgnoreCaseAndIdNot(String username, UUID id);
 
+    // Checks whether anyone owns the username (sign-up screen), ignoring case.
+    boolean existsByUsernameIgnoreCase(String username);
+
     // Finds a bounded page of usernames beginning with the query.
     List<Profile> findByUsernameStartingWithIgnoreCase(String username, Pageable pageable);
 }

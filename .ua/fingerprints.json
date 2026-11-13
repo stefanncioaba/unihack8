@@ -1,0 +1,4890 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "828d6ab9dac65c0431da783cab804314882531c7",
+  "generatedAt": "2026-11-13T18:50:21+00:00",
+  "files": {
+    ".mcp.json": {
+      "filePath": ".mcp.json",
+      "contentHash": "34bc53e312d8287a2b46b4d9b7a7734eebef46da1d63c3da3fbe9ddda47e0d73",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 8,
+      "hasStructuralAnalysis": false
+    },
+    "AGENTS.md": {
+      "filePath": "AGENTS.md",
+      "contentHash": "60a9c4fedec4c3ed54a29035374c59f83be94d042d685a8250c440978e3db0c6",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 49,
+      "hasStructuralAnalysis": false
+    },
+    "DOCS.md": {
+      "filePath": "DOCS.md",
+      "contentHash": "c56ff275934f2cc39f97e3af0943a5b217129f20920b1b2d7cbba073f36c191b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 186,
+      "hasStructuralAnalysis": false
+    },
+    "PLAN.md": {
+      "filePath": "PLAN.md",
+      "contentHash": "e549b08a5d0bc8bc73b38bbea1eaf853911267a1da9231c050b5ae1ee65218b6",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 319,
+      "hasStructuralAnalysis": false
+    },
+    "README.md": {
+      "filePath": "README.md",
+      "contentHash": "053154b11874e37aeba87c7d9a6c1cd34f06a9bf864931eb84b5cf13d02edcf0",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2,
+      "hasStructuralAnalysis": false
+    },
+    "backend/.gitattributes": {
+      "filePath": "backend/.gitattributes",
+      "contentHash": "fe495e43270d435b102b52732f83383357ac97d0633e8644b4b41a65bb03a66f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": false
+    },
+    "backend/build.gradle": {
+      "filePath": "backend/build.gradle",
+      "contentHash": "ff7d51ba9a50dbe1a2822dfab82ef72c8eb4cec4e52e573ff06e2b6dcb751096",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 40,
+      "hasStructuralAnalysis": false
+    },
+    "backend/gradle/wrapper/gradle-wrapper.properties": {
+      "filePath": "backend/gradle/wrapper/gradle-wrapper.properties",
+      "contentHash": "ffe4af3144342cf1745fd6627d356f4c3be583cdd8d72a8effa4a91fda724b67",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 10,
+      "hasStructuralAnalysis": false
+    },
+    "backend/gradlew": {
+      "filePath": "backend/gradlew",
+      "contentHash": "a5a5c199ba02189ae8c46a334223371a20599d9c298ef65e7540ede4a3f72d59",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 249,
+      "hasStructuralAnalysis": false
+    },
+    "backend/gradlew.bat": {
+      "filePath": "backend/gradlew.bat",
+      "contentHash": "f17917f8dbe61182b149273ee78090fec1197442c3f38276af907bfa5190db16",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 113,
+      "hasStructuralAnalysis": false
+    },
+    "backend/settings.gradle": {
+      "filePath": "backend/settings.gradle",
+      "contentHash": "3f0d322bb1fc8d36fe4532e8319795aed819bce956f9e390d60942c7bde3ae84",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2,
+      "hasStructuralAnalysis": false
+    },
+    "backend/src/main/java/com/unihack8/backend/BackendApplication.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/BackendApplication.java",
+      "contentHash": "82be85cd51edeab419d8ec4687077a7b3f0d6d2884ba6dcfabbbb77f49d00189",
+      "functions": [
+        {
+          "name": "main",
+          "params": [
+            "args"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "BackendApplication",
+          "methods": [
+            "main"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.springframework.boot.SpringApplication",
+          "specifiers": [
+            "SpringApplication"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.autoconfigure.SpringBootApplication",
+          "specifiers": [
+            "SpringBootApplication"
+          ]
+        }
+      ],
+      "exports": [
+        "main",
+        "BackendApplication"
+      ],
+      "totalLines": 14,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/common/dto/ErrorResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/dto/ErrorResponse.java",
+      "contentHash": "505dc09c37f0970b6ee35e036fd03207f829be0b3194de04918835ed1854f1ae",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ErrorResponse",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        }
+      ],
+      "exports": [
+        "ErrorResponse"
+      ],
+      "totalLines": 24,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/common/dto/PageParams.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/dto/PageParams.java",
+      "contentHash": "1ad49c290cc8b5500036b0031c67a30d51dd8ff31b4eb9582704874a832449a8",
+      "functions": [
+        {
+          "name": "of",
+          "params": [
+            "page",
+            "size"
+          ],
+          "returnType": "PageParams",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "forMap",
+          "params": [
+            "page",
+            "size"
+          ],
+          "returnType": "PageParams",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "of",
+          "params": [
+            "page",
+            "size",
+            "maxSize"
+          ],
+          "returnType": "PageParams",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "toPageable",
+          "params": [
+            "sort"
+          ],
+          "returnType": "Pageable",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "PageParams",
+          "methods": [
+            "of",
+            "forMap",
+            "of",
+            "toPageable"
+          ],
+          "properties": [
+            "DEFAULT_SIZE",
+            "MAX_SIZE",
+            "MAX_MAP_SIZE"
+          ],
+          "exported": true,
+          "lineCount": 34
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "org.springframework.data.domain.PageRequest",
+          "specifiers": [
+            "PageRequest"
+          ]
+        },
+        {
+          "source": "org.springframework.data.domain.Pageable",
+          "specifiers": [
+            "Pageable"
+          ]
+        },
+        {
+          "source": "org.springframework.data.domain.Sort",
+          "specifiers": [
+            "Sort"
+          ]
+        }
+      ],
+      "exports": [
+        "DEFAULT_SIZE",
+        "MAX_SIZE",
+        "MAX_MAP_SIZE",
+        "of",
+        "forMap",
+        "toPageable",
+        "PageParams"
+      ],
+      "totalLines": 47,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/common/dto/PageResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/dto/PageResponse.java",
+      "contentHash": "e29c15742df03e0f4b9c5dae9e2f351ec6ad7e50e2558de55d623e976ba8aca7",
+      "functions": [
+        {
+          "name": "of",
+          "params": [
+            "page",
+            "mapper"
+          ],
+          "returnType": "PageResponse<T>",
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "classes": [
+        {
+          "name": "PageResponse",
+          "methods": [
+            "of"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 12
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.function.Function",
+          "specifiers": [
+            "Function"
+          ]
+        },
+        {
+          "source": "org.springframework.data.domain.Page",
+          "specifiers": [
+            "Page"
+          ]
+        }
+      ],
+      "exports": [
+        "of",
+        "PageResponse"
+      ],
+      "totalLines": 28,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
+      "contentHash": "e0d63aab0f780d3ca92f0ac35d0ed0bcca51aef3fad316eb735c2379c2a6e93a",
+      "functions": [
+        {
+          "name": "ApiException",
+          "params": [
+            "code"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "ApiException",
+          "params": [
+            "code",
+            "message"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "notFound",
+          "params": [
+            "what"
+          ],
+          "returnType": "ApiException",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "code",
+          "params": [],
+          "returnType": "ErrorCode",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "ApiException",
+          "methods": [
+            "ApiException",
+            "ApiException",
+            "notFound",
+            "code"
+          ],
+          "properties": [
+            "code"
+          ],
+          "exported": true,
+          "lineCount": 25
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "ApiException",
+        "ApiException",
+        "notFound",
+        "code",
+        "ApiException"
+      ],
+      "totalLines": 33,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
+      "contentHash": "e42ddb4da25446fb1b542f01c7e7b1d49f8efe1128aa29c0123d6cbf93185da0",
+      "functions": [
+        {
+          "name": "ErrorCode",
+          "params": [
+            "status",
+            "defaultMessage"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "status",
+          "params": [],
+          "returnType": "HttpStatus",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "defaultMessage",
+          "params": [],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "ErrorCode",
+          "methods": [
+            "ErrorCode",
+            "status",
+            "defaultMessage"
+          ],
+          "properties": [
+            "status",
+            "defaultMessage"
+          ],
+          "exported": true,
+          "lineCount": 44
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.springframework.http.HttpStatus",
+          "specifiers": [
+            "HttpStatus"
+          ]
+        }
+      ],
+      "exports": [
+        "status",
+        "defaultMessage",
+        "ErrorCode"
+      ],
+      "totalLines": 53,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/common/exception/ErrorResponseFactory.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/exception/ErrorResponseFactory.java",
+      "contentHash": "c423d0a8cf43a89281bd928c9a172ef330fb06fae6cdc85563d4c81ced307f67",
+      "functions": [
+        {
+          "name": "ErrorResponseFactory",
+          "params": [
+            "clock"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "create",
+          "params": [
+            "code",
+            "message",
+            "path"
+          ],
+          "returnType": "ErrorResponse",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "create",
+          "params": [
+            "code",
+            "message",
+            "fields",
+            "path"
+          ],
+          "returnType": "ErrorResponse",
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [
+        {
+          "name": "ErrorResponseFactory",
+          "methods": [
+            "ErrorResponseFactory",
+            "create",
+            "create"
+          ],
+          "properties": [
+            "clock"
+          ],
+          "exported": true,
+          "lineCount": 26
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.dto.ErrorResponse",
+          "specifiers": [
+            "ErrorResponse"
+          ]
+        },
+        {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        }
+      ],
+      "exports": [
+        "ErrorResponseFactory",
+        "create",
+        "create",
+        "ErrorResponseFactory"
+      ],
+      "totalLines": 36,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/common/exception/GlobalExceptionHandler.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/exception/GlobalExceptionHandler.java",
+      "contentHash": "97227a2e81743f4c7641535d210a205ce128f63551f88a5e871a63564f35ce1d",
+      "functions": [
+        {
+          "name": "GlobalExceptionHandler",
+          "params": [
+            "errors"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "handleApi",
+          "params": [
+            "ex",
+            "request"
+          ],
+          "returnType": "ResponseEntity<ErrorResponse>",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "handleBodyValidation",
+          "params": [
+            "ex",
+            "request"
+          ],
+          "returnType": "ResponseEntity<ErrorResponse>",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "handleParameterValidation",
+          "params": [
+            "ex",
+            "request"
+          ],
+          "returnType": "ResponseEntity<ErrorResponse>",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "handleConstraintViolation",
+          "params": [
+            "ex",
+            "request"
+          ],
+          "returnType": "ResponseEntity<ErrorResponse>",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "handleUnreadableBody",
+          "params": [
+            "ex",
+            "request"
+          ],
+          "returnType": "ResponseEntity<ErrorResponse>",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "handleMissingParameter",
+          "params": [
+            "ex",
+            "request"
+          ],
+          "returnType": "ResponseEntity<ErrorResponse>",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "handleTypeMismatch",
+          "params": [
+            "ex",
+            "request"
+          ],
+          "returnType": "ResponseEntity<ErrorResponse>",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "handleNoEndpoint",
+          "params": [
+            "ex",
+            "request"
+          ],
+          "returnType": "ResponseEntity<ErrorResponse>",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "handleWrongMethod",
+          "params": [
+            "ex",
+            "request"
+          ],
+          "returnType": "ResponseEntity<ErrorResponse>",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "handleAccessDenied",
+          "params": [
+            "ex",
+            "request"
+          ],
+          "returnType": "ResponseEntity<ErrorResponse>",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "handleUnexpected",
+          "params": [
+            "ex",
+            "request"
+          ],
+          "returnType": "ResponseEntity<ErrorResponse>",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "respond",
+          "params": [
+            "code",
+            "message",
+            "fields",
+            "request"
+          ],
+          "returnType": "ResponseEntity<ErrorResponse>",
+          "exported": false,
+          "lineCount": 5
+        }
+      ],
+      "classes": [
+        {
+          "name": "GlobalExceptionHandler",
+          "methods": [
+            "GlobalExceptionHandler",
+            "handleApi",
+            "handleBodyValidation",
+            "handleParameterValidation",
+            "handleConstraintViolation",
+            "handleUnreadableBody",
+            "handleMissingParameter",
+            "handleTypeMismatch",
+            "handleNoEndpoint",
+            "handleWrongMethod",
+            "handleAccessDenied",
+            "handleUnexpected",
+            "respond"
+          ],
+          "properties": [
+            "log",
+            "errors"
+          ],
+          "exported": true,
+          "lineCount": 113
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.dto.ErrorResponse",
+          "specifiers": [
+            "ErrorResponse"
+          ]
+        },
+        {
+          "source": "jakarta.servlet.http.HttpServletRequest",
+          "specifiers": [
+            "HttpServletRequest"
+          ]
+        },
+        {
+          "source": "jakarta.validation.ConstraintViolationException",
+          "specifiers": [
+            "ConstraintViolationException"
+          ]
+        },
+        {
+          "source": "java.util.LinkedHashMap",
+          "specifiers": [
+            "LinkedHashMap"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "org.slf4j.Logger",
+          "specifiers": [
+            "Logger"
+          ]
+        },
+        {
+          "source": "org.slf4j.LoggerFactory",
+          "specifiers": [
+            "LoggerFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.http.ResponseEntity",
+          "specifiers": [
+            "ResponseEntity"
+          ]
+        },
+        {
+          "source": "org.springframework.http.converter.HttpMessageNotReadableException",
+          "specifiers": [
+            "HttpMessageNotReadableException"
+          ]
+        },
+        {
+          "source": "org.springframework.security.access.AccessDeniedException",
+          "specifiers": [
+            "AccessDeniedException"
+          ]
+        },
+        {
+          "source": "org.springframework.validation.FieldError",
+          "specifiers": [
+            "FieldError"
+          ]
+        },
+        {
+          "source": "org.springframework.web.HttpRequestMethodNotSupportedException",
+          "specifiers": [
+            "HttpRequestMethodNotSupportedException"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.MethodArgumentNotValidException",
+          "specifiers": [
+            "MethodArgumentNotValidException"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.MissingServletRequestParameterException",
+          "specifiers": [
+            "MissingServletRequestParameterException"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.ExceptionHandler",
+          "specifiers": [
+            "ExceptionHandler"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RestControllerAdvice",
+          "specifiers": [
+            "RestControllerAdvice"
+          ]
+        },
+        {
+          "source": "org.springframework.web.method.annotation.HandlerMethodValidationException",
+          "specifiers": [
+            "HandlerMethodValidationException"
+          ]
+        },
+        {
+          "source": "org.springframework.web.method.annotation.MethodArgumentTypeMismatchException",
+          "specifiers": [
+            "MethodArgumentTypeMismatchException"
+          ]
+        },
+        {
+          "source": "org.springframework.web.servlet.resource.NoResourceFoundException",
+          "specifiers": [
+            "NoResourceFoundException"
+          ]
+        }
+      ],
+      "exports": [
+        "GlobalExceptionHandler",
+        "handleApi",
+        "handleBodyValidation",
+        "handleParameterValidation",
+        "handleConstraintViolation",
+        "handleUnreadableBody",
+        "handleMissingParameter",
+        "handleTypeMismatch",
+        "handleNoEndpoint",
+        "handleWrongMethod",
+        "handleAccessDenied",
+        "handleUnexpected",
+        "GlobalExceptionHandler"
+      ],
+      "totalLines": 141,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/common/security/CurrentUser.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/security/CurrentUser.java",
+      "contentHash": "84b9cbcaee4f9b7b2e293d7efb47953c54b484ae086b68db6a43005356377014",
+      "functions": [
+        {
+          "name": "id",
+          "params": [],
+          "returnType": "UUID",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "optionalId",
+          "params": [],
+          "returnType": "Optional<UUID>",
+          "exported": true,
+          "lineCount": 11
+        }
+      ],
+      "classes": [
+        {
+          "name": "CurrentUser",
+          "methods": [
+            "id",
+            "optionalId"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 21
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.springframework.security.core.Authentication",
+          "specifiers": [
+            "Authentication"
+          ]
+        },
+        {
+          "source": "org.springframework.security.core.context.SecurityContextHolder",
+          "specifiers": [
+            "SecurityContextHolder"
+          ]
+        },
+        {
+          "source": "org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken",
+          "specifiers": [
+            "JwtAuthenticationToken"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        }
+      ],
+      "exports": [
+        "id",
+        "optionalId",
+        "CurrentUser"
+      ],
+      "totalLines": 37,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/common/security/JsonAccessDeniedHandler.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/security/JsonAccessDeniedHandler.java",
+      "contentHash": "c9016bdc4efdf83bcce9c144abbe6382913bf9c1b1a2b0b066a2109072330c4b",
+      "functions": [
+        {
+          "name": "JsonAccessDeniedHandler",
+          "params": [
+            "errors",
+            "objectMapper"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "handle",
+          "params": [
+            "request",
+            "response",
+            "accessDeniedException"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [
+        {
+          "name": "JsonAccessDeniedHandler",
+          "methods": [
+            "JsonAccessDeniedHandler",
+            "handle"
+          ],
+          "properties": [
+            "errors",
+            "objectMapper"
+          ],
+          "exported": true,
+          "lineCount": 23
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorResponseFactory",
+          "specifiers": [
+            "ErrorResponseFactory"
+          ]
+        },
+        {
+          "source": "jakarta.servlet.http.HttpServletRequest",
+          "specifiers": [
+            "HttpServletRequest"
+          ]
+        },
+        {
+          "source": "jakarta.servlet.http.HttpServletResponse",
+          "specifiers": [
+            "HttpServletResponse"
+          ]
+        },
+        {
+          "source": "java.io.IOException",
+          "specifiers": [
+            "IOException"
+          ]
+        },
+        {
+          "source": "org.springframework.http.MediaType",
+          "specifiers": [
+            "MediaType"
+          ]
+        },
+        {
+          "source": "org.springframework.security.access.AccessDeniedException",
+          "specifiers": [
+            "AccessDeniedException"
+          ]
+        },
+        {
+          "source": "org.springframework.security.web.access.AccessDeniedHandler",
+          "specifiers": [
+            "AccessDeniedHandler"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        },
+        {
+          "source": "tools.jackson.databind.ObjectMapper",
+          "specifiers": [
+            "ObjectMapper"
+          ]
+        }
+      ],
+      "exports": [
+        "JsonAccessDeniedHandler",
+        "handle",
+        "JsonAccessDeniedHandler"
+      ],
+      "totalLines": 38,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/common/security/JsonAuthenticationEntryPoint.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/common/security/JsonAuthenticationEntryPoint.java",
+      "contentHash": "74558005de6ebd6e51dabf1d31838623874412ff480ad5f33f3602527d37ffad",
+      "functions": [
+        {
+          "name": "JsonAuthenticationEntryPoint",
+          "params": [
+            "errors",
+            "objectMapper"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "commence",
+          "params": [
+            "request",
+            "response",
+            "authException"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "classes": [
+        {
+          "name": "JsonAuthenticationEntryPoint",
+          "methods": [
+            "JsonAuthenticationEntryPoint",
+            "commence"
+          ],
+          "properties": [
+            "errors",
+            "objectMapper"
+          ],
+          "exported": true,
+          "lineCount": 24
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorResponseFactory",
+          "specifiers": [
+            "ErrorResponseFactory"
+          ]
+        },
+        {
+          "source": "jakarta.servlet.http.HttpServletRequest",
+          "specifiers": [
+            "HttpServletRequest"
+          ]
+        },
+        {
+          "source": "jakarta.servlet.http.HttpServletResponse",
+          "specifiers": [
+            "HttpServletResponse"
+          ]
+        },
+        {
+          "source": "java.io.IOException",
+          "specifiers": [
+            "IOException"
+          ]
+        },
+        {
+          "source": "org.springframework.http.MediaType",
+          "specifiers": [
+            "MediaType"
+          ]
+        },
+        {
+          "source": "org.springframework.security.core.AuthenticationException",
+          "specifiers": [
+            "AuthenticationException"
+          ]
+        },
+        {
+          "source": "org.springframework.security.web.AuthenticationEntryPoint",
+          "specifiers": [
+            "AuthenticationEntryPoint"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        },
+        {
+          "source": "tools.jackson.databind.ObjectMapper",
+          "specifiers": [
+            "ObjectMapper"
+          ]
+        }
+      ],
+      "exports": [
+        "JsonAuthenticationEntryPoint",
+        "commence",
+        "JsonAuthenticationEntryPoint"
+      ],
+      "totalLines": 39,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java",
+      "contentHash": "135e6351d30ba7228311abd2b022040f56f3f199beb2934259e1f2e5711cdd33",
+      "functions": [
+        {
+          "name": "securityFilterChain",
+          "params": [
+            "http",
+            "authenticationEntryPoint",
+            "accessDeniedHandler"
+          ],
+          "returnType": "SecurityFilterChain",
+          "exported": true,
+          "lineCount": 27
+        },
+        {
+          "name": "jwtDecoder",
+          "params": [
+            "supabase"
+          ],
+          "returnType": "JwtDecoder",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "tokenValidator",
+          "params": [
+            "issuer"
+          ],
+          "returnType": "OAuth2TokenValidator<Jwt>",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "corsConfigurationSource",
+          "params": [],
+          "returnType": "CorsConfigurationSource",
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "classes": [
+        {
+          "name": "SecurityConfig",
+          "methods": [
+            "securityFilterChain",
+            "jwtDecoder",
+            "tokenValidator",
+            "corsConfigurationSource"
+          ],
+          "properties": [
+            "SUPABASE_AUDIENCE"
+          ],
+          "exported": true,
+          "lineCount": 66
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.security.JsonAccessDeniedHandler",
+          "specifiers": [
+            "JsonAccessDeniedHandler"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.security.JsonAuthenticationEntryPoint",
+          "specifiers": [
+            "JsonAuthenticationEntryPoint"
+          ]
+        },
+        {
+          "source": "java.nio.charset.StandardCharsets",
+          "specifiers": [
+            "StandardCharsets"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "javax.crypto.SecretKey",
+          "specifiers": [
+            "SecretKey"
+          ]
+        },
+        {
+          "source": "javax.crypto.spec.SecretKeySpec",
+          "specifiers": [
+            "SecretKeySpec"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.context.properties.EnableConfigurationProperties",
+          "specifiers": [
+            "EnableConfigurationProperties"
+          ]
+        },
+        {
+          "source": "org.springframework.context.annotation.Bean",
+          "specifiers": [
+            "Bean"
+          ]
+        },
+        {
+          "source": "org.springframework.context.annotation.Configuration",
+          "specifiers": [
+            "Configuration"
+          ]
+        },
+        {
+          "source": "org.springframework.http.HttpMethod",
+          "specifiers": [
+            "HttpMethod"
+          ]
+        },
+        {
+          "source": "org.springframework.security.config.Customizer",
+          "specifiers": [
+            "Customizer"
+          ]
+        },
+        {
+          "source": "org.springframework.security.config.annotation.web.builders.HttpSecurity",
+          "specifiers": [
+            "HttpSecurity"
+          ]
+        },
+        {
+          "source": "org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer",
+          "specifiers": [
+            "AbstractHttpConfigurer"
+          ]
+        },
+        {
+          "source": "org.springframework.security.config.http.SessionCreationPolicy",
+          "specifiers": [
+            "SessionCreationPolicy"
+          ]
+        },
+        {
+          "source": "org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator",
+          "specifiers": [
+            "DelegatingOAuth2TokenValidator"
+          ]
+        },
+        {
+          "source": "org.springframework.security.oauth2.core.OAuth2TokenValidator",
+          "specifiers": [
+            "OAuth2TokenValidator"
+          ]
+        },
+        {
+          "source": "org.springframework.security.oauth2.jose.jws.MacAlgorithm",
+          "specifiers": [
+            "MacAlgorithm"
+          ]
+        },
+        {
+          "source": "org.springframework.security.oauth2.jwt.Jwt",
+          "specifiers": [
+            "Jwt"
+          ]
+        },
+        {
+          "source": "org.springframework.security.oauth2.jwt.JwtClaimValidator",
+          "specifiers": [
+            "JwtClaimValidator"
+          ]
+        },
+        {
+          "source": "org.springframework.security.oauth2.jwt.JwtDecoder",
+          "specifiers": [
+            "JwtDecoder"
+          ]
+        },
+        {
+          "source": "org.springframework.security.oauth2.jwt.JwtValidators",
+          "specifiers": [
+            "JwtValidators"
+          ]
+        },
+        {
+          "source": "org.springframework.security.oauth2.jwt.NimbusJwtDecoder",
+          "specifiers": [
+            "NimbusJwtDecoder"
+          ]
+        },
+        {
+          "source": "org.springframework.security.web.SecurityFilterChain",
+          "specifiers": [
+            "SecurityFilterChain"
+          ]
+        },
+        {
+          "source": "org.springframework.web.cors.CorsConfiguration",
+          "specifiers": [
+            "CorsConfiguration"
+          ]
+        },
+        {
+          "source": "org.springframework.web.cors.CorsConfigurationSource",
+          "specifiers": [
+            "CorsConfigurationSource"
+          ]
+        },
+        {
+          "source": "org.springframework.web.cors.UrlBasedCorsConfigurationSource",
+          "specifiers": [
+            "UrlBasedCorsConfigurationSource"
+          ]
+        }
+      ],
+      "exports": [
+        "securityFilterChain",
+        "jwtDecoder",
+        "corsConfigurationSource",
+        "SecurityConfig"
+      ],
+      "totalLines": 100,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/config/SupabaseProperties.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/config/SupabaseProperties.java",
+      "contentHash": "434eff6af30cafc6a032634c16714108c961ca29446fdd48cfbb462cbe66d6c2",
+      "functions": [
+        {
+          "name": "issuer",
+          "params": [],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "SupabaseProperties",
+          "methods": [
+            "issuer"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 12
+        }
+      ],
+      "imports": [
+        {
+          "source": "jakarta.validation.constraints.NotBlank",
+          "specifiers": [
+            "NotBlank"
+          ]
+        },
+        {
+          "source": "jakarta.validation.constraints.Size",
+          "specifiers": [
+            "Size"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.context.properties.ConfigurationProperties",
+          "specifiers": [
+            "ConfigurationProperties"
+          ]
+        },
+        {
+          "source": "org.springframework.validation.annotation.Validated",
+          "specifiers": [
+            "Validated"
+          ]
+        }
+      ],
+      "exports": [
+        "issuer",
+        "SupabaseProperties"
+      ],
+      "totalLines": 26,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/config/TimeConfig.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/config/TimeConfig.java",
+      "contentHash": "01c9c2c1dc59a7131d6c4e4f1d34d1ce4d9ebf33649be7300500d2312813c80f",
+      "functions": [
+        {
+          "name": "clock",
+          "params": [],
+          "returnType": "Clock",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "TimeConfig",
+          "methods": [
+            "clock"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
+          "source": "org.springframework.context.annotation.Bean",
+          "specifiers": [
+            "Bean"
+          ]
+        },
+        {
+          "source": "org.springframework.context.annotation.Configuration",
+          "specifiers": [
+            "Configuration"
+          ]
+        }
+      ],
+      "exports": [
+        "clock",
+        "TimeConfig"
+      ],
+      "totalLines": 17,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/resources/application-local.properties.example": {
+      "filePath": "backend/src/main/resources/application-local.properties.example",
+      "contentHash": "a67a386c27ee9aee8e64735d15b734ed9fb790b8cc35de0899d8754579c8203e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 28,
+      "hasStructuralAnalysis": false
+    },
+    "backend/src/main/resources/application.properties": {
+      "filePath": "backend/src/main/resources/application.properties",
+      "contentHash": "6d0903e11bbf3ed383a0e91bd76d94cfa2961321e3c9365623d3622c3cee664b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 21,
+      "hasStructuralAnalysis": false
+    },
+    "backend/src/test/java/com/unihack8/backend/BackendApplicationTests.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/BackendApplicationTests.java",
+      "contentHash": "b41d5964bea0ab5376ea0dbe6b1168065465d95cb0be180d156dcd5c266466f0",
+      "functions": [
+        {
+          "name": "contextLoads",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "BackendApplicationTests",
+          "methods": [
+            "contextLoads"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 9
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.test.context.SpringBootTest",
+          "specifiers": [
+            "SpringBootTest"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 16,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/common/dto/PageParamsTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/common/dto/PageParamsTest.java",
+      "contentHash": "0f31a8f8b87d7aa635deccf15f7c2ee58bd89c22c33775639f0e99bba6ca24b0",
+      "functions": [
+        {
+          "name": "defaultsWhenMissing",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "listMaxIs100",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "mapMaxIs500",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "rejectsNegativePageAndZeroSize",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "toPageableKeepsSort",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "pageResponseMapsItems",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        }
+      ],
+      "classes": [
+        {
+          "name": "PageParamsTest",
+          "methods": [
+            "defaultsWhenMissing",
+            "listMaxIs100",
+            "mapMaxIs500",
+            "rejectsNegativePageAndZeroSize",
+            "toPageableKeepsSort",
+            "pageResponseMapsItems"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 52
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "org.assertj.core.api.Assertions.assertThatThrownBy",
+          "specifiers": [
+            "assertThatThrownBy"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.data.domain.PageImpl",
+          "specifiers": [
+            "PageImpl"
+          ]
+        },
+        {
+          "source": "org.springframework.data.domain.PageRequest",
+          "specifiers": [
+            "PageRequest"
+          ]
+        },
+        {
+          "source": "org.springframework.data.domain.Pageable",
+          "specifiers": [
+            "Pageable"
+          ]
+        },
+        {
+          "source": "org.springframework.data.domain.Sort",
+          "specifiers": [
+            "Sort"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 68,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/common/exception/GlobalExceptionHandlerTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/common/exception/GlobalExceptionHandlerTest.java",
+      "contentHash": "4157da3a0c10947d189b79875a8d23a5e1fcbaa900178952066e41b851972dd8",
+      "functions": [
+        {
+          "name": "apiExceptionUsesItsCodeAndStatus",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "invalidBodyListsFields",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "malformedJsonIs400",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "wrongParameterTypeIs400",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "pageSizeOverLimitIs400",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "unknownPathIs404",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "wrongMethodIs405",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "unexpectedErrorIs500WithoutDetails",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "GlobalExceptionHandlerTest",
+          "methods": [
+            "apiExceptionUsesItsCodeAndStatus",
+            "invalidBodyListsFields",
+            "malformedJsonIs400",
+            "wrongParameterTypeIs400",
+            "pageSizeOverLimitIs400",
+            "unknownPathIs404",
+            "wrongMethodIs405",
+            "unexpectedErrorIs500WithoutDetails"
+          ],
+          "properties": [
+            "AUTH",
+            "mvc"
+          ],
+          "exported": false,
+          "lineCount": 87
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.hamcrest.Matchers.containsString",
+          "specifiers": [
+            "containsString"
+          ]
+        },
+        {
+          "source": "org.hamcrest.Matchers.matchesPattern",
+          "specifiers": [
+            "matchesPattern"
+          ]
+        },
+        {
+          "source": "org.hamcrest.Matchers.not",
+          "specifiers": [
+            "not"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get",
+          "specifiers": [
+            "get"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post",
+          "specifiers": [
+            "post"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.content",
+          "specifiers": [
+            "content"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath",
+          "specifiers": [
+            "jsonPath"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.status",
+          "specifiers": [
+            "status"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.support.JwtTestTokens",
+          "specifiers": [
+            "JwtTestTokens"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Autowired",
+          "specifiers": [
+            "Autowired"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.test.context.SpringBootTest",
+          "specifiers": [
+            "SpringBootTest"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc",
+          "specifiers": [
+            "AutoConfigureMockMvc"
+          ]
+        },
+        {
+          "source": "org.springframework.http.MediaType",
+          "specifiers": [
+            "MediaType"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.MockMvc",
+          "specifiers": [
+            "MockMvc"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 109,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/common/security/CurrentUserTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/common/security/CurrentUserTest.java",
+      "contentHash": "5c87b2d984e567eb59199ab5b7cb776eb60a117261b1f8ac7f482c44ebaffe06",
+      "functions": [
+        {
+          "name": "clearContext",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "signInAs",
+          "params": [
+            "subject"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "returnsSubjectAsId",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "anonymousCallerHasNoId",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "nonUuidSubjectIsIgnored",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        }
+      ],
+      "classes": [
+        {
+          "name": "CurrentUserTest",
+          "methods": [
+            "clearContext",
+            "signInAs",
+            "returnsSubjectAsId",
+            "anonymousCallerHasNoId",
+            "nonUuidSubjectIsIgnored"
+          ],
+          "properties": [
+            "currentUser"
+          ],
+          "exported": false,
+          "lineCount": 46
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "org.assertj.core.api.Assertions.assertThatThrownBy",
+          "specifiers": [
+            "assertThatThrownBy"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.AfterEach",
+          "specifiers": [
+            "AfterEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.security.core.context.SecurityContextHolder",
+          "specifiers": [
+            "SecurityContextHolder"
+          ]
+        },
+        {
+          "source": "org.springframework.security.oauth2.jwt.Jwt",
+          "specifiers": [
+            "Jwt"
+          ]
+        },
+        {
+          "source": "org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken",
+          "specifiers": [
+            "JwtAuthenticationToken"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 63,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/config/SecurityConfigTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/config/SecurityConfigTest.java",
+      "contentHash": "e03270130554afa8a345d6576748a28059457336269b48f85f6db6427a4c89df",
+      "functions": [
+        {
+          "name": "protectedEndpointWithoutTokenIs401",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "validTokenIsAcceptedAndSubIsTheUserId",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "tokenWithWrongSecretIs401",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "expiredTokenIs401",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "tokenWithWrongIssuerIs401",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "tokenWithWrongAudienceIs401",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "malformedTokenIs401",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "publicEndpointWorksWithoutToken",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "publicEndpointSeesCallerWhenTokenSent",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "unknownPathWithoutTokenIs401",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        }
+      ],
+      "classes": [
+        {
+          "name": "SecurityConfigTest",
+          "methods": [
+            "protectedEndpointWithoutTokenIs401",
+            "validTokenIsAcceptedAndSubIsTheUserId",
+            "tokenWithWrongSecretIs401",
+            "expiredTokenIs401",
+            "tokenWithWrongIssuerIs401",
+            "tokenWithWrongAudienceIs401",
+            "malformedTokenIs401",
+            "publicEndpointWorksWithoutToken",
+            "publicEndpointSeesCallerWhenTokenSent",
+            "unknownPathWithoutTokenIs401"
+          ],
+          "properties": [
+            "USER",
+            "mvc"
+          ],
+          "exported": false,
+          "lineCount": 96
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get",
+          "specifiers": [
+            "get"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.header",
+          "specifiers": [
+            "header"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath",
+          "specifiers": [
+            "jsonPath"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.status",
+          "specifiers": [
+            "status"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.support.JwtTestTokens",
+          "specifiers": [
+            "JwtTestTokens"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Autowired",
+          "specifiers": [
+            "Autowired"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.test.context.SpringBootTest",
+          "specifiers": [
+            "SpringBootTest"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc",
+          "specifiers": [
+            "AutoConfigureMockMvc"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.MockMvc",
+          "specifiers": [
+            "MockMvc"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 114,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/config/SupabasePropertiesTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/config/SupabasePropertiesTest.java",
+      "contentHash": "a9892acd94959077f20b1e43951b2f05a8decc3d53b49417cd53151910164970",
+      "functions": [
+        {
+          "name": "issuerAppendsAuthPath",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "issuerIgnoresTrailingSlash",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        }
+      ],
+      "classes": [
+        {
+          "name": "SupabasePropertiesTest",
+          "methods": [
+            "issuerAppendsAuthPath",
+            "issuerIgnoresTrailingSlash"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 16
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 24,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/support/JwtTestTokens.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/support/JwtTestTokens.java",
+      "contentHash": "f708986ceae1decbf2ef0e01405e0fde396349e91e03244fc2576ffcb8c9506b",
+      "functions": [
+        {
+          "name": "JwtTestTokens",
+          "params": [],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "valid",
+          "params": [
+            "userId"
+          ],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "sign",
+          "params": [
+            "secret",
+            "subject",
+            "issuer",
+            "audience",
+            "expiresAt"
+          ],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 17
+        }
+      ],
+      "classes": [
+        {
+          "name": "JwtTestTokens",
+          "methods": [
+            "JwtTestTokens",
+            "valid",
+            "sign"
+          ],
+          "properties": [
+            "SECRET",
+            "ISSUER",
+            "AUDIENCE"
+          ],
+          "exported": true,
+          "lineCount": 34
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.nimbusds.jose.JOSEException",
+          "specifiers": [
+            "JOSEException"
+          ]
+        },
+        {
+          "source": "com.nimbusds.jose.JWSAlgorithm",
+          "specifiers": [
+            "JWSAlgorithm"
+          ]
+        },
+        {
+          "source": "com.nimbusds.jose.JWSHeader",
+          "specifiers": [
+            "JWSHeader"
+          ]
+        },
+        {
+          "source": "com.nimbusds.jose.crypto.MACSigner",
+          "specifiers": [
+            "MACSigner"
+          ]
+        },
+        {
+          "source": "com.nimbusds.jwt.JWTClaimsSet",
+          "specifiers": [
+            "JWTClaimsSet"
+          ]
+        },
+        {
+          "source": "com.nimbusds.jwt.SignedJWT",
+          "specifiers": [
+            "SignedJWT"
+          ]
+        },
+        {
+          "source": "java.nio.charset.StandardCharsets",
+          "specifiers": [
+            "StandardCharsets"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.Date",
+          "specifiers": [
+            "Date"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "SECRET",
+        "ISSUER",
+        "AUDIENCE",
+        "valid",
+        "sign",
+        "JwtTestTokens"
+      ],
+      "totalLines": 52,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/support/TestProbeController.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/support/TestProbeController.java",
+      "contentHash": "83d17190acc2ed7b023ea733acf82c664a2a3214c8f8be43bf337ded7db8112c",
+      "functions": [
+        {
+          "name": "TestProbeController",
+          "params": [
+            "currentUser"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "publicProbe",
+          "params": [],
+          "returnType": "Map<String, Object>",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "me",
+          "params": [],
+          "returnType": "Map<String, String>",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "full",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "boom",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "body",
+          "params": [
+            "body"
+          ],
+          "returnType": "Map<String, String>",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "page",
+          "params": [
+            "page",
+            "size"
+          ],
+          "returnType": "PageParams",
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [
+        {
+          "name": "TestProbeController",
+          "methods": [
+            "TestProbeController",
+            "publicProbe",
+            "me",
+            "full",
+            "boom",
+            "body",
+            "page"
+          ],
+          "properties": [
+            "currentUser"
+          ],
+          "exported": true,
+          "lineCount": 51
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.dto.PageParams",
+          "specifiers": [
+            "PageParams"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.security.CurrentUser",
+          "specifiers": [
+            "CurrentUser"
+          ]
+        },
+        {
+          "source": "jakarta.validation.Valid",
+          "specifiers": [
+            "Valid"
+          ]
+        },
+        {
+          "source": "jakarta.validation.constraints.NotBlank",
+          "specifiers": [
+            "NotBlank"
+          ]
+        },
+        {
+          "source": "jakarta.validation.constraints.Positive",
+          "specifiers": [
+            "Positive"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.GetMapping",
+          "specifiers": [
+            "GetMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.PostMapping",
+          "specifiers": [
+            "PostMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RequestBody",
+          "specifiers": [
+            "RequestBody"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RequestParam",
+          "specifiers": [
+            "RequestParam"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RestController",
+          "specifiers": [
+            "RestController"
+          ]
+        }
+      ],
+      "exports": [
+        "TestProbeController",
+        "publicProbe",
+        "me",
+        "full",
+        "boom",
+        "body",
+        "page",
+        "TestProbeController"
+      ],
+      "totalLines": 72,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/resources/application.properties": {
+      "filePath": "backend/src/test/resources/application.properties",
+      "contentHash": "50c191d7bcb33d60ef85ef2a2ef6c8069ccfa114d90402a87d4c2c8d6929ee21",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 17,
+      "hasStructuralAnalysis": false
+    },
+    "docs/API.md": {
+      "filePath": "docs/API.md",
+      "contentHash": "114b58216de5c900ca936d5994c399735192364c0161277a294f867084450de5",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 591,
+      "hasStructuralAnalysis": false
+    },
+    "frontend/.env.example": {
+      "filePath": "frontend/.env.example",
+      "contentHash": "2927e4db63ffbcf273cf21415a55c495189392115ac6f259f10536fa865850fb",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2,
+      "hasStructuralAnalysis": false
+    },
+    "frontend/AGENTS.md": {
+      "filePath": "frontend/AGENTS.md",
+      "contentHash": "74906b75b99ef669200f05cc9131ae74b4a6e8c7a6827d65cb0389d6d2740202",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 42,
+      "hasStructuralAnalysis": false
+    },
+    "frontend/app.json": {
+      "filePath": "frontend/app.json",
+      "contentHash": "ee9fa6cfafa92d8144de1eb2cb5530b6f9e48eaf58b3b27fc3dcda41b26f527c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 32,
+      "hasStructuralAnalysis": false
+    },
+    "frontend/eslint.config.js": {
+      "filePath": "frontend/eslint.config.js",
+      "contentHash": "7cbf8e569149adb38a3f948af341eecd55cf2bc3bd03c1b25157242a8f4f0711",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 8,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/jsconfig.json": {
+      "filePath": "frontend/jsconfig.json",
+      "contentHash": "c34819c1a656138f8641b7bf1eb5f4f2d3a306691634cb25b657b6dff3ae1174",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 11,
+      "hasStructuralAnalysis": false
+    },
+    "frontend/package.json": {
+      "filePath": "frontend/package.json",
+      "contentHash": "a43efb1235e4312df069eb02fc0963a19e04295b7be69411a554139328e1433a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 34,
+      "hasStructuralAnalysis": false
+    },
+    "frontend/src/app/_layout.jsx": {
+      "filePath": "frontend/src/app/_layout.jsx",
+      "contentHash": "c483625e7d6b73f06ac3e95d40e0a3c199bb460f600a260245b7988f60168982",
+      "functions": [
+        {
+          "name": "RootLayout",
+          "params": [],
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "expo-router",
+          "specifiers": [
+            "Stack"
+          ]
+        },
+        {
+          "source": "expo-status-bar",
+          "specifiers": [
+            "StatusBar"
+          ]
+        }
+      ],
+      "exports": [
+        "RootLayout"
+      ],
+      "totalLines": 15,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/app/index.jsx": {
+      "filePath": "frontend/src/app/index.jsx",
+      "contentHash": "e2b5caf99a1e17e1630b5e20a6668ca68105baa754bb3e9e31260219ee0c91d3",
+      "functions": [
+        {
+          "name": "DiscoverScreen",
+          "params": [],
+          "exported": true,
+          "lineCount": 65
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "useRef",
+            "useState"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "ActivityIndicator",
+            "Pressable",
+            "StyleSheet",
+            "Text",
+            "View"
+          ]
+        },
+        {
+          "source": "expo-location",
+          "specifiers": [
+            "* as Location"
+          ]
+        },
+        {
+          "source": "react-native-maps",
+          "specifiers": [
+            "MapView"
+          ]
+        },
+        {
+          "source": "react-native-safe-area-context",
+          "specifiers": [
+            "SafeAreaView"
+          ]
+        },
+        {
+          "source": "../lib/map",
+          "specifiers": [
+            "regionForCoordinates",
+            "TIMISOARA_CENTER"
+          ]
+        }
+      ],
+      "exports": [
+        "DiscoverScreen"
+      ],
+      "totalLines": 102,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/lib/api.js": {
+      "filePath": "frontend/src/lib/api.js",
+      "contentHash": "34ec6946673907895e398807d56964921b773ff0d19a65562fbe1e5b8998a97f",
+      "functions": [
+        {
+          "name": "apiBaseUrl",
+          "params": [],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "apiGet",
+          "params": [
+            "path"
+          ],
+          "exported": true,
+          "lineCount": 11
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "apiBaseUrl",
+        "apiGet"
+      ],
+      "totalLines": 22,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/lib/map.js": {
+      "filePath": "frontend/src/lib/map.js",
+      "contentHash": "146bd34fff344a71e18463d3fc7e2691109e967010379f14deb9e6cb3d97ea32",
+      "functions": [
+        {
+          "name": "regionForCoordinates",
+          "params": [
+            "latitude",
+            "longitude"
+          ],
+          "exported": true,
+          "lineCount": 12
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "TIMISOARA_CENTER",
+        "regionForCoordinates"
+      ],
+      "totalLines": 16,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/tests/setup.test.mjs": {
+      "filePath": "frontend/tests/setup.test.mjs",
+      "contentHash": "ebfd845b5277429bc017b5709d08ef7ee614fa6eedf8bb2ac3cd88913f6c86fe",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "node:assert/strict",
+          "specifiers": [
+            "assert"
+          ]
+        },
+        {
+          "source": "node:test",
+          "specifiers": [
+            "test"
+          ]
+        },
+        {
+          "source": "../src/lib/api.js",
+          "specifiers": [
+            "apiBaseUrl",
+            "apiGet"
+          ]
+        },
+        {
+          "source": "../src/lib/map.js",
+          "specifiers": [
+            "regionForCoordinates"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 39,
+      "hasStructuralAnalysis": true
+    },
+    "infra/otp/README.md": {
+      "filePath": "infra/otp/README.md",
+      "contentHash": "39e85e0962abd886185055bde477e371f27e5dce1c85d323bc6713b2869594b0",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 15,
+      "hasStructuralAnalysis": false
+    },
+    "supabase/migrations/20261113000001_profiles.sql": {
+      "filePath": "supabase/migrations/20261113000001_profiles.sql",
+      "contentHash": "b2d0bc872db2b968c0d62a6f89c513734f9fec68499846e5379fcf265f1b5688",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 60,
+      "hasStructuralAnalysis": false
+    },
+    "supabase/migrations/20261113000002_events.sql": {
+      "filePath": "supabase/migrations/20261113000002_events.sql",
+      "contentHash": "6092919ff59aef6bc0506066f9bffa8a2ebb1e6c9abee1fd2d3184f2574d78db",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 50,
+      "hasStructuralAnalysis": false
+    },
+    "supabase/migrations/20261113000003_participation_reliability.sql": {
+      "filePath": "supabase/migrations/20261113000003_participation_reliability.sql",
+      "contentHash": "b7d48c6b4bd3d2d4d8b750eb0f2c34feb724861d734f1297ef7f602d7da4c207",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 38,
+      "hasStructuralAnalysis": false
+    },
+    "supabase/migrations/20261113000004_places.sql": {
+      "filePath": "supabase/migrations/20261113000004_places.sql",
+      "contentHash": "137a4938a0891306f86c8734905dfda63a671b2d6a79dcd53045068f5ebbc0cc",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 24,
+      "hasStructuralAnalysis": false
+    },
+    "supabase/tests/schema_checks.sql": {
+      "filePath": "supabase/tests/schema_checks.sql",
+      "contentHash": "50b54f360da1ae14d4ebc2ecc5049acf47983bc935dd771521ac0452f11fdbb3",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 186,
+      "hasStructuralAnalysis": false
+    },
+    "backend/src/main/java/com/unihack8/backend/users/controller/UserController.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
+      "contentHash": "85c3bdd6a5f76e753629a52aa98523a2567572f1617b514b3b8e6de33c32f680",
+      "functions": [
+        {
+          "name": "UserController",
+          "params": [
+            "users",
+            "currentUser"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "usernameAvailable",
+          "params": [
+            "username"
+          ],
+          "returnType": "UsernameAvailabilityResponse",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "me",
+          "params": [],
+          "returnType": "ProfileResponse",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "updateMe",
+          "params": [
+            "request"
+          ],
+          "returnType": "ProfileResponse",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "search",
+          "params": [
+            "q"
+          ],
+          "returnType": "List<ProfileSearchResult>",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "byId",
+          "params": [
+            "id"
+          ],
+          "returnType": "ProfileResponse",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "UserController",
+          "methods": [
+            "UserController",
+            "usernameAvailable",
+            "me",
+            "updateMe",
+            "search",
+            "byId"
+          ],
+          "properties": [
+            "users",
+            "currentUser"
+          ],
+          "exported": true,
+          "lineCount": 40
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.security.CurrentUser",
+          "specifiers": [
+            "CurrentUser"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.ProfileResponse",
+          "specifiers": [
+            "ProfileResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.ProfileSearchResult",
+          "specifiers": [
+            "ProfileSearchResult"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.UpdateUsernameRequest",
+          "specifiers": [
+            "UpdateUsernameRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.UsernameAvailabilityResponse",
+          "specifiers": [
+            "UsernameAvailabilityResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.service.UserService",
+          "specifiers": [
+            "UserService"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.GetMapping",
+          "specifiers": [
+            "GetMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.PatchMapping",
+          "specifiers": [
+            "PatchMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.PathVariable",
+          "specifiers": [
+            "PathVariable"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RequestBody",
+          "specifiers": [
+            "RequestBody"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RequestMapping",
+          "specifiers": [
+            "RequestMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RequestParam",
+          "specifiers": [
+            "RequestParam"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RestController",
+          "specifiers": [
+            "RestController"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "UserController",
+        "usernameAvailable",
+        "me",
+        "updateMe",
+        "search",
+        "byId",
+        "UserController"
+      ],
+      "totalLines": 63,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/service/UserService.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/service/UserService.java",
+      "contentHash": "121ce056e5662d482e5ad8461e99d18abe64f8de8dbe90bcb1db1cdf36329143",
+      "functions": [
+        {
+          "name": "getProfile",
+          "params": [
+            "userId"
+          ],
+          "returnType": "ProfileResponse",
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "updateUsername",
+          "params": [
+            "userId",
+            "username"
+          ],
+          "returnType": "ProfileResponse",
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "search",
+          "params": [
+            "query"
+          ],
+          "returnType": "List<ProfileSearchResult>",
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "checkUsername",
+          "params": [
+            "username"
+          ],
+          "returnType": "UsernameAvailabilityResponse",
+          "exported": true,
+          "lineCount": 1
+        }
+      ],
+      "classes": [
+        {
+          "name": "UserService",
+          "methods": [
+            "getProfile",
+            "updateUsername",
+            "search",
+            "checkUsername"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 13
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.users.domain.dto.ProfileResponse",
+          "specifiers": [
+            "ProfileResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.ProfileSearchResult",
+          "specifiers": [
+            "ProfileSearchResult"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.UsernameAvailabilityResponse",
+          "specifiers": [
+            "UsernameAvailabilityResponse"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "getProfile",
+        "updateUsername",
+        "search",
+        "checkUsername",
+        "UserService"
+      ],
+      "totalLines": 23,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "contentHash": "2b4708540b0d4b8151fca76e4c9c7ed7348713a7ec454d42c83e09c539af4110",
+      "functions": [
+        {
+          "name": "UserServiceImpl",
+          "params": [
+            "profiles",
+            "attendedEvents",
+            "mapper"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "getProfile",
+          "params": [
+            "userId"
+          ],
+          "returnType": "ProfileResponse",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "updateUsername",
+          "params": [
+            "userId",
+            "username"
+          ],
+          "returnType": "ProfileResponse",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "search",
+          "params": [
+            "query"
+          ],
+          "returnType": "List<ProfileSearchResult>",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "checkUsername",
+          "params": [
+            "username"
+          ],
+          "returnType": "UsernameAvailabilityResponse",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "requireValidUsername",
+          "params": [
+            "username"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        }
+      ],
+      "classes": [
+        {
+          "name": "UserServiceImpl",
+          "methods": [
+            "UserServiceImpl",
+            "getProfile",
+            "updateUsername",
+            "search",
+            "checkUsername",
+            "requireValidUsername"
+          ],
+          "properties": [
+            "USERNAME",
+            "SEARCH_LIMIT",
+            "profiles",
+            "attendedEvents",
+            "mapper"
+          ],
+          "exported": true,
+          "lineCount": 70
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.ProfileResponse",
+          "specifiers": [
+            "ProfileResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.ProfileSearchResult",
+          "specifiers": [
+            "ProfileSearchResult"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.UsernameAvailabilityResponse",
+          "specifiers": [
+            "UsernameAvailabilityResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.entity.Profile",
+          "specifiers": [
+            "Profile"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.mapper.ProfileMapper",
+          "specifiers": [
+            "ProfileMapper"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.repository.AttendedEventRepository",
+          "specifiers": [
+            "AttendedEventRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.repository.ProfileRepository",
+          "specifiers": [
+            "ProfileRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.service.UserService",
+          "specifiers": [
+            "UserService"
+          ]
+        },
+        {
+          "source": "org.springframework.dao.DataIntegrityViolationException",
+          "specifiers": [
+            "DataIntegrityViolationException"
+          ]
+        },
+        {
+          "source": "org.springframework.data.domain.PageRequest",
+          "specifiers": [
+            "PageRequest"
+          ]
+        },
+        {
+          "source": "org.springframework.data.domain.Sort",
+          "specifiers": [
+            "Sort"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Service",
+          "specifiers": [
+            "Service"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.annotation.Transactional",
+          "specifiers": [
+            "Transactional"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "java.util.regex.Pattern",
+          "specifiers": [
+            "Pattern"
+          ]
+        }
+      ],
+      "exports": [
+        "UserServiceImpl",
+        "getProfile",
+        "updateUsername",
+        "search",
+        "checkUsername",
+        "UserServiceImpl"
+      ],
+      "totalLines": 94,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java",
+      "contentHash": "4d110c473fdaca61ffd2b283a45777b23268d501bdf17ad96ec1f6e89f53aec1",
+      "functions": [
+        {
+          "name": "existsByUsernameIgnoreCaseAndIdNot",
+          "params": [
+            "username",
+            "id"
+          ],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "existsByUsernameIgnoreCase",
+          "params": [
+            "username"
+          ],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "findByUsernameStartingWithIgnoreCase",
+          "params": [
+            "username",
+            "pageable"
+          ],
+          "returnType": "List<Profile>",
+          "exported": true,
+          "lineCount": 1
+        }
+      ],
+      "classes": [
+        {
+          "name": "ProfileRepository",
+          "methods": [
+            "existsByUsernameIgnoreCaseAndIdNot",
+            "existsByUsernameIgnoreCase",
+            "findByUsernameStartingWithIgnoreCase"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.users.domain.entity.Profile",
+          "specifiers": [
+            "Profile"
+          ]
+        },
+        {
+          "source": "org.springframework.data.domain.Pageable",
+          "specifiers": [
+            "Pageable"
+          ]
+        },
+        {
+          "source": "org.springframework.data.jpa.repository.JpaRepository",
+          "specifiers": [
+            "JpaRepository"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "existsByUsernameIgnoreCaseAndIdNot",
+        "existsByUsernameIgnoreCase",
+        "findByUsernameStartingWithIgnoreCase",
+        "ProfileRepository"
+      ],
+      "totalLines": 20,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/repository/AttendedEventRepository.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/repository/AttendedEventRepository.java",
+      "contentHash": "a2fe7b304a6f5a713380d67fc30a217b21ffd4ff19dcf9a63fa5a65f3bacc4c5",
+      "functions": [
+        {
+          "name": "findAttendedByUserId",
+          "params": [
+            "userId"
+          ],
+          "returnType": "List<AttendedEventResponse>",
+          "exported": true,
+          "lineCount": 1
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttendedEventRepository",
+          "methods": [
+            "findAttendedByUserId"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.users.domain.dto.AttendedEventResponse",
+          "specifiers": [
+            "AttendedEventResponse"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "findAttendedByUserId",
+        "AttendedEventRepository"
+      ],
+      "totalLines": 12,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java",
+      "contentHash": "7a01461b39eb51ce2a46786ec19702b93cae4779cd12f8695ce1f0d53d0a82ab",
+      "functions": [
+        {
+          "name": "AttendedEventRepositoryImpl",
+          "params": [
+            "jdbcTemplate"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "findAttendedByUserId",
+          "params": [
+            "userId"
+          ],
+          "returnType": "List<AttendedEventResponse>",
+          "exported": true,
+          "lineCount": 22
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttendedEventRepositoryImpl",
+          "methods": [
+            "AttendedEventRepositoryImpl",
+            "findAttendedByUserId"
+          ],
+          "properties": [
+            "ATTENDED_EVENTS_SQL",
+            "jdbcTemplate"
+          ],
+          "exported": true,
+          "lineCount": 50
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.users.domain.dto.AttendedEventResponse",
+          "specifiers": [
+            "AttendedEventResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.repository.AttendedEventRepository",
+          "specifiers": [
+            "AttendedEventRepository"
+          ]
+        },
+        {
+          "source": "org.springframework.jdbc.core.JdbcTemplate",
+          "specifiers": [
+            "JdbcTemplate"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Repository",
+          "specifiers": [
+            "Repository"
+          ]
+        },
+        {
+          "source": "java.math.BigDecimal",
+          "specifiers": [
+            "BigDecimal"
+          ]
+        },
+        {
+          "source": "java.sql.Timestamp",
+          "specifiers": [
+            "Timestamp"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "AttendedEventRepositoryImpl",
+        "findAttendedByUserId",
+        "AttendedEventRepositoryImpl"
+      ],
+      "totalLines": 64,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
+      "contentHash": "f450db09b5d4f03167c23fd2c29699afa1f69739dd573f93b9cdec8ab0a24dd2",
+      "functions": [
+        {
+          "name": "Profile",
+          "params": [],
+          "exported": false,
+          "lineCount": 2
+        },
+        {
+          "name": "Profile",
+          "params": [
+            "id",
+            "username",
+            "reliabilityScore",
+            "createdAt"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "getId",
+          "params": [],
+          "returnType": "UUID",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "getUsername",
+          "params": [],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "getReliabilityScore",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "getCreatedAt",
+          "params": [],
+          "returnType": "Instant",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "changeUsername",
+          "params": [
+            "username"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "Profile",
+          "methods": [
+            "Profile",
+            "Profile",
+            "getId",
+            "getUsername",
+            "getReliabilityScore",
+            "getCreatedAt",
+            "changeUsername"
+          ],
+          "properties": [
+            "id",
+            "username",
+            "reliabilityScore",
+            "createdAt"
+          ],
+          "exported": true,
+          "lineCount": 50
+        }
+      ],
+      "imports": [
+        {
+          "source": "jakarta.persistence.Column",
+          "specifiers": [
+            "Column"
+          ]
+        },
+        {
+          "source": "jakarta.persistence.Entity",
+          "specifiers": [
+            "Entity"
+          ]
+        },
+        {
+          "source": "jakarta.persistence.Id",
+          "specifiers": [
+            "Id"
+          ]
+        },
+        {
+          "source": "jakarta.persistence.Table",
+          "specifiers": [
+            "Table"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "Profile",
+        "getId",
+        "getUsername",
+        "getReliabilityScore",
+        "getCreatedAt",
+        "changeUsername",
+        "Profile"
+      ],
+      "totalLines": 63,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java",
+      "contentHash": "a0cba841a79fbd0676f4603b31fd544ff57786964c7049342f29e3308275b5b8",
+      "functions": [
+        {
+          "name": "toResponse",
+          "params": [
+            "profile",
+            "attendedEvents"
+          ],
+          "returnType": "ProfileResponse",
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "toSearchResult",
+          "params": [
+            "profile"
+          ],
+          "returnType": "ProfileSearchResult",
+          "exported": true,
+          "lineCount": 1
+        }
+      ],
+      "classes": [
+        {
+          "name": "ProfileMapper",
+          "methods": [
+            "toResponse",
+            "toSearchResult"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.users.domain.dto.AttendedEventResponse",
+          "specifiers": [
+            "AttendedEventResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.ProfileResponse",
+          "specifiers": [
+            "ProfileResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.ProfileSearchResult",
+          "specifiers": [
+            "ProfileSearchResult"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.entity.Profile",
+          "specifiers": [
+            "Profile"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "toResponse",
+        "toSearchResult",
+        "ProfileMapper"
+      ],
+      "totalLines": 17,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java",
+      "contentHash": "77f38527fdd32d49afa1b2de16dec419250372646fd09aa18e3e56db94bc27cd",
+      "functions": [
+        {
+          "name": "toResponse",
+          "params": [
+            "profile",
+            "attendedEvents"
+          ],
+          "returnType": "ProfileResponse",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "toSearchResult",
+          "params": [
+            "profile"
+          ],
+          "returnType": "ProfileSearchResult",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "ProfileMapperImpl",
+          "methods": [
+            "toResponse",
+            "toSearchResult"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 15
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.users.domain.dto.AttendedEventResponse",
+          "specifiers": [
+            "AttendedEventResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.ProfileResponse",
+          "specifiers": [
+            "ProfileResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.ProfileSearchResult",
+          "specifiers": [
+            "ProfileSearchResult"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.entity.Profile",
+          "specifiers": [
+            "Profile"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.mapper.ProfileMapper",
+          "specifiers": [
+            "ProfileMapper"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "toResponse",
+        "toSearchResult",
+        "ProfileMapperImpl"
+      ],
+      "totalLines": 28,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java",
+      "contentHash": "57e420cde54aa0915180fcc945405cf60c2e694534b8e50f3a0e2af74b839085",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ProfileResponse",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "ProfileResponse"
+      ],
+      "totalLines": 10,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java",
+      "contentHash": "0318d338c8479284120fdd1f172c89f6818c1ff5717a645bffefdcc26254163d",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ProfileSearchResult",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "ProfileSearchResult"
+      ],
+      "totalLines": 7,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/domain/dto/UpdateUsernameRequest.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/UpdateUsernameRequest.java",
+      "contentHash": "1fa21e6505b1f8a439385d93422556f0b11a2fdadd7811d8d3a71d2d11e03763",
+      "functions": [],
+      "classes": [
+        {
+          "name": "UpdateUsernameRequest",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "UpdateUsernameRequest"
+      ],
+      "totalLines": 9,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/domain/dto/UsernameAvailabilityResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/UsernameAvailabilityResponse.java",
+      "contentHash": "a7e8762bf69a0286884a36ca84f5a6efd3a854e5b2dfa353932e477ebff1eca3",
+      "functions": [],
+      "classes": [
+        {
+          "name": "UsernameAvailabilityResponse",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "UsernameAvailabilityResponse"
+      ],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java",
+      "contentHash": "37097c12a5a349fc98d4ae51e2c748beb692b01f6b7d24bf0eec131e586f9b9d",
+      "functions": [],
+      "classes": [
+        {
+          "name": "AttendedEventResponse",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 16
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.math.BigDecimal",
+          "specifiers": [
+            "BigDecimal"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "AttendedEventResponse"
+      ],
+      "totalLines": 29,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
+      "contentHash": "57743a41c9adcc14229d83e05d4729bdfe2d0ad8c4f2e68d3b6bd27ef1edd4e2",
+      "functions": [
+        {
+          "name": "readsOwnProfile",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "updatesUsername",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "reportsTakenUsername",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "rejectsMissingBody",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "searchesByUsername",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "searchNeedsQuery",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "readsPublicProfile",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "reportsMissingUser",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "rejectsMalformedId",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "usernameAvailabilityIsPublic",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "usernameAvailabilityRejectsBadFormat",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "rejectsRequestsWithoutToken",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "rejectsInvalidToken",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "bearer",
+          "params": [
+            "userId"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "profile",
+          "params": [
+            "id"
+          ],
+          "returnType": "ProfileResponse",
+          "exported": false,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "UserControllerTest",
+          "methods": [
+            "readsOwnProfile",
+            "updatesUsername",
+            "reportsTakenUsername",
+            "rejectsMissingBody",
+            "searchesByUsername",
+            "searchNeedsQuery",
+            "readsPublicProfile",
+            "reportsMissingUser",
+            "rejectsMalformedId",
+            "usernameAvailabilityIsPublic",
+            "usernameAvailabilityRejectsBadFormat",
+            "rejectsRequestsWithoutToken",
+            "rejectsInvalidToken",
+            "bearer",
+            "profile"
+          ],
+          "properties": [
+            "USER_ID",
+            "OTHER_ID",
+            "mvc",
+            "users"
+          ],
+          "exported": false,
+          "lineCount": 161
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.support.JwtTestTokens",
+          "specifiers": [
+            "JwtTestTokens"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.AttendedEventResponse",
+          "specifiers": [
+            "AttendedEventResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.ProfileResponse",
+          "specifiers": [
+            "ProfileResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.ProfileSearchResult",
+          "specifiers": [
+            "ProfileSearchResult"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.UsernameAvailabilityResponse",
+          "specifiers": [
+            "UsernameAvailabilityResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.service.UserService",
+          "specifiers": [
+            "UserService"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Autowired",
+          "specifiers": [
+            "Autowired"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.test.context.SpringBootTest",
+          "specifiers": [
+            "SpringBootTest"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc",
+          "specifiers": [
+            "AutoConfigureMockMvc"
+          ]
+        },
+        {
+          "source": "org.springframework.http.MediaType",
+          "specifiers": [
+            "MediaType"
+          ]
+        },
+        {
+          "source": "org.springframework.test.context.bean.override.mockito.MockitoBean",
+          "specifiers": [
+            "MockitoBean"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.MockMvc",
+          "specifiers": [
+            "MockMvc"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.when",
+          "specifiers": [
+            "when"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get",
+          "specifiers": [
+            "get"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch",
+          "specifiers": [
+            "patch"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath",
+          "specifiers": [
+            "jsonPath"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.status",
+          "specifiers": [
+            "status"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 193,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
+      "contentHash": "f1ffff2b89846a62faa2b92e266618b2a1f0112af6c71e12120cbcb00903d62b",
+      "functions": [
+        {
+          "name": "setUp",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "profileIncludesAttendedEvents",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "missingProfileIsNotFound",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "rejectsTakenUsername",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "rejectsConcurrentUsernameCollision",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "changesUsername",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "rejectsInvalidUsernames",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "checksUsernameAvailability",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "searchIsCappedAtTwenty",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "searchRejectsEmptyQuery",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "codeOf",
+          "params": [
+            "call"
+          ],
+          "returnType": "ErrorCode",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "profile",
+          "params": [],
+          "returnType": "Profile",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "attendedEvent",
+          "params": [],
+          "returnType": "AttendedEventResponse",
+          "exported": false,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "UserServiceImplTest",
+          "methods": [
+            "setUp",
+            "profileIncludesAttendedEvents",
+            "missingProfileIsNotFound",
+            "rejectsTakenUsername",
+            "rejectsConcurrentUsernameCollision",
+            "changesUsername",
+            "rejectsInvalidUsernames",
+            "checksUsernameAvailability",
+            "searchIsCappedAtTwenty",
+            "searchRejectsEmptyQuery",
+            "codeOf",
+            "profile",
+            "attendedEvent"
+          ],
+          "properties": [
+            "USER_ID",
+            "EVENT_ID",
+            "profiles",
+            "attendedEvents",
+            "service"
+          ],
+          "exported": false,
+          "lineCount": 126
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.AttendedEventResponse",
+          "specifiers": [
+            "AttendedEventResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.entity.Profile",
+          "specifiers": [
+            "Profile"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.mapper.impl.ProfileMapperImpl",
+          "specifiers": [
+            "ProfileMapperImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.repository.AttendedEventRepository",
+          "specifiers": [
+            "AttendedEventRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.repository.ProfileRepository",
+          "specifiers": [
+            "ProfileRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.service.impl.UserServiceImpl",
+          "specifiers": [
+            "UserServiceImpl"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.BeforeEach",
+          "specifiers": [
+            "BeforeEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.extension.ExtendWith",
+          "specifiers": [
+            "ExtendWith"
+          ]
+        },
+        {
+          "source": "org.mockito.ArgumentCaptor",
+          "specifiers": [
+            "ArgumentCaptor"
+          ]
+        },
+        {
+          "source": "org.mockito.Mock",
+          "specifiers": [
+            "Mock"
+          ]
+        },
+        {
+          "source": "org.mockito.junit.jupiter.MockitoExtension",
+          "specifiers": [
+            "MockitoExtension"
+          ]
+        },
+        {
+          "source": "org.springframework.dao.DataIntegrityViolationException",
+          "specifiers": [
+            "DataIntegrityViolationException"
+          ]
+        },
+        {
+          "source": "org.springframework.data.domain.Pageable",
+          "specifiers": [
+            "Pageable"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Assertions.assertEquals",
+          "specifiers": [
+            "assertEquals"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Assertions.assertFalse",
+          "specifiers": [
+            "assertFalse"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Assertions.assertThrows",
+          "specifiers": [
+            "assertThrows"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Assertions.assertTrue",
+          "specifiers": [
+            "assertTrue"
+          ]
+        },
+        {
+          "source": "org.mockito.ArgumentMatchers.any",
+          "specifiers": [
+            "any"
+          ]
+        },
+        {
+          "source": "org.mockito.ArgumentMatchers.eq",
+          "specifiers": [
+            "eq"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.never",
+          "specifiers": [
+            "never"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.verify",
+          "specifiers": [
+            "verify"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.when",
+          "specifiers": [
+            "when"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 163,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/users/repository/ProfileRepositoryTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/users/repository/ProfileRepositoryTest.java",
+      "contentHash": "76a8cb0da98f5b2ac4918d2cfedf114ca0deb23b5e26945d862f6eb2b9559bef",
+      "functions": [
+        {
+          "name": "searchesLiteralPrefixWithoutCase",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "checksOtherProfilesForUsernameConflict",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "findsExistingUsernameIgnoringCase",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "profile",
+          "params": [
+            "username"
+          ],
+          "returnType": "Profile",
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "ProfileRepositoryTest",
+          "methods": [
+            "searchesLiteralPrefixWithoutCase",
+            "checksOtherProfilesForUsernameConflict",
+            "findsExistingUsernameIgnoringCase",
+            "profile"
+          ],
+          "properties": [
+            "profiles"
+          ],
+          "exported": false,
+          "lineCount": 41
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.users.domain.entity.Profile",
+          "specifiers": [
+            "Profile"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Autowired",
+          "specifiers": [
+            "Autowired"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest",
+          "specifiers": [
+            "DataJpaTest"
+          ]
+        },
+        {
+          "source": "org.springframework.data.domain.PageRequest",
+          "specifiers": [
+            "PageRequest"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Assertions.assertEquals",
+          "specifiers": [
+            "assertEquals"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Assertions.assertFalse",
+          "specifiers": [
+            "assertFalse"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Assertions.assertTrue",
+          "specifiers": [
+            "assertTrue"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 58,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java",
+      "contentHash": "49171c45f1bde4fd0e78b7e1206963f41555ed4aba4688fa110355d1fb043d31",
+      "functions": [
+        {
+          "name": "setUp",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "returnsOnlyAttendedEventsNewestFirst",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "fillsCategoryAndSpotsLeft",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 19
+        },
+        {
+          "name": "returnsAtMostTwentyEvents",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "event",
+          "params": [
+            "title",
+            "startsAt",
+            "capacity",
+            "category"
+          ],
+          "returnType": "UUID",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "participant",
+          "params": [
+            "eventId",
+            "userId",
+            "status"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttendedEventRepositoryImplTest",
+          "methods": [
+            "setUp",
+            "returnsOnlyAttendedEventsNewestFirst",
+            "fillsCategoryAndSpotsLeft",
+            "returnsAtMostTwentyEvents",
+            "event",
+            "participant"
+          ],
+          "properties": [
+            "ME",
+            "OTHER",
+            "dataSource",
+            "jdbc",
+            "repository"
+          ],
+          "exported": false,
+          "lineCount": 96
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.users.domain.dto.AttendedEventResponse",
+          "specifiers": [
+            "AttendedEventResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.repository.impl.AttendedEventRepositoryImpl",
+          "specifiers": [
+            "AttendedEventRepositoryImpl"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.BeforeEach",
+          "specifiers": [
+            "BeforeEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Autowired",
+          "specifiers": [
+            "Autowired"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest",
+          "specifiers": [
+            "DataJpaTest"
+          ]
+        },
+        {
+          "source": "org.springframework.jdbc.core.JdbcTemplate",
+          "specifiers": [
+            "JdbcTemplate"
+          ]
+        },
+        {
+          "source": "javax.sql.DataSource",
+          "specifiers": [
+            "DataSource"
+          ]
+        },
+        {
+          "source": "java.sql.Timestamp",
+          "specifiers": [
+            "Timestamp"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Assertions.assertEquals",
+          "specifiers": [
+            "assertEquals"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Assertions.assertNull",
+          "specifiers": [
+            "assertNull"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 121,
+      "hasStructuralAnalysis": true
+    }
+  }
+}

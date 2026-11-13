@@ -8,7 +8,7 @@ Mobile app for Timișoara: events (imported and user-created) with QR check-in a
 
 - **Plan and task list:** `PLAN.md`
 - **Rules for contributors and agents:** `AGENTS.md`
-- **API contract:** `docs/API.md` (created in PLAN task 1.6)
+- **API contract:** `docs/API.md` — every endpoint with request/response examples, error codes and conventions. Change it before the code.
 
 ## Architecture
 
@@ -27,18 +27,90 @@ The mobile app never calls third-party data sources directly; the backend proxie
 
 ## Configuration and running
 
-- **Backend keys:** `backend/src/main/resources/application-local.properties` (git-ignored). Never commit real values.
-- **Mobile keys:** `frontend/.env` (git-ignored) — Supabase URL, Supabase publishable key, backend address only. Add the variable names to the existing `frontend/.env.example`.
+- **Backend keys:** copy `backend/src/main/resources/application-local.properties.example` to `application-local.properties` (git-ignored) and fill in:
+  - `spring.datasource.url` — Supabase dashboard → Connect → "Session pooler" (port 5432), written as `jdbc:postgresql://<host>:5432/postgres`.
+  - `spring.datasource.password` — the database password set when the project was created.
+  - `supabase.jwt-secret` — Supabase dashboard → Project Settings → JWT Keys → "Legacy JWT Secret".
+  - `gemini.api-key` — from Google AI Studio.
+  - Already filled: Supabase URL, database user, Gemini model names, OpenTripPlanner URL.
+- **Mobile keys:** set up with the Expo app (PLAN step 12.1).
+- **Token validation:** the backend checks access tokens with the **legacy JWT secret (HS256)**, by team decision. On 2026-11-13 the project's signing key was rotated: **HS256 (Shared Secret) is the current key**, ECC (P-256) is the previous key (kept, not revoked). Do not rotate back to ECC — the backend would reject every login token with 401. Automated tests check HS256 tokens signed with a test secret; a real Supabase login token has not been tried yet (first chance: when the app's sign-in works, task 12.2).
+- **API keys:** the mobile app uses the legacy `anon` key (public). The legacy `service_role` key is not needed: the backend talks to the database directly.
+- **Never in mobile:** database password, JWT secret, Gemini key, `service_role` key.
 - **No deployment:** the backend runs on a laptop and the app runs in Expo Go on phones on the same Wi-Fi.
 - **No seed data:** accounts are created in the app; events come from the LiveTickets import and the create-event form.
 - **Merging:** branches go into `main` only when Stefan says so.
 
+### Running the backend (PLAN task 3.6)
+
+1. Fill in `backend/src/main/resources/application-local.properties` (above). The app refuses to start without the database values, and `supabase.jwt-secret` must be at least 32 characters.
+2. **IntelliJ:** Run → Edit Configurations → `BackendApplication`:
+   - Ultimate ("Spring Boot" type): **Active profiles** = `local`.
+   - Community ("Application" type): Modify options → Environment variables → `SPRING_PROFILES_ACTIVE=local`.
+   The console should print `The following 1 profile is active: "local"`.
+3. **Terminal** (from `backend/`): `./gradlew bootRun --args='--spring.profiles.active=local'`
+4. The API listens on **port 8080 on all network interfaces**. From a phone on the same Wi-Fi use `http://<laptop Wi-Fi IPv4>:8080` (find it with `ipconfig`, Wi-Fi adapter). If the phone cannot connect, allow Java through the Windows Firewall for private networks.
+5. **Quick check:** `GET http://<ip>:8080/test` without a token must answer `401` with `{"code":"UNAUTHORIZED",...}` — that proves the server is reachable and security is on. (There is no health endpoint: nothing is deployed.)
+
+**Tests:** `./gradlew test` from `backend/`. They use an in-memory H2 database and a fake Supabase secret (`src/test/resources/application.properties`), so they never need the real database or your local keys.
+
+## Backend foundation (PLAN task 3)
+
+Shared code every feature uses. Feature packages (`users`, `events`, …) are created by each member with the layout from PLAN 3.2.
+
+| Package | Class | Use it for |
+|---|---|---|
+| `config` | `SecurityConfig` | Public vs. protected routes and token checks. Public: `GET /events`, `GET /events/{id}`, `GET /places`, `GET /places/{id}`, `GET /transit/**`, `GET /users/username-available`. Everything else needs `Authorization: Bearer <token>`. **Add a new public route here.** |
+| `config` | `SupabaseProperties` | `supabase.url` and `supabase.jwt-secret` from `application-local.properties`. |
+| `config` | `TimeConfig` | A shared `Clock` bean — inject it instead of calling `Instant.now()` so tests can fix the time. |
+| `common.security` | `CurrentUser` | `currentUser.id()` = caller's UUID (= `profiles.id`), 401 if not signed in. `optionalId()` on public endpoints. |
+| `common.exception` | `ApiException`, `ErrorCode` | `throw new ApiException(ErrorCode.EVENT_FULL)` (or with a custom message) → standard error JSON with the right status. `ApiException.notFound("Event")` for 404. |
+| `common.exception` | `GlobalExceptionHandler` | Turns validation errors, bad JSON, wrong parameter types, unknown paths and unexpected errors into the standard error JSON. Unexpected errors are logged and answer `500 INTERNAL_ERROR` without details. |
+| `common.dto` | `PageParams`, `PageResponse` | `PageParams.of(page, size)` (max 100) or `PageParams.forMap(...)` (max 500) → `.toPageable(sort)`; return `PageResponse.of(page, mapper)`. |
+
+- **Token checks:** HS256 signature with the legacy secret, not expired, issuer `https://<project>.supabase.co/auth/v1`, audience `authenticated`. The user id is the token's `sub`.
+- **Sessions:** none (stateless); CSRF off (no cookies); CORS open for development.
+- **Database:** Hibernate only validates the schema (`ddl-auto=validate`); change tables with a Supabase migration, never from Java. Pool limited to 5 connections (Supabase free plan).
+- **Tests:** `support/JwtTestTokens` signs Supabase-style test tokens; `support/TestProbeController` (test-only) exercises security and errors. 30 tests, all passing on 2026-11-13.
+
+## Supabase MCP (PLAN task 1.2)
+
+- The Supabase MCP server is configured in `.mcp.json` at the repo root (committed, no secrets inside). It is scoped to our project only (`project_ref=mjurmmhilnolicncywsw`).
+- **Each teammate authenticates once:** in a regular terminal, from the repo root, run `claude /mcp`, choose "Use this MCP server", select `supabase`, then "Authenticate" and log in to Supabase in the browser that opens.
+- **Use it from Claude Code in a terminal** (`claude` in the repo root). The Claude desktop app did not load this project's `.mcp.json` server in our test on 2026-11-13; the terminal CLI did, and listed the (still empty) tables.
+- Every migration applied through MCP is also saved as a `.sql` file in `supabase/migrations/`.
+
+## Database (PLAN task 2)
+
+Applied to Supabase on 2026-11-13 from `supabase/migrations/` (four migrations, in file order).
+
+| Table | Purpose |
+|---|---|
+| `profiles` | One row per user (`id` = `auth.users.id`): `username`, `reliability_score` (starts at 100, never below 0). |
+| `events` | `source` = `USER` (needs `organizer_id`) or `EXTERNAL` (needs `external_id`, e.g. `livetickets:<id>`, unique). Optional `capacity` (null = unlimited), coordinates both set or both null. |
+| `event_participants` | Who joined which event (one row per pair), `status` (`JOINED`, `ATTENDED`, `NO_SHOW`, `CANCELLED`, `BANNED`), auto-generated `qr_token`. `checked_in_at` is set only for `ATTENDED`. |
+| `reliability_log` | Every score change: `points_change` (e.g. +5, −10) and `reason`. Kept when its event is deleted. |
+| `places` | Places imported from OpenStreetMap; `osm_id` (e.g. `node/2845091337`) is unique so re-imports update rows. |
+
+- **Every `id` is a UUID.**
+- **Sign-up creates the profile automatically** (trigger `on_auth_user_created`). The username comes from sign-up metadata `{ "username": "..." }`. If it is missing, invalid or already taken, a generated `user_xxxxxxxx` is used so sign-up never fails; the app should check availability first and the user can rename later.
+- **Usernames:** 3–20 letters, digits or underscores; unique ignoring case.
+- **Row Level Security** is on for every table with no policies, so the public Supabase keys cannot read or write app data. The Spring API connects with the database password, which bypasses RLS.
+- **Search:** trigram indexes on `profiles.username` and `events.title` (extension `pg_trgm` in schema `extensions`).
+- **No seed data.**
+
+**Tests:** `supabase/tests/schema_checks.sql` (21 checks: sign-up trigger, username rules, event source rules, double join, check-in rule, cascades, RLS). Run it with the Supabase MCP `execute_sql`; it always rolls back and ends with the error `SCHEMA CHECKS PASSED (21 checks)` or `SCHEMA CHECK FAILED: …`. Last run 2026-11-13: passed.
+
+**Advisors (2026-11-13):** security — only "RLS enabled, no policy" (INFO, intended); performance — only "unused index" (INFO, expected on empty tables).
+
 ## Current state
 
-- `backend/`: Spring Boot 4.1.2 API with the users/profile endpoints and JWT resource-server configuration. The remaining features are not implemented.
-- `frontend/`: existing Expo SDK 54 app written in JavaScript (`.js`/`.jsx`), with Expo Router, a map screen, location support, and an API helper. The planned tabs and feature screens are not built yet.
-- `docs/API.md`: users/profile contract added; contracts for the other features are pending. `infra/` and `supabase/` are not created yet.
-- Supabase project and schema: Stefan is creating them; not verified in this checkout.
+- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging, tests) and the users/profile endpoints (PLAN 4). The other features are not built yet.
+- `supabase/`: migrations and schema tests for task 2, applied.
+- `docs/API.md`: API contract (task 1.6).
+- `infra/otp/`: folder for OpenTripPlanner (README only; the server is set up in task 10). Its large data files are git-ignored.
+- `frontend/`: Expo app (SDK 54) set up by the frontend teammates — see `frontend/AGENTS.md`. Each teammate works on their own `<name>_dev` branch.
+- Supabase project: created, MCP connected, email sign-in on with "Confirm email" off, database schema applied (no data).
 
 ## External data sources
 
@@ -84,31 +156,43 @@ Checked against Google's documentation on 2026-11-13.
 - **Free-tier limit on web search:** free only on `gemini-2.5-flash` / `gemini-2.5-flash-lite` (500 requests per day); both are redirected to newer models on 1 December 2026. On the newer free models it is listed as not available; on a paid account 5,000 searches per month are free. The hackathon ends on 15 November 2026, before that date, so the web lookup uses `gemini-2.5-flash` for free. The price page was long and only partly read — test one web lookup early to confirm.
 - **Why not Google Maps data directly:** Google's terms forbid scraping or bulk-downloading its places and saving their names, addresses and reviews, and its Places API has no menu or dish-price data.
 
+## Reliability rules (PLAN task 1.7, agreed 2026-11-13)
+
+| Event | Points | Log `reason` |
+|---|---|---|
+| Starting score | 100 | — |
+| Checked in by the organiser (QR scan) | +5 | `ATTENDED` |
+| Still `JOINED` when the event ends (no-show) | −10 | `NO_SHOW` |
+| Leaves less than 2 hours before the start | −2 | `LATE_CANCEL` |
+| Leaves earlier | 0 | — (no log entry) |
+
+- The score never goes below 0: a change that would go lower stops at 0 (the log still records the full rule value).
+- Being banned by an organiser costs no points by itself.
+- Only `USER` events count; imported events cannot be joined.
+- An event with no end time is treated as ending 3 hours after it starts (for no-shows and check-in).
+
 ## Features
 
 ### Users and profiles (PLAN 4)
 
-- `GET /users/me` and `GET /users/{id}` return a profile with username, reliability score, creation time, and confirmed attended events. `GET /users/search?q=` returns up to 20 username-prefix matches. `PATCH /users/me` changes a username matching `[A-Za-z0-9_]{3,20}` and returns `409 USERNAME_TAKEN` on conflict.
-- All `/users/**` requests require a Supabase JWT. Spring Security validates the signature through the project JWKS URL and the issuer through the Supabase URL. Only event list/detail, place list/detail, and transit GET endpoints are public; event tickets remain protected. The JWT `sub` is the profile UUID. Stefan's Supabase project must use asymmetric JWT signing keys for JWKS validation and enforce case-insensitive uniqueness of `profiles.username` in the database.
-- The API assumes `profiles(id, username, reliability_score, created_at)`, `event_participants(event_id, user_id, status)`, and `events(id, title, starts_at)`, as specified in PLAN 2. The attended-events query selects only `ATTENDED` rows. These tables and the auth-user profile trigger are being created separately; live integration is pending.
-- Endpoint examples and current error codes are in `docs/API.md`. The remaining feature contracts are still pending under PLAN 1.6.
-- Local secrets go in ignored `backend/src/main/resources/application-local.properties`; copy the names from the committed `.example` file. Run `cd backend` then `.\gradlew.bat bootRun` on Windows. For a phone in Expo Go, use the laptop's LAN IP in `frontend/.env` as `EXPO_PUBLIC_API_URL=http://<laptop-ip>:8080`; both devices must be on the same Wi-Fi. The API needs the Supabase database and JWKS settings to serve real requests.
-- Tests use Mockito and an in-memory H2 database; no test connects to Supabase. Run `cd backend` then `.\gradlew.bat test`.
+Package `com.unihack8.backend.users` (`controller`, `service` + `impl`, `repository` + `impl`, `mapper` + `impl`, `domain/entity`, `domain/dto`). Request and answer shapes are in `docs/API.md` → Users.
 
-Other feature sections are added as PLAN tasks are implemented: Events, Reliability, Places, Transit, Routing, AI, Mobile.
+- `GET /users/username-available?username=` — **public**. `{ "username", "available" }`; `400 INVALID_USERNAME` for a bad format. Case-insensitive.
+- `GET /users/me`, `GET /users/{id}` — profile: id, username, reliability score, creation time and `attendedEvents`. Only `ATTENDED` rows count; newest first, at most 20, each in the `EventSummary` shape (missing category shows as `OTHER`; `spotsLeft` counts `JOINED` + `ATTENDED` and is `null` without a capacity). `404 NOT_FOUND` for an unknown id.
+- `PATCH /users/me` — `{ "username" }`, 3–20 letters, digits or `_`. `400 INVALID_USERNAME` for a bad or missing name; `409 USERNAME_TAKEN` when someone else has it, ignoring case — also when two requests race (the database unique index answers).
+- `GET /users/search?q=` — username prefix, case-insensitive, `_` and `%` taken literally, **sorted by username**, at most 20. A blank or missing `q` is `400 VALIDATION_FAILED`.
+- All of these except `username-available` need a token. Errors use the shared shape (`ApiException` + `ErrorCode`); the users package has no exception classes of its own.
+- Profiles are read through JPA (`Profile` → `profiles`). Attended events come from one plain SQL query over `events` and `event_participants` (`AttendedEventRepositoryImpl`), so this package needs no entities for tables the events feature will own. `GET /users/me/events` (PLAN 5.8) and `GET /users/{id}/reliability` (PLAN 6.4) are not built yet.
+- **Tests** (`src/test/.../users`): `UserServiceImplTest` (Mockito rules), `UserControllerTest` (MockMvc with real HS256 test tokens), `ProfileRepositoryTest` and `AttendedEventRepositoryImplTest` (H2). No test touches Supabase.
+
+Sections are added here as each PLAN task is implemented: Events, Reliability, Places, Transit, Routing, AI, Frontend.
 
 ## Knowledge graph
 
-Current project and planned integration paths (PLAN task 1.8 will expand this as features are implemented):
+One graph for the whole repo, made with the **Understand-Anything** plugin (rule from AGENTS.md: keep it updated with every change).
 
-```mermaid
-flowchart LR
-    F[frontend/: JavaScript Expo app] -->|sign-in| S[Supabase Auth]
-    F -->|REST + JWT| B[backend/: Spring Boot API]
-    B --> DB[Supabase Postgres]
-    B --> STPT[STPT live transit]
-    B --> LT[LiveTickets events]
-    B --> OSM[OpenStreetMap places]
-    B --> OTP[OpenTripPlanner routing]
-    B --> AI[Gemini API]
-```
+- **Files:** `.ua/knowledge-graph.json` (the graph), `.ua/meta.json` and `.ua/fingerprints.json` (let the next run update only changed files), `.ua/.understandignore` (what is left out: secrets such as `application-local.properties` and `.env`, build output, `.claude/`). Scratch folders under `.ua/` are git-ignored.
+- **Current version (2026-11-13):** Stefan's graph (commit `828d6ab`, 54 files) continued with the users feature (PLAN 4): 72 files, 152 nodes, 351 edges, 11 layers (Project Documentation, API Contract, Backend App Security & Config, Backend Shared Web Layer, Backend Users & Profiles, Backend Tests, Backend Build & Config, Database Schema, Infrastructure & Tooling, Frontend App, Frontend Config), 19-step guided tour. Files changed after `828d6ab` by other work (for example `DOCS.md`, `PLAN.md`) are re-read by the next `/understand` run, because their fingerprints no longer match.
+- **Left out on purpose** (`.ua/.understandignore`): secrets, build output, `.claude/`, and frontend noise (`package-lock.json`, `assets/`, `LICENSE`, `.npmrc`).
+- **Update it** after each change: run `/understand` (Claude Code) or the same command in Codex; it only reanalyzes changed files. `/understand-dashboard` opens the interactive view.
+- **Codex:** the plugin's README lists Codex as supported (install it with the plugin's install script for `codex`); not tested by us yet.

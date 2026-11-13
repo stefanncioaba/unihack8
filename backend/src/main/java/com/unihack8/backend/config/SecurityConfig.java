@@ -1,50 +1,99 @@
 package com.unihack8.backend.config;
 
+import com.unihack8.backend.common.security.JsonAccessDeniedHandler;
+import com.unihack8.backend.common.security.JsonAuthenticationEntryPoint;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
+import org.springframework.security.oauth2.core.OAuth2TokenValidator;
+import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtClaimValidator;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtValidators;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.http.MediaType;
 
-import java.util.List;
-
+/**
+ * Security rules (PLAN 3.3): every request is stateless and carries a Supabase access token,
+ * except the public read-only endpoints listed in docs/API.md.
+ */
 @Configuration
+@EnableConfigurationProperties(SupabaseProperties.class)
 public class SecurityConfig {
 
-    // Allows public city data while requiring a verified Supabase JWT for user actions.
+    // Audience Supabase puts in the tokens of signed-in users.
+    static final String SUPABASE_AUDIENCE = "authenticated";
+
+    // Builds the request rules: public GETs, everything else needs a valid token.
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .csrf(csrf -> csrf.disable())
+    public SecurityFilterChain securityFilterChain(
+            HttpSecurity http,
+            JsonAuthenticationEntryPoint authenticationEntryPoint,
+            JsonAccessDeniedHandler accessDeniedHandler) throws Exception {
+        http
+                .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/events", "/events/{id}", "/places", "/places/{id}", "/transit/**").permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,
+                                "/events", "/events/*",
+                                "/places", "/places/*",
+                                "/transit/**",
+                                "/users/username-available").permitAll()
+                        .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated())
-                .exceptionHandling(errors -> errors.authenticationEntryPoint((request, response, exception) -> {
-                    response.setStatus(401);
-                    response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-                    response.getWriter().write("{\"code\":\"UNAUTHORIZED\",\"message\":\"Authentication required\"}");
-                }))
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
-                .build();
+                .oauth2ResourceServer(oauth -> oauth
+                        .jwt(Customizer.withDefaults())
+                        .authenticationEntryPoint(authenticationEntryPoint)
+                        .accessDeniedHandler(accessDeniedHandler))
+                .exceptionHandling(e -> e
+                        .authenticationEntryPoint(authenticationEntryPoint)
+                        .accessDeniedHandler(accessDeniedHandler));
+        return http.build();
     }
 
-    // Permits Expo development clients to call the API from their local origin.
+    // Checks token signature (HS256 with the legacy Supabase secret), expiry, issuer and audience.
     @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(List.of("*"));
-        configuration.setAllowedMethods(List.of("GET", "POST", "PATCH", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+    public JwtDecoder jwtDecoder(SupabaseProperties supabase) {
+        SecretKey key = new SecretKeySpec(supabase.jwtSecret().getBytes(StandardCharsets.UTF_8), "HmacSHA256");
+        NimbusJwtDecoder decoder = NimbusJwtDecoder.withSecretKey(key)
+                .macAlgorithm(MacAlgorithm.HS256)
+                .build();
+        decoder.setJwtValidator(tokenValidator(supabase.issuer()));
+        return decoder;
+    }
+
+    // Default checks (expiry, not-before) plus Supabase's issuer and "authenticated" audience.
+    static OAuth2TokenValidator<Jwt> tokenValidator(String issuer) {
+        OAuth2TokenValidator<Jwt> audience = new JwtClaimValidator<List<String>>(
+                "aud", aud -> aud != null && aud.contains(SUPABASE_AUDIENCE));
+        return new DelegatingOAuth2TokenValidator<>(JwtValidators.createDefaultWithIssuer(issuer), audience);
+    }
+
+    // CORS open to any origin while developing (only matters for Expo web; phones ignore CORS).
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration cors = new CorsConfiguration();
+        cors.setAllowedOriginPatterns(List.of("*"));
+        cors.setAllowedMethods(List.of("GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"));
+        cors.setAllowedHeaders(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
+        source.registerCorsConfiguration("/**", cors);
         return source;
     }
 }
