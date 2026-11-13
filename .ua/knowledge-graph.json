@@ -29,8 +29,8 @@
       "Expo Router"
     ],
     "description": "Hackathon mobile app for Timișoara (Connected Communities): Spring Boot API + Supabase + Expo app with events and QR reliability points, places map, live STPT transit, routing and an AI guide.",
-    "analyzedAt": "2026-11-13T19:21:13.257Z",
-    "gitCommitHash": "ba62f164a925bdb235a30c51f3cba871769d393c"
+    "analyzedAt": "2026-11-13T19:33:33.977Z",
+    "gitCommitHash": "400c16e873916d5053753284cb45279d9b8437d2"
   },
   "nodes": [
     {
@@ -5652,21 +5652,6 @@
       "complexity": "complex"
     },
     {
-      "id": "document:infra/otp/README.md",
-      "type": "document",
-      "name": "README.md",
-      "filePath": "infra/otp/README.md",
-      "summary": "Setup guide for the OpenTripPlanner 2 routing server on port 8081: lists the data files, the three-step download/build/serve workflow, GTFS end-date caveat, and the GraphQL planConnection request the backend sends.",
-      "tags": [
-        "documentation",
-        "routing",
-        "infrastructure",
-        "opentripplanner",
-        "setup-guide"
-      ],
-      "complexity": "simple"
-    },
-    {
       "id": "service:infra/otp/docker-compose.yml",
       "type": "service",
       "name": "docker-compose.yml",
@@ -5885,20 +5870,6 @@
         "configuration"
       ],
       "complexity": "moderate"
-    },
-    {
-      "id": "document:docs/API.md",
-      "type": "document",
-      "name": "API.md",
-      "filePath": "docs/API.md",
-      "summary": "REST API contract for the backend: conventions, paged/error envelopes, shared objects, and endpoints for users, events and check-in, places, STPT transit (including last departures and summary), OTP route planning, and the AI chat assistant.",
-      "tags": [
-        "documentation",
-        "api-schema",
-        "rest",
-        "contract"
-      ],
-      "complexity": "complex"
     },
     {
       "id": "file:backend/src/main/java/com/unihack8/backend/routing/client/OtpClient.java",
@@ -6653,17 +6624,750 @@
       "complexity": "simple"
     },
     {
+      "id": "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
+      "type": "file",
+      "name": "UserController.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
+      "summary": "REST controller under /users exposing the public username-availability check, the caller's own profile read/update (GET/PATCH /users/me), username prefix search, and public profile lookup by Supabase user ID.",
+      "tags": [
+        "api-handler",
+        "controller",
+        "users",
+        "rest",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java:UserController",
+      "type": "class",
+      "name": "UserController",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
+      "lineRange": [
+        21,
+        62
+      ],
+      "summary": "Spring @RestController that delegates every /users endpoint to UserService and resolves the caller via CurrentUser.",
+      "tags": [
+        "api-handler",
+        "controller",
+        "users"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java",
+      "type": "file",
+      "name": "AttendedEventResponse.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java",
+      "summary": "Record describing one attended event shown on a profile, mirroring the EventSummary shape from docs/API.md including venue, coordinates, timing, price range and remaining spots.",
+      "tags": [
+        "dto",
+        "data-model",
+        "events",
+        "serialization"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Java records give concise immutable DTOs with auto-generated accessors, equals and hashCode."
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java:AttendedEventResponse",
+      "type": "class",
+      "name": "AttendedEventResponse",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java",
+      "lineRange": [
+        13,
+        28
+      ],
+      "summary": "Immutable record for an attended event summary; spotsLeft is null when the event has no capacity limit.",
+      "tags": [
+        "dto",
+        "data-model",
+        "events"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java",
+      "type": "file",
+      "name": "ProfileResponse.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java",
+      "summary": "Record for the full profile API response: id, username, reliability score, creation time and the list of attended events.",
+      "tags": [
+        "dto",
+        "data-model",
+        "users",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java:ProfileResponse",
+      "type": "class",
+      "name": "ProfileResponse",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java",
+      "lineRange": [
+        7,
+        9
+      ],
+      "summary": "Immutable full-profile response record including attended events.",
+      "tags": [
+        "dto",
+        "data-model",
+        "users"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java",
+      "type": "file",
+      "name": "ProfileSearchResult.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java",
+      "summary": "Compact record returned by username search containing id, username and reliability score.",
+      "tags": [
+        "dto",
+        "data-model",
+        "users",
+        "search"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java:ProfileSearchResult",
+      "type": "class",
+      "name": "ProfileSearchResult",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java",
+      "lineRange": [
+        5,
+        6
+      ],
+      "summary": "Compact search-result record for a user profile.",
+      "tags": [
+        "dto",
+        "data-model",
+        "search"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/UpdateUsernameRequest.java",
+      "type": "file",
+      "name": "UpdateUsernameRequest.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/UpdateUsernameRequest.java",
+      "summary": "Request body record for PATCH /users/me carrying the new username; format validation happens in the service layer.",
+      "tags": [
+        "dto",
+        "request",
+        "users",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/users/domain/dto/UpdateUsernameRequest.java:UpdateUsernameRequest",
+      "type": "class",
+      "name": "UpdateUsernameRequest",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/UpdateUsernameRequest.java",
+      "lineRange": [
+        7,
+        8
+      ],
+      "summary": "Request record holding the desired new username.",
+      "tags": [
+        "dto",
+        "request",
+        "users"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/UsernameAvailabilityResponse.java",
+      "type": "file",
+      "name": "UsernameAvailabilityResponse.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/UsernameAvailabilityResponse.java",
+      "summary": "Response record for GET /users/username-available reporting the queried username and whether it is free.",
+      "tags": [
+        "dto",
+        "response",
+        "users"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/users/domain/dto/UsernameAvailabilityResponse.java:UsernameAvailabilityResponse",
+      "type": "class",
+      "name": "UsernameAvailabilityResponse",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/UsernameAvailabilityResponse.java",
+      "lineRange": [
+        4,
+        5
+      ],
+      "summary": "Response record pairing a username with its availability flag.",
+      "tags": [
+        "dto",
+        "response",
+        "users"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
+      "type": "file",
+      "name": "Profile.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
+      "summary": "JPA entity mapped to the Supabase profiles table holding the user ID, username, reliability score and creation timestamp, with a mutator for username changes.",
+      "tags": [
+        "entity",
+        "data-model",
+        "jpa",
+        "users",
+        "reliability"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java:Profile",
+      "type": "class",
+      "name": "Profile",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
+      "lineRange": [
+        11,
+        62
+      ],
+      "summary": "JPA entity for the profiles table with getters and a changeUsername mutator used after service validation.",
+      "tags": [
+        "entity",
+        "jpa",
+        "data-model"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java",
+      "type": "file",
+      "name": "ProfileMapper.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java",
+      "summary": "Mapper interface converting Profile entities into the full ProfileResponse and compact ProfileSearchResult DTOs.",
+      "tags": [
+        "mapper",
+        "interface",
+        "users",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java:ProfileMapper",
+      "type": "class",
+      "name": "ProfileMapper",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java",
+      "lineRange": [
+        10,
+        16
+      ],
+      "summary": "Mapper contract for building profile responses and search results.",
+      "tags": [
+        "mapper",
+        "interface",
+        "users"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java",
+      "type": "file",
+      "name": "ProfileMapperImpl.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java",
+      "summary": "Spring component implementing ProfileMapper by copying entity fields (plus attended events) into the profile DTO records.",
+      "tags": [
+        "mapper",
+        "serialization",
+        "users",
+        "component",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java:ProfileMapperImpl",
+      "type": "class",
+      "name": "ProfileMapperImpl",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java",
+      "lineRange": [
+        12,
+        27
+      ],
+      "summary": "Hand-written @Component mapping Profile entities into ProfileResponse and ProfileSearchResult.",
+      "tags": [
+        "mapper",
+        "component",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/users/repository/AttendedEventRepository.java",
+      "type": "file",
+      "name": "AttendedEventRepository.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/repository/AttendedEventRepository.java",
+      "summary": "Repository interface for listing the events a user has confirmed attendance at.",
+      "tags": [
+        "repository",
+        "interface",
+        "events",
+        "users"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/users/repository/AttendedEventRepository.java:AttendedEventRepository",
+      "type": "class",
+      "name": "AttendedEventRepository",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/repository/AttendedEventRepository.java",
+      "lineRange": [
+        8,
+        11
+      ],
+      "summary": "Repository contract exposing findAttendedByUserId.",
+      "tags": [
+        "repository",
+        "interface",
+        "events"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java",
+      "type": "file",
+      "name": "ProfileRepository.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java",
+      "summary": "Spring Data JPA repository for Profile with case-insensitive username existence checks and bounded prefix search.",
+      "tags": [
+        "repository",
+        "jpa",
+        "users",
+        "search",
+        "tested"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Spring Data derives SQL from method names like existsByUsernameIgnoreCaseAndIdNot."
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java:ProfileRepository",
+      "type": "class",
+      "name": "ProfileRepository",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java",
+      "lineRange": [
+        10,
+        19
+      ],
+      "summary": "JpaRepository<Profile, UUID> with derived queries for username uniqueness and prefix search.",
+      "tags": [
+        "repository",
+        "jpa",
+        "users"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java",
+      "type": "file",
+      "name": "AttendedEventRepositoryImpl.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java",
+      "summary": "JdbcTemplate-based repository running a raw SQL query over the events and event_participants tables to return a user's 20 most recent ATTENDED events with computed spots left.",
+      "tags": [
+        "repository",
+        "sql",
+        "jdbc",
+        "events",
+        "reliability",
+        "tested"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Uses a Java text block for the SQL and a lambda RowMapper; spots_left is computed with GREATEST and a correlated COUNT subquery."
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java:AttendedEventRepositoryImpl",
+      "type": "class",
+      "name": "AttendedEventRepositoryImpl",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java",
+      "lineRange": [
+        13,
+        63
+      ],
+      "summary": "@Repository querying event tables via JdbcTemplate so the users feature avoids duplicating event entities.",
+      "tags": [
+        "repository",
+        "jdbc",
+        "sql"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java:findAttendedByUserId",
+      "type": "function",
+      "name": "findAttendedByUserId",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java",
+      "lineRange": [
+        40,
+        62
+      ],
+      "summary": "Runs the attended-events SQL for a user and maps each row into an AttendedEventResponse, handling a nullable end time.",
+      "tags": [
+        "sql",
+        "row-mapper",
+        "events"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/users/service/UserService.java",
+      "type": "file",
+      "name": "UserService.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/service/UserService.java",
+      "summary": "Service interface for user profiles: fetching profiles with attended events, changing usernames, searching by prefix and checking username availability.",
+      "tags": [
+        "service",
+        "interface",
+        "users"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/users/service/UserService.java:UserService",
+      "type": "class",
+      "name": "UserService",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/service/UserService.java",
+      "lineRange": [
+        10,
+        22
+      ],
+      "summary": "Service contract for profile reads, username updates, search and availability checks.",
+      "tags": [
+        "service",
+        "interface",
+        "users"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "type": "file",
+      "name": "UserServiceImpl.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "summary": "Transactional service implementation enforcing the username format rule, case-insensitive uniqueness (including concurrent collisions), capped prefix search, and assembling profiles with attended events.",
+      "tags": [
+        "service",
+        "business-logic",
+        "validation",
+        "users",
+        "transactional",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java:UserServiceImpl",
+      "type": "class",
+      "name": "UserServiceImpl",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "lineRange": [
+        23,
+        93
+      ],
+      "summary": "@Service combining ProfileRepository, AttendedEventRepository and ProfileMapper; throws ApiException with INVALID_USERNAME, USERNAME_TAKEN, VALIDATION_FAILED or not-found codes.",
+      "tags": [
+        "service",
+        "business-logic",
+        "validation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java:updateUsername",
+      "type": "function",
+      "name": "updateUsername",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "lineRange": [
+        49,
+        64
+      ],
+      "summary": "Validates and changes a user's username, rejecting names taken by others and translating unique-constraint violations into USERNAME_TAKEN.",
+      "tags": [
+        "validation",
+        "transactional",
+        "users"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java:search",
+      "type": "function",
+      "name": "search",
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "lineRange": [
+        67,
+        77
+      ],
+      "summary": "Trims the query, rejects empty input, and returns up to 20 profiles whose username starts with the prefix, sorted alphabetically.",
+      "tags": [
+        "search",
+        "pagination",
+        "users"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
+      "type": "file",
+      "name": "UserControllerTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
+      "summary": "MockMvc web-layer tests for UserController covering own/public profile reads, username updates and conflicts, search validation, the public availability endpoint, and JWT rejection.",
+      "tags": [
+        "test",
+        "controller",
+        "security",
+        "mockmvc"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java:UserControllerTest",
+      "type": "class",
+      "name": "UserControllerTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
+      "lineRange": [
+        30,
+        192
+      ],
+      "summary": "Web slice test class using signed test JWTs and a mocked UserService.",
+      "tags": [
+        "test",
+        "mockmvc",
+        "controller"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java:readsOwnProfile",
+      "type": "function",
+      "name": "readsOwnProfile",
+      "filePath": "backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
+      "lineRange": [
+        43,
+        55
+      ],
+      "summary": "Verifies GET /users/me returns the authenticated caller's profile with attended events.",
+      "tags": [
+        "test",
+        "mockmvc",
+        "profile"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java:reportsTakenUsername",
+      "type": "function",
+      "name": "reportsTakenUsername",
+      "filePath": "backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
+      "lineRange": [
+        71,
+        82
+      ],
+      "summary": "Verifies PATCH /users/me answers 409 when the service reports USERNAME_TAKEN.",
+      "tags": [
+        "test",
+        "mockmvc",
+        "error-handling"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java",
+      "type": "file",
+      "name": "AttendedEventRepositoryImplTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java",
+      "summary": "Database-backed tests for AttendedEventRepositoryImpl verifying only ATTENDED events are returned newest first, category fallback and spots-left calculation, and the 20-item cap.",
+      "tags": [
+        "test",
+        "repository",
+        "sql",
+        "events"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java:AttendedEventRepositoryImplTest",
+      "type": "class",
+      "name": "AttendedEventRepositoryImplTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java",
+      "lineRange": [
+        24,
+        120
+      ],
+      "summary": "JDBC integration test class seeding event and participant rows before each test.",
+      "tags": [
+        "test",
+        "repository",
+        "jdbc"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java:setUp",
+      "type": "function",
+      "name": "setUp",
+      "filePath": "backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java",
+      "lineRange": [
+        36,
+        54
+      ],
+      "summary": "Clears and seeds profiles, events and participant rows used by the attended-events tests.",
+      "tags": [
+        "test",
+        "fixture",
+        "setup"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java:fillsCategoryAndSpotsLeft",
+      "type": "function",
+      "name": "fillsCategoryAndSpotsLeft",
+      "filePath": "backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java",
+      "lineRange": [
+        74,
+        93
+      ],
+      "summary": "Asserts a missing category is reported as OTHER and spots left counts joined and attended participants.",
+      "tags": [
+        "test",
+        "sql",
+        "events"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java:returnsOnlyAttendedEventsNewestFirst",
+      "type": "function",
+      "name": "returnsOnlyAttendedEventsNewestFirst",
+      "filePath": "backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java",
+      "lineRange": [
+        57,
+        71
+      ],
+      "summary": "Asserts only ATTENDED participations are returned, ordered newest first.",
+      "tags": [
+        "test",
+        "ordering",
+        "events"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/users/repository/ProfileRepositoryTest.java",
+      "type": "file",
+      "name": "ProfileRepositoryTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/users/repository/ProfileRepositoryTest.java",
+      "summary": "JPA repository tests for ProfileRepository checking literal case-insensitive prefix search and username conflict detection.",
+      "tags": [
+        "test",
+        "repository",
+        "jpa",
+        "users"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/users/repository/ProfileRepositoryTest.java:ProfileRepositoryTest",
+      "type": "class",
+      "name": "ProfileRepositoryTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/users/repository/ProfileRepositoryTest.java",
+      "lineRange": [
+        16,
+        57
+      ],
+      "summary": "Data JPA test class for Profile derived queries.",
+      "tags": [
+        "test",
+        "jpa",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
+      "type": "file",
+      "name": "UserServiceImplTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
+      "summary": "Unit tests for UserServiceImpl with mocked repositories covering profile assembly, not-found, taken and concurrently-taken usernames, invalid formats, availability and search capping.",
+      "tags": [
+        "test",
+        "service",
+        "validation",
+        "users"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java:UserServiceImplTest",
+      "type": "class",
+      "name": "UserServiceImplTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
+      "lineRange": [
+        36,
+        162
+      ],
+      "summary": "Mockito-based unit test class for UserServiceImpl using the real ProfileMapperImpl.",
+      "tags": [
+        "test",
+        "service",
+        "mockito"
+      ],
+      "complexity": "moderate"
+    },
+    {
       "id": "document:DOCS.md",
       "type": "document",
       "name": "DOCS.md",
       "filePath": "DOCS.md",
-      "summary": "Living technical documentation for the Timisoara Connected Communities app: architecture, configuration and running, Supabase schema, external data sources (STPT, LiveTickets, OSM, Gemini), reliability rules, and feature notes for places, live transit with GTFS last departures, and OpenTripPlanner routing, whose coordinates now use the shared common.geo GeoPoint (28 routing tests, 162 backend tests).",
+      "summary": "Living project documentation for the Timisoara app: architecture, configuration and running, the shared backend foundation (security, errors, paging), Supabase database schema, external data sources, reliability rules, and per-feature sections for Users, Places, Transit and Routing, plus knowledge-graph upkeep.",
       "tags": [
         "documentation",
         "architecture",
-        "api-reference",
-        "transit",
-        "routing"
+        "backend",
+        "database",
+        "development"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:infra/otp/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "infra/otp/README.md",
+      "summary": "Setup guide for the self-hosted OpenTripPlanner 2 routing server on port 8081: data files (STPT GTFS, Timisoara OSM extract), the three Docker commands to download data, build the graph and serve, timetable expiry caveats, and the GraphQL request the backend sends.",
+      "tags": [
+        "documentation",
+        "infrastructure",
+        "routing",
+        "containerization",
+        "setup-guide"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:docs/API.md",
+      "type": "document",
+      "name": "API.md",
+      "filePath": "docs/API.md",
+      "summary": "REST API contract for the mobile app: conventions (auth, paging, error shape and codes), shared objects (UserSummary, EventSummary, PlaceSummary), and request/response examples for Users, Events, Places, Transit, Routing and AI chat endpoints. Changed before the code.",
+      "tags": [
+        "documentation",
+        "api-schema",
+        "api-contract",
+        "rest",
+        "backend"
       ],
       "complexity": "complex"
     }
@@ -9687,13 +10391,6 @@
       "weight": 0.6
     },
     {
-      "source": "config:backend/src/main/resources/application.properties",
-      "target": "document:docs/API.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "config:backend/src/test/resources/application.properties",
       "target": "file:backend/src/test/java/com/unihack8/backend/support/JwtTestTokens.java",
       "type": "configures",
@@ -10156,20 +10853,6 @@
       "weight": 0.5
     },
     {
-      "source": "document:infra/otp/README.md",
-      "target": "service:infra/otp/docker-compose.yml",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:infra/otp/README.md",
-      "target": "file:infra/otp/get-data.sh",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "service:infra/otp/docker-compose.yml",
       "target": "file:infra/otp/get-data.sh",
       "type": "depends_on",
@@ -10291,27 +10974,6 @@
     {
       "source": "config:backend/src/test/resources/otp/plan-transit.json",
       "target": "file:backend/src/test/java/com/unihack8/backend/routing/support/OtpFixtures.java",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/API.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/transit/controller/TransitController.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/API.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/API.md",
-      "target": "document:README.md",
       "type": "related",
       "direction": "forward",
       "weight": 0.5
@@ -10849,6 +11511,566 @@
       "weight": 0.5
     },
     {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java:UserController",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java:UserController",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java:AttendedEventResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java:AttendedEventResponse",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java:ProfileResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java:ProfileResponse",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java:ProfileSearchResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java:ProfileSearchResult",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/UpdateUsernameRequest.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/domain/dto/UpdateUsernameRequest.java:UpdateUsernameRequest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/UpdateUsernameRequest.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/domain/dto/UpdateUsernameRequest.java:UpdateUsernameRequest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/UsernameAvailabilityResponse.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/domain/dto/UsernameAvailabilityResponse.java:UsernameAvailabilityResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/UsernameAvailabilityResponse.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/domain/dto/UsernameAvailabilityResponse.java:UsernameAvailabilityResponse",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java:Profile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java:Profile",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java:ProfileMapper",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java:ProfileMapper",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java:ProfileMapperImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java:ProfileMapperImpl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/repository/AttendedEventRepository.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/repository/AttendedEventRepository.java:AttendedEventRepository",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/repository/AttendedEventRepository.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/repository/AttendedEventRepository.java:AttendedEventRepository",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java:ProfileRepository",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java:ProfileRepository",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java:AttendedEventRepositoryImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java:AttendedEventRepositoryImpl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java:findAttendedByUserId",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/service/UserService.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/service/UserService.java:UserService",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/service/UserService.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/service/UserService.java:UserService",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java:UserServiceImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java:UserServiceImpl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java:updateUsername",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java:search",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java:UserControllerTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java:UserControllerTest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java:readsOwnProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java:reportsTakenUsername",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java:AttendedEventRepositoryImplTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java:AttendedEventRepositoryImplTest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java:setUp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java:fillsCategoryAndSpotsLeft",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java:returnsOnlyAttendedEventsNewestFirst",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/repository/ProfileRepositoryTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/users/repository/ProfileRepositoryTest.java:ProfileRepositoryTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/repository/ProfileRepositoryTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/users/repository/ProfileRepositoryTest.java:ProfileRepositoryTest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java:UserServiceImplTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java:UserServiceImplTest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java:ProfileMapperImpl",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java:ProfileMapper",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java:AttendedEventRepositoryImpl",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/repository/AttendedEventRepository.java:AttendedEventRepository",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java:UserServiceImpl",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/service/UserService.java:UserService",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java:UserController",
+      "target": "class:backend/src/main/java/com/unihack8/backend/users/service/UserService.java:UserService",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java:UserController",
+      "target": "class:backend/src/main/java/com/unihack8/backend/common/security/CurrentUser.java:CurrentUser",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/users/repository/ProfileRepositoryTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/config/SupabaseProperties.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/config/TimeConfig.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/security/CurrentUser.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/GlobalExceptionHandler.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/PageParams.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/PageResponse.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/PlaceCategory.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/mapper/impl/PlaceMapperImpl.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/transit/controller/TransitController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/transit/client/StptClient.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/transit/mapper/TransitMapper.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/transit/service/TransitService.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/cache/StaleCache.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/transit/config/StptProperties.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/transit/repository/impl/GtfsTimetableRepository.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
       "source": "document:DOCS.md",
       "target": "file:backend/src/main/java/com/unihack8/backend/routing/controller/RoutingController.java",
       "type": "documents",
@@ -10872,153 +12094,6 @@
     {
       "source": "document:DOCS.md",
       "target": "file:backend/src/main/java/com/unihack8/backend/routing/mapper/impl/RoutePlanMapperImpl.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/routing/util/PolylineEncoder.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/routing/config/OtpProperties.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/routing/config/OtpClientConfig.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/transit/repository/impl/GtfsTimetableRepository.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/transit/controller/TransitController.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/transit/service/TransitService.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/transit/client/StptClient.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/transit/mapper/TransitMapper.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/transit/config/StptProperties.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/transit/config/StptClientConfig.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/cache/StaleCache.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceImportService.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/places/service/PlaceService.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/GlobalExceptionHandler.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/security/CurrentUser.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/BackendApplication.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/config/TimeConfig.java",
       "type": "documents",
       "direction": "forward",
       "weight": 0.5
@@ -11053,35 +12128,7 @@
     },
     {
       "source": "document:DOCS.md",
-      "target": "config:backend/src/main/resources/application.properties",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "config:backend/src/test/resources/otp/plan-transit.json",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
       "target": "file:supabase/tests/schema_checks.sql",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:infra/otp/get-data.sh",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "config:.mcp.json",
       "type": "documents",
       "direction": "forward",
       "weight": 0.5
@@ -11095,7 +12142,7 @@
     },
     {
       "source": "document:DOCS.md",
-      "target": "document:README.md",
+      "target": "document:AGENTS.md",
       "type": "related",
       "direction": "forward",
       "weight": 0.5
@@ -11110,6 +12157,167 @@
     {
       "source": "document:DOCS.md",
       "target": "document:infra/otp/README.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "config:.mcp.json",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "config:backend/src/main/resources/application-local.properties.example",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:infra/otp/README.md",
+      "target": "service:infra/otp/docker-compose.yml",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:infra/otp/README.md",
+      "target": "file:infra/otp/get-data.sh",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:infra/otp/README.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/routing/client/impl/OtpGraphQlClient.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:infra/otp/README.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/routing/config/OtpProperties.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:infra/otp/README.md",
+      "target": "config:backend/src/main/resources/application-local.properties.example",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/transit/controller/TransitController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/routing/controller/RoutingController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/ErrorResponse.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/dto/PageResponse.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/UsernameAvailabilityResponse.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/UpdateUsernameRequest.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitSummaryResponse.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/routing/domain/dto/RoutePlanResponse.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/routing/domain/dto/RouteLegResponse.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java",
       "type": "related",
       "direction": "forward",
       "weight": 0.5
@@ -12739,6 +13947,262 @@
       "recoveredFromImportMap": true
     },
     {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/security/CurrentUser.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/UpdateUsernameRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/UsernameAvailabilityResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/service/UserService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/repository/AttendedEventRepository.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/repository/AttendedEventRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/service/UserService.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/service/UserService.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/service/UserService.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/UsernameAvailabilityResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/UsernameAvailabilityResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/repository/AttendedEventRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/service/UserService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
       "source": "file:backend/src/test/java/com/unihack8/backend/common/cache/StaleCacheTest.java",
       "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
       "type": "imports",
@@ -13667,6 +15131,158 @@
       "recoveredFromImportMap": true
     },
     {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/UsernameAvailabilityResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/service/UserService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/support/JwtTestTokens.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/repository/ProfileRepositoryTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/repository/AttendedEventRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
       "source": "file:frontend/src/app/index.jsx",
       "target": "file:frontend/src/lib/map.js",
       "type": "imports",
@@ -13836,6 +15452,27 @@
       ]
     },
     {
+      "id": "layer:users-feature",
+      "name": "Users Feature",
+      "description": "Profiles and usernames: the Profile entity on the profiles table, username availability and change, username search, public profiles with attended events, and the /users endpoints.",
+      "nodeIds": [
+        "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
+        "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java",
+        "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java",
+        "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java",
+        "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/UpdateUsernameRequest.java",
+        "file:backend/src/main/java/com/unihack8/backend/users/domain/dto/UsernameAvailabilityResponse.java",
+        "file:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
+        "file:backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java",
+        "file:backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/users/repository/AttendedEventRepository.java",
+        "file:backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java",
+        "file:backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/users/service/UserService.java",
+        "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java"
+      ]
+    },
+    {
       "id": "layer:backend-tests",
       "name": "Backend Tests",
       "description": "JUnit tests for the backend context, security filter chain, Supabase properties, paging and error handling, plus the support package (JWT test token minting, probe controller) and test properties.",
@@ -13876,7 +15513,11 @@
         "file:backend/src/test/java/com/unihack8/backend/routing/service/impl/RoutingServiceImplTest.java",
         "file:backend/src/test/java/com/unihack8/backend/routing/support/OtpFixtures.java",
         "file:backend/src/test/java/com/unihack8/backend/routing/util/PolylineEncoderTest.java",
-        "config:backend/src/test/resources/otp/plan-transit.json"
+        "config:backend/src/test/resources/otp/plan-transit.json",
+        "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
+        "file:backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java",
+        "file:backend/src/test/java/com/unihack8/backend/users/repository/ProfileRepositoryTest.java",
+        "file:backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java"
       ]
     },
     {
@@ -13998,6 +15639,17 @@
     },
     {
       "order": 6,
+      "title": "Users and Profiles",
+      "description": "The users feature reads the profiles table that Supabase fills on sign-up. UserController exposes GET/PATCH /users/me (own profile, change username), GET /users/search (username prefix), GET /users/{id} (public profile with attended events) and the public GET /users/username-available check used before sign-up. UserServiceImpl enforces the username rules and uniqueness; AttendedEventRepositoryImpl lists the events a user attended.",
+      "nodeIds": [
+        "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
+        "file:backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
+        "file:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
+        "file:backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java"
+      ]
+    },
+    {
+      "order": 7,
       "title": "Places from OpenStreetMap",
       "description": "Migration 4 adds public.places for restaurants, cafes and other points of interest imported from OpenStreetMap, kept unique by osm_id so re-imports update rows instead of duplicating them. These rows power the category filters on the map and will feed the AI guide.",
       "nodeIds": [
@@ -14006,7 +15658,7 @@
       ]
     },
     {
-      "order": 7,
+      "order": 8,
       "title": "Verifying the Schema",
       "description": "schema_checks.sql is a self-rolling-back PL/pgSQL block that tests the rules from the previous four steps: profile creation on sign-up, username formats and the table constraints. It leaves no data behind, so it can be run safely against the shared Supabase database.",
       "nodeIds": [
@@ -14014,7 +15666,7 @@
       ]
     },
     {
-      "order": 8,
+      "order": 9,
       "title": "The REST API Contract",
       "description": "docs/API.md defines how the mobile app talks to the backend: conventions, the paged and error answer shapes, shared objects and the planned endpoints. The next backend steps implement exactly these shapes, so reading the contract first makes the Java code easy to follow.",
       "nodeIds": [
@@ -14022,7 +15674,7 @@
       ]
     },
     {
-      "order": 9,
+      "order": 10,
       "title": "Spring Boot Entry and Settings",
       "description": "BackendApplication bootstraps the Spring Boot API, and its smoke test checks that the context loads. SupabaseProperties binds the Supabase URL and legacy HS256 JWT secret and derives the token issuer, TimeConfig exposes a shared UTC Clock so time logic can be tested, and application.properties tells Hibernate to only validate against the Supabase migrations instead of creating tables.",
       "nodeIds": [
@@ -14035,7 +15687,7 @@
       "languageLesson": "Java records annotated with @ConfigurationProperties give immutable, validated config objects, and injecting a Clock bean instead of calling Instant.now() lets tests freeze time."
     },
     {
-      "order": 10,
+      "order": 11,
       "title": "Security and the Current User",
       "description": "SecurityConfig makes the backend a stateless JWT resource server: Supabase access tokens are validated with the secret and issuer from the previous step, public GET routes for events and places stay open, and everything else requires a token. CurrentUser then reads the token's sub claim to give services the caller's UUID, and the JSON entry point and access-denied handler make 401 and 403 answers use the same error format as the rest of the API.",
       "nodeIds": [
@@ -14047,7 +15699,7 @@
       "languageLesson": "In modern Spring Security you declare a SecurityFilterChain bean; configuring oauth2ResourceServer with a JWT decoder means every request is authenticated before any controller runs."
     },
     {
-      "order": 11,
+      "order": 12,
       "title": "One Error Format Everywhere",
       "description": "ErrorCode is the most depended-on file in the backend: an enum listing every API error, from validation and auth to QR check-in and rate limiting. Code throws ApiException with a code, GlobalExceptionHandler catches it (plus validation and malformed-body errors), and ErrorResponseFactory builds the ErrorResponse record, the single error JSON shape promised in docs/API.md and shared with the security handlers from Step 10.",
       "nodeIds": [
@@ -14060,7 +15712,7 @@
       "languageLesson": "@RestControllerAdvice with @ExceptionHandler methods centralises error handling, so controllers just throw and never build error bodies themselves."
     },
     {
-      "order": 12,
+      "order": 13,
       "title": "Paging Lists",
       "description": "PageParams is an immutable record that enforces the API paging rules (page starts at 0, default size 20, capped at 100 for lists) and rejects bad input through the error system from the previous step. PageResponse is the matching generic answer shape from docs/API.md, with a factory that converts Spring Data pages so every future list endpoint looks the same.",
       "nodeIds": [
@@ -14071,7 +15723,7 @@
       "languageLesson": "Java records can validate their fields in a compact constructor, and a generic record like PageResponse<T> gives one reusable, type-safe wrapper for any list."
     },
     {
-      "order": 13,
+      "order": 14,
       "title": "Backend Tests with Real JWTs",
       "description": "The foundation is covered by tests that run on an in-memory H2 database in PostgreSQL mode with a fake Supabase secret. JwtTestTokens signs HS256 tokens shaped like real Supabase access tokens, and TestProbeController (test-only, never shipped) exposes probe endpoints so SecurityConfigTest and GlobalExceptionHandlerTest can hit public and protected routes with MockMvc and check the exact error JSON.",
       "nodeIds": [
@@ -14083,7 +15735,7 @@
       ]
     },
     {
-      "order": 14,
+      "order": 15,
       "title": "Backend Build and Tooling",
       "description": "build.gradle targets Java 21 and Spring Boot with JPA, Security and Validation, while the Gradle wrapper pins a fixed Gradle version so every teammate builds the same way. The application-local properties example lists the Supabase URL, JWT secret and pooler connection each developer fills into a git-ignored local profile.",
       "nodeIds": [
@@ -14095,7 +15747,7 @@
       "languageLesson": "The Gradle wrapper (gradlew plus gradle-wrapper.properties) downloads the pinned Gradle version on first run, so nobody needs Gradle installed globally."
     },
     {
-      "order": 15,
+      "order": 16,
       "title": "Places: From OpenStreetMap to the Map",
       "description": "The places feature turns OpenStreetMap data into searchable map points. PlaceCategory defines the 10 app categories and which OSM tags select them. The import (PlaceImportService with OverpassClient and OsmElementMapper) downloads Timișoara once from the Overpass API, falling back to a mirror when the main server is busy, and upserts rows by osm_id so re-runs never duplicate. PlaceController exposes GET /places (category, viewport, name and near-me filters, closest first) and GET /places/{id}; PlaceServiceImpl does the search using the shared GeoPoint and BoundingBox helpers.",
       "nodeIds": [
@@ -14108,7 +15760,7 @@
       ]
     },
     {
-      "order": 16,
+      "order": 17,
       "title": "Live Transit: Caching and the STPT Client",
       "description": "StaleCache is a generic, thread-safe TTL cache built to front unreliable upstreams like the STPT live feed. Fresh entries are served directly, expired ones are reloaded, and if a reload fails the last known value is returned and flagged stale; only when nothing was ever cached does it throw the 503 SOURCE_UNAVAILABLE error from Step 9. StaleCacheTest drives expiry deterministically with MutableClock, a test Clock you advance by hand, building on the injected Clock from Step 7. The transit feature starts at the edge of the system. StptProperties binds the stpt.* settings (base URL, timeouts, user agent, per-data-type cache TTLs), StptClientConfig builds the RestClient with those timeouts and a custom User-Agent, and the StptClient interface with its StptClientImpl calls the undocumented STPT live-site JSON endpoints and leniently parses them into raw Stpt* records such as StptStop.",
       "nodeIds": [
@@ -14123,7 +15775,7 @@
       ]
     },
     {
-      "order": 17,
+      "order": 18,
       "title": "Live Transit: Mapping, Service and Endpoints",
       "description": "The project keeps two DTO families: raw stpt records mirroring the upstream format (like StptArrival with its HH:mm|minutes strings) and clean API records like ArrivalDto and VehicleDto that match docs/API.md. TransitMapperImpl bridges them by hand: it splits route ends, classifies vehicle types and converts local Timișoara arrival times into UTC instants, even across midnight. TransitServiceImpl ties the previous three steps together: it fetches through StptClient, caches each data kind in StaleCache with stale fallback, maps through TransitMapper and builds sorted, bbox-filtered, localized answers. TransitController exposes the public /transit endpoints (routes, stops, vehicles, arrivals, alerts, last departures and a home summary) with Accept-Language-based language selection, and TransitSummaryResponse and LastDeparturesResponse power the 'last tram at this hour' idea from Step 1. The \"last tram\" answers come from the STPT GTFS timetable (TimetableRepository / GtfsTimetableRepository reading infra/otp/stpt-gtfs.zip), falling back to live arrivals when the file is missing or expired.",
       "nodeIds": [
@@ -14142,7 +15794,7 @@
       ]
     },
     {
-      "order": 18,
+      "order": 19,
       "title": "Live Transit: Tests with Saved STPT Answers",
       "description": "Each transit layer has its own tests. StptClientImplTest runs the client against a mocked HTTP server fed saved STPT responses such as arrivals-stop-1.json and vehicles-route-1.json, TransitServiceImplTest mocks the client and uses MutableClock to check caching, stale fallback and last departures, and TransitControllerTest verifies every endpoint and the SOURCE_UNAVAILABLE mapping. Recorded fixtures mean the tests never depend on live.stpt.ro being up.",
       "nodeIds": [
@@ -14154,7 +15806,7 @@
       ]
     },
     {
-      "order": 19,
+      "order": 20,
       "title": "Directions with OpenTripPlanner",
       "description": "GET /routes/plan asks our own OpenTripPlanner 2 server (infra/otp: docker compose plus get-data.sh, which downloads the STPT GTFS timetable and the Timișoara street map). RoutingServiceImpl picks the itinerary that arrives first and falls back to a straight-line walking estimate when OTP is down; OtpGraphQlClient sends the GraphQL planConnection query and RoutePlanMapperImpl shapes legs and polylines for the map.",
       "nodeIds": [
@@ -14167,7 +15819,7 @@
       ]
     },
     {
-      "order": 20,
+      "order": 21,
       "title": "Expo App Shell and Discover",
       "description": "Switching to the mobile app, _layout.jsx is the Expo Router root that sets up the status bar and native Stack navigator, and index.jsx is the Discover home screen rendering a react-native-maps MapView centered on Timișoara. map.js supplies the frozen TIMISOARA_CENTER coordinates and a validated region builder, keeping map math out of the UI.",
       "nodeIds": [
@@ -14178,7 +15830,7 @@
       "languageLesson": "Expo Router uses file-based routing: _layout.jsx wraps every screen in its folder, and index.jsx becomes the default route."
     },
     {
-      "order": 21,
+      "order": 22,
       "title": "Talking to the Backend",
       "description": "api.js is the app's minimal HTTP client: it resolves the backend base URL from EXPO_PUBLIC_API_URL, defined in .env.example as the LAN address of the Spring Boot server, and wraps GET requests. setup.test.mjs uses node:test to check both the URL handling here and the coordinate validation in map.js.",
       "nodeIds": [
@@ -14189,7 +15841,7 @@
       "languageLesson": "Expo only exposes environment variables prefixed with EXPO_PUBLIC_ to app code, and they are inlined at build time, so never put secrets in them."
     },
     {
-      "order": 22,
+      "order": 23,
       "title": "Frontend Configuration",
       "description": "package.json pins Expo SDK 54, React Native 0.81, expo-router, expo-location and react-native-maps, and app.json is the Expo manifest naming the app 'Connected Communities' with its deep-link scheme and icons. jsconfig.json turns on type checking for plain JS files, and frontend/AGENTS.md reminds contributors to follow versioned Expo docs and use expo install.",
       "nodeIds": [
@@ -14201,7 +15853,7 @@
       ]
     },
     {
-      "order": 23,
+      "order": 24,
       "title": "Transit Routing and Dev Tooling",
       "description": "infra/otp/README.md describes the planned OpenTripPlanner 2 server on port 8081, called only by the backend, that will compute walking and public transport directions for Timișoara. .mcp.json registers the hosted Supabase MCP server for this project, which is how AI tooling inspects and migrates the database you studied earlier.",
       "nodeIds": [
