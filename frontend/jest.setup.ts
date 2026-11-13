@@ -47,16 +47,22 @@ jest.mock('expo-router', () => {
   };
 });
 
-// Maps: plain views, with the imperative methods the screens call.
+// Maps: plain views, with the imperative methods the screens call. `Polyline`, `Circle` and `Callout` are plain
+// views too. Tests trigger map events with fireEvent(map, 'regionChangeComplete', region) / 'press' / 'longPress'.
 jest.mock('react-native-maps', () => {
   const React = require('react');
   const { View } = require('react-native');
   const MapView = React.forwardRef((props: object, ref: React.Ref<unknown>) => {
-    React.useImperativeHandle(ref, () => ({ animateToRegion: jest.fn() }));
+    React.useImperativeHandle(ref, () => ({
+      animateToRegion: jest.fn(),
+      animateCamera: jest.fn(),
+      fitToCoordinates: jest.fn(),
+      getMapBoundaries: jest.fn(async () => ({ northEast: { latitude: 45.8, longitude: 21.3 }, southWest: { latitude: 45.7, longitude: 21.1 } })),
+    }));
     return React.createElement(View, props);
   });
-  const Marker = (props: object) => React.createElement(View, props);
-  return { __esModule: true, default: MapView, Marker };
+  const plain = (props: object) => React.createElement(View, props);
+  return { __esModule: true, default: MapView, Marker: plain, Polyline: plain, Circle: plain, Callout: plain, PROVIDER_GOOGLE: 'google' };
 });
 
 jest.mock('expo-location', () => ({

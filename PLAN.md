@@ -257,12 +257,12 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 **Needs:** 12. Real data from 5, 8, 9, 10. Use `react-native-maps` (works in Expo Go).
 
-- [ ] **14.1 Map** centred on Timișoara with the user's position.
-- [ ] **14.2 Category filter chips** (list from 8.1) and place markers loaded for the visible area only.
-- [ ] **14.3 Event markers** with a separate on/off toggle; tap opens event details.
+- [x] **14.1 Map** centred on Timișoara with the user's position.
+- [x] **14.2 Category filter chips** (list from 8.1) and place markers loaded for the visible area only.
+- [x] **14.3 Event markers** with a separate on/off toggle; tap opens event details.
 - [ ] **14.4 Transit layer:** stops, live vehicles for a chosen line (refresh every 10 s), tap a stop for next arrivals and last departure.
 - [ ] **14.5 Directions:** pick a destination (marker or long-press) → walking vs walking + public transport, with time estimate, steps and the route drawn on the map.
-- [ ] **14.6 Performance:** cluster markers when zoomed out; debounce reloads while the map moves.
+- [x] **14.6 Performance:** cluster markers when zoomed out; debounce reloads while the map moves.
 
 ---
 
@@ -270,10 +270,10 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 **Needs:** 12. Real data from 11.
 
-- [ ] **15.1 Chat screen:** message list, input, "thinking" indicator, error + retry.
-- [ ] **15.2 "New chat" button** that clears the conversation (kept in memory only — nothing is saved).
-- [ ] **15.3 Suggested questions** on an empty chat ("Where can I eat pizza near me?", "What can I do this weekend?").
-- [ ] **15.4 Result cards** for places and events in an answer, with "show on map" and "open event".
+- [x] **15.1 Chat screen:** message list, input, "thinking" indicator, error + retry.
+- [x] **15.2 "New chat" button** that clears the conversation (kept in memory only — nothing is saved).
+- [x] **15.3 Suggested questions** on an empty chat ("Where can I eat pizza near me?", "What can I do this weekend?").
+- [x] **15.4 Result cards** for places and events in an answer, with "show on map" and "open event".
 
 ---
 

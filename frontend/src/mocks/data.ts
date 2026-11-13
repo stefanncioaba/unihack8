@@ -1,6 +1,7 @@
 // Seed data for the mock backend. Shapes follow docs/API.md. Dates are relative to "now"
 // so the demo always shows upcoming events.
-import type { EventCategory, EventSource, ParticipantStatus, TransitAlert, UserSummary } from '@/api/types';
+import type { EventCategory, EventSource, ParticipantStatus, UserSummary } from '@/api/types';
+import type { TransitAlert } from '@/api/types.transit';
 import { bucharestToUtcIso, toBucharest } from '@/lib/time';
 
 export const MOCK_ME_ID = '11111111-1111-4111-8111-111111111111';

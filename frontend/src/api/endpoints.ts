@@ -14,8 +14,6 @@ import type {
   Participant,
   PublicProfile,
   Ticket,
-  TransitAlert,
-  TransitSummary,
   UsernameAvailability,
   UserSummary,
 } from './types';
@@ -67,11 +65,3 @@ export const getMyTicket = (id: string) => api<Ticket>('GET', `/events/${id}/my-
 /** Organiser only: check a scanned ticket in. */
 export const checkIn = (eventId: string, token: string) =>
   api<CheckInResult>('POST', `/events/${eventId}/check-in`, { body: { token } });
-
-// ---- Transit -----------------------------------------------------------
-
-/** Home page line: nearest stop and the last departures. */
-export const getTransitSummary = (near: string) => api<TransitSummary>('GET', '/transit/summary', { query: { near } });
-
-/** Current service alerts. */
-export const getTransitAlerts = () => api<TransitAlert[]>('GET', '/transit/alerts');
