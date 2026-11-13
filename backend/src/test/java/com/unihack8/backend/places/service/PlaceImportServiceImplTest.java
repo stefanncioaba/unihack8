@@ -43,9 +43,11 @@ class PlaceImportServiceImplTest {
     private PlaceImportService service;
     private List<OverpassElement> fixture;
 
-    // Builds the service by hand with the real repository and mapper and the fake client.
+    // Builds the service by hand with the real repository and mapper and the fake client. The test
+    // database is shared with other test classes, so start from an empty places table.
     @BeforeEach
     void setUp() {
+        placeRepository.deleteAll();
         service = new PlaceImportServiceImpl(overpassClient, new OsmElementMapperImpl(), placeRepository,
                 transactionManager);
         fixture = OverpassFixtures.timisoaraSample().elements();

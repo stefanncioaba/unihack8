@@ -1,0 +1,15 @@
+# Venues of LiveTickets events that OpenStreetMap does not know (or knows under another name).
+# Used by the events import (PLAN 7.3) after our places table and before searching Nominatim by name.
+#
+# Format, one venue per line:
+#   <venue name as LiveTickets writes it> | <street address>      -> the address is geocoded with Nominatim
+#   <venue name as LiveTickets writes it> | <lat>,<lon>           -> used as is (best: exact spot)
+# Names are matched ignoring case, diacritics and punctuation. Lines starting with # are ignored.
+# Addresses below were found 2026-11-13 (zilesinopti.ro, trip.com, tradefairdates.com); replace them
+# with exact lat,lon if you know the entrance.
+
+Fratelli Lounge & Club Timisoara | Bulevardul Corneliu Coposu 3, Timișoara
+Expovest | Calea Lugojului 7, Timișoara
+Vineri 15 | Bulevardul Vasile Pârvan 9, Timișoara
+# Coordinates from OpenStreetMap ("Aeroportul Internațional Timișoara - Traian Vuia"); the full LiveTickets name is not found by Nominatim.
+Aeroportul Internațional "Traian Vuia" Timişoara | 45.80974, 21.33302

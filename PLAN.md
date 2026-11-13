@@ -164,11 +164,11 @@ Tasks 8, 9 and 10 do not need the database to start: B can build and test them a
 
 **Needs:** 3 and 2.3. Source details are in `DOCS.md` → "External data sources".
 
-- [ ] **7.1 Client** for the LiveTickets public events endpoint; keep only events whose `city` is Timișoara. Imported rows get `source = EXTERNAL`. Save one real response as a test fixture.
-- [ ] **7.2 Mapping** to our `events` row: title, cleaned description (the source sends HTML), venue name, dates, prices, image, link back to the ticket page.
-- [ ] **7.3 Geocoding** (turning a venue name into map coordinates): only for events that are **new** in this import — events already saved keep their coordinates, so no separate cache table is needed. First look for the venue by name in our own `places` table; if it is not there, ask OpenStreetMap Nominatim (at most 1 request per second, identify the app in the request header). Events that cannot be located are saved without coordinates and appear in lists but not on the map.
-- [ ] **7.4 Import job:** on startup and every 6 hours; upsert on (`source`, `external_id`) so nothing is duplicated.
-- [ ] **7.5** Tests with the saved fixture (no network in tests).
+- [x] **7.1 Client** for the LiveTickets public events endpoint; keep only events whose `city` is Timișoara. Imported rows get `source = EXTERNAL`. Save one real response as a test fixture.
+- [x] **7.2 Mapping** to our `events` row: title, cleaned description (the source sends HTML), venue name, dates, prices, image, link back to the ticket page.
+- [x] **7.3 Geocoding** (turning a venue name into map coordinates): only for events that are **new** in this import — events already saved keep their coordinates, so no separate cache table is needed. First look for the venue by name in our own `places` table; if it is not there, ask OpenStreetMap Nominatim (at most 1 request per second, identify the app in the request header). Events that cannot be located are saved without coordinates and appear in lists but not on the map.
+- [x] **7.4 Import job:** runs on demand, not on a schedule (team decision 2026-11-13: the hackathon ends 15 Nov, so a weekly job would first run after it, and a GitHub workflow would need the database password as a secret). Run it once to fill the database and once more on demo morning: start the backend with `--events.import.enabled=true` (see `DOCS.md` → Events import). Upsert on `external_id` so re-runs never duplicate; upcoming events LiveTickets no longer lists are removed.
+- [x] **7.5** Tests with the saved fixture (no network in tests).
 
 ---
 

@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "546fbc2b6b38db07c4a566763d2e771839ff5843",
-  "generatedAt": "2026-11-13T20:37:39.183Z",
+  "gitCommitHash": "ad982c65023b95c35903882d178bc9683fb43a7c",
+  "generatedAt": "2026-11-13T20:44:29+00:00",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -1797,6 +1797,1761 @@
         "TimeConfig"
       ],
       "totalLines": 17,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/eventimport/client/LiveTicketsClient.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/client/LiveTicketsClient.java",
+      "contentHash": "7e2f05e00c8601e4bd6e12ede8206f2a7816b02956da7e2c5feff7afac9d99ce",
+      "functions": [],
+      "classes": [
+        {
+          "name": "LiveTicketsClient",
+          "methods": [
+            "fetchUpcomingEvents"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.eventimport.client.dto.LiveTicketsEvent",
+          "specifiers": [
+            "LiveTicketsEvent"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "LiveTicketsClient"
+      ],
+      "totalLines": 12,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsEvent.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsEvent.java",
+      "contentHash": "e31044e4868cabdf0294637aabfdc561fed2282ecf02603919224718e1ac5940",
+      "functions": [],
+      "classes": [
+        {
+          "name": "LiveTicketsEvent",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 15
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.fasterxml.jackson.annotation.JsonIgnoreProperties",
+          "specifiers": [
+            "JsonIgnoreProperties"
+          ]
+        },
+        {
+          "source": "com.fasterxml.jackson.annotation.JsonProperty",
+          "specifiers": [
+            "JsonProperty"
+          ]
+        },
+        {
+          "source": "java.math.BigDecimal",
+          "specifiers": [
+            "BigDecimal"
+          ]
+        }
+      ],
+      "exports": [
+        "LiveTicketsEvent"
+      ],
+      "totalLines": 32,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsSearchResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/client/dto/LiveTicketsSearchResponse.java",
+      "contentHash": "bfb7a2795ebd19a0f09c5d970375ffee6c03b145b3b7cac5d0f5b58d9aeb243b",
+      "functions": [
+        {
+          "name": "items",
+          "params": [],
+          "returnType": "List<LiveTicketsEvent>",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "hasMorePages",
+          "params": [],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "LiveTicketsSearchResponse",
+          "methods": [
+            "items",
+            "hasMorePages"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 18
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.fasterxml.jackson.annotation.JsonIgnoreProperties",
+          "specifiers": [
+            "JsonIgnoreProperties"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "items",
+        "hasMorePages",
+        "LiveTicketsSearchResponse"
+      ],
+      "totalLines": 25,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/client/impl/LiveTicketsClientImpl.java",
+      "contentHash": "a42ce2f9c9d9f9a0eea2b40afcd954d6ff632067bf53a60164b54b23de5accd1",
+      "functions": [
+        {
+          "name": "LiveTicketsClientImpl",
+          "params": [
+            "properties"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "fetchUpcomingEvents",
+          "params": [],
+          "returnType": "List<LiveTicketsEvent>",
+          "exported": true,
+          "lineCount": 22
+        },
+        {
+          "name": "parse",
+          "params": [
+            "json"
+          ],
+          "returnType": "LiveTicketsSearchResponse",
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "LiveTicketsClientImpl",
+          "methods": [
+            "LiveTicketsClientImpl",
+            "fetchUpcomingEvents",
+            "parse"
+          ],
+          "properties": [
+            "USER_AGENT",
+            "PAGE_SIZE",
+            "MAX_PAGES",
+            "JSON",
+            "properties",
+            "restClient"
+          ],
+          "exported": true,
+          "lineCount": 61
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.eventimport.client.LiveTicketsClient",
+          "specifiers": [
+            "LiveTicketsClient"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.client.dto.LiveTicketsEvent",
+          "specifiers": [
+            "LiveTicketsEvent"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.client.dto.LiveTicketsSearchResponse",
+          "specifiers": [
+            "LiveTicketsSearchResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.config.EventImportProperties",
+          "specifiers": [
+            "EventImportProperties"
+          ]
+        },
+        {
+          "source": "java.net.http.HttpClient",
+          "specifiers": [
+            "HttpClient"
+          ]
+        },
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "org.springframework.http.HttpHeaders",
+          "specifiers": [
+            "HttpHeaders"
+          ]
+        },
+        {
+          "source": "org.springframework.http.MediaType",
+          "specifiers": [
+            "MediaType"
+          ]
+        },
+        {
+          "source": "org.springframework.http.client.JdkClientHttpRequestFactory",
+          "specifiers": [
+            "JdkClientHttpRequestFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        },
+        {
+          "source": "org.springframework.web.client.RestClient",
+          "specifiers": [
+            "RestClient"
+          ]
+        },
+        {
+          "source": "org.springframework.web.util.UriComponentsBuilder",
+          "specifiers": [
+            "UriComponentsBuilder"
+          ]
+        },
+        {
+          "source": "tools.jackson.databind.DeserializationFeature",
+          "specifiers": [
+            "DeserializationFeature"
+          ]
+        },
+        {
+          "source": "tools.jackson.databind.json.JsonMapper",
+          "specifiers": [
+            "JsonMapper"
+          ]
+        }
+      ],
+      "exports": [
+        "USER_AGENT",
+        "LiveTicketsClientImpl",
+        "fetchUpcomingEvents",
+        "parse",
+        "LiveTicketsClientImpl"
+      ],
+      "totalLines": 86,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportConfig.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportConfig.java",
+      "contentHash": "dcc239339bacc522e32a1de8ac80948ca360ecb31c25cf375145ec7973b80b2b",
+      "functions": [],
+      "classes": [
+        {
+          "name": "EventImportConfig",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.springframework.boot.context.properties.EnableConfigurationProperties",
+          "specifiers": [
+            "EnableConfigurationProperties"
+          ]
+        },
+        {
+          "source": "org.springframework.context.annotation.Configuration",
+          "specifiers": [
+            "Configuration"
+          ]
+        }
+      ],
+      "exports": [
+        "EventImportConfig"
+      ],
+      "totalLines": 11,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportProperties.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportProperties.java",
+      "contentHash": "2b0aff9ebc6721c194b65b4b4c271845aac30d813120be63e505435f792f1984",
+      "functions": [
+        {
+          "name": "defaults",
+          "params": [],
+          "returnType": "EventImportProperties",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "blank",
+          "params": [
+            "value"
+          ],
+          "returnType": "boolean",
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "EventImportProperties",
+          "methods": [
+            "defaults",
+            "blank"
+          ],
+          "properties": [
+            "DEFAULT_LIVETICKETS_URL",
+            "DEFAULT_CITY",
+            "DEFAULT_NOMINATIM_URL",
+            "DEFAULT_BBOX"
+          ],
+          "exported": true,
+          "lineCount": 28
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.springframework.boot.context.properties.ConfigurationProperties",
+          "specifiers": [
+            "ConfigurationProperties"
+          ]
+        }
+      ],
+      "exports": [
+        "DEFAULT_LIVETICKETS_URL",
+        "DEFAULT_CITY",
+        "DEFAULT_NOMINATIM_URL",
+        "DEFAULT_BBOX",
+        "defaults",
+        "EventImportProperties"
+      ],
+      "totalLines": 43,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportRunner.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/config/EventImportRunner.java",
+      "contentHash": "f80b3d47156a3fd2c0794cbc74eca3ff14db33101ec8c3c15dbb3013a728855b",
+      "functions": [
+        {
+          "name": "EventImportRunner",
+          "params": [
+            "importService"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "run",
+          "params": [
+            "args"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [
+        {
+          "name": "EventImportRunner",
+          "methods": [
+            "EventImportRunner",
+            "run"
+          ],
+          "properties": [
+            "log",
+            "importService"
+          ],
+          "exported": true,
+          "lineCount": 24
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.eventimport.service.EventImportService",
+          "specifiers": [
+            "EventImportService"
+          ]
+        },
+        {
+          "source": "org.slf4j.Logger",
+          "specifiers": [
+            "Logger"
+          ]
+        },
+        {
+          "source": "org.slf4j.LoggerFactory",
+          "specifiers": [
+            "LoggerFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.ApplicationArguments",
+          "specifiers": [
+            "ApplicationArguments"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.ApplicationRunner",
+          "specifiers": [
+            "ApplicationRunner"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.autoconfigure.condition.ConditionalOnProperty",
+          "specifiers": [
+            "ConditionalOnProperty"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        }
+      ],
+      "exports": [
+        "EventImportRunner",
+        "run",
+        "EventImportRunner"
+      ],
+      "totalLines": 40,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/eventimport/domain/dto/ImportedEvent.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/domain/dto/ImportedEvent.java",
+      "contentHash": "e926ba3c843d1efd0addd38efcb37ae49150e8075d75225143b4cd6bbcdb2d3c",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ImportedEvent",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 13
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.math.BigDecimal",
+          "specifiers": [
+            "BigDecimal"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        }
+      ],
+      "exports": [
+        "ImportedEvent"
+      ],
+      "totalLines": 28,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapper.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapper.java",
+      "contentHash": "85b92b417ced84b0fecd4ae2617d3dda6fbd45bc461dd7c25099d5bcb76704e3",
+      "functions": [],
+      "classes": [
+        {
+          "name": "LiveTicketsEventMapper",
+          "methods": [
+            "toImportedEvent"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.eventimport.client.dto.LiveTicketsEvent",
+          "specifiers": [
+            "LiveTicketsEvent"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.domain.dto.ImportedEvent",
+          "specifiers": [
+            "ImportedEvent"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        }
+      ],
+      "exports": [
+        "LiveTicketsEventMapper"
+      ],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
+      "contentHash": "1c692b177f0f822a37cfc54af6430bb38d4c22e52dd1aeb263b081b0d3a462a3",
+      "functions": [
+        {
+          "name": "LiveTicketsEventMapperImpl",
+          "params": [
+            "properties"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "toImportedEvent",
+          "params": [
+            "event"
+          ],
+          "returnType": "Optional<ImportedEvent>",
+          "exported": true,
+          "lineCount": 38
+        },
+        {
+          "name": "guessCategory",
+          "params": [
+            "title",
+            "description"
+          ],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "categoryOf",
+          "params": [
+            "text"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "plainText",
+          "params": [
+            "html"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "normalize",
+          "params": [
+            "text"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "romanianTime",
+          "params": [
+            "value"
+          ],
+          "returnType": "Instant",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "imageUrl",
+          "params": [
+            "event"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "nonNegative",
+          "params": [
+            "price"
+          ],
+          "returnType": "BigDecimal",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "blank",
+          "params": [
+            "value"
+          ],
+          "returnType": "boolean",
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "LiveTicketsEventMapperImpl",
+          "methods": [
+            "LiveTicketsEventMapperImpl",
+            "toImportedEvent",
+            "guessCategory",
+            "categoryOf",
+            "plainText",
+            "normalize",
+            "romanianTime",
+            "imageUrl",
+            "nonNegative",
+            "blank"
+          ],
+          "properties": [
+            "EXTERNAL_ID_PREFIX",
+            "ROMANIA",
+            "IMAGE_BASE",
+            "TICKET_PAGE_BASE",
+            "MAX_DESCRIPTION_LENGTH",
+            "CATEGORY_KEYWORDS",
+            "TAGS",
+            "LINE_BREAKS",
+            "SPACES",
+            "BLANK_LINES",
+            "DIACRITICS",
+            "wantedCity"
+          ],
+          "exported": true,
+          "lineCount": 169
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.eventimport.client.dto.LiveTicketsEvent",
+          "specifiers": [
+            "LiveTicketsEvent"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.config.EventImportProperties",
+          "specifiers": [
+            "EventImportProperties"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.domain.dto.ImportedEvent",
+          "specifiers": [
+            "ImportedEvent"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.mapper.LiveTicketsEventMapper",
+          "specifiers": [
+            "LiveTicketsEventMapper"
+          ]
+        },
+        {
+          "source": "java.math.BigDecimal",
+          "specifiers": [
+            "BigDecimal"
+          ]
+        },
+        {
+          "source": "java.text.Normalizer",
+          "specifiers": [
+            "Normalizer"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.time.LocalDateTime",
+          "specifiers": [
+            "LocalDateTime"
+          ]
+        },
+        {
+          "source": "java.time.ZoneId",
+          "specifiers": [
+            "ZoneId"
+          ]
+        },
+        {
+          "source": "java.time.format.DateTimeParseException",
+          "specifiers": [
+            "DateTimeParseException"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Locale",
+          "specifiers": [
+            "Locale"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.regex.Pattern",
+          "specifiers": [
+            "Pattern"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        },
+        {
+          "source": "org.springframework.web.util.HtmlUtils",
+          "specifiers": [
+            "HtmlUtils"
+          ]
+        }
+      ],
+      "exports": [
+        "EXTERNAL_ID_PREFIX",
+        "LiveTicketsEventMapperImpl",
+        "toImportedEvent",
+        "guessCategory",
+        "LiveTicketsEventMapperImpl"
+      ],
+      "totalLines": 195,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/eventimport/repository/ExternalEventRepository.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/repository/ExternalEventRepository.java",
+      "contentHash": "5736e25d2a3e3e36d82793101b14badffa92249a80e8017eb5829870b650530d",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ExternalEventRepository",
+          "methods": [
+            "findExisting",
+            "insert",
+            "update",
+            "deleteUpcomingNotIn"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 14
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.domain.dto.ImportedEvent",
+          "specifiers": [
+            "ImportedEvent"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.Collection",
+          "specifiers": [
+            "Collection"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        }
+      ],
+      "exports": [
+        "ExternalEventRepository"
+      ],
+      "totalLines": 27,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/repository/impl/ExternalEventRepositoryImpl.java",
+      "contentHash": "436c3ed396cd638f9ba88983ffe9d410db89e62d694353e8a20da624c129f325",
+      "functions": [
+        {
+          "name": "ExternalEventRepositoryImpl",
+          "params": [
+            "jdbc"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "findExisting",
+          "params": [
+            "externalIds"
+          ],
+          "returnType": "Map<String, Boolean>",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "insert",
+          "params": [
+            "event",
+            "location"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "update",
+          "params": [
+            "event",
+            "location"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 23
+        },
+        {
+          "name": "deleteUpcomingNotIn",
+          "params": [
+            "externalIdPrefix",
+            "keepIds",
+            "now"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "utc",
+          "params": [
+            "instant"
+          ],
+          "returnType": "OffsetDateTime",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "concat",
+          "params": [
+            "first",
+            "rest"
+          ],
+          "returnType": "Object[]",
+          "exported": false,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "ExternalEventRepositoryImpl",
+          "methods": [
+            "ExternalEventRepositoryImpl",
+            "findExisting",
+            "insert",
+            "update",
+            "deleteUpcomingNotIn",
+            "utc",
+            "concat"
+          ],
+          "properties": [
+            "SOURCE",
+            "jdbc"
+          ],
+          "exported": true,
+          "lineCount": 94
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.domain.dto.ImportedEvent",
+          "specifiers": [
+            "ImportedEvent"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.repository.ExternalEventRepository",
+          "specifiers": [
+            "ExternalEventRepository"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.time.OffsetDateTime",
+          "specifiers": [
+            "OffsetDateTime"
+          ]
+        },
+        {
+          "source": "java.time.ZoneOffset",
+          "specifiers": [
+            "ZoneOffset"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.Collection",
+          "specifiers": [
+            "Collection"
+          ]
+        },
+        {
+          "source": "java.util.HashMap",
+          "specifiers": [
+            "HashMap"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.springframework.jdbc.core.JdbcTemplate",
+          "specifiers": [
+            "JdbcTemplate"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Repository",
+          "specifiers": [
+            "Repository"
+          ]
+        }
+      ],
+      "exports": [
+        "ExternalEventRepositoryImpl",
+        "findExisting",
+        "insert",
+        "update",
+        "deleteUpcomingNotIn",
+        "ExternalEventRepositoryImpl"
+      ],
+      "totalLines": 116,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/eventimport/service/EventImportService.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/EventImportService.java",
+      "contentHash": "40cb8cecf60507cce7cfcc51a5c85eccc08cd44d2161cb6fe98b58a245e5a428",
+      "functions": [],
+      "classes": [
+        {
+          "name": "EventImportService",
+          "methods": [
+            "importEvents"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 19
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "EventImportService"
+      ],
+      "totalLines": 23,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/eventimport/service/VenueGeocoder.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/VenueGeocoder.java",
+      "contentHash": "72aa391df85d6c4de2ac5ccf8e63d4c391f8d0f14efd65f76dc520304b6a2602",
+      "functions": [],
+      "classes": [
+        {
+          "name": "VenueGeocoder",
+          "methods": [
+            "locate"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        }
+      ],
+      "exports": [
+        "VenueGeocoder"
+      ],
+      "totalLines": 16,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImpl.java",
+      "contentHash": "10fe7d22cc8b3b1af33e487e70f2b14c9551f985e799b4f9b9c71d17f0aac936",
+      "functions": [
+        {
+          "name": "EventImportServiceImpl",
+          "params": [
+            "client",
+            "mapper",
+            "geocoder",
+            "events",
+            "transactionManager",
+            "clock"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "importEvents",
+          "params": [],
+          "returnType": "Result",
+          "exported": true,
+          "lineCount": 52
+        }
+      ],
+      "classes": [
+        {
+          "name": "EventImportServiceImpl",
+          "methods": [
+            "EventImportServiceImpl",
+            "importEvents"
+          ],
+          "properties": [
+            "log",
+            "client",
+            "mapper",
+            "geocoder",
+            "events",
+            "transaction",
+            "clock"
+          ],
+          "exported": true,
+          "lineCount": 78
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.client.LiveTicketsClient",
+          "specifiers": [
+            "LiveTicketsClient"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.client.dto.LiveTicketsEvent",
+          "specifiers": [
+            "LiveTicketsEvent"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.domain.dto.ImportedEvent",
+          "specifiers": [
+            "ImportedEvent"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.mapper.LiveTicketsEventMapper",
+          "specifiers": [
+            "LiveTicketsEventMapper"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.mapper.impl.LiveTicketsEventMapperImpl",
+          "specifiers": [
+            "LiveTicketsEventMapperImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.repository.ExternalEventRepository",
+          "specifiers": [
+            "ExternalEventRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.service.EventImportService",
+          "specifiers": [
+            "EventImportService"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.service.VenueGeocoder",
+          "specifiers": [
+            "VenueGeocoder"
+          ]
+        },
+        {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.HashMap",
+          "specifiers": [
+            "HashMap"
+          ]
+        },
+        {
+          "source": "java.util.LinkedHashMap",
+          "specifiers": [
+            "LinkedHashMap"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "org.slf4j.Logger",
+          "specifiers": [
+            "Logger"
+          ]
+        },
+        {
+          "source": "org.slf4j.LoggerFactory",
+          "specifiers": [
+            "LoggerFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Service",
+          "specifiers": [
+            "Service"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.PlatformTransactionManager",
+          "specifiers": [
+            "PlatformTransactionManager"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.support.TransactionTemplate",
+          "specifiers": [
+            "TransactionTemplate"
+          ]
+        }
+      ],
+      "exports": [
+        "EventImportServiceImpl",
+        "importEvents",
+        "EventImportServiceImpl"
+      ],
+      "totalLines": 106,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueDirectory.java",
+      "contentHash": "a1a49dab20334ec40067570b67048f2ea108f2917ce015caefce4c675327ce80",
+      "functions": [
+        {
+          "name": "VenueDirectory",
+          "params": [
+            "entries"
+          ],
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "load",
+          "params": [
+            "normalize"
+          ],
+          "returnType": "VenueDirectory",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "parse",
+          "params": [
+            "text",
+            "normalize"
+          ],
+          "returnType": "VenueDirectory",
+          "exported": false,
+          "lineCount": 21
+        },
+        {
+          "name": "find",
+          "params": [
+            "normalizedNames"
+          ],
+          "returnType": "Optional<Entry>",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "toEntry",
+          "params": [
+            "value"
+          ],
+          "returnType": "Entry",
+          "exported": false,
+          "lineCount": 11
+        }
+      ],
+      "classes": [
+        {
+          "name": "VenueDirectory",
+          "methods": [
+            "VenueDirectory",
+            "load",
+            "parse",
+            "find",
+            "toEntry"
+          ],
+          "properties": [
+            "RESOURCE",
+            "entries"
+          ],
+          "exported": false,
+          "lineCount": 79
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "java.io.BufferedReader",
+          "specifiers": [
+            "BufferedReader"
+          ]
+        },
+        {
+          "source": "java.io.IOException",
+          "specifiers": [
+            "IOException"
+          ]
+        },
+        {
+          "source": "java.io.InputStream",
+          "specifiers": [
+            "InputStream"
+          ]
+        },
+        {
+          "source": "java.io.InputStreamReader",
+          "specifiers": [
+            "InputStreamReader"
+          ]
+        },
+        {
+          "source": "java.io.UncheckedIOException",
+          "specifiers": [
+            "UncheckedIOException"
+          ]
+        },
+        {
+          "source": "java.nio.charset.StandardCharsets",
+          "specifiers": [
+            "StandardCharsets"
+          ]
+        },
+        {
+          "source": "java.util.HashMap",
+          "specifiers": [
+            "HashMap"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.function.Function",
+          "specifiers": [
+            "Function"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 98,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImpl.java",
+      "contentHash": "fec22f98c7d90cd38527e1968015dfea0aceccd89751319fcf33f435a77e0494",
+      "functions": [
+        {
+          "name": "VenueGeocoderImpl",
+          "params": [
+            "properties",
+            "jdbc"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "VenueGeocoderImpl",
+          "params": [
+            "properties",
+            "jdbc",
+            "sleeper",
+            "clockMillis"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "VenueGeocoderImpl",
+          "params": [
+            "properties",
+            "jdbc",
+            "sleeper",
+            "clockMillis",
+            "directory"
+          ],
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "locate",
+          "params": [
+            "venueName"
+          ],
+          "returnType": "Optional<GeoPoint>",
+          "exported": true,
+          "lineCount": 24
+        },
+        {
+          "name": "normalize",
+          "params": [
+            "value"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "candidateNames",
+          "params": [
+            "normalized"
+          ],
+          "returnType": "Set<String>",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "findInPlaces",
+          "params": [
+            "normalizedVenue"
+          ],
+          "returnType": "Optional<GeoPoint>",
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "findInDirectory",
+          "params": [
+            "normalizedVenue"
+          ],
+          "returnType": "Optional<GeoPoint>",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "textInBrackets",
+          "params": [
+            "venueName"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "askNominatim",
+          "params": [
+            "query"
+          ],
+          "returnType": "Optional<GeoPoint>",
+          "exported": false,
+          "lineCount": 29
+        },
+        {
+          "name": "waitForRateLimit",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "parseFirstInside",
+          "params": [
+            "body"
+          ],
+          "returnType": "Optional<GeoPoint>",
+          "exported": false,
+          "lineCount": 16
+        },
+        {
+          "name": "viewbox",
+          "params": [],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "parseBbox",
+          "params": [
+            "bbox"
+          ],
+          "returnType": "BoundingBox",
+          "exported": false,
+          "lineCount": 11
+        }
+      ],
+      "classes": [
+        {
+          "name": "VenueGeocoderImpl",
+          "methods": [
+            "VenueGeocoderImpl",
+            "VenueGeocoderImpl",
+            "VenueGeocoderImpl",
+            "locate",
+            "normalize",
+            "candidateNames",
+            "findInPlaces",
+            "findInDirectory",
+            "textInBrackets",
+            "askNominatim",
+            "waitForRateLimit",
+            "parseFirstInside",
+            "viewbox",
+            "parseBbox"
+          ],
+          "properties": [
+            "USER_AGENT",
+            "MIN_REQUEST_SPACING_MILLIS",
+            "TIMEOUT",
+            "SAME_PLACE_METERS",
+            "DEFAULT_CITY_WORD",
+            "log",
+            "JSON",
+            "properties",
+            "jdbc",
+            "restClient",
+            "sleeper",
+            "clockMillis",
+            "area",
+            "cityWords",
+            "directory",
+            "cache",
+            "lastRequestAt"
+          ],
+          "exported": true,
+          "lineCount": 262
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.geo.BoundingBox",
+          "specifiers": [
+            "BoundingBox"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.config.EventImportProperties",
+          "specifiers": [
+            "EventImportProperties"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.service.VenueGeocoder",
+          "specifiers": [
+            "VenueGeocoder"
+          ]
+        },
+        {
+          "source": "java.net.URI",
+          "specifiers": [
+            "URI"
+          ]
+        },
+        {
+          "source": "java.net.http.HttpClient",
+          "specifiers": [
+            "HttpClient"
+          ]
+        },
+        {
+          "source": "java.text.Normalizer",
+          "specifiers": [
+            "Normalizer"
+          ]
+        },
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.LinkedHashSet",
+          "specifiers": [
+            "LinkedHashSet"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Locale",
+          "specifiers": [
+            "Locale"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.Set",
+          "specifiers": [
+            "Set"
+          ]
+        },
+        {
+          "source": "java.util.concurrent.ConcurrentHashMap",
+          "specifiers": [
+            "ConcurrentHashMap"
+          ]
+        },
+        {
+          "source": "java.util.function.LongSupplier",
+          "specifiers": [
+            "LongSupplier"
+          ]
+        },
+        {
+          "source": "org.slf4j.Logger",
+          "specifiers": [
+            "Logger"
+          ]
+        },
+        {
+          "source": "org.slf4j.LoggerFactory",
+          "specifiers": [
+            "LoggerFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Autowired",
+          "specifiers": [
+            "Autowired"
+          ]
+        },
+        {
+          "source": "org.springframework.http.HttpHeaders",
+          "specifiers": [
+            "HttpHeaders"
+          ]
+        },
+        {
+          "source": "org.springframework.http.MediaType",
+          "specifiers": [
+            "MediaType"
+          ]
+        },
+        {
+          "source": "org.springframework.http.client.JdkClientHttpRequestFactory",
+          "specifiers": [
+            "JdkClientHttpRequestFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.jdbc.core.JdbcTemplate",
+          "specifiers": [
+            "JdbcTemplate"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Service",
+          "specifiers": [
+            "Service"
+          ]
+        },
+        {
+          "source": "org.springframework.web.client.RestClient",
+          "specifiers": [
+            "RestClient"
+          ]
+        },
+        {
+          "source": "org.springframework.web.util.UriComponentsBuilder",
+          "specifiers": [
+            "UriComponentsBuilder"
+          ]
+        },
+        {
+          "source": "tools.jackson.databind.DeserializationFeature",
+          "specifiers": [
+            "DeserializationFeature"
+          ]
+        },
+        {
+          "source": "tools.jackson.databind.json.JsonMapper",
+          "specifiers": [
+            "JsonMapper"
+          ]
+        }
+      ],
+      "exports": [
+        "USER_AGENT",
+        "VenueGeocoderImpl",
+        "locate",
+        "VenueGeocoderImpl"
+      ],
+      "totalLines": 302,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/events/controller/EventController.java": {
@@ -10776,6 +12531,16 @@
       "totalLines": 21,
       "hasStructuralAnalysis": false
     },
+    "backend/src/main/resources/eventimport/venues.txt": {
+      "filePath": "backend/src/main/resources/eventimport/venues.txt",
+      "contentHash": "b0b7c87c7967921f6076c7cc0e554a54de92d16ad5fe49858fdca7e6a5a0b532",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 16,
+      "hasStructuralAnalysis": false
+    },
     "backend/src/test/java/com/unihack8/backend/BackendApplicationTests.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/BackendApplicationTests.java",
       "contentHash": "b41d5964bea0ab5376ea0dbe6b1168065465d95cb0be180d156dcd5c266466f0",
@@ -11702,6 +13467,1210 @@
       ],
       "exports": [],
       "totalLines": 24,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/client/LiveTicketsClientImplTest.java",
+      "contentHash": "70289145adce82f5ebda72d8d5b7d5109b268b00f1b8fb2318f10e263ff6e1ba",
+      "functions": [
+        {
+          "name": "fixtureJson",
+          "params": [],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "parsesSavedResponse",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "parsesEmptyBodies",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "readsAllPages",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 30
+        },
+        {
+          "name": "serverErrorIsThrown",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 16
+        },
+        {
+          "name": "propertiesDefaults",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        }
+      ],
+      "classes": [
+        {
+          "name": "LiveTicketsClientImplTest",
+          "methods": [
+            "fixtureJson",
+            "parsesSavedResponse",
+            "parsesEmptyBodies",
+            "readsAllPages",
+            "serverErrorIsThrown",
+            "propertiesDefaults"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 87
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "org.assertj.core.api.Assertions.assertThatThrownBy",
+          "specifiers": [
+            "assertThatThrownBy"
+          ]
+        },
+        {
+          "source": "com.sun.net.httpserver.HttpServer",
+          "specifiers": [
+            "HttpServer"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.client.dto.LiveTicketsSearchResponse",
+          "specifiers": [
+            "LiveTicketsSearchResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.client.impl.LiveTicketsClientImpl",
+          "specifiers": [
+            "LiveTicketsClientImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.config.EventImportProperties",
+          "specifiers": [
+            "EventImportProperties"
+          ]
+        },
+        {
+          "source": "java.io.IOException",
+          "specifiers": [
+            "IOException"
+          ]
+        },
+        {
+          "source": "java.io.InputStream",
+          "specifiers": [
+            "InputStream"
+          ]
+        },
+        {
+          "source": "java.net.InetSocketAddress",
+          "specifiers": [
+            "InetSocketAddress"
+          ]
+        },
+        {
+          "source": "java.nio.charset.StandardCharsets",
+          "specifiers": [
+            "StandardCharsets"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.concurrent.CopyOnWriteArrayList",
+          "specifiers": [
+            "CopyOnWriteArrayList"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.web.client.HttpServerErrorException",
+          "specifiers": [
+            "HttpServerErrorException"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 107,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/eventimport/config/EventImportRunnerTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/config/EventImportRunnerTest.java",
+      "contentHash": "342ffebb319b97a2ce526a3ac027c3d55f3423c99cd0ec6e8bea82270b580b1e",
+      "functions": [
+        {
+          "name": "runsTheImport",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "failureDoesNotStopTheApp",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        }
+      ],
+      "classes": [
+        {
+          "name": "EventImportRunnerTest",
+          "methods": [
+            "runsTheImport",
+            "failureDoesNotStopTheApp"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 23
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThatCode",
+          "specifiers": [
+            "assertThatCode"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.mock",
+          "specifiers": [
+            "mock"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.verify",
+          "specifiers": [
+            "verify"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.when",
+          "specifiers": [
+            "when"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.service.EventImportService",
+          "specifiers": [
+            "EventImportService"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.DefaultApplicationArguments",
+          "specifiers": [
+            "DefaultApplicationArguments"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 36,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java",
+      "contentHash": "bb868d3f97b0235895abefce00764bd38de963322170faf5becba76affa0a07a",
+      "functions": [
+        {
+          "name": "event",
+          "params": [
+            "name",
+            "description",
+            "start",
+            "end"
+          ],
+          "returnType": "LiveTicketsEvent",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "keepsOnlyTheCity",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "mapsAllFields",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 19
+        },
+        {
+          "name": "convertsRomanianSummerTime",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "dropsEndBeforeStart",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "cityComparisonIgnoresDiacriticsAndCase",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "skipsIncompleteEvents",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "handlesMissingLinksAndOddPrices",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 17
+        },
+        {
+          "name": "turnsHtmlIntoPlainText",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "guessesCategory",
+          "params": [
+            "title",
+            "description",
+            "expected"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 15
+        }
+      ],
+      "classes": [
+        {
+          "name": "LiveTicketsEventMapperImplTest",
+          "methods": [
+            "event",
+            "keepsOnlyTheCity",
+            "mapsAllFields",
+            "convertsRomanianSummerTime",
+            "dropsEndBeforeStart",
+            "cityComparisonIgnoresDiacriticsAndCase",
+            "skipsIncompleteEvents",
+            "handlesMissingLinksAndOddPrices",
+            "turnsHtmlIntoPlainText",
+            "guessesCategory"
+          ],
+          "properties": [
+            "mapper"
+          ],
+          "exported": false,
+          "lineCount": 120
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.client.dto.LiveTicketsEvent",
+          "specifiers": [
+            "LiveTicketsEvent"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.config.EventImportProperties",
+          "specifiers": [
+            "EventImportProperties"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.domain.dto.ImportedEvent",
+          "specifiers": [
+            "ImportedEvent"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.mapper.impl.LiveTicketsEventMapperImpl",
+          "specifiers": [
+            "LiveTicketsEventMapperImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.support.LiveTicketsFixtures",
+          "specifiers": [
+            "LiveTicketsFixtures"
+          ]
+        },
+        {
+          "source": "java.math.BigDecimal",
+          "specifiers": [
+            "BigDecimal"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.params.ParameterizedTest",
+          "specifiers": [
+            "ParameterizedTest"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.params.provider.CsvSource",
+          "specifiers": [
+            "CsvSource"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 139,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java",
+      "contentHash": "4b11b954a59431d71e4b0ca388dd1df8960ed338603390cbf5b1a2f87ff4c68a",
+      "functions": [
+        {
+          "name": "setUp",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 27
+        },
+        {
+          "name": "count",
+          "params": [],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "firstRunInsertsCityEvents",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 25
+        },
+        {
+          "name": "secondRunUpdatesWithoutDuplicates",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 23
+        },
+        {
+          "name": "laterRunLocatesPreviouslyUnlocatedEvents",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "removesCancelledUpcomingEventsOnly",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 16
+        },
+        {
+          "name": "emptyAnswerRemovesNothing",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        }
+      ],
+      "classes": [
+        {
+          "name": "EventImportServiceImplTest",
+          "methods": [
+            "setUp",
+            "count",
+            "firstRunInsertsCityEvents",
+            "secondRunUpdatesWithoutDuplicates",
+            "laterRunLocatesPreviouslyUnlocatedEvents",
+            "removesCancelledUpcomingEventsOnly",
+            "emptyAnswerRemovesNothing"
+          ],
+          "properties": [
+            "NOW",
+            "FRATELLI",
+            "jdbc",
+            "client",
+            "geocoder",
+            "service"
+          ],
+          "exported": false,
+          "lineCount": 142
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "org.mockito.ArgumentMatchers.anyString",
+          "specifiers": [
+            "anyString"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.mock",
+          "specifiers": [
+            "mock"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.never",
+          "specifiers": [
+            "never"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.verify",
+          "specifiers": [
+            "verify"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.when",
+          "specifiers": [
+            "when"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.client.LiveTicketsClient",
+          "specifiers": [
+            "LiveTicketsClient"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.client.dto.LiveTicketsEvent",
+          "specifiers": [
+            "LiveTicketsEvent"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.config.EventImportProperties",
+          "specifiers": [
+            "EventImportProperties"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.support.LiveTicketsFixtures",
+          "specifiers": [
+            "LiveTicketsFixtures"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.mapper.impl.LiveTicketsEventMapperImpl",
+          "specifiers": [
+            "LiveTicketsEventMapperImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.repository.impl.ExternalEventRepositoryImpl",
+          "specifiers": [
+            "ExternalEventRepositoryImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.service.EventImportService",
+          "specifiers": [
+            "EventImportService"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.service.VenueGeocoder",
+          "specifiers": [
+            "VenueGeocoder"
+          ]
+        },
+        {
+          "source": "java.math.BigDecimal",
+          "specifiers": [
+            "BigDecimal"
+          ]
+        },
+        {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.time.ZoneOffset",
+          "specifiers": [
+            "ZoneOffset"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.BeforeEach",
+          "specifiers": [
+            "BeforeEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.jdbc.core.JdbcTemplate",
+          "specifiers": [
+            "JdbcTemplate"
+          ]
+        },
+        {
+          "source": "org.springframework.jdbc.datasource.DataSourceTransactionManager",
+          "specifiers": [
+            "DataSourceTransactionManager"
+          ]
+        },
+        {
+          "source": "org.springframework.jdbc.datasource.DriverManagerDataSource",
+          "specifiers": [
+            "DriverManagerDataSource"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 180,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/VenueGeocoderImplTest.java",
+      "contentHash": "fbc2f5f6e8a08251e5984404c6f7351562f8df2dbe124bab1097be6cda4bee27",
+      "functions": [
+        {
+          "name": "startServer",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "stopServer",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "matchesPlaceIgnoringCaseAndDiacritics",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "matchesPlaceIgnoringPunctuation",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "matchesPlaceAfterDroppingCityWord",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "substringDoesNotMatch",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "ambiguousPlaceNameIsIgnored",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "asksNominatimWithExpectedParameters",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 17
+        },
+        {
+          "name": "encodesSpecialCharacters",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "rejectsResultOutsideArea",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "emptyResultGivesEmpty",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "serverErrorGivesEmpty",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "unreachableServerGivesEmpty",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "cityOnlyOrBlankVenueIsNotLookedUp",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "cachesHitsAndMisses",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "spacesRequestsOneSecondApart",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "normalizesNames",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "parsesBboxSetting",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "curatedCoordinatesAreUsedDirectly",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "curatedAddressIsGeocoded",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "placesTableWinsOverCuratedFile",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "triesTextInBrackets",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "textInBracketsParsing",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "bundledDirectoryLoads",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "geocoderWithDirectory",
+          "params": [
+            "venuesTxt"
+          ],
+          "returnType": "VenueGeocoderImpl",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "geocoder",
+          "params": [],
+          "returnType": "VenueGeocoderImpl",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "geocoder",
+          "params": [
+            "nominatimUrl"
+          ],
+          "returnType": "VenueGeocoderImpl",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "place",
+          "params": [
+            "name",
+            "lat",
+            "lon"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "decodeQuery",
+          "params": [
+            "rawQuery"
+          ],
+          "returnType": "Map<String, String>",
+          "exported": false,
+          "lineCount": 9
+        }
+      ],
+      "classes": [
+        {
+          "name": "VenueGeocoderImplTest",
+          "methods": [
+            "startServer",
+            "stopServer",
+            "matchesPlaceIgnoringCaseAndDiacritics",
+            "matchesPlaceIgnoringPunctuation",
+            "matchesPlaceAfterDroppingCityWord",
+            "substringDoesNotMatch",
+            "ambiguousPlaceNameIsIgnored",
+            "asksNominatimWithExpectedParameters",
+            "encodesSpecialCharacters",
+            "rejectsResultOutsideArea",
+            "emptyResultGivesEmpty",
+            "serverErrorGivesEmpty",
+            "unreachableServerGivesEmpty",
+            "cityOnlyOrBlankVenueIsNotLookedUp",
+            "cachesHitsAndMisses",
+            "spacesRequestsOneSecondApart",
+            "normalizesNames",
+            "parsesBboxSetting",
+            "curatedCoordinatesAreUsedDirectly",
+            "curatedAddressIsGeocoded",
+            "placesTableWinsOverCuratedFile",
+            "triesTextInBrackets",
+            "textInBracketsParsing",
+            "bundledDirectoryLoads",
+            "geocoderWithDirectory",
+            "geocoder",
+            "geocoder",
+            "place",
+            "decodeQuery"
+          ],
+          "properties": [
+            "NOMINATIM_HIT",
+            "places",
+            "dataSource",
+            "server",
+            "hits",
+            "queries",
+            "userAgent",
+            "responseBody",
+            "responseStatus",
+            "sleeps",
+            "clock"
+          ],
+          "exported": false,
+          "lineCount": 342
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "com.sun.net.httpserver.HttpServer",
+          "specifiers": [
+            "HttpServer"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.config.EventImportProperties",
+          "specifiers": [
+            "EventImportProperties"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.PlaceCategory",
+          "specifiers": [
+            "PlaceCategory"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.entity.Place",
+          "specifiers": [
+            "Place"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.repository.PlaceRepository",
+          "specifiers": [
+            "PlaceRepository"
+          ]
+        },
+        {
+          "source": "java.net.InetSocketAddress",
+          "specifiers": [
+            "InetSocketAddress"
+          ]
+        },
+        {
+          "source": "java.net.URLDecoder",
+          "specifiers": [
+            "URLDecoder"
+          ]
+        },
+        {
+          "source": "java.nio.charset.StandardCharsets",
+          "specifiers": [
+            "StandardCharsets"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.LinkedHashMap",
+          "specifiers": [
+            "LinkedHashMap"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.concurrent.CopyOnWriteArrayList",
+          "specifiers": [
+            "CopyOnWriteArrayList"
+          ]
+        },
+        {
+          "source": "java.util.concurrent.atomic.AtomicInteger",
+          "specifiers": [
+            "AtomicInteger"
+          ]
+        },
+        {
+          "source": "java.util.concurrent.atomic.AtomicLong",
+          "specifiers": [
+            "AtomicLong"
+          ]
+        },
+        {
+          "source": "java.util.concurrent.atomic.AtomicReference",
+          "specifiers": [
+            "AtomicReference"
+          ]
+        },
+        {
+          "source": "javax.sql.DataSource",
+          "specifiers": [
+            "DataSource"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.AfterEach",
+          "specifiers": [
+            "AfterEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.BeforeEach",
+          "specifiers": [
+            "BeforeEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Autowired",
+          "specifiers": [
+            "Autowired"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest",
+          "specifiers": [
+            "DataJpaTest"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase",
+          "specifiers": [
+            "AutoConfigureTestDatabase"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase.Replace",
+          "specifiers": [
+            "Replace"
+          ]
+        },
+        {
+          "source": "org.springframework.jdbc.core.JdbcTemplate",
+          "specifiers": [
+            "JdbcTemplate"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 379,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/eventimport/support/LiveTicketsFixtures.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/support/LiveTicketsFixtures.java",
+      "contentHash": "75109e2ec3ec74561e5e967b0a130231fcc0314750a32f284a261b092b37a86f",
+      "functions": [
+        {
+          "name": "LiveTicketsFixtures",
+          "params": [],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "sample",
+          "params": [],
+          "returnType": "List<LiveTicketsEvent>",
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "LiveTicketsFixtures",
+          "methods": [
+            "LiveTicketsFixtures",
+            "sample"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 15
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.eventimport.client.dto.LiveTicketsEvent",
+          "specifiers": [
+            "LiveTicketsEvent"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.eventimport.client.impl.LiveTicketsClientImpl",
+          "specifiers": [
+            "LiveTicketsClientImpl"
+          ]
+        },
+        {
+          "source": "java.io.IOException",
+          "specifiers": [
+            "IOException"
+          ]
+        },
+        {
+          "source": "java.io.InputStream",
+          "specifiers": [
+            "InputStream"
+          ]
+        },
+        {
+          "source": "java.io.UncheckedIOException",
+          "specifiers": [
+            "UncheckedIOException"
+          ]
+        },
+        {
+          "source": "java.nio.charset.StandardCharsets",
+          "specifiers": [
+            "StandardCharsets"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "sample",
+        "LiveTicketsFixtures"
+      ],
+      "totalLines": 30,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/events/controller/EventControllerTest.java": {
@@ -17234,6 +20203,16 @@
       "imports": [],
       "exports": [],
       "totalLines": 17,
+      "hasStructuralAnalysis": false
+    },
+    "backend/src/test/resources/livetickets/event-search-sample.json": {
+      "filePath": "backend/src/test/resources/livetickets/event-search-sample.json",
+      "contentHash": "445ec5284c89844572cfc4cfd44e71b079bccb0e36275f008aa2bdc09bbf91d0",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 272,
       "hasStructuralAnalysis": false
     },
     "backend/src/test/resources/otp/plan-transit.json": {
