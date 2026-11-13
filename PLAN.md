@@ -204,11 +204,11 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 **Needs:** nothing to start; Docker on one machine.
 
-- [ ] **10.1 Get the data:** a Timișoara street extract from OpenStreetMap (`.osm.pbf`, cut from the Romania extract) and the STPT GTFS zip. The live site is generated from a file named `smtt-timisoara-ro.zip`; **finding a download for it is the first thing to do in this task** (see open question 2).
-- [ ] **10.2 Run OTP 2** with `infra/otp/docker-compose.yml`: build the graph once, save it, serve it. Document the two commands. OTP is its own server, separate from the Spring API: only the Spring backend calls it (address set in `application-local.properties`), the mobile app never does. Both use port 8080 by default, so run OTP on 8081.
-- [ ] **10.3** `GET /routes/plan?from=lat,lon&to=lat,lon&mode=WALK|TRANSIT` — the backend calls OTP's GraphQL API and returns a small shape: total minutes, and legs (mode, line, from/to stop, start/end time, polyline).
-- [ ] **10.4 Walking-only fallback:** if OTP is down or the GTFS file was not found, still answer `mode=WALK` (OTP with streets only, or straight-line distance × walking speed) so the demo never shows an error.
-- [ ] **10.5** Tests: mapping of a saved OTP response, and the fallback path.
+- [x] **10.1 Get the data:** a Timișoara street extract from OpenStreetMap (`.osm.pbf`, cut from the Romania extract) and the STPT GTFS zip. The live site is generated from a file named `smtt-timisoara-ro.zip`; **finding a download for it is the first thing to do in this task** (see open question 2).
+- [x] **10.2 Run OTP 2** with `infra/otp/docker-compose.yml`: build the graph once, save it, serve it. Document the two commands. OTP is its own server, separate from the Spring API: only the Spring backend calls it (address set in `application-local.properties`), the mobile app never does. Both use port 8080 by default, so run OTP on 8081.
+- [x] **10.3** `GET /routes/plan?from=lat,lon&to=lat,lon&mode=WALK|TRANSIT` — the backend calls OTP's GraphQL API and returns a small shape: total minutes, and legs (mode, line, from/to stop, start/end time, polyline).
+- [x] **10.4 Walking-only fallback:** if OTP is down or the GTFS file was not found, still answer `mode=WALK` (OTP with streets only, or straight-line distance × walking speed) so the demo never shows an error.
+- [x] **10.5** Tests: mapping of a saved OTP response, and the fallback path.
 
 ---
 
@@ -314,5 +314,5 @@ Never cut: sign-in, events + join, QR check-in with reliability, map with filter
 ## Open questions (need an answer from the team)
 
 1. **Prices, menus and reviews come from the AI's web lookup (11.3), not from stored data.** Answers depend on what Google Search finds at that moment and take a few seconds longer. Good enough for the demo?
-2. **STPT GTFS file.** Is there an official download or contact for `smtt-timisoara-ro.zip`? Without it OTP can route walking only.
+2. ~~**STPT GTFS file.**~~ Answered 2026-11-13: SMTT publishes it at `https://smtt.ro/transit/gtfs/maps/smtt-timisoara-ro.zip` (Mobility Database `mdb-2868`). Transit routing works; see `DOCS.md` → Routing.
 3. **Permission.** The STPT and LiveTickets endpoints are the ones their own websites use; they are not documented public APIs. For a hackathon demo with caching this is low-volume, but ask both for permission if the app goes beyond the demo.4. **Reliability numbers** in 1.7 — confirm or change.

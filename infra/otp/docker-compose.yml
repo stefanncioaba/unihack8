@@ -1,0 +1,30 @@
+# OpenTripPlanner 2 for Timișoara (PLAN task 10). See README.md in this folder.
+#
+#   1. Build the graph once (after get-data.sh):  docker compose --profile build run --rm otp-build
+#   2. Serve it on port 8081:                     docker compose up -d otp
+#
+# Both services read and write this folder (mounted at /var/opentripplanner):
+# timisoara.osm.pbf + stpt-gtfs.zip in, graph.obj out.
+
+services:
+  # One-off: reads the street map and GTFS timetable, writes graph.obj.
+  otp-build:
+    image: opentripplanner/opentripplanner:2.7.0
+    profiles: ["build"]
+    volumes:
+      - ./:/var/opentripplanner
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx3g"
+    command: ["--build", "--save"]
+
+  # Serves the saved graph. Port 8081 on the laptop, because the Spring API uses 8080.
+  otp:
+    image: opentripplanner/opentripplanner:2.7.0
+    volumes:
+      - ./:/var/opentripplanner
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx2g"
+    command: ["--load", "--serve"]
+    ports:
+      - "8081:8080"
+    restart: unless-stopped
