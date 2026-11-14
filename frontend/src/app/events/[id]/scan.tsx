@@ -17,8 +17,8 @@ import { TextField } from '@/ui/TextField';
 import { colors } from '@/ui/theme';
 
 const OUTCOME_STYLE = {
-  success: { icon: 'checkmark-circle', color: colors.teal },
-  warning: { icon: 'alert-circle', color: colors.orangeSoft },
+  success: { icon: 'checkmark-circle', color: colors.signal },
+  warning: { icon: 'alert-circle', color: colors.gold },
   error: { icon: 'close-circle', color: colors.danger },
 } as const;
 
@@ -109,7 +109,7 @@ export default function ScanScreen() {
 
 const styles = StyleSheet.create({
   cameraBox: { aspectRatio: 1, borderRadius: 18, overflow: 'hidden', backgroundColor: '#000', marginBottom: 16, alignItems: 'center', justifyContent: 'center' },
-  frame: { width: '62%', aspectRatio: 1, borderRadius: 18, borderWidth: 2, borderColor: colors.teal },
+  frame: { width: '62%', aspectRatio: 1, borderRadius: 18, borderWidth: 2, borderColor: colors.signal },
   result: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   manual: { gap: 10, marginTop: 4 },
 });

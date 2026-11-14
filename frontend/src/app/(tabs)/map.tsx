@@ -160,7 +160,7 @@ function MapBody() {
         customMapStyle={darkMapStyle}
         testID="main-map"
       >
-        {focus && !params.placeId && !params.eventId && <Marker coordinate={{ latitude: focus.lat, longitude: focus.lon }} title={params.title} pinColor={colors.violet} testID="focus-marker" />}
+        {focus && !params.placeId && !params.eventId && <Marker coordinate={{ latitude: focus.lat, longitude: focus.lon }} title={params.title} pinColor={colors.oxford} testID="focus-marker" />}
         {zoomedIn && places.data && (
           <PlaceMarkers
             places={places.data.items}
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
     height: 26,
     borderRadius: 13,
     justifyContent: 'center',
-    backgroundColor: 'rgba(25,26,44,0.92)',
+    backgroundColor: 'rgba(0,29,61,0.92)',
   },
   topRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
   pill: {
@@ -265,7 +265,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     borderRadius: 16,
     justifyContent: 'center',
-    backgroundColor: 'rgba(25,26,44,0.92)',
+    backgroundColor: 'rgba(0,29,61,0.92)',
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.borderStrong,
   },
@@ -275,7 +275,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(25,26,44,0.92)',
+    backgroundColor: 'rgba(0,29,61,0.92)',
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.borderStrong,
   },

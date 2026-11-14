@@ -26,7 +26,7 @@ type Props = {
 function foreground(variant: Variant): string {
   if (variant === 'primary') return colors.onAccent;
   if (variant === 'danger') return colors.danger;
-  if (variant === 'ghost') return colors.orangeSoft;
+  if (variant === 'ghost') return colors.gold;
   return colors.text;
 }
 
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   regular: { minHeight: 48, paddingHorizontal: 18 },
   small: { minHeight: 32, paddingHorizontal: 12, borderRadius: radius.chip },
   row: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  primary: { backgroundColor: colors.orange },
+  primary: { backgroundColor: colors.accent },
   secondary: { backgroundColor: colors.surface, borderWidth: StyleSheet.hairlineWidth, borderColor: colors.borderStrong },
-  danger: { backgroundColor: 'rgba(255,90,106,0.10)', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(255,90,106,0.45)' },
+  danger: { backgroundColor: 'rgba(255,107,107,0.10)', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(255,107,107,0.45)' },
 });

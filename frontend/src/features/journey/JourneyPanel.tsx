@@ -24,7 +24,7 @@ export function JourneyLayer({ target, journey }: { target: JourneyTarget; journ
         testID="journey-destination"
         coordinate={{ latitude: target.to.lat, longitude: target.to.lon }}
         title={target.name ?? undefined}
-        pinColor={colors.orange}
+        pinColor={colors.accent}
       />
       {!journey.arrived &&
         journey.plan.data?.legs.map((leg, i) => {
@@ -35,7 +35,7 @@ export function JourneyLayer({ target, journey }: { target: JourneyTarget; journ
               key={i}
               testID={`journey-line-${i}`}
               coordinates={legPoints(leg).map((p) => ({ latitude: p.lat, longitude: p.lon }))}
-              strokeColor={done ? colors.textMuted : walk ? colors.teal : colors.orangeSoft}
+              strokeColor={done ? colors.textMuted : walk ? colors.signal : colors.gold}
               strokeWidth={walk ? 5 : 7}
               lineDashPattern={walk ? [8, 8] : undefined}
             />
@@ -60,7 +60,7 @@ function JourneyBody({ target, journey }: { target: JourneyTarget; journey: Jour
   if (journey.arrived) {
     return (
       <View style={styles.row} testID="journey-arrived">
-        <View style={[styles.badge, { backgroundColor: colors.teal }]}>
+        <View style={[styles.badge, { backgroundColor: colors.signal }]}>
           <Icon name="flag-outline" size={18} color={colors.onAccent} />
         </View>
         <View style={{ flex: 1 }}>
@@ -82,7 +82,7 @@ function JourneyBody({ target, journey }: { target: JourneyTarget; journey: Jour
     <View style={styles.body}>
       {leg ? (
         <View style={styles.row} testID="journey-step">
-          <View style={[styles.badge, leg.mode !== 'WALK' && { backgroundColor: colors.orangeSoft }]}>
+          <View style={[styles.badge, leg.mode !== 'WALK' && { backgroundColor: colors.gold }]}>
             <Icon name={legIcon(leg.mode)} size={18} color={leg.mode === 'WALK' ? colors.text : colors.onAccent} />
           </View>
           <View style={{ flex: 1 }}>
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     gap: 10,
     padding: 14,
     borderRadius: radius.card + 2,
-    backgroundColor: 'rgba(25,26,44,0.97)',
+    backgroundColor: 'rgba(0,29,61,0.97)',
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.borderStrong,
   },

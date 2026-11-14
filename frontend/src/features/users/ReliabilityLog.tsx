@@ -37,7 +37,7 @@ export function ReliabilityLog({ userId }: { userId: string }) {
               {entry.eventTitle ?? 'Deleted event'} · {formatDate(entry.createdAt)}
             </Text>
           </View>
-          <Text variant="heading" style={{ color: entry.pointsChange > 0 ? colors.teal : colors.danger }} accessibilityLabel={`${formatPoints(entry.pointsChange)} points`}>
+          <Text variant="heading" style={{ color: entry.pointsChange > 0 ? colors.signal : colors.danger }} accessibilityLabel={`${formatPoints(entry.pointsChange)} points`}>
             {formatPoints(entry.pointsChange)}
           </Text>
         </View>

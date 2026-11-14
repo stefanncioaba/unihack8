@@ -12,7 +12,7 @@ describe('HomeScreen', () => {
     expect(await screen.findByText(/Last tram 2 from/)).toBeTruthy();
     expect(await screen.findByText('Board games night')).toBeTruthy();
     expect(screen.getByText('Upcoming events')).toBeTruthy();
-    expect(screen.getByText('LIVE')).toBeTruthy();
+    expect(screen.getByText('Live')).toBeTruthy();
   });
 
   it('shows date, place and free spots on a card', async () => {
@@ -22,6 +22,14 @@ describe('HomeScreen', () => {
     expect(card.getByText(/· 19:00$/)).toBeTruthy();
     expect(card.getByText('Scârț Loc Lejer')).toBeTruthy();
     expect(card.getByText('4 spots left')).toBeTruthy();
+  });
+
+  it('shows the last departure as a departure board: line plate and time', async () => {
+    renderScreen(<HomeScreen />);
+    const board = within(await screen.findByTestId('city-info-strip'));
+    expect(await board.findByLabelText('Line 2')).toBeTruthy();
+    expect(board.getByText('23:41')).toBeTruthy(); // 21:41 UTC in Bucharest winter time
+    expect(board.getByText('Public transport near you')).toBeTruthy();
   });
 
   it('expands the transit alerts', async () => {

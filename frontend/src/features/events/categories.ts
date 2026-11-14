@@ -5,15 +5,15 @@ import type { IconName } from '@/ui/Icon';
 export type CategoryMeta = { label: string; icon: IconName; colors: [string, string] };
 
 export const CATEGORY_META: Record<EventCategory, CategoryMeta> = {
-  PARTY: { label: 'Party', icon: 'sparkles-outline', colors: ['#4A1D7A', '#111029'] },
-  CONCERT: { label: 'Concert', icon: 'musical-notes-outline', colors: ['#0B5560', '#3A1766'] },
-  THEATRE: { label: 'Theatre', icon: 'film-outline', colors: ['#7A3418', '#3A1766'] },
-  SPORT: { label: 'Sport', icon: 'football-outline', colors: ['#0B5560', '#111029'] },
-  GAMES: { label: 'Games', icon: 'game-controller-outline', colors: ['#3A1766', '#0B5560'] },
-  FOOD: { label: 'Food', icon: 'restaurant-outline', colors: ['#7A3418', '#111029'] },
-  ART: { label: 'Art', icon: 'color-palette-outline', colors: ['#4A1D7A', '#7A3418'] },
-  MEETUP: { label: 'Meetup', icon: 'people-outline', colors: ['#0B5560', '#1B2A4A'] },
-  OTHER: { label: 'Other', icon: 'calendar-outline', colors: ['#252536', '#111029'] },
+  PARTY: { label: 'Party', icon: 'sparkles-outline', colors: ['#003566', '#000814'] },
+  CONCERT: { label: 'Concert', icon: 'musical-notes-outline', colors: ['#0B467F', '#001D3D'] },
+  THEATRE: { label: 'Theatre', icon: 'film-outline', colors: ['#5C4400', '#001D3D'] },
+  SPORT: { label: 'Sport', icon: 'football-outline', colors: ['#003566', '#001D3D'] },
+  GAMES: { label: 'Games', icon: 'game-controller-outline', colors: ['#00284D', '#0B467F'] },
+  FOOD: { label: 'Food', icon: 'restaurant-outline', colors: ['#6B5200', '#000814'] },
+  ART: { label: 'Art', icon: 'color-palette-outline', colors: ['#0B467F', '#5C4400'] },
+  MEETUP: { label: 'Meetup', icon: 'people-outline', colors: ['#003566', '#00284D'] },
+  OTHER: { label: 'Other', icon: 'calendar-outline', colors: ['#00284D', '#000814'] },
 };
 
 /** Meta for a category, tolerating unknown values from newer backends. */

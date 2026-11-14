@@ -12,7 +12,7 @@ export function ClusterMarker({ id, lat, lon, count, color, onPress }: Props) {
   return (
     <Marker testID={`cluster-${id}`} coordinate={{ latitude: lat, longitude: lon }} onPress={onPress} tracksViewChanges={false} anchor={{ x: 0.5, y: 0.5 }}>
       <View style={[styles.badge, { backgroundColor: color }]} accessibilityLabel={`${count} results, tap to zoom in`}>
-        <Text variant="cardTitle" style={{ color: color === colors.orangeSoft ? colors.onAccent : '#fff' }}>
+        <Text variant="cardTitle" style={{ color: color === colors.gold ? colors.onAccent : '#fff' }}>
           {count}
         </Text>
       </View>

@@ -20,8 +20,8 @@ export const TextField = forwardRef<TextInput, FieldProps>(function TextField({ 
       <TextInput
         ref={ref}
         accessibilityLabel={label}
-        placeholderTextColor="#6F6E80"
-        selectionColor={colors.orange}
+        placeholderTextColor="#5D7393"
+        selectionColor={colors.accent}
         {...rest}
         style={[styles.input, error ? { borderColor: colors.danger } : null, rest.multiline && styles.multiline, style]}
       />
@@ -48,8 +48,8 @@ export const SearchField = forwardRef<TextInput, SearchProps>(function SearchFie
       <TextInput
         ref={ref}
         accessibilityLabel={rest.placeholder ?? 'Search'}
-        placeholderTextColor="#6F6E80"
-        selectionColor={colors.orange}
+        placeholderTextColor="#5D7393"
+        selectionColor={colors.accent}
         editable={!onPressField}
         pointerEvents={onPressField ? 'none' : 'auto'}
         returnKeyType="search"

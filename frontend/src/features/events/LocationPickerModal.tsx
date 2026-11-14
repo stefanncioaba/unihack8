@@ -46,7 +46,7 @@ export function LocationPickerModal({ visible, center, value, onConfirm, onClose
           customMapStyle={darkMapStyle}
           testID="picker-map"
         >
-          {point && <Marker coordinate={{ latitude: point.lat, longitude: point.lon }} pinColor={colors.violet} />}
+          {point && <Marker coordinate={{ latitude: point.lat, longitude: point.lon }} pinColor={colors.oxford} />}
         </MapView>
         <SafeAreaView style={styles.overlay} edges={['top', 'bottom']} pointerEvents="box-none">
           <View style={styles.top}>
@@ -74,9 +74,9 @@ const styles = StyleSheet.create({
     borderRadius: 19,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(25,26,44,0.92)',
+    backgroundColor: 'rgba(0,29,61,0.92)',
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.borderStrong,
   },
-  hint: { paddingHorizontal: 12, height: 32, borderRadius: 16, justifyContent: 'center', backgroundColor: 'rgba(25,26,44,0.92)' },
+  hint: { paddingHorizontal: 12, height: 32, borderRadius: 16, justifyContent: 'center', backgroundColor: 'rgba(0,29,61,0.92)' },
 });

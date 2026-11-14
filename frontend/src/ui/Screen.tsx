@@ -21,7 +21,7 @@ type Props = {
 };
 
 /** Wrap every screen in this. */
-export function Screen({ children, scroll, glow = 'teal', edges = ['top'], padded = true, refreshControl, contentStyle, testID }: Props) {
+export function Screen({ children, scroll, glow = 'night', edges = ['top'], padded = true, refreshControl, contentStyle, testID }: Props) {
   const inner = [padded && { paddingHorizontal: PAGE_MARGIN }, contentStyle];
   return (
     <View style={styles.root} testID={testID}>
@@ -47,6 +47,6 @@ export function Screen({ children, scroll, glow = 'teal', edges = ['top'], padde
 }
 
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: '#090A18' },
+  root: { flex: 1, backgroundColor: '#000814' },
   safe: { flex: 1 },
 });

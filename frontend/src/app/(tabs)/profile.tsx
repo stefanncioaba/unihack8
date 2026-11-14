@@ -6,7 +6,7 @@ import { Pressable, StyleSheet, View } from 'react-native';
 
 import { useAuth } from '@/features/auth/AuthProvider';
 import { MyEvents } from '@/features/users/MyEvents';
-import { ReliabilityGauge } from '@/features/users/ReliabilityGauge';
+import { ReliabilityLine } from '@/features/users/ReliabilityLine';
 import { ReliabilityLog } from '@/features/users/ReliabilityLog';
 import { UsernameEditor } from '@/features/users/UsernameEditor';
 import { useMe } from '@/hooks/queries';
@@ -65,13 +65,11 @@ export default function ProfileScreen() {
                 </Text>
               </View>
               <Pressable accessibilityRole="button" accessibilityLabel="Change username" onPress={() => setEditing(true)} hitSlop={10} style={styles.edit}>
-                <Icon name="create-outline" size={18} color={colors.orangeSoft} />
+                <Icon name="create-outline" size={18} color={colors.gold} />
               </Pressable>
             </View>
           )}
-          <Card>
-            <ReliabilityGauge score={me.data.reliabilityScore} />
-          </Card>
+          <ReliabilityLine score={me.data.reliabilityScore} />
 
           <Text variant="heading" accessibilityRole="header">
             My events
@@ -86,13 +84,15 @@ export default function ProfileScreen() {
       )}
 
       <View style={styles.actions}>
-        <Button title="Find people" variant="secondary" icon="people-outline" iconLeft onPress={() => router.push('/users/search')} />
         {error ? (
           <Text tone="danger" accessibilityRole="alert">
             {error}
           </Text>
         ) : null}
-        <Button title="Sign out" variant="danger" icon="log-out-outline" iconLeft loading={signingOut} onPress={handleSignOut} />
+        <View style={styles.actionRow}>
+          <Button title="Find people" variant="secondary" icon="people-outline" iconLeft onPress={() => router.push('/users/search')} style={{ flex: 1 }} />
+          <Button title="Sign out" variant="danger" icon="log-out-outline" iconLeft loading={signingOut} onPress={handleSignOut} style={{ flex: 1 }} />
+        </View>
       </View>
     </Screen>
   );
@@ -103,4 +103,5 @@ const styles = StyleSheet.create({
   identity: { flexDirection: 'row', alignItems: 'center', gap: 14 },
   edit: { width: 36, height: 36, borderRadius: 18, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.surface },
   actions: { gap: 12, marginTop: 28 },
+  actionRow: { flexDirection: 'row', gap: 10 },
 });

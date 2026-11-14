@@ -12,7 +12,7 @@ import { colors } from './theme';
 export function LoadingState({ label }: { label?: string }) {
   return (
     <View style={styles.center} accessibilityRole="progressbar" accessibilityLabel={label ?? 'Loading'} testID="loading-state">
-      <ActivityIndicator color={colors.teal} />
+      <ActivityIndicator color={colors.signal} />
       {label ? (
         <Text variant="caption" tone="muted">
           {label}
@@ -29,7 +29,7 @@ export function EmptyState({ icon = 'sparkles-outline', title, message, actionLa
   return (
     <View style={styles.center} testID="empty-state">
       <View style={styles.badge}>
-        <Icon name={icon} size={22} color={colors.teal} />
+        <Icon name={icon} size={22} color={colors.signal} />
       </View>
       <Text variant="heading" style={styles.centerText}>
         {title}
@@ -48,7 +48,7 @@ export function EmptyState({ icon = 'sparkles-outline', title, message, actionLa
 export function ErrorState({ error, onRetry }: { error: unknown; onRetry?: () => void }) {
   return (
     <View style={styles.center} testID="error-state">
-      <View style={[styles.badge, { backgroundColor: 'rgba(255,90,106,0.12)' }]}>
+      <View style={[styles.badge, { backgroundColor: 'rgba(255,107,107,0.12)' }]}>
         <Icon name="cloud-offline-outline" size={22} color={colors.danger} />
       </View>
       <Text variant="heading" style={styles.centerText}>
@@ -71,6 +71,6 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(23,215,211,0.10)',
+    backgroundColor: 'rgba(142,197,255,0.10)',
   },
 });

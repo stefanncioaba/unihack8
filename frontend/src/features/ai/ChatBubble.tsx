@@ -22,7 +22,7 @@ function Sources({ sources }: { sources: ChatSource[] }) {
       </Text>
       {sources.map((s) => (
         <Pressable key={s.url} accessibilityRole="link" accessibilityLabel={`Open source ${s.title}`} onPress={() => Linking.openURL(s.url)} style={styles.source}>
-          <Icon name="link-outline" size={12} color={colors.orangeSoft} />
+          <Icon name="link-outline" size={12} color={colors.gold} />
           <Text variant="caption" tone="accent" numberOfLines={1} style={{ flexShrink: 1 }}>
             {s.title}
           </Text>
@@ -51,7 +51,7 @@ export function ThinkingBubble() {
   return (
     <View style={[styles.row, styles.rowTheirs]} accessibilityLabel="The assistant is thinking" testID="chat-thinking">
       <View style={[styles.bubble, styles.theirs, styles.thinking]}>
-        <ActivityIndicator size="small" color={colors.teal} />
+        <ActivityIndicator size="small" color={colors.signal} />
         <Text tone="muted">Thinking…</Text>
       </View>
     </View>
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   rowMine: { alignItems: 'flex-end' },
   rowTheirs: { alignItems: 'flex-start', gap: 8 },
   bubble: { maxWidth: '86%', paddingHorizontal: 14, paddingVertical: 10, borderRadius: 16, gap: 8 },
-  mine: { backgroundColor: colors.tealBubble, borderBottomRightRadius: 4 },
+  mine: { backgroundColor: colors.bubble, borderBottomRightRadius: 4 },
   theirs: {
     backgroundColor: colors.surface,
     borderBottomLeftRadius: 4,

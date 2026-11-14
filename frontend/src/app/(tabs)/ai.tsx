@@ -23,7 +23,7 @@ export default function AiScreen() {
   const empty = chat.messages.length === 0;
 
   return (
-    <Screen glow="warm">
+    <Screen glow="lamp">
       {empty ? (
         <View style={styles.hero}>
           <View style={styles.motif} testID="chat-motif">

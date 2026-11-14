@@ -46,8 +46,8 @@ describe('PublicProfileScreen', () => {
   it('explains how the score works', async () => {
     setParams({ id: IDS.stella });
     renderScreen(<PublicProfileScreen />);
-    fireEvent.press(await screen.findByRole('button', { name: 'How the score works' }));
-    expect(screen.getByTestId('score-explainer')).toBeTruthy();
+    expect(await screen.findByTestId('score-explainer')).toBeTruthy();
+    expect(screen.getByTestId('reliability-line')).toBeTruthy();
   });
 
   it('shows an empty state for someone who attended nothing', async () => {

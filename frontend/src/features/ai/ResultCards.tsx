@@ -92,5 +92,5 @@ const styles = StyleSheet.create({
   list: { alignSelf: 'stretch', gap: 8 },
   card: { gap: 10, padding: 12 },
   head: { flexDirection: 'row', alignItems: 'center', gap: 10 },
-  badge: { width: 30, height: 30, borderRadius: 15, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.violet },
+  badge: { width: 30, height: 30, borderRadius: 15, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.oxford },
 });

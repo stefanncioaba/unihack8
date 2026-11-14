@@ -1,9 +1,9 @@
-// Small pure helpers: validation, geo, formatting, new-event form, check-in outcomes, gauge.
+// Small pure helpers: validation, geo, formatting, new-event form, check-in outcomes, reliability line.
 import { ApiError, friendlyError } from '@/api/errors';
 import { outcomeFromError, outcomeFromSuccess } from '@/features/events/checkInResult';
 import { availabilityLabel, isFull, priceLabel, spotsLabel } from '@/features/events/format';
 import { defaultStart, emptyForm, validateEventForm } from '@/features/events/newEventForm';
-import { gaugeFraction } from '@/features/users/ReliabilityGauge';
+import { LINE_MAX, linePosition, lineStops, nextStopLabel } from '@/features/users/ReliabilityLine';
 import { DEFAULT_POSITION, isValidCoordinate, regionFor, toNearParam } from '@/lib/geo';
 import { validateEmail, validatePassword, validateUsername } from '@/lib/validation';
 import { reliabilityColor } from '@/ui/ReliabilityBadge';
@@ -141,16 +141,39 @@ describe('friendlyError', () => {
 });
 
 describe('reliability visuals', () => {
-  it('fills the gauge proportionally and clamps it', () => {
-    expect(gaugeFraction(0)).toBe(0);
-    expect(gaugeFraction(75)).toBe(0.5);
-    expect(gaugeFraction(500)).toBe(1);
-    expect(gaugeFraction(-5)).toBe(0);
+  it('places the score along a 0–200 line and pins higher scores to the end', () => {
+    expect(LINE_MAX).toBe(200);
+    expect(linePosition(0)).toBe(0);
+    expect(linePosition(100)).toBe(50);
+    expect(linePosition(150)).toBe(75);
+    expect(linePosition(500)).toBe(100);
+    expect(linePosition(-5)).toBe(0);
+  });
+
+  it('draws a stop every 50 points, marks passed and next stops, and hides the ones under the plate', () => {
+    expect(lineStops(100)).toEqual([
+      { value: 0, passed: true, next: false },
+      { value: 50, passed: true, next: false },
+      { value: 150, passed: false, next: true },
+      { value: 200, passed: false, next: false },
+    ]);
+    // 35 sits close to 50, so the plate hides the 50 stop.
+    expect(lineStops(35).map((s) => s.value)).toEqual([0, 100, 150, 200]);
+    expect(lineStops(260).map((s) => s.value)).toEqual([0, 50, 100, 150]);
+    expect(lineStops(260).every((s) => s.passed && !s.next)).toBe(true);
+  });
+
+  it('says how far the next stop is', () => {
+    expect(nextStopLabel(100)).toBe('50 points to 150');
+    expect(nextStopLabel(35)).toBe('15 points to 50');
+    expect(nextStopLabel(0)).toBe('50 points to 50');
+    expect(nextStopLabel(200)).toBe('End of the line');
+    expect(nextStopLabel(340)).toBe('End of the line');
   });
 
   it('colours scores by trust level', () => {
-    expect(reliabilityColor(100)).toBe(colors.teal);
-    expect(reliabilityColor(75)).toBe(colors.orangeSoft);
+    expect(reliabilityColor(100)).toBe(colors.signal);
+    expect(reliabilityColor(75)).toBe(colors.gold);
     expect(reliabilityColor(30)).toBe(colors.danger);
   });
 });

@@ -52,7 +52,7 @@ export function EventMarkers({ events, selectedId, showLabels, onSelect, bbox, o
   return (
     <>
       {clusters.map((c) => (
-        <ClusterMarker key={c.id} id={c.id} lat={c.lat} lon={c.lon} count={c.items.length} color={colors.orangeSoft} onPress={() => onZoomTo(c.lat, c.lon)} />
+        <ClusterMarker key={c.id} id={c.id} lat={c.lat} lon={c.lon} count={c.items.length} color={colors.gold} onPress={() => onZoomTo(c.lat, c.lon)} />
       ))}
       {singles.map((e) => (
         <Marker
@@ -78,10 +78,10 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.orangeSoft,
+    backgroundColor: colors.gold,
     borderWidth: 2,
     borderColor: 'rgba(255,255,255,0.9)',
   },
-  badgeSelected: { backgroundColor: colors.teal, transform: [{ scale: 1.15 }] },
-  label: { paddingHorizontal: 8, height: 20, borderRadius: 10, justifyContent: 'center', backgroundColor: 'rgba(9,10,24,0.88)' },
+  badgeSelected: { backgroundColor: colors.signal, transform: [{ scale: 1.15 }] },
+  label: { paddingHorizontal: 8, height: 20, borderRadius: 10, justifyContent: 'center', backgroundColor: 'rgba(0,8,20,0.88)' },
 });

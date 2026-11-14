@@ -49,7 +49,7 @@ function RouteResult({ route, index }: { route: ChatRoute; index: number }) {
   return (
     <Card style={styles.card} testID={`result-route-${index}`}>
       <View style={styles.head}>
-        <View style={[styles.badge, !walk && { backgroundColor: colors.orangeSoft }]}>
+        <View style={[styles.badge, !walk && { backgroundColor: colors.gold }]}>
           <Icon name={walk ? 'walk-outline' : 'bus-outline'} size={15} color={walk ? '#fff' : colors.onAccent} />
         </View>
         <View style={{ flex: 1 }}>
@@ -99,6 +99,6 @@ const styles = StyleSheet.create({
   list: { alignSelf: 'stretch', gap: 8 },
   card: { gap: 10, padding: 12 },
   head: { flexDirection: 'row', alignItems: 'center', gap: 10 },
-  badge: { width: 30, height: 30, borderRadius: 15, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.teal },
+  badge: { width: 30, height: 30, borderRadius: 15, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.signal },
   actions: { flexDirection: 'row', gap: 8 },
 });

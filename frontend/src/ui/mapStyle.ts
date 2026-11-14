@@ -1,17 +1,17 @@
-// Dark, desaturated Google-Maps style (navy land, charcoal roads, dark teal water). Applies on Android;
-// iOS uses `userInterfaceStyle="dark"` on the MapView instead.
+// Night-navy Google-Maps style (Prussian land, Oxford roads, ink water, muted blue labels). Applies on
+// Android; iOS uses `userInterfaceStyle="dark"` on the MapView instead.
 import type { MapStyleElement } from 'react-native-maps';
 
 export const darkMapStyle: MapStyleElement[] = [
-  { elementType: 'geometry', stylers: [{ color: '#111029' }] },
-  { elementType: 'labels.text.fill', stylers: [{ color: '#8E8CA3' }] },
-  { elementType: 'labels.text.stroke', stylers: [{ color: '#090A18' }] },
-  { featureType: 'administrative', elementType: 'geometry', stylers: [{ color: '#252536' }] },
-  { featureType: 'poi', elementType: 'geometry', stylers: [{ color: '#151530' }] },
-  { featureType: 'poi.park', elementType: 'geometry', stylers: [{ color: '#10223A' }] },
-  { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#252536' }] },
-  { featureType: 'road', elementType: 'geometry.stroke', stylers: [{ color: '#191A2C' }] },
-  { featureType: 'road.highway', elementType: 'geometry', stylers: [{ color: '#2F3350' }] },
-  { featureType: 'transit', elementType: 'geometry', stylers: [{ color: '#1D2140' }] },
-  { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#0B3C45' }] },
+  { elementType: 'geometry', stylers: [{ color: '#001A36' }] },
+  { elementType: 'labels.text.fill', stylers: [{ color: '#7E93B2' }] },
+  { elementType: 'labels.text.stroke', stylers: [{ color: '#000814' }] },
+  { featureType: 'administrative', elementType: 'geometry', stylers: [{ color: '#00284D' }] },
+  { featureType: 'poi', elementType: 'geometry', stylers: [{ color: '#00203F' }] },
+  { featureType: 'poi.park', elementType: 'geometry', stylers: [{ color: '#06283F' }] },
+  { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#003566' }] },
+  { featureType: 'road', elementType: 'geometry.stroke', stylers: [{ color: '#001D3D' }] },
+  { featureType: 'road.highway', elementType: 'geometry', stylers: [{ color: '#0B467F' }] },
+  { featureType: 'transit', elementType: 'geometry', stylers: [{ color: '#002B55' }] },
+  { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#000814' }] },
 ];

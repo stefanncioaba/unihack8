@@ -16,14 +16,14 @@ function Motif() {
     <Svg width={120} height={120} viewBox="0 0 120 120" accessibilityElementsHidden>
       <Defs>
         <LinearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
-          <Stop offset="0" stopColor={colors.teal} />
-          <Stop offset="1" stopColor={colors.orange} />
+          <Stop offset="0" stopColor={colors.signal} />
+          <Stop offset="1" stopColor={colors.accent} />
         </LinearGradient>
       </Defs>
       <Circle cx="60" cy="60" r="44" stroke="url(#ring)" strokeWidth="2" fill="none" opacity={0.9} />
-      <Circle cx="60" cy="60" r="26" stroke={colors.teal} strokeWidth="1" fill="none" opacity={0.45} />
-      <Circle cx="60" cy="60" r="6" fill={colors.orange} />
-      <Rect x="58" y="6" width="4" height="10" rx="2" fill={colors.teal} opacity={0.7} />
+      <Circle cx="60" cy="60" r="26" stroke={colors.signal} strokeWidth="1" fill="none" opacity={0.45} />
+      <Circle cx="60" cy="60" r="6" fill={colors.accent} />
+      <Rect x="58" y="6" width="4" height="10" rx="2" fill={colors.signal} opacity={0.7} />
     </Svg>
   );
 }
@@ -34,7 +34,7 @@ type Props = { title: string; subtitle: string; children: ReactNode; footer: Rea
 export function AuthShell({ title, subtitle, children, footer }: Props) {
   const { configured } = useAuth();
   return (
-    <Screen scroll glow="warm" edges={['top', 'bottom']}>
+    <Screen scroll glow="lamp" edges={['top', 'bottom']}>
       <View style={styles.motif}>
         <Motif />
       </View>
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   motif: { alignItems: 'center', paddingTop: 32, paddingBottom: 12 },
   center: { textAlign: 'center' },
   subtitle: { marginTop: 4, marginBottom: 20 },
-  warning: { marginBottom: 12, borderColor: colors.orange },
+  warning: { marginBottom: 12, borderColor: colors.accent },
   form: { gap: 14 },
   footer: { alignItems: 'center', marginTop: 20, flexDirection: 'row', justifyContent: 'center', gap: 6 },
 });

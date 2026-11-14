@@ -21,14 +21,13 @@ async function startEditing(name: string) {
 }
 
 describe('ProfileScreen: score explanation (16.1)', () => {
-  it('lists the three rules in the "How it works" panel', async () => {
+  it('shows the three rules under the reliability line', async () => {
     renderScreen(<ProfileScreen />);
-    fireEvent.press(await screen.findByRole('button', { name: 'How the score works' }));
-    const panel = screen.getByTestId('score-explainer');
+    const panel = await screen.findByTestId('score-explainer');
     expect(within(panel).getByText('+5')).toBeTruthy();
     expect(within(panel).getByText('−10')).toBeTruthy();
     expect(within(panel).getByText('−2')).toBeTruthy();
-    expect(within(panel).getByText(/never drops below 0/)).toBeTruthy();
+    expect(screen.getByText(/never drops below 0/)).toBeTruthy();
   });
 });
 

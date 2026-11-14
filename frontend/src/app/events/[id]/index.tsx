@@ -25,7 +25,7 @@ import { colors } from '@/ui/theme';
 function InfoRow({ icon, children }: { icon: React.ComponentProps<typeof Icon>['name']; children: string }) {
   return (
     <View style={styles.info}>
-      <Icon name={icon} size={16} color={colors.teal} />
+      <Icon name={icon} size={16} color={colors.signal} />
       <Text style={{ flex: 1 }}>{children}</Text>
     </View>
   );
@@ -95,7 +95,7 @@ export default function EventDetailsScreen() {
     <Shell>
       <EventArt category={e.category} imageUrl={e.imageUrl} shade style={styles.hero}>
         <View style={styles.heroChips}>
-          <StatusChip label={meta.label.toUpperCase()} tone="orange" />
+          <StatusChip label={meta.label} tone="accent" />
           {e.source === 'EXTERNAL' && <StatusChip label="TICKETED" tone="muted" />}
         </View>
       </EventArt>

@@ -9,12 +9,12 @@ export function ChatMotif({ size = 140 }: { size?: number }) {
     <Svg width={size} height={size} viewBox="0 0 160 160" accessibilityElementsHidden>
       <Defs>
         <LinearGradient id="aiRing" x1="0" y1="0" x2="1" y2="1">
-          <Stop offset="0" stopColor={colors.teal} />
-          <Stop offset="1" stopColor={colors.orange} />
+          <Stop offset="0" stopColor={colors.signal} />
+          <Stop offset="1" stopColor={colors.accent} />
         </LinearGradient>
       </Defs>
       <Circle cx="80" cy="80" r="62" stroke="url(#aiRing)" strokeWidth="2" fill="none" opacity={0.85} />
-      <Circle cx="80" cy="80" r="40" stroke={colors.teal} strokeWidth="1" fill="none" opacity={0.4} />
+      <Circle cx="80" cy="80" r="40" stroke={colors.signal} strokeWidth="1" fill="none" opacity={0.4} />
       <Circle cx="80" cy="80" r="18" fill="url(#aiRing)" opacity={0.9} />
     </Svg>
   );

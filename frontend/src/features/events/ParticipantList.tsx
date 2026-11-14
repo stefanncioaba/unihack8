@@ -20,7 +20,7 @@ type Props = {
 
 /** Status chip for non-default statuses. */
 function statusChip(status: ParticipantStatus) {
-  if (status === 'ATTENDED') return <StatusChip label="Checked in" tone="teal" />;
+  if (status === 'ATTENDED') return <StatusChip label="Checked in" tone="signal" />;
   if (status === 'NO_SHOW') return <StatusChip label="No-show" tone="danger" />;
   if (status === 'BANNED') return <StatusChip label="Banned" tone="danger" />;
   return null;

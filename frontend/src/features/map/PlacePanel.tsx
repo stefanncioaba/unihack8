@@ -31,7 +31,7 @@ const TAG_LABELS: [string, string][] = [
 function Row({ icon, text }: { icon: IconName; text: string }) {
   return (
     <View style={styles.row}>
-      <Icon name={icon} size={14} color={colors.teal} />
+      <Icon name={icon} size={14} color={colors.signal} />
       <Text variant="body" style={{ flex: 1 }}>
         {text}
       </Text>
@@ -55,7 +55,7 @@ export function PlacePanel({ id }: { id: string }) {
   return (
     <View style={{ gap: 8 }} testID="place-panel">
       <View style={styles.header}>
-        <StatusChip label={meta.label.toUpperCase()} tone="teal" />
+        <StatusChip label={meta.label} tone="signal" />
       </View>
       <Text variant="heading" numberOfLines={2} style={{ paddingRight: 24 }}>
         {p.name}

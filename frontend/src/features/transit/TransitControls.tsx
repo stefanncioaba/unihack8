@@ -37,5 +37,5 @@ export function TransitControls({ transitOn, onToggleTransit, line, onSelectLine
 const styles = StyleSheet.create({
   scroll: { flexGrow: 0, flexShrink: 0, height: 34, marginHorizontal: -16 },
   row: { gap: 8, paddingHorizontal: 16, alignItems: 'center' },
-  chip: { backgroundColor: 'rgba(25,26,44,0.92)' },
+  chip: { backgroundColor: 'rgba(0,29,61,0.92)' },
 });

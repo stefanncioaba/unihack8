@@ -52,9 +52,9 @@ function ModeTab({ label, icon, active, status, onPress }: { label: string; icon
       onPress={onPress}
       style={[styles.tab, active && styles.tabActive]}
     >
-      <Icon name={icon} size={16} color={active ? colors.orangeSoft : colors.textMuted} />
+      <Icon name={icon} size={16} color={active ? colors.gold : colors.textMuted} />
       <View>
-        <Text variant="chip" style={{ color: active ? colors.orangeSoft : colors.textMuted }}>
+        <Text variant="chip" style={{ color: active ? colors.gold : colors.textMuted }}>
           {label}
         </Text>
         <Text variant="cardTitle">{status}</Text>
@@ -153,8 +153,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'transparent',
   },
-  tabActive: { borderColor: colors.orangeSoft },
+  tabActive: { borderColor: colors.gold },
   leg: { flexDirection: 'row', gap: 10, alignItems: 'center', paddingVertical: 4 },
   legIcon: { width: 26, height: 26, borderRadius: 13, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.surfaceAlt },
-  legIconRide: { backgroundColor: colors.orangeSoft },
+  legIconRide: { backgroundColor: colors.gold },
 });

@@ -77,11 +77,11 @@ export default function AllEventsScreen() {
           onEndReached={() => {
             if (query.hasNextPage && !query.isFetchingNextPage) query.fetchNextPage();
           }}
-          refreshControl={<RefreshControl refreshing={query.isRefetching && !query.isFetchingNextPage} onRefresh={() => query.refetch()} tintColor={colors.teal} />}
+          refreshControl={<RefreshControl refreshing={query.isRefetching && !query.isFetchingNextPage} onRefresh={() => query.refetch()} tintColor={colors.signal} />}
           ListEmptyComponent={
             <EmptyState icon="search-outline" title="No events found" message="Try a different search, category or date." />
           }
-          ListFooterComponent={query.isFetchingNextPage ? <ActivityIndicator color={colors.teal} style={{ marginVertical: 16 }} /> : null}
+          ListFooterComponent={query.isFetchingNextPage ? <ActivityIndicator color={colors.signal} style={{ marginVertical: 16 }} /> : null}
         />
       )}
     </Screen>

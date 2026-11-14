@@ -94,7 +94,7 @@ export default function SignUpScreen() {
           {errors.form}
         </Text>
       ) : null}
-      {notice ? <Text tone="teal">{notice}</Text> : null}
+      {notice ? <Text tone="signal">{notice}</Text> : null}
       <Button title="Create account" icon="arrow-forward" onPress={submit} loading={busy} />
     </AuthShell>
   );

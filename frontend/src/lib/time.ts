@@ -77,6 +77,12 @@ export function formatDate(iso: string): string {
   return `${t.day} ${MONTHS[t.month - 1]} ${t.year}`;
 }
 
+/** `{ month: 'Nov', day: 14 }` in Bucharest time, for calendar-style date badges. */
+export function monthDay(iso: string): { month: string; day: number } {
+  const t = toBucharest(iso);
+  return { month: MONTHS[t.month - 1], day: t.day };
+}
+
 /** `Sat, 14 Nov · 19:00`: the standard event date line. */
 export function formatEventDate(iso: string): string {
   return `${formatDay(iso)} · ${formatTime(iso)}`;

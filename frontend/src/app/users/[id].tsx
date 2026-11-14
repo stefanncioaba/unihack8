@@ -3,11 +3,10 @@ import { useLocalSearchParams } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
 import { EventListItem } from '@/features/events/EventCards';
-import { ReliabilityGauge } from '@/features/users/ReliabilityGauge';
+import { ReliabilityLine } from '@/features/users/ReliabilityLine';
 import { useUser } from '@/hooks/queries';
 import { formatDate } from '@/lib/time';
 import { Avatar } from '@/ui/Avatar';
-import { Card } from '@/ui/Card';
 import { Screen } from '@/ui/Screen';
 import { ScreenHeader } from '@/ui/ScreenHeader';
 import { EmptyState, ErrorState, LoadingState } from '@/ui/States';
@@ -39,9 +38,7 @@ export default function PublicProfileScreen() {
             </View>
           </View>
 
-          <Card>
-            <ReliabilityGauge score={user.data.reliabilityScore} />
-          </Card>
+          <ReliabilityLine score={user.data.reliabilityScore} />
 
           <Text variant="heading" accessibilityRole="header">
             Events attended

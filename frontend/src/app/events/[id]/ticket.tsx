@@ -29,11 +29,11 @@ export default function TicketScreen() {
         <View style={styles.wrap}>
           {/* The code needs a light tile to scan reliably. */}
           <View style={styles.qr} accessibilityLabel="Ticket QR code" testID="ticket-qr">
-            <QRCode value={ticket.data.qrToken} size={216} color="#090A18" backgroundColor="#F6F3F2" />
+            <QRCode value={ticket.data.qrToken} size={216} color="#000814" backgroundColor="#EEF3FA" />
           </View>
           <StatusChip
             label={ticket.data.status === 'ATTENDED' ? 'CHECKED IN' : 'READY TO SCAN'}
-            tone={ticket.data.status === 'ATTENDED' ? 'teal' : 'orange'}
+            tone={ticket.data.status === 'ATTENDED' ? 'signal' : 'accent'}
           />
           {event.data && (
             <View style={styles.details}>
@@ -61,7 +61,7 @@ export default function TicketScreen() {
 
 const styles = StyleSheet.create({
   wrap: { alignItems: 'center', gap: 16, paddingTop: 12 },
-  qr: { padding: 16, borderRadius: 16, backgroundColor: '#F6F3F2', borderWidth: 1, borderColor: colors.borderStrong },
+  qr: { padding: 16, borderRadius: 16, backgroundColor: '#EEF3FA', borderWidth: 1, borderColor: colors.borderStrong },
   details: { gap: 4, alignItems: 'center' },
   center: { textAlign: 'center' },
 });

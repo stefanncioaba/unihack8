@@ -25,7 +25,7 @@ function StopDot({ selected }: { selected: boolean }) {
 
 /** Round badge with the vehicle icon and the line number, in the line's colour. */
 function VehicleBadge({ line }: { line: TransitRoute }) {
-  const color = line.color ?? colors.orange;
+  const color = line.color ?? colors.accent;
   const icon = line.type === 'TRAM' ? 'train' : 'bus';
   return (
     <View style={[styles.vehicle, { backgroundColor: color }]}>
@@ -73,7 +73,7 @@ export function TransitLayer({ stops, line, vehicles, selectedStopId, onSelectSt
 }
 
 const styles = StyleSheet.create({
-  stop: { width: 12, height: 12, borderRadius: 6, backgroundColor: colors.teal, borderWidth: 2, borderColor: colors.bg },
+  stop: { width: 12, height: 12, borderRadius: 6, backgroundColor: colors.signal, borderWidth: 2, borderColor: colors.bg },
   stopSelected: { width: 18, height: 18, borderRadius: 9, borderColor: '#fff' },
   vehicle: {
     flexDirection: 'row',

@@ -49,7 +49,7 @@ export function PlaceMarkers({ places, selectedId, showLabels, onSelect, bbox, o
   return (
     <>
       {clusters.map((c) => (
-        <ClusterMarker key={c.id} id={c.id} lat={c.lat} lon={c.lon} count={c.items.length} color={colors.violet} onPress={() => onZoomTo(c.lat, c.lon)} />
+        <ClusterMarker key={c.id} id={c.id} lat={c.lat} lon={c.lon} count={c.items.length} color={colors.oxford} onPress={() => onZoomTo(c.lat, c.lon)} />
       ))}
       {singles.map((p) => (
         <Marker
@@ -75,17 +75,17 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.violet,
+    backgroundColor: colors.oxford,
     borderWidth: 2,
     borderColor: 'rgba(255,255,255,0.85)',
   },
-  badgeSelected: { backgroundColor: colors.orange, transform: [{ scale: 1.15 }] },
+  badgeSelected: { backgroundColor: colors.accent, transform: [{ scale: 1.15 }] },
   label: {
     paddingHorizontal: 8,
     height: 20,
     borderRadius: 10,
     justifyContent: 'center',
-    backgroundColor: 'rgba(9,10,24,0.88)',
+    backgroundColor: 'rgba(0,8,20,0.88)',
     shadowColor: '#000',
     shadowOpacity: 0.4,
     shadowRadius: 3,

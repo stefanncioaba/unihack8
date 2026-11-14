@@ -14,9 +14,9 @@ type Props = {
   testID?: string;
 };
 
-/** Filter chip: dark when idle, orange-tinted when selected. */
+/** Filter chip: navy when idle, solid signal yellow with ink text when selected. */
 export function Chip({ label, selected, onPress, icon, style, testID }: Props) {
-  const fg = selected ? colors.orangeSoft : colors.textMuted;
+  const fg = selected ? colors.onAccent : colors.textMuted;
   return (
     <Pressable
       testID={testID}
@@ -35,12 +35,12 @@ export function Chip({ label, selected, onPress, icon, style, testID }: Props) {
 }
 
 /** Non-interactive status pill (e.g. "Live", participant state). */
-export function StatusChip({ label, tone = 'orange' }: { label: string; tone?: 'orange' | 'teal' | 'muted' | 'danger' }) {
+export function StatusChip({ label, tone = 'accent' }: { label: string; tone?: 'accent' | 'signal' | 'muted' | 'danger' }) {
   const palette = {
-    orange: { bg: colors.orange, fg: colors.onAccent },
-    teal: { bg: 'rgba(23,215,211,0.14)', fg: colors.teal },
+    accent: { bg: colors.accent, fg: colors.onAccent },
+    signal: { bg: 'rgba(142,197,255,0.14)', fg: colors.signal },
     muted: { bg: colors.surfaceAlt, fg: colors.textMuted },
-    danger: { bg: 'rgba(255,90,106,0.14)', fg: colors.danger },
+    danger: { bg: 'rgba(255,107,107,0.14)', fg: colors.danger },
   }[tone];
   return (
     <View style={[styles.status, { backgroundColor: palette.bg }]}>
@@ -56,13 +56,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 5,
-    height: 30,
+    height: 32,
     paddingHorizontal: 12,
     borderRadius: radius.chip,
     backgroundColor: colors.surface,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.border,
   },
-  selected: { backgroundColor: 'rgba(255,113,56,0.14)', borderColor: colors.orange },
+  selected: { backgroundColor: colors.accent, borderColor: colors.accent },
   status: { paddingHorizontal: 9, height: 22, borderRadius: radius.chip, alignItems: 'center', justifyContent: 'center' },
 });

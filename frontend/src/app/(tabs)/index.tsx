@@ -11,7 +11,7 @@ import { CityInfoStrip } from '@/features/transit/CityInfoStrip';
 import { useEventsPage } from '@/hooks/queries';
 import { useTransitSummary } from '@/hooks/useTransit';
 import { Button } from '@/ui/Button';
-import { Chip, StatusChip } from '@/ui/Chip';
+import { Chip } from '@/ui/Chip';
 import { Icon } from '@/ui/Icon';
 import { Screen } from '@/ui/Screen';
 import { EmptyState, ErrorState, LoadingState } from '@/ui/States';
@@ -20,6 +20,18 @@ import { SearchField } from '@/ui/TextField';
 import { colors, PAGE_MARGIN } from '@/ui/theme';
 
 const HOME_EVENT_COUNT = 8;
+
+/** "Live" with a glowing yellow dot while transit data flows; grey "Offline" when it does not. */
+function LivePill({ offline }: { offline: boolean }) {
+  return (
+    <View style={[styles.live, offline && styles.liveOff]}>
+      <View style={[styles.liveDot, offline && { backgroundColor: colors.textMuted }]} />
+      <Text variant="chip" style={{ color: offline ? colors.textMuted : colors.gold }}>
+        {offline ? 'Offline' : 'Live'}
+      </Text>
+    </View>
+  );
+}
 
 /** The discovery-style Home page. */
 export default function HomeScreen() {
@@ -37,7 +49,7 @@ export default function HomeScreen() {
   }
 
   return (
-    <Screen scroll padded={false} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={refresh} tintColor={colors.teal} />}>
+    <Screen scroll padded={false} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={refresh} tintColor={colors.signal} />}>
       <View style={styles.header}>
         <Text variant="title" accessibilityRole="header">
           Timișoara
@@ -51,7 +63,7 @@ export default function HomeScreen() {
           >
             <Icon name="people-outline" size={18} />
           </Pressable>
-          <StatusChip label={summary.isError ? 'OFFLINE' : 'LIVE'} tone={summary.isError ? 'muted' : 'orange'} />
+          <LivePill offline={summary.isError} />
         </View>
       </View>
 
@@ -106,7 +118,7 @@ export default function HomeScreen() {
       )}
 
       <View style={[styles.cta, { paddingHorizontal: PAGE_MARGIN }]}>
-        <Button title="Create an event" icon="arrow-forward" onPress={() => router.push('/events/new')} />
+        <Button title="Create an event" icon="add" iconLeft onPress={() => router.push('/events/new')} />
       </View>
     </Screen>
   );
@@ -114,6 +126,19 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: PAGE_MARGIN, paddingTop: 10, paddingBottom: 14 },
+  live: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    height: 28,
+    paddingHorizontal: 11,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: 'rgba(255,195,0,0.5)',
+    backgroundColor: 'rgba(255,195,0,0.12)',
+  },
+  liveOff: { borderColor: colors.border, backgroundColor: colors.surface },
+  liveDot: { width: 7, height: 7, borderRadius: 4, backgroundColor: colors.accent },
   headerRight: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   iconButton: {
     width: 34,
@@ -126,7 +151,7 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
   },
   block: { marginBottom: 14, paddingHorizontal: PAGE_MARGIN },
-  chipsScroll: { marginBottom: 14, flexGrow: 0, flexShrink: 0, height: 30 },
+  chipsScroll: { marginBottom: 14, flexGrow: 0, flexShrink: 0, height: 32 },
   chips: { gap: 8, paddingHorizontal: PAGE_MARGIN },
   sectionHeader: { flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 12 },
   cards: { gap: 12, paddingHorizontal: PAGE_MARGIN },

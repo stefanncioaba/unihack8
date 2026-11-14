@@ -22,14 +22,14 @@ export function DirectionsLayer() {
         testID="destination-marker"
         coordinate={{ latitude: destination.coords.lat, longitude: destination.coords.lon }}
         title={destination.title}
-        pinColor={colors.orange}
+        pinColor={colors.accent}
       />
       {destination.origin && (
         <Marker
           testID="origin-marker"
           coordinate={{ latitude: destination.origin.coords.lat, longitude: destination.origin.coords.lon }}
           title={destination.origin.title}
-          pinColor={colors.teal}
+          pinColor={colors.signal}
         />
       )}
       {plan.data?.legs.map((leg, i) => {
@@ -39,7 +39,7 @@ export function DirectionsLayer() {
             key={i}
             testID={`route-line-${i}`}
             coordinates={decodePolyline(leg.polyline).map((p) => ({ latitude: p.lat, longitude: p.lon }))}
-            strokeColor={walk ? colors.teal : colors.orangeSoft}
+            strokeColor={walk ? colors.signal : colors.gold}
             strokeWidth={walk ? 4 : 6}
             lineDashPattern={walk ? [8, 8] : undefined}
           />

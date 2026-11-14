@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Night Tram mockups</title>
+<style>
+  /* "Timișoara after dark": ink + navy layers, signal yellow for actions, pale signal blue for status. */
+  :root {
+    --ink: #000814; --prussian: #001d3d; --mid: #00284d; --oxford: #003566;
+    --yellow: #ffc300; --gold: #ffd60a; --signal: #8ec5ff; --signal-deep: #3b7dd8;
+    --text: #eef3fa; --muted: #8da2bf; --faint: #5d7393;
+    --border: rgba(142,197,255,.12); --border-strong: rgba(142,197,255,.2); --danger: #ff6b6b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f1420; font-family: Roboto, "Segoe UI", system-ui, sans-serif; color: var(--text); padding: 40px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 390px); gap: 40px; }
+  body.single { padding: 0; background: var(--ink); }
+  body.single .grid { display: block; }
+  body.single .phone { border-radius: 0; box-shadow: none; }
+  body.single .phone:not(.show) { display: none; }
+
+  .phone { width: 390px; height: 844px; position: relative; overflow: hidden; border-radius: 36px; background: var(--ink);
+    box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 30px 60px rgba(0,0,0,.5); display: flex; flex-direction: column; }
+  /* Night-sky bloom: Oxford Navy over the top of every screen. */
+  .phone::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(120% 42% at 75% 0%, rgba(0,53,102,.85), rgba(0,53,102,0) 100%); }
+  .phone.lamp::before { background: radial-gradient(70% 28% at 0% 0%, rgba(255,195,0,.10), transparent 100%),
+    radial-gradient(120% 42% at 75% 0%, rgba(0,53,102,.85), rgba(0,53,102,0) 100%); }
+  .phone > * { position: relative; }
+
+  .status { height: 40px; display: flex; align-items: center; justify-content: space-between; padding: 0 26px; font-size: 13px; font-weight: 600; flex: none; }
+  .content { flex: 1; padding: 6px 16px 0; overflow: hidden; display: flex; flex-direction: column; gap: 16px; }
+  .row { display: flex; align-items: center; gap: 10px; }
+  .between { justify-content: space-between; }
+  .ico { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+  h1 { font-size: 28px; font-weight: 800; letter-spacing: -.6px; }
+  h2 { font-size: 18px; font-weight: 700; letter-spacing: -.2px; }
+  .muted { color: var(--muted); } .small { font-size: 12px; } .gold { color: var(--gold); } .signal { color: var(--signal); }
+
+  .iconbtn { width: 42px; height: 42px; border-radius: 50%; background: var(--prussian); border: 1px solid var(--border); display: grid; place-items: center; color: var(--text); }
+  .live { display: flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px; border-radius: 99px; background: rgba(255,195,0,.12); border: 1px solid rgba(255,195,0,.5); color: var(--gold); font-size: 12px; font-weight: 700; }
+  .live i { width: 7px; height: 7px; border-radius: 50%; background: var(--yellow); box-shadow: 0 0 8px var(--yellow); }
+
+  .search { height: 46px; border-radius: 12px; background: var(--prussian); border: 1px solid var(--border); display: flex; align-items: center; gap: 10px; padding: 0 14px; color: var(--faint); font-size: 14px; }
+  .search.typed { color: var(--text); border-color: var(--yellow); }
+  .chips { display: flex; gap: 8px; overflow: hidden; margin-right: -16px; }
+  .chip { flex: none; height: 34px; padding: 0 14px; border-radius: 99px; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600;
+    background: var(--prussian); border: 1px solid var(--border); color: var(--muted); }
+  .chip .ico { width: 15px; height: 15px; }
+  .chip.on { background: var(--yellow); border-color: var(--yellow); color: var(--ink); }
+  .chip.glass { background: rgba(0,29,61,.92); border-color: var(--border-strong); color: var(--text); }
+
+  /* Signature element: the departure board. Route plate in signal yellow, time in big tabular numerals. */
+  .board { border-radius: 18px; background: var(--prussian); border: 1px solid var(--border); overflow: hidden; }
+  .board-top { display: flex; gap: 14px; padding: 14px; align-items: center; }
+  .plate { width: 54px; height: 54px; border-radius: 10px; background: var(--yellow); color: var(--ink); display: grid; place-items: center; flex: none;
+    font-weight: 900; font-size: 26px; letter-spacing: -1px; box-shadow: inset 0 -3px 0 rgba(0,0,0,.18); }
+  .plate small { display: block; font-size: 8.5px; font-weight: 800; letter-spacing: .2px; margin-top: -4px; text-align: center; }
+  .depart { flex: 1; min-width: 0; }
+  .depart .what { font-size: 12px; color: var(--muted); }
+  .depart .where { font-size: 14.5px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .time { text-align: right; flex: none; }
+  .time b { font-size: 30px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -1px; color: var(--gold); display: block; line-height: 1; }
+  .time span { font-size: 11px; color: var(--muted); }
+  .board-foot { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: rgba(0,8,20,.45); border-top: 1px dashed var(--border-strong); font-size: 12px; }
+  .alerts { display: flex; align-items: center; gap: 5px; color: var(--gold); font-weight: 700; }
+
+  .ev-row { display: flex; gap: 12px; margin-right: -16px; overflow: hidden; }
+  .ev { width: 268px; flex: none; border-radius: 18px; overflow: hidden; background: var(--prussian); border: 1px solid var(--border); }
+  .art { height: 150px; position: relative; display: grid; place-items: center; }
+  .art .big { width: 54px; height: 54px; stroke: rgba(255,255,255,.18); stroke-width: 1.4; }
+  .art .shade { position: absolute; inset: 0; background: linear-gradient(transparent 35%, rgba(0,8,20,.92)); }
+  .art .cap { position: absolute; left: 14px; right: 14px; bottom: 12px; }
+  .art .cap b { font-size: 16px; display: block; }
+  .art .cap span { font-size: 12.5px; color: var(--gold); font-weight: 600; }
+  .date { position: absolute; top: 12px; left: 12px; width: 44px; border-radius: 10px; overflow: hidden; text-align: center; background: var(--ink); border: 1px solid var(--border-strong); }
+  .date i { display: block; font-style: normal; font-size: 9.5px; font-weight: 800; background: var(--yellow); color: var(--ink); padding: 2px 0; }
+  .date b { display: block; font-size: 17px; padding: 2px 0 3px; }
+  .ev-foot { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; font-size: 13px; color: var(--muted); }
+  .price { padding: 4px 10px; border-radius: 99px; background: var(--mid); color: var(--text); font-size: 12px; font-weight: 700; }
+
+  .btn { height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 15px; }
+  .btn.primary { background: var(--yellow); color: var(--ink); box-shadow: 0 8px 24px rgba(255,195,0,.18); }
+  .btn.secondary { background: var(--prussian); border: 1px solid var(--border-strong); }
+  .btn.danger { background: rgba(255,107,107,.08); border: 1px solid rgba(255,107,107,.35); color: var(--danger); }
+
+  .tabs { height: 78px; flex: none; display: flex; background: #00102a; border-top: 1px solid var(--border); padding-top: 10px; }
+  .tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; color: var(--muted); position: relative; }
+  .tab .ico { width: 22px; height: 22px; }
+  .tab.on { color: var(--yellow); }
+  .tab.on::before { content: ""; position: absolute; top: -11px; width: 28px; height: 3px; border-radius: 0 0 3px 3px; background: var(--yellow); }
+
+  .card { border-radius: 18px; background: var(--prussian); border: 1px solid var(--border); padding: 14px; }
+  .avatar { width: 46px; height: 46px; border-radius: 50%; background: var(--oxford); border: 2px solid var(--border-strong); display: grid; place-items: center; font-weight: 800; color: var(--gold); flex: none; font-size: 17px; }
+  .trust { display: inline-flex; align-items: center; gap: 5px; height: 26px; padding: 0 10px; border-radius: 99px; border: 1px solid rgba(142,197,255,.4); color: var(--signal); font-size: 12.5px; font-weight: 700; background: rgba(142,197,255,.08); }
+  .trust .ico { width: 14px; height: 14px; }
+  .pill { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 99px; font-size: 11.5px; font-weight: 700; }
+  .pill.signal { background: rgba(142,197,255,.14); color: var(--signal); }
+  .pill.yellow { background: var(--yellow); color: var(--ink); }
+
+  /* Map */
+  .map { position: absolute; inset: 0; background: #001a36; }
+  .map > svg { position: absolute; inset: 0; }
+  .pin { position: absolute; transform: translate(-50%, -100%); display: flex; flex-direction: column; align-items: center; }
+  .pin .head { width: 34px; height: 34px; border-radius: 50% 50% 50% 4px; transform: rotate(-45deg); display: grid; place-items: center; border: 2px solid rgba(255,255,255,.9); }
+  .pin .head svg { transform: rotate(45deg); width: 16px; height: 16px; position: static; }
+  .pin.is-ev .head { background: var(--yellow); color: var(--ink); border-color: var(--ink); }
+  .pin.is-pl .head { background: var(--oxford); color: var(--signal); border-color: var(--signal); }
+  .pin label { font-size: 11px; font-weight: 600; margin-top: 6px; color: var(--text); text-shadow: 0 1px 3px var(--ink), 0 0 6px var(--ink); white-space: nowrap; }
+  .tram { position: absolute; transform: translate(-50%,-50%); height: 22px; padding: 0 7px; border-radius: 6px; background: var(--yellow); color: var(--ink); font-size: 11px; font-weight: 900; display: grid; place-items: center; box-shadow: 0 0 0 3px rgba(255,195,0,.25); }
+  .peek { position: absolute; left: 12px; right: 12px; bottom: 90px; }
+
+  /* AI */
+  .orb { width: 170px; height: 170px; position: relative; margin: 0 auto; }
+  .orb span { position: absolute; border-radius: 50%; inset: 0; border: 1.5px solid rgba(142,197,255,.35); }
+  .orb span:nth-child(2) { inset: 28px; border-color: rgba(255,214,10,.35); }
+  .orb span:nth-child(3) { inset: 62px; border: none; background: radial-gradient(circle at 35% 30%, var(--gold), var(--yellow) 45%, #8a6a00); box-shadow: 0 0 40px rgba(255,195,0,.35); }
+  .composer { height: 56px; border-radius: 16px; background: var(--prussian); border: 1px solid var(--border-strong); display: flex; align-items: center; padding: 0 6px 0 16px; gap: 10px; color: var(--faint); font-size: 14px; }
+  .send { width: 44px; height: 44px; border-radius: 12px; background: var(--yellow); color: var(--ink); display: grid; place-items: center; margin-left: auto; }
+
+  /* Profile */
+  .rel { display: grid; gap: 14px; }
+  /* Fixed 0–200 line with stops every 50; the plate sits at the score and stops at the 200 end. */
+  .line { position: relative; height: 54px; margin: 0 30px; }
+  .track { position: absolute; left: 0; right: 0; top: 26px; height: 4px; border-radius: 2px; background: var(--mid); }
+  .track .fill { position: absolute; left: 0; top: 0; height: 100%; border-radius: 2px; background: var(--yellow); }
+  .track.cut::before { content: ""; position: absolute; left: -30px; width: 30px; top: 0; height: 100%;
+    background: linear-gradient(90deg, rgba(255,195,0,0), var(--yellow)); }
+  .stop { position: absolute; top: 22px; transform: translateX(-50%); display: grid; justify-items: center; gap: 6px; }
+  .stop i { width: 12px; height: 12px; border-radius: 50%; background: var(--ink); border: 2px solid var(--border-strong); }
+  .stop.passed i { background: var(--yellow); border-color: var(--ink); }
+  .stop.next span { color: var(--gold); font-weight: 700; }
+  .stop span { font-size: 10.5px; color: var(--faint); font-variant-numeric: tabular-nums; }
+  .here { position: absolute; top: 8px; transform: translateX(-50%); height: 40px; min-width: 52px; padding: 0 8px; border-radius: 9px;
+    background: var(--yellow); color: var(--ink); font-weight: 900; font-size: 22px; letter-spacing: -.5px; display: grid; place-items: center;
+    font-variant-numeric: tabular-nums; box-shadow: inset 0 -3px 0 rgba(0,0,0,.18), 0 0 0 4px var(--prussian); }
+  .fares { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px dashed var(--border-strong); padding-top: 10px; }
+  .fares div { display: grid; gap: 1px; padding-left: 10px; border-left: 1px solid var(--border); }
+  .fares div:first-child { padding-left: 0; border-left: none; }
+  .fares b { font-size: 15px; font-variant-numeric: tabular-nums; }
+  .fares span { font-size: 11.5px; color: var(--muted); }
+  .history { border-radius: 18px; border: 1px dashed var(--border-strong); padding: 22px 16px; text-align: center; display: grid; gap: 6px; justify-items: center; }
+  .history .ring { width: 48px; height: 48px; border-radius: 50%; background: rgba(142,197,255,.1); display: grid; place-items: center; color: var(--signal); }
+
+  .back { width: 40px; height: 40px; border-radius: 50%; background: var(--prussian); border: 1px solid var(--border); display: grid; place-items: center; }
+  .meta { display: grid; gap: 10px; font-size: 14px; }
+  .meta .row .ico { color: var(--signal); }
+</style>
+</head>
+<body>
+<!-- Inline icon sprite (outline style, matches Ionicons weight). -->
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 19c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5"/><circle cx="17" cy="9" r="2.6"/><path d="M16.5 13.6c2.6.1 4.4 1.8 5 4.4"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></symbol>
+  <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></symbol>
+  <symbol id="i-film" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/></symbol>
+  <symbol id="i-ball" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m12 7 4 3-1.5 4.5h-5L8 10z"/><path d="M12 7V3M16 10l4-1.5M14.5 14.5l2.5 3.5M9.5 14.5 7 18M8 10 4 8.5"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17v.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8.5 8.5 0 0 1-12.5 7.5L3 21l1.5-5A8.5 8.5 0 1 1 21 12z"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4.2-7 8-7s7 2.5 8 7"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3M21 14v.01M17 21h4v-4M14 18v3"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+  <symbol id="i-locate" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></symbol>
+  <symbol id="i-fork" viewBox="0 0 24 24"><path d="M7 3v8M4 3v5a3 3 0 0 0 6 0V3M7 11v10M17 21V3c-2.5 1-4 3.5-4 7h4"/></symbol>
+  <symbol id="i-cup" viewBox="0 0 24 24"><path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM17 10h1.5a2.5 2.5 0 0 1 0 5H17M8 3v2M12 3v2"/></symbol>
+  <symbol id="i-bus" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="15" rx="3"/><path d="M5 11h14M8 21l1-3M16 21l-1-3"/><circle cx="9" cy="14.5" r=".6"/><circle cx="15" cy="14.5" r=".6"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+  <symbol id="i-walk" viewBox="0 0 24 24"><circle cx="13" cy="4" r="1.8"/><path d="m9 21 2-6 3 3v3M8 12l2-4 4 1 2 3 2 1M11 15l1-5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+</svg>
+
+<div class="grid">
+
+<!-- ============ HOME ============ -->
+<div class="phone" id="home">
+  <div class="status"><span>13:44</span><span>58%</span></div>
+  <div class="content">
+    <div class="row between">
+      <div>
+        <div class="muted small">Saturday evening</div>
+        <h1>Timișoara</h1>
+      </div>
+      <div class="row">
+        <div class="live"><i></i>Live</div>
+        <div class="iconbtn"><svg class="ico"><use href="#i-people"/></svg></div>
+      </div>
+    </div>
+    <div class="search"><svg class="ico"><use href="#i-search"/></svg>Search events</div>
+    <div class="chips">
+      <div class="chip on">All</div>
+      <div class="chip"><svg class="ico"><use href="#i-spark"/></svg>Party</div>
+      <div class="chip"><svg class="ico"><use href="#i-music"/></svg>Concert</div>
+      <div class="chip"><svg class="ico"><use href="#i-film"/></svg>Theatre</div>
+      <div class="chip"><svg class="ico"><use href="#i-ball"/></svg>Sport</div>
+    </div>
+
+    <div class="board">
+      <div class="board-top">
+        <div class="plate"><div>16<small>trolley</small></div></div>
+        <div class="depart">
+          <div class="what">Last departure tonight</div>
+          <div class="where">from Piața Huniade</div>
+          <div class="muted small">to Gara de Nord</div>
+        </div>
+        <div class="time"><b>23:10</b><span>in 9h 26m</span></div>
+      </div>
+      <div class="board-foot">
+        <span class="muted">Public transport near you</span>
+        <span class="alerts"><svg class="ico" style="width:14px;height:14px"><use href="#i-warn"/></svg>5 alerts</span>
+      </div>
+    </div>
+
+    <div class="row between"><h2>Upcoming events</h2><span class="gold small" style="font-weight:600">See all</span></div>
+    <div class="ev-row">
+      <div class="ev">
+        <div class="art" style="background:linear-gradient(140deg,#0b467f,#000814)">
+          <svg class="ico big"><use href="#i-spark"/></svg>
+          <div class="shade"></div>
+          <div class="date"><i>NOV</i><b>14</b></div>
+          <div class="cap"><b>Mama Dansează</b><span>Sat 14 Nov, 20:00</span></div>
+        </div>
+        <div class="ev-foot"><span class="row" style="gap:6px"><svg class="ico" style="width:15px;height:15px"><use href="#i-pin"/></svg>Vineri 15</span><span class="price">40 lei</span></div>
+      </div>
+      <div class="ev">
+        <div class="art" style="background:linear-gradient(140deg,#5c4400,#001d3d)">
+          <svg class="ico big"><use href="#i-music"/></svg>
+          <div class="shade"></div>
+          <div class="date"><i>NOV</i><b>14</b></div>
+          <div class="cap"><b>Spontan at the Terminal</b><span>Sat 14 Nov, 21:00</span></div>
+        </div>
+        <div class="ev-foot"><span>Aeroportul Internațional</span></div>
+      </div>
+    </div>
+
+    <div class="btn primary"><svg class="ico"><use href="#i-plus"/></svg>Create an event</div>
+  </div>
+  <div class="tabs">
+    <div class="tab on"><svg class="ico"><use href="#i-home"/></svg>Home</div>
+    <div class="tab"><svg class="ico"><use href="#i-map"/></svg>Map</div>
+    <div class="tab"><svg class="ico"><use href="#i-chat"/></svg>AI</div>
+    <div class="tab"><svg class="ico"><use href="#i-user"/></svg>Profile</div>
+  </div>
+</div>
+
+<!-- ============ MAP ============ -->
+<div class="phone" id="map" style="background:#001a36">
+  <div class="map">
+    <svg viewBox="0 0 390 844" preserveAspectRatio="none">
+      <rect width="390" height="844" fill="#001a36"/>
+      <!-- blocks -->
+      <g fill="#00203f">
+        <rect x="30" y="140" width="120" height="90" rx="6"/><rect x="200" y="160" width="150" height="70" rx="6"/>
+        <rect x="40" y="300" width="90" height="120" rx="6"/><rect x="230" y="320" width="120" height="100" rx="6"/>
+        <rect x="20" y="560" width="140" height="110" rx="6"/><rect x="220" y="600" width="140" height="80" rx="6"/>
+      </g>
+      <path d="M150 380 q60 -40 120 10 q30 30 0 60 q-60 40 -120 0 z" fill="#06283f"/>
+      <!-- Bega river -->
+      <path d="M-10 500 C80 470 140 520 210 480 S330 430 400 450" stroke="#000814" stroke-width="22" fill="none"/>
+      <!-- roads -->
+      <g stroke="#003566" fill="none" stroke-linecap="round">
+        <path d="M0 260 L390 300" stroke-width="7"/><path d="M180 0 L200 844" stroke-width="7"/>
+        <path d="M0 720 L390 690" stroke-width="5"/><path d="M60 0 L110 844" stroke-width="4"/>
+        <path d="M330 0 L300 844" stroke-width="4"/><path d="M0 120 L390 90" stroke-width="4"/>
+        <circle cx="195" cy="300" r="70" stroke-width="5"/>
+      </g>
+      <path d="M0 260 L390 300" stroke="#0b467f" stroke-width="2" fill="none"/>
+      <!-- live tram route -->
+      <path d="M0 610 L120 560 L195 300 L260 180 L390 150" stroke="#ffc300" stroke-width="3" fill="none" stroke-dasharray="1 7" stroke-linecap="round" opacity=".7"/>
+    </svg>
+    <div class="pin is-ev" style="left:196px;top:300px"><div class="head"><svg class="ico"><use href="#i-spark"/></svg></div><label>Mama Dansează</label></div>
+    <div class="pin is-pl" style="left:110px;top:380px"><div class="head"><svg class="ico"><use href="#i-cup"/></svg></div><label>Piața Unirii</label></div>
+    <div class="pin is-pl" style="left:290px;top:260px"><div class="head"><svg class="ico"><use href="#i-fork"/></svg></div><label>Bastionul Theresia</label></div>
+    <div class="pin is-pl" style="left:300px;top:580px"><div class="head"><svg class="ico"><use href="#i-camera"/></svg></div><label>Parcul Rozelor</label></div>
+    <div class="pin is-ev" style="left:70px;top:585px"><div class="head"><svg class="ico"><use href="#i-ball"/></svg></div><label>Batminyon</label></div>
+    <div class="tram" style="left:138px;top:520px">1</div>
+    <div class="tram" style="left:250px;top:200px">16</div>
+  </div>
+  <div class="status"><span>13:44</span><span>58%</span></div>
+  <div style="padding:6px 16px 0;display:grid;gap:10px">
+    <div class="row between">
+      <div class="search" style="flex:1;background:rgba(0,29,61,.92);border-color:var(--border-strong)"><svg class="ico"><use href="#i-search"/></svg>Search Timișoara</div>
+      <div class="iconbtn" style="background:rgba(0,29,61,.92)"><svg class="ico"><use href="#i-locate"/></svg></div>
+    </div>
+    <div class="chips">
+      <div class="chip on"><svg class="ico"><use href="#i-cal"/></svg>Events</div>
+      <div class="chip glass">All places</div>
+      <div class="chip glass"><svg class="ico"><use href="#i-fork"/></svg>Restaurants</div>
+      <div class="chip glass"><svg class="ico"><use href="#i-cup"/></svg>Cafés</div>
+      <div class="chip glass"><svg class="ico"><use href="#i-bus"/></svg>Transit</div>
+    </div>
+  </div>
+  <div class="peek card" style="background:rgba(0,29,61,.97);border-color:var(--border-strong)">
+    <div class="row between">
+      <div class="row"><div class="plate" style="width:40px;height:40px;font-size:18px;border-radius:8px">16</div>
+        <div><div style="font-weight:700">Piața Huniade</div><div class="muted small">Next in 4 min · live</div></div></div>
+      <div class="pill signal">Stop</div>
+    </div>
+    <div class="row" style="margin-top:12px;gap:8px">
+      <div class="btn primary" style="flex:1;height:42px;font-size:14px"><svg class="ico"><use href="#i-walk"/></svg>Directions</div>
+      <div class="btn secondary" style="flex:1;height:42px;font-size:14px">Timetable</div>
+    </div>
+  </div>
+  <div class="tabs" style="position:absolute;bottom:0;left:0;right:0">
+    <div class="tab"><svg class="ico"><use href="#i-home"/></svg>Home</div>
+    <div class="tab on"><svg class="ico"><use href="#i-map"/></svg>Map</div>
+    <div class="tab"><svg class="ico"><use href="#i-chat"/></svg>AI</div>
+    <div class="tab"><svg class="ico"><use href="#i-user"/></svg>Profile</div>
+  </div>
+</div>
+
+<!-- ============ AI ============ -->
+<div class="phone lamp" id="ai">
+  <div class="status"><span>13:44</span><span>58%</span></div>
+  <div class="content" style="justify-content:flex-end;padding-bottom:16px">
+    <div style="flex:1;display:grid;place-content:center;gap:26px;text-align:center">
+      <div class="orb"><span></span><span></span><span></span></div>
+      <div style="display:grid;gap:6px">
+        <h1 style="font-size:24px">Ask about the city</h1>
+        <div class="muted">Places to eat, things to do, how to get there.</div>
+      </div>
+    </div>
+    <div class="chips">
+      <div class="chip" style="color:var(--text)">Cheap pizza near me</div>
+      <div class="chip" style="color:var(--text)">What's on this weekend?</div>
+      <div class="chip" style="color:var(--text)">Best coffee</div>
+    </div>
+    <div class="composer">Ask about places, events, directions…<div class="send"><svg class="ico"><use href="#i-up"/></svg></div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab"><svg class="ico"><use href="#i-home"/></svg>Home</div>
+    <div class="tab"><svg class="ico"><use href="#i-map"/></svg>Map</div>
+    <div class="tab on"><svg class="ico"><use href="#i-chat"/></svg>AI</div>
+    <div class="tab"><svg class="ico"><use href="#i-user"/></svg>Profile</div>
+  </div>
+</div>
+
+<!-- ============ PROFILE ============ -->
+<div class="phone" id="profile">
+  <div class="status"><span>13:44</span><span>58%</span></div>
+  <div class="content">
+    <div class="row between">
+      <div class="row" style="gap:14px">
+        <div class="avatar" style="width:62px;height:62px;font-size:24px">D</div>
+        <div><h1 style="font-size:24px">Doru</h1><div class="muted small">Member since 13 Nov 2026</div></div>
+      </div>
+      <div class="iconbtn"><svg class="ico" style="color:var(--gold)"><use href="#i-edit"/></svg></div>
+    </div>
+
+    <!-- Reliability as a transit line: the score is a stop on a 0–150 route, rules read like a fare table. -->
+    <div class="card rel">
+      <div class="row between">
+        <div style="font-weight:700">Reliability</div>
+        <div class="muted small">Starting score, no events yet</div>
+      </div>
+      <div class="line" data-score="100"></div>
+      <div class="fares">
+        <div><b class="signal">+5</b><span>checked in</span></div>
+        <div><b style="color:var(--danger)">−10</b><span>missed it</span></div>
+        <div><b style="color:var(--danger)">−2</b><span>left late</span></div>
+      </div>
+    </div>
+
+    <h2>Organising</h2>
+    <div class="card row" style="gap:12px">
+      <div style="width:58px;height:58px;border-radius:12px;background:linear-gradient(140deg,#003566,#001d3d);display:grid;place-items:center;color:rgba(255,255,255,.3)"><svg class="ico" style="width:26px;height:26px"><use href="#i-ball"/></svg></div>
+      <div style="flex:1">
+        <div style="font-weight:700">Batminyon</div>
+        <div class="gold small" style="font-weight:600">Sun 15 Nov, 19:00</div>
+        <div class="muted small">Marasti</div>
+      </div>
+      <div class="pill signal">4 spots left</div>
+    </div>
+
+    <h2>Reliability history</h2>
+    <div class="history">
+      <div class="ring"><svg class="ico"><use href="#i-shield"/></svg></div>
+      <div style="font-weight:700">No changes yet</div>
+      <div class="muted small">Join an event and get checked in to see your score move.</div>
+    </div>
+
+    <div class="row" style="gap:10px">
+      <div class="btn secondary" style="flex:1"><svg class="ico"><use href="#i-people"/></svg>Find people</div>
+      <div class="btn danger" style="flex:1"><svg class="ico"><use href="#i-out"/></svg>Sign out</div>
+    </div>
+  </div>
+  <div class="tabs">
+    <div class="tab"><svg class="ico"><use href="#i-home"/></svg>Home</div>
+    <div class="tab"><svg class="ico"><use href="#i-map"/></svg>Map</div>
+    <div class="tab"><svg class="ico"><use href="#i-chat"/></svg>AI</div>
+    <div class="tab on"><svg class="ico"><use href="#i-user"/></svg>Profile</div>
+  </div>
+</div>
+
+<!-- ============ EVENT ============ -->
+<div class="phone" id="event">
+  <div class="status"><span>13:45</span><span>58%</span></div>
+  <div class="content">
+    <div class="row" style="gap:14px"><div class="back"><svg class="ico"><use href="#i-back"/></svg></div><h2 style="font-size:20px">Event</h2></div>
+    <div class="art" style="height:190px;border-radius:18px;overflow:hidden;background:linear-gradient(140deg,#003566,#001d3d)">
+      <svg class="ico big" style="width:70px;height:70px"><use href="#i-ball"/></svg>
+      <div class="pill yellow" style="position:absolute;top:12px;left:12px">Sport</div>
+      <div class="date" style="left:auto;right:12px"><i>NOV</i><b>15</b></div>
+    </div>
+    <h1 style="font-size:26px">Batminyon</h1>
+    <div class="meta">
+      <div class="row"><svg class="ico"><use href="#i-cal"/></svg>Sun 15 Nov, 19:00</div>
+      <div class="row"><svg class="ico"><use href="#i-pin"/></svg>Marasti</div>
+      <div class="row"><svg class="ico"><use href="#i-people"/></svg>4 of 5 spots left
+        <span style="flex:1;height:6px;border-radius:3px;background:var(--mid);margin-left:6px;overflow:hidden"><span style="display:block;width:20%;height:100%;background:var(--signal)"></span></span></div>
+    </div>
+    <div class="muted" style="font-size:14px">Haideți la badminton.</div>
+    <div class="card row between" style="padding:12px 14px">
+      <div class="row"><div class="avatar">D</div><div><div class="muted small">Organiser</div><div style="font-weight:700">Doru</div></div></div>
+      <div class="trust"><svg class="ico"><use href="#i-shield"/></svg>100</div>
+    </div>
+    <div class="row" style="gap:10px">
+      <div class="btn secondary" style="flex:1"><svg class="ico"><use href="#i-map"/></svg>Show on map</div>
+      <div class="btn primary" style="flex:1.3"><svg class="ico"><use href="#i-qr"/></svg>Scan tickets</div>
+    </div>
+    <h2>Participants (1)</h2>
+    <div class="card row between" style="padding:12px 14px">
+      <div class="row"><div class="avatar">T</div><div style="display:grid;gap:5px"><div style="font-weight:700">test_</div>
+        <div class="row" style="gap:6px"><div class="trust" style="height:22px;font-size:11.5px"><svg class="ico"><use href="#i-shield"/></svg>105</div><div class="pill signal" style="height:22px">Checked in</div></div></div></div>
+      <div class="pill" style="border:1px solid rgba(255,107,107,.4);color:var(--danger);height:32px;padding:0 14px">Ban</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FIND PEOPLE ============ -->
+<div class="phone" id="people">
+  <div class="status"><span>13:45</span><span>58%</span></div>
+  <div class="content">
+    <div class="row" style="gap:14px"><div class="back"><svg class="ico"><use href="#i-back"/></svg></div><h2 style="font-size:20px">Find people</h2></div>
+    <div class="search typed"><svg class="ico" style="color:var(--gold)"><use href="#i-search"/></svg>test<span style="width:2px;height:18px;background:var(--yellow);margin-left:-8px"></span><svg class="ico" style="margin-left:auto;color:var(--muted)"><use href="#i-x"/></svg></div>
+    <div class="muted small">1 person matches “test”</div>
+    <div class="card row between">
+      <div class="row" style="gap:12px"><div class="avatar">T</div>
+        <div><div style="font-weight:700">test_</div><div class="muted small">Attended 1 event</div></div></div>
+      <div class="row" style="gap:10px"><div class="trust"><svg class="ico"><use href="#i-shield"/></svg>105</div><svg class="ico muted"><use href="#i-chev"/></svg></div>
+    </div>
+    <div class="card row between" style="opacity:.55">
+      <div class="row" style="gap:12px"><div class="avatar" style="color:var(--signal)">?</div>
+        <div><div style="font-weight:700">Search by username</div><div class="muted small">See someone's score and the events they attended.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ RELIABILITY LINE AT DIFFERENT SCORES ============ -->
+<div class="phone" id="scores">
+  <div class="status"><span>Reliability line</span><span>scores</span></div>
+  <div class="content" style="gap:12px">
+    <div class="muted small">The line moves with the score. Stops every 50 points, full at 200.</div>
+    <div class="card rel"><div class="row between"><div style="font-weight:700">New account</div><div class="muted small">score 100</div></div><div class="line" data-score="100"></div></div>
+    <div class="card rel"><div class="row between"><div style="font-weight:700">Missed a few</div><div class="muted small">score 35</div></div><div class="line" data-score="35"></div></div>
+    <div class="card rel"><div class="row between"><div style="font-weight:700">Never shows up</div><div class="muted small">score 0</div></div><div class="line" data-score="0"></div></div>
+    <div class="card rel"><div class="row between"><div style="font-weight:700">Regular</div><div class="muted small">score 165</div></div><div class="line" data-score="165"></div></div>
+    <div class="card rel"><div class="row between"><div style="font-weight:700">Maxed out</div><div class="muted small">score 200</div></div><div class="line" data-score="200"></div></div>
+  </div>
+</div>
+
+</div>
+<script>
+  // Draws a reliability line on a fixed 0–200 scale. Scores above 200 sit at the end.
+  const STEP = 50, MAX = 200;
+  document.querySelectorAll('.line[data-score]').forEach((el) => {
+    const score = Math.max(0, Number(el.dataset.score));
+    const pos = (v) => (Math.min(v, MAX) / MAX) * 100;
+    const nextStop = Math.floor(score / STEP) * STEP + STEP;
+    let html = `<div class="track"><div class="fill" style="width:${pos(score)}%"></div></div>`;
+    for (let v = 0; v <= MAX; v += STEP) {
+      if (Math.abs(pos(v) - pos(score)) < 12) continue; // the plate would cover this stop
+      const cls = v < score ? 'passed' : v === nextStop ? 'next' : '';
+      html += `<div class="stop ${cls}" style="left:${pos(v)}%"><i></i><span>${v}</span></div>`;
+    }
+    html += `<div class="here" style="left:${pos(score)}%">${score}</div>`;
+    el.innerHTML = html;
+  });
+
+  // ?s=<id> renders one screen at phone size (used to export single PNGs).
+  const s = new URLSearchParams(location.search).get('s');
+  if (s) { document.body.classList.add('single'); document.getElementById(s).classList.add('show'); }
+</script>
+</body>
+</html>

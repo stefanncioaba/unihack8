@@ -3,7 +3,7 @@ import { router } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import type { EventSummary } from '@/api/types';
-import { formatEventDate } from '@/lib/time';
+import { formatEventDate, monthDay } from '@/lib/time';
 import { Icon } from '@/ui/Icon';
 import { StatusChip } from '@/ui/Chip';
 import { Text } from '@/ui/Text';
@@ -22,7 +22,18 @@ export function openEvent(id: string) {
 function AvailabilityChip({ event }: { event: EventSummary }) {
   const label = availabilityLabel(event);
   if (!label) return null;
-  return <StatusChip label={label} tone={isFull(event) ? 'danger' : event.source === 'EXTERNAL' ? 'muted' : 'teal'} />;
+  return <StatusChip label={label} tone={isFull(event) ? 'danger' : event.source === 'EXTERNAL' ? 'muted' : 'signal'} />;
+}
+
+/** Small calendar page (yellow month strip over the day number) for the corner of event art. */
+export function DateBadge({ iso }: { iso: string }) {
+  const { month, day } = monthDay(iso);
+  return (
+    <View style={styles.badge} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+      <Text style={styles.badgeMonth}>{month}</Text>
+      <Text style={styles.badgeDay}>{day}</Text>
+    </View>
+  );
 }
 
 /** Large card (16:9 art, two-line title, warm date line) for horizontally scrolling rows. */
@@ -38,6 +49,9 @@ export function EventCard({ event, width = 264 }: { event: EventSummary; width?:
     >
       <EventArt category={event.category} imageUrl={event.imageUrl} shade>
         <View style={styles.corner}>
+          <DateBadge iso={event.startsAt} />
+        </View>
+        <View style={styles.categoryIcon}>
           <Icon name={meta.icon} size={14} color={colors.text} />
         </View>
         <View style={styles.overlay}>
@@ -97,16 +111,20 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
     overflow: 'hidden',
   },
-  corner: {
+  corner: { position: 'absolute', top: 10, left: 10 },
+  badge: { width: 42, borderRadius: 9, overflow: 'hidden', backgroundColor: colors.bg, borderWidth: 1, borderColor: colors.borderStrong, alignItems: 'center' },
+  badgeMonth: { alignSelf: 'stretch', textAlign: 'center', fontSize: 9.5, lineHeight: 14, fontWeight: '800', color: colors.onAccent, backgroundColor: colors.accent },
+  badgeDay: { fontSize: 16, lineHeight: 21, fontWeight: '800', color: colors.text, fontVariant: ['tabular-nums'] },
+  categoryIcon: {
     position: 'absolute',
     top: 10,
-    left: 10,
+    right: 10,
     width: 26,
     height: 26,
     borderRadius: 13,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(9,10,24,0.6)',
+    backgroundColor: 'rgba(0,8,20,0.6)',
   },
   overlay: { position: 'absolute', left: 12, right: 12, bottom: 10, gap: 2 },
   footer: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 8, padding: 10 },

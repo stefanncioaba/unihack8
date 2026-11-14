@@ -28,8 +28,8 @@ export function ChatInput({ onSend, disabled }: Props) {
         onChangeText={setText}
         onSubmitEditing={submit}
         placeholder="Ask about places, events, directions…"
-        placeholderTextColor="#6F6E80"
-        selectionColor={colors.orange}
+        placeholderTextColor="#5D7393"
+        selectionColor={colors.accent}
         returnKeyType="send"
         blurOnSubmit={false}
         multiline
@@ -65,5 +65,5 @@ const styles = StyleSheet.create({
   },
   input: { flex: 1, maxHeight: 110, minHeight: 36, color: colors.text, fontSize: 14, paddingVertical: 8 },
   send: { width: 36, height: 36, borderRadius: 18, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.surfaceAlt },
-  sendActive: { backgroundColor: colors.orange },
+  sendActive: { backgroundColor: colors.accent },
 });

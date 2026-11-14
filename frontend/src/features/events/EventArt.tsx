@@ -35,7 +35,7 @@ export function EventArt({ category, imageUrl, aspectRatio = 16 / 9, shade, icon
           </View>
         </>
       )}
-      {shade && <LinearGradient colors={['transparent', 'rgba(9,10,24,0.92)']} locations={[0.25, 1]} style={StyleSheet.absoluteFill} />}
+      {shade && <LinearGradient colors={['transparent', 'rgba(0,8,20,0.92)']} locations={[0.25, 1]} style={StyleSheet.absoluteFill} />}
       {children}
     </View>
   );

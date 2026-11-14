@@ -14,8 +14,8 @@ export function Avatar({ size = 40 }: { size?: number }) {
         </LinearGradient>
       </Defs>
       <Circle cx="24" cy="24" r="23.5" fill="url(#avatarBg)" stroke={colors.borderStrong} />
-      <Circle cx="24" cy="19" r="7" fill={colors.teal} opacity={0.85} />
-      <Path d="M9 40c1.5-8 7.5-12 15-12s13.5 4 15 12c-4.2 4.6-9.2 6.5-15 6.5S13.2 44.6 9 40z" fill={colors.tealDeep} opacity={0.7} />
+      <Circle cx="24" cy="19" r="7" fill={colors.signal} opacity={0.85} />
+      <Path d="M9 40c1.5-8 7.5-12 15-12s13.5 4 15 12c-4.2 4.6-9.2 6.5-15 6.5S13.2 44.6 9 40z" fill={colors.signalDeep} opacity={0.7} />
     </Svg>
   );
 }

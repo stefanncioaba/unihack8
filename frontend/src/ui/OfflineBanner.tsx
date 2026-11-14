@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     gap: 6,
     paddingHorizontal: 16,
     paddingBottom: 6,
-    backgroundColor: 'rgba(255,90,106,0.92)',
+    backgroundColor: 'rgba(255,107,107,0.92)',
   },
   text: { color: colors.text, flexShrink: 1, textAlign: 'center' },
 });

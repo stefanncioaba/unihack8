@@ -8,6 +8,7 @@ import {
   formatEventDate,
   formatTime,
   minutesUntil,
+  monthDay,
   toBucharest,
 } from '@/lib/time';
 
@@ -32,6 +33,9 @@ describe('Bucharest time', () => {
     expect(formatDay('2026-11-14T17:00:00Z')).toBe('Sat, 14 Nov');
     expect(formatEventDate('2026-11-14T17:00:00Z')).toBe('Sat, 14 Nov · 19:00');
     expect(formatDate('2026-11-14T17:00:00Z')).toBe('14 Nov 2026');
+    expect(monthDay('2026-11-14T17:00:00Z')).toEqual({ month: 'Nov', day: 14 });
+    // 23:30 UTC on the 30th is already 1 Dec in Bucharest.
+    expect(monthDay('2026-11-30T23:30:00Z')).toEqual({ month: 'Dec', day: 1 });
   });
 
   it('rolls into the next day when the offset crosses midnight', () => {

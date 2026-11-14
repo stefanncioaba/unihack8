@@ -5,8 +5,8 @@ import type { TransitArrival, TransitDeparture } from '@/api/types.transit';
 import { useLastDepartures, useStopArrivals } from '@/hooks/useTransit';
 import { StatusChip } from '@/ui/Chip';
 import { ErrorState, LoadingState } from '@/ui/States';
+import { RoutePlate } from '@/ui/RoutePlate';
 import { Text } from '@/ui/Text';
-import { colors } from '@/ui/theme';
 import { formatTime, parseIso } from '@/lib/time';
 
 /** How many arrivals fit in the panel. */
@@ -21,13 +21,11 @@ export function arrivalLabel(minutes: number): string {
 function LineRow({ route, headsign, right, muted, testID }: { route: string; headsign: string; right: string; muted?: boolean; testID?: string }) {
   return (
     <View style={styles.row} testID={testID}>
-      <View style={styles.line}>
-        <Text variant="chip">{route}</Text>
-      </View>
+      <RoutePlate label={route} size="sm" style={muted ? { opacity: 0.55 } : undefined} />
       <Text numberOfLines={1} tone={muted ? 'muted' : 'primary'} style={{ flex: 1 }}>
         {headsign}
       </Text>
-      <Text tone={muted ? 'muted' : 'teal'} variant="cardTitle">
+      <Text tone={muted ? 'muted' : 'signal'} variant="cardTitle">
         {right}
       </Text>
     </View>
@@ -81,7 +79,7 @@ export function StopPanel({ stopId }: { stopId: string }) {
   return (
     <View style={{ gap: 10 }} testID="stop-panel">
       <View style={styles.header}>
-        <StatusChip label="STOP" tone="teal" />
+        <StatusChip label="STOP" tone="signal" />
         {arrivals.data?.stale && <StatusChip label="DELAYED DATA" tone="muted" />}
       </View>
       <Text variant="heading" numberOfLines={2} style={{ paddingRight: 24 }}>
@@ -119,13 +117,4 @@ export function StopPanel({ stopId }: { stopId: string }) {
 const styles = StyleSheet.create({
   header: { flexDirection: 'row', gap: 6 },
   row: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  line: {
-    minWidth: 30,
-    height: 22,
-    paddingHorizontal: 6,
-    borderRadius: 6,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.surfaceAlt,
-  },
 });
