@@ -417,6 +417,20 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 ---
 
+## 25. Neighbour Help Board — Tracks A + C
+
+**Needs:** 5, 6 (done). Added 2026-11-14. **Goal:** "Neighbours helping neighbours, with trust built in." Users post small help requests (borrow a ladder, walk a dog, carry a bag); others offer to help and the requester decides whom to trust by their civic trust score. The requester scans the helper's QR code like an event check-in: the first scanned helper closes the request and gets +5; nobody else's points change. A request nobody closes disappears after 24 h.
+
+- [x] **25.1 Rules (agreed 2026-11-14):** scanned helper +5 (`HELPED`, like attending); requester unchanged; other helpers 0; withdrawing and cancelling free; unlimited offers; 24 h expiry with no points. In `DOCS.md` → Reliability rules.
+- [x] **25.2 Database:** `help_requests` and `help_offers` — migration `20261114000005_help_board.sql`. *Applied to Supabase 2026-11-14 and checked (5/5).*
+- [x] **25.3 API:** board (with `near` and `bbox`, the latter for Neighbourhood Pulse's per-area list), mine, create, detail, cancel, offer, withdraw, my-ticket, check-in (package `help`); errors `NOT_REQUESTER`, `IS_REQUESTER`, `ALREADY_OFFERED`, `NOT_OFFERED`, `HELP_CLOSED`, `WRONG_REQUEST`. Contract in `docs/API.md`.
+- [x] **25.4 First scan closes:** row lock + conditional updates; other offers become `NOT_NEEDED`; a second scan is refused and pays nothing.
+- [x] **25.5 App:** Help board, post form, detail with offers and trust scores, offer / withdraw, helper QR ticket, requester scanner, closed / expired states, entry from Home, "Helped a neighbour" in the history; test-only mock route `testing/mocks/routes/help.ts` with the same rules.
+- [x] **25.6 Tests:** backend and frontend (see `DOCS.md` → Neighbour Help Board).
+- [x] **25.7** `DOCS.md`, `docs/API.md` and the knowledge graph updated.
+
+---
+
 ## If time runs short — cut in this order
 
 1. Marker clustering (14.6) and AI result cards (15.4).

@@ -1,8 +1,8 @@
 // My ticket: the participant's QR code for an event (PLAN 13.6). The QR holds only the `qrToken`.
 import { useLocalSearchParams } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
-import QRCode from 'react-native-qrcode-svg';
 
+import { QrTile } from '@/features/scan/QrTile';
 import { useEvent, useMyTicket } from '@/hooks/queries';
 import { formatEventDate } from '@/lib/time';
 import { StatusChip } from '@/ui/Chip';
@@ -10,7 +10,6 @@ import { Screen } from '@/ui/Screen';
 import { ScreenHeader } from '@/ui/ScreenHeader';
 import { ErrorState, LoadingState } from '@/ui/States';
 import { Text } from '@/ui/Text';
-import { colors } from '@/ui/theme';
 
 /** Shows the QR code the organiser scans at the venue. */
 export default function TicketScreen() {
@@ -27,10 +26,7 @@ export default function TicketScreen() {
         <ErrorState error={ticket.error} onRetry={() => ticket.refetch()} />
       ) : (
         <View style={styles.wrap}>
-          {/* The code needs a light tile to scan reliably. */}
-          <View style={styles.qr} accessibilityLabel="Ticket QR code" testID="ticket-qr">
-            <QRCode value={ticket.data.qrToken} size={216} color="#000814" backgroundColor="#EEF3FA" />
-          </View>
+          <QrTile value={ticket.data.qrToken} />
           <StatusChip
             label={ticket.data.status === 'ATTENDED' ? 'CHECKED IN' : 'READY TO SCAN'}
             tone={ticket.data.status === 'ATTENDED' ? 'signal' : 'accent'}
@@ -61,7 +57,6 @@ export default function TicketScreen() {
 
 const styles = StyleSheet.create({
   wrap: { alignItems: 'center', gap: 16, paddingTop: 12 },
-  qr: { padding: 16, borderRadius: 16, backgroundColor: '#EEF3FA', borderWidth: 1, borderColor: colors.borderStrong },
   details: { gap: 4, alignItems: 'center' },
   center: { textAlign: 'center' },
 });

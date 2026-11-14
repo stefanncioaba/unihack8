@@ -21,12 +21,13 @@ async function startEditing(name: string) {
 }
 
 describe('ProfileScreen: score explanation (16.1)', () => {
-  it('shows the rules, including the volunteer bonus, under the civic trust line', async () => {
+  it('shows the rules, including the volunteer bonus and helping a neighbour, under the civic trust line', async () => {
     renderScreen(<ProfileScreen />);
     expect(await screen.findByText('Civic trust score')).toBeTruthy();
     const panel = await screen.findByTestId('score-explainer');
-    expect(within(panel).getAllByText('+5')).toHaveLength(2);
+    expect(within(panel).getAllByText('+5')).toHaveLength(3);
     expect(within(panel).getByText(/volunteer action/)).toBeTruthy();
+    expect(within(panel).getByText(/Helped a neighbour/)).toBeTruthy();
     expect(within(panel).getByText('−10')).toBeTruthy();
     expect(within(panel).getByText('−2')).toBeTruthy();
     expect(screen.getByText(/never drops below 0/)).toBeTruthy();
@@ -271,5 +272,6 @@ describe('reliability labels', () => {
     expect(reasonLabel('LATE_CANCEL')).toBe('Left late');
     expect(reasonLabel('EVENT_RATING')).toBe('Event rating');
     expect(reasonLabel('VOLUNTEER_BONUS')).toBe('Volunteer bonus');
+    expect(reasonLabel('HELPED')).toBe('Helped a neighbour');
   });
 });

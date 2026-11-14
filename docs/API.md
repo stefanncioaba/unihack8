@@ -4,7 +4,7 @@ The contract between the Spring backend (`backend/`) and the Expo app (`frontend
 The app always calls the real backend (PLAN 17.1); the Jest tests use a mock backend built from the examples below (`frontend/testing/mocks/`),
 so **change this file first, then the code**, and tell the team when you do.
 
-Covers PLAN tasks 4–11. Sign-up and login are not here: the app does them directly with Supabase.
+Covers PLAN tasks 4–11, 22, 24 and 25 (Neighbour Help Board). Sign-up and login are not here: the app does them directly with Supabase.
 
 ---
 
@@ -74,6 +74,12 @@ For `VALIDATION_FAILED`, `fields` lists per-field errors when available (for exa
 | 409 | `ALREADY_CHECKED_IN` | This ticket was already scanned. |
 | 403 | `NOT_ATTENDED` | Only participants the organiser checked in can review the event. |
 | 409 | `REVIEWS_CLOSED` | Reviews closed (24 h after the event ended, or the rating was settled). |
+| 403 | `NOT_REQUESTER` | Only the person who posted the help request can do this (cancel, scan). |
+| 409 | `IS_REQUESTER` | You cannot offer help on your own request. |
+| 409 | `ALREADY_OFFERED` | You already offered to help with this request. |
+| 409 | `NOT_OFFERED` | No current offer from you (or from the scanned helper). |
+| 409 | `HELP_CLOSED` | The help request is closed: already helped, cancelled, or 24 h passed. |
+| 409 | `WRONG_REQUEST` | The scanned helper ticket belongs to another help request. |
 | 429 | `RATE_LIMITED` | Reserved. The AI chat no longer has a per-user limit, so nothing returns it today. |
 | 500 | `INTERNAL_ERROR` | Unexpected server error (details are only in the backend log). |
 | 503 | `AI_UNAVAILABLE` | Gemini did not answer. |
@@ -425,6 +431,126 @@ Creates or replaces the caller's review. Request:
 Errors: `400 VALIDATION_FAILED`, `403 NOT_ATTENDED` (not checked in), `403 EXTERNAL_EVENT`, `409 IS_ORGANIZER`, `409 REVIEWS_CLOSED`, `404 NOT_FOUND`.
 
 **Organiser rating settlement.** A backend job (every 5 minutes) settles each user event once its reviews close: with reviews, the organiser gets `round((average − 3) × 2.5)` points (rounded away from zero; at least +1 above 3 stars, at least −1 at 3 stars or less), logged as `EVENT_RATING`. 5★ → +5, 4★ → +3, 3★ → −1, 2★ → −3, 1★ → −5. No reviews → no change. Each event is settled exactly once.
+
+---
+
+## Neighbour Help Board — PLAN task 25
+
+"Neighbours helping neighbours, with trust built in." A user posts that they need small help; other users offer to help.
+The requester picks whom to trust by their civic trust score, meets them, and scans the helper's QR code.
+**The first helper who is scanned closes the request.** All endpoints need a token.
+
+Rules (see `DOCS.md` → Reliability rules):
+
+- The scanned helper gets **+5** (`HELPED` log row; in `GET /users/{id}/reliability` its `eventId` and `eventTitle` are `null`). Nobody else's score changes: not the requester, not the other helpers.
+- Withdrawing an offer and cancelling a request are free. There is no limit on how many people can offer.
+- A request that nobody closed **disappears 24 hours after it was posted** (`expiresAt`): it leaves the board and can no longer be offered on or scanned. No points change.
+
+### HelpRequestSummary
+
+```json
+{
+  "id": "5d1e2f3a-4b5c-4d6e-8f70-1a2b3c4d5e6f",
+  "title": "Borrow a ladder for 30 minutes",
+  "category": "BORROW",
+  "address": "Strada Paris 12",
+  "lat": 45.7489,
+  "lon": 21.2318,
+  "requester": { "id": "8b0f6c1e-2d3a-4f5b-9c7d-1e2f3a4b5c6d", "username": "stefan", "reliabilityScore": 115 },
+  "status": "OPEN",
+  "createdAt": "2026-11-14T17:00:00Z",
+  "expiresAt": "2026-11-15T17:00:00Z",
+  "offerCount": 2,
+  "myOffer": "OFFERED"
+}
+```
+
+- `category` is one of `BORROW` (lend a tool or thing), `CARRY` (carry or move something), `PETS` (walk or feed a pet), `ERRANDS` (shopping, pick-ups), `REPAIRS` (small fixes, tech help), `OTHER`.
+- `status` is `OPEN`, `HELPED` (closed by a scan), `CANCELLED` (by the requester) or `EXPIRED` (24 h passed while open).
+- `address`, `lat` and `lon` are optional (`lat`/`lon` both or neither). `offerCount` counts current offers (`OFFERED` and `HELPED`).
+- `myOffer` is the caller's offer status, or `null`: `OFFERED`, `WITHDRAWN`, `HELPED` (the caller was scanned) or `NOT_NEEDED` (someone else was scanned first).
+
+### `GET /help-requests`
+
+The board: open, not expired requests, newest first, at most 50. Optional `near=lat,lon` sorts by distance instead (requests without a location last).
+Optional `bbox=minLon,minLat,maxLon,maxLat` (same format as `GET /events?bbox=`) keeps only requests **with a location inside the box** (edges included; min greater than max is a 400) — used by Neighbourhood Pulse for one area's requests; it combines with `near`.
+Answer: array of `HelpRequestSummary`. Errors: `400 VALIDATION_FAILED` (bad `near` or `bbox`).
+
+### `GET /help-requests/mine`
+
+```json
+{ "requested": [ HelpRequestSummary ], "offered": [ HelpRequestSummary ] }
+```
+
+The caller's own requests and the requests they offered on (every status, `WITHDRAWN` offers left out), newest first, at most 20 each.
+
+### `POST /help-requests`
+
+```json
+{ "title": "Borrow a ladder for 30 minutes", "description": "Changing a bulb in the hallway.", "category": "BORROW",
+  "address": "Strada Paris 12", "lat": 45.7489, "lon": 21.2318 }
+```
+
+`title` 3–80 characters, `description` optional ≤ 500, `address` optional ≤ 120, `category` from the list, `lat`/`lon` both or neither and valid.
+Answer `201`: `HelpRequestDetail`. Errors: `400 VALIDATION_FAILED`.
+
+### `GET /help-requests/{id}`
+
+`HelpRequestDetail` = `HelpRequestSummary` plus:
+
+```json
+{
+  "description": "Changing a bulb in the hallway.",
+  "closedAt": null,
+  "helper": null,
+  "offers": [
+    { "user": { "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d", "username": "stella_99", "reliabilityScore": 95 },
+      "status": "OFFERED", "offeredAt": "2026-11-14T17:10:00Z" }
+  ],
+  "isRequester": false,
+  "canOffer": false
+}
+```
+
+`helper` is the scanned helper (`UserSummary`) once `HELPED`. `offers` lists everyone who offered except withdrawn offers, oldest first.
+`canOffer` is true when the request is `OPEN`, the caller is not the requester and has no current offer.
+Expired and closed requests stay readable here. Errors: `404 NOT_FOUND`.
+
+### `DELETE /help-requests/{id}`
+
+Requester only, while `OPEN`: sets `CANCELLED` and `closedAt`. Offers keep their status (no points change for anyone). Answer: `HelpRequestDetail`.
+Errors: `403 NOT_REQUESTER`, `409 HELP_CLOSED` (already helped, cancelled or expired).
+
+### `POST /help-requests/{id}/offers`
+
+Offer to help. Answer `201`: `{ "requestId": "…", "qrToken": "…", "status": "OFFERED" }`. Offering again after withdrawing keeps the same QR token.
+Errors: `409 IS_REQUESTER`, `409 ALREADY_OFFERED`, `409 HELP_CLOSED`.
+
+### `DELETE /help-requests/{id}/offers/me`
+
+Withdraw an `OFFERED` offer; free. Answer: `{ "requestId": "…", "status": "WITHDRAWN" }`. Errors: `409 NOT_OFFERED`, `409 HELP_CLOSED`.
+
+### `GET /help-requests/{id}/my-ticket`
+
+The helper's QR code (it contains only `qrToken`): `{ "requestId": "…", "qrToken": "…", "status": "OFFERED" }`.
+`status` is `OFFERED`, `HELPED` or `NOT_NEEDED`. Errors: `409 NOT_OFFERED` (never offered, or withdrew).
+
+### `POST /help-requests/{id}/check-in`
+
+The requester scans a helper's QR code: `{ "token": "…" }`. Answer:
+
+```json
+{
+  "user": { "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d", "username": "stella_99", "reliabilityScore": 100 },
+  "status": "HELPED",
+  "pointsChange": 5
+}
+```
+
+The helper's offer becomes `HELPED`, every other offer `NOT_NEEDED` (no points), the request `HELPED` with `closedAt`.
+Errors: `403 NOT_REQUESTER`, `404 TICKET_NOT_FOUND` (unknown token or not a ticket), `409 WRONG_REQUEST` (ticket of another request),
+`409 NOT_OFFERED` (the helper withdrew), `409 HELP_CLOSED` (already helped — also a second scan — cancelled or expired), `400 VALIDATION_FAILED` (blank token).
+Checks run in this order: blank token (400), unknown request (404), `NOT_REQUESTER`, `HELP_CLOSED`, `TICKET_NOT_FOUND`, `WRONG_REQUEST`, `NOT_OFFERED`.
 
 ---
 

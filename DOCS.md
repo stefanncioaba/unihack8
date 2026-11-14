@@ -84,7 +84,7 @@ Shared code every feature uses. Feature packages (`users`, `events`, …) are cr
 
 ## Database (PLAN task 2)
 
-Applied to Supabase from `supabase/migrations/` in file order: the four schema migrations on 2026-11-13, the three `place_prices` migrations (table + data, PLAN 11.3) on 2026-11-14. `20261114000004_event_reviews.sql` (PLAN 22) on 2026-11-14 (Supabase migration `event_reviews`). Checked on the real database the same day: column types read by the Java queries (average = double precision, counts and spots = integer), and a rolled-back check block (one review per person, rating 1–5, comment ≤ 300, average/count, settle-once update, cascade on event delete, RLS on) — 7/7 passed, no data left behind.
+Applied to Supabase from `supabase/migrations/` in file order: the four schema migrations on 2026-11-13, the three `place_prices` migrations (table + data, PLAN 11.3) on 2026-11-14. `20261114000004_event_reviews.sql` (PLAN 22) on 2026-11-14 (Supabase migration `event_reviews`). `20261114000005_help_board.sql` (PLAN 25) on 2026-11-14 (Supabase migration `help_board`), checked the same day with a rolled-back block (lat/lon pairs, `HELPED` needs `checked_in_at`, closed needs `closed_at`, one `HELPED` offer per request, RLS on — 5/5 passed) and `EXPLAIN` of the backend's queries. Checked on the real database the same day: column types read by the Java queries (average = double precision, counts and spots = integer), and a rolled-back check block (one review per person, rating 1–5, comment ≤ 300, average/count, settle-once update, cascade on event delete, RLS on) — 7/7 passed, no data left behind.
 
 | Table | Purpose |
 |---|---|
@@ -93,6 +93,8 @@ Applied to Supabase from `supabase/migrations/` in file order: the four schema m
 | `event_participants` | Who joined which event (one row per pair), `status` (`JOINED`, `ATTENDED`, `NO_SHOW`, `CANCELLED`, `BANNED`), auto-generated `qr_token`. `checked_in_at` is set only for `ATTENDED`. |
 | `reliability_log` | Every score change: `points_change` (e.g. +5, −10) and `reason`. Kept when its event is deleted. |
 | `event_reviews` | One review per checked-in attendee per event (PLAN 22): `rating` 1–5, optional `comment` (≤ 300 chars), `created_at`, `updated_at`. `events.review_settled_at` marks when the organiser's rating points were applied. |
+| `help_requests` | Neighbour Help Board (PLAN 25): `requester_id`, `title` (3–80), optional `description` (≤ 500), `category` (`BORROW`, `CARRY`, `PETS`, `ERRANDS`, `REPAIRS`, `OTHER`), optional `address` and coordinates (both or neither), `status` (`OPEN`, `HELPED`, `CANCELLED`; `EXPIRED` is computed), `expires_at` (= `created_at` + 24 h), `closed_at` (set exactly when not open), `helper_id`. |
+| `help_offers` | Who offered to help (one row per request and helper): `status` (`OFFERED`, `WITHDRAWN`, `HELPED`, `NOT_NEEDED`), auto-generated `qr_token`, `checked_in_at` only for `HELPED`; a partial unique index allows one `HELPED` per request. |
 | `places` | Places imported from OpenStreetMap; `osm_id` (e.g. `node/2845091337`) is unique so re-imports update rows. |
 | `place_prices` | Researched menu prices for the AI (PLAN 11.3): `place_name` (matches `places.name` or the OSM `brand` tag, case-insensitive), `item`, `item_type` (`COFFEE`, `PIZZA`, `FOOD`, `BEER`, `DRINK`), `price_lei`, `size`, `source_type`, `source_url`, `source_date`, `note`. See Features → AI assistant. |
 
@@ -103,13 +105,13 @@ Applied to Supabase from `supabase/migrations/` in file order: the four schema m
 - **Search:** trigram indexes on `profiles.username` and `events.title` (extension `pg_trgm` in schema `extensions`).
 - **No seed data.**
 
-**Tests:** `supabase/tests/schema_checks.sql` (21 checks: sign-up trigger, username rules, event source rules, double join, check-in rule, cascades, RLS). Run it with the Supabase MCP `execute_sql`; it always rolls back and ends with the error `SCHEMA CHECKS PASSED (21 checks)` or `SCHEMA CHECK FAILED: …`. Last run 2026-11-13: passed.
+**Tests:** `supabase/tests/schema_checks.sql` (25 checks, the last 4 for the Help Board: sign-up trigger, username rules, event source rules, double join, check-in rule, cascades, RLS). Run it with the Supabase MCP `execute_sql`; it always rolls back and ends with the error `SCHEMA CHECKS PASSED (25 checks)` or `SCHEMA CHECK FAILED: …`. Last run 2026-11-13: passed.
 
 **Advisors (2026-11-13):** security — only "RLS enabled, no policy" (INFO, intended); performance — only "unused index" (INFO, expected on empty tables). **Re-run 2026-11-14 after `event_reviews`:** the same two INFO kinds (now also for `event_reviews` and its reviewer index), plus one Auth WARN "Leaked password protection disabled" (an Auth dashboard setting, not part of the schema).
 
 ## Current state
 
-- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging), users/profile endpoints (task 4), events and participation (task 5), QR check-in, no-show job and reliability history (task 6), LiveTickets events import (task 7, 38 events), places (task 8, 1003 Timișoara places imported into Supabase), live transit (task 9, `/transit/**`) and routing (task 10, `/routes/plan`) and the AI assistant (task 11, `POST /ai/chat`, Gemini + our own tools + 232 stored menu prices). Event reviews and organiser rating (task 22, package `reviews`). The combined backend has 408 tests passing, 1 live Gemini check skipped by default (2026-11-14, event reviews merged with main); the frontend 375 (plus 7 live-backend tests skipped by default; 2026-11-14, event reviews merged with main).
+- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging), users/profile endpoints (task 4), events and participation (task 5), QR check-in, no-show job and reliability history (task 6), LiveTickets events import (task 7, 38 events), places (task 8, 1003 Timișoara places imported into Supabase), live transit (task 9, `/transit/**`) and routing (task 10, `/routes/plan`) and the AI assistant (task 11, `POST /ai/chat`, Gemini + our own tools + 232 stored menu prices). Event reviews and organiser rating (task 22, package `reviews`). Neighbour Help Board (task 25, package `help`): 473 backend tests and 556 frontend tests passing, 7 skipped (2026-11-14). The combined backend has 408 tests passing, 1 live Gemini check skipped by default (2026-11-14, event reviews merged with main); the frontend 375 (plus 7 live-backend tests skipped by default; 2026-11-14, event reviews merged with main).
 - `supabase/`: migrations and schema tests for task 2, applied.
 - `docs/API.md`: API contract (task 1.6).
 - `infra/otp/`: OpenTripPlanner 2.7 setup (docker-compose, data download script). Its large data files are git-ignored. `GET /routes/plan` is implemented (task 10).
@@ -173,11 +175,13 @@ Checked by calling the API with our key on 2026-11-13 (this replaces the earlier
 | Still `JOINED` when the event ends (no-show) | −10 | `NO_SHOW` |
 | Leaves less than 2 hours before the start | −2 | `LATE_CANCEL` |
 | Leaves earlier | 0 | — (no log entry) |
+| Helper scanned by the requester on the **Neighbour Help Board** (PLAN 25); only the first scanned helper, once | +5 | `HELPED` (`event_id` null) |
 | Organiser, 24 h after their event ends, from the attendees' average rating (PLAN 22) | `round((avg − 3) × 2.5)`, −5 … +5 (5★ +5, 4★ +3, 3★ −1, 2★ −3, 1★ −5) | `EVENT_RATING` |
 
 - In the app the reliability score is shown as the **civic trust score** (same number, same API field `reliabilityScore`); only the labels changed.
 - The score never goes below 0: a change that would go lower stops at 0 (the log still records the full rule value).
 - Being banned by an organiser costs no points by itself.
+- Help Board (agreed 2026-11-14): the requester's score never changes; other helpers lose nothing when someone else is scanned first; withdrawing an offer and cancelling a request are free; there is no limit on offers; a request nobody closes expires after 24 h with no change for anyone.
 - Only `USER` events count; imported events cannot be joined.
 - An event with no end time is treated as ending 3 hours after it starts (for no-shows and check-in).
 - Organiser rating: above 3 stars always gains at least +1, 3 stars or less always loses at least −1; an event with no reviews changes nothing. Applied once per event.
@@ -444,6 +448,31 @@ When the AI gives directions that start **where the user is**, its answer has a 
 **Tests:** backend `ToolContextTest` (user start / start 30 m away / other start / no location), `PlanRouteAndEventsToolTest` (routes remembered from the user, from another place, without location), `ChatResultMapperImplTest` (names, "Your location", duplicates, empty list), `AiChatServiceImplTest` (`routes[]` in the chat answer, empty when no route), `AiControllerTest` (JSON shape). Mobile `ai.routes.test.tsx` (Go shown / hidden, Go opens journey mode, preview, permission refused, params round-trip) and `map.journey.test.tsx` (progress maths, first step from the live GPS, step advance at the stop, off-route re-plan, arrival, End, moved since the answer, permission, error + retry, preview from another place), with mocked positions through `globalThis.__moveTo()` in `jest.setup.ts`.
 
 **Not verified yet:** not tried on a phone (GPS accuracy, camera following, battery) and not against real Gemini — whether the model leaves out the start point for "how do I get there" is only asked for by the prompt.
+
+### Neighbour Help Board (PLAN task 25, Tracks A + C)
+
+"Neighbours helping neighbours, with trust built in." A user posts that they need small help (borrow a ladder, walk a dog, carry a bag); other users offer; the requester picks whom to trust by their civic trust score and scans that helper's QR code when they meet. It works like an event check-in, but **the first scanned helper closes the request**. Contract: `docs/API.md` → Neighbour Help Board; points: Reliability rules above.
+
+**Backend** (package `help`: `controller`, `domain/{entity,dto}`, `mapper` + `impl`, `repository` + `impl`, `service` + `impl`, plus `domain/HelpRules`):
+- `HelpController` — `GET /help-requests` (board, optional `near` sort and `bbox` area filter — Neighbourhood Pulse lists one area's requests with it), `GET /help-requests/mine`, `POST /help-requests`, `GET` / `DELETE /help-requests/{id}`, `POST /help-requests/{id}/offers`, `DELETE /help-requests/{id}/offers/me`, `GET /help-requests/{id}/my-ticket`, `POST /help-requests/{id}/check-in`. All need a token.
+- `HelpServiceImpl` — every change locks the request row first (`SELECT … FOR UPDATE`, like join and check-in lock the event), and every status change is conditional (`… AND status = 'OPEN'` / `'OFFERED'`), so two scans never both win and a scan never pays twice. A scan: offer `OFFERED` → `HELPED`, request `OPEN` → `HELPED` with `helper_id`, every other offer → `NOT_NEEDED`, then `ParticipationRepository.changeReliability(helper, null, +5, "HELPED")` — the same single score writer as events (floors at 0, writes `reliability_log`). It reuses `CheckInRequest` / `CheckInResponse` from the reliability package and `UserSummary` from events.
+- **24-hour expiry without a job:** `expires_at` is stored; the board only reads `OPEN` rows with `expires_at > now`, and `HelpRules.effectiveStatus` shows an overdue `OPEN` row as `EXPIRED` everywhere else (detail, mine), where offers, withdrawals and scans are refused with `HELP_CLOSED`. Nothing has to be cleaned up and no points change, so no scheduled task is needed.
+- `HelpRequestRepositoryImpl` / `HelpOfferRepositoryImpl` — JdbcTemplate; one query per list joins the requester's profile, counts current offers and reads the caller's own offer. Re-offering after a withdrawal reuses the row and its QR token.
+- New error codes: `NOT_REQUESTER`, `IS_REQUESTER`, `ALREADY_OFFERED`, `NOT_OFFERED`, `HELP_CLOSED`, `WRONG_REQUEST`. `ReliabilityRules.HELPED_POINTS` (= `ATTENDED_POINTS`, +5) and `HELPED_REASON`.
+- **History:** `HELPED` log rows have no event, so `GET /users/{id}/reliability` returns them with `eventId` / `eventTitle` `null`; the app labels them "Helped a neighbour".
+
+**Mobile** (`frontend/`):
+- `/help` (`app/help/index.tsx`, stack `app/help/_layout.tsx`, registered in the root layout) — the board: category icon, title, requester with civic trust score, offer count, posted / expires time; nearest first when the phone's real position is known (`near`); category chips, pull to refresh, refresh every 30 s; a **Mine** tab ("You asked" / "You offered", `GET /help-requests/mine`); **Ask for help** button. Opened from the **Help** button in the Home header, which shows the number of open requests.
+- `/help/new` — title 3–80, optional details with a n/500 counter, category chips, optional address and an optional pin from the events map picker; same rules as the API, then opens the new request.
+- `/help/[id]` — status (Open / Helped by X / Cancelled / Expired), description, requester and every offer with its trust score (tap → profile). A neighbour can **Offer to help**, **Withdraw** or open **My QR code**; the requester can **Scan helper's QR** or **Cancel request** (asks first).
+- `/help/[id]/ticket` — the helper's QR (only the `qrToken`), refreshed every 10 s until "You helped · +5" or "Not needed". `/help/[id]/scan` — camera scan with a typed-code fallback; success shows "X helped you" and "+5 civic trust", each error code has its own message.
+- Code: `api/{types,endpoints}.help.ts`, `hooks/useHelp.ts` (keys under `['help']`, board key includes `near` and `bbox`; a check-in also refreshes `me`, profiles and reliability history), `features/help/` (cards, offer list, categories, text helpers, form rules). The camera scanner and QR tile moved to `features/scan/` (`QrScanner`, `QrTile`) and are shared with the event scanner and ticket, which look and behave the same.
+- History: `HELPED` shows as "Helped a neighbour" with "Help board" as its second line (there is no event title); the profile's rule table lists the +5.
+- **Mock backend** (tests only): `testing/mocks/routes/help.ts` + `helpSeed.ts` with the same rules and error order (first scan closes, others `NOT_NEEDED`, +5 only for the scanned helper, free withdraw / cancel, re-offer keeps the token, 24 h expiry, `near`, `bbox`). Seven demo requests; on "Help carrying a sofa" (by `demo_user`) the codes `demo-help-ticket-stella` / `demo-help-ticket-andrei` succeed, `demo-help-ticket-stella-1` is a wrong request and `demo-help-ticket-maria` was withdrawn.
+
+**Tests:** backend 21 — `HelpRulesTest` (24 h, `EXPIRED`, +5 = attendance), `HelpServiceImplTest` (Mockito: only the scanned helper scores, a lost race gives nothing, refusals, re-offer keeps the token, validation), `HelpIntegrationTest` (H2 + real endpoints and tokens: post and board, token required, validation, two helpers → first scan +5 and closes, others `NOT_NEEDED` with no points, second scan refused, scan refusals, withdraw / re-offer, 24 h expiry, cancel, mine, `near` sort, `bbox` filter); `HelpTestSchema` is the H2 copy of the migration. Frontend 56 — `__tests__/mocks.help.test.ts` (16: every rule and error of the mock, `bbox`) and `__tests__/screens.help.test.tsx` (40: board, Mine, form validation, detail as helper and requester, offer / withdraw / cancel, ticket states, scanner success and errors, Home button, hook parameters, `HELPED` label); the profile test now expects three +5 rules.
+
+**Not verified yet:** not tried on a phone (camera scan of a helper's QR) or end to end against Supabase with real users.
 
 ### Neighbourhood Pulse (PLAN task 24, Tracks B + C)
 

@@ -17,6 +17,9 @@ public final class ReliabilityRules {
     public static final String VOLUNTEER_CATEGORY = "VOLUNTEER";
     public static final int VOLUNTEER_BONUS_POINTS = 5;
     public static final String VOLUNTEER_BONUS_REASON = "VOLUNTEER_BONUS";
+    // Neighbour Help Board (PLAN 25): the helper the requester scans gets the same +5 as attending.
+    public static final int HELPED_POINTS = ATTENDED_POINTS;
+    public static final String HELPED_REASON = "HELPED";
     // An event without an end time is treated as ending this long after it starts.
     public static final Duration DEFAULT_EVENT_LENGTH = Duration.ofHours(3);
 

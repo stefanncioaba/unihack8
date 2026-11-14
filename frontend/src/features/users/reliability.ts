@@ -5,6 +5,7 @@ import type { ReliabilityReason } from '@/api/types.users';
 export const RELIABILITY_RULES: { points: number; text: string }[] = [
   { points: 5, text: 'Checked in at an event you joined' },
   { points: 5, text: 'Bonus for a volunteer action (cleanups, food drives)' },
+  { points: 5, text: 'Helped a neighbour from the Help board' },
   { points: -10, text: 'Missed an event you joined' },
   { points: -2, text: 'Left less than 2 hours before the start' },
 ];
@@ -30,5 +31,13 @@ export function reasonLabel(reason: ReliabilityReason): string {
       return 'Event rating';
     case 'VOLUNTEER_BONUS':
       return 'Volunteer bonus';
+    case 'HELPED':
+      return 'Helped a neighbour';
   }
+}
+
+/** Second line of a history row: the event, the help request's title, or a fallback when it is gone. */
+export function entrySubject(entry: { reason: ReliabilityReason; eventTitle: string | null }): string {
+  if (entry.reason === 'HELPED') return entry.eventTitle ?? 'Help board';
+  return entry.eventTitle ?? 'Deleted event';
 }

@@ -5,6 +5,8 @@ import type { TransitAlert } from '@/api/types.transit';
 import type { ReliabilityEntry } from '@/api/types.users';
 import { bucharestToUtcIso, toBucharest } from '@/lib/time';
 
+import { seedHelpRequests, type MockHelpRequest } from './helpSeed';
+
 export const MOCK_ME_ID = '11111111-1111-4111-8111-111111111111';
 
 export type MockParticipant = { userId: string; status: ParticipantStatus; joinedAt: string; qrToken: string };
@@ -47,6 +49,8 @@ export type MockState = {
   reviews: Record<string, MockReview[]>;
   /** Event ids whose organiser rating was already applied (settled once, 24 h after the end). */
   settled: string[];
+  /** Neighbour Help Board requests with their offers (PLAN 25). */
+  helpRequests: MockHelpRequest[];
 };
 
 /** Bucharest wall-clock `hour:minute` on the day `days` from now, as a UTC ISO string. */
@@ -271,5 +275,6 @@ export function seed(): MockState {
     reviews,
     // The workshop was settled before the seed (its reliability entry is left out to keep the seeded history short).
     settled: [eventId(105)],
+    helpRequests: seedHelpRequests(USER_IDS),
   };
 }

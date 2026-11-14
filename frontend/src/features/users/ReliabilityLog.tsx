@@ -9,7 +9,7 @@ import { Text } from '@/ui/Text';
 import { colors } from '@/ui/theme';
 
 import { openEvent } from '../events/EventCards';
-import { formatPoints, reasonLabel } from './reliability';
+import { entrySubject, formatPoints, reasonLabel } from './reliability';
 
 /** List of the 20 most recent score changes; handles its own loading, empty and error states. */
 export function ReliabilityLog({ userId }: { userId: string }) {
@@ -34,7 +34,7 @@ export function ReliabilityLog({ userId }: { userId: string }) {
               onPress={entry.eventId ? () => openEvent(entry.eventId!) : undefined}
               accessibilityRole={entry.eventId ? 'link' : undefined}
             >
-              {entry.eventTitle ?? 'Deleted event'} · {formatDate(entry.createdAt)}
+              {entrySubject(entry)} · {formatDate(entry.createdAt)}
             </Text>
           </View>
           <Text variant="heading" style={{ color: entry.pointsChange > 0 ? colors.signal : colors.danger }} accessibilityLabel={`${formatPoints(entry.pointsChange)} points`}>

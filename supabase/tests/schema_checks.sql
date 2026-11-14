@@ -14,6 +14,7 @@ declare
     v_name  text;
     v_score integer;
     v_token uuid;
+    hr uuid;
 -- Each "must fail" check below is a nested block: if the bad statement is
 -- accepted, the block raises SCHEMA CHECK FAILED (not caught by its handler).
 begin
@@ -178,6 +179,36 @@ begin
         raise exception 'SCHEMA CHECK FAILED: a public table has RLS off';
     end if;
     n := n + 1;
+
+    -- 20. Help board: a request needs both lat and lon, or neither.
+    begin
+        insert into public.help_requests (requester_id, title, category, lat, expires_at)
+            values (u1, 'Borrow a ladder', 'BORROW', 45.75, now() + interval '24 hours');
+        raise exception 'SCHEMA CHECK FAILED: help request with lat but no lon accepted';
+    exception when check_violation then n := n + 1;
+    end;
+
+    -- 21. Help board: a scanned (HELPED) offer needs a check-in time.
+    insert into public.help_requests (requester_id, title, category, expires_at)
+        values (u1, 'Walk my dog', 'PETS', now() + interval '24 hours') returning id into hr;
+    begin
+        insert into public.help_offers (request_id, helper_id, status) values (hr, u2, 'HELPED');
+        raise exception 'SCHEMA CHECK FAILED: HELPED offer without checked_in_at accepted';
+    exception when check_violation then n := n + 1;
+    end;
+
+    -- 22. Help board: a closed request needs closed_at, and only one helper can be HELPED.
+    begin
+        update public.help_requests set status = 'HELPED' where id = hr;
+        raise exception 'SCHEMA CHECK FAILED: HELPED request without closed_at accepted';
+    exception when check_violation then n := n + 1;
+    end;
+    insert into public.help_offers (request_id, helper_id, status, checked_in_at) values (hr, u2, 'HELPED', now());
+    begin
+        insert into public.help_offers (request_id, helper_id, status, checked_in_at) values (hr, u1, 'HELPED', now());
+        raise exception 'SCHEMA CHECK FAILED: second HELPED offer accepted';
+    exception when unique_violation then n := n + 1;
+    end;
 
     -- Always roll back.
     raise exception 'SCHEMA CHECKS PASSED (% checks)', n;
