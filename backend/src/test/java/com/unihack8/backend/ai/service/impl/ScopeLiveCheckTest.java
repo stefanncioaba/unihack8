@@ -87,7 +87,7 @@ class ScopeLiveCheckTest {
                 new RecordingTool(new SearchPlacesTool(null), calls),
                 new RecordingTool(new SearchEventsTool(null), calls),
                 new RecordingTool(new TransitInfoTool(null), calls),
-                new RecordingTool(new PlanRouteTool(null), calls));
+                new RecordingTool(new PlanRouteTool(null, null), calls));
         AiChatServiceImpl service = new AiChatServiceImpl(client, properties,
                 new AiProperties(5, 20, 15, Duration.ofSeconds(30)),
                 new ChatResultMapperImpl(), tools, Clock.systemUTC());

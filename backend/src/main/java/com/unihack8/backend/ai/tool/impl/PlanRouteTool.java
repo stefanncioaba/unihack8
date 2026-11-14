@@ -1,6 +1,8 @@
 package com.unihack8.backend.ai.tool.impl;
 
 import com.unihack8.backend.ai.domain.ToolContext;
+import com.unihack8.backend.ai.domain.dto.LeaveNowDto;
+import com.unihack8.backend.ai.service.LeaveNowService;
 import com.unihack8.backend.ai.tool.AiTool;
 import com.unihack8.backend.ai.tool.ToolArgs;
 import com.unihack8.backend.ai.tool.ToolException;
@@ -22,10 +24,12 @@ import org.springframework.stereotype.Component;
 public class PlanRouteTool implements AiTool {
 
     private final RoutingService routingService;
+    private final LeaveNowService leaveNowService;
 
-    // Needs the routing service (task 10).
-    public PlanRouteTool(RoutingService routingService) {
+    // Needs the routing service (task 10) and the "leave now" service (live STPT arrivals).
+    public PlanRouteTool(RoutingService routingService, LeaveNowService leaveNowService) {
         this.routingService = routingService;
+        this.leaveNowService = leaveNowService;
     }
 
     // Tool name used by the model.
@@ -79,8 +83,12 @@ public class PlanRouteTool implements AiTool {
             answer.put("note", "Public transport planning is unavailable right now; this is the walking route.");
         }
         boolean fromUser = context.startsFromUser(start);
+        // "Leave now" only for a trip from where the user is, starting now (live arrivals cover the next hour).
+        LeaveNowDto leaveNow = fromUser && departAt == null
+                ? leaveNowService.leaveNow(plan, context.now()).orElse(null)
+                : null;
         context.rememberRoute(new ToolContext.PlannedRoute(from, to, plan.mode(), plan.durationMinutes(),
-                plan.distanceMeters(), fromUser));
+                plan.distanceMeters(), fromUser, leaveNow));
         answer.put("from", fromUser ? "user location"
                 : start == null ? "city centre (user location unknown)" : "given point");
         answer.put("mode", plan.mode());
@@ -92,7 +100,30 @@ public class PlanRouteTool implements AiTool {
             answer.put("estimate", "straight-line walking estimate (route planner unavailable)");
         }
         answer.put("steps", plan.legs().stream().map(PlanRouteTool::leg).toList());
+        if (leaveNow != null) {
+            answer.put("leave_now", leaveNowView(leaveNow, context.now()));
+        }
         return answer;
+    }
+
+    // "Leave now" for the model: which vehicle to catch, where, and in how many minutes to leave.
+    private static Map<String, Object> leaveNowView(LeaveNowDto leaveNow, Instant now) {
+        Map<String, Object> view = new LinkedHashMap<>();
+        view.put("vehicle", leaveNow.vehicleType() == null ? null : leaveNow.vehicleType().toLowerCase(Locale.ROOT));
+        view.put("line", leaveNow.line());
+        view.put("stop", leaveNow.stopName());
+        view.put("board_at", ToolArgs.localClock(leaveNow.boardAt()));
+        view.put("leave_in_minutes", Math.max(0, java.time.Duration.between(now, leaveNow.leaveAt()).toMinutes()));
+        view.put("walk_minutes_to_stop", leaveNow.walkMinutes());
+        view.put("time_is", switch (leaveNow.source()) {
+            case LeaveNowDto.SOURCE_LIVE -> "live (tracked vehicle)";
+            case LeaveNowDto.SOURCE_TIMETABLE -> "scheduled";
+            default -> "planned (live arrivals unavailable)";
+        });
+        if (leaveNow.missedBoardAt() != null) {
+            view.put("too_late_for", ToolArgs.localClock(leaveNow.missedBoardAt()));
+        }
+        return view;
     }
 
     // One step of the route for the model.

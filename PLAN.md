@@ -403,6 +403,20 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 ---
 
+## 24. AI "Leave now" box — Tracks B + C
+
+**Needs:** 9, 10, 18 (done). Added 2026-11-14. **Goal:** when the AI gives a tram/bus route that starts where the user is, it says "Leave in 6 min to catch tram 1 at Gara de Nord" — in the text **and** in a separate "Leave now" box under the route card, using the live STPT arrivals ("Will I make it?").
+
+- [x] **24.1 Contract first:** `routes[].leaveNow` in `docs/API.md` (line, vehicle type, stop, walk minutes, board/leave times, source, missed earlier vehicle); `null` for walking, other starts and later times.
+- [x] **24.2 Backend:** `LeaveNowService` matches the planner's boarding stop to the STPT stop and picks the first arrival the user can still reach on foot (+1 spare minute); falls back to the planner's time when STPT is down. `plan_route` returns `leave_now` to the model; the system prompt asks for one "Leave in N min…" sentence.
+- [x] **24.3 Mobile:** `LeaveNowBox` under the route card with a live countdown (Leave in N min → Leave now → Hurry → You won't make this one) and Live / Scheduled / Planned label.
+- [x] **24.4 Tests:** backend and frontend (see `DOCS.md` → AI "Leave now" box).
+- [x] **24.5a** `DOCS.md` and `docs/API.md` updated.
+- [ ] **24.5b** Knowledge graph updated (`/understand`; the plugin was not available in the session that built this).
+- [ ] **24.6** Try it on a phone with real STPT data and Gemini.
+
+---
+
 ## If time runs short — cut in this order
 
 1. Marker clustering (14.6) and AI result cards (15.4).

@@ -1,5 +1,6 @@
 // Route cards under an assistant answer (PLAN 18.4): destination, walking / public transport and the time estimate.
 // "Go" (start the journey) appears only for a route that starts where the user is; every card can preview its route.
+// A tram/bus trip from the user also gets the "Leave now" box under its card (PLAN 24).
 import * as Location from 'expo-location';
 import { router } from 'expo-router';
 import { useState } from 'react';
@@ -14,6 +15,8 @@ import { Card } from '@/ui/Card';
 import { Icon } from '@/ui/Icon';
 import { Text } from '@/ui/Text';
 import { colors } from '@/ui/theme';
+
+import { LeaveNowBox } from './LeaveNowBox';
 
 /** Asks for location permission when it is missing; true when the app may follow the user. */
 export async function ensureLocationPermission(): Promise<boolean> {
@@ -47,39 +50,43 @@ function RouteResult({ route, index }: { route: ChatRoute; index: number }) {
   }
 
   return (
-    <Card style={styles.card} testID={`result-route-${index}`}>
-      <View style={styles.head}>
-        <View style={[styles.badge, !walk && { backgroundColor: colors.gold }]}>
-          <Icon name={walk ? 'walk-outline' : 'bus-outline'} size={15} color={walk ? '#fff' : colors.onAccent} />
+    <View style={styles.list}>
+      <Card style={styles.card} testID={`result-route-${index}`}>
+        <View style={styles.head}>
+          <View style={[styles.badge, !walk && { backgroundColor: colors.gold }]}>
+            <Icon name={walk ? 'walk-outline' : 'bus-outline'} size={15} color={walk ? '#fff' : colors.onAccent} />
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text variant="cardTitle" numberOfLines={1}>
+              {destination}
+            </Text>
+            <Text variant="caption" tone="muted" numberOfLines={2}>
+              {[walk ? 'Walking' : 'Walk + public transport', `${route.durationMinutes} min`, formatDistance(route.distanceMeters)].join(' · ')}
+              {route.startsFromUser ? '' : ` · from ${route.from.name ?? 'another place'}`}
+            </Text>
+          </View>
         </View>
-        <View style={{ flex: 1 }}>
-          <Text variant="cardTitle" numberOfLines={1}>
-            {destination}
-          </Text>
-          <Text variant="caption" tone="muted" numberOfLines={2}>
-            {[walk ? 'Walking' : 'Walk + public transport', `${route.durationMinutes} min`, formatDistance(route.distanceMeters)].join(' · ')}
-            {route.startsFromUser ? '' : ` · from ${route.from.name ?? 'another place'}`}
-          </Text>
+        <View style={styles.actions}>
+          {route.startsFromUser ? <Button title="Go" icon="navigate" iconLeft small onPress={go} style={{ flex: 1 }} /> : null}
+          <Button
+            title="Show route on map"
+            icon="map-outline"
+            iconLeft
+            small
+            variant="secondary"
+            onPress={() => router.push({ pathname: '/map', params: routeParams(route, false) })}
+            style={{ flex: route.startsFromUser ? 1.4 : 1 }}
+          />
         </View>
-      </View>
-      <View style={styles.actions}>
-        {route.startsFromUser ? <Button title="Go" icon="navigate" iconLeft small onPress={go} style={{ flex: 1 }} /> : null}
-        <Button
-          title="Show route on map"
-          icon="map-outline"
-          iconLeft
-          small
-          variant="secondary"
-          onPress={() => router.push({ pathname: '/map', params: routeParams(route, false) })}
-          style={{ flex: route.startsFromUser ? 1.4 : 1 }}
-        />
-      </View>
-      {blocked ? (
-        <Text variant="caption" tone="danger" accessibilityRole="alert" testID="route-location-needed">
-          Allow location access to start the journey.
-        </Text>
-      ) : null}
-    </Card>
+        {blocked ? (
+          <Text variant="caption" tone="danger" accessibilityRole="alert" testID="route-location-needed">
+            Allow location access to start the journey.
+          </Text>
+        ) : null}
+      </Card>
+      {/* "Leave now" box (PLAN 24): its own box under the card, only for a tram/bus trip from the user. */}
+      {route.leaveNow ? <LeaveNowBox leave={route.leaveNow} index={index} /> : null}
+    </View>
   );
 }
 

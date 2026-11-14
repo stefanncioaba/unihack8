@@ -687,6 +687,8 @@ Answer — `reply` is plain text (no markdown) in the user's language (Romanian 
 - `basis`: `TOTAL` when the answer is one plan (at most one place and at most one event, e.g. "concert, then pizza"; the totals are plain sums of the lines). `OPTIONS` when it offers alternatives (two or more places, or two or more events — the user picks one of each kind). The app labels it "Average total", "Average per option" (one kind) or "Average per plan" (alternatives plus another kind).
 - `note`: short remark (saved prices may have changed; recommendations without a stored price: "Not included (price unknown): …" for `TOTAL`, "No stored price for …" for `OPTIONS`).
 
+`routes[].leaveNow` (PLAN 24, "Leave now" box) says when to leave to catch the route's first tram/trolleybus/bus. It is `null` for walking routes, when `startsFromUser` is `false`, and for routes planned for a later time (`depart_at`). Fields: `line`, `vehicleType` (`TRAM` | `TROLLEYBUS` | `BUS`), `headsign` (or `null`), `stopName` (where to get on), `walkMinutes` (from the user to that stop), `boardAt` (when the vehicle the user can still catch reaches the stop), `leaveAt` (`boardAt` minus the walk and one spare minute; never before the answer time), `source` (`LIVE` = tracked vehicle, `TIMETABLE` = STPT's scheduled time, `PLAN` = the route planner's time because STPT's arrivals were unavailable), and `missedBoardAt` (an earlier vehicle of the same line that leaves before the user can reach the stop, or `null`). The app counts down to `leaveAt` itself.
+
 ```json
 {
   "reply": "- 5 to go: 127 m away (2 min walk). Espresso about 5 lei. Open until 19:00.\nPrices may have changed.",
@@ -700,7 +702,27 @@ Answer — `reply` is plain text (no markdown) in the user's language (Romanian 
       "mode": "WALK",
       "durationMinutes": 2,
       "distanceMeters": 127,
-      "startsFromUser": true
+      "startsFromUser": true,
+      "leaveNow": null
+    },
+    {
+      "from": { "lat": 45.7537, "lon": 21.2257, "name": "Your location" },
+      "to": { "lat": 45.7505, "lon": 21.2075, "name": "Gara de Nord" },
+      "mode": "TRANSIT",
+      "durationMinutes": 20,
+      "distanceMeters": 3400,
+      "startsFromUser": true,
+      "leaveNow": {
+        "line": "1",
+        "vehicleType": "TRAM",
+        "headsign": "Gara de Nord",
+        "stopName": "Piața Libertății",
+        "walkMinutes": 4,
+        "boardAt": "2026-11-14T18:41:00Z",
+        "leaveAt": "2026-11-14T18:36:00Z",
+        "source": "LIVE",
+        "missedBoardAt": "2026-11-14T18:33:00Z"
+      }
     }
   ],
   "cost": {

@@ -85,7 +85,10 @@ final class SystemPrompt {
                 starts at the user; set them only when the user asks for a route from somewhere else (that \
                 place's lat/lon from a tool). The app shows a route card for every route you plan, with a "Go" \
                 button when it starts at the user. Only describe routes \
-                plan_route returned; for another time (e.g. tomorrow) call it with depart_at.
+                plan_route returned; for another time (e.g. tomorrow) call it with depart_at. When plan_route \
+                gives leave_now, start the directions with one sentence like "Leave in 6 min to catch tram 1 at \
+                Gara de Nord (20:41)" ("Leave now" when leave_in_minutes is 0); if it has too_late_for, add that \
+                the one at that time leaves too soon. The app also shows this in a "Leave now" box.
                 5. Opening hours: search_places already leaves out places closed right now and gives open_now and \
                 closes_at. Mention closes_at when it is within the next hour. If open_now is "unknown", say the \
                 hours are not known. If the user asks about another time (tomorrow morning, Saturday), call \

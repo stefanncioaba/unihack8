@@ -21,6 +21,26 @@ export type ChatSource = { title: string; url: string };
 /** One end of a route the assistant planned; `name` is "Your location", a place/event name, or null. */
 export type ChatRoutePoint = { lat: number; lon: number; name: string | null };
 
+/** Where the time of the vehicle to catch comes from: a tracked vehicle, STPT's timetable, or the route planner. */
+export type LeaveNowSource = 'LIVE' | 'TIMETABLE' | 'PLAN';
+
+/** "Leave now": when to leave so the walk ends at the first stop in time for the first tram/bus (PLAN 24). */
+export type ChatLeaveNow = {
+  line: string;
+  /** TRAM, TROLLEYBUS or BUS. */
+  vehicleType: string;
+  headsign: string | null;
+  stopName: string | null;
+  walkMinutes: number;
+  /** When the vehicle the user can catch reaches the stop (ISO, UTC). */
+  boardAt: string;
+  /** When to start walking: boardAt minus the walk and one spare minute (ISO, UTC). */
+  leaveAt: string;
+  source: LeaveNowSource;
+  /** An earlier vehicle of the same line the user can no longer reach; null when none. */
+  missedBoardAt: string | null;
+};
+
 /** A route the assistant planned for its answer (PLAN 18.1). "Go" is offered only when `startsFromUser`. */
 export type ChatRoute = {
   from: ChatRoutePoint;
@@ -29,6 +49,8 @@ export type ChatRoute = {
   durationMinutes: number;
   distanceMeters: number;
   startsFromUser: boolean;
+  /** Null for walking routes, routes that do not start at the user, and routes planned for a later time. */
+  leaveNow: ChatLeaveNow | null;
 };
 
 /** One priced line of the cost box: a recommended place (stored menu prices) or event (ticket price range). */
