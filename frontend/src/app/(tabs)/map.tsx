@@ -134,12 +134,15 @@ function MapBody() {
 
   const lat = Number(params.lat);
   const lon = Number(params.lon);
-  const focus = params.lat && params.lon && isValidCoordinate(lat, lon) ? { lat, lon } : null;
+  // A plain "Show on map" pin (no place / event panel) goes away once its trip card is closed, until it is asked for again.
+  const [focusDismissed, setFocusDismissed] = useState(false);
+  const focus = !focusDismissed && params.lat && params.lon && isValidCoordinate(lat, lon) ? { lat, lon } : null;
 
   // Fly to the requested spot whenever "Show on map" is pressed (again), and open its panel when an id came along.
   // `at` is a timestamp so pressing the same button twice still counts as a new request.
   useEffect(() => {
-    if (focus) mapRef.current?.animateToRegion(regionFor(focus, 0.012), 400);
+    setFocusDismissed(false);
+    if (params.lat && params.lon && isValidCoordinate(lat, lon)) mapRef.current?.animateToRegion(regionFor({ lat, lon }, 0.012), 400);
     // Places and events are hidden while Transport is on: turn it off so the requested pin is drawn with its panel.
     if ((params.placeId || params.eventId) && filters.transitOn) dispatchFilter({ type: 'transport' });
     if (params.placeId) select({ type: 'place', id: params.placeId });
@@ -170,6 +173,18 @@ function MapBody() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [routeRequest]);
+
+  // Tapping the "Show on map" pin opens the trip card to it.
+  const openFocusTrip = useCallback(() => {
+    if (focus) setDestination({ coords: focus, title: params.title || 'Selected spot' });
+  }, [focus?.lat, focus?.lon, params.title, setDestination]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // When the trip card is closed (directions were shown, now they are not), the pin goes away too.
+  const wasShowingDirections = useRef(showingDirections);
+  useEffect(() => {
+    if (wasShowingDirections.current && !showingDirections) setFocusDismissed(true);
+    wasShowingDirections.current = showingDirections;
+  }, [showingDirections]);
 
   // Directions open: frame the whole trip (start and destination) so the route and its vehicles are in view.
   const tripStart = destination?.origin?.coords ?? position;
@@ -253,7 +268,7 @@ function MapBody() {
         showsTraffic={false}
         testID="main-map"
       >
-        {focus && !showingDirections && !params.placeId && !params.eventId && <Marker coordinate={{ latitude: focus.lat, longitude: focus.lon }} title={params.title} pinColor={colors.oxford} testID="focus-marker" />}
+        {focus && !showingDirections && !params.placeId && !params.eventId && <Marker coordinate={{ latitude: focus.lat, longitude: focus.lon }} title={params.title} pinColor={colors.oxford} onPress={openFocusTrip} testID="focus-marker" />}
         {placesVisible && places.data && (
           <PlaceMarkers
             places={places.data.items}

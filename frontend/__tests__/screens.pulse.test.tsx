@@ -3,13 +3,15 @@ import { fireEvent, screen, waitFor, within } from '@testing-library/react-nativ
 
 import type { NeighbourhoodPulse } from '@/api/types.neighbourhoods';
 import HomeScreen from '@/app/(tabs)/index';
+import NeighbourhoodScreen from '@/app/pulse/[id]';
 import NeighbourhoodPulseScreen from '@/app/pulse/index';
+import { areaBbox, areaIdOf, inArea } from '@/features/neighbourhoods/areas';
 import { neighbourhoodPhoto, NEIGHBOURHOOD_PHOTOS } from '@/features/neighbourhoods/photos';
 import { eventsLine, eventWhen, peopleLine, placesLine, transitLine } from '@/features/neighbourhoods/pulseFormat';
 import * as mocks from '@test/mocks';
 import { mockPulseAreas } from '@test/mocks/routes/neighbourhoods';
 
-import { IDS, mockRouter, renderScreen } from './testUtils';
+import { IDS, mockRouter, renderScreen, setParams } from './testUtils';
 
 /** A mock area with some fields replaced. */
 function area(overrides: Partial<NeighbourhoodPulse> = {}): NeighbourhoodPulse {
@@ -115,5 +117,50 @@ describe('Home entry point', () => {
     renderScreen(<HomeScreen />);
     fireEvent.press(await screen.findByLabelText('Neighbourhood pulse'));
     await waitFor(() => expect(mockRouter.push).toHaveBeenCalledWith('/pulse'));
+  });
+});
+
+describe('area helpers', () => {
+  const areas = mockPulseAreas();
+  it('puts a point in the nearest covering area, or none', () => {
+    expect(areaIdOf({ lat: 45.7568, lon: 21.229 }, areas)).toBe('cetate');
+    expect(areaIdOf({ lat: 45.7585, lon: 21.2475 }, areas)).toBe('fabric');
+    expect(areaIdOf({ lat: 44.4, lon: 26.1 }, areas)).toBeNull();
+  });
+
+  it('builds a box around the circle and keeps only the area items', () => {
+    const b = areaBbox(areas[0]);
+    expect(b.minLat).toBeLessThan(45.7568);
+    expect(b.maxLon).toBeGreaterThan(21.229);
+    const items = [
+      { id: 'in', lat: 45.757, lon: 21.229 },
+      { id: 'out', lat: 45.7585, lon: 21.2475 },
+      { id: 'none', lat: null, lon: null },
+    ];
+    expect(inArea(items, 'cetate', areas).map((i) => i.id)).toEqual(['in']);
+  });
+});
+
+describe('NeighbourhoodScreen (area panel)', () => {
+  it('opens from a Pulse card', async () => {
+    renderScreen(<NeighbourhoodPulseScreen />);
+    fireEvent.press(await screen.findByLabelText('Open Cetate'));
+    expect(mockRouter.push).toHaveBeenCalledWith('/pulse/cetate');
+  });
+
+  it('shows the area events tab, then the help tab', async () => {
+    setParams({ id: 'cetate' });
+    renderScreen(<NeighbourhoodScreen />);
+    expect(await screen.findByText('Art walk through the old town')).toBeTruthy();
+    expect(screen.getByText('Busy')).toBeTruthy();
+    fireEvent.press(screen.getByTestId('area-tab-help'));
+    expect(await screen.findByText('Neighbour help')).toBeTruthy();
+    expect(screen.queryByText('Art walk through the old town')).toBeNull();
+  });
+
+  it('says when the area is unknown', async () => {
+    setParams({ id: 'nowhere' });
+    renderScreen(<NeighbourhoodScreen />);
+    expect(await screen.findByText('Neighbourhood not found')).toBeTruthy();
   });
 });
