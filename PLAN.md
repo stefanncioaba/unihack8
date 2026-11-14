@@ -391,6 +391,18 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 ---
 
+## 23. Volunteer actions — Tracks A + C
+
+**Needs:** 5, 6 (done). Added 2026-11-14. **Goal:** events tagged "volunteer" (park cleanups, food drives) on the existing event system; reliability is shown as a civic trust score and volunteering gives bonus points.
+
+- [x] **23.1 Category:** `VOLUNTEER` accepted by the events API, filters, AI `search_events` and the LiveTickets category guess. No database change.
+- [x] **23.2 Bonus:** check-in at a `VOLUNTEER` event adds +5 more, logged as `VOLUNTEER_BONUS` (total +10, once per ticket).
+- [x] **23.3 App:** Volunteer category chip/icon, bonus line on the event page, bonus rule in the profile, "Volunteer bonus" in the history, "civic trust" wording; mock backend has the same rule and two demo actions.
+- [x] **23.4 Tests:** backend and frontend (see `DOCS.md` → Volunteer actions).
+- [x] **23.5** `DOCS.md`, `docs/API.md` and the knowledge graph updated.
+
+---
+
 ## If time runs short — cut in this order
 
 1. Marker clustering (14.6) and AI result cards (15.4).

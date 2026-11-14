@@ -13,7 +13,7 @@ export function outcomeFromSuccess(result: CheckInResult): ScanOutcome {
   return {
     kind: 'success',
     title: `${result.user.username} checked in`,
-    message: `+${result.pointsChange} reliability points · score is now ${result.user.reliabilityScore}`,
+    message: `+${result.pointsChange} civic trust points · score is now ${result.user.reliabilityScore}`,
   };
 }
 

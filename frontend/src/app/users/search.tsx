@@ -27,7 +27,7 @@ export default function UserSearchScreen() {
       <SearchField placeholder="Search by username" value={text} onChangeText={setText} onClear={() => setText('')} autoFocus />
       <View style={{ flex: 1, marginTop: 12 }}>
         {term.length === 0 ? (
-          <EmptyState icon="people-outline" title="Look someone up" message="Type a username to see their reliability and events they attended." />
+          <EmptyState icon="people-outline" title="Look someone up" message="Type a username to see their civic trust score and events they attended." />
         ) : results.isPending ? (
           <LoadingState label="Searching…" />
         ) : results.isError ? (

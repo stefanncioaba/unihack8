@@ -117,7 +117,8 @@ Used in lists, on the map and inside other answers. `spotsLeft` is `null` when t
 `averageRating` is the review average with one decimal (`null` without reviews); `reviewCount` is the number of reviews (see `GET /events/{id}/reviews`).
 
 `source` is `USER` or `EXTERNAL`. Event `category` is one of (filtering by `OTHER` also returns imported events stored without a category):
-`PARTY`, `CONCERT`, `THEATRE`, `SPORT`, `GAMES`, `FOOD`, `ART`, `MEETUP`, `OTHER`.
+`PARTY`, `CONCERT`, `THEATRE`, `SPORT`, `GAMES`, `FOOD`, `ART`, `MEETUP`, `VOLUNTEER`, `OTHER`.
+`VOLUNTEER` marks volunteer actions (park cleanups, food drives): checking in at one gives a +5 bonus (see check-in).
 Imported events that cannot be classified get `OTHER`.
 
 ### PlaceSummary
@@ -235,7 +236,7 @@ Score and the 20 most recent changes.
 }
 ```
 
-`reason` is `ATTENDED`, `NO_SHOW`, `LATE_CANCEL` or `EVENT_RATING` (the organiser's points from the event's average rating, from -5 to +5). `eventId` / `eventTitle` are `null` if the event was deleted.
+`reason` is `ATTENDED`, `NO_SHOW`, `LATE_CANCEL`, `EVENT_RATING` (the organiser's points from the event's average rating, from -5 to +5) or `VOLUNTEER_BONUS` (+5 extra for checking in at a `VOLUNTEER` event). `eventId` / `eventTitle` are `null` if the event was deleted.
 
 ---
 
@@ -384,6 +385,7 @@ Answer:
 
 Errors: `403 NOT_ORGANIZER`, `403 EXTERNAL_EVENT`, `404 TICKET_NOT_FOUND` (unknown token, or scanned text that is not a ticket), `409 WRONG_EVENT`, `409 ALREADY_CHECKED_IN`, `403 BANNED`, `409 NOT_JOINED` (the participant left), `409 EVENT_ENDED` (after the event's end, or start + 3 h without an end time), `400 VALIDATION_FAILED` (blank token).
 Scanning the same ticket twice never adds points twice.
+At a `VOLUNTEER` event `pointsChange` is `10`: +5 `ATTENDED` and +5 `VOLUNTEER_BONUS`, written as two reliability log rows.
 
 ### `GET /events/{id}/reviews` — public (token optional)
 

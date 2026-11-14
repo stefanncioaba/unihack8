@@ -7,7 +7,7 @@ import com.unihack8.backend.events.domain.dto.UserSummary;
  *
  * @param user         the participant, with their new reliability score
  * @param status       always ATTENDED
- * @param pointsChange points added by this check-in (+5)
+ * @param pointsChange points added by this check-in (+5, or +10 at a VOLUNTEER event)
  */
 public record CheckInResponse(UserSummary user, String status, int pointsChange) {
 }

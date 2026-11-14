@@ -189,10 +189,13 @@ export const eventsRoutes: Route[] = [
       if (endOf(e) < Date.now()) throw new ApiError(409, 'EVENT_ENDED', 'This event is over.');
       owner.p.status = 'ATTENDED';
       const user = userById(owner.p.userId);
-      user.reliabilityScore += 5;
+      // Volunteer actions give a separately logged bonus, like the backend.
+      const bonus = e.category === 'VOLUNTEER' ? 5 : 0;
+      user.reliabilityScore += 5 + bonus;
       logReliability(user.id, 5, 'ATTENDED', e);
+      if (bonus) logReliability(user.id, bonus, 'VOLUNTEER_BONUS', e);
       getState().attended[user.id] = [e.id, ...(getState().attended[user.id] ?? [])];
-      return { user: { ...user }, status: 'ATTENDED', pointsChange: 5 };
+      return { user: { ...user }, status: 'ATTENDED', pointsChange: 5 + bonus };
     },
   },
   {

@@ -16,7 +16,7 @@ export function reliabilityColor(score: number): string {
 export function ReliabilityBadge({ score }: { score: number }) {
   const color = reliabilityColor(score);
   return (
-    <View style={[styles.pill, { borderColor: color }]} accessibilityLabel={`Reliability ${score}`}>
+    <View style={[styles.pill, { borderColor: color }]} accessibilityLabel={`Civic trust ${score}`}>
       <Icon name="shield-checkmark-outline" size={12} color={color} />
       <Text variant="chip" style={{ color }}>
         {score}
