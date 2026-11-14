@@ -84,7 +84,7 @@ Shared code every feature uses. Feature packages (`users`, `events`, …) are cr
 
 ## Database (PLAN task 2)
 
-Applied to Supabase from `supabase/migrations/` in file order: the four schema migrations on 2026-11-13, the three `place_prices` migrations (table + data, PLAN 11.3) on 2026-11-14. `20261114000004_event_reviews.sql` (PLAN 21) is in the repo but **not applied to Supabase yet** — apply it before deploying the backend that reads `event_reviews`.
+Applied to Supabase from `supabase/migrations/` in file order: the four schema migrations on 2026-11-13, the three `place_prices` migrations (table + data, PLAN 11.3) on 2026-11-14. `20261114000004_event_reviews.sql` (PLAN 21) on 2026-11-14 (Supabase migration `event_reviews`). Checked on the real database the same day: column types read by the Java queries (average = double precision, counts and spots = integer), and a rolled-back check block (one review per person, rating 1–5, comment ≤ 300, average/count, settle-once update, cascade on event delete, RLS on) — 7/7 passed, no data left behind.
 
 | Table | Purpose |
 |---|---|
@@ -105,7 +105,7 @@ Applied to Supabase from `supabase/migrations/` in file order: the four schema m
 
 **Tests:** `supabase/tests/schema_checks.sql` (21 checks: sign-up trigger, username rules, event source rules, double join, check-in rule, cascades, RLS). Run it with the Supabase MCP `execute_sql`; it always rolls back and ends with the error `SCHEMA CHECKS PASSED (21 checks)` or `SCHEMA CHECK FAILED: …`. Last run 2026-11-13: passed.
 
-**Advisors (2026-11-13):** security — only "RLS enabled, no policy" (INFO, intended); performance — only "unused index" (INFO, expected on empty tables).
+**Advisors (2026-11-13):** security — only "RLS enabled, no policy" (INFO, intended); performance — only "unused index" (INFO, expected on empty tables). **Re-run 2026-11-14 after `event_reviews`:** the same two INFO kinds (now also for `event_reviews` and its reviewer index), plus one Auth WARN "Leaked password protection disabled" (an Auth dashboard setting, not part of the schema).
 
 ## Current state
 
