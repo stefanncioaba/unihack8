@@ -34,6 +34,7 @@ import {
 } from '@/features/transit/lines';
 import { lineDirections } from '@/features/transit/lineView';
 import { ROUTE_STYLE, TransitLayer } from '@/features/transit/TransitLayer';
+import { vehicleImages } from '@/features/transit/VehicleMarker';
 import { speedLabel } from '@/features/transit/VehiclePanel';
 import { createQueryClient } from '@/lib/queryClient';
 import { decodePolyline, encodePolyline } from '@/lib/polyline';
@@ -330,8 +331,10 @@ describe('TransitLayer', () => {
     render(<TransitLayer stops={undefined} lineId={null} vehicles={vehicles} onSelectStop={jest.fn()} onSelectVehicle={onSelectVehicle} />);
     expect(routeLines()).toHaveLength(0);
     expect(vehicleMarkers()).toHaveLength(3);
-    expect(screen.getByLabelText('Express bus E4')).toBeTruthy();
-    expect(screen.getAllByLabelText('Tram 1')).toHaveLength(2);
+    // Each vehicle is the ready-made badge of its line.
+    expect(screen.getByTestId('vehicle-marker-b').props.image).toBe(vehicleImages(vehicles[2]).normal);
+    expect(screen.getByTestId('vehicle-marker-a').props.image).toBe(vehicleImages(vehicles[0]).normal);
+    expect(screen.getByTestId('vehicle-marker-back').props.image).toBe(vehicleImages(vehicles[1]).normal);
     fireEvent.press(screen.getByTestId('vehicle-marker-b'));
     expect(onSelectVehicle).toHaveBeenCalledWith(vehicles[2]);
   });
@@ -372,16 +375,10 @@ describe('TransitLayer', () => {
     expect(vehicleMarkers()).toHaveLength(2);
   });
 
-  it('redraws vehicle markers only briefly after they appear (Android snapshot)', () => {
-    jest.useFakeTimers();
-    try {
-      render(<TransitLayer stops={undefined} lineId={null} vehicles={vehicles} onSelectStop={jest.fn()} onSelectVehicle={jest.fn()} />);
-      expect(screen.getByTestId('vehicle-marker-a').props.tracksViewChanges).toBe(true);
-      act(() => jest.advanceTimersByTime(1000));
-      expect(screen.getByTestId('vehicle-marker-a').props.tracksViewChanges).toBe(false);
-    } finally {
-      jest.useRealTimers();
-    }
+  it('vehicle markers are images with no view tracking (nothing to snapshot)', () => {
+    render(<TransitLayer stops={undefined} lineId={null} vehicles={vehicles} onSelectStop={jest.fn()} onSelectVehicle={jest.fn()} />);
+    expect(screen.getByTestId('vehicle-marker-a').props.tracksViewChanges).toBe(false);
+    expect(screen.getByTestId('vehicle-marker-a').props.image).toBeDefined();
   });
 });
 
@@ -455,6 +452,7 @@ describe('MapScreen live transit', () => {
     renderScreen(<MapScreen />);
     await moveTo(0.2); // zoomed out: no stops, but vehicles still show
     fireEvent.press(screen.getByTestId('chip-transit'));
+    fireEvent.press(await screen.findByTestId('line-group-TRAM')); // trams are chosen to start with: press again for every type
     await waitFor(() => expect(vehicleMarkers()).toHaveLength(8));
     expect(routeLines()).toHaveLength(0);
 
@@ -488,6 +486,7 @@ describe('MapScreen live transit', () => {
     renderScreen(<MapScreen />);
     await moveTo(0.2);
     fireEvent.press(screen.getByTestId('chip-transit'));
+    fireEvent.press(await screen.findByTestId('line-group-TRAM')); // trams are chosen to start with: press again for every type
     await waitFor(() => expect(vehicleMarkers()).toHaveLength(8));
     const vehicleCalls = spy.mock.calls.filter((c) => c[1] === '/transit/vehicles');
     expect(vehicleCalls.length).toBeGreaterThan(0);
@@ -519,6 +518,7 @@ describe('MapScreen live transit', () => {
     renderScreen(<MapScreen />);
     await moveTo(0.2);
     fireEvent.press(screen.getByTestId('chip-transit'));
+    fireEvent.press(await screen.findByTestId('line-group-TRAM')); // trams are chosen to start with: press again for every type
     await waitFor(() => expect(vehicleMarkers()).toHaveLength(8));
     fireEvent(screen.getByTestId('main-map'), 'longPress', { nativeEvent: { coordinate: { latitude: 45.7275, longitude: 21.2355 } } });
     await screen.findByTestId('directions-panel');

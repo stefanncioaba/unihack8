@@ -1,6 +1,6 @@
 // Grid clustering of map pins (14.6).
 import { clampBbox } from '@/hooks/useMapEvents';
-import { CLUSTER_MIN_SPAN, CLUSTER_ZOOM_MIN_SPAN, clusterPoints, clusterZoomTarget, shouldCluster, spreadStacked } from '@/lib/cluster';
+import { CLUSTER_MIN_SPAN, CLUSTER_ZOOM_MIN_SPAN, clusterCellSize, clusterPoints, clusterZoomTarget, shouldCluster, spreadStacked } from '@/lib/cluster';
 
 const BOX = { minLon: 21.0, minLat: 45.0, maxLon: 21.6, maxLat: 45.6 }; // 6 cells of 0.1 degrees
 
@@ -118,5 +118,28 @@ describe('clampBbox', () => {
   it('keeps a far zoomed-out view inside valid coordinates', () => {
     expect(clampBbox({ minLon: -250, minLat: -120, maxLon: 260, maxLat: 95 })).toEqual({ minLon: -180, minLat: -90, maxLon: 180, maxLat: 90 });
     expect(clampBbox(BOX)).toEqual(BOX);
+  });
+});
+
+describe('stable clusters (grid fixed to the world, not the screen)', () => {
+  const pts = [pt('a', 45.7501, 21.2201), pt('b', 45.7503, 21.2203), pt('c', 45.7701, 21.2401), pt('d', 45.7503, 21.2301)];
+  const view = { minLon: 21.2, minLat: 45.74, maxLon: 21.26, maxLat: 45.8 };
+  const groups = (box: typeof view) => clusterPoints(pts, box, true).clusters.map((c) => c.id).sort();
+
+  it('a tiny jitter of the view (even of its size) gives the same groups', () => {
+    const base = groups(view);
+    expect(groups({ minLon: view.minLon + 0.0007, minLat: view.minLat - 0.0004, maxLon: view.maxLon + 0.0007, maxLat: view.maxLat - 0.0004 })).toEqual(base);
+    expect(groups({ ...view, maxLon: view.maxLon + 0.002, maxLat: view.maxLat + 0.002 })).toEqual(base);
+  });
+
+  it('panning a larger distance keeps points in the same groups', () => {
+    const shifted = clusterPoints(pts, { ...view, minLon: view.minLon + 0.01, maxLon: view.maxLon + 0.01 }, true);
+    expect(shifted.clusters.map((c) => c.id).sort()).toEqual(groups(view));
+  });
+
+  it('cell size snaps to a power of two and follows the span', () => {
+    expect(clusterCellSize(0.06)).toBe(clusterCellSize(0.062));
+    expect(clusterCellSize(0.12)).toBe(clusterCellSize(0.06) * 2);
+    expect(Math.log2(clusterCellSize(0.07))).toBe(Math.round(Math.log2(clusterCellSize(0.07))));
   });
 });

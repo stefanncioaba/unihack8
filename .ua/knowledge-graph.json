@@ -35,8 +35,8 @@
       "Jest"
     ],
     "description": "Hackathon mobile app for Timișoara (Connected Communities): Spring Boot API + Supabase + Expo app with events and QR reliability points, places map, live STPT transit, routing and an AI guide.",
-    "analyzedAt": "2026-11-14T19:02:06.315Z",
-    "gitCommitHash": "210c993255cc92c733bb283c5b9d62015ea167f0"
+    "analyzedAt": "2026-11-14T18:15:32.929Z",
+    "gitCommitHash": "078b1dce6eaec808aad6c687bd48580d110018e2"
   },
   "nodes": [
     {
@@ -5500,7 +5500,7 @@
       "type": "file",
       "name": "cluster.ts",
       "filePath": "frontend/src/lib/cluster.ts",
-      "summary": "Pure grid-based map pin clustering: splits points into lone pins and clusters, decides when to cluster by zoom span, computes cluster zoom targets and fans out stacked pins.",
+      "summary": "Pure map pin clustering on a world-fixed, power-of-two grid (stable between small region changes), zoom targets and fan-out of stacked pins.",
       "tags": [
         "utility",
         "map",
@@ -7323,7 +7323,7 @@
       "type": "file",
       "name": "usePlaces.ts",
       "filePath": "frontend/src/hooks/usePlaces.ts",
-      "summary": "TanStack Query hooks for places: places within the visible map bbox (optionally filtered by category) and a single place detail, with shared cache keys.",
+      "summary": "Places hooks: one request per padded area reused while panning/zooming in (nextFetchArea), pins picked on the phone by view and category; single place detail.",
       "tags": [
         "hook",
         "data-fetching",
@@ -7351,7 +7351,7 @@
       "type": "file",
       "name": "bbox.ts",
       "filePath": "frontend/src/lib/bbox.ts",
-      "summary": "Bounding-box helpers converting a map region to a bbox, rounding it for stable cache keys, serialising it as a query param and testing containment.",
+      "summary": "Bounding-box helpers: region to bbox, outward rounding for stable cache keys, expand, cover test, query param and containment.",
       "tags": [
         "utility",
         "geo",
@@ -20407,7 +20407,7 @@
       "type": "file",
       "name": "TripMarkers.tsx",
       "filePath": "frontend/src/features/directions/TripMarkers.tsx",
-      "summary": "Draws trip guidance markers (board and get-off pills) on the map for directions preview and journey mode, sized explicitly so Android marker snapshots are not clipped.",
+      "summary": "Draws the board / get-off markers of a route plan as ready-made image badges in the line colour, with the step text as the tap callout.",
       "tags": [
         "component",
         "directions",
@@ -20689,7 +20689,7 @@
       "type": "file",
       "name": "ClusterMarker.tsx",
       "filePath": "frontend/src/features/map/ClusterMarker.tsx",
-      "summary": "Shared cluster-bubble marker plus a single shared timer that briefly enables tracksViewChanges on custom markers so Android snapshots them correctly; also exports pin box sizing used by place, event, stop and vehicle markers.",
+      "summary": "Image-based count bubble marker (clusterImage) plus the shared timer and useBriefViewTracking; exports pin box sizing.",
       "tags": [
         "component",
         "map",
@@ -20706,7 +20706,7 @@
       "type": "file",
       "name": "EventMarkers.tsx",
       "filePath": "frontend/src/features/map/EventMarkers.tsx",
-      "summary": "Renders event pins on the map, clustering nearby events into count bubbles at any zoom and spreading stacked events; memoised to skip re-renders on pans.",
+      "summary": "Renders event pins as image markers per category with count bubbles when zoomed out and stacked events fanned out.",
       "tags": [
         "component",
         "map",
@@ -20753,7 +20753,7 @@
       "type": "file",
       "name": "LinePicker.tsx",
       "filePath": "frontend/src/features/transit/LinePicker.tsx",
-      "summary": "STPT-style line picker strip under the map filter bar: type groups with coloured line tiles, and for a chosen line a bar with a Tur/Retur direction toggle and a clear button.",
+      "summary": "Transport panel: vehicle-type buttons with legend names, number tiles of the chosen type, and the chosen line's bar with Tur/Retur toggle and clear button.",
       "tags": [
         "component",
         "transit",
@@ -21195,7 +21195,7 @@
       "type": "file",
       "name": "TransitLayer.tsx",
       "filePath": "frontend/src/features/transit/TransitLayer.tsx",
-      "summary": "Transit map layer drawing live vehicles in view, stops when zoomed in, and for a chosen line its single-direction route with halo, its stops and only its vehicles.",
+      "summary": "Transit layer inside the MapView: chosen line's route per direction, image stop dots and image vehicle markers near the visible area.",
       "tags": [
         "component",
         "transit",
@@ -21210,7 +21210,7 @@
       "type": "file",
       "name": "VehicleMarker.tsx",
       "filePath": "frontend/src/features/transit/VehicleMarker.tsx",
-      "summary": "Live vehicle marker: round badge in the line colour with type icon and number, soft halo and bearing arrow, gliding smoothly between positions with memoised sub-views to avoid Android re-snapshots.",
+      "summary": "Live vehicle marker drawn from a ready-made per-line badge image (vehicleImages), gliding natively to each position; also exports the badge view used in the vehicle panel.",
       "tags": [
         "component",
         "transit",
@@ -22665,7 +22665,7 @@
       "type": "file",
       "name": "PlaceMarkers.tsx",
       "filePath": "frontend/src/features/map/PlaceMarkers.tsx",
-      "summary": "Renders Oxford Navy place pins on the react-native-maps map, with category icons, optional name pills when zoomed in, and grid clustering of nearby places when zoomed out. Memoises each marker and briefly tracks view changes so Android snapshots icons correctly.",
+      "summary": "Renders place pins as image markers (ready-made PNG per category, another when selected) with grid clusters and fanned-out stacked places; no name labels, no view snapshots.",
       "tags": [
         "component",
         "map",
@@ -26674,6 +26674,99 @@
       "complexity": "simple"
     },
     {
+      "id": "file:frontend/src/app/pulse/index.tsx",
+      "type": "file",
+      "name": "index.tsx",
+      "filePath": "frontend/src/app/pulse/index.tsx",
+      "summary": "Neighbourhood Pulse screen listing a live card per Timisoara area with loading and error states.",
+      "tags": [
+        "screen",
+        "pulse",
+        "neighbourhoods",
+        "react-native",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/app/pulse/index.tsx:NeighbourhoodPulseScreen",
+      "type": "function",
+      "name": "NeighbourhoodPulseScreen",
+      "filePath": "frontend/src/app/pulse/index.tsx",
+      "lineRange": [
+        13,
+        40
+      ],
+      "summary": "Screen listing neighbourhood cards from the pulse query.",
+      "tags": [
+        "screen",
+        "pulse"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
+      "type": "file",
+      "name": "NeighbourhoodCard.tsx",
+      "filePath": "frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
+      "summary": "Card component showing an area photo, level and live rows for events, transit, places and reliable people, with map navigation.",
+      "tags": [
+        "component",
+        "pulse",
+        "neighbourhoods",
+        "ui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:Row",
+      "type": "function",
+      "name": "Row",
+      "filePath": "frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
+      "lineRange": [
+        24,
+        33
+      ],
+      "summary": "Single labelled info row inside a neighbourhood card.",
+      "tags": [
+        "component",
+        "ui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:Header",
+      "type": "function",
+      "name": "Header",
+      "filePath": "frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
+      "lineRange": [
+        36,
+        60
+      ],
+      "summary": "Card header with area photo, name and level chip.",
+      "tags": [
+        "component",
+        "ui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:NeighbourhoodCard",
+      "type": "function",
+      "name": "NeighbourhoodCard",
+      "filePath": "frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
+      "lineRange": [
+        63,
+        107
+      ],
+      "summary": "Full card for one area showing live events, transit, places and people rows.",
+      "tags": [
+        "component",
+        "pulse"
+      ],
+      "complexity": "moderate"
+    },
+    {
       "id": "file:frontend/src/features/neighbourhoods/photos.ts",
       "type": "file",
       "name": "photos.ts",
@@ -26700,6 +26793,116 @@
       "tags": [
         "utility",
         "assets"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "type": "file",
+      "name": "pulseFormat.ts",
+      "filePath": "frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "summary": "Formatting helpers that turn pulse data into human-readable lines and level metadata.",
+      "tags": [
+        "utility",
+        "formatting",
+        "pulse",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:plural",
+      "type": "function",
+      "name": "plural",
+      "filePath": "frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "lineRange": [
+        14,
+        16
+      ],
+      "summary": "Pluralises a noun by count.",
+      "tags": [
+        "utility",
+        "formatting"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:eventsLine",
+      "type": "function",
+      "name": "eventsLine",
+      "filePath": "frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "lineRange": [
+        19,
+        27
+      ],
+      "summary": "Builds the events summary line for an area.",
+      "tags": [
+        "formatting",
+        "pulse"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:eventWhen",
+      "type": "function",
+      "name": "eventWhen",
+      "filePath": "frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "lineRange": [
+        30,
+        34
+      ],
+      "summary": "Formats when the next event starts.",
+      "tags": [
+        "formatting",
+        "time"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:transitLine",
+      "type": "function",
+      "name": "transitLine",
+      "filePath": "frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "lineRange": [
+        37,
+        43
+      ],
+      "summary": "Builds the transit summary line.",
+      "tags": [
+        "formatting",
+        "transit"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:placesLine",
+      "type": "function",
+      "name": "placesLine",
+      "filePath": "frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "lineRange": [
+        46,
+        51
+      ],
+      "summary": "Builds the places summary line.",
+      "tags": [
+        "formatting",
+        "places"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:peopleLine",
+      "type": "function",
+      "name": "peopleLine",
+      "filePath": "frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "lineRange": [
+        54,
+        58
+      ],
+      "summary": "Builds the reliable-people summary line.",
+      "tags": [
+        "formatting",
+        "reliability"
       ],
       "complexity": "simple"
     },
@@ -31385,6 +31588,20 @@
       ]
     },
     {
+      "id": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "type": "file",
+      "name": "screens.pulse.test.tsx",
+      "filePath": "frontend/__tests__/screens.pulse.test.tsx",
+      "summary": "Jest tests for Neighbourhood Pulse: text formatting, area photos, the pulse list screen, the Home entry point, area geo helpers and the per-area panel with its Events and Help tabs.",
+      "tags": [
+        "test",
+        "neighbourhoods",
+        "pulse",
+        "frontend"
+      ],
+      "complexity": "moderate"
+    },
+    {
       "id": "file:frontend/src/app/pulse/[id].tsx",
       "type": "file",
       "name": "[id].tsx",
@@ -34424,6 +34641,20 @@
       "complexity": "simple"
     },
     {
+      "id": "file:frontend/__tests__/help.groupByArea.test.ts",
+      "type": "file",
+      "name": "help.groupByArea.test.ts",
+      "filePath": "frontend/__tests__/help.groupByArea.test.ts",
+      "summary": "Jest unit tests for groupByNeighbourhood: verifies the Help Board Nearby list is split into neighbourhood sections with your own area first, others by distance, empty areas dropped and unpinned/outside requests last.",
+      "tags": [
+        "test",
+        "help",
+        "neighbourhoods",
+        "grouping"
+      ],
+      "complexity": "simple"
+    },
+    {
       "id": "file:frontend/__tests__/screens.help.test.tsx",
       "type": "file",
       "name": "screens.help.test.tsx",
@@ -34559,80 +34790,17 @@
       "complexity": "moderate"
     },
     {
-      "id": "file:frontend/__tests__/help.groupByArea.test.ts",
-      "type": "file",
-      "name": "help.groupByArea.test.ts",
-      "filePath": "frontend/__tests__/help.groupByArea.test.ts",
-      "summary": "Jest unit tests for the Help board area helpers: groupByNeighbourhood ordering (own area first, then by distance, outside last, empty areas dropped) and countByArea counting open requests per Pulse area while skipping unpinned or outside ones.",
-      "tags": [
-        "test",
-        "help",
-        "neighbourhoods",
-        "grouping"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "type": "file",
-      "name": "screens.pulse.test.tsx",
-      "filePath": "frontend/__tests__/screens.pulse.test.tsx",
-      "summary": "Jest tests for Neighbourhood Pulse: text formatters including the new helpLine, area photos, the pulse list screen (per-area help counts, hidden help line when the board fails), the Home entry point, area geo helpers and the per-area panel with Events and Help tabs.",
-      "tags": [
-        "test",
-        "neighbourhoods",
-        "pulse",
-        "help",
-        "screen"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "file:frontend/src/app/pulse/index.tsx",
-      "type": "file",
-      "name": "index.tsx",
-      "filePath": "frontend/src/app/pulse/index.tsx",
-      "summary": "Neighbourhood Pulse screen listing a live card per Timisoara area, with loading/error/empty states, pull-to-refresh and per-area open help-request counts from the Help board.",
-      "tags": [
-        "screen",
-        "pulse",
-        "neighbourhoods",
-        "react-native",
-        "help",
-        "tested"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/app/pulse/index.tsx:NeighbourhoodPulseScreen",
-      "type": "function",
-      "name": "NeighbourhoodPulseScreen",
-      "filePath": "frontend/src/app/pulse/index.tsx",
-      "lineRange": [
-        17,
-        49
-      ],
-      "summary": "Default-exported screen that loads the pulse and help board, memoizes countByArea per area and renders a FlatList of NeighbourhoodCards with helpCount (hidden when the board is unavailable); refresh refetches both.",
-      "tags": [
-        "screen",
-        "pulse",
-        "component",
-        "help-count"
-      ],
-      "complexity": "moderate"
-    },
-    {
       "id": "file:frontend/src/features/help/groupByArea.ts",
       "type": "file",
       "name": "groupByArea.ts",
       "filePath": "frontend/src/features/help/groupByArea.ts",
-      "summary": "Pure helpers that place Help Board requests into Neighbourhood Pulse areas: grouping the Nearby list by neighbourhood (yours first, then closest, outside last) and counting open requests per area for the Pulse cards.",
+      "summary": "Pure helper that groups Help Board requests into neighbourhood sections using the same area circles as Neighbourhood Pulse, ordering your current area first, then others by distance, with outside/unpinned requests last.",
       "tags": [
         "utility",
-        "geo",
-        "grouping",
-        "help-board",
+        "help",
         "neighbourhoods",
+        "grouping",
+        "geo",
         "tested"
       ],
       "complexity": "simple"
@@ -34646,7 +34814,7 @@
         21,
         39
       ],
-      "summary": "Splits help requests into per-neighbourhood sections using areaIdOf, ordering the user's current area first, then others by distance, with requests outside every area in a final section.",
+      "summary": "Buckets requests by areaIdOf, ranks areas (current area first, then by distanceMeters, stable by list order), drops empty areas and appends an Outside the neighbourhoods section.",
       "tags": [
         "utility",
         "grouping",
@@ -34656,232 +34824,11 @@
       "complexity": "moderate"
     },
     {
-      "id": "function:frontend/src/features/help/groupByArea.ts:countByArea",
-      "type": "function",
-      "name": "countByArea",
-      "filePath": "frontend/src/features/help/groupByArea.ts",
-      "lineRange": [
-        42,
-        49
-      ],
-      "summary": "Counts open help requests per area id using the same area rule as the board grouping, ignoring requests that are unpinned or outside every area; feeds the Pulse cards' help line.",
-      "tags": [
-        "utility",
-        "aggregation",
-        "geo",
-        "help-board"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "type": "file",
-      "name": "NeighbourhoodCard.tsx",
-      "filePath": "frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "summary": "React Native card for one Neighbourhood Pulse area showing activity level, event highlights, transit, places, people and (when known) its open help-request count; the help row opens the area's Help tab and other rows open the area, events or the map.",
-      "tags": [
-        "component",
-        "react-native",
-        "neighbourhoods",
-        "ui",
-        "navigation",
-        "tested"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:Row",
-      "type": "function",
-      "name": "Row",
-      "filePath": "frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "lineRange": [
-        24,
-        33
-      ],
-      "summary": "Small icon-plus-text row used for each pulse line on the card, with a tone and test id.",
-      "tags": [
-        "component",
-        "ui",
-        "presentational"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:Header",
-      "type": "function",
-      "name": "Header",
-      "filePath": "frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "lineRange": [
-        36,
-        60
-      ],
-      "summary": "Card header rendering the neighbourhood photo, name and activity-level chip.",
-      "tags": [
-        "component",
-        "ui",
-        "header"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:NeighbourhoodCard",
-      "type": "function",
-      "name": "NeighbourhoodCard",
-      "filePath": "frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "lineRange": [
-        64,
-        124
-      ],
-      "summary": "Exported Pulse card component; renders event, transit, alert, places and people rows, an optional tappable help row (helpLine of helpCount) routing to /pulse/<id>?tab=help, and a Show-on-map link.",
-      "tags": [
-        "component",
-        "react-native",
-        "navigation",
-        "neighbourhoods"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "type": "file",
-      "name": "pulseFormat.ts",
-      "filePath": "frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "summary": "Pure text-formatting helpers for Neighbourhood Pulse cards: level labels/tones and one-line summaries for events, transit, places, people and open help requests.",
-      "tags": [
-        "utility",
-        "formatting",
-        "neighbourhoods",
-        "pure-functions",
-        "tested"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:plural",
-      "type": "function",
-      "name": "plural",
-      "filePath": "frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "lineRange": [
-        14,
-        16
-      ],
-      "summary": "Formats a count with a singular or plural noun.",
-      "tags": [
-        "utility",
-        "formatting",
-        "string"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:eventsLine",
-      "type": "function",
-      "name": "eventsLine",
-      "filePath": "frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "lineRange": [
-        19,
-        27
-      ],
-      "summary": "Builds the events summary line (now, tonight, free spots) or a quiet message.",
-      "tags": [
-        "utility",
-        "formatting",
-        "events"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:eventWhen",
-      "type": "function",
-      "name": "eventWhen",
-      "filePath": "frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "lineRange": [
-        30,
-        34
-      ],
-      "summary": "Formats an event's start ('Now' or time) plus remaining spots or 'full'.",
-      "tags": [
-        "utility",
-        "formatting",
-        "events",
-        "time"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:transitLine",
-      "type": "function",
-      "name": "transitLine",
-      "filePath": "frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "lineRange": [
-        37,
-        43
-      ],
-      "summary": "Summarises STPT lines and live vehicles nearby, or explains why transit info is missing.",
-      "tags": [
-        "utility",
-        "formatting",
-        "transit"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:placesLine",
-      "type": "function",
-      "name": "placesLine",
-      "filePath": "frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "lineRange": [
-        46,
-        51
-      ],
-      "summary": "Summarises open places out of total with the top category labels.",
-      "tags": [
-        "utility",
-        "formatting",
-        "places"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:peopleLine",
-      "type": "function",
-      "name": "peopleLine",
-      "filePath": "frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "lineRange": [
-        54,
-        58
-      ],
-      "summary": "Summarises people going out and reliable attendees, or an invitation when none joined.",
-      "tags": [
-        "utility",
-        "formatting",
-        "reliability"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:helpLine",
-      "type": "function",
-      "name": "helpLine",
-      "filePath": "frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "lineRange": [
-        61,
-        64
-      ],
-      "summary": "Formats the open help-request count for a Pulse card ('Nobody needs help right now', '1 neighbour needs help', 'N neighbours need help').",
-      "tags": [
-        "utility",
-        "formatting",
-        "help-board"
-      ],
-      "complexity": "simple"
-    },
-    {
       "id": "document:DOCS.md",
       "type": "document",
       "name": "DOCS.md",
       "filePath": "DOCS.md",
-      "summary": "Living technical documentation for the Timisoara Connected Communities app covering backend packages, API endpoints, frontend screens and features; now also documents Neighbourhood Pulse cards showing each area's open help-request count (countByArea, helpLine, tappable help row opening the area's Help tab).",
+      "summary": "Living technical documentation for the Timișoara Connected Communities app covering backend packages, API endpoints, frontend screens and features; now documents the neighbourhood-grouped Help Board and the required, auto-pinned help request location.",
       "tags": [
         "documentation",
         "architecture",
@@ -34896,7 +34843,7 @@
       "type": "document",
       "name": "PLAN.md",
       "filePath": "PLAN.md",
-      "summary": "Hackathon implementation roadmap with checkbox task lists per feature phase; adds ticked item 24.11 for open help-request counts on Neighbourhood Pulse cards.",
+      "summary": "Project roadmap with numbered task sections and checkboxes per track (through 25 Help Board, 26 Leave now, 27 news), including newly ticked item 25.8 grouping the board by neighbourhood and pinning requests at the user's position.",
       "tags": [
         "documentation",
         "planning",
@@ -34904,6 +34851,54 @@
         "task-tracking"
       ],
       "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/features/map/markerImages.ts",
+      "type": "file",
+      "name": "markerImages.ts",
+      "filePath": "frontend/src/features/map/markerImages.ts",
+      "summary": "Generated index of the pre-drawn map pin PNGs (place, event, cluster bubbles).",
+      "tags": [
+        "map",
+        "assets"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/scripts/generate_marker_images.py",
+      "type": "file",
+      "name": "generate_marker_images.py",
+      "filePath": "frontend/scripts/generate_marker_images.py",
+      "summary": "Pillow script that draws the map pin PNGs from the Ionicons font and writes markerImages.ts.",
+      "tags": [
+        "map",
+        "assets"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/features/transit/transitImages.ts",
+      "type": "file",
+      "name": "transitImages.ts",
+      "filePath": "frontend/src/features/transit/transitImages.ts",
+      "summary": "Generated index of the pre-drawn transit images: badge per line, generic badge per type, stop dot and trip badges per colour.",
+      "tags": [
+        "transit",
+        "assets"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/scripts/generate_transit_images.py",
+      "type": "file",
+      "name": "generate_transit_images.py",
+      "filePath": "frontend/scripts/generate_transit_images.py",
+      "summary": "Pillow script that draws the transit images from STPT route list, the app palette and the Ionicons font, and writes transitImages.ts.",
+      "tags": [
+        "transit",
+        "assets"
+      ],
+      "complexity": "simple"
     }
   ],
   "edges": [
@@ -53521,6 +53516,48 @@
       "weight": 0.8
     },
     {
+      "source": "file:frontend/src/app/pulse/index.tsx",
+      "target": "function:frontend/src/app/pulse/index.tsx:NeighbourhoodPulseScreen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/app/pulse/index.tsx",
+      "target": "function:frontend/src/app/pulse/index.tsx:NeighbourhoodPulseScreen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
+      "target": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:Row",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
+      "target": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:Header",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
+      "target": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:NeighbourhoodCard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
+      "target": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:NeighbourhoodCard",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
       "source": "file:frontend/src/features/neighbourhoods/photos.ts",
       "target": "function:frontend/src/features/neighbourhoods/photos.ts:neighbourhoodPhoto",
       "type": "contains",
@@ -53530,6 +53567,90 @@
     {
       "source": "file:frontend/src/features/neighbourhoods/photos.ts",
       "target": "function:frontend/src/features/neighbourhoods/photos.ts:neighbourhoodPhoto",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:plural",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:plural",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:eventsLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:eventsLine",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:eventWhen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:eventWhen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:transitLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:transitLine",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:placesLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:placesLine",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:peopleLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:peopleLine",
       "type": "exports",
       "direction": "forward",
       "weight": 0.8
@@ -56447,6 +56568,34 @@
       "weight": 0.8
     },
     {
+      "source": "file:frontend/src/features/neighbourhoods/areas.ts",
+      "target": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/app/pulse/index.tsx",
+      "target": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "target": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
       "source": "file:frontend/src/app/pulse/[id].tsx",
       "target": "function:frontend/src/app/pulse/[id].tsx:NeighbourhoodScreen",
       "type": "contains",
@@ -58715,6 +58864,20 @@
       "weight": 0.5
     },
     {
+      "source": "file:frontend/src/features/help/groupByArea.ts",
+      "target": "file:frontend/__tests__/help.groupByArea.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/__tests__/help.groupByArea.test.ts",
+      "target": "function:frontend/src/features/help/groupByArea.ts:groupByNeighbourhood",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
       "source": "file:frontend/src/app/help/index.tsx",
       "target": "file:frontend/__tests__/screens.help.test.tsx",
       "type": "tested_by",
@@ -58848,6 +59011,13 @@
       "weight": 0.8
     },
     {
+      "source": "function:frontend/src/app/help/index.tsx:Board",
+      "target": "function:frontend/src/features/help/groupByArea.ts:groupByNeighbourhood",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
       "source": "function:frontend/src/app/help/index.tsx:Mine",
       "target": "function:frontend/src/hooks/useHelp.ts:useMyHelpRequests",
       "type": "calls",
@@ -58888,6 +59058,181 @@
       "type": "calls",
       "direction": "forward",
       "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/help/groupByArea.ts",
+      "target": "function:frontend/src/features/help/groupByArea.ts:groupByNeighbourhood",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/help/groupByArea.ts",
+      "target": "function:frontend/src/features/help/groupByArea.ts:groupByNeighbourhood",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/help/groupByArea.ts:groupByNeighbourhood",
+      "target": "function:frontend/src/features/neighbourhoods/areas.ts:areaIdOf",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/help/groupByArea.ts:groupByNeighbourhood",
+      "target": "function:frontend/src/lib/geo.ts:distanceMeters",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/app/help/index.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/app/help/new.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/features/help/groupByArea.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:frontend/src/app/help/index.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:frontend/src/app/help/new.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:frontend/src/features/help/groupByArea.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "document:DOCS.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:frontend/src/app/pulse/[id].tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/LeaveNowServiceImpl.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/news/controller/NewsController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:frontend/src/features/ai/LeaveNowBox.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:frontend/src/app/news/index.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/app/pulse/[id].tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/features/neighbourhoods/areas.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "document:PLAN.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/LeaveNowServiceImpl.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/news/controller/NewsController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/news/service/impl/NewsServiceImpl.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/features/ai/LeaveNowBox.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/app/news/index.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/GlobalExceptionHandler.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
     },
     {
       "source": "file:backend/src/main/java/com/unihack8/backend/ai/client/GeminiClient.java",
@@ -68754,6 +69099,22 @@
       "recoveredFromImportMap": true
     },
     {
+      "source": "file:frontend/__tests__/help.groupByArea.test.ts",
+      "target": "file:frontend/src/api/types.help.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/help.groupByArea.test.ts",
+      "target": "file:frontend/src/features/help/groupByArea.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
       "source": "file:frontend/__tests__/layout.root.test.tsx",
       "target": "file:frontend/src/app/_layout.tsx",
       "type": "imports",
@@ -70324,6 +70685,86 @@
     {
       "source": "file:frontend/__tests__/screens.profile.test.tsx",
       "target": "file:frontend/testing/mocks/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "target": "file:frontend/__tests__/testUtils.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "target": "file:frontend/src/api/types.neighbourhoods.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "target": "file:frontend/src/app/(tabs)/index.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "target": "file:frontend/src/app/pulse/[id].tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "target": "file:frontend/src/app/pulse/index.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "target": "file:frontend/src/features/neighbourhoods/areas.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "target": "file:frontend/src/features/neighbourhoods/photos.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "target": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "target": "file:frontend/testing/mocks/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "target": "file:frontend/testing/mocks/routes/neighbourhoods.ts",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -72235,6 +72676,14 @@
     },
     {
       "source": "file:frontend/src/app/help/index.tsx",
+      "target": "file:frontend/src/features/help/groupByArea.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
       "target": "file:frontend/src/features/location/LocationProvider.tsx",
       "type": "imports",
       "direction": "forward",
@@ -72539,6 +72988,14 @@
     },
     {
       "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
       "target": "file:frontend/src/hooks/useHelp.ts",
       "type": "imports",
       "direction": "forward",
@@ -72619,6 +73076,62 @@
     },
     {
       "source": "file:frontend/src/app/pulse/_layout.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/index.tsx",
+      "target": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/index.tsx",
+      "target": "file:frontend/src/hooks/useNeighbourhoods.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/index.tsx",
+      "target": "file:frontend/src/lib/time.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/index.tsx",
+      "target": "file:frontend/src/ui/Screen.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/index.tsx",
+      "target": "file:frontend/src/ui/ScreenHeader.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/index.tsx",
+      "target": "file:frontend/src/ui/States.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/index.tsx",
       "target": "file:frontend/src/ui/theme.ts",
       "type": "imports",
       "direction": "forward",
@@ -74258,6 +74771,30 @@
       "recoveredFromImportMap": true
     },
     {
+      "source": "file:frontend/src/features/help/groupByArea.ts",
+      "target": "file:frontend/src/api/types.help.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/groupByArea.ts",
+      "target": "file:frontend/src/features/neighbourhoods/areas.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/groupByArea.ts",
+      "target": "file:frontend/src/lib/geo.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
       "source": "file:frontend/src/features/help/newHelpForm.ts",
       "target": "file:frontend/src/api/types.help.ts",
       "type": "imports",
@@ -74914,6 +75451,70 @@
       "recoveredFromImportMap": true
     },
     {
+      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
+      "target": "file:frontend/src/api/types.neighbourhoods.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
+      "target": "file:frontend/src/features/events/EventCards.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
+      "target": "file:frontend/src/features/neighbourhoods/photos.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
+      "target": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
+      "target": "file:frontend/src/ui/Chip.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
+      "target": "file:frontend/src/ui/Icon.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
       "source": "file:frontend/src/features/neighbourhoods/areas.ts",
       "target": "file:frontend/src/lib/bbox.ts",
       "type": "imports",
@@ -74924,6 +75525,30 @@
     {
       "source": "file:frontend/src/features/neighbourhoods/areas.ts",
       "target": "file:frontend/src/lib/geo.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "target": "file:frontend/src/api/types.neighbourhoods.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "target": "file:frontend/src/features/map/placeCategories.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "target": "file:frontend/src/lib/time.ts",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -76826,832 +77451,32 @@
       "recoveredFromImportMap": true
     },
     {
-      "source": "file:frontend/src/features/help/groupByArea.ts",
-      "target": "file:frontend/__tests__/help.groupByArea.test.ts",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:frontend/src/app/pulse/index.tsx",
-      "target": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:frontend/src/app/pulse/[id].tsx",
-      "target": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "target": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/areas.ts",
-      "target": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:frontend/src/app/pulse/index.tsx",
-      "target": "function:frontend/src/app/pulse/index.tsx:NeighbourhoodPulseScreen",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/app/pulse/index.tsx",
-      "target": "function:frontend/src/app/pulse/index.tsx:NeighbourhoodPulseScreen",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/pulse/index.tsx:NeighbourhoodPulseScreen",
-      "target": "function:frontend/src/features/help/groupByArea.ts:countByArea",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/pulse/index.tsx:NeighbourhoodPulseScreen",
-      "target": "function:frontend/src/hooks/useHelp.ts:useHelpBoard",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/pulse/index.tsx:NeighbourhoodPulseScreen",
-      "target": "function:frontend/src/hooks/useNeighbourhoods.ts:useNeighbourhoodPulse",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/pulse/index.tsx:NeighbourhoodPulseScreen",
-      "target": "function:frontend/src/lib/time.ts:formatTime",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/pulse/index.tsx:NeighbourhoodPulseScreen",
-      "target": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:NeighbourhoodCard",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/help/groupByArea.ts",
-      "target": "function:frontend/src/features/help/groupByArea.ts:groupByNeighbourhood",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/help/groupByArea.ts",
-      "target": "function:frontend/src/features/help/groupByArea.ts:groupByNeighbourhood",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/help/groupByArea.ts",
-      "target": "function:frontend/src/features/help/groupByArea.ts:countByArea",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/help/groupByArea.ts",
-      "target": "function:frontend/src/features/help/groupByArea.ts:countByArea",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "target": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:Row",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "target": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:Header",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "target": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:NeighbourhoodCard",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "target": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:NeighbourhoodCard",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:plural",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:plural",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:eventsLine",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:eventsLine",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:eventWhen",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:eventWhen",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:transitLine",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:transitLine",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:placesLine",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:placesLine",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:peopleLine",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:peopleLine",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:helpLine",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:helpLine",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/help/groupByArea.ts:groupByNeighbourhood",
-      "target": "function:frontend/src/features/neighbourhoods/areas.ts:areaIdOf",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/help/groupByArea.ts:countByArea",
-      "target": "function:frontend/src/features/neighbourhoods/areas.ts:areaIdOf",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/help/groupByArea.ts:groupByNeighbourhood",
-      "target": "function:frontend/src/lib/geo.ts:distanceMeters",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:NeighbourhoodCard",
-      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:eventsLine",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:NeighbourhoodCard",
-      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:eventWhen",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:NeighbourhoodCard",
-      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:transitLine",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:NeighbourhoodCard",
-      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:placesLine",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:NeighbourhoodCard",
-      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:peopleLine",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:NeighbourhoodCard",
-      "target": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:helpLine",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:NeighbourhoodCard",
-      "target": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:Header",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:NeighbourhoodCard",
-      "target": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:Row",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx:NeighbourhoodCard",
-      "target": "function:frontend/src/features/events/EventCards.tsx:openEvent",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:placesLine",
-      "target": "function:frontend/src/features/map/placeCategories.ts:placeMeta",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/neighbourhoods/pulseFormat.ts:eventWhen",
-      "target": "function:frontend/src/lib/time.ts:formatTime",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "target": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/app/help/index.tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/app/help/new.tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/features/help/groupByArea.ts",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "file:frontend/src/app/help/index.tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "file:frontend/src/app/help/new.tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "file:frontend/src/features/help/groupByArea.ts",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "document:DOCS.md",
+      "source": "file:frontend/src/features/map/markerImages.ts",
+      "target": "file:frontend/src/features/map/PlaceMarkers.tsx",
       "type": "related",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "document:PLAN.md",
-      "target": "file:frontend/src/app/pulse/[id].tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/LeaveNowServiceImpl.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/news/controller/NewsController.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "file:frontend/src/features/ai/LeaveNowBox.tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "file:frontend/src/app/news/index.tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/app/pulse/[id].tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/features/neighbourhoods/areas.ts",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "document:PLAN.md",
+      "source": "file:frontend/scripts/generate_marker_images.py",
+      "target": "file:frontend/src/features/map/markerImages.ts",
       "type": "related",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/LeaveNowServiceImpl.java",
-      "type": "documents",
+      "source": "file:frontend/src/features/transit/transitImages.ts",
+      "target": "file:frontend/src/features/transit/VehicleMarker.tsx",
+      "type": "related",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/news/controller/NewsController.java",
-      "type": "documents",
+      "source": "file:frontend/scripts/generate_transit_images.py",
+      "target": "file:frontend/src/features/transit/transitImages.ts",
+      "type": "related",
       "direction": "forward",
       "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/news/service/impl/NewsServiceImpl.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/features/ai/LeaveNowBox.tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/app/news/index.tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/GlobalExceptionHandler.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/app/pulse/index.tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "file:frontend/src/app/pulse/index.tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:frontend/src/app/help/index.tsx",
-      "target": "file:frontend/src/features/help/groupByArea.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/[id].tsx",
-      "target": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/help.groupByArea.test.ts",
-      "target": "file:frontend/src/api/types.help.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/help.groupByArea.test.ts",
-      "target": "file:frontend/src/features/help/groupByArea.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "target": "file:frontend/__tests__/testUtils.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "target": "file:frontend/src/api/types.neighbourhoods.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "target": "file:frontend/src/app/(tabs)/index.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "target": "file:frontend/src/app/pulse/[id].tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "target": "file:frontend/src/app/pulse/index.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "target": "file:frontend/src/features/neighbourhoods/areas.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "target": "file:frontend/src/features/neighbourhoods/photos.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "target": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "target": "file:frontend/testing/mocks/index.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "target": "file:frontend/testing/mocks/routes/neighbourhoods.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/index.tsx",
-      "target": "file:frontend/src/features/help/groupByArea.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/index.tsx",
-      "target": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/index.tsx",
-      "target": "file:frontend/src/hooks/useHelp.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/index.tsx",
-      "target": "file:frontend/src/hooks/useNeighbourhoods.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/index.tsx",
-      "target": "file:frontend/src/lib/time.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/index.tsx",
-      "target": "file:frontend/src/ui/Screen.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/index.tsx",
-      "target": "file:frontend/src/ui/ScreenHeader.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/index.tsx",
-      "target": "file:frontend/src/ui/States.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/index.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/groupByArea.ts",
-      "target": "file:frontend/src/api/types.help.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/groupByArea.ts",
-      "target": "file:frontend/src/features/neighbourhoods/areas.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/groupByArea.ts",
-      "target": "file:frontend/src/lib/geo.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "target": "file:frontend/src/api/types.neighbourhoods.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "target": "file:frontend/src/features/events/EventCards.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "target": "file:frontend/src/features/neighbourhoods/photos.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "target": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "target": "file:frontend/src/ui/Chip.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "target": "file:frontend/src/ui/Icon.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "target": "file:frontend/src/ui/Text.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "target": "file:frontend/src/api/types.neighbourhoods.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "target": "file:frontend/src/features/map/placeCategories.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "target": "file:frontend/src/lib/time.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
     }
   ],
   "layers": [

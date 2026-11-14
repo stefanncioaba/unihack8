@@ -4,7 +4,7 @@
 // directions (14.5, with the live vehicles of the route's lines). Tapping a vehicle opens its live panel.
 // Long-press anywhere to get directions to that spot. An AI route card opens it with a route preview, or with "Go" in
 // journey mode (PLAN 18.5): the route from the live position, the camera following the user and the current step.
-import { useLocalSearchParams } from 'expo-router';
+import { useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import MapView, { Marker, type LongPressEvent, type MapPressEvent, type Region } from 'react-native-maps';
@@ -19,7 +19,7 @@ import { useCurrentPosition } from '@/features/location/LocationProvider';
 import { EventMarkers } from '@/features/map/EventMarkers';
 import { MapFilterBar } from '@/features/map/MapFilterBar';
 import { MapPanel } from '@/features/map/MapPanel';
-import type { TransitVehicle } from '@/api/types.transit';
+import type { TransitRouteType, TransitVehicle } from '@/api/types.transit';
 import { MapProvider, isTransitLayerSelection, useMapContext } from '@/features/map/MapContext';
 import { INITIAL_MAP_FILTERS, mapFiltersReducer, visibleLayers, type MapFilterAction } from '@/features/map/mapFilters';
 import { PlaceMarkers } from '@/features/map/PlaceMarkers';
@@ -40,9 +40,8 @@ import { darkMapStyle } from '@/ui/mapStyle';
 import { Text } from '@/ui/Text';
 import { colors } from '@/ui/theme';
 
-/** Visible span (degrees of latitude) below which places are loaded / pins get name labels. */
+/** Visible span (degrees of latitude) below which places are loaded. */
 const ZOOM_PLACES_MAX_SPAN = 0.06;
-const ZOOM_LABELS_MAX_SPAN = 0.015;
 /** Visible span below which transit stops are shown (about 3 km). */
 const ZOOM_STOPS_MAX_SPAN = 0.03;
 
@@ -72,7 +71,6 @@ function MapBody() {
   const placesVisible = placesOn && zoomedIn;
   const places = usePlacesInArea(bbox, categories, placesVisible);
   const events = useEventsInArea(bbox, eventsOn);
-  const labelsVisible = span > 0 && span <= ZOOM_LABELS_MAX_SPAN;
   const stopsVisible = transitOn && span > 0 && span <= ZOOM_STOPS_MAX_SPAN;
   const stops = useStopsInArea(bbox, stopsVisible);
   // Transport shows every live vehicle (one request); no route lines until a line is picked. The picked line's shape
@@ -80,13 +78,22 @@ function MapBody() {
   const vehicles = useAllVehicles(transitOn);
   const routes = useTransitRoutes(transitOn);
   const [lineView, setLineView] = useState<LineView | null>(null);
+  // The vehicle type picked in the transport panel (trams first); its vehicles are the ones drawn until a line is picked.
+  const [transitMode, setTransitMode] = useState<TransitRouteType | null>('TRAM');
+  const modeVehicles = useMemo(
+    () => (transitMode ? vehicles.data?.vehicles.filter((v) => (v.type ?? 'BUS') === transitMode) : vehicles.data?.vehicles),
+    [vehicles.data, transitMode],
+  );
   const lineId = transitOn ? lineView?.id ?? null : null;
   const lineShape = useLineShape(lineId);
   const directions = useMemo(() => lineDirections(lineShape.data, lineId, decodePolyline), [lineShape.data, lineId]);
   const directionIndex = lineView?.dir ?? directionOfVehicle(directions, lineView?.headsign);
   // Transport off: the next time it is on, every vehicle shows again.
   useEffect(() => {
-    if (!filters.transitOn) setLineView(null);
+    if (!filters.transitOn) {
+      setLineView(null);
+      setTransitMode('TRAM');
+    }
   }, [filters.transitOn]);
   /** Picks a line in the picker (null clears it, back to every vehicle). */
   const pickLine = useCallback((id: string | null) => setLineView(id ? { id, dir: null, headsign: null } : null), []);
@@ -179,12 +186,18 @@ function MapBody() {
     if (focus) setDestination({ coords: focus, title: params.title || 'Selected spot' });
   }, [focus?.lat, focus?.lon, params.title, setDestination]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // When the trip card is closed (directions were shown, now they are not), the pin goes away too.
-  const wasShowingDirections = useRef(showingDirections);
+  // The "Show on map" pin is only for the moment it was asked for: it goes away as soon as the user does something
+  // else: directions open (or close), another place / event / stop is picked, or they leave the Map tab (another menu,
+  // a search, a screen on top). Asking for it again (a new `at`) brings it back.
+  const lastSelection = useRef(selection);
   useEffect(() => {
-    if (wasShowingDirections.current && !showingDirections) setFocusDismissed(true);
-    wasShowingDirections.current = showingDirections;
+    if (selection && selection !== lastSelection.current) setFocusDismissed(true);
+    lastSelection.current = selection;
+  }, [selection]);
+  useEffect(() => {
+    if (showingDirections) setFocusDismissed(true);
   }, [showingDirections]);
+  useFocusEffect(useCallback(() => () => setFocusDismissed(true), []));
 
   // Directions open: frame the whole trip (start and destination) so the route and its vehicles are in view.
   const tripStart = destination?.origin?.coords ?? position;
@@ -273,7 +286,6 @@ function MapBody() {
           <PlaceMarkers
             places={places.data.items}
             selectedId={selection?.type === 'place' ? selection.id : undefined}
-            showLabels={labelsVisible}
             bbox={bbox}
             onZoomTo={zoomTo}
             onSelect={selectPlace}
@@ -283,7 +295,6 @@ function MapBody() {
           <EventMarkers
             events={events.data.items}
             selectedId={selection?.type === 'event' ? selection.id : undefined}
-            showLabels={labelsVisible}
             bbox={bbox}
             onZoomTo={zoomTo}
             onSelect={selectEvent}
@@ -295,7 +306,7 @@ function MapBody() {
             lineId={lineId}
             directions={directions}
             directionIndex={directionIndex}
-            vehicles={vehicles.data?.vehicles}
+            vehicles={modeVehicles}
             bbox={bbox}
             selectedStopId={selection?.type === 'stop' ? selection.id : undefined}
             selectedVehicleId={selection?.type === 'vehicle' ? selection.id : undefined}
@@ -318,7 +329,7 @@ function MapBody() {
         </View>
         <MapFilterBar filters={layers} onChange={changeFilter} disabled={showingDirections} />
         {transitOn && (
-          <LinePicker routes={routes.data} lineId={lineId} directions={directions} directionIndex={directionIndex} onPick={pickLine} onDirection={pickDirection} />
+          <LinePicker routes={routes.data} mode={transitMode} onMode={setTransitMode} lineId={lineId} directions={directions} directionIndex={directionIndex} onPick={pickLine} onDirection={pickDirection} />
         )}
         {showingDirections && (
           <View style={styles.hint} testID="filters-off-hint">

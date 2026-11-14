@@ -49,10 +49,25 @@ jest.mock('expo-router', () => {
   const React = require('react');
   const { Pressable } = require('react-native');
   const router = { push: jest.fn(), replace: jest.fn(), back: jest.fn(), canGoBack: jest.fn(() => true) };
+  // Screens that run an effect while focused (useFocusEffect). Tests call globalThis.__setRouteFocused(false / true)
+  // (inside act) to leave / come back to the screen.
+  const focusEffects = new Set<{ blur: () => void; focus: () => void }>();
+  (globalThis as { __setRouteFocused?: (focused: boolean) => void }).__setRouteFocused = (focused) => focusEffects.forEach((e) => (focused ? e.focus() : e.blur()));
+  const useFocusEffect = (effect: () => void | (() => void)) =>
+    React.useEffect(() => {
+      let cleanup = effect();
+      const entry = { blur: () => { cleanup?.(); cleanup = undefined; }, focus: () => { cleanup = effect(); } };
+      focusEffects.add(entry);
+      return () => {
+        focusEffects.delete(entry);
+        cleanup?.();
+      };
+    }, [effect]);
   const passthrough = ({ children }: { children?: React.ReactNode }) => React.createElement(React.Fragment, null, children);
   return {
     router,
     useRouter: () => router,
+    useFocusEffect,
     useLocalSearchParams: () => (globalThis as { __routeParams?: object }).__routeParams ?? {},
     Link: ({ children, href, ...rest }: { children: React.ReactNode; href: string }) =>
       React.createElement(Pressable, { ...rest, onPress: () => router.push(href) }, children),

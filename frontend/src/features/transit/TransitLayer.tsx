@@ -3,16 +3,15 @@
 // ONE direction (Tur / Retur), thick in the line colour over a faint wider halo, the stop dots of that direction and
 // only that line's vehicles (those heading that way when their headsigns tell). Vehicles are drawn above everything.
 import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
-import { StyleSheet, View } from 'react-native';
 import { Marker, Polyline } from 'react-native-maps';
 
 import type { TransitStop, TransitVehicle } from '@/api/types.transit';
-import { useBriefViewTracking } from '@/features/map/ClusterMarker';
 import type { Bbox } from '@/lib/bbox';
 import { colors } from '@/ui/theme';
 
 import { lineColor, sameLine, vehiclesInView, vehiclesOfLine, withAlpha } from './lines';
 import { vehiclesInDirection, type LineDirection } from './lineView';
+import { STOP_IMAGES } from './transitImages';
 import { VehicleMarker } from './VehicleMarker';
 
 /** A stop as the layer draws it (GET /transit/stops item, or a stop of the chosen line's direction). */
@@ -43,21 +42,13 @@ export const ROUTE_STYLE = { width: 7, haloWidth: 11, haloOpacity: 0.3 } as cons
 /** Stop dot anchor (one shared object). */
 const CENTER = { x: 0.5, y: 0.5 };
 
-/** A stop: small dot (signal blue, or the line colour on a chosen line), bigger and ringed when selected. Redraws
- * briefly after mounting or a selection change (see useBriefViewTracking) so Android does not snapshot an empty marker.
- * Memoised: a vehicle refresh or a pan does not touch it. */
+/** A stop: small dot (signal blue, or the line colour on a chosen line), bigger and ringed when selected. A ready-made
+ * image (transitImages.ts), so it is never cut off or blank. Memoised: a vehicle refresh or a pan does not touch it. */
 const StopMarker = memo(function StopMarker({ stop, selected, color, onPress }: { stop: LayerStop; selected: boolean; color: string; onPress: (id: string) => void }) {
-  const tracking = useBriefViewTracking(`${selected}:${color}`);
   const coordinate = useMemo(() => ({ latitude: stop.lat, longitude: stop.lon }), [stop.lat, stop.lon]);
   const press = useCallback(() => onPress(stop.id), [onPress, stop.id]);
-  return (
-    <Marker testID={`stop-marker-${stop.id}`} coordinate={coordinate} onPress={press} tracksViewChanges={tracking} anchor={CENTER} zIndex={10}>
-      {/* Fixed-size root that holds the dot in both sizes, so the snapshot never cuts it. */}
-      <View testID={`marker-root-stop-${stop.id}`} collapsable={false} style={styles.stopRoot}>
-        <View collapsable={false} style={[styles.stop, { backgroundColor: color }, selected && styles.stopSelected]} />
-      </View>
-    </Marker>
-  );
+  const images = STOP_IMAGES[color.toLowerCase()] ?? STOP_IMAGES[colors.signal.toLowerCase()];
+  return <Marker testID={`stop-marker-${stop.id}`} coordinate={coordinate} onPress={press} image={selected ? images.selected : images.normal} tracksViewChanges={false} anchor={CENTER} zIndex={10} />;
 });
 
 /** The chosen line's route for the shown direction: the halo first, then the line on top. Memoised: only a new line or
@@ -132,12 +123,3 @@ function TransitLayerBase({
 
 /** The layer is memoised too: the map screen re-renders on every pan and panel change. */
 export const TransitLayer = memo(TransitLayerBase);
-
-/** Side of a stop marker's root (larger than the selected dot). */
-export const STOP_ROOT_SIZE = 22;
-
-const styles = StyleSheet.create({
-  stopRoot: { width: STOP_ROOT_SIZE, height: STOP_ROOT_SIZE, alignItems: 'center', justifyContent: 'center' },
-  stop: { width: 12, height: 12, borderRadius: 6, borderWidth: 2, borderColor: colors.bg },
-  stopSelected: { width: 18, height: 18, borderRadius: 9, borderColor: '#fff' },
-});
