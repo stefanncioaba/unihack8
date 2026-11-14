@@ -603,4 +603,6 @@ Answer — `reply` is plain text (no markdown) in the user's language (Romanian 
 }
 ```
 
+**Off-topic requests (PLAN 19):** the assistant answers only about Timișoara (places, food and drinks, events, public transport, the city) and directions. Anything else (code, maths/homework, essays, translations, general knowledge, general chat) gets a normal `200` answer whose `reply` is one short sentence, in the user's language, saying what it can help with; `places`, `events` and `sources` (and `routes`, once PLAN 18 adds it) are empty. There is no special error code, so the app shows it like any other answer. A mixed message gets the city part answered and the rest declined in one sentence.
+
 Takes 2–10 s (the model may call several tools). Errors: `400 VALIDATION_FAILED` (empty `messages`, a `role` other than `user`/`assistant`, a message over 2000 characters, or the last message not from the user), `429 RATE_LIMITED` (more than 10 requests per minute per user), `503 AI_UNAVAILABLE` (Gemini down or busy; the message says to try again in a minute).

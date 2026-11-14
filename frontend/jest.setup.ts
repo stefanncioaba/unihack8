@@ -75,7 +75,8 @@ jest.mock('react-native-maps', () => {
     }));
     return React.createElement(View, props);
   });
-  const plain = (props: object) => React.createElement(View, props);
+  MapView.displayName = 'MapView';
+  const plain =(props: object) => React.createElement(View, props);
   return { __esModule: true, default: MapView, Marker: plain, Polyline: plain, Circle: plain, Callout: plain, PROVIDER_GOOGLE: 'google' };
 });
 
