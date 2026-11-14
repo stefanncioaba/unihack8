@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "37e420d6f6e77e0562138b13960dbe63457d1b73",
-  "generatedAt": "2026-11-14T17:46:57.044Z",
+  "gitCommitHash": "69cb57946684bc71c0253fcb1f9fbdd57b78bb91",
+  "generatedAt": "2026-11-14T17:52:30.562Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,7 +25,7 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "3fb7172396f3569821824ad950a7a41cd7cafcde983d0d86ef0a6a62e6d5e18d",
+      "contentHash": "beea50df7e8ea46dcbf2d52afdd097a7242dc0596a19df244a596f9467080455",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -4512,7 +4512,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/exception/GlobalExceptionHandler.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/exception/GlobalExceptionHandler.java",
-      "contentHash": "8f93866385fb598414d47dcc583a1c6227f76d558388dd70074d4f254b080471",
+      "contentHash": "6a4314661342a8b3d1520eda8cb18e06af88b4baa5ec8ab390a1a7c489a0693f",
       "functions": [
         {
           "name": "GlobalExceptionHandler",
@@ -4630,7 +4630,25 @@
           ],
           "returnType": "ResponseEntity<ErrorResponse>",
           "exported": true,
-          "lineCount": 5
+          "lineCount": 12
+        },
+        {
+          "name": "isClientDisconnect",
+          "params": [
+            "ex"
+          ],
+          "returnType": "boolean",
+          "exported": false,
+          "lineCount": 16
+        },
+        {
+          "name": "rootMessage",
+          "params": [
+            "ex"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 7
         },
         {
           "name": "respond",
@@ -4661,6 +4679,8 @@
             "handleWrongMethod",
             "handleAccessDenied",
             "handleUnexpected",
+            "isClientDisconnect",
+            "rootMessage",
             "respond"
           ],
           "properties": [
@@ -4668,7 +4688,7 @@
             "errors"
           ],
           "exported": true,
-          "lineCount": 113
+          "lineCount": 147
         }
       ],
       "imports": [
@@ -4691,9 +4711,21 @@
           ]
         },
         {
+          "source": "java.io.IOException",
+          "specifiers": [
+            "IOException"
+          ]
+        },
+        {
           "source": "java.util.LinkedHashMap",
           "specifiers": [
             "LinkedHashMap"
+          ]
+        },
+        {
+          "source": "java.util.Locale",
+          "specifiers": [
+            "Locale"
           ]
         },
         {
@@ -4769,6 +4801,12 @@
           ]
         },
         {
+          "source": "org.springframework.web.context.request.async.AsyncRequestNotUsableException",
+          "specifiers": [
+            "AsyncRequestNotUsableException"
+          ]
+        },
+        {
           "source": "org.springframework.web.method.annotation.HandlerMethodValidationException",
           "specifiers": [
             "HandlerMethodValidationException"
@@ -4802,7 +4840,7 @@
         "handleUnexpected",
         "GlobalExceptionHandler"
       ],
-      "totalLines": 141,
+      "totalLines": 178,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java": {
@@ -28935,7 +28973,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/common/exception/GlobalExceptionHandlerTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/common/exception/GlobalExceptionHandlerTest.java",
-      "contentHash": "f7a89664bd09843f9b7997661f884c2ed32ef25d4faa7025650b9c81557e84e1",
+      "contentHash": "447371c4659bff7f77cd4c3148b5894551d821444518a86bb12b053d0bdf7738",
       "functions": [
         {
           "name": "apiExceptionUsesItsCodeAndStatus",
@@ -28992,6 +29030,27 @@
           "returnType": "void",
           "exported": false,
           "lineCount": 7
+        },
+        {
+          "name": "clientHangupWritesNoErrorBody",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "recognisesClientDisconnects",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "realErrorsAreNotDisconnects",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
         }
       ],
       "classes": [
@@ -29005,14 +29064,17 @@
             "pageSizeOverLimitIs400",
             "unknownPathIs404",
             "wrongMethodIs405",
-            "unexpectedErrorIs500WithoutDetails"
+            "unexpectedErrorIs500WithoutDetails",
+            "clientHangupWritesNoErrorBody",
+            "recognisesClientDisconnects",
+            "realErrorsAreNotDisconnects"
           ],
           "properties": [
             "AUTH",
             "mvc"
           ],
           "exported": false,
-          "lineCount": 87
+          "lineCount": 114
         }
       ],
       "imports": [
@@ -29065,15 +29127,45 @@
           ]
         },
         {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
           "source": "com.unihack8.backend.support.JwtTestTokens",
           "specifiers": [
             "JwtTestTokens"
           ]
         },
         {
+          "source": "java.io.IOException",
+          "specifiers": [
+            "IOException"
+          ]
+        },
+        {
           "source": "java.util.UUID",
           "specifiers": [
             "UUID"
+          ]
+        },
+        {
+          "source": "org.apache.catalina.connector.ClientAbortException",
+          "specifiers": [
+            "ClientAbortException"
+          ]
+        },
+        {
+          "source": "org.springframework.http.converter.HttpMessageNotWritableException",
+          "specifiers": [
+            "HttpMessageNotWritableException"
+          ]
+        },
+        {
+          "source": "org.springframework.web.context.request.async.AsyncRequestNotUsableException",
+          "specifiers": [
+            "AsyncRequestNotUsableException"
           ]
         },
         {
@@ -29114,7 +29206,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 109,
+      "totalLines": 142,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/common/geo/GeoTest.java": {
@@ -37936,7 +38028,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/support/TestProbeController.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/support/TestProbeController.java",
-      "contentHash": "e55715948cf029a78ea4662fa7f489ac1b8d8f8428be0905f0f4f89e9303f189",
+      "contentHash": "1b739be92756a232b7792e6901995ca5e31228f2cf0588d994d4ad876bb731b6",
       "functions": [
         {
           "name": "TestProbeController",
@@ -37975,6 +38067,13 @@
           "lineCount": 4
         },
         {
+          "name": "hangup",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
           "name": "body",
           "params": [
             "body"
@@ -38003,6 +38102,7 @@
             "me",
             "full",
             "boom",
+            "hangup",
             "body",
             "page"
           ],
@@ -38010,7 +38110,7 @@
             "currentUser"
           ],
           "exported": true,
-          "lineCount": 51
+          "lineCount": 58
         }
       ],
       "imports": [
@@ -38099,11 +38199,12 @@
         "me",
         "full",
         "boom",
+        "hangup",
         "body",
         "page",
         "TestProbeController"
       ],
-      "totalLines": 72,
+      "totalLines": 79,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/transit/client/impl/StptClientImplTest.java": {
