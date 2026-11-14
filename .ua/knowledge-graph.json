@@ -34,8 +34,8 @@
       "Jest"
     ],
     "description": "Hackathon mobile app for Timișoara (Connected Communities): Spring Boot API + Supabase + Expo app with events and QR reliability points, places map, live STPT transit, routing and an AI guide.",
-    "analyzedAt": "2026-11-14T13:35:26.669Z",
-    "gitCommitHash": "1a45ceb76a356a8204ce738f35aee4497d7689c5"
+    "analyzedAt": "2026-11-14T13:42:42.323Z",
+    "gitCommitHash": "5248fef33b47ba51537078073294103c919da911"
   },
   "nodes": [
     {
@@ -5266,20 +5266,6 @@
       "complexity": "complex"
     },
     {
-      "id": "file:frontend/__tests__/screens.home.test.tsx",
-      "type": "file",
-      "name": "screens.home.test.tsx",
-      "filePath": "frontend/__tests__/screens.home.test.tsx",
-      "summary": "Screen tests for the Home tab (city info strip, departure board, transit alerts, category filters, navigation) and the All events list (search, filters, pagination).",
-      "tags": [
-        "test",
-        "screen",
-        "events",
-        "transit"
-      ],
-      "complexity": "moderate"
-    },
-    {
       "id": "file:frontend/__tests__/screens.users.test.tsx",
       "type": "file",
       "name": "screens.users.test.tsx",
@@ -5477,87 +5463,6 @@
         "tabs"
       ],
       "complexity": "simple"
-    },
-    {
-      "id": "file:frontend/src/app/(tabs)/ai.tsx",
-      "type": "file",
-      "name": "ai.tsx",
-      "filePath": "frontend/src/app/(tabs)/ai.tsx",
-      "summary": "AI assistant tab: chat conversation with bubbles, suggestions, place result cards and route cards, sending the user's position with each request.",
-      "tags": [
-        "screen",
-        "ai-assistant",
-        "chat",
-        "component",
-        "tested"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
-      "type": "function",
-      "name": "AiScreen",
-      "filePath": "frontend/src/app/(tabs)/ai.tsx",
-      "lineRange": [
-        18,
-        76
-      ],
-      "summary": "Chat screen for the AI guide, rendering messages, results and route cards.",
-      "tags": [
-        "screen",
-        "ai-assistant",
-        "chat"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "file:frontend/src/app/(tabs)/index.tsx",
-      "type": "file",
-      "name": "index.tsx",
-      "filePath": "frontend/src/app/(tabs)/index.tsx",
-      "summary": "Home tab: search, category chips, live city transit info strip, upcoming event cards, people search and create-event entry, with pull-to-refresh.",
-      "tags": [
-        "screen",
-        "entry-point",
-        "events",
-        "transit",
-        "tested"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:frontend/src/app/(tabs)/index.tsx:LivePill",
-      "type": "function",
-      "name": "LivePill",
-      "filePath": "frontend/src/app/(tabs)/index.tsx",
-      "lineRange": [
-        25,
-        34
-      ],
-      "summary": "Small status pill showing Live or Offline depending on transit data availability.",
-      "tags": [
-        "component",
-        "transit",
-        "status"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
-      "type": "function",
-      "name": "HomeScreen",
-      "filePath": "frontend/src/app/(tabs)/index.tsx",
-      "lineRange": [
-        37,
-        125
-      ],
-      "summary": "Discovery-style Home page combining search, categories, transit info and upcoming events.",
-      "tags": [
-        "screen",
-        "events",
-        "transit"
-      ],
-      "complexity": "moderate"
     },
     {
       "id": "file:frontend/src/app/(tabs)/profile.tsx",
@@ -5877,88 +5782,6 @@
         "exported"
       ],
       "complexity": "moderate"
-    },
-    {
-      "id": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "type": "file",
-      "name": "ChatBubble.tsx",
-      "filePath": "frontend/src/features/ai/ChatBubble.tsx",
-      "summary": "AI chat message bubbles for user and assistant, including source links, a thinking indicator and an error bubble with retry.",
-      "tags": [
-        "component",
-        "ai-chat",
-        "ui",
-        "react-native"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:frontend/src/features/ai/ChatBubble.tsx:Sources",
-      "type": "function",
-      "name": "Sources",
-      "filePath": "frontend/src/features/ai/ChatBubble.tsx",
-      "lineRange": [
-        17,
-        33
-      ],
-      "summary": "Lists links to web sources the assistant used.",
-      "tags": [
-        "component",
-        "ai-chat",
-        "internal"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/ai/ChatBubble.tsx:ChatBubble",
-      "type": "function",
-      "name": "ChatBubble",
-      "filePath": "frontend/src/features/ai/ChatBubble.tsx",
-      "lineRange": [
-        36,
-        47
-      ],
-      "summary": "Renders one chat message with optional result cards under assistant replies.",
-      "tags": [
-        "component",
-        "ai-chat",
-        "exported"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/ai/ChatBubble.tsx:ThinkingBubble",
-      "type": "function",
-      "name": "ThinkingBubble",
-      "filePath": "frontend/src/features/ai/ChatBubble.tsx",
-      "lineRange": [
-        50,
-        59
-      ],
-      "summary": "Placeholder bubble shown while the assistant works.",
-      "tags": [
-        "component",
-        "ai-chat",
-        "exported"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/ai/ChatBubble.tsx:ErrorBubble",
-      "type": "function",
-      "name": "ErrorBubble",
-      "filePath": "frontend/src/features/ai/ChatBubble.tsx",
-      "lineRange": [
-        62,
-        73
-      ],
-      "summary": "Error bubble with a Try again action repeating the request.",
-      "tags": [
-        "component",
-        "ai-chat",
-        "exported"
-      ],
-      "complexity": "simple"
     },
     {
       "id": "file:frontend/src/features/ai/ChatInput.tsx",
@@ -7055,37 +6878,6 @@
         "exported"
       ],
       "complexity": "simple"
-    },
-    {
-      "id": "file:frontend/src/features/transit/CityInfoStrip.tsx",
-      "type": "file",
-      "name": "CityInfoStrip.tsx",
-      "filePath": "frontend/src/features/transit/CityInfoStrip.tsx",
-      "summary": "Home-screen departure-board strip showing the last tram message, last departure time and an expandable STPT transit alerts pill.",
-      "tags": [
-        "component",
-        "transit",
-        "departure-board",
-        "alerts"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
-      "type": "function",
-      "name": "CityInfoStrip",
-      "filePath": "frontend/src/features/transit/CityInfoStrip.tsx",
-      "lineRange": [
-        15,
-        97
-      ],
-      "summary": "Departure board with last-tram info and expandable alerts.",
-      "tags": [
-        "component",
-        "transit",
-        "exported"
-      ],
-      "complexity": "moderate"
     },
     {
       "id": "file:frontend/src/features/users/MyEvents.tsx",
@@ -18347,7 +18139,8 @@
         "service",
         "interface",
         "transit",
-        "type-definition"
+        "type-definition",
+        "tested"
       ],
       "complexity": "simple"
     },
@@ -18365,264 +18158,6 @@
         "service",
         "interface",
         "contract"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "type": "file",
-      "name": "TransitServiceImpl.java",
-      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "summary": "Core transit service combining cached STPT live data, GTFS timetable and shapes into app-ready responses, including last-departure logic and a localized last-tram summary.",
-      "tags": [
-        "service",
-        "transit",
-        "caching",
-        "real-time",
-        "business-logic",
-        "tested"
-      ],
-      "complexity": "complex",
-      "languageNotes": "Uses stale-while-error caching and a 03:00 service-day cutover so after-midnight trips belong to the previous day."
-    },
-    {
-      "id": "class:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:TransitServiceImpl",
-      "type": "class",
-      "name": "TransitServiceImpl",
-      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "lineRange": [
-        48,
-        405
-      ],
-      "summary": "TransitService implementation with per-kind stale caches, line list back-off, service-day rules and line-name ordering.",
-      "tags": [
-        "service",
-        "implementation",
-        "caching"
-      ],
-      "complexity": "complex"
-    },
-    {
-      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:routes",
-      "type": "function",
-      "name": "routes",
-      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "lineRange": [
-        104,
-        112
-      ],
-      "summary": "Returns cached STPT lines sorted by type then numerically by name, dropping unnamed lines.",
-      "tags": [
-        "service",
-        "caching"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:stops",
-      "type": "function",
-      "name": "stops",
-      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "lineRange": [
-        115,
-        121
-      ],
-      "summary": "Returns all cached stops, optionally filtered to a bounding box.",
-      "tags": [
-        "service",
-        "geo"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:vehicles",
-      "type": "function",
-      "name": "vehicles",
-      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "lineRange": [
-        124,
-        135
-      ],
-      "summary": "Returns live vehicle positions for one line or all lines, enriched with line facts.",
-      "tags": [
-        "service",
-        "real-time"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:shapes",
-      "type": "function",
-      "name": "shapes",
-      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "lineRange": [
-        138,
-        146
-      ],
-      "summary": "Returns every line's path sorted like routes, or only the requested line's.",
-      "tags": [
-        "service",
-        "geo"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:allShapes",
-      "type": "function",
-      "name": "allShapes",
-      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "lineRange": [
-        149,
-        176
-      ],
-      "summary": "Builds line shapes once, reusing a GTFS-only build for a few minutes while STPT's line list is unavailable.",
-      "tags": [
-        "caching",
-        "geo"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:linesById",
-      "type": "function",
-      "name": "linesById",
-      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "lineRange": [
-        179,
-        196
-      ],
-      "summary": "Indexes STPT lines by lower-case id, backing off retries for a minute after a failed fetch.",
-      "tags": [
-        "caching",
-        "resilience"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:arrivals",
-      "type": "function",
-      "name": "arrivals",
-      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "lineRange": [
-        204,
-        215
-      ],
-      "summary": "Returns the next arrivals at a stop, soonest first, with stale-cache fallback.",
-      "tags": [
-        "service",
-        "real-time"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:alerts",
-      "type": "function",
-      "name": "alerts",
-      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "lineRange": [
-        218,
-        221
-      ],
-      "summary": "Returns current STPT service alerts mapped to DTOs.",
-      "tags": [
-        "service",
-        "alerts"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:lastDepartures",
-      "type": "function",
-      "name": "lastDepartures",
-      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "lineRange": [
-        224,
-        239
-      ],
-      "summary": "Returns last departures from the GTFS timetable when it covers the day, otherwise falls back to live data.",
-      "tags": [
-        "service",
-        "timetable"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:liveLastDepartures",
-      "type": "function",
-      "name": "liveLastDepartures",
-      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "lineRange": [
-        242,
-        257
-      ],
-      "summary": "Fallback computing the latest live arrival seen per line and direction.",
-      "tags": [
-        "real-time",
-        "fallback"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:summary",
-      "type": "function",
-      "name": "summary",
-      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "lineRange": [
-        260,
-        271
-      ],
-      "summary": "Builds the nearest-stop summary with last departures, alert count and a ready-to-show sentence.",
-      "tags": [
-        "service",
-        "summary"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:message",
-      "type": "function",
-      "name": "message",
-      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "lineRange": [
-        274,
-        295
-      ],
-      "summary": "Composes the localized 'Last tram X from Y leaves at HH:MM' sentence for the line that stops first.",
-      "tags": [
-        "localization",
-        "formatting"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:vehicleWord",
-      "type": "function",
-      "name": "vehicleWord",
-      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "lineRange": [
-        308,
-        318
-      ],
-      "summary": "Picks the vehicle noun (tram, bus, trolleybus...) used in the summary sentence per language.",
-      "tags": [
-        "localization",
-        "utility"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:compareLineNames",
-      "type": "function",
-      "name": "compareLineNames",
-      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "lineRange": [
-        382,
-        395
-      ],
-      "summary": "Compares line names like '2', '11', 'M14', 'E4b' by prefix letters, number, then remainder.",
-      "tags": [
-        "sorting",
-        "utility"
       ],
       "complexity": "simple"
     },
@@ -18824,174 +18359,6 @@
       "complexity": "simple"
     },
     {
-      "id": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "type": "file",
-      "name": "TransitControllerTest.java",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "summary": "Web MVC tests for TransitController endpoints (routes, stops, vehicles, shapes, arrivals, alerts, last departures, summary) and error mapping.",
-      "tags": [
-        "test",
-        "api-handler",
-        "transit",
-        "web-mvc",
-        "junit"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "class:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:TransitControllerTest",
-      "type": "class",
-      "name": "TransitControllerTest",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "lineRange": [
-        40,
-        209
-      ],
-      "summary": "Controller slice test class verifying HTTP responses of the transit API.",
-      "tags": [
-        "test",
-        "junit",
-        "web-mvc"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:routes",
-      "type": "function",
-      "name": "routes",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "lineRange": [
-        53,
-        63
-      ],
-      "summary": "Test case verifying: routes.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:stops",
-      "type": "function",
-      "name": "stops",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "lineRange": [
-        66,
-        77
-      ],
-      "summary": "Test case verifying: stops.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:vehicles",
-      "type": "function",
-      "name": "vehicles",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "lineRange": [
-        80,
-        97
-      ],
-      "summary": "Test case verifying: vehicles.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:allVehicles",
-      "type": "function",
-      "name": "allVehicles",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "lineRange": [
-        100,
-        111
-      ],
-      "summary": "Test case verifying: all vehicles.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:shapes",
-      "type": "function",
-      "name": "shapes",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "lineRange": [
-        114,
-        130
-      ],
-      "summary": "Test case verifying: shapes.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:arrivals",
-      "type": "function",
-      "name": "arrivals",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "lineRange": [
-        142,
-        156
-      ],
-      "summary": "Test case verifying: arrivals.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:lastDepartures",
-      "type": "function",
-      "name": "lastDepartures",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "lineRange": [
-        168,
-        177
-      ],
-      "summary": "Test case verifying: last departures.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:summary",
-      "type": "function",
-      "name": "summary",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "lineRange": [
-        180,
-        200
-      ],
-      "summary": "Test case verifying: summary.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "moderate"
-    },
-    {
       "id": "file:backend/src/test/java/com/unihack8/backend/transit/mapper/impl/TransitMapperImplTest.java",
       "type": "file",
       "name": "TransitMapperImplTest.java",
@@ -19187,275 +18554,6 @@
         "transit"
       ],
       "complexity": "complex"
-    },
-    {
-      "id": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "type": "file",
-      "name": "TransitServiceImplTest.java",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "summary": "Extensive unit tests for TransitServiceImpl covering sorting, caching, stale fallback, shapes, arrivals, timetable vs live last departures and localized summaries.",
-      "tags": [
-        "test",
-        "service",
-        "transit",
-        "caching",
-        "junit"
-      ],
-      "complexity": "complex"
-    },
-    {
-      "id": "class:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:TransitServiceImplTest",
-      "type": "class",
-      "name": "TransitServiceImplTest",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "lineRange": [
-        47,
-        476
-      ],
-      "summary": "Test class using mocks and a MutableClock to exercise TransitServiceImpl behaviour.",
-      "tags": [
-        "test",
-        "junit"
-      ],
-      "complexity": "complex"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:setUp",
-      "type": "function",
-      "name": "setUp",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "lineRange": [
-        59,
-        83
-      ],
-      "summary": "Prepares mocks and fixtures shared by the TransitServiceImplTest tests.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:vehiclesFresh",
-      "type": "function",
-      "name": "vehiclesFresh",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "lineRange": [
-        110,
-        125
-      ],
-      "summary": "Test case verifying: vehicles fresh.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:allVehiclesWithoutRoute",
-      "type": "function",
-      "name": "allVehiclesWithoutRoute",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "lineRange": [
-        128,
-        144
-      ],
-      "summary": "Test case verifying: all vehicles without route.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:allVehiclesCached",
-      "type": "function",
-      "name": "allVehiclesCached",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "lineRange": [
-        147,
-        157
-      ],
-      "summary": "Test case verifying: all vehicles cached.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:allVehiclesStaleWhenSourceDown",
-      "type": "function",
-      "name": "allVehiclesStaleWhenSourceDown",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "lineRange": [
-        160,
-        173
-      ],
-      "summary": "Test case verifying: all vehicles stale when source down.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:vehiclesWithoutLineList",
-      "type": "function",
-      "name": "vehiclesWithoutLineList",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "lineRange": [
-        176,
-        185
-      ],
-      "summary": "Test case verifying: vehicles without line list.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:vehiclesStaleWhenSourceDown",
-      "type": "function",
-      "name": "vehiclesStaleWhenSourceDown",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "lineRange": [
-        188,
-        201
-      ],
-      "summary": "Test case verifying: vehicles stale when source down.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:shapesSortedAndFiltered",
-      "type": "function",
-      "name": "shapesSortedAndFiltered",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "lineRange": [
-        213,
-        226
-      ],
-      "summary": "Test case verifying: shapes sorted and filtered.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:shapesWithoutLineListUseGtfs",
-      "type": "function",
-      "name": "shapesWithoutLineListUseGtfs",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "lineRange": [
-        240,
-        261
-      ],
-      "summary": "Test case verifying: shapes without line list use gtfs.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:vehiclesDoNotRetryFailedLineListAtOnce",
-      "type": "function",
-      "name": "vehiclesDoNotRetryFailedLineListAtOnce",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "lineRange": [
-        264,
-        278
-      ],
-      "summary": "Test case verifying: vehicles do not retry failed line list at once.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:lineWithoutNameIsSkipped",
-      "type": "function",
-      "name": "lineWithoutNameIsSkipped",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "lineRange": [
-        281,
-        294
-      ],
-      "summary": "Test case verifying: line without name is skipped.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:summaryInEnglish",
-      "type": "function",
-      "name": "summaryInEnglish",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "lineRange": [
-        358,
-        368
-      ],
-      "summary": "Test case verifying: summary in english.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:lastDeparturesFromTimetable",
-      "type": "function",
-      "name": "lastDeparturesFromTimetable",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "lineRange": [
-        392,
-        406
-      ],
-      "summary": "Test case verifying: last departures from timetable.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:summaryFromTimetable",
-      "type": "function",
-      "name": "summaryFromTimetable",
-      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "lineRange": [
-        444,
-        459
-      ],
-      "summary": "Test case verifying: summary from timetable.",
-      "tags": [
-        "test",
-        "junit",
-        "transit"
-      ],
-      "complexity": "moderate"
     },
     {
       "id": "file:backend/src/main/java/com/unihack8/backend/common/dto/ErrorResponse.java",
@@ -21094,34 +20192,6 @@
       "complexity": "moderate"
     },
     {
-      "id": "document:docs/API.md",
-      "type": "document",
-      "name": "API.md",
-      "filePath": "docs/API.md",
-      "summary": "Full REST API contract for the Spring Boot backend: conventions (paging, error format), shared objects, and endpoints for users, events and check-in, places, STPT transit, routing and the AI assistant.",
-      "tags": [
-        "documentation",
-        "api-schema",
-        "rest",
-        "contract"
-      ],
-      "complexity": "complex"
-    },
-    {
-      "id": "document:docs/DEMO.md",
-      "type": "document",
-      "name": "DEMO.md",
-      "filePath": "docs/DEMO.md",
-      "summary": "Hackathon demo guide with a setup checklist (OTP, backend, Expo app, accounts), a two-phone walkthrough of join/ticket/check-in, a 3-minute pitch script and a troubleshooting table.",
-      "tags": [
-        "documentation",
-        "demo",
-        "setup",
-        "pitch"
-      ],
-      "complexity": "simple"
-    },
-    {
       "id": "file:docs/design/mockups.html",
       "type": "file",
       "name": "mockups.html",
@@ -21354,17 +20424,1287 @@
       "complexity": "simple"
     },
     {
+      "id": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "type": "file",
+      "name": "ai.shortcuts.test.tsx",
+      "filePath": "frontend/__tests__/ai.shortcuts.test.tsx",
+      "summary": "Jest tests for AI shortcuts (PLAN 13.10): normalization and duplicate helpers, saving/removing shortcuts on the Home screen backed by AsyncStorage, and the AI tab auto-asking a shortcut question from route params without repeating on re-render.",
+      "tags": [
+        "test",
+        "ai",
+        "shortcuts",
+        "async-storage",
+        "react-native"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/__tests__/ai.shortcuts.test.tsx:aiAgain",
+      "type": "function",
+      "name": "aiAgain",
+      "filePath": "frontend/__tests__/ai.shortcuts.test.tsx",
+      "lineRange": [
+        16,
+        24
+      ],
+      "summary": "Re-wraps AiScreen in the same QueryClient and Auth providers used by renderScreen so tests can re-render after changing route params.",
+      "tags": [
+        "test",
+        "test-helper",
+        "provider-wrapper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/__tests__/screens.home.test.tsx",
+      "type": "file",
+      "name": "screens.home.test.tsx",
+      "filePath": "frontend/__tests__/screens.home.test.tsx",
+      "summary": "Jest tests for the Home tab and the All Events screen: city info strip and departure board, transit alerts, category filtering, navigation to events/search/create/people, empty states, debounced search, date filters and infinite paging.",
+      "tags": [
+        "test",
+        "home-screen",
+        "events",
+        "transit",
+        "react-native"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/src/app/(tabs)/ai.tsx",
+      "type": "file",
+      "name": "ai.tsx",
+      "filePath": "frontend/src/app/(tabs)/ai.tsx",
+      "summary": "AI tab screen: an in-memory chat with the city guide showing result and route cards under answers, suggestions on an empty chat, a New chat reset, and auto-asking a question passed as a Home shortcut via ?ask=&at= params.",
+      "tags": [
+        "component",
+        "screen",
+        "ai-chat",
+        "expo-router",
+        "entry-point",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
+      "type": "function",
+      "name": "AiScreen",
+      "filePath": "frontend/src/app/(tabs)/ai.tsx",
+      "lineRange": [
+        21,
+        92
+      ],
+      "summary": "Default-exported chat screen that wires useAiChat with the user location, renders the message list with SaveShortcut, ResultCards and RouteCards, and starts a fresh chat once per distinct shortcut request.",
+      "tags": [
+        "component",
+        "screen",
+        "ai-chat",
+        "hook-consumer"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/src/app/(tabs)/index.tsx",
+      "type": "file",
+      "name": "index.tsx",
+      "filePath": "frontend/src/app/(tabs)/index.tsx",
+      "summary": "Home tab screen: Timisoara header with people search and a live transit pill, event search field, category chips, city info strip, AI shortcut bar, a horizontal upcoming-events row and a create-event button with pull-to-refresh.",
+      "tags": [
+        "component",
+        "screen",
+        "home",
+        "entry-point",
+        "expo-router",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/app/(tabs)/index.tsx:LivePill",
+      "type": "function",
+      "name": "LivePill",
+      "filePath": "frontend/src/app/(tabs)/index.tsx",
+      "lineRange": [
+        26,
+        35
+      ],
+      "summary": "Small status pill showing a glowing yellow Live dot while transit data loads, or a grey Offline label when the transit summary fails.",
+      "tags": [
+        "component",
+        "status-indicator",
+        "transit",
+        "ui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "type": "function",
+      "name": "HomeScreen",
+      "filePath": "frontend/src/app/(tabs)/index.tsx",
+      "lineRange": [
+        38,
+        128
+      ],
+      "summary": "Default-exported discovery Home page that loads the transit summary and a category-filtered page of upcoming events, handles pull-to-refresh, and routes to search, people, event lists and the create form.",
+      "tags": [
+        "component",
+        "screen",
+        "home",
+        "events",
+        "navigation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "type": "file",
+      "name": "ChatBubble.tsx",
+      "filePath": "frontend/src/features/ai/ChatBubble.tsx",
+      "summary": "AI chat bubble components: user and assistant message bubbles with source links, plus the thinking indicator and error bubbles used by the AI tab.",
+      "tags": [
+        "component",
+        "ai-chat",
+        "ui",
+        "react-native"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/features/ai/ChatBubble.tsx:Sources",
+      "type": "function",
+      "name": "Sources",
+      "filePath": "frontend/src/features/ai/ChatBubble.tsx",
+      "lineRange": [
+        17,
+        33
+      ],
+      "summary": "Renders the list of web sources the assistant used as tappable links that open in the browser.",
+      "tags": [
+        "component",
+        "ai-chat",
+        "links"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/ai/ChatBubble.tsx:ChatBubble",
+      "type": "function",
+      "name": "ChatBubble",
+      "filePath": "frontend/src/features/ai/ChatBubble.tsx",
+      "lineRange": [
+        36,
+        48
+      ],
+      "summary": "Renders one chat message as a right-aligned user bubble or left-aligned assistant bubble, with optional result cards or a user action underneath.",
+      "tags": [
+        "component",
+        "ai-chat",
+        "message"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/ai/ChatBubble.tsx:ThinkingBubble",
+      "type": "function",
+      "name": "ThinkingBubble",
+      "filePath": "frontend/src/features/ai/ChatBubble.tsx",
+      "lineRange": [
+        51,
+        60
+      ],
+      "summary": "Assistant-side placeholder bubble with a spinner shown while the AI reply is pending.",
+      "tags": [
+        "component",
+        "ai-chat",
+        "loading-state"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/ai/ChatBubble.tsx:ErrorBubble",
+      "type": "function",
+      "name": "ErrorBubble",
+      "filePath": "frontend/src/features/ai/ChatBubble.tsx",
+      "lineRange": [
+        63,
+        74
+      ],
+      "summary": "Error bubble showing a friendly error message with a retry button when the AI request fails.",
+      "tags": [
+        "component",
+        "ai-chat",
+        "error-handling"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/features/ai/SaveShortcut.tsx",
+      "type": "file",
+      "name": "SaveShortcut.tsx",
+      "filePath": "frontend/src/features/ai/SaveShortcut.tsx",
+      "summary": "Small \"Save as shortcut\" link shown under a sent AI question that toggles saving it as a Home shortcut button.",
+      "tags": [
+        "component",
+        "ai-shortcuts",
+        "bookmark",
+        "ui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/ai/SaveShortcut.tsx:SaveShortcut",
+      "type": "function",
+      "name": "SaveShortcut",
+      "filePath": "frontend/src/features/ai/SaveShortcut.tsx",
+      "lineRange": [
+        12,
+        30
+      ],
+      "summary": "Toggle link that adds or removes a question from the saved shortcuts, hidden while loading or when the list is full and the question is not saved.",
+      "tags": [
+        "component",
+        "ai-shortcuts",
+        "toggle"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "type": "file",
+      "name": "ShortcutBar.tsx",
+      "filePath": "frontend/src/features/ai/ShortcutBar.tsx",
+      "summary": "\"Ask the city\" section on the Home screen showing saved AI questions as pill buttons, with edit mode to remove them and an inline field to add new ones.",
+      "tags": [
+        "component",
+        "ai-shortcuts",
+        "home-screen",
+        "ui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/features/ai/ShortcutBar.tsx:ShortcutButton",
+      "type": "function",
+      "name": "ShortcutButton",
+      "filePath": "frontend/src/features/ai/ShortcutBar.tsx",
+      "lineRange": [
+        15,
+        41
+      ],
+      "summary": "One saved question pill that asks it on the AI tab when tapped, or a remove button while in edit mode.",
+      "tags": [
+        "component",
+        "ai-shortcuts",
+        "button"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/ai/ShortcutBar.tsx:ShortcutBar",
+      "type": "function",
+      "name": "ShortcutBar",
+      "filePath": "frontend/src/features/ai/ShortcutBar.tsx",
+      "lineRange": [
+        44,
+        131
+      ],
+      "summary": "Home section managing edit/add state, validating drafts against duplicates and the list limit, and rendering the shortcut row and add field.",
+      "tags": [
+        "component",
+        "ai-shortcuts",
+        "form",
+        "state-management"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/src/features/ai/shortcuts.ts",
+      "type": "file",
+      "name": "shortcuts.ts",
+      "filePath": "frontend/src/features/ai/shortcuts.ts",
+      "summary": "Device-local storage and TanStack Query hook for saved AI question shortcuts, with normalization, duplicate checks and navigation to ask a question on the AI tab.",
+      "tags": [
+        "hook",
+        "ai-shortcuts",
+        "persistence",
+        "async-storage",
+        "utility",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/features/ai/shortcuts.ts:normalizeShortcut",
+      "type": "function",
+      "name": "normalizeShortcut",
+      "filePath": "frontend/src/features/ai/shortcuts.ts",
+      "lineRange": [
+        14,
+        16
+      ],
+      "summary": "Trims, collapses whitespace and caps the length of a shortcut so equivalent questions compare equal.",
+      "tags": [
+        "utility",
+        "normalization",
+        "string"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/ai/shortcuts.ts:hasShortcut",
+      "type": "function",
+      "name": "hasShortcut",
+      "filePath": "frontend/src/features/ai/shortcuts.ts",
+      "lineRange": [
+        19,
+        22
+      ],
+      "summary": "Case-insensitive check whether a normalized question is already in the shortcut list.",
+      "tags": [
+        "utility",
+        "validation",
+        "ai-shortcuts"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/ai/shortcuts.ts:loadShortcuts",
+      "type": "function",
+      "name": "loadShortcuts",
+      "filePath": "frontend/src/features/ai/shortcuts.ts",
+      "lineRange": [
+        25,
+        33
+      ],
+      "summary": "Reads and validates the saved shortcut list from AsyncStorage, returning an empty list on missing or corrupt data.",
+      "tags": [
+        "persistence",
+        "async-storage",
+        "ai-shortcuts"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/ai/shortcuts.ts:askOnAiTab",
+      "type": "function",
+      "name": "askOnAiTab",
+      "filePath": "frontend/src/features/ai/shortcuts.ts",
+      "lineRange": [
+        41,
+        43
+      ],
+      "summary": "Navigates to the AI tab with the question as a param plus a timestamp so the same shortcut can re-ask.",
+      "tags": [
+        "navigation",
+        "expo-router",
+        "ai-shortcuts"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/ai/shortcuts.ts:useShortcuts",
+      "type": "function",
+      "name": "useShortcuts",
+      "filePath": "frontend/src/features/ai/shortcuts.ts",
+      "lineRange": [
+        46,
+        75
+      ],
+      "summary": "React hook exposing saved shortcuts with add/remove mutations that persist to AsyncStorage and update the shared query cache, enforcing a 12-item limit.",
+      "tags": [
+        "hook",
+        "tanstack-query",
+        "mutation",
+        "ai-shortcuts"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/src/features/transit/CityInfoStrip.tsx",
+      "type": "file",
+      "name": "CityInfoStrip.tsx",
+      "filePath": "frontend/src/features/transit/CityInfoStrip.tsx",
+      "summary": "Home \"City info\" departure-board strip showing the next arrival at the nearest stop with route plate, server message, arrival time and an expandable live transit alerts list.",
+      "tags": [
+        "component",
+        "transit",
+        "home-screen",
+        "real-time",
+        "ui",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
+      "type": "function",
+      "name": "CityInfoStrip",
+      "filePath": "frontend/src/features/transit/CityInfoStrip.tsx",
+      "lineRange": [
+        16,
+        105
+      ],
+      "summary": "Departure board component combining current position, transit summary and alerts queries into loading, error and live states with a toggleable alerts list.",
+      "tags": [
+        "component",
+        "transit",
+        "real-time",
+        "alerts"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/features/transit/CityInfoStrip.tsx:arrivalIn",
+      "type": "function",
+      "name": "arrivalIn",
+      "filePath": "frontend/src/features/transit/CityInfoStrip.tsx",
+      "lineRange": [
+        108,
+        110
+      ],
+      "summary": "Formats minutes until arrival as \"now\" or \"in N min\".",
+      "tags": [
+        "utility",
+        "formatting",
+        "transit"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/transit/domain/dto/NextArrivalDto.java",
+      "type": "file",
+      "name": "NextArrivalDto.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/NextArrivalDto.java",
+      "summary": "Transit DTO describing the soonest arrival at the caller's nearest stop for the home page, including route, headsign, ETA, live flag and a last-trip-of-the-day flag derived from the GTFS timetable.",
+      "tags": [
+        "data-model",
+        "dto",
+        "transit",
+        "java-record",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/transit/domain/dto/NextArrivalDto.java:NextArrivalDto",
+      "type": "class",
+      "name": "NextArrivalDto",
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/NextArrivalDto.java",
+      "lineRange": [
+        9,
+        11
+      ],
+      "summary": "Immutable record carrying route, headsign, arrivesAt instant, minutes until arrival, whether the estimate is live, and whether it is the last trip of that line and direction today.",
+      "tags": [
+        "dto",
+        "data-model",
+        "transit",
+        "immutable"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "type": "file",
+      "name": "TransitServiceImpl.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "summary": "Spring service implementing TransitService: caches STPT stops, lines, live vehicles, arrivals and alerts with stale fallbacks, builds sorted line shapes from GTFS, computes last departures from the timetable or live data, and produces the localized next/last tram stop summary.",
+      "tags": [
+        "service",
+        "caching",
+        "public-transport",
+        "timetable",
+        "business-logic",
+        "tested"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Uses volatile fields plus per-kind StaleCache instances for lock-free stale-while-error caching; Java 21 switch expressions and records."
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:TransitServiceImpl",
+      "type": "class",
+      "name": "TransitServiceImpl",
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "lineRange": [
+        49,
+        463
+      ],
+      "summary": "Core transit service holding per-kind STPT caches, shape/fallback-shape caches and a line-list retry window; exposes routes, stops, vehicles, shapes, arrivals, alerts, last departures and the nearest-stop summary.",
+      "tags": [
+        "service",
+        "caching",
+        "public-transport",
+        "spring-service"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:routes",
+      "type": "function",
+      "name": "routes",
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "lineRange": [
+        107,
+        115
+      ],
+      "summary": "Returns STPT lines from cache sorted by type rank then natural line-name order, dropping lines without a name.",
+      "tags": [
+        "public-transport",
+        "sorting",
+        "caching"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:stops",
+      "type": "function",
+      "name": "stops",
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "lineRange": [
+        118,
+        124
+      ],
+      "summary": "Returns cached STPT stops, optionally filtered by a bounding box.",
+      "tags": [
+        "public-transport",
+        "geo-filter",
+        "caching"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:vehicles",
+      "type": "function",
+      "name": "vehicles",
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "lineRange": [
+        127,
+        138
+      ],
+      "summary": "Returns live vehicle positions for one line or the whole network from stale-tolerant caches, attaching line facts when available.",
+      "tags": [
+        "public-transport",
+        "real-time",
+        "caching"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:shapes",
+      "type": "function",
+      "name": "shapes",
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "lineRange": [
+        141,
+        149
+      ],
+      "summary": "Returns every line path or only the requested line, matched case-insensitively.",
+      "tags": [
+        "public-transport",
+        "map-shapes",
+        "filtering"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:allShapes",
+      "type": "function",
+      "name": "allShapes",
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "lineRange": [
+        152,
+        179
+      ],
+      "summary": "Builds line shapes from the GTFS shape repository once; caches permanently when STPT line facts exist, otherwise reuses a GTFS-only fallback build for five minutes.",
+      "tags": [
+        "caching",
+        "map-shapes",
+        "fallback"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:linesById",
+      "type": "function",
+      "name": "linesById",
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "lineRange": [
+        182,
+        199
+      ],
+      "summary": "Maps STPT lines by lower-case id, returning an empty map and setting a 60-second retry window when the line list fails.",
+      "tags": [
+        "caching",
+        "retry-backoff",
+        "lookup"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:arrivals",
+      "type": "function",
+      "name": "arrivals",
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "lineRange": [
+        207,
+        218
+      ],
+      "summary": "Returns the next arrivals at a validated stop, merged from STPT data and sorted soonest first with freshness flags.",
+      "tags": [
+        "public-transport",
+        "real-time",
+        "api-handler"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:alerts",
+      "type": "function",
+      "name": "alerts",
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "lineRange": [
+        221,
+        224
+      ],
+      "summary": "Returns current STPT service alerts mapped to DTOs from cache.",
+      "tags": [
+        "public-transport",
+        "alerts",
+        "caching"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:lastDepartures",
+      "type": "function",
+      "name": "lastDepartures",
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "lineRange": [
+        227,
+        242
+      ],
+      "summary": "Returns the last departures per line at a stop from the GTFS timetable for the current service day, falling back to the live estimate.",
+      "tags": [
+        "timetable",
+        "public-transport",
+        "fallback"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:liveLastDepartures",
+      "type": "function",
+      "name": "liveLastDepartures",
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "lineRange": [
+        245,
+        260
+      ],
+      "summary": "Fallback that keeps the latest live arrival per line and direction as an estimated last departure.",
+      "tags": [
+        "fallback",
+        "real-time",
+        "aggregation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:summary",
+      "type": "function",
+      "name": "summary",
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "lineRange": [
+        264,
+        278
+      ],
+      "summary": "Finds the nearest stop, its next arrival (flagged when it is the last trip), last departures and alert count, and builds a ready-to-show English or Romanian sentence.",
+      "tags": [
+        "public-transport",
+        "summary",
+        "localization"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:nextArrival",
+      "type": "function",
+      "name": "nextArrival",
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "lineRange": [
+        281,
+        295
+      ],
+      "summary": "Picks the soonest upcoming arrival at a stop and flags whether it is the last trip; returns null when arrivals are unavailable.",
+      "tags": [
+        "real-time",
+        "public-transport",
+        "fallback"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:isLastTrip",
+      "type": "function",
+      "name": "isLastTrip",
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "lineRange": [
+        298,
+        313
+      ],
+      "summary": "Decides whether a live arrival is the last trip of its line (same direction when headsigns match) using the timetable with a three-minute tolerance.",
+      "tags": [
+        "timetable",
+        "business-logic",
+        "last-tram"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:nextMessage",
+      "type": "function",
+      "name": "nextMessage",
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "lineRange": [
+        316,
+        329
+      ],
+      "summary": "Formats the localized \"Next/Last vehicle line at stop arrives at HH:mm (in N min)\" sentence.",
+      "tags": [
+        "localization",
+        "formatting",
+        "summary"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:message",
+      "type": "function",
+      "name": "message",
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "lineRange": [
+        332,
+        353
+      ],
+      "summary": "Fallback sentence naming the line that stops running first among those still running, or saying no departures are left, in English or Romanian.",
+      "tags": [
+        "localization",
+        "formatting",
+        "last-tram"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:vehicleWord",
+      "type": "function",
+      "name": "vehicleWord",
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "lineRange": [
+        366,
+        376
+      ],
+      "summary": "Returns the localized vehicle noun (tram, trolleybus, boat, bus or generic service) for a line type.",
+      "tags": [
+        "localization",
+        "utility",
+        "formatting"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:compareLineNames",
+      "type": "function",
+      "name": "compareLineNames",
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "lineRange": [
+        440,
+        453
+      ],
+      "summary": "Comparator ordering line names naturally by leading number then suffix (2 before 5b before 11).",
+      "tags": [
+        "sorting",
+        "utility",
+        "comparator"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "type": "file",
+      "name": "TransitControllerTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "summary": "WebMvc slice test for the transit REST controller with a mocked TransitService, checking JSON shapes for routes, stops, vehicles, shapes, arrivals, alerts, last departures and the summary, plus 503/400 errors and Accept-Language locale handling.",
+      "tags": [
+        "test",
+        "api-handler",
+        "mockmvc",
+        "public-transport"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:TransitControllerTest",
+      "type": "class",
+      "name": "TransitControllerTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "lineRange": [
+        41,
+        215
+      ],
+      "summary": "MockMvc test class covering every /transit endpoint, error mapping and language selection.",
+      "tags": [
+        "test",
+        "mockmvc",
+        "controller-test"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:routes",
+      "type": "function",
+      "name": "routes",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "lineRange": [
+        54,
+        64
+      ],
+      "summary": "Verifies GET /transit/routes returns the line list JSON.",
+      "tags": [
+        "test",
+        "mockmvc"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:stops",
+      "type": "function",
+      "name": "stops",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "lineRange": [
+        67,
+        78
+      ],
+      "summary": "Verifies GET /transit/stops passes the bbox and returns stops.",
+      "tags": [
+        "test",
+        "mockmvc",
+        "geo-filter"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:vehicles",
+      "type": "function",
+      "name": "vehicles",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "lineRange": [
+        81,
+        98
+      ],
+      "summary": "Verifies GET /transit/vehicles for a line returns positions with freshness metadata.",
+      "tags": [
+        "test",
+        "mockmvc",
+        "real-time"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:allVehicles",
+      "type": "function",
+      "name": "allVehicles",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "lineRange": [
+        101,
+        112
+      ],
+      "summary": "Verifies GET /transit/vehicles without a route returns the whole network.",
+      "tags": [
+        "test",
+        "mockmvc",
+        "real-time"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:shapes",
+      "type": "function",
+      "name": "shapes",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "lineRange": [
+        115,
+        131
+      ],
+      "summary": "Verifies GET /transit/shapes returns line paths with optional route filter.",
+      "tags": [
+        "test",
+        "mockmvc",
+        "map-shapes"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:arrivals",
+      "type": "function",
+      "name": "arrivals",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "lineRange": [
+        143,
+        157
+      ],
+      "summary": "Verifies the stop arrivals endpoint returns sorted arrivals.",
+      "tags": [
+        "test",
+        "mockmvc",
+        "real-time"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:lastDepartures",
+      "type": "function",
+      "name": "lastDepartures",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "lineRange": [
+        169,
+        178
+      ],
+      "summary": "Verifies the last-departures endpoint returns per-line last trips.",
+      "tags": [
+        "test",
+        "mockmvc",
+        "timetable"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:summary",
+      "type": "function",
+      "name": "summary",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "lineRange": [
+        181,
+        206
+      ],
+      "summary": "Verifies GET /transit/summary returns nearest stop, next arrival with last flag and message, maps Accept-Language to ro/en and rejects bad coordinates with 400.",
+      "tags": [
+        "test",
+        "mockmvc",
+        "localization"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "type": "file",
+      "name": "TransitServiceImplTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "summary": "Unit tests for TransitServiceImpl with a mocked STPT client, timetable and shape repositories and a MutableClock, covering sorting, caching, stale fallbacks, retry windows, shapes, arrivals, last departures, service-day rules, last-trip detection and localized summaries.",
+      "tags": [
+        "test",
+        "unit-test",
+        "caching",
+        "public-transport",
+        "timetable"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:TransitServiceImplTest",
+      "type": "class",
+      "name": "TransitServiceImplTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "lineRange": [
+        47,
+        522
+      ],
+      "summary": "Mockito-based test suite exercising every TransitServiceImpl path including outages and timetable edge cases.",
+      "tags": [
+        "test",
+        "unit-test",
+        "mockito"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:setUp",
+      "type": "function",
+      "name": "setUp",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "lineRange": [
+        59,
+        83
+      ],
+      "summary": "Builds the service under test with mocks, a mutable clock, real TransitMapperImpl and short cache TTLs.",
+      "tags": [
+        "test",
+        "fixture",
+        "setup"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:vehiclesFresh",
+      "type": "function",
+      "name": "vehiclesFresh",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "lineRange": [
+        110,
+        125
+      ],
+      "summary": "Checks fresh vehicle positions for a line are mapped with line facts.",
+      "tags": [
+        "test",
+        "real-time"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:allVehiclesWithoutRoute",
+      "type": "function",
+      "name": "allVehiclesWithoutRoute",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "lineRange": [
+        128,
+        144
+      ],
+      "summary": "Checks whole-network vehicles are returned when no route is given.",
+      "tags": [
+        "test",
+        "real-time"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:allVehiclesCached",
+      "type": "function",
+      "name": "allVehiclesCached",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "lineRange": [
+        147,
+        157
+      ],
+      "summary": "Checks whole-network vehicles are cached within the TTL.",
+      "tags": [
+        "test",
+        "caching"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:allVehiclesStaleWhenSourceDown",
+      "type": "function",
+      "name": "allVehiclesStaleWhenSourceDown",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "lineRange": [
+        160,
+        173
+      ],
+      "summary": "Checks stale whole-network vehicles are served when STPT fails.",
+      "tags": [
+        "test",
+        "fallback",
+        "caching"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:vehiclesWithoutLineList",
+      "type": "function",
+      "name": "vehiclesWithoutLineList",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "lineRange": [
+        176,
+        185
+      ],
+      "summary": "Checks vehicles still load when the STPT line list is unavailable.",
+      "tags": [
+        "test",
+        "fallback"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:vehiclesStaleWhenSourceDown",
+      "type": "function",
+      "name": "vehiclesStaleWhenSourceDown",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "lineRange": [
+        188,
+        201
+      ],
+      "summary": "Checks stale line vehicles are served after an STPT outage.",
+      "tags": [
+        "test",
+        "fallback",
+        "caching"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:shapesSortedAndFiltered",
+      "type": "function",
+      "name": "shapesSortedAndFiltered",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "lineRange": [
+        213,
+        226
+      ],
+      "summary": "Checks shapes are sorted by type and name and filterable by route.",
+      "tags": [
+        "test",
+        "map-shapes",
+        "sorting"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:shapesWithoutLineListUseGtfs",
+      "type": "function",
+      "name": "shapesWithoutLineListUseGtfs",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "lineRange": [
+        240,
+        261
+      ],
+      "summary": "Checks GTFS-only shapes are reused briefly while the line list is down and replaced once it returns.",
+      "tags": [
+        "test",
+        "map-shapes",
+        "fallback"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:vehiclesDoNotRetryFailedLineListAtOnce",
+      "type": "function",
+      "name": "vehiclesDoNotRetryFailedLineListAtOnce",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "lineRange": [
+        264,
+        278
+      ],
+      "summary": "Checks a failed line-list fetch is not retried until the retry window passes.",
+      "tags": [
+        "test",
+        "retry-backoff"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:lineWithoutNameIsSkipped",
+      "type": "function",
+      "name": "lineWithoutNameIsSkipped",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "lineRange": [
+        281,
+        294
+      ],
+      "summary": "Checks lines without a name are dropped from routes.",
+      "tags": [
+        "test",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:summaryInEnglish",
+      "type": "function",
+      "name": "summaryInEnglish",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "lineRange": [
+        358,
+        370
+      ],
+      "summary": "Checks the English summary sentence and nearest-stop distance.",
+      "tags": [
+        "test",
+        "localization",
+        "summary"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:lastDeparturesFromTimetable",
+      "type": "function",
+      "name": "lastDeparturesFromTimetable",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "lineRange": [
+        395,
+        409
+      ],
+      "summary": "Checks last departures come from the GTFS timetable when it covers today.",
+      "tags": [
+        "test",
+        "timetable"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:summaryFromTimetable",
+      "type": "function",
+      "name": "summaryFromTimetable",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "lineRange": [
+        447,
+        475
+      ],
+      "summary": "Walks the clock through an evening, checking the next-arrival sentence, the last-trip flag and the no-more-departures message in both languages.",
+      "tags": [
+        "test",
+        "timetable",
+        "last-tram",
+        "localization"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:summaryFallsBackToLastDepartureWhenArrivalsDown",
+      "type": "function",
+      "name": "summaryFallsBackToLastDepartureWhenArrivalsDown",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "lineRange": [
+        478,
+        487
+      ],
+      "summary": "Checks the summary uses the last-departure sentence when STPT arrivals fail.",
+      "tags": [
+        "test",
+        "fallback",
+        "summary"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:lastTripDetection",
+      "type": "function",
+      "name": "lastTripDetection",
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "lineRange": [
+        490,
+        505
+      ],
+      "summary": "Checks isLastTrip matching by direction, falling back to the line, with the small tolerance.",
+      "tags": [
+        "test",
+        "last-tram",
+        "timetable"
+      ],
+      "complexity": "simple"
+    },
+    {
       "id": "document:DOCS.md",
       "type": "document",
       "name": "DOCS.md",
       "filePath": "DOCS.md",
-      "summary": "Full technical documentation organised feature by feature: overview, architecture, configuration and running, Supabase MCP and database, external data sources (STPT, LiveTickets, OSM, Gemini), reliability rules, backend features (users, events, QR check-in, places, transit including the whole-network live vehicles endpoint, routing, AI scope and trip cost), frontend screens and the knowledge graph.",
+      "summary": "Living project documentation covering architecture, configuration and running, the Supabase schema, external data sources (STPT live transit, LiveTickets, OpenStreetMap, Gemini), reliability rules, and per-feature notes for events, QR check-in, places, transit, routing, the AI assistant and the Expo frontend.",
       "tags": [
         "documentation",
         "architecture",
         "configuration",
-        "features",
-        "reference"
+        "feature-reference",
+        "entry-point"
       ],
       "complexity": "complex"
     },
@@ -21373,7 +21713,7 @@
       "type": "document",
       "name": "PLAN.md",
       "filePath": "PLAN.md",
-      "summary": "Project task plan split into three parallel tracks with usage rules, a dependency map and 21 numbered task groups (foundation, database, backend, users, events, QR reliability, LiveTickets import, places, STPT transit, routing, AI, mobile pages, integration, AI navigation, scope, trip cost, map filters and live transit network), plus cut order and open questions.",
+      "summary": "Task-by-task hackathon roadmap split into tracks A/B/C, with checkbox items for foundation, database, backend, events and reliability, places, live STPT transit, routing, AI assistant, mobile pages, map filters and live network, plus cut order and open questions.",
       "tags": [
         "documentation",
         "planning",
@@ -21381,6 +21721,34 @@
         "task-tracking"
       ],
       "complexity": "complex"
+    },
+    {
+      "id": "document:docs/API.md",
+      "type": "document",
+      "name": "API.md",
+      "filePath": "docs/API.md",
+      "summary": "REST API contract for the Spring Boot backend: conventions (auth, paging, error format), shared UserSummary/EventSummary/PlaceSummary objects, and every endpoint for users, events, check-in/reliability, places, STPT transit, routing and the AI chat assistant.",
+      "tags": [
+        "documentation",
+        "api-schema",
+        "rest-api",
+        "contract"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/DEMO.md",
+      "type": "document",
+      "name": "DEMO.md",
+      "filePath": "docs/DEMO.md",
+      "summary": "Hackathon demo runbook: demo-morning setup checklist (OTP routing server, backend with events import, Expo app on two phones), a two-phone walkthrough of join/QR check-in/reliability/AI/directions, a 3-minute pitch script and a troubleshooting table.",
+      "tags": [
+        "documentation",
+        "demo",
+        "runbook",
+        "troubleshooting"
+      ],
+      "complexity": "simple"
     }
   ],
   "edges": [
@@ -22394,20 +22762,6 @@
     },
     {
       "source": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
-      "target": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
-      "target": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
       "target": "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
       "type": "tested_by",
       "direction": "forward",
@@ -22520,20 +22874,6 @@
     },
     {
       "source": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
-      "target": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
-      "target": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
       "target": "file:backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
       "type": "tested_by",
       "direction": "forward",
@@ -22566,13 +22906,6 @@
       "type": "contains",
       "direction": "forward",
       "weight": 1
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
-      "target": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
     },
     {
       "source": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoParsing.java",
@@ -24941,13 +25274,6 @@
       "weight": 0.5
     },
     {
-      "source": "file:frontend/src/app/(tabs)/ai.tsx",
-      "target": "file:frontend/__tests__/ai.routes.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "file:frontend/src/app/(auth)/sign-in.tsx",
       "target": "file:frontend/__tests__/screens.auth.test.tsx",
       "type": "tested_by",
@@ -24957,13 +25283,6 @@
     {
       "source": "file:frontend/src/app/(auth)/sign-up.tsx",
       "target": "file:frontend/__tests__/screens.auth.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:frontend/src/app/(tabs)/ai.tsx",
-      "target": "file:frontend/__tests__/screens.users.test.tsx",
       "type": "tested_by",
       "direction": "forward",
       "weight": 0.5
@@ -25095,34 +25414,6 @@
       "weight": 0.8
     },
     {
-      "source": "file:frontend/src/app/(tabs)/ai.tsx",
-      "target": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/app/(tabs)/ai.tsx",
-      "target": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
-      "target": "function:frontend/src/features/location/LocationProvider.tsx:useCurrentPosition",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
-      "target": "function:frontend/src/hooks/useAi.ts:useAiChat",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
       "source": "file:frontend/src/app/events/[id]/index.tsx",
       "target": "file:frontend/__tests__/screens.event.test.tsx",
       "type": "tested_by",
@@ -25151,20 +25442,6 @@
       "weight": 0.5
     },
     {
-      "source": "file:frontend/src/app/(tabs)/index.tsx",
-      "target": "file:frontend/__tests__/screens.home.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:frontend/src/app/events/index.tsx",
-      "target": "file:frontend/__tests__/screens.home.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "file:frontend/src/app/(tabs)/profile.tsx",
       "target": "file:frontend/__tests__/screens.users.test.tsx",
       "type": "tested_by",
@@ -25177,48 +25454,6 @@
       "type": "tested_by",
       "direction": "forward",
       "weight": 0.5
-    },
-    {
-      "source": "file:frontend/src/app/(tabs)/index.tsx",
-      "target": "function:frontend/src/app/(tabs)/index.tsx:LivePill",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/app/(tabs)/index.tsx",
-      "target": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/app/(tabs)/index.tsx",
-      "target": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
-      "target": "function:frontend/src/features/location/LocationProvider.tsx:useCurrentPosition",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
-      "target": "function:frontend/src/hooks/queries.ts:useEventsPage",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
-      "target": "function:frontend/src/hooks/useTransit.ts:useTransitSummary",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
     },
     {
       "source": "file:frontend/src/app/(tabs)/profile.tsx",
@@ -25517,55 +25752,6 @@
     {
       "source": "file:frontend/src/app/users/search.tsx",
       "target": "function:frontend/src/app/users/search.tsx:UserSearchScreen",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "target": "function:frontend/src/features/ai/ChatBubble.tsx:Sources",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ChatBubble",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ChatBubble",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ThinkingBubble",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ThinkingBubble",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ErrorBubble",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ErrorBubble",
       "type": "exports",
       "direction": "forward",
       "weight": 0.8
@@ -26208,20 +26394,6 @@
       "weight": 0.8
     },
     {
-      "source": "file:frontend/src/features/transit/CityInfoStrip.tsx",
-      "target": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/transit/CityInfoStrip.tsx",
-      "target": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
       "source": "function:frontend/src/features/map/EventPanel.tsx:EventPanel",
       "target": "function:frontend/src/features/events/EventCards.tsx:EventCard",
       "type": "calls",
@@ -26257,13 +26429,6 @@
       "weight": 0.8
     },
     {
-      "source": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
-      "target": "function:frontend/src/features/location/LocationProvider.tsx:useCurrentPosition",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
       "source": "function:frontend/src/features/map/EventMarkers.tsx:EventMarkers",
       "target": "function:frontend/src/lib/cluster.ts:clusterPoints",
       "type": "calls",
@@ -26294,20 +26459,6 @@
     {
       "source": "function:frontend/src/features/map/PlacePanel.tsx:PlacePanel",
       "target": "function:frontend/src/hooks/usePlaces.ts:usePlace",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
-      "target": "function:frontend/src/hooks/useTransit.ts:useLastDepartures",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
-      "target": "function:frontend/src/hooks/useTransit.ts:useTransitAlerts",
       "type": "calls",
       "direction": "forward",
       "weight": 0.8
@@ -27620,13 +27771,6 @@
       "type": "contains",
       "direction": "forward",
       "weight": 1
-    },
-    {
-      "source": "file:frontend/src/app/(tabs)/ai.tsx",
-      "target": "file:frontend/__tests__/ai.chat.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
     },
     {
       "source": "file:frontend/src/api/endpoints.users.ts",
@@ -33236,13 +33380,6 @@
       "weight": 0.5
     },
     {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/controller/TransitController.java",
-      "target": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "file:backend/src/main/java/com/unihack8/backend/transit/config/StptProperties.java",
       "target": "file:backend/src/main/java/com/unihack8/backend/transit/client/impl/StptClientImpl.java",
       "type": "related",
@@ -33705,174 +33842,6 @@
       "weight": 0.5
     },
     {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "class:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:TransitServiceImpl",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "class:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:TransitServiceImpl",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:routes",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:routes",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:stops",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:stops",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:vehicles",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:vehicles",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:shapes",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:shapes",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:allShapes",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:linesById",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:arrivals",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:arrivals",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:alerts",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:alerts",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:lastDepartures",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:lastDepartures",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:liveLastDepartures",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:summary",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:summary",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:message",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:vehicleWord",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:compareLineNames",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
       "source": "file:backend/src/test/java/com/unihack8/backend/ai/tool/impl/TransitInfoToolTest.java",
       "target": "class:backend/src/test/java/com/unihack8/backend/ai/tool/impl/TransitInfoToolTest.java:TransitInfoToolTest",
       "type": "contains",
@@ -33943,188 +33912,6 @@
       "weight": 1
     },
     {
-      "source": "class:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:TransitServiceImpl",
-      "target": "class:backend/src/main/java/com/unihack8/backend/transit/service/TransitService.java:TransitService",
-      "type": "implements",
-      "direction": "forward",
-      "weight": 0.9
-    },
-    {
-      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:routes",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/mapper/impl/TransitMapperImpl.java:toRoute",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:vehicles",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/mapper/impl/TransitMapperImpl.java:toVehicle",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:allShapes",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/mapper/impl/TransitMapperImpl.java:toShape",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:arrivals",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/mapper/impl/TransitMapperImpl.java:toArrivals",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:alerts",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/mapper/impl/TransitMapperImpl.java:toAlert",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:allShapes",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/repository/impl/GtfsShapeRepository.java:shapes",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:lastDepartures",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/repository/impl/GtfsTimetableRepository.java:lastDepartures",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:lastDepartures",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:liveLastDepartures",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:summary",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:message",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:message",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:vehicleWord",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:shapes",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:allShapes",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:vehicles",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:linesById",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:routes",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/client/impl/StptClientImpl.java:fetchRoutes",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:arrivals",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/client/impl/StptClientImpl.java:fetchArrivals",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:routes",
-      "target": "function:backend/src/main/java/com/unihack8/backend/common/cache/StaleCache.java:get",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "target": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "target": "class:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:TransitControllerTest",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:routes",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:stops",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:vehicles",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:allVehicles",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:shapes",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:arrivals",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:lastDepartures",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:summary",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
       "source": "file:backend/src/test/java/com/unihack8/backend/transit/mapper/impl/TransitMapperImplTest.java",
       "target": "class:backend/src/test/java/com/unihack8/backend/transit/mapper/impl/TransitMapperImplTest.java:TransitMapperImplTest",
       "type": "contains",
@@ -34190,111 +33977,6 @@
     {
       "source": "file:backend/src/test/java/com/unihack8/backend/transit/repository/impl/GtfsTimetableRepositoryTest.java",
       "target": "function:backend/src/test/java/com/unihack8/backend/transit/repository/impl/GtfsTimetableRepositoryTest.java:setUp",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "target": "class:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:TransitServiceImplTest",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:setUp",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:vehiclesFresh",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:allVehiclesWithoutRoute",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:allVehiclesCached",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:allVehiclesStaleWhenSourceDown",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:vehiclesWithoutLineList",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:vehiclesStaleWhenSourceDown",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:shapesSortedAndFiltered",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:shapesWithoutLineListUseGtfs",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:vehiclesDoNotRetryFailedLineListAtOnce",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:lineWithoutNameIsSkipped",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:summaryInEnglish",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:lastDeparturesFromTimetable",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:summaryFromTimetable",
       "type": "contains",
       "direction": "forward",
       "weight": 1
@@ -35119,13 +34801,6 @@
       "weight": 0.6
     },
     {
-      "source": "document:docs/DEMO.md",
-      "target": "document:docs/API.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "file:docs/design/mockups.html",
       "target": "file:frontend/src/ui/index.ts",
       "type": "related",
@@ -35329,27 +35004,6 @@
       "weight": 0.8
     },
     {
-      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:vehicles",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/client/impl/StptClientImpl.java:fetchVehicles",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:vehicles",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/client/impl/StptClientImpl.java:fetchAllVehicles",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:alerts",
-      "target": "function:backend/src/main/java/com/unihack8/backend/transit/client/impl/StptClientImpl.java:fetchAlerts",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
       "source": "function:backend/src/main/java/com/unihack8/backend/places/service/impl/PlaceServiceImpl.java:get",
       "target": "function:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java:notFound",
       "type": "calls",
@@ -35546,65 +35200,940 @@
       "weight": 0.5
     },
     {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
-      "type": "documents",
+      "source": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "target": "function:frontend/__tests__/ai.shortcuts.test.tsx:aiAgain",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/ai.tsx",
+      "target": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/ai.tsx",
+      "target": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/index.tsx",
+      "target": "function:frontend/src/app/(tabs)/index.tsx:LivePill",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/index.tsx",
+      "target": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/index.tsx",
+      "target": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/ai.tsx",
+      "target": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "type": "tested_by",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "type": "documents",
+      "source": "file:frontend/src/app/(tabs)/index.tsx",
+      "target": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "type": "tested_by",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/transit/client/impl/StptClientImpl.java",
-      "type": "documents",
+      "source": "file:frontend/src/app/(tabs)/index.tsx",
+      "target": "file:frontend/__tests__/screens.home.test.tsx",
+      "type": "tested_by",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/routing/service/impl/RoutingServiceImpl.java",
-      "type": "documents",
+      "source": "file:frontend/src/app/events/index.tsx",
+      "target": "file:frontend/__tests__/screens.home.test.tsx",
+      "type": "tested_by",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/reliability/service/impl/ReliabilityServiceImpl.java",
-      "type": "documents",
+      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
+      "target": "function:frontend/src/hooks/useAi.ts:useAiChat",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
+      "target": "function:frontend/src/features/location/LocationProvider.tsx:useCurrentPosition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "target": "function:frontend/src/app/(tabs)/index.tsx:LivePill",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "target": "function:frontend/src/hooks/useTransit.ts:useTransitSummary",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "target": "function:frontend/src/hooks/queries.ts:useEventsPage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "target": "function:frontend/src/features/location/LocationProvider.tsx:useCurrentPosition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/__tests__/ai.shortcuts.test.tsx:aiAgain",
+      "target": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/__tests__/ai.shortcuts.test.tsx:aiAgain",
+      "target": "function:frontend/__tests__/testUtils.tsx:fakeAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "target": "function:frontend/src/features/ai/ChatBubble.tsx:Sources",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ChatBubble",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ChatBubble",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ThinkingBubble",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ThinkingBubble",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ErrorBubble",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ErrorBubble",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/ai/SaveShortcut.tsx",
+      "target": "function:frontend/src/features/ai/SaveShortcut.tsx:SaveShortcut",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/SaveShortcut.tsx",
+      "target": "function:frontend/src/features/ai/SaveShortcut.tsx:SaveShortcut",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "target": "function:frontend/src/features/ai/ShortcutBar.tsx:ShortcutButton",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "target": "function:frontend/src/features/ai/ShortcutBar.tsx:ShortcutBar",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "target": "function:frontend/src/features/ai/ShortcutBar.tsx:ShortcutBar",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:normalizeShortcut",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:normalizeShortcut",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:hasShortcut",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:hasShortcut",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:loadShortcuts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:loadShortcuts",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:askOnAiTab",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:askOnAiTab",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:useShortcuts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:useShortcuts",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/transit/CityInfoStrip.tsx",
+      "target": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/transit/CityInfoStrip.tsx",
+      "target": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/transit/CityInfoStrip.tsx",
+      "target": "function:frontend/src/features/transit/CityInfoStrip.tsx:arrivalIn",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/transit/CityInfoStrip.tsx",
+      "target": "function:frontend/src/features/transit/CityInfoStrip.tsx:arrivalIn",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/SaveShortcut.tsx:SaveShortcut",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:useShortcuts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/ShortcutBar.tsx:ShortcutBar",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:useShortcuts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/ShortcutBar.tsx:ShortcutButton",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:askOnAiTab",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/shortcuts.ts:useShortcuts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:loadShortcuts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/shortcuts.ts:useShortcuts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:hasShortcut",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/shortcuts.ts:useShortcuts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:normalizeShortcut",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/shortcuts.ts:hasShortcut",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:normalizeShortcut",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/ChatBubble.tsx:ErrorBubble",
+      "target": "function:frontend/src/api/errors.ts:friendlyError",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
+      "target": "function:frontend/src/features/location/LocationProvider.tsx:useCurrentPosition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
+      "target": "function:frontend/src/hooks/useTransit.ts:useTransitSummary",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
+      "target": "function:frontend/src/hooks/useTransit.ts:useTransitAlerts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
+      "target": "function:frontend/src/lib/time.ts:formatTime",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
+      "target": "function:frontend/src/features/transit/CityInfoStrip.tsx:arrivalIn",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "type": "tested_by",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/reliability/service/impl/CheckInServiceImpl.java",
-      "type": "documents",
+      "source": "file:frontend/src/features/transit/CityInfoStrip.tsx",
+      "target": "file:frontend/__tests__/screens.home.test.tsx",
+      "type": "tested_by",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/features/ai/RouteCards.tsx",
-      "type": "documents",
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/domain/dto/NextArrivalDto.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/transit/domain/dto/NextArrivalDto.java:NextArrivalDto",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/domain/dto/NextArrivalDto.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/transit/domain/dto/NextArrivalDto.java:NextArrivalDto",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/domain/dto/NextArrivalDto.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "type": "tested_by",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "document:PLAN.md",
-      "target": "document:DOCS.md",
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:TransitServiceImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:TransitServiceImpl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:routes",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:stops",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:vehicles",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:shapes",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:allShapes",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:linesById",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:arrivals",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:alerts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:lastDepartures",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:liveLastDepartures",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:summary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:nextArrival",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:isLastTrip",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:nextMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:message",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:vehicleWord",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:compareLineNames",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:TransitServiceImpl",
+      "target": "class:backend/src/main/java/com/unihack8/backend/transit/service/TransitService.java:TransitService",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:TransitServiceImpl",
+      "target": "function:backend/src/main/java/com/unihack8/backend/common/cache/StaleCache.java:get",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:summary",
+      "target": "function:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java:notFound",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:summary",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:nextArrival",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:summary",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:nextMessage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:summary",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:message",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:nextArrival",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:isLastTrip",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:TransitControllerTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:routes",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:stops",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:vehicles",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:allVehicles",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:shapes",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:arrivals",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:lastDepartures",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java:summary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/TransitService.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:TransitServiceImplTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:setUp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:vehiclesFresh",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:allVehiclesWithoutRoute",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:allVehiclesCached",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:allVehiclesStaleWhenSourceDown",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:vehiclesWithoutLineList",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:vehiclesStaleWhenSourceDown",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:shapesSortedAndFiltered",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:shapesWithoutLineListUseGtfs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:vehiclesDoNotRetryFailedLineListAtOnce",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:lineWithoutNameIsSkipped",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:summaryInEnglish",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:lastDeparturesFromTimetable",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:summaryFromTimetable",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:summaryFallsBackToLastDepartureWhenArrivalsDown",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:lastTripDetection",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "function:backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java:lastTripDetection",
+      "target": "function:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java:isLastTrip",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "document:PLAN.md",
       "type": "related",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "document:PLAN.md",
-      "target": "document:AGENTS.md",
+      "source": "document:DOCS.md",
+      "target": "file:frontend/__tests__/live.backend.test.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "document:frontend/AGENTS.md",
       "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/routing/controller/RoutingController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/controller/MyEventsController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/reliability/controller/CheckInController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/reliability/controller/ReliabilityController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/controller/AiController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/transit/controller/TransitController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/DEMO.md",
+      "target": "document:docs/API.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/DEMO.md",
+      "target": "document:infra/otp/README.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/DEMO.md",
+      "target": "service:infra/otp/docker-compose.yml",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/DEMO.md",
+      "target": "document:PLAN.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/DEMO.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/reliability/controller/CheckInController.java",
+      "type": "documents",
       "direction": "forward",
       "weight": 0.5
     },
@@ -39210,6 +39739,14 @@
     },
     {
       "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/transit/domain/dto/NextArrivalDto.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
       "target": "file:backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitRouteDto.java",
       "type": "imports",
       "direction": "forward",
@@ -41610,6 +42147,14 @@
     },
     {
       "source": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/transit/domain/dto/NextArrivalDto.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
       "target": "file:backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitRouteDto.java",
       "type": "imports",
       "direction": "forward",
@@ -42211,6 +42756,54 @@
     {
       "source": "file:frontend/__tests__/ai.routes.test.tsx",
       "target": "file:frontend/src/features/location/LocationProvider.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "target": "file:frontend/__tests__/testUtils.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "target": "file:frontend/src/app/(tabs)/ai.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "target": "file:frontend/src/app/(tabs)/index.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "target": "file:frontend/src/features/ai/shortcuts.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "target": "file:frontend/src/features/auth/AuthProvider.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "target": "file:frontend/testing/mocks/index.ts",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -43050,6 +43643,14 @@
     },
     {
       "source": "file:frontend/__tests__/screens.home.test.tsx",
+      "target": "file:frontend/src/api/types.transit.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.home.test.tsx",
       "target": "file:frontend/src/app/(tabs)/index.tsx",
       "type": "imports",
       "direction": "forward",
@@ -43059,6 +43660,22 @@
     {
       "source": "file:frontend/__tests__/screens.home.test.tsx",
       "target": "file:frontend/src/app/events/index.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.home.test.tsx",
+      "target": "file:frontend/src/features/transit/CityInfoStrip.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.home.test.tsx",
+      "target": "file:frontend/testing/mocks/index.ts",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -43554,6 +44171,14 @@
     },
     {
       "source": "file:frontend/src/app/(tabs)/ai.tsx",
+      "target": "file:frontend/src/features/ai/SaveShortcut.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/ai.tsx",
       "target": "file:frontend/src/features/ai/Suggestions.tsx",
       "type": "imports",
       "direction": "forward",
@@ -43603,6 +44228,14 @@
     {
       "source": "file:frontend/src/app/(tabs)/index.tsx",
       "target": "file:frontend/src/api/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/index.tsx",
+      "target": "file:frontend/src/features/ai/ShortcutBar.tsx",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -45025,8 +45658,96 @@
       "recoveredFromImportMap": true
     },
     {
+      "source": "file:frontend/src/features/ai/SaveShortcut.tsx",
+      "target": "file:frontend/src/features/ai/shortcuts.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/SaveShortcut.tsx",
+      "target": "file:frontend/src/ui/Icon.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/SaveShortcut.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/SaveShortcut.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "target": "file:frontend/src/api/types.ai.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "target": "file:frontend/src/features/ai/shortcuts.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "target": "file:frontend/src/ui/Button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "target": "file:frontend/src/ui/Icon.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
       "source": "file:frontend/src/features/ai/Suggestions.tsx",
       "target": "file:frontend/src/ui/Chip.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "file:frontend/src/api/types.ai.ts",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -47951,7 +48672,10 @@
         "file:frontend/src/features/transit/lines.ts",
         "file:frontend/src/ui/OfflineBanner.tsx",
         "file:frontend/src/ui/mapStyle.ts",
-        "file:frontend/src/ui/index.ts"
+        "file:frontend/src/ui/index.ts",
+        "file:frontend/src/features/ai/SaveShortcut.tsx",
+        "file:frontend/src/features/ai/ShortcutBar.tsx",
+        "file:frontend/src/features/ai/shortcuts.ts"
       ]
     },
     {
@@ -48055,7 +48779,8 @@
         "file:backend/src/main/java/com/unihack8/backend/transit/service/TransitService.java",
         "file:backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
         "file:backend/src/main/java/com/unihack8/backend/transit/config/StptClientConfig.java",
-        "file:backend/src/main/java/com/unihack8/backend/transit/repository/impl/GtfsCsv.java"
+        "file:backend/src/main/java/com/unihack8/backend/transit/repository/impl/GtfsCsv.java",
+        "file:backend/src/main/java/com/unihack8/backend/transit/domain/dto/NextArrivalDto.java"
       ]
     },
     {
@@ -48171,7 +48896,8 @@
         "file:frontend/__tests__/network.offline.test.tsx",
         "file:frontend/__tests__/screens.profile.test.tsx",
         "file:frontend/__tests__/testUtils.tsx",
-        "file:frontend/jest.setup.ts"
+        "file:frontend/jest.setup.ts",
+        "file:frontend/__tests__/ai.shortcuts.test.tsx"
       ]
     },
     {
@@ -48519,12 +49245,13 @@
     {
       "order": 28,
       "title": "Tabs and the Home Screen",
-      "description": "The tab layout defines four bottom tabs: Home, Map, AI and Profile. The Home screen shows a search field, category chips, nearby upcoming events and the city info strip, which is now a departure board: the last-tram message, the last departure time in large gold numerals and an expandable transit alerts pill, styled with the tokens and route plates from the previous step. The events list adds search and filters.",
+      "description": "The tab layout defines four bottom tabs: Home, Map, AI and Profile. The Home screen shows a search field, category chips, nearby upcoming events and the city info strip, which is now a departure board: the last-tram message, the last departure time in large gold numerals and an expandable transit alerts pill, styled with the tokens and route plates from the previous step. The events list adds search and filters. The CityInfoStrip on Home now also shows a next-arrival strip for the nearest stop, fed by the backend NextArrivalDto (line, destination and minutes until the next vehicle).",
       "nodeIds": [
         "file:frontend/src/app/(tabs)/_layout.tsx",
         "file:frontend/src/app/(tabs)/index.tsx",
         "file:frontend/src/features/transit/CityInfoStrip.tsx",
-        "file:frontend/src/app/events/index.tsx"
+        "file:frontend/src/app/events/index.tsx",
+        "file:backend/src/main/java/com/unihack8/backend/transit/domain/dto/NextArrivalDto.java"
       ]
     },
     {
@@ -48577,13 +49304,16 @@
     {
       "order": 33,
       "title": "The AI Chat Screen",
-      "description": "The AI tab is the frontend for Steps 20-24. useAi keeps the message history, trims it to the maximum window and sends it with the user location through endpoints.ai. ChatBubble shows replies with cited price sources, and ResultCards renders the place and event cards with a Show on map shortcut that deep-links into the Map tab; route answers get their own cards, covered next.",
+      "description": "The AI tab is the frontend for Steps 20-24. useAi keeps the message history, trims it to the maximum window and sends it with the user location through endpoints.ai. ChatBubble shows replies with cited price sources, and ResultCards renders the place and event cards with a Show on map shortcut that deep-links into the Map tab; route answers get their own cards, covered next. Home AI shortcuts let users save a favourite question (SaveShortcut), keep it in shortcuts.ts storage, and fire it from the ShortcutBar on Home straight into this chat.",
       "nodeIds": [
         "file:frontend/src/app/(tabs)/ai.tsx",
         "file:frontend/src/hooks/useAi.ts",
         "file:frontend/src/api/endpoints.ai.ts",
         "file:frontend/src/features/ai/ResultCards.tsx",
-        "file:frontend/src/features/ai/ChatBubble.tsx"
+        "file:frontend/src/features/ai/ChatBubble.tsx",
+        "file:frontend/src/features/ai/shortcuts.ts",
+        "file:frontend/src/features/ai/ShortcutBar.tsx",
+        "file:frontend/src/features/ai/SaveShortcut.tsx"
       ]
     },
     {

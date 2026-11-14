@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "1a45ceb76a356a8204ce738f35aee4497d7689c5",
-  "generatedAt": "2026-11-14T13:35:27.062Z",
+  "gitCommitHash": "5248fef33b47ba51537078073294103c919da911",
+  "generatedAt": "2026-11-14T13:42:43.368Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,22 +25,22 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "8cd650b14ba5c096a08d88397193f2376e91a3b6aef23914e15a8d13b604640e",
+      "contentHash": "9b06f72f5ff0b97ebd6ba09c8b92686d8cba2d1a77cf4b6a6014e12ce4a4999e",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 563,
+      "totalLines": 565,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "95d45e2769c19d6d2dfdd025add98448bc738c3c61d2ff9b4c8c267ce058bcd9",
+      "contentHash": "605444af70c103e7cea3b084e41dd571f3198895fc5bff954378e3ad3794a6ea",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 383,
+      "totalLines": 385,
       "hasStructuralAnalysis": false
     },
     "README.md": {
@@ -15467,7 +15467,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitSummaryResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitSummaryResponse.java",
-      "contentHash": "6fcbc36451b2b9a61a86b8b86d8ae8a8fa302ba938e2c53e9abad2dd51011eeb",
+      "contentHash": "0d43c46cc523a578c4ee3cacebf173ef0116c8ee70f4b543187d1937e015bb0a",
       "functions": [],
       "classes": [
         {
@@ -15489,7 +15489,7 @@
       "exports": [
         "TransitSummaryResponse"
       ],
-      "totalLines": 9,
+      "totalLines": 12,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/VehicleDto.java": {
@@ -17028,7 +17028,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "contentHash": "1f266e52c2bc0f73984af506d0947706931447d311556838eea30b2ff2ddc127",
+      "contentHash": "117ed5bf8ea5040c073c22c63cf4ce4f89953ea205333fbcd8586c3c494f2a38",
       "functions": [
         {
           "name": "TransitServiceImpl",
@@ -17142,7 +17142,38 @@
           ],
           "returnType": "TransitSummaryResponse",
           "exported": true,
-          "lineCount": 12
+          "lineCount": 15
+        },
+        {
+          "name": "nextArrival",
+          "params": [
+            "stopId",
+            "last"
+          ],
+          "returnType": "NextArrivalDto",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "isLastTrip",
+          "params": [
+            "arrival",
+            "last"
+          ],
+          "returnType": "boolean",
+          "exported": false,
+          "lineCount": 16
+        },
+        {
+          "name": "nextMessage",
+          "params": [
+            "stopName",
+            "next",
+            "romanian"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 14
         },
         {
           "name": "message",
@@ -17281,6 +17312,9 @@
             "lastDepartures",
             "liveLastDepartures",
             "summary",
+            "nextArrival",
+            "isLastTrip",
+            "nextMessage",
             "message",
             "typeOf",
             "vehicleWord",
@@ -17302,6 +17336,7 @@
             "ALL",
             "CITY_ZONE",
             "HOUR_MINUTE",
+            "LAST_TRIP_TOLERANCE",
             "TYPE_ORDER",
             "ROUTES_RETRY_AFTER",
             "FALLBACK_SHAPES_TTL",
@@ -17322,7 +17357,7 @@
             "routesRetryAt"
           ],
           "exported": true,
-          "lineCount": 358
+          "lineCount": 415
         }
       ],
       "imports": [
@@ -17402,6 +17437,12 @@
           "source": "com.unihack8.backend.transit.domain.dto.NearestStopDto",
           "specifiers": [
             "NearestStopDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.NextArrivalDto",
+          "specifiers": [
+            "NextArrivalDto"
           ]
         },
         {
@@ -17597,7 +17638,7 @@
         "summary",
         "TransitServiceImpl"
       ],
-      "totalLines": 406,
+      "totalLines": 464,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/users/controller/UserController.java": {
@@ -27465,7 +27506,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "contentHash": "7e455305edeccd1929280381eefaf6852400e1cfce015b4be5789822274ec6ab",
+      "contentHash": "56fde26477aba8638a65ae23a01046e45af1c8d8428d69d2521e4f21e0511cc3",
       "functions": [
         {
           "name": "routes",
@@ -27535,7 +27576,7 @@
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 21
+          "lineCount": 26
         },
         {
           "name": "languageChoice",
@@ -27567,7 +27608,7 @@
             "transit"
           ],
           "exported": false,
-          "lineCount": 170
+          "lineCount": 175
         }
       ],
       "imports": [
@@ -27674,6 +27715,12 @@
           ]
         },
         {
+          "source": "com.unihack8.backend.transit.domain.dto.NextArrivalDto",
+          "specifiers": [
+            "NextArrivalDto"
+          ]
+        },
+        {
           "source": "com.unihack8.backend.transit.domain.dto.TransitRouteDto",
           "specifiers": [
             "TransitRouteDto"
@@ -27777,7 +27824,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 210,
+      "totalLines": 216,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/transit/mapper/impl/PolylineEncoderTest.java": {
@@ -28441,7 +28488,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "contentHash": "76390f724883ae45d516da2c0f7648363f0da42174b277066a94e1965d9291c0",
+      "contentHash": "544dfeab2e8d82e14fe97654bab7cd552c4ba037ff96ab6e91e3e75f91c175d2",
       "functions": [
         {
           "name": "setUp",
@@ -28613,7 +28660,7 @@
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 11
+          "lineCount": 13
         },
         {
           "name": "summaryInRomanianWithAlertsDown",
@@ -28627,7 +28674,7 @@
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 7
+          "lineCount": 8
         },
         {
           "name": "lastDeparturesFromTimetable",
@@ -28666,6 +28713,20 @@
         },
         {
           "name": "summaryFromTimetable",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 29
+        },
+        {
+          "name": "summaryFallsBackToLastDepartureWhenArrivalsDown",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "lastTripDetection",
           "params": [],
           "returnType": "void",
           "exported": false,
@@ -28722,6 +28783,8 @@
             "emptyTimetableFallsBackToLive",
             "stopKnownOnlyToTimetable",
             "summaryFromTimetable",
+            "summaryFallsBackToLastDepartureWhenArrivalsDown",
+            "lastTripDetection",
             "lineNameOrder",
             "vehicleWords"
           ],
@@ -28734,7 +28797,7 @@
             "service"
           ],
           "exported": false,
-          "lineCount": 430
+          "lineCount": 476
         }
       ],
       "imports": [
@@ -28986,7 +29049,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 477,
+      "totalLines": 523,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java": {
@@ -29961,17 +30024,17 @@
     },
     "docs/API.md": {
       "filePath": "docs/API.md",
-      "contentHash": "6a8991272507582908c916080d6edabafa0d0e3b9889b7747ad0cb3834a318b1",
+      "contentHash": "8d79842a7dcac61272d55dae8b43d7f09f7c43bf3f6487b5b34103b5fcd1779d",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 634,
+      "totalLines": 636,
       "hasStructuralAnalysis": false
     },
     "docs/DEMO.md": {
       "filePath": "docs/DEMO.md",
-      "contentHash": "89c19229070a208e0a00a145dc777504962c9040d93e54942615af0b0a8ad676",
+      "contentHash": "1d76f021eeabb9d7672cca754583bf00fa984c970a10f6b8f0683ecca062f0ef",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -30559,7 +30622,7 @@
     },
     "frontend/__tests__/live.backend.test.ts": {
       "filePath": "frontend/__tests__/live.backend.test.ts",
-      "contentHash": "b43c5c8b53333864493614b57437cb4e0b1d5f0e401ce63a5593ffee20779441",
+      "contentHash": "c8701b9e5bf8aea1a807f3bda54eef5941992506d738eb56c3fd192da249c318",
       "functions": [
         {
           "name": "expectKeys",
@@ -31451,7 +31514,7 @@
     },
     "frontend/__tests__/mocks.backend.test.ts": {
       "filePath": "frontend/__tests__/mocks.backend.test.ts",
-      "contentHash": "52d7c3cac53f670c3857292417a34a2571e69c1e51ad8acf6485701e7ee00102",
+      "contentHash": "03f000567977d0ae80fe4f6ba2d6b97004e26a11f81ad56444c5d3f7367b15ee",
       "functions": [
         {
           "name": "call",
@@ -31487,7 +31550,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 145,
+      "totalLines": 146,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/mocks.users.test.ts": {
@@ -31694,7 +31757,7 @@
     },
     "frontend/__tests__/screens.home.test.tsx": {
       "filePath": "frontend/__tests__/screens.home.test.tsx",
-      "contentHash": "c73755a4f0d0206be737d9140994e3d93f29ce120d6ea6d9681a3ebb447de47c",
+      "contentHash": "e0102ac19e59825022fa7fc769f01c30637d63046d4307d05bfcc433c5d5445e",
       "functions": [],
       "classes": [],
       "imports": [
@@ -31705,6 +31768,12 @@
             "screen",
             "waitFor",
             "within"
+          ]
+        },
+        {
+          "source": "@/api/types.transit",
+          "specifiers": [
+            "TransitSummary"
           ]
         },
         {
@@ -31720,6 +31789,18 @@
           ]
         },
         {
+          "source": "@/features/transit/CityInfoStrip",
+          "specifiers": [
+            "arrivalIn"
+          ]
+        },
+        {
+          "source": "@test/mocks",
+          "specifiers": [
+            "* as mocks"
+          ]
+        },
+        {
           "source": "./testUtils",
           "specifiers": [
             "IDS",
@@ -31730,7 +31811,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 134,
+      "totalLines": 164,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/screens.profile.test.tsx": {
@@ -32256,7 +32337,7 @@
     },
     "frontend/src/api/endpoints.transit.ts": {
       "filePath": "frontend/src/api/endpoints.transit.ts",
-      "contentHash": "315f2676f29407f45f6772a8a0b9d43ad1f6bcd6f5a84e9bf42ee7e7e36a762c",
+      "contentHash": "03bcb2bb0ae99bd5cbc227d832a72b498a4b594142b41476149d9ac928193ddd",
       "functions": [
         {
           "name": "getTransitSummary",
@@ -32667,12 +32748,12 @@
     },
     "frontend/src/api/types.transit.ts": {
       "filePath": "frontend/src/api/types.transit.ts",
-      "contentHash": "df7e5c23797f7e0e8a93e702a4f16ef74c27209a57e25c20eabe60340f41fb9c",
+      "contentHash": "55c72af882b7cc82de4b4117e695935ade1385d70b0fb688c5a95c6788b3eba3",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 60,
+      "totalLines": 65,
       "hasStructuralAnalysis": true
     },
     "frontend/src/api/types.ts": {
@@ -32933,20 +33014,27 @@
     },
     "frontend/src/app/(tabs)/ai.tsx": {
       "filePath": "frontend/src/app/(tabs)/ai.tsx",
-      "contentHash": "e9e9fbd7dd77f137e1d109d4d9911dc800480a62a55e70c6465e62018db1364e",
+      "contentHash": "d09f00f91a3d9ac591f130f3310922a4869f6e065000bbee51bf7aaa49ac93e3",
       "functions": [
         {
           "name": "AiScreen",
           "params": [],
           "exported": true,
-          "lineCount": 59
+          "lineCount": 72
         }
       ],
       "classes": [],
       "imports": [
         {
+          "source": "expo-router",
+          "specifiers": [
+            "useLocalSearchParams"
+          ]
+        },
+        {
           "source": "react",
           "specifiers": [
+            "useEffect",
             "useRef"
           ]
         },
@@ -32976,6 +33064,12 @@
           "source": "@/features/ai/ChatMotif",
           "specifiers": [
             "ChatMotif"
+          ]
+        },
+        {
+          "source": "@/features/ai/SaveShortcut",
+          "specifiers": [
+            "SaveShortcut"
           ]
         },
         {
@@ -33031,12 +33125,12 @@
       "exports": [
         "AiScreen"
       ],
-      "totalLines": 85,
+      "totalLines": 101,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/(tabs)/index.tsx": {
       "filePath": "frontend/src/app/(tabs)/index.tsx",
-      "contentHash": "1474867a170f241ed3ab5b702c2088e4b877b933a60d4837c544b3cdd90f08d7",
+      "contentHash": "f02199b147de3a5ff31b9e81fba715faa5835f8f32096923e085aeb15afd98c4",
       "functions": [
         {
           "name": "LivePill",
@@ -33050,7 +33144,7 @@
           "name": "HomeScreen",
           "params": [],
           "exported": true,
-          "lineCount": 89
+          "lineCount": 91
         }
       ],
       "classes": [],
@@ -33083,6 +33177,12 @@
           "specifiers": [
             "EVENT_CATEGORIES",
             "EventCategory"
+          ]
+        },
+        {
+          "source": "@/features/ai/ShortcutBar",
+          "specifiers": [
+            "ShortcutBar"
           ]
         },
         {
@@ -33176,7 +33276,7 @@
       "exports": [
         "HomeScreen"
       ],
-      "totalLines": 160,
+      "totalLines": 163,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/(tabs)/map.tsx": {
@@ -34549,7 +34649,7 @@
     },
     "frontend/src/features/ai/ChatBubble.tsx": {
       "filePath": "frontend/src/features/ai/ChatBubble.tsx",
-      "contentHash": "be4b319435d7cb0e210a08b9f0b3f2342324bcdb51c05228627a4b576ca9752d",
+      "contentHash": "5fe836f61ea5bcf6746e4679945cfefc193d32b28eccc72313a14ef425bf84d5",
       "functions": [
         {
           "name": "Sources",
@@ -34562,10 +34662,10 @@
         {
           "name": "ChatBubble",
           "params": [
-            "{ message, children }"
+            "{ message, children, userAction }"
           ],
           "exported": true,
-          "lineCount": 12
+          "lineCount": 13
         },
         {
           "name": "ThinkingBubble",
@@ -34648,7 +34748,7 @@
         "ThinkingBubble",
         "ErrorBubble"
       ],
-      "totalLines": 92,
+      "totalLines": 93,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/ai/ChatInput.tsx": {
@@ -37338,13 +37438,22 @@
     },
     "frontend/src/features/transit/CityInfoStrip.tsx": {
       "filePath": "frontend/src/features/transit/CityInfoStrip.tsx",
-      "contentHash": "96ee8149e8b36ec07703f2162d6fe12770fa72096bc985ed208d288746920246",
+      "contentHash": "18e2c2f534446144e850fec210e65133d514c989ba308b49e7d04ba104109ed7",
       "functions": [
         {
           "name": "CityInfoStrip",
           "params": [],
           "exported": true,
-          "lineCount": 83
+          "lineCount": 90
+        },
+        {
+          "name": "arrivalIn",
+          "params": [
+            "minutes"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 3
         }
       ],
       "classes": [],
@@ -37409,9 +37518,10 @@
         }
       ],
       "exports": [
-        "CityInfoStrip"
+        "CityInfoStrip",
+        "arrivalIn"
       ],
-      "totalLines": 126,
+      "totalLines": 141,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/transit/LegVehicles.tsx": {
@@ -38646,7 +38756,7 @@
     },
     "frontend/src/hooks/useAi.ts": {
       "filePath": "frontend/src/hooks/useAi.ts",
-      "contentHash": "c2ab1260443d7a3f99bd633435550c17eda7179e1257c67d3fedf85ddbe7ff22",
+      "contentHash": "396628a5836062278f64dd8090e6f047158e6783016617775602bb9534913515",
       "functions": [
         {
           "name": "newId",
@@ -38660,7 +38770,7 @@
             "location"
           ],
           "exported": true,
-          "lineCount": 69
+          "lineCount": 83
         }
       ],
       "classes": [],
@@ -38705,7 +38815,7 @@
       "exports": [
         "useAiChat"
       ],
-      "totalLines": 97,
+      "totalLines": 111,
       "hasStructuralAnalysis": true
     },
     "frontend/src/hooks/useDebounced.ts": {
@@ -38907,7 +39017,7 @@
     },
     "frontend/src/hooks/useTransit.ts": {
       "filePath": "frontend/src/hooks/useTransit.ts",
-      "contentHash": "2c6617160de28ec4c43d9793328ffbea0aa0b252578a9f1880a0acabe7bc2c61",
+      "contentHash": "8611cb58b8bf69f46d6a85debeeb942ec5c93716024ea3ef89616d942a040f42",
       "functions": [
         {
           "name": "useTransitSummary",
@@ -41317,7 +41427,7 @@
     },
     "frontend/testing/mocks/routes/transit.ts": {
       "filePath": "frontend/testing/mocks/routes/transit.ts",
-      "contentHash": "8a70237bb9963d743a40dc53da22161d831addcc2d4fad6149913190995d0888",
+      "contentHash": "efe63151e1046682c6f0957478b345956cfa625c0632d2f98fe9f3b60790d93e",
       "functions": [
         {
           "name": "hash",
@@ -41420,7 +41530,7 @@
       "exports": [
         "transitRoutes"
       ],
-      "totalLines": 163,
+      "totalLines": 164,
       "hasStructuralAnalysis": true
     },
     "frontend/testing/mocks/routes/users.ts": {
@@ -41617,6 +41727,359 @@
       "exports": [],
       "totalLines": 186,
       "hasStructuralAnalysis": false
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/NextArrivalDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/NextArrivalDto.java",
+      "contentHash": "28d3a7dba49420fa044c2f619a5f0a4bcddca49a24eedbb3687a2dba28ea784e",
+      "functions": [],
+      "classes": [
+        {
+          "name": "NextArrivalDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        }
+      ],
+      "exports": [
+        "NextArrivalDto"
+      ],
+      "totalLines": 12,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/__tests__/ai.shortcuts.test.tsx": {
+      "filePath": "frontend/__tests__/ai.shortcuts.test.tsx",
+      "contentHash": "2c5d7a88581c34653383c986bb9b425311c7513fa2d1c3fcee1dfcca11f449f6",
+      "functions": [
+        {
+          "name": "aiAgain",
+          "params": [
+            "client"
+          ],
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "seed",
+          "params": [
+            "list"
+          ],
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@react-native-async-storage/async-storage",
+          "specifiers": [
+            "AsyncStorage"
+          ]
+        },
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "QueryClientProvider",
+            "QueryClient"
+          ]
+        },
+        {
+          "source": "@testing-library/react-native",
+          "specifiers": [
+            "act",
+            "fireEvent",
+            "screen",
+            "waitFor",
+            "within"
+          ]
+        },
+        {
+          "source": "@/app/(tabs)/ai",
+          "specifiers": [
+            "AiScreen"
+          ]
+        },
+        {
+          "source": "@/app/(tabs)/index",
+          "specifiers": [
+            "HomeScreen"
+          ]
+        },
+        {
+          "source": "@/features/ai/shortcuts",
+          "specifiers": [
+            "hasShortcut",
+            "loadShortcuts",
+            "MAX_SHORTCUTS",
+            "normalizeShortcut",
+            "SHORTCUTS_STORAGE_KEY"
+          ]
+        },
+        {
+          "source": "@test/mocks",
+          "specifiers": [
+            "setMockLatency"
+          ]
+        },
+        {
+          "source": "@/features/auth/AuthProvider",
+          "specifiers": [
+            "AuthContext"
+          ]
+        },
+        {
+          "source": "./testUtils",
+          "specifiers": [
+            "fakeAuth",
+            "mockRouter",
+            "renderScreen",
+            "setParams"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 152,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/ai/SaveShortcut.tsx": {
+      "filePath": "frontend/src/features/ai/SaveShortcut.tsx",
+      "contentHash": "7e19fd41b1343eca25ae6c2c0fc1d77e8ff1594fb3daa54e653b4e82ce076ccf",
+      "functions": [
+        {
+          "name": "SaveShortcut",
+          "params": [
+            "{ question }"
+          ],
+          "exported": true,
+          "lineCount": 19
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react-native",
+          "specifiers": [
+            "Pressable",
+            "StyleSheet"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "Icon"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors"
+          ]
+        },
+        {
+          "source": "./shortcuts",
+          "specifiers": [
+            "useShortcuts"
+          ]
+        }
+      ],
+      "exports": [
+        "SaveShortcut"
+      ],
+      "totalLines": 35,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/ai/ShortcutBar.tsx": {
+      "filePath": "frontend/src/features/ai/ShortcutBar.tsx",
+      "contentHash": "0e27cfefbd88bb6ca39ad5b07ceed2b4ff714f129eb7821d555a9a8b254dd2e0",
+      "functions": [
+        {
+          "name": "ShortcutButton",
+          "params": [
+            "{ text, editing, onLongPress, onRemove }"
+          ],
+          "exported": false,
+          "lineCount": 27
+        },
+        {
+          "name": "ShortcutBar",
+          "params": [],
+          "exported": true,
+          "lineCount": 88
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "useState"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "Pressable",
+            "ScrollView",
+            "StyleSheet",
+            "TextInput",
+            "View"
+          ]
+        },
+        {
+          "source": "@/api/types.ai",
+          "specifiers": [
+            "MAX_CHAT_MESSAGE_CHARS"
+          ]
+        },
+        {
+          "source": "@/ui/Button",
+          "specifiers": [
+            "Button"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "Icon"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors",
+            "PAGE_MARGIN",
+            "radius"
+          ]
+        },
+        {
+          "source": "./shortcuts",
+          "specifiers": [
+            "askOnAiTab",
+            "useShortcuts"
+          ]
+        }
+      ],
+      "exports": [
+        "ShortcutBar"
+      ],
+      "totalLines": 167,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/ai/shortcuts.ts": {
+      "filePath": "frontend/src/features/ai/shortcuts.ts",
+      "contentHash": "2abab98f2dfe69922ecdecd735b70451348d7e6066aca9d4b5de3bae458b3f86",
+      "functions": [
+        {
+          "name": "normalizeShortcut",
+          "params": [
+            "text"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "hasShortcut",
+          "params": [
+            "list",
+            "text"
+          ],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "loadShortcuts",
+          "params": [],
+          "returnType": "Promise<string[]>",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "saveShortcuts",
+          "params": [
+            "list"
+          ],
+          "returnType": "Promise<void>",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "askOnAiTab",
+          "params": [
+            "question"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "useShortcuts",
+          "params": [],
+          "exported": true,
+          "lineCount": 30
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@react-native-async-storage/async-storage",
+          "specifiers": [
+            "AsyncStorage"
+          ]
+        },
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "useMutation",
+            "useQuery",
+            "useQueryClient"
+          ]
+        },
+        {
+          "source": "expo-router",
+          "specifiers": [
+            "router"
+          ]
+        },
+        {
+          "source": "@/api/types.ai",
+          "specifiers": [
+            "MAX_CHAT_MESSAGE_CHARS"
+          ]
+        }
+      ],
+      "exports": [
+        "SHORTCUTS_STORAGE_KEY",
+        "MAX_SHORTCUTS",
+        "normalizeShortcut",
+        "hasShortcut",
+        "loadShortcuts",
+        "askOnAiTab",
+        "useShortcuts"
+      ],
+      "totalLines": 76,
+      "hasStructuralAnalysis": true
     }
   }
 }
