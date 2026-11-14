@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "e377f86e236857d89db43370d9cd59e57a9adbdd",
-  "generatedAt": "2026-11-14T16:55:44.706Z",
+  "gitCommitHash": "c9a05472db8fad4b143484a8bba720a5df7a689b",
+  "generatedAt": "2026-11-14T17:26:29.277Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,22 +25,22 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "d00e5eacec760c5a7d63f8df82e53578de77b03c3e84da895b724d7c13f921cb",
+      "contentHash": "7668ca1a11f059795be3f2e927bb756fc54fd833885688da6071bbc4b18be50d",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 678,
+      "totalLines": 707,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "875bd8df6dc0a4402f717604bd69651c5072648d51d73e30c953c30021899833",
+      "contentHash": "007aa3ce484adae4f2adbb0c56b65157cdf555ac62a971bc1d302c41921bdc3d",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 434,
+      "totalLines": 448,
       "hasStructuralAnalysis": false
     },
     "README.md": {
@@ -4013,7 +4013,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
-      "contentHash": "b9cb4d76d2d89cb050e18a3adf473738e760081792515ae04728f526ac9bde71",
+      "contentHash": "c0b5e976eaa25f00c7a6e95efcb47609fadeab44636c489c39d53fca9e7ae061",
       "functions": [
         {
           "name": "ErrorCode",
@@ -4052,7 +4052,7 @@
             "defaultMessage"
           ],
           "exported": true,
-          "lineCount": 46
+          "lineCount": 52
         }
       ],
       "imports": [
@@ -4068,7 +4068,7 @@
         "defaultMessage",
         "ErrorCode"
       ],
-      "totalLines": 55,
+      "totalLines": 61,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/common/exception/ErrorResponseFactory.java": {
@@ -12480,7 +12480,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/reliability/domain/ReliabilityRules.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/reliability/domain/ReliabilityRules.java",
-      "contentHash": "91e4114256d9bc96ab6198698970fc5b0df59f61fda5009661d55d034be388f1",
+      "contentHash": "6391d3a9a3ff5f93a145d3ea2dd65a7695058e0bd183ff85d72a30323111ef35",
       "functions": [
         {
           "name": "ReliabilityRules",
@@ -12524,10 +12524,12 @@
             "VOLUNTEER_CATEGORY",
             "VOLUNTEER_BONUS_POINTS",
             "VOLUNTEER_BONUS_REASON",
+            "HELPED_POINTS",
+            "HELPED_REASON",
             "DEFAULT_EVENT_LENGTH"
           ],
           "exported": true,
-          "lineCount": 27
+          "lineCount": 30
         }
       ],
       "imports": [
@@ -12552,12 +12554,14 @@
         "VOLUNTEER_CATEGORY",
         "VOLUNTEER_BONUS_POINTS",
         "VOLUNTEER_BONUS_REASON",
+        "HELPED_POINTS",
+        "HELPED_REASON",
         "DEFAULT_EVENT_LENGTH",
         "checkInBonus",
         "effectiveEnd",
         "ReliabilityRules"
       ],
-      "totalLines": 37,
+      "totalLines": 40,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/reliability/domain/dto/CheckInRequest.java": {
@@ -33348,12 +33352,12 @@
     },
     "docs/API.md": {
       "filePath": "docs/API.md",
-      "contentHash": "beacba10c0de7fcc693623b0a0873e86ad070213fdae6eaeea193099e47db744",
+      "contentHash": "a251b5080962750ea29e493f45d280fa8e4c9b67c4e8265dab5334be403eb5d8",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 759,
+      "totalLines": 885,
       "hasStructuralAnalysis": false
     },
     "docs/DEMO.md": {
@@ -36208,7 +36212,7 @@
     },
     "frontend/__tests__/screens.profile.test.tsx": {
       "filePath": "frontend/__tests__/screens.profile.test.tsx",
-      "contentHash": "dd167b13a7ff5eeddba60a1148a921179927e5798f2ed04d30f244a5c7d14d0c",
+      "contentHash": "0c11142ef24e8f8e5415c53ed30e7036a4d3080904b52ea6ae227ac79e863680",
       "functions": [
         {
           "name": "startEditing",
@@ -36289,7 +36293,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 276,
+      "totalLines": 278,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/screens.users.test.tsx": {
@@ -36360,7 +36364,7 @@
     },
     "frontend/__tests__/testUtils.tsx": {
       "filePath": "frontend/__tests__/testUtils.tsx",
-      "contentHash": "54bdd6fb0de9f1bf394290c8a34e06e9648e7a93ab7302c54e8aa735f2052c6b",
+      "contentHash": "a0d235f28e2326e788324363c9b415f1a97f59d05015a6987dc619598dbabac9",
       "functions": [
         {
           "name": "setParams",
@@ -36435,9 +36439,10 @@
         "setParams",
         "fakeAuth",
         "renderScreen",
-        "IDS"
+        "IDS",
+        "HELP"
       ],
-      "totalLines": 58,
+      "totalLines": 69,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/users.reliabilityLine.test.tsx": {
@@ -37081,7 +37086,7 @@
     },
     "frontend/src/api/errors.ts": {
       "filePath": "frontend/src/api/errors.ts",
-      "contentHash": "696e1ebdc565a4bddb3ad5e9c35f75987be9c10855298ebfdc9990f2495da63a",
+      "contentHash": "90af6b39fa41845d7c25c942d05b3ccf15a390644e771cb57891b9d8ae65ab62",
       "functions": [
         {
           "name": "friendlyError",
@@ -37113,7 +37118,7 @@
         "ApiError",
         "friendlyError"
       ],
-      "totalLines": 57,
+      "totalLines": 63,
       "hasStructuralAnalysis": true
     },
     "frontend/src/api/types.ai.ts": {
@@ -37195,7 +37200,7 @@
     },
     "frontend/src/api/types.users.ts": {
       "filePath": "frontend/src/api/types.users.ts",
-      "contentHash": "b9e835b37cc3093093bf1c0ba7ba261e23f45cce8a7e9344168725674eb94a29",
+      "contentHash": "d4937bde76dcc36277822b18008ee55c0933c52fcb437ac49429f76561c5539d",
       "functions": [],
       "classes": [],
       "imports": [
@@ -37573,7 +37578,7 @@
     },
     "frontend/src/app/(tabs)/index.tsx": {
       "filePath": "frontend/src/app/(tabs)/index.tsx",
-      "contentHash": "0376f009d80e78ccfc302c0391050bd132c1f534f13731a5b9b0f79a879b7ec8",
+      "contentHash": "89d57a03fb08f8588eadc2ed36d613fb1322ff57f42c49b730dc14d331536242",
       "functions": [
         {
           "name": "eventCardWidth",
@@ -37588,7 +37593,13 @@
           "name": "HomeScreen",
           "params": [],
           "exported": true,
-          "lineCount": 97
+          "lineCount": 98
+        },
+        {
+          "name": "HelpButton",
+          "params": [],
+          "exported": false,
+          "lineCount": 25
         }
       ],
       "classes": [],
@@ -37653,6 +37664,12 @@
           ]
         },
         {
+          "source": "@/hooks/useHelp",
+          "specifiers": [
+            "useHelpBoard"
+          ]
+        },
+        {
           "source": "@/ui/Button",
           "specifiers": [
             "Button"
@@ -37708,7 +37725,7 @@
         "eventCardWidth",
         "HomeScreen"
       ],
-      "totalLines": 160,
+      "totalLines": 190,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/(tabs)/map.tsx": {
@@ -38097,13 +38114,13 @@
     },
     "frontend/src/app/_layout.tsx": {
       "filePath": "frontend/src/app/_layout.tsx",
-      "contentHash": "582133fef48b0cc1f034c55a533ec69498165b32e68a85bb7863daf1352b6a77",
+      "contentHash": "ab7825ac93e62f5d0bb5f46923f350b0ca98c6e0b21efc55b3f8b166de5434f2",
       "functions": [
         {
           "name": "Gate",
           "params": [],
           "exported": false,
-          "lineCount": 33
+          "lineCount": 34
         },
         {
           "name": "RootLayout",
@@ -38197,7 +38214,7 @@
       "exports": [
         "RootLayout"
       ],
-      "totalLines": 69,
+      "totalLines": 70,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/events/[id]/index.tsx": {
@@ -38379,24 +38396,17 @@
     },
     "frontend/src/app/events/[id]/scan.tsx": {
       "filePath": "frontend/src/app/events/[id]/scan.tsx",
-      "contentHash": "16ce807c58ef97926fab795ec2753b642ec6b7b25d3257822497fb631920669e",
+      "contentHash": "c6658a9b6ec84d25b93a38495ac4e05c860d66824947f649a44dd7f12a9197da",
       "functions": [
         {
           "name": "ScanScreen",
           "params": [],
           "exported": true,
-          "lineCount": 83
+          "lineCount": 28
         }
       ],
       "classes": [],
       "imports": [
-        {
-          "source": "expo-camera",
-          "specifiers": [
-            "CameraView",
-            "useCameraPermissions"
-          ]
-        },
         {
           "source": "expo-router",
           "specifiers": [
@@ -38404,25 +38414,16 @@
           ]
         },
         {
-          "source": "react",
-          "specifiers": [
-            "useRef",
-            "useState"
-          ]
-        },
-        {
-          "source": "react-native",
-          "specifiers": [
-            "StyleSheet",
-            "View"
-          ]
-        },
-        {
           "source": "@/features/events/checkInResult",
           "specifiers": [
             "outcomeFromError",
-            "outcomeFromSuccess",
-            "ScanOutcome"
+            "outcomeFromSuccess"
+          ]
+        },
+        {
+          "source": "@/features/scan/QrScanner",
+          "specifiers": [
+            "QrScanner"
           ]
         },
         {
@@ -38430,24 +38431,6 @@
           "specifiers": [
             "useCheckIn",
             "useEvent"
-          ]
-        },
-        {
-          "source": "@/ui/Button",
-          "specifiers": [
-            "Button"
-          ]
-        },
-        {
-          "source": "@/ui/Card",
-          "specifiers": [
-            "Card"
-          ]
-        },
-        {
-          "source": "@/ui/Icon",
-          "specifiers": [
-            "Icon"
           ]
         },
         {
@@ -38461,48 +38444,23 @@
           "specifiers": [
             "ScreenHeader"
           ]
-        },
-        {
-          "source": "@/ui/States",
-          "specifiers": [
-            "EmptyState",
-            "LoadingState"
-          ]
-        },
-        {
-          "source": "@/ui/Text",
-          "specifiers": [
-            "Text"
-          ]
-        },
-        {
-          "source": "@/ui/TextField",
-          "specifiers": [
-            "TextField"
-          ]
-        },
-        {
-          "source": "@/ui/theme",
-          "specifiers": [
-            "colors"
-          ]
         }
       ],
       "exports": [
         "ScanScreen"
       ],
-      "totalLines": 116,
+      "totalLines": 39,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/events/[id]/ticket.tsx": {
       "filePath": "frontend/src/app/events/[id]/ticket.tsx",
-      "contentHash": "6a9463f30cb4483f9b3698f4e9c0989d570cc24a7757370516131439dbda53f8",
+      "contentHash": "1eb9e8b6e49364bfd97baa2999d574f2d079fc2ed68d9c94125b059e0a17e2f0",
       "functions": [
         {
           "name": "TicketScreen",
           "params": [],
           "exported": true,
-          "lineCount": 45
+          "lineCount": 42
         }
       ],
       "classes": [],
@@ -38521,9 +38479,9 @@
           ]
         },
         {
-          "source": "react-native-qrcode-svg",
+          "source": "@/features/scan/QrTile",
           "specifiers": [
-            "QRCode"
+            "QrTile"
           ]
         },
         {
@@ -38569,18 +38527,12 @@
           "specifiers": [
             "Text"
           ]
-        },
-        {
-          "source": "@/ui/theme",
-          "specifiers": [
-            "colors"
-          ]
         }
       ],
       "exports": [
         "TicketScreen"
       ],
-      "totalLines": 68,
+      "totalLines": 63,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/events/_layout.tsx": {
@@ -44756,7 +44708,7 @@
     },
     "frontend/src/features/users/ReliabilityLog.tsx": {
       "filePath": "frontend/src/features/users/ReliabilityLog.tsx",
-      "contentHash": "9fbd100464c39bde8518e3435b963f34435f79a75ea87a2696ec2833cc8ecb24",
+      "contentHash": "454f5431f86ef9ed54c3a6c849978e3a8e5d029de742fb47d025b9eb547f4719",
       "functions": [
         {
           "name": "ReliabilityLog",
@@ -44823,6 +44775,7 @@
         {
           "source": "./reliability",
           "specifiers": [
+            "entrySubject",
             "formatPoints",
             "reasonLabel"
           ]
@@ -44901,7 +44854,7 @@
     },
     "frontend/src/features/users/reliability.ts": {
       "filePath": "frontend/src/features/users/reliability.ts",
-      "contentHash": "64671ab35264a9453ca913e41a59c0e5cd5d9edb321dd57ed4a4a30fb8dddaf0",
+      "contentHash": "795167b37470e84dc3d77ea109ebad763f70786e5f3e479f40ba04b411e03917",
       "functions": [
         {
           "name": "formatPoints",
@@ -44919,7 +44872,16 @@
           ],
           "returnType": "string",
           "exported": true,
-          "lineCount": 14
+          "lineCount": 16
+        },
+        {
+          "name": "entrySubject",
+          "params": [
+            "entry"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 4
         }
       ],
       "classes": [],
@@ -44935,9 +44897,10 @@
         "RELIABILITY_RULES",
         "START_SCORE",
         "formatPoints",
-        "reasonLabel"
+        "reasonLabel",
+        "entrySubject"
       ],
-      "totalLines": 35,
+      "totalLines": 44,
       "hasStructuralAnalysis": true
     },
     "frontend/src/hooks/queries.ts": {
@@ -47363,7 +47326,7 @@
     },
     "frontend/testing/mocks/data.ts": {
       "filePath": "frontend/testing/mocks/data.ts",
-      "contentHash": "adbc69fbf01b758b355baacb4b84b1183bc96283327fc41aa04add8cb8386534",
+      "contentHash": "52071c35a7b22aaa61df0b75f4f33afd6624f6e68c5de0cea03f76c4f873d737",
       "functions": [
         {
           "name": "at",
@@ -47406,7 +47369,7 @@
           "params": [],
           "returnType": "MockState",
           "exported": true,
-          "lineCount": 203
+          "lineCount": 204
         }
       ],
       "classes": [],
@@ -47438,6 +47401,13 @@
             "bucharestToUtcIso",
             "toBucharest"
           ]
+        },
+        {
+          "source": "./helpSeed",
+          "specifiers": [
+            "seedHelpRequests",
+            "MockHelpRequest"
+          ]
         }
       ],
       "exports": [
@@ -47445,12 +47415,12 @@
         "USER_IDS",
         "seed"
       ],
-      "totalLines": 276,
+      "totalLines": 281,
       "hasStructuralAnalysis": true
     },
     "frontend/testing/mocks/index.ts": {
       "filePath": "frontend/testing/mocks/index.ts",
-      "contentHash": "0a4a0786372b93e160a58cfff7ee1ada1b65ee93c3394a974c94e4894fc284b2",
+      "contentHash": "880939b55e33a0983dfd20ff70030c33667ba07d461c3e5a358b99062bcdf66a",
       "functions": [
         {
           "name": "mockRequest",
@@ -47503,6 +47473,12 @@
           ]
         },
         {
+          "source": "./routes/help",
+          "specifiers": [
+            "helpRoutes"
+          ]
+        },
+        {
           "source": "./routes/places",
           "specifiers": [
             "placesRoutes"
@@ -47541,7 +47517,7 @@
         "setMockLatency",
         "mockRequest"
       ],
-      "totalLines": 37,
+      "totalLines": 38,
       "hasStructuralAnalysis": true
     },
     "frontend/testing/mocks/placesSeed.ts": {
@@ -48354,12 +48330,12 @@
     },
     "supabase/tests/schema_checks.sql": {
       "filePath": "supabase/tests/schema_checks.sql",
-      "contentHash": "e685de959f3bdf405833263229049b28e359a3559382bc17b62887d42715ce86",
+      "contentHash": "fec51368819b53268dc4d60f016946a716d0cfa8126181ec4f1a9464183738b5",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 186,
+      "totalLines": 217,
       "hasStructuralAnalysis": false
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/controller/NeighbourhoodController.java": {
@@ -50858,6 +50834,4833 @@
       ],
       "totalLines": 94,
       "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
+      "contentHash": "c77cf9799401516fedaea2554b9f2b16adb8d5ecdb519e225845720cdafaaf56",
+      "functions": [
+        {
+          "name": "HelpController",
+          "params": [
+            "help",
+            "currentUser"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "board",
+          "params": [
+            "near",
+            "bbox"
+          ],
+          "returnType": "List<HelpRequestSummary>",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "mine",
+          "params": [],
+          "returnType": "MyHelpResponse",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "create",
+          "params": [
+            "request"
+          ],
+          "returnType": "HelpRequestDetail",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "detail",
+          "params": [
+            "id"
+          ],
+          "returnType": "HelpRequestDetail",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "cancel",
+          "params": [
+            "id"
+          ],
+          "returnType": "HelpRequestDetail",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "offer",
+          "params": [
+            "id"
+          ],
+          "returnType": "HelpTicketResponse",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "withdraw",
+          "params": [
+            "id"
+          ],
+          "returnType": "WithdrawResponse",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "myTicket",
+          "params": [
+            "id"
+          ],
+          "returnType": "HelpTicketResponse",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "checkIn",
+          "params": [
+            "id",
+            "request"
+          ],
+          "returnType": "CheckInResponse",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "HelpController",
+          "methods": [
+            "HelpController",
+            "board",
+            "mine",
+            "create",
+            "detail",
+            "cancel",
+            "offer",
+            "withdraw",
+            "myTicket",
+            "checkIn"
+          ],
+          "properties": [
+            "help",
+            "currentUser"
+          ],
+          "exported": true,
+          "lineCount": 72
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.geo.BoundingBox",
+          "specifiers": [
+            "BoundingBox"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.security.CurrentUser",
+          "specifiers": [
+            "CurrentUser"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.CreateHelpRequest",
+          "specifiers": [
+            "CreateHelpRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.HelpRequestDetail",
+          "specifiers": [
+            "HelpRequestDetail"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.HelpRequestSummary",
+          "specifiers": [
+            "HelpRequestSummary"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.HelpTicketResponse",
+          "specifiers": [
+            "HelpTicketResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.MyHelpResponse",
+          "specifiers": [
+            "MyHelpResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.WithdrawResponse",
+          "specifiers": [
+            "WithdrawResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.service.HelpService",
+          "specifiers": [
+            "HelpService"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.dto.CheckInRequest",
+          "specifiers": [
+            "CheckInRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.dto.CheckInResponse",
+          "specifiers": [
+            "CheckInResponse"
+          ]
+        },
+        {
+          "source": "jakarta.validation.Valid",
+          "specifiers": [
+            "Valid"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.springframework.http.HttpStatus",
+          "specifiers": [
+            "HttpStatus"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.DeleteMapping",
+          "specifiers": [
+            "DeleteMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.GetMapping",
+          "specifiers": [
+            "GetMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.PathVariable",
+          "specifiers": [
+            "PathVariable"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.PostMapping",
+          "specifiers": [
+            "PostMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RequestBody",
+          "specifiers": [
+            "RequestBody"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RequestMapping",
+          "specifiers": [
+            "RequestMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RequestParam",
+          "specifiers": [
+            "RequestParam"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.ResponseStatus",
+          "specifiers": [
+            "ResponseStatus"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RestController",
+          "specifiers": [
+            "RestController"
+          ]
+        }
+      ],
+      "exports": [
+        "HelpController",
+        "board",
+        "mine",
+        "create",
+        "detail",
+        "cancel",
+        "offer",
+        "withdraw",
+        "myTicket",
+        "checkIn",
+        "HelpController"
+      ],
+      "totalLines": 102,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/help/domain/HelpRules.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/help/domain/HelpRules.java",
+      "contentHash": "b022c26e510342dbe12f6405090187fdbb8b45926ed715677351c1462af708ac",
+      "functions": [
+        {
+          "name": "HelpRules",
+          "params": [],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "expiresAt",
+          "params": [
+            "createdAt"
+          ],
+          "returnType": "Instant",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "effectiveStatus",
+          "params": [
+            "stored",
+            "expiresAt",
+            "now"
+          ],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "isOpen",
+          "params": [
+            "stored",
+            "expiresAt",
+            "now"
+          ],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "HelpRules",
+          "methods": [
+            "HelpRules",
+            "expiresAt",
+            "effectiveStatus",
+            "isOpen"
+          ],
+          "properties": [
+            "LIFETIME",
+            "TITLE_MIN",
+            "TITLE_MAX",
+            "DESCRIPTION_MAX",
+            "ADDRESS_MAX",
+            "BOARD_LIMIT",
+            "MINE_LIMIT",
+            "CATEGORIES",
+            "OPEN",
+            "HELPED",
+            "CANCELLED",
+            "EXPIRED",
+            "OFFERED",
+            "WITHDRAWN",
+            "NOT_NEEDED"
+          ],
+          "exported": true,
+          "lineCount": 42
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.Set",
+          "specifiers": [
+            "Set"
+          ]
+        }
+      ],
+      "exports": [
+        "LIFETIME",
+        "TITLE_MIN",
+        "TITLE_MAX",
+        "DESCRIPTION_MAX",
+        "ADDRESS_MAX",
+        "BOARD_LIMIT",
+        "MINE_LIMIT",
+        "CATEGORIES",
+        "OPEN",
+        "HELPED",
+        "CANCELLED",
+        "EXPIRED",
+        "OFFERED",
+        "WITHDRAWN",
+        "NOT_NEEDED",
+        "expiresAt",
+        "effectiveStatus",
+        "isOpen",
+        "HelpRules"
+      ],
+      "totalLines": 53,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/help/domain/dto/CreateHelpRequest.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/help/domain/dto/CreateHelpRequest.java",
+      "contentHash": "e3eaabf541c7cf42c0236cf2c9485e3b2bbdb4d081209fc4b1625c158cf696c4",
+      "functions": [],
+      "classes": [
+        {
+          "name": "CreateHelpRequest",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "CreateHelpRequest"
+      ],
+      "totalLines": 16,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpOfferResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpOfferResponse.java",
+      "contentHash": "d147690698b5ef2a3dd501c4e39265eb339672c38da47f3f96aa2b8e3ba5d9cd",
+      "functions": [],
+      "classes": [
+        {
+          "name": "HelpOfferResponse",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.events.domain.dto.UserSummary",
+          "specifiers": [
+            "UserSummary"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        }
+      ],
+      "exports": [
+        "HelpOfferResponse"
+      ],
+      "totalLines": 9,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestDetail.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestDetail.java",
+      "contentHash": "ffe313c403d16c934fbae195a05ada3b03e833fee71fadf98b64580fc3696a43",
+      "functions": [],
+      "classes": [
+        {
+          "name": "HelpRequestDetail",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.fasterxml.jackson.annotation.JsonProperty",
+          "specifiers": [
+            "JsonProperty"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.domain.dto.UserSummary",
+          "specifiers": [
+            "UserSummary"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "HelpRequestDetail"
+      ],
+      "totalLines": 16,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestSummary.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestSummary.java",
+      "contentHash": "c99d6db368b43ce1faf977af05c624d4065487c25d05f7fffcc4285911cf2f4e",
+      "functions": [],
+      "classes": [
+        {
+          "name": "HelpRequestSummary",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.events.domain.dto.UserSummary",
+          "specifiers": [
+            "UserSummary"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "HelpRequestSummary"
+      ],
+      "totalLines": 12,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpTicketResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpTicketResponse.java",
+      "contentHash": "ed8ad5aed9c13e1fe646dd96d5bfe73f2ea4c810fcac5cfc97442cc9a67223cb",
+      "functions": [],
+      "classes": [
+        {
+          "name": "HelpTicketResponse",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "HelpTicketResponse"
+      ],
+      "totalLines": 8,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/help/domain/dto/MyHelpResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/help/domain/dto/MyHelpResponse.java",
+      "contentHash": "6de2e8813093b0167d915e599f855802ca1229189ada35c3cb1ecf7f8b19d892",
+      "functions": [],
+      "classes": [
+        {
+          "name": "MyHelpResponse",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "MyHelpResponse"
+      ],
+      "totalLines": 8,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/help/domain/dto/WithdrawResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/help/domain/dto/WithdrawResponse.java",
+      "contentHash": "099c35a5ba643b7fa224186b4578de0f4ff435e2b7027927d9a50b7aeccdf6f6",
+      "functions": [],
+      "classes": [
+        {
+          "name": "WithdrawResponse",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "WithdrawResponse"
+      ],
+      "totalLines": 8,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpOffer.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpOffer.java",
+      "contentHash": "96d4c2ebf8c5d7c8d23cd2db282fba81247a4d1126103c021975f6989796b776",
+      "functions": [],
+      "classes": [
+        {
+          "name": "HelpOffer",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "HelpOffer"
+      ],
+      "totalLines": 10,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpOfferView.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpOfferView.java",
+      "contentHash": "0630ff4b85f78bc4f0afa3296a4ef3a8971d3c843ab9eb6a983b282d3eed7700",
+      "functions": [],
+      "classes": [
+        {
+          "name": "HelpOfferView",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "HelpOfferView"
+      ],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequest.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequest.java",
+      "contentHash": "49aa163565b1ead2617b9320a09d8953969f5d0ea9f8cd28a00301cf10b1a020",
+      "functions": [],
+      "classes": [
+        {
+          "name": "HelpRequest",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "HelpRequest"
+      ],
+      "totalLines": 11,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequestView.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequestView.java",
+      "contentHash": "6bc63331c5db3adb6f8815ea2fe354b0dc7b279f70f4900eaa8a183b836d7a30",
+      "functions": [],
+      "classes": [
+        {
+          "name": "HelpRequestView",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "HelpRequestView"
+      ],
+      "totalLines": 10,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/help/mapper/HelpMapper.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/help/mapper/HelpMapper.java",
+      "contentHash": "1fe8c765f0832d3f85bff631e2794dffe629386dd4f1ffc59962cda31bf0ed1e",
+      "functions": [],
+      "classes": [
+        {
+          "name": "HelpMapper",
+          "methods": [
+            "toSummary",
+            "toDetail"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.help.domain.dto.HelpRequestDetail",
+          "specifiers": [
+            "HelpRequestDetail"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.HelpRequestSummary",
+          "specifiers": [
+            "HelpRequestSummary"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.entity.HelpOfferView",
+          "specifiers": [
+            "HelpOfferView"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.entity.HelpRequestView",
+          "specifiers": [
+            "HelpRequestView"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "HelpMapper"
+      ],
+      "totalLines": 20,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
+      "contentHash": "6ac9d4b3830cc5e1937b282bc3535720bd452e68a957385bb1f0821e7e1df69c",
+      "functions": [
+        {
+          "name": "toSummary",
+          "params": [
+            "view",
+            "now"
+          ],
+          "returnType": "HelpRequestSummary",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "toDetail",
+          "params": [
+            "view",
+            "offers",
+            "caller",
+            "now"
+          ],
+          "returnType": "HelpRequestDetail",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "requester",
+          "params": [
+            "view"
+          ],
+          "returnType": "UserSummary",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "user",
+          "params": [
+            "o"
+          ],
+          "returnType": "UserSummary",
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "HelpMapperImpl",
+          "methods": [
+            "toSummary",
+            "toDetail",
+            "requester",
+            "user"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 39
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.events.domain.dto.UserSummary",
+          "specifiers": [
+            "UserSummary"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.HelpRules",
+          "specifiers": [
+            "HelpRules"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.HelpOfferResponse",
+          "specifiers": [
+            "HelpOfferResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.HelpRequestDetail",
+          "specifiers": [
+            "HelpRequestDetail"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.HelpRequestSummary",
+          "specifiers": [
+            "HelpRequestSummary"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.entity.HelpOfferView",
+          "specifiers": [
+            "HelpOfferView"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.entity.HelpRequest",
+          "specifiers": [
+            "HelpRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.entity.HelpRequestView",
+          "specifiers": [
+            "HelpRequestView"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.mapper.HelpMapper",
+          "specifiers": [
+            "HelpMapper"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        }
+      ],
+      "exports": [
+        "toSummary",
+        "toDetail",
+        "HelpMapperImpl"
+      ],
+      "totalLines": 57,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/help/repository/HelpOfferRepository.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/help/repository/HelpOfferRepository.java",
+      "contentHash": "be6028d40a71759b8db683d04247e7c2437522c8df7c2f67c3aea18a7f704cbe",
+      "functions": [],
+      "classes": [
+        {
+          "name": "HelpOfferRepository",
+          "methods": [
+            "find",
+            "findByToken",
+            "insert",
+            "changeStatus",
+            "markHelped",
+            "markOthersNotNeeded",
+            "offers"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 23
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.help.domain.entity.HelpOffer",
+          "specifiers": [
+            "HelpOffer"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.entity.HelpOfferView",
+          "specifiers": [
+            "HelpOfferView"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "HelpOfferRepository"
+      ],
+      "totalLines": 34,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/help/repository/HelpRequestRepository.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/help/repository/HelpRequestRepository.java",
+      "contentHash": "d981be2fbf4cc853e4c2b5bc3d629f7074431e547287352b514230d72c8aa46c",
+      "functions": [],
+      "classes": [
+        {
+          "name": "HelpRequestRepository",
+          "methods": [
+            "insert",
+            "findView",
+            "lock",
+            "openRequests",
+            "requestedBy",
+            "offeredBy",
+            "cancel",
+            "close"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 26
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.geo.BoundingBox",
+          "specifiers": [
+            "BoundingBox"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.entity.HelpRequest",
+          "specifiers": [
+            "HelpRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.entity.HelpRequestView",
+          "specifiers": [
+            "HelpRequestView"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "HelpRequestRepository"
+      ],
+      "totalLines": 38,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/help/repository/impl/HelpOfferRepositoryImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/help/repository/impl/HelpOfferRepositoryImpl.java",
+      "contentHash": "f1e3ff9ec1a8d7020fa4e70a054cad61cd5d4e23445e1578dce428000b38df03",
+      "functions": [
+        {
+          "name": "HelpOfferRepositoryImpl",
+          "params": [
+            "jdbc"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "find",
+          "params": [
+            "requestId",
+            "helperId"
+          ],
+          "returnType": "Optional<HelpOffer>",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "findByToken",
+          "params": [
+            "qrToken"
+          ],
+          "returnType": "Optional<HelpOffer>",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "insert",
+          "params": [
+            "o"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "changeStatus",
+          "params": [
+            "requestId",
+            "helperId",
+            "from",
+            "to"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "markHelped",
+          "params": [
+            "requestId",
+            "helperId",
+            "checkedInAt"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "markOthersNotNeeded",
+          "params": [
+            "requestId",
+            "helperId"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "offers",
+          "params": [
+            "requestId"
+          ],
+          "returnType": "List<HelpOfferView>",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "offer",
+          "params": [
+            "rs"
+          ],
+          "returnType": "HelpOffer",
+          "exported": false,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "HelpOfferRepositoryImpl",
+          "methods": [
+            "HelpOfferRepositoryImpl",
+            "find",
+            "findByToken",
+            "insert",
+            "changeStatus",
+            "markHelped",
+            "markOthersNotNeeded",
+            "offers",
+            "offer"
+          ],
+          "properties": [
+            "COLUMNS",
+            "jdbc"
+          ],
+          "exported": true,
+          "lineCount": 75
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.help.domain.entity.HelpOffer",
+          "specifiers": [
+            "HelpOffer"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.entity.HelpOfferView",
+          "specifiers": [
+            "HelpOfferView"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.repository.HelpOfferRepository",
+          "specifiers": [
+            "HelpOfferRepository"
+          ]
+        },
+        {
+          "source": "java.sql.ResultSet",
+          "specifiers": [
+            "ResultSet"
+          ]
+        },
+        {
+          "source": "java.sql.SQLException",
+          "specifiers": [
+            "SQLException"
+          ]
+        },
+        {
+          "source": "java.sql.Timestamp",
+          "specifiers": [
+            "Timestamp"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.springframework.jdbc.core.JdbcTemplate",
+          "specifiers": [
+            "JdbcTemplate"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Repository",
+          "specifiers": [
+            "Repository"
+          ]
+        }
+      ],
+      "exports": [
+        "HelpOfferRepositoryImpl",
+        "find",
+        "findByToken",
+        "insert",
+        "changeStatus",
+        "markHelped",
+        "markOthersNotNeeded",
+        "offers",
+        "HelpOfferRepositoryImpl"
+      ],
+      "totalLines": 92,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/help/repository/impl/HelpRequestRepositoryImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/help/repository/impl/HelpRequestRepositoryImpl.java",
+      "contentHash": "fa6920a8992f2356f77b2d7e0a4448265ad98207b7bf7322ef6c087469df24dd",
+      "functions": [
+        {
+          "name": "HelpRequestRepositoryImpl",
+          "params": [
+            "jdbc"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "insert",
+          "params": [
+            "r"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "findView",
+          "params": [
+            "id",
+            "caller"
+          ],
+          "returnType": "Optional<HelpRequestView>",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "lock",
+          "params": [
+            "id"
+          ],
+          "returnType": "Optional<HelpRequest>",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "openRequests",
+          "params": [
+            "now",
+            "caller",
+            "bbox",
+            "limit"
+          ],
+          "returnType": "List<HelpRequestView>",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "requestedBy",
+          "params": [
+            "userId",
+            "limit"
+          ],
+          "returnType": "List<HelpRequestView>",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "offeredBy",
+          "params": [
+            "userId",
+            "limit"
+          ],
+          "returnType": "List<HelpRequestView>",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "cancel",
+          "params": [
+            "id",
+            "closedAt"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "close",
+          "params": [
+            "id",
+            "helperId",
+            "closedAt"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "viewMapper",
+          "params": [],
+          "returnType": "RowMapper<HelpRequestView>",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "request",
+          "params": [
+            "rs"
+          ],
+          "returnType": "HelpRequest",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "number",
+          "params": [
+            "rs",
+            "column"
+          ],
+          "returnType": "Double",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "instant",
+          "params": [
+            "rs",
+            "column"
+          ],
+          "returnType": "Instant",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "timestamp",
+          "params": [
+            "value"
+          ],
+          "returnType": "Timestamp",
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "HelpRequestRepositoryImpl",
+          "methods": [
+            "HelpRequestRepositoryImpl",
+            "insert",
+            "findView",
+            "lock",
+            "openRequests",
+            "requestedBy",
+            "offeredBy",
+            "cancel",
+            "close",
+            "viewMapper",
+            "request",
+            "number",
+            "instant",
+            "timestamp"
+          ],
+          "properties": [
+            "COLUMNS",
+            "VIEW",
+            "jdbc"
+          ],
+          "exported": true,
+          "lineCount": 116
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.geo.BoundingBox",
+          "specifiers": [
+            "BoundingBox"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.entity.HelpRequest",
+          "specifiers": [
+            "HelpRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.entity.HelpRequestView",
+          "specifiers": [
+            "HelpRequestView"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.repository.HelpRequestRepository",
+          "specifiers": [
+            "HelpRequestRepository"
+          ]
+        },
+        {
+          "source": "java.sql.ResultSet",
+          "specifiers": [
+            "ResultSet"
+          ]
+        },
+        {
+          "source": "java.sql.SQLException",
+          "specifiers": [
+            "SQLException"
+          ]
+        },
+        {
+          "source": "java.sql.Timestamp",
+          "specifiers": [
+            "Timestamp"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.springframework.jdbc.core.JdbcTemplate",
+          "specifiers": [
+            "JdbcTemplate"
+          ]
+        },
+        {
+          "source": "org.springframework.jdbc.core.RowMapper",
+          "specifiers": [
+            "RowMapper"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Repository",
+          "specifiers": [
+            "Repository"
+          ]
+        }
+      ],
+      "exports": [
+        "HelpRequestRepositoryImpl",
+        "insert",
+        "findView",
+        "lock",
+        "openRequests",
+        "requestedBy",
+        "offeredBy",
+        "cancel",
+        "close",
+        "HelpRequestRepositoryImpl"
+      ],
+      "totalLines": 138,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/help/service/HelpService.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
+      "contentHash": "802118a23de0645d0676c1cbe181b613f59f623762d48c14ac6564534efd655c",
+      "functions": [],
+      "classes": [
+        {
+          "name": "HelpService",
+          "methods": [
+            "board",
+            "mine",
+            "create",
+            "detail",
+            "cancel",
+            "offer",
+            "withdraw",
+            "myTicket",
+            "checkIn"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 30
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.geo.BoundingBox",
+          "specifiers": [
+            "BoundingBox"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.CreateHelpRequest",
+          "specifiers": [
+            "CreateHelpRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.HelpRequestDetail",
+          "specifiers": [
+            "HelpRequestDetail"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.HelpRequestSummary",
+          "specifiers": [
+            "HelpRequestSummary"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.HelpTicketResponse",
+          "specifiers": [
+            "HelpTicketResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.MyHelpResponse",
+          "specifiers": [
+            "MyHelpResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.WithdrawResponse",
+          "specifiers": [
+            "WithdrawResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.dto.CheckInResponse",
+          "specifiers": [
+            "CheckInResponse"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "HelpService"
+      ],
+      "totalLines": 46,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "contentHash": "652b82bbb22a51a243b0ebce4f309e8b0c72ca6efd9f1d295d26fd4de96516aa",
+      "functions": [
+        {
+          "name": "HelpServiceImpl",
+          "params": [
+            "requests",
+            "offers",
+            "participations",
+            "profiles",
+            "mapper",
+            "clock"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "board",
+          "params": [
+            "caller",
+            "near",
+            "bbox"
+          ],
+          "returnType": "List<HelpRequestSummary>",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "mine",
+          "params": [
+            "caller"
+          ],
+          "returnType": "MyHelpResponse",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "create",
+          "params": [
+            "caller",
+            "body"
+          ],
+          "returnType": "HelpRequestDetail",
+          "exported": true,
+          "lineCount": 30
+        },
+        {
+          "name": "detail",
+          "params": [
+            "id",
+            "caller"
+          ],
+          "returnType": "HelpRequestDetail",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "cancel",
+          "params": [
+            "id",
+            "caller"
+          ],
+          "returnType": "HelpRequestDetail",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "offer",
+          "params": [
+            "id",
+            "caller"
+          ],
+          "returnType": "HelpTicketResponse",
+          "exported": true,
+          "lineCount": 22
+        },
+        {
+          "name": "withdraw",
+          "params": [
+            "id",
+            "caller"
+          ],
+          "returnType": "WithdrawResponse",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "myTicket",
+          "params": [
+            "id",
+            "caller"
+          ],
+          "returnType": "HelpTicketResponse",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "checkIn",
+          "params": [
+            "id",
+            "caller",
+            "token"
+          ],
+          "returnType": "CheckInResponse",
+          "exported": true,
+          "lineCount": 27
+        },
+        {
+          "name": "lock",
+          "params": [
+            "id"
+          ],
+          "returnType": "HelpRequest",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "requireOpen",
+          "params": [
+            "request",
+            "now"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "validateLocation",
+          "params": [
+            "lat",
+            "lon"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "distance",
+          "params": [
+            "view",
+            "near"
+          ],
+          "returnType": "double",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "parseToken",
+          "params": [
+            "token"
+          ],
+          "returnType": "UUID",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "trimToNull",
+          "params": [
+            "value"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "invalid",
+          "params": [
+            "message"
+          ],
+          "returnType": "ApiException",
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "HelpServiceImpl",
+          "methods": [
+            "HelpServiceImpl",
+            "board",
+            "mine",
+            "create",
+            "detail",
+            "cancel",
+            "offer",
+            "withdraw",
+            "myTicket",
+            "checkIn",
+            "lock",
+            "requireOpen",
+            "validateLocation",
+            "distance",
+            "parseToken",
+            "trimToNull",
+            "invalid"
+          ],
+          "properties": [
+            "NEAR_CANDIDATES",
+            "requests",
+            "offers",
+            "participations",
+            "profiles",
+            "mapper",
+            "clock"
+          ],
+          "exported": true,
+          "lineCount": 239
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.BoundingBox",
+          "specifiers": [
+            "BoundingBox"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.domain.dto.UserSummary",
+          "specifiers": [
+            "UserSummary"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.repository.ParticipationRepository",
+          "specifiers": [
+            "ParticipationRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.HelpRules",
+          "specifiers": [
+            "HelpRules"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.CreateHelpRequest",
+          "specifiers": [
+            "CreateHelpRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.HelpRequestDetail",
+          "specifiers": [
+            "HelpRequestDetail"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.HelpRequestSummary",
+          "specifiers": [
+            "HelpRequestSummary"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.HelpTicketResponse",
+          "specifiers": [
+            "HelpTicketResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.MyHelpResponse",
+          "specifiers": [
+            "MyHelpResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.WithdrawResponse",
+          "specifiers": [
+            "WithdrawResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.entity.HelpOffer",
+          "specifiers": [
+            "HelpOffer"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.entity.HelpRequest",
+          "specifiers": [
+            "HelpRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.entity.HelpRequestView",
+          "specifiers": [
+            "HelpRequestView"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.mapper.HelpMapper",
+          "specifiers": [
+            "HelpMapper"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.repository.HelpOfferRepository",
+          "specifiers": [
+            "HelpOfferRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.repository.HelpRequestRepository",
+          "specifiers": [
+            "HelpRequestRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.service.HelpService",
+          "specifiers": [
+            "HelpService"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.ReliabilityRules",
+          "specifiers": [
+            "ReliabilityRules"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.dto.CheckInResponse",
+          "specifiers": [
+            "CheckInResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.entity.Profile",
+          "specifiers": [
+            "Profile"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.repository.ProfileRepository",
+          "specifiers": [
+            "ProfileRepository"
+          ]
+        },
+        {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.Comparator",
+          "specifiers": [
+            "Comparator"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Locale",
+          "specifiers": [
+            "Locale"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Service",
+          "specifiers": [
+            "Service"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.annotation.Transactional",
+          "specifiers": [
+            "Transactional"
+          ]
+        }
+      ],
+      "exports": [
+        "HelpServiceImpl",
+        "board",
+        "mine",
+        "create",
+        "detail",
+        "cancel",
+        "offer",
+        "withdraw",
+        "myTicket",
+        "checkIn",
+        "HelpServiceImpl"
+      ],
+      "totalLines": 281,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/help/HelpIntegrationTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/help/HelpIntegrationTest.java",
+      "contentHash": "73298a128144843895c6a294325acd86c257df044a9b9cc5d9e09c838fb9baa1",
+      "functions": [
+        {
+          "name": "setUp",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "auth",
+          "params": [
+            "user"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "ask",
+          "params": [
+            "json"
+          ],
+          "returnType": "ResultActions",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "postRequest",
+          "params": [],
+          "returnType": "UUID",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "offer",
+          "params": [
+            "request",
+            "user"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "scan",
+          "params": [
+            "request",
+            "who",
+            "token"
+          ],
+          "returnType": "ResultActions",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "score",
+          "params": [
+            "user"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "logRows",
+          "params": [
+            "user"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "age",
+          "params": [
+            "request"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "postAndBoard",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 17
+        },
+        {
+          "name": "boardNeedsToken",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "validation",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "firstScannedHelperClosesTheRequest",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 46
+        },
+        {
+          "name": "scanRefusals",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "offerWithdrawAndReoffer",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 25
+        },
+        {
+          "name": "expiresAfter24Hours",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 17
+        },
+        {
+          "name": "cancel",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "mineAndNotFound",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "nearSortsByDistance",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "bboxFiltersOneArea",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 18
+        }
+      ],
+      "classes": [
+        {
+          "name": "HelpIntegrationTest",
+          "methods": [
+            "setUp",
+            "auth",
+            "ask",
+            "postRequest",
+            "offer",
+            "scan",
+            "score",
+            "logRows",
+            "age",
+            "postAndBoard",
+            "boardNeedsToken",
+            "validation",
+            "firstScannedHelperClosesTheRequest",
+            "scanRefusals",
+            "offerWithdrawAndReoffer",
+            "expiresAfter24Hours",
+            "cancel",
+            "mineAndNotFound",
+            "nearSortsByDistance",
+            "bboxFiltersOneArea"
+          ],
+          "properties": [
+            "ASKER",
+            "HELPER",
+            "SECOND",
+            "mvc",
+            "jdbc",
+            "now"
+          ],
+          "exported": false,
+          "lineCount": 301
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete",
+          "specifiers": [
+            "delete"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get",
+          "specifiers": [
+            "get"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post",
+          "specifiers": [
+            "post"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath",
+          "specifiers": [
+            "jsonPath"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.status",
+          "specifiers": [
+            "status"
+          ]
+        },
+        {
+          "source": "com.jayway.jsonpath.JsonPath",
+          "specifiers": [
+            "JsonPath"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.support.HelpTestSchema",
+          "specifiers": [
+            "HelpTestSchema"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.support.JwtTestTokens",
+          "specifiers": [
+            "JwtTestTokens"
+          ]
+        },
+        {
+          "source": "java.sql.Timestamp",
+          "specifiers": [
+            "Timestamp"
+          ]
+        },
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.BeforeEach",
+          "specifiers": [
+            "BeforeEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Autowired",
+          "specifiers": [
+            "Autowired"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.test.context.SpringBootTest",
+          "specifiers": [
+            "SpringBootTest"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc",
+          "specifiers": [
+            "AutoConfigureMockMvc"
+          ]
+        },
+        {
+          "source": "org.springframework.http.MediaType",
+          "specifiers": [
+            "MediaType"
+          ]
+        },
+        {
+          "source": "org.springframework.jdbc.core.JdbcTemplate",
+          "specifiers": [
+            "JdbcTemplate"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.MockMvc",
+          "specifiers": [
+            "MockMvc"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.ResultActions",
+          "specifiers": [
+            "ResultActions"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 334,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/help/domain/HelpRulesTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/help/domain/HelpRulesTest.java",
+      "contentHash": "980c872367a9d3562793c6418d58b1f0269aebfee2300d85ac8990aa7cafc212",
+      "functions": [
+        {
+          "name": "expiresAfter24Hours",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "effectiveStatus",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "helperPointsMatchAttendance",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "HelpRulesTest",
+          "methods": [
+            "expiresAfter24Hours",
+            "effectiveStatus",
+            "helperPointsMatchAttendance"
+          ],
+          "properties": [
+            "POSTED"
+          ],
+          "exported": false,
+          "lineCount": 31
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reliability.domain.ReliabilityRules",
+          "specifiers": [
+            "ReliabilityRules"
+          ]
+        },
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 42,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
+      "contentHash": "0f46dc83e750a5cfb35a0f2fa2752998de7f7d7be32b9e5a3938337d8c995188",
+      "functions": [
+        {
+          "name": "setUp",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "request",
+          "params": [
+            "status",
+            "ago"
+          ],
+          "returnType": "HelpRequest",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "locked",
+          "params": [
+            "request"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "offer",
+          "params": [
+            "status"
+          ],
+          "returnType": "HelpOffer",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "fails",
+          "params": [
+            "call",
+            "code"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "checkInClosesAndRewardsOnlyTheHelper",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 22
+        },
+        {
+          "name": "lostRaceGivesNoPoints",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "checkInRefusals",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "offerRules",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "withdrawRules",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "cancelRules",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "createValidation",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 15
+        }
+      ],
+      "classes": [
+        {
+          "name": "HelpServiceImplTest",
+          "methods": [
+            "setUp",
+            "request",
+            "locked",
+            "offer",
+            "fails",
+            "checkInClosesAndRewardsOnlyTheHelper",
+            "lostRaceGivesNoPoints",
+            "checkInRefusals",
+            "offerRules",
+            "withdrawRules",
+            "cancelRules",
+            "createValidation"
+          ],
+          "properties": [
+            "REQUEST",
+            "ASKER",
+            "HELPER",
+            "NOW",
+            "requests",
+            "offers",
+            "participations",
+            "profiles",
+            "service"
+          ],
+          "exported": false,
+          "lineCount": 140
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "org.assertj.core.api.Assertions.assertThatThrownBy",
+          "specifiers": [
+            "assertThatThrownBy"
+          ]
+        },
+        {
+          "source": "org.mockito.ArgumentMatchers.any",
+          "specifiers": [
+            "any"
+          ]
+        },
+        {
+          "source": "org.mockito.ArgumentMatchers.anyInt",
+          "specifiers": [
+            "anyInt"
+          ]
+        },
+        {
+          "source": "org.mockito.ArgumentMatchers.anyString",
+          "specifiers": [
+            "anyString"
+          ]
+        },
+        {
+          "source": "org.mockito.ArgumentMatchers.eq",
+          "specifiers": [
+            "eq"
+          ]
+        },
+        {
+          "source": "org.mockito.ArgumentMatchers.isNull",
+          "specifiers": [
+            "isNull"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.never",
+          "specifiers": [
+            "never"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.verify",
+          "specifiers": [
+            "verify"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.when",
+          "specifiers": [
+            "when"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.repository.ParticipationRepository",
+          "specifiers": [
+            "ParticipationRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.dto.CreateHelpRequest",
+          "specifiers": [
+            "CreateHelpRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.entity.HelpOffer",
+          "specifiers": [
+            "HelpOffer"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.entity.HelpRequest",
+          "specifiers": [
+            "HelpRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.mapper.impl.HelpMapperImpl",
+          "specifiers": [
+            "HelpMapperImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.repository.HelpOfferRepository",
+          "specifiers": [
+            "HelpOfferRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.repository.HelpRequestRepository",
+          "specifiers": [
+            "HelpRequestRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.service.impl.HelpServiceImpl",
+          "specifiers": [
+            "HelpServiceImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.entity.Profile",
+          "specifiers": [
+            "Profile"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.repository.ProfileRepository",
+          "specifiers": [
+            "ProfileRepository"
+          ]
+        },
+        {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.time.ZoneOffset",
+          "specifiers": [
+            "ZoneOffset"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.BeforeEach",
+          "specifiers": [
+            "BeforeEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.extension.ExtendWith",
+          "specifiers": [
+            "ExtendWith"
+          ]
+        },
+        {
+          "source": "org.mockito.Mock",
+          "specifiers": [
+            "Mock"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito",
+          "specifiers": [
+            "Mockito"
+          ]
+        },
+        {
+          "source": "org.mockito.junit.jupiter.MockitoExtension",
+          "specifiers": [
+            "MockitoExtension"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 180,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/help/support/HelpTestSchema.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/help/support/HelpTestSchema.java",
+      "contentHash": "88d75bd018c14638ef110b9427f00ee9b9cf6f3f4d7aac1b60bc858ab50a80da",
+      "functions": [
+        {
+          "name": "HelpTestSchema",
+          "params": [],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "create",
+          "params": [
+            "jdbc"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 19
+        }
+      ],
+      "classes": [
+        {
+          "name": "HelpTestSchema",
+          "methods": [
+            "HelpTestSchema",
+            "create"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 27
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.springframework.jdbc.core.JdbcTemplate",
+          "specifiers": [
+            "JdbcTemplate"
+          ]
+        }
+      ],
+      "exports": [
+        "create",
+        "HelpTestSchema"
+      ],
+      "totalLines": 36,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/__tests__/mocks.help.test.ts": {
+      "filePath": "frontend/__tests__/mocks.help.test.ts",
+      "contentHash": "a3c8f68078de9da5ca1aca3f60c4c2803e42c528121aba591f099305f525c123",
+      "functions": [
+        {
+          "name": "call",
+          "params": [
+            "method",
+            "path",
+            "query",
+            "body"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "codeOf",
+          "params": [
+            "promise"
+          ],
+          "returnType": "Promise<string>",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "score",
+          "params": [
+            "id"
+          ],
+          "exported": false,
+          "lineCount": 1
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/errors",
+          "specifiers": [
+            "ApiError"
+          ]
+        },
+        {
+          "source": "@test/mocks",
+          "specifiers": [
+            "getMockState",
+            "mockRequest"
+          ]
+        },
+        {
+          "source": "./testUtils",
+          "specifiers": [
+            "HELP",
+            "IDS"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 196,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/__tests__/screens.help.test.tsx": {
+      "filePath": "frontend/__tests__/screens.help.test.tsx",
+      "contentHash": "150f34c924d51af1d70346daa394a571eef2b16b42e069493ed99447b461d369",
+      "functions": [
+        {
+          "name": "minutes",
+          "params": [
+            "m"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "confirmAlert",
+          "params": [
+            "spy",
+            "label"
+          ],
+          "exported": false,
+          "lineCount": 4
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@testing-library/react-native",
+          "specifiers": [
+            "act",
+            "fireEvent",
+            "renderHook",
+            "screen",
+            "waitFor",
+            "within"
+          ]
+        },
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "QueryClientProvider"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "Alert"
+          ]
+        },
+        {
+          "source": "@/api/errors",
+          "specifiers": [
+            "ApiError"
+          ]
+        },
+        {
+          "source": "@/app/(tabs)/index",
+          "specifiers": [
+            "HomeScreen"
+          ]
+        },
+        {
+          "source": "@/app/help/index",
+          "specifiers": [
+            "HelpBoardScreen"
+          ]
+        },
+        {
+          "source": "@/app/help/[id]/index",
+          "specifiers": [
+            "HelpRequestScreen"
+          ]
+        },
+        {
+          "source": "@/app/help/[id]/scan",
+          "specifiers": [
+            "HelpScanScreen"
+          ]
+        },
+        {
+          "source": "@/app/help/[id]/ticket",
+          "specifiers": [
+            "HelpTicketScreen"
+          ]
+        },
+        {
+          "source": "@/app/help/new",
+          "specifiers": [
+            "NewHelpRequestScreen"
+          ]
+        },
+        {
+          "source": "@/features/help/checkInResult",
+          "specifiers": [
+            "helpOutcomeFromError",
+            "helpOutcomeFromSuccess"
+          ]
+        },
+        {
+          "source": "@/features/help/format",
+          "specifiers": [
+            "expiresIn",
+            "filterByCategory",
+            "myOfferLabel",
+            "offersLabel",
+            "statusLine",
+            "ticketState",
+            "timeAgo"
+          ]
+        },
+        {
+          "source": "@/features/help/newHelpForm",
+          "specifiers": [
+            "emptyHelpForm",
+            "validateHelpForm"
+          ]
+        },
+        {
+          "source": "@/features/users/ReliabilityLog",
+          "specifiers": [
+            "ReliabilityLog"
+          ]
+        },
+        {
+          "source": "@/features/users/reliability",
+          "specifiers": [
+            "entrySubject",
+            "reasonLabel"
+          ]
+        },
+        {
+          "source": "@/hooks/useHelp",
+          "specifiers": [
+            "useHelpBoard"
+          ]
+        },
+        {
+          "source": "@/lib/queryClient",
+          "specifiers": [
+            "createQueryClient"
+          ]
+        },
+        {
+          "source": "@test/mocks",
+          "specifiers": [
+            "* as mocks"
+          ]
+        },
+        {
+          "source": "./testUtils",
+          "specifiers": [
+            "HELP",
+            "IDS",
+            "mockRouter",
+            "renderScreen",
+            "setParams"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 456,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/api/endpoints.help.ts": {
+      "filePath": "frontend/src/api/endpoints.help.ts",
+      "contentHash": "097578c896b1a84bd9886689c819aee7add749619b35abccc0df25b4a33db0d8",
+      "functions": [
+        {
+          "name": "listHelpRequests",
+          "params": [
+            "query",
+            "signal"
+          ],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "getMyHelpRequests",
+          "params": [],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "createHelpRequest",
+          "params": [
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "getHelpRequest",
+          "params": [
+            "id"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "cancelHelpRequest",
+          "params": [
+            "id"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "offerHelp",
+          "params": [
+            "id"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "withdrawHelp",
+          "params": [
+            "id"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "getHelpTicket",
+          "params": [
+            "id"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "helpCheckIn",
+          "params": [
+            "id",
+            "token"
+          ],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./client",
+          "specifiers": [
+            "api"
+          ]
+        },
+        {
+          "source": "./types.help",
+          "specifiers": [
+            "HelpCheckInResult",
+            "HelpRequestDetail",
+            "HelpRequestSummary",
+            "HelpTicket",
+            "HelpWithdrawResult",
+            "MyHelpRequests",
+            "NewHelpRequest"
+          ]
+        }
+      ],
+      "exports": [
+        "listHelpRequests",
+        "getMyHelpRequests",
+        "createHelpRequest",
+        "getHelpRequest",
+        "cancelHelpRequest",
+        "offerHelp",
+        "withdrawHelp",
+        "getHelpTicket",
+        "helpCheckIn"
+      ],
+      "totalLines": 44,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/api/types.help.ts": {
+      "filePath": "frontend/src/api/types.help.ts",
+      "contentHash": "cca595d24b8e67c01c30eeadf9e8268dfd67359551276a7bca144f9b62da9050",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./types",
+          "specifiers": [
+            "UserSummary"
+          ]
+        }
+      ],
+      "exports": [
+        "HELP_CATEGORIES",
+        "HELP_TITLE_MIN",
+        "HELP_TITLE_MAX",
+        "HELP_DESCRIPTION_MAX",
+        "HELP_ADDRESS_MAX",
+        "HELP_POINTS",
+        "HELP_EXPIRY_MS"
+      ],
+      "totalLines": 79,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/app/help/[id]/index.tsx": {
+      "filePath": "frontend/src/app/help/[id]/index.tsx",
+      "contentHash": "d99f40f4bbbd11238db340fa58c110ecb9e75f43bfb3abbd601dfacaffa71994",
+      "functions": [
+        {
+          "name": "InfoRow",
+          "params": [
+            "{ icon, children, testID }"
+          ],
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "statusTone",
+          "params": [
+            "r"
+          ],
+          "returnType": "'signal' | 'muted'",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "HelpRequestScreen",
+          "params": [],
+          "exported": true,
+          "lineCount": 137
+        },
+        {
+          "name": "Shell",
+          "params": [
+            "{ children }"
+          ],
+          "exported": false,
+          "lineCount": 8
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "expo-router",
+          "specifiers": [
+            "router",
+            "useLocalSearchParams"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "Alert",
+            "Pressable",
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "@/api/errors",
+          "specifiers": [
+            "friendlyError"
+          ]
+        },
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HELP_POINTS",
+            "HelpRequestDetail"
+          ]
+        },
+        {
+          "source": "@/features/help/categories",
+          "specifiers": [
+            "helpCategoryMeta"
+          ]
+        },
+        {
+          "source": "@/features/help/format",
+          "specifiers": [
+            "statusLabel",
+            "statusLine",
+            "timeAgo"
+          ]
+        },
+        {
+          "source": "@/features/help/OfferList",
+          "specifiers": [
+            "OfferList"
+          ]
+        },
+        {
+          "source": "@/hooks/useHelp",
+          "specifiers": [
+            "useCancelHelpRequest",
+            "useHelpRequest",
+            "useOfferHelp",
+            "useWithdrawHelp"
+          ]
+        },
+        {
+          "source": "@/lib/time",
+          "specifiers": [
+            "formatEventDate"
+          ]
+        },
+        {
+          "source": "@/ui/Avatar",
+          "specifiers": [
+            "Avatar"
+          ]
+        },
+        {
+          "source": "@/ui/Button",
+          "specifiers": [
+            "Button"
+          ]
+        },
+        {
+          "source": "@/ui/Card",
+          "specifiers": [
+            "Card"
+          ]
+        },
+        {
+          "source": "@/ui/Chip",
+          "specifiers": [
+            "StatusChip"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "Icon"
+          ]
+        },
+        {
+          "source": "@/ui/ReliabilityBadge",
+          "specifiers": [
+            "ReliabilityBadge"
+          ]
+        },
+        {
+          "source": "@/ui/Screen",
+          "specifiers": [
+            "Screen"
+          ]
+        },
+        {
+          "source": "@/ui/ScreenHeader",
+          "specifiers": [
+            "ScreenHeader"
+          ]
+        },
+        {
+          "source": "@/ui/States",
+          "specifiers": [
+            "ErrorState",
+            "LoadingState"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors"
+          ]
+        }
+      ],
+      "exports": [
+        "HelpRequestScreen"
+      ],
+      "totalLines": 204,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/app/help/[id]/scan.tsx": {
+      "filePath": "frontend/src/app/help/[id]/scan.tsx",
+      "contentHash": "968da7a1f229e0f0140650aafb66e1fb899f9fcc97022089876de9c44d568e9f",
+      "functions": [
+        {
+          "name": "HelpScanScreen",
+          "params": [],
+          "exported": true,
+          "lineCount": 33
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "expo-router",
+          "specifiers": [
+            "router",
+            "useLocalSearchParams"
+          ]
+        },
+        {
+          "source": "@/features/help/checkInResult",
+          "specifiers": [
+            "helpOutcomeFromError",
+            "helpOutcomeFromSuccess"
+          ]
+        },
+        {
+          "source": "@/features/scan/QrScanner",
+          "specifiers": [
+            "QrScanner"
+          ]
+        },
+        {
+          "source": "@/hooks/useHelp",
+          "specifiers": [
+            "useHelpCheckIn",
+            "useHelpRequest"
+          ]
+        },
+        {
+          "source": "@/ui/Screen",
+          "specifiers": [
+            "Screen"
+          ]
+        },
+        {
+          "source": "@/ui/ScreenHeader",
+          "specifiers": [
+            "ScreenHeader"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        }
+      ],
+      "exports": [
+        "HelpScanScreen"
+      ],
+      "totalLines": 45,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/app/help/[id]/ticket.tsx": {
+      "filePath": "frontend/src/app/help/[id]/ticket.tsx",
+      "contentHash": "9935c581e5a5c79f6efa79212efa0861ad2efd7b8f6877e91ab7fe4831e92e71",
+      "functions": [
+        {
+          "name": "HelpTicketScreen",
+          "params": [],
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "TicketBody",
+          "params": [
+            "{ ticket, requester, closed }"
+          ],
+          "exported": false,
+          "lineCount": 19
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "expo-router",
+          "specifiers": [
+            "useLocalSearchParams"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HelpTicket"
+          ]
+        },
+        {
+          "source": "@/features/help/format",
+          "specifiers": [
+            "ticketState"
+          ]
+        },
+        {
+          "source": "@/features/scan/QrTile",
+          "specifiers": [
+            "QrTile"
+          ]
+        },
+        {
+          "source": "@/hooks/useHelp",
+          "specifiers": [
+            "useHelpRequest",
+            "useHelpTicket"
+          ]
+        },
+        {
+          "source": "@/ui/Chip",
+          "specifiers": [
+            "StatusChip"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "Icon"
+          ]
+        },
+        {
+          "source": "@/ui/Screen",
+          "specifiers": [
+            "Screen"
+          ]
+        },
+        {
+          "source": "@/ui/ScreenHeader",
+          "specifiers": [
+            "ScreenHeader"
+          ]
+        },
+        {
+          "source": "@/ui/States",
+          "specifiers": [
+            "ErrorState",
+            "LoadingState"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors"
+          ]
+        }
+      ],
+      "exports": [
+        "HelpTicketScreen"
+      ],
+      "totalLines": 65,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/app/help/_layout.tsx": {
+      "filePath": "frontend/src/app/help/_layout.tsx",
+      "contentHash": "2028a1944d6f2a9a41a4696da90538a7128a03a29410a46139f436a2bed814fa",
+      "functions": [
+        {
+          "name": "HelpLayout",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "expo-router",
+          "specifiers": [
+            "Stack"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors"
+          ]
+        }
+      ],
+      "exports": [
+        "HelpLayout"
+      ],
+      "totalLines": 10,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/app/help/index.tsx": {
+      "filePath": "frontend/src/app/help/index.tsx",
+      "contentHash": "8bf427329ab7fb51652f183f9a54f0cf3b4e59a60ec10ffa043d436dc578ab82",
+      "functions": [
+        {
+          "name": "HelpBoardScreen",
+          "params": [],
+          "exported": true,
+          "lineCount": 35
+        },
+        {
+          "name": "Board",
+          "params": [
+            "{ categories }"
+          ],
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "Mine",
+          "params": [],
+          "exported": false,
+          "lineCount": 16
+        },
+        {
+          "name": "Section",
+          "params": [
+            "{ title, empty, items, showRequester }"
+          ],
+          "exported": false,
+          "lineCount": 14
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "expo-router",
+          "specifiers": [
+            "router"
+          ]
+        },
+        {
+          "source": "react",
+          "specifiers": [
+            "useState"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "FlatList",
+            "RefreshControl",
+            "ScrollView",
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HELP_CATEGORIES",
+            "HelpCategory",
+            "HelpRequestSummary"
+          ]
+        },
+        {
+          "source": "@/features/help/categories",
+          "specifiers": [
+            "HELP_CATEGORY_META"
+          ]
+        },
+        {
+          "source": "@/features/help/format",
+          "specifiers": [
+            "filterByCategory"
+          ]
+        },
+        {
+          "source": "@/features/help/HelpCards",
+          "specifiers": [
+            "HelpRequestRow"
+          ]
+        },
+        {
+          "source": "@/hooks/useHelp",
+          "specifiers": [
+            "useHelpBoard",
+            "useMyHelpRequests"
+          ]
+        },
+        {
+          "source": "@/ui/Button",
+          "specifiers": [
+            "Button"
+          ]
+        },
+        {
+          "source": "@/ui/Chip",
+          "specifiers": [
+            "Chip"
+          ]
+        },
+        {
+          "source": "@/ui/Screen",
+          "specifiers": [
+            "Screen"
+          ]
+        },
+        {
+          "source": "@/ui/ScreenHeader",
+          "specifiers": [
+            "ScreenHeader"
+          ]
+        },
+        {
+          "source": "@/ui/States",
+          "specifiers": [
+            "EmptyState",
+            "ErrorState",
+            "LoadingState"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors",
+            "PAGE_MARGIN"
+          ]
+        }
+      ],
+      "exports": [
+        "HelpBoardScreen"
+      ],
+      "totalLines": 127,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/app/help/new.tsx": {
+      "filePath": "frontend/src/app/help/new.tsx",
+      "contentHash": "c953ed49c95edda598f76800ebde2fd85492c8a51a384c1d7b4225307f95c24b",
+      "functions": [
+        {
+          "name": "NewHelpRequestScreen",
+          "params": [],
+          "exported": true,
+          "lineCount": 121
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "expo-router",
+          "specifiers": [
+            "router"
+          ]
+        },
+        {
+          "source": "react",
+          "specifiers": [
+            "useState"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "ScrollView",
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "@/api/errors",
+          "specifiers": [
+            "friendlyError"
+          ]
+        },
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HELP_ADDRESS_MAX",
+            "HELP_CATEGORIES",
+            "HELP_DESCRIPTION_MAX",
+            "HELP_TITLE_MAX"
+          ]
+        },
+        {
+          "source": "@/features/events/LocationPickerModal",
+          "specifiers": [
+            "LocationPickerModal"
+          ]
+        },
+        {
+          "source": "@/features/help/categories",
+          "specifiers": [
+            "HELP_CATEGORY_META"
+          ]
+        },
+        {
+          "source": "@/features/help/newHelpForm",
+          "specifiers": [
+            "emptyHelpForm",
+            "validateHelpForm",
+            "HelpForm",
+            "HelpFormErrors"
+          ]
+        },
+        {
+          "source": "@/features/location/LocationProvider",
+          "specifiers": [
+            "useCurrentPosition"
+          ]
+        },
+        {
+          "source": "@/hooks/useHelp",
+          "specifiers": [
+            "useCreateHelpRequest"
+          ]
+        },
+        {
+          "source": "@/ui/Button",
+          "specifiers": [
+            "Button"
+          ]
+        },
+        {
+          "source": "@/ui/Chip",
+          "specifiers": [
+            "Chip"
+          ]
+        },
+        {
+          "source": "@/ui/Screen",
+          "specifiers": [
+            "Screen"
+          ]
+        },
+        {
+          "source": "@/ui/ScreenHeader",
+          "specifiers": [
+            "ScreenHeader"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/TextField",
+          "specifiers": [
+            "TextField"
+          ]
+        }
+      ],
+      "exports": [
+        "NewHelpRequestScreen"
+      ],
+      "totalLines": 148,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/help/HelpCards.tsx": {
+      "filePath": "frontend/src/features/help/HelpCards.tsx",
+      "contentHash": "a06b3f0521adf696a62fde15afe4a3d72c1319e2cc62b71907e0285e10fc16ed",
+      "functions": [
+        {
+          "name": "openHelpRequest",
+          "params": [
+            "id"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "StateChip",
+          "params": [
+            "{ request }"
+          ],
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "HelpRequestRow",
+          "params": [
+            "{ request, showRequester = true, now = Date.now() }"
+          ],
+          "exported": true,
+          "lineCount": 39
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "expo-router",
+          "specifiers": [
+            "router"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "Pressable",
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HelpRequestSummary"
+          ]
+        },
+        {
+          "source": "@/ui/Chip",
+          "specifiers": [
+            "StatusChip"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "Icon"
+          ]
+        },
+        {
+          "source": "@/ui/ReliabilityBadge",
+          "specifiers": [
+            "ReliabilityBadge"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors",
+            "radius"
+          ]
+        },
+        {
+          "source": "./categories",
+          "specifiers": [
+            "helpCategoryMeta"
+          ]
+        },
+        {
+          "source": "./format",
+          "specifiers": [
+            "expiresIn",
+            "myOfferLabel",
+            "offersLabel",
+            "statusLabel",
+            "timeAgo"
+          ]
+        }
+      ],
+      "exports": [
+        "openHelpRequest",
+        "HelpRequestRow"
+      ],
+      "totalLines": 85,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/help/OfferList.tsx": {
+      "filePath": "frontend/src/features/help/OfferList.tsx",
+      "contentHash": "d1802f83f971f2fb873fa1230088e59fcae1c55eca8a6fcc3698e36e8cebd8e6",
+      "functions": [
+        {
+          "name": "offerChip",
+          "params": [
+            "offer"
+          ],
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "OfferList",
+          "params": [
+            "{ offers, now = Date.now() }"
+          ],
+          "exported": true,
+          "lineCount": 30
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "expo-router",
+          "specifiers": [
+            "router"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "Pressable",
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HelpOffer"
+          ]
+        },
+        {
+          "source": "@/ui/Avatar",
+          "specifiers": [
+            "Avatar"
+          ]
+        },
+        {
+          "source": "@/ui/Chip",
+          "specifiers": [
+            "StatusChip"
+          ]
+        },
+        {
+          "source": "@/ui/ReliabilityBadge",
+          "specifiers": [
+            "ReliabilityBadge"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors",
+            "radius"
+          ]
+        },
+        {
+          "source": "./format",
+          "specifiers": [
+            "timeAgo"
+          ]
+        }
+      ],
+      "exports": [
+        "OfferList"
+      ],
+      "totalLines": 67,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/help/categories.ts": {
+      "filePath": "frontend/src/features/help/categories.ts",
+      "contentHash": "37d284f7f22629bce55672a711001a16840a2522219cb907704f90efef3e5b0f",
+      "functions": [
+        {
+          "name": "helpCategoryMeta",
+          "params": [
+            "category"
+          ],
+          "returnType": "HelpCategoryMeta",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HelpCategory"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "IconName"
+          ]
+        }
+      ],
+      "exports": [
+        "HELP_CATEGORY_META",
+        "helpCategoryMeta"
+      ],
+      "totalLines": 20,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/help/checkInResult.ts": {
+      "filePath": "frontend/src/features/help/checkInResult.ts",
+      "contentHash": "5a8084cefa628b5aa75a70534306a34cdb9538aa2f8e76418bb69a97e64351a0",
+      "functions": [
+        {
+          "name": "helpOutcomeFromSuccess",
+          "params": [
+            "result"
+          ],
+          "returnType": "ScanOutcome",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "helpOutcomeFromError",
+          "params": [
+            "error"
+          ],
+          "returnType": "ScanOutcome",
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/errors",
+          "specifiers": [
+            "ApiError",
+            "friendlyError"
+          ]
+        },
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HelpCheckInResult"
+          ]
+        },
+        {
+          "source": "@/features/events/checkInResult",
+          "specifiers": [
+            "ScanOutcome"
+          ]
+        }
+      ],
+      "exports": [
+        "helpOutcomeFromSuccess",
+        "helpOutcomeFromError"
+      ],
+      "totalLines": 25,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/help/format.ts": {
+      "filePath": "frontend/src/features/help/format.ts",
+      "contentHash": "215bcad2465cf1a3bdc3388a54a8af9dfea92b5e208f256d692dd240d2467882",
+      "functions": [
+        {
+          "name": "timeAgo",
+          "params": [
+            "iso",
+            "now"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "expiresIn",
+          "params": [
+            "iso",
+            "now"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "offersLabel",
+          "params": [
+            "count"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "statusLabel",
+          "params": [
+            "r"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "statusLine",
+          "params": [
+            "r",
+            "now"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "myOfferLabel",
+          "params": [
+            "status"
+          ],
+          "returnType": "string | null",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "filterByCategory",
+          "params": [
+            "list",
+            "categories"
+          ],
+          "returnType": "T[]",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "ticketState",
+          "params": [
+            "status",
+            "requester",
+            "closed"
+          ],
+          "exported": true,
+          "lineCount": 16
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HELP_POINTS",
+            "HelpCategory",
+            "HelpOfferStatus",
+            "HelpRequestDetail",
+            "HelpRequestSummary",
+            "HelpTicket"
+          ]
+        }
+      ],
+      "exports": [
+        "timeAgo",
+        "expiresIn",
+        "offersLabel",
+        "statusLabel",
+        "statusLine",
+        "myOfferLabel",
+        "filterByCategory",
+        "ticketState"
+      ],
+      "totalLines": 87,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/help/newHelpForm.ts": {
+      "filePath": "frontend/src/features/help/newHelpForm.ts",
+      "contentHash": "a6cf83234bf3aaa16923b3306eaddffc1e62195a85c26d9eaf271bf290874e86",
+      "functions": [
+        {
+          "name": "emptyHelpForm",
+          "params": [],
+          "returnType": "HelpForm",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "validateHelpForm",
+          "params": [
+            "form"
+          ],
+          "returnType": "{ errors: HelpFormErrors; payload: NewHelpRequest | null }",
+          "exported": true,
+          "lineCount": 25
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HELP_ADDRESS_MAX",
+            "HELP_DESCRIPTION_MAX",
+            "HELP_TITLE_MAX",
+            "HELP_TITLE_MIN",
+            "HelpCategory",
+            "NewHelpRequest"
+          ]
+        },
+        {
+          "source": "@/lib/geo",
+          "specifiers": [
+            "isValidCoordinate",
+            "Coordinates"
+          ]
+        }
+      ],
+      "exports": [
+        "emptyHelpForm",
+        "validateHelpForm"
+      ],
+      "totalLines": 54,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/scan/QrScanner.tsx": {
+      "filePath": "frontend/src/features/scan/QrScanner.tsx",
+      "contentHash": "8fc86a4ff77eb0c2972d13304b88b932a6e949da6cc487cdea7551b06775c9f7",
+      "functions": [
+        {
+          "name": "QrScanner",
+          "params": [
+            "{ onToken, pending, permissionMessage, manualLabel, manualPlaceholder, manualButton, nextLabel = 'Scan next', successAction }"
+          ],
+          "exported": true,
+          "lineCount": 80
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "expo-camera",
+          "specifiers": [
+            "CameraView",
+            "useCameraPermissions"
+          ]
+        },
+        {
+          "source": "react",
+          "specifiers": [
+            "useRef",
+            "useState"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "@/features/events/checkInResult",
+          "specifiers": [
+            "ScanOutcome"
+          ]
+        },
+        {
+          "source": "@/ui/Button",
+          "specifiers": [
+            "Button"
+          ]
+        },
+        {
+          "source": "@/ui/Card",
+          "specifiers": [
+            "Card"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "Icon"
+          ]
+        },
+        {
+          "source": "@/ui/States",
+          "specifiers": [
+            "EmptyState",
+            "LoadingState"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/TextField",
+          "specifiers": [
+            "TextField"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors"
+          ]
+        }
+      ],
+      "exports": [
+        "QrScanner"
+      ],
+      "totalLines": 125,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/scan/QrTile.tsx": {
+      "filePath": "frontend/src/features/scan/QrTile.tsx",
+      "contentHash": "e2362426cac0f8bdf4d4f542bc984f45b6f81d299005b1a1773826c625ed2e4e",
+      "functions": [
+        {
+          "name": "QrTile",
+          "params": [
+            "{ value, label = 'Ticket QR code', testID = 'ticket-qr' }"
+          ],
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react-native",
+          "specifiers": [
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "react-native-qrcode-svg",
+          "specifiers": [
+            "QRCode"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors"
+          ]
+        }
+      ],
+      "exports": [
+        "QrTile"
+      ],
+      "totalLines": 19,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/hooks/useHelp.ts": {
+      "filePath": "frontend/src/hooks/useHelp.ts",
+      "contentHash": "d1c58a6dbe8bf534e80da5e8de9a2b04022f390b6de78ec71f8384761674b47b",
+      "functions": [
+        {
+          "name": "useHelpBoard",
+          "params": [
+            "options"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "useMyHelpRequests",
+          "params": [
+            "enabled"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "useHelpRequest",
+          "params": [
+            "id"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "useHelpTicket",
+          "params": [
+            "id",
+            "enabled"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "useRefreshHelp",
+          "params": [],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "useCreateHelpRequest",
+          "params": [],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "useCancelHelpRequest",
+          "params": [
+            "id"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "useOfferHelp",
+          "params": [
+            "id"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "useWithdrawHelp",
+          "params": [
+            "id"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "useHelpCheckIn",
+          "params": [
+            "id"
+          ],
+          "exported": true,
+          "lineCount": 15
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "useMutation",
+            "useQuery",
+            "useQueryClient"
+          ]
+        },
+        {
+          "source": "@/api/endpoints.help",
+          "specifiers": [
+            "cancelHelpRequest",
+            "createHelpRequest",
+            "getHelpRequest",
+            "getHelpTicket",
+            "getMyHelpRequests",
+            "helpCheckIn",
+            "listHelpRequests",
+            "offerHelp",
+            "withdrawHelp"
+          ]
+        },
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "NewHelpRequest"
+          ]
+        },
+        {
+          "source": "@/features/location/LocationProvider",
+          "specifiers": [
+            "useCurrentPosition"
+          ]
+        },
+        {
+          "source": "@/lib/geo",
+          "specifiers": [
+            "toNearParam"
+          ]
+        }
+      ],
+      "exports": [
+        "HELP_REFRESH_MS",
+        "HELP_TICKET_REFRESH_MS",
+        "helpKeys",
+        "useHelpBoard",
+        "useMyHelpRequests",
+        "useHelpRequest",
+        "useHelpTicket",
+        "useCreateHelpRequest",
+        "useCancelHelpRequest",
+        "useOfferHelp",
+        "useWithdrawHelp",
+        "useHelpCheckIn"
+      ],
+      "totalLines": 113,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/testing/mocks/helpSeed.ts": {
+      "filePath": "frontend/testing/mocks/helpSeed.ts",
+      "contentHash": "a60cf387963978bdf728a514c94a09184d066b0f4e085d8e150cbbe73f83346a",
+      "functions": [
+        {
+          "name": "helpRequestId",
+          "params": [
+            "n"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "minutesAgo",
+          "params": [
+            "minutes"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "seedHelpRequests",
+          "params": [
+            "ids"
+          ],
+          "returnType": "MockHelpRequest[]",
+          "exported": true,
+          "lineCount": 73
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HelpCategory",
+            "HelpOfferStatus",
+            "HelpStatus"
+          ]
+        }
+      ],
+      "exports": [
+        "helpRequestId",
+        "seedHelpRequests"
+      ],
+      "totalLines": 106,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/testing/mocks/routes/help.ts": {
+      "filePath": "frontend/testing/mocks/routes/help.ts",
+      "contentHash": "282340bd733df6e29541d1903ee2e71c0cbc6972c69f7e1aa29fb1cab27e6483",
+      "functions": [
+        {
+          "name": "requestById",
+          "params": [
+            "id"
+          ],
+          "returnType": "MockHelpRequest",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "effectiveStatus",
+          "params": [
+            "r",
+            "now"
+          ],
+          "returnType": "HelpStatus",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "requireOpen",
+          "params": [
+            "r"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "newestFirst",
+          "params": [
+            "a",
+            "b"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "toSummary",
+          "params": [
+            "r"
+          ],
+          "returnType": "HelpRequestSummary",
+          "exported": false,
+          "lineCount": 17
+        },
+        {
+          "name": "toDetail",
+          "params": [
+            "r"
+          ],
+          "returnType": "HelpRequestDetail",
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "parseNear",
+          "params": [
+            "value"
+          ],
+          "returnType": "{ lat: number; lon: number } | null",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "parseBbox",
+          "params": [
+            "value"
+          ],
+          "returnType": "[number, number, number, number] | null",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "validate",
+          "params": [
+            "b"
+          ],
+          "returnType": "Record<string, string>",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "logHelped",
+          "params": [
+            "userId"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/errors",
+          "specifiers": [
+            "ApiError"
+          ]
+        },
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HelpCategory",
+            "HelpCheckInResult",
+            "HelpRequestDetail",
+            "HelpRequestSummary",
+            "HelpStatus",
+            "HelpTicket",
+            "MyHelpRequests",
+            "NewHelpRequest"
+          ]
+        },
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HELP_ADDRESS_MAX",
+            "HELP_CATEGORIES",
+            "HELP_DESCRIPTION_MAX",
+            "HELP_EXPIRY_MS",
+            "HELP_POINTS",
+            "HELP_TITLE_MAX",
+            "HELP_TITLE_MIN"
+          ]
+        },
+        {
+          "source": "@/api/types.users",
+          "specifiers": [
+            "ReliabilityEntry"
+          ]
+        },
+        {
+          "source": "@/lib/geo",
+          "specifiers": [
+            "distanceMeters",
+            "isValidCoordinate"
+          ]
+        },
+        {
+          "source": "../core",
+          "specifiers": [
+            "getState",
+            "userById",
+            "Route"
+          ]
+        },
+        {
+          "source": "../data",
+          "specifiers": [
+            "MOCK_ME_ID"
+          ]
+        },
+        {
+          "source": "../helpSeed",
+          "specifiers": [
+            "helpRequestId",
+            "MockHelpRequest"
+          ]
+        }
+      ],
+      "exports": [
+        "effectiveStatus",
+        "helpRoutes"
+      ],
+      "totalLines": 269,
+      "hasStructuralAnalysis": true
+    },
+    "supabase/migrations/20261114000005_help_board.sql": {
+      "filePath": "supabase/migrations/20261114000005_help_board.sql",
+      "contentHash": "9bc4ad3849e85e40148c44dd4d14ec47e58fe752bc3a32881a14b807587e41dc",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 54,
+      "hasStructuralAnalysis": false
     }
   }
 }
