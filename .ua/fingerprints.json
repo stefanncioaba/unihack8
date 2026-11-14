@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "0616da1b07814ba0fc1911dbf527ef6c9943707a",
-  "generatedAt": "2026-11-14T12:33:29.947Z",
+  "gitCommitHash": "aa45884b5f67734e094b1f373bcc0ae93115e47e",
+  "generatedAt": "2026-11-14T12:33:43.308Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -30752,7 +30752,7 @@
     },
     "frontend/src/app/(tabs)/_layout.tsx": {
       "filePath": "frontend/src/app/(tabs)/_layout.tsx",
-      "contentHash": "9670016511f84220a09a02119d288552ea03223564f2e3a779ea2ad7bf91348f",
+      "contentHash": "d4e640d192d3614feab42eabdab463da80412b522eb0f714963fced4626fd746",
       "functions": [
         {
           "name": "tab",
@@ -32413,7 +32413,7 @@
     },
     "frontend/src/features/ai/ChatBubble.tsx": {
       "filePath": "frontend/src/features/ai/ChatBubble.tsx",
-      "contentHash": "a0472b64d708dade1beb9f79d1d456907f346cf20e35762014686442187082c5",
+      "contentHash": "019427becc0bcbdb2638419ec97210a7fd9eee926ec2f8e2c360ac37c6514b8e",
       "functions": [
         {
           "name": "Sources",
@@ -32573,7 +32573,7 @@
     },
     "frontend/src/features/ai/ChatMotif.tsx": {
       "filePath": "frontend/src/features/ai/ChatMotif.tsx",
-      "contentHash": "c6c6487edabbe75127d919b6c2d3c3b0898a84459493f52d5bc034ae14dba776",
+      "contentHash": "55bb7ce6e8edf99720e3d9d7864e86535c24a4858dade350bd71e0de01c17918",
       "functions": [
         {
           "name": "ChatMotif",
@@ -32846,7 +32846,7 @@
     },
     "frontend/src/features/auth/AuthShell.tsx": {
       "filePath": "frontend/src/features/auth/AuthShell.tsx",
-      "contentHash": "cc94ba08b6353c603699450b1045703c72f61c9422b23e37ee1531b6dccb8c1d",
+      "contentHash": "d826201f9feae2bf8cef7ae1bbd66e0e1161c7d6b53d1fa27d585ab63b07c5dc",
       "functions": [
         {
           "name": "Motif",
@@ -33900,7 +33900,7 @@
     },
     "frontend/src/features/map/ClusterMarker.tsx": {
       "filePath": "frontend/src/features/map/ClusterMarker.tsx",
-      "contentHash": "9f6f8422323ab51c924215a30da0c1e10f6c0dcdbef84898fb493bab80b363b3",
+      "contentHash": "444f362945b70a55da5a42a8a6741b65071dbe3bd50e91a3297e55b3850f6921",
       "functions": [
         {
           "name": "ClusterMarker",
@@ -33947,7 +33947,7 @@
     },
     "frontend/src/features/map/EventMarkers.tsx": {
       "filePath": "frontend/src/features/map/EventMarkers.tsx",
-      "contentHash": "24366ece4fb402e8adc957f5c21d2cfb18c56b3da402db6e777ba38f851fec38",
+      "contentHash": "af690af1bbf810887c2a5509030771ee8e9e3e70173b3de3b33cefc9dd534f04",
       "functions": [
         {
           "name": "EventPin",
@@ -34305,7 +34305,7 @@
     },
     "frontend/src/features/map/PlaceMarkers.tsx": {
       "filePath": "frontend/src/features/map/PlaceMarkers.tsx",
-      "contentHash": "25619d4d940377d1bcaebc3419f94365afd2ff4b212705f23c12f06c6ea1f3dc",
+      "contentHash": "147420ae1c79456ccc60c5f140eaea23de5ffec97f024c7e65b08f4da4850f14",
       "functions": [
         {
           "name": "PlacePin",
@@ -34760,7 +34760,7 @@
     },
     "frontend/src/features/transit/TransitLayer.tsx": {
       "filePath": "frontend/src/features/transit/TransitLayer.tsx",
-      "contentHash": "c001e1bdfbeed72b0c68bbfd452abe7645f77a69f03d6792af5e34094ecc1606",
+      "contentHash": "4470767201a2c6880321ee7827659d1805b803ded8ad17a6bf18555b0de2c7b8",
       "functions": [
         {
           "name": "StopDot",
@@ -36247,7 +36247,7 @@
     },
     "frontend/src/ui/Avatar.tsx": {
       "filePath": "frontend/src/ui/Avatar.tsx",
-      "contentHash": "f4b8c9a2a1685aeea20d7e7195c230350cd266ac183f7a21a66d634d8d06e4b3",
+      "contentHash": "bba812533ad298ffdfe3a990f3fc8874edd70292e6c20a7ed8bc755b2697d391",
       "functions": [
         {
           "name": "Avatar",
@@ -36286,7 +36286,7 @@
     },
     "frontend/src/ui/Button.tsx": {
       "filePath": "frontend/src/ui/Button.tsx",
-      "contentHash": "a6cca32175b7a505b78bff31486cf06e9c09ca9c261637eb9ebe003e53a84e12",
+      "contentHash": "705299214c1662455c383de52390fe9e704e18deec09d2561a6fa0c0c8ecb7ff",
       "functions": [
         {
           "name": "foreground",
@@ -36611,7 +36611,7 @@
     },
     "frontend/src/ui/ReliabilityBadge.tsx": {
       "filePath": "frontend/src/ui/ReliabilityBadge.tsx",
-      "contentHash": "010b8a477d82f7bb0e386f3afb76c1dde6daadeb85ebc24aedb4e55e24507e2b",
+      "contentHash": "03e692f2a62fd0ef237f42e260e41dbad2ce3d2ae457fb034e7d5ae737b0bc73",
       "functions": [
         {
           "name": "reliabilityColor",

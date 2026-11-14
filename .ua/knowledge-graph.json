@@ -34,8 +34,8 @@
       "Jest"
     ],
     "description": "Hackathon mobile app for Timișoara (Connected Communities): Spring Boot API + Supabase + Expo app with events and QR reliability points, places map, live STPT transit, routing and an AI guide.",
-    "analyzedAt": "2026-11-14T12:33:28.802Z",
-    "gitCommitHash": "0616da1b07814ba0fc1911dbf527ef6c9943707a"
+    "analyzedAt": "2026-11-14T12:33:43.276Z",
+    "gitCommitHash": "aa45884b5f67734e094b1f373bcc0ae93115e47e"
   },
   "nodes": [
     {
@@ -43726,22 +43726,6 @@
       "recoveredFromImportMap": true
     },
     {
-      "source": "file:frontend/src/app/(tabs)/_layout.tsx",
-      "target": "file:frontend/src/ui/Icon.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/(tabs)/_layout.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
       "source": "file:frontend/src/app/(tabs)/ai.tsx",
       "target": "file:frontend/src/features/ai/ChatBubble.tsx",
       "type": "imports",
@@ -44998,62 +44982,6 @@
       "recoveredFromImportMap": true
     },
     {
-      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "target": "file:frontend/src/api/errors.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "target": "file:frontend/src/api/types.ai.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "target": "file:frontend/src/hooks/useAi.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "target": "file:frontend/src/ui/Button.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "target": "file:frontend/src/ui/Icon.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "target": "file:frontend/src/ui/Text.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
       "source": "file:frontend/src/features/ai/ChatInput.tsx",
       "target": "file:frontend/src/api/types.ai.ts",
       "type": "imports",
@@ -45071,14 +44999,6 @@
     },
     {
       "source": "file:frontend/src/features/ai/ChatInput.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/ai/ChatMotif.tsx",
       "target": "file:frontend/src/ui/theme.ts",
       "type": "imports",
       "direction": "forward",
@@ -45272,46 +45192,6 @@
     {
       "source": "file:frontend/src/features/auth/AuthProvider.tsx",
       "target": "file:frontend/src/lib/supabase.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/auth/AuthShell.tsx",
-      "target": "file:frontend/src/features/auth/AuthProvider.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/auth/AuthShell.tsx",
-      "target": "file:frontend/src/ui/Card.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/auth/AuthShell.tsx",
-      "target": "file:frontend/src/ui/Screen.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/auth/AuthShell.tsx",
-      "target": "file:frontend/src/ui/Text.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/auth/AuthShell.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -45910,86 +45790,6 @@
       "recoveredFromImportMap": true
     },
     {
-      "source": "file:frontend/src/features/map/ClusterMarker.tsx",
-      "target": "file:frontend/src/ui/Text.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/map/ClusterMarker.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/map/EventMarkers.tsx",
-      "target": "file:frontend/src/api/types.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/map/EventMarkers.tsx",
-      "target": "file:frontend/src/features/events/categories.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/map/EventMarkers.tsx",
-      "target": "file:frontend/src/features/map/ClusterMarker.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/map/EventMarkers.tsx",
-      "target": "file:frontend/src/lib/bbox.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/map/EventMarkers.tsx",
-      "target": "file:frontend/src/lib/cluster.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/map/EventMarkers.tsx",
-      "target": "file:frontend/src/ui/Icon.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/map/EventMarkers.tsx",
-      "target": "file:frontend/src/ui/Text.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/map/EventMarkers.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
       "source": "file:frontend/src/features/map/EventPanel.tsx",
       "target": "file:frontend/src/features/events/EventCards.tsx",
       "type": "imports",
@@ -46135,70 +45935,6 @@
     },
     {
       "source": "file:frontend/src/features/map/MapPanel.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/map/PlaceMarkers.tsx",
-      "target": "file:frontend/src/api/types.places.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/map/PlaceMarkers.tsx",
-      "target": "file:frontend/src/features/map/ClusterMarker.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/map/PlaceMarkers.tsx",
-      "target": "file:frontend/src/features/map/placeCategories.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/map/PlaceMarkers.tsx",
-      "target": "file:frontend/src/lib/bbox.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/map/PlaceMarkers.tsx",
-      "target": "file:frontend/src/lib/cluster.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/map/PlaceMarkers.tsx",
-      "target": "file:frontend/src/ui/Icon.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/map/PlaceMarkers.tsx",
-      "target": "file:frontend/src/ui/Text.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/map/PlaceMarkers.tsx",
       "target": "file:frontend/src/ui/theme.ts",
       "type": "imports",
       "direction": "forward",
@@ -46416,38 +46152,6 @@
     {
       "source": "file:frontend/src/features/transit/TransitControls.tsx",
       "target": "file:frontend/src/ui/Chip.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/transit/TransitLayer.tsx",
-      "target": "file:frontend/src/api/types.transit.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/transit/TransitLayer.tsx",
-      "target": "file:frontend/src/ui/Icon.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/transit/TransitLayer.tsx",
-      "target": "file:frontend/src/ui/Text.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/transit/TransitLayer.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -46838,38 +46542,6 @@
       "recoveredFromImportMap": true
     },
     {
-      "source": "file:frontend/src/ui/Avatar.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/ui/Button.tsx",
-      "target": "file:frontend/src/ui/Icon.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/ui/Button.tsx",
-      "target": "file:frontend/src/ui/Text.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/ui/Button.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
       "source": "file:frontend/src/ui/Card.tsx",
       "target": "file:frontend/src/ui/theme.ts",
       "type": "imports",
@@ -46927,30 +46599,6 @@
     },
     {
       "source": "file:frontend/src/ui/OfflineBanner.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/ui/ReliabilityBadge.tsx",
-      "target": "file:frontend/src/ui/Icon.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/ui/ReliabilityBadge.tsx",
-      "target": "file:frontend/src/ui/Text.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/ui/ReliabilityBadge.tsx",
       "target": "file:frontend/src/ui/theme.ts",
       "type": "imports",
       "direction": "forward",
@@ -47488,6 +47136,358 @@
     {
       "source": "file:frontend/testing/mocks/transitSeed.ts",
       "target": "file:frontend/src/api/types.transit.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/_layout.tsx",
+      "target": "file:frontend/src/ui/Icon.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/_layout.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "target": "file:frontend/src/api/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "target": "file:frontend/src/api/types.ai.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "target": "file:frontend/src/hooks/useAi.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "target": "file:frontend/src/ui/Button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "target": "file:frontend/src/ui/Icon.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatMotif.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/auth/AuthShell.tsx",
+      "target": "file:frontend/src/features/auth/AuthProvider.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/auth/AuthShell.tsx",
+      "target": "file:frontend/src/ui/Card.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/auth/AuthShell.tsx",
+      "target": "file:frontend/src/ui/Screen.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/auth/AuthShell.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/auth/AuthShell.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/map/ClusterMarker.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/map/ClusterMarker.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/map/EventMarkers.tsx",
+      "target": "file:frontend/src/api/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/map/EventMarkers.tsx",
+      "target": "file:frontend/src/features/events/categories.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/map/EventMarkers.tsx",
+      "target": "file:frontend/src/features/map/ClusterMarker.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/map/EventMarkers.tsx",
+      "target": "file:frontend/src/lib/bbox.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/map/EventMarkers.tsx",
+      "target": "file:frontend/src/lib/cluster.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/map/EventMarkers.tsx",
+      "target": "file:frontend/src/ui/Icon.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/map/EventMarkers.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/map/EventMarkers.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/map/PlaceMarkers.tsx",
+      "target": "file:frontend/src/api/types.places.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/map/PlaceMarkers.tsx",
+      "target": "file:frontend/src/features/map/ClusterMarker.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/map/PlaceMarkers.tsx",
+      "target": "file:frontend/src/features/map/placeCategories.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/map/PlaceMarkers.tsx",
+      "target": "file:frontend/src/lib/bbox.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/map/PlaceMarkers.tsx",
+      "target": "file:frontend/src/lib/cluster.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/map/PlaceMarkers.tsx",
+      "target": "file:frontend/src/ui/Icon.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/map/PlaceMarkers.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/map/PlaceMarkers.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/transit/TransitLayer.tsx",
+      "target": "file:frontend/src/api/types.transit.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/transit/TransitLayer.tsx",
+      "target": "file:frontend/src/ui/Icon.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/transit/TransitLayer.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/transit/TransitLayer.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/ui/Avatar.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/ui/Button.tsx",
+      "target": "file:frontend/src/ui/Icon.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/ui/Button.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/ui/Button.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/ui/ReliabilityBadge.tsx",
+      "target": "file:frontend/src/ui/Icon.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/ui/ReliabilityBadge.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/ui/ReliabilityBadge.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
