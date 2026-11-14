@@ -473,7 +473,8 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 - [x] **28.4 API:** `GET` / `POST /users/me/skills`, `PATCH` / `DELETE /users/me/skills/{id}` (max 10, 2–40 characters, no duplicate names; `SKILL_EXISTS`, `SKILL_LIMIT`); `skills` on profiles and on help offers. Contract in `docs/API.md`.
 - [x] **28.5 App:** "My skills" on the Profile tab (add, edit, delete), skills on public profiles, helpers' skills on a help request (matching first), "Fits your skills" on the board and the Pulse Help tab, new category chips.
 - [x] **28.6 Tests:** backend and frontend (see `DOCS.md` → Profile skills).
-- [x] **28.7** `DOCS.md`, `docs/API.md` and the knowledge graph updated.
+- [x] **28.7a** `DOCS.md` and `docs/API.md` updated.
+- [ ] **28.7b** Knowledge graph updated (the plugin asks for a full rebuild: 45 changed files).
 - [ ] **28.8** Try it on a phone against Supabase.
 
 ---
