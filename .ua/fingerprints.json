@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "07ec2127c2e0511e7a58a6a74496f641a911a2e2",
-  "generatedAt": "2026-11-14T19:18:52.915Z",
+  "gitCommitHash": "bb44f38b8867ce46e584af19768632702c47095d",
+  "generatedAt": "2026-11-14T22:05:27.221Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,22 +25,22 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "50f32e942cd60827c920911dd076adf4e2d27cbbe6adae5974e8022b9d78e764",
+      "contentHash": "0d66ab2b9c25e2caf0047cd50288b672036128dde177f15e7c50f897af0a81de",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 769,
+      "totalLines": 792,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "72c887293841b515f3b82bc1147fee941cc9479f95cb78bda110438f3c392fb8",
+      "contentHash": "b85e3d68e434c67f585642cb106e3987e843e945f400db138e5260d332cb5b95",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 482,
+      "totalLines": 496,
       "hasStructuralAnalysis": false
     },
     "README.md": {
@@ -4360,7 +4360,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
-      "contentHash": "c0b5e976eaa25f00c7a6e95efcb47609fadeab44636c489c39d53fca9e7ae061",
+      "contentHash": "7a8e9f608d0fab2cb7f3f2aecfe8cafd101dd5c63b3d1f8b9e2d88710e6d1937",
       "functions": [
         {
           "name": "ErrorCode",
@@ -4399,7 +4399,7 @@
             "defaultMessage"
           ],
           "exported": true,
-          "lineCount": 52
+          "lineCount": 54
         }
       ],
       "imports": [
@@ -4415,7 +4415,7 @@
         "defaultMessage",
         "ErrorCode"
       ],
-      "totalLines": 61,
+      "totalLines": 63,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/common/exception/ErrorResponseFactory.java": {
@@ -9959,7 +9959,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/help/domain/HelpRules.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/help/domain/HelpRules.java",
-      "contentHash": "8cb8c5e2e39b8160ce539f21d4152b0f892c9d611766a7db665bf600cd682362",
+      "contentHash": "464480ff31c8cb110c57cbc14424a251b77afbbd64cea1b25328844ff5d651f5",
       "functions": [
         {
           "name": "HelpRules",
@@ -10016,6 +10016,7 @@
             "ADDRESS_MAX",
             "BOARD_LIMIT",
             "MINE_LIMIT",
+            "CATEGORY_ORDER",
             "CATEGORIES",
             "OPEN",
             "HELPED",
@@ -10026,7 +10027,7 @@
             "NOT_NEEDED"
           ],
           "exported": true,
-          "lineCount": 42
+          "lineCount": 46
         }
       ],
       "imports": [
@@ -10040,6 +10041,12 @@
           "source": "java.time.Instant",
           "specifiers": [
             "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
           ]
         },
         {
@@ -10057,6 +10064,7 @@
         "ADDRESS_MAX",
         "BOARD_LIMIT",
         "MINE_LIMIT",
+        "CATEGORY_ORDER",
         "CATEGORIES",
         "OPEN",
         "HELPED",
@@ -10070,12 +10078,12 @@
         "isOpen",
         "HelpRules"
       ],
-      "totalLines": 53,
+      "totalLines": 58,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/help/domain/dto/CreateHelpRequest.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/help/domain/dto/CreateHelpRequest.java",
-      "contentHash": "061b31d278715ec4e7e74c48fd65e4ba845c2d59433c33b4a7433a5f4dc6cd4e",
+      "contentHash": "dd690fdf80107c8f8d114773c9783efdac35cb310c414bf14447d0e690028521",
       "functions": [],
       "classes": [
         {
@@ -10095,7 +10103,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpOfferResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpOfferResponse.java",
-      "contentHash": "cad5ce5e9be062a8bb75435a27bf2abc83e4b73980623c542e82fb225b4e4e93",
+      "contentHash": "215a565a176fd03808f8d80e8c864c8b6635c8e0757c8dee5930baf1e1699d35",
       "functions": [],
       "classes": [
         {
@@ -10114,16 +10122,28 @@
           ]
         },
         {
+          "source": "com.unihack8.backend.users.domain.dto.SkillResponse",
+          "specifiers": [
+            "SkillResponse"
+          ]
+        },
+        {
           "source": "java.time.Instant",
           "specifiers": [
             "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
           ]
         }
       ],
       "exports": [
         "HelpOfferResponse"
       ],
-      "totalLines": 9,
+      "totalLines": 14,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestDetail.java": {
@@ -10405,7 +10425,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/help/mapper/HelpMapper.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/help/mapper/HelpMapper.java",
-      "contentHash": "fd9c061d2a9e3e01a2f278d8d89b64d61f8c395904531f69677a0580748957df",
+      "contentHash": "af9e9d9d2c2e925a0e499ed4c507d4db62944575028392af55090b2aa95b4acf",
       "functions": [],
       "classes": [
         {
@@ -10416,7 +10436,7 @@
           ],
           "properties": [],
           "exported": true,
-          "lineCount": 8
+          "lineCount": 9
         }
       ],
       "imports": [
@@ -10451,9 +10471,21 @@
           ]
         },
         {
+          "source": "com.unihack8.backend.users.domain.dto.SkillResponse",
+          "specifiers": [
+            "SkillResponse"
+          ]
+        },
+        {
           "source": "java.util.List",
           "specifiers": [
             "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
           ]
         },
         {
@@ -10466,12 +10498,12 @@
       "exports": [
         "HelpMapper"
       ],
-      "totalLines": 20,
+      "totalLines": 23,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
-      "contentHash": "ebea39d6298da722f6f23aaa215447215e81df9cb845c463b7268d537ae1c0f1",
+      "contentHash": "5af0c4ab8d2693f1e3881b92e2e33419ca9e8800e919b8704f9e2f707192ef76",
       "functions": [
         {
           "name": "toSummary",
@@ -10488,12 +10520,13 @@
           "params": [
             "view",
             "offers",
+            "skills",
             "caller",
             "now"
           ],
           "returnType": "HelpRequestDetail",
           "exported": true,
-          "lineCount": 15
+          "lineCount": 17
         },
         {
           "name": "requester",
@@ -10525,7 +10558,7 @@
           ],
           "properties": [],
           "exported": true,
-          "lineCount": 39
+          "lineCount": 41
         }
       ],
       "imports": [
@@ -10584,6 +10617,12 @@
           ]
         },
         {
+          "source": "com.unihack8.backend.users.domain.dto.SkillResponse",
+          "specifiers": [
+            "SkillResponse"
+          ]
+        },
+        {
           "source": "java.time.Instant",
           "specifiers": [
             "Instant"
@@ -10593,6 +10632,12 @@
           "source": "java.util.List",
           "specifiers": [
             "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
           ]
         },
         {
@@ -10613,7 +10658,7 @@
         "toDetail",
         "HelpMapperImpl"
       ],
-      "totalLines": 57,
+      "totalLines": 61,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/help/repository/HelpOfferRepository.java": {
@@ -11322,7 +11367,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "contentHash": "68dc4ddfd98a7b4d39b32e4791c178295725fbc2ba651221262783a518fac64c",
+      "contentHash": "e26a19a235f54047b6f0dc24171ef1e1896546367546c11b1c9dd85a63324c03",
       "functions": [
         {
           "name": "HelpServiceImpl",
@@ -11332,10 +11377,11 @@
             "participations",
             "profiles",
             "mapper",
+            "skills",
             "clock"
           ],
           "exported": true,
-          "lineCount": 10
+          "lineCount": 11
         },
         {
           "name": "board",
@@ -11375,7 +11421,7 @@
           ],
           "returnType": "HelpRequestDetail",
           "exported": true,
-          "lineCount": 6
+          "lineCount": 8
         },
         {
           "name": "cancel",
@@ -11524,10 +11570,11 @@
             "participations",
             "profiles",
             "mapper",
+            "skills",
             "clock"
           ],
           "exported": true,
-          "lineCount": 239
+          "lineCount": 243
         }
       ],
       "imports": [
@@ -11700,6 +11747,30 @@
           ]
         },
         {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.service.SkillService",
+          "specifiers": [
+            "SkillService"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.SkillResponse",
+          "specifiers": [
+            "SkillResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.entity.HelpOfferView",
+          "specifiers": [
+            "HelpOfferView"
+          ]
+        },
+        {
           "source": "java.util.Locale",
           "specifiers": [
             "Locale"
@@ -11737,7 +11808,7 @@
         "checkIn",
         "HelpServiceImpl"
       ],
-      "totalLines": 281,
+      "totalLines": 289,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/controller/NeighbourhoodController.java": {
@@ -24922,7 +24993,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java",
-      "contentHash": "71a85887adf601fa4539b5be39bbd66cb275ef1663c88892786f67e5a2f0dc55",
+      "contentHash": "742eee9424f9f1011b6b3fbe5ad04baa78158604da3fba5f8b9d1e3fe9d78305",
       "functions": [],
       "classes": [
         {
@@ -24930,7 +25001,7 @@
           "methods": [],
           "properties": [],
           "exported": true,
-          "lineCount": 4
+          "lineCount": 5
         }
       ],
       "imports": [
@@ -24956,7 +25027,7 @@
       "exports": [
         "ProfileResponse"
       ],
-      "totalLines": 12,
+      "totalLines": 13,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java": {
@@ -25159,7 +25230,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java",
-      "contentHash": "df7303ce5dffb036d02f97d3b3f4f9776b74ac28032d762ff2f54419e338637a",
+      "contentHash": "c9856619eaf38d60e9680bc4e513977e155566ad573c151ea045e6ee1011f906",
       "functions": [],
       "classes": [
         {
@@ -25193,6 +25264,12 @@
           ]
         },
         {
+          "source": "com.unihack8.backend.users.domain.dto.SkillResponse",
+          "specifiers": [
+            "SkillResponse"
+          ]
+        },
+        {
           "source": "com.unihack8.backend.users.domain.entity.Profile",
           "specifiers": [
             "Profile"
@@ -25208,19 +25285,20 @@
       "exports": [
         "ProfileMapper"
       ],
-      "totalLines": 18,
+      "totalLines": 19,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java",
-      "contentHash": "84e4abdaf5c177431df0d14b40aef8c2d06d55a2ee52aad828c8b89f235984bc",
+      "contentHash": "f68cb1a24df477fcd3f4024438e46c4dc7abf490040cb03a6d2fe90865f38720",
       "functions": [
         {
           "name": "toResponse",
           "params": [
             "profile",
             "attendedEvents",
-            "organizedEvents"
+            "organizedEvents",
+            "skills"
           ],
           "returnType": "ProfileResponse",
           "exported": true,
@@ -25268,6 +25346,12 @@
           ]
         },
         {
+          "source": "com.unihack8.backend.users.domain.dto.SkillResponse",
+          "specifiers": [
+            "SkillResponse"
+          ]
+        },
+        {
           "source": "com.unihack8.backend.users.domain.entity.Profile",
           "specifiers": [
             "Profile"
@@ -25297,7 +25381,7 @@
         "toSearchResult",
         "ProfileMapperImpl"
       ],
-      "totalLines": 29,
+      "totalLines": 30,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/users/repository/AttendedEventRepository.java": {
@@ -25599,7 +25683,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
-      "contentHash": "b39e169c351301993583e4728b9b3ad357266291fb1e316a8805afe4d61f5067",
+      "contentHash": "9732c59ff377a23a12b75f42d9e76618b9c934732e6889029d2e8463114e582c",
       "functions": [
         {
           "name": "UserServiceImpl",
@@ -25607,10 +25691,11 @@
             "profiles",
             "attendedEvents",
             "mapper",
+            "skills",
             "clock"
           ],
           "exported": true,
-          "lineCount": 7
+          "lineCount": 8
         },
         {
           "name": "getProfile",
@@ -25665,7 +25750,7 @@
           ],
           "returnType": "ProfileResponse",
           "exported": false,
-          "lineCount": 4
+          "lineCount": 5
         }
       ],
       "classes": [
@@ -25686,10 +25771,11 @@
             "profiles",
             "attendedEvents",
             "mapper",
+            "skills",
             "clock"
           ],
           "exported": true,
-          "lineCount": 81
+          "lineCount": 84
         }
       ],
       "imports": [
@@ -25745,6 +25831,12 @@
           "source": "com.unihack8.backend.users.repository.ProfileRepository",
           "specifiers": [
             "ProfileRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.service.SkillService",
+          "specifiers": [
+            "SkillService"
           ]
         },
         {
@@ -25816,7 +25908,7 @@
         "checkUsername",
         "UserServiceImpl"
       ],
-      "totalLines": 105,
+      "totalLines": 109,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/resources/application-local.properties.example": {
@@ -31890,14 +31982,14 @@
     },
     "backend/src/test/java/com/unihack8/backend/help/HelpIntegrationTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/help/HelpIntegrationTest.java",
-      "contentHash": "06977b88fd9d1d2ad8bd807100443d54fa645e01f8ef2ffb91efb77784e89aac",
+      "contentHash": "cf1e8c8d5af0d19ab6b386aebff4fb9cbbef2639c2459f18ecd487e1eff64917",
       "functions": [
         {
           "name": "setUp",
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 10
+          "lineCount": 11
         },
         {
           "name": "auth",
@@ -31978,6 +32070,20 @@
           "returnType": "void",
           "exported": false,
           "lineCount": 17
+        },
+        {
+          "name": "offersShowHelperSkills",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 17
+        },
+        {
+          "name": "newCategoriesAccepted",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
         },
         {
           "name": "boardNeedsToken",
@@ -32064,6 +32170,8 @@
             "logRows",
             "age",
             "postAndBoard",
+            "offersShowHelperSkills",
+            "newCategoriesAccepted",
             "boardNeedsToken",
             "validation",
             "firstScannedHelperClosesTheRequest",
@@ -32084,7 +32192,7 @@
             "now"
           ],
           "exported": false,
-          "lineCount": 301
+          "lineCount": 329
         }
       ],
       "imports": [
@@ -32228,12 +32336,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 334,
+      "totalLines": 362,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/help/domain/HelpRulesTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/help/domain/HelpRulesTest.java",
-      "contentHash": "bcaaa9aad4fcb4a448d33d336b7fcefda49c15b5b5b526408b828ee2e4e6667c",
+      "contentHash": "6005e27128aa39551e14c3e3a75a420683c2c59489bc7dabab5aa2c375147b34",
       "functions": [
         {
           "name": "expiresAfter24Hours",
@@ -32254,7 +32362,14 @@
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 7
+          "lineCount": 5
+        },
+        {
+          "name": "categoriesInOrder",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
         }
       ],
       "classes": [
@@ -32263,13 +32378,14 @@
           "methods": [
             "expiresAfter24Hours",
             "effectiveStatus",
-            "helperPointsMatchAttendance"
+            "helperPointsMatchAttendance",
+            "categoriesInOrder"
           ],
           "properties": [
             "POSTED"
           ],
           "exported": false,
-          "lineCount": 31
+          "lineCount": 39
         }
       ],
       "imports": [
@@ -32305,12 +32421,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 42,
+      "totalLines": 50,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
-      "contentHash": "239aff71c92ae75bfccfc0707fac0fff268a0e4b55da8f175786587aafead5c0",
+      "contentHash": "8f14a27630c8237f035803987e31b63adaba15d69c4b2f8c3b93eca3fe08372f",
       "functions": [
         {
           "name": "setUp",
@@ -32433,10 +32549,11 @@
             "offers",
             "participations",
             "profiles",
+            "skills",
             "service"
           ],
           "exported": false,
-          "lineCount": 140
+          "lineCount": 141
         }
       ],
       "imports": [
@@ -32609,6 +32726,12 @@
           ]
         },
         {
+          "source": "com.unihack8.backend.users.service.SkillService",
+          "specifiers": [
+            "SkillService"
+          ]
+        },
+        {
           "source": "org.junit.jupiter.api.BeforeEach",
           "specifiers": [
             "BeforeEach"
@@ -32646,7 +32769,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 180,
+      "totalLines": 182,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/help/support/HelpTestSchema.java": {
@@ -40177,21 +40300,21 @@
     },
     "backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
-      "contentHash": "abf30480cc052cdc2147578c0d39008ed89a9b5136d2c6f0519c6250d628a395",
+      "contentHash": "9f055fcd6095ba491cd99c8f7fe40d4b2dce6092b6a651e6436ef69a8ee2ae29",
       "functions": [
         {
           "name": "readsOwnProfile",
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 13
+          "lineCount": 15
         },
         {
           "name": "updatesUsername",
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 11
+          "lineCount": 12
         },
         {
           "name": "reportsTakenUsername",
@@ -40312,11 +40435,12 @@
           "properties": [
             "USER_ID",
             "OTHER_ID",
+            "SKILL_ID",
             "mvc",
             "users"
           ],
           "exported": false,
-          "lineCount": 164
+          "lineCount": 168
         }
       ],
       "imports": [
@@ -40354,6 +40478,12 @@
           "source": "com.unihack8.backend.users.domain.dto.ProfileSearchResult",
           "specifiers": [
             "ProfileSearchResult"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.SkillResponse",
+          "specifiers": [
+            "SkillResponse"
           ]
         },
         {
@@ -40460,7 +40590,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 194,
+      "totalLines": 199,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java": {
@@ -40756,14 +40886,14 @@
     },
     "backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
-      "contentHash": "f226630f4a86590fb37928b472bf2271952b2a28056ecaf3a10425692fcef261",
+      "contentHash": "70ec1d44b82676d7323e8ef3a452362cd57003188bc5eff53cc9b77429adfa69",
       "functions": [
         {
           "name": "setUp",
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 4
+          "lineCount": 5
         },
         {
           "name": "profileIncludesAttendedEvents",
@@ -40876,10 +41006,11 @@
             "NOW",
             "profiles",
             "attendedEvents",
+            "skills",
             "service"
           ],
           "exported": false,
-          "lineCount": 128
+          "lineCount": 132
         }
       ],
       "imports": [
@@ -40929,6 +41060,12 @@
           "source": "com.unihack8.backend.users.service.impl.UserServiceImpl",
           "specifiers": [
             "UserServiceImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.service.SkillService",
+          "specifiers": [
+            "SkillService"
           ]
         },
         {
@@ -41071,7 +41208,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 166,
+      "totalLines": 171,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/resources/application.properties": {
@@ -41176,12 +41313,12 @@
     },
     "docs/API.md": {
       "filePath": "docs/API.md",
-      "contentHash": "3391f391f08ff651abe44c13e6a4854ad6a4060a656c5e3f77a48f3c21920334",
+      "contentHash": "63640743444a27d4b8822c56afa2187e026ffadc9395cd5d0771ea8ca9b99495",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 945,
+      "totalLines": 969,
       "hasStructuralAnalysis": false
     },
     "docs/DEMO.md": {
@@ -45863,7 +46000,7 @@
     },
     "frontend/src/api/endpoints.users.ts": {
       "filePath": "frontend/src/api/endpoints.users.ts",
-      "contentHash": "ee8772ce46ddfe76730f9a0475b91db3e39a08dbed3524f8237ed478be98c746",
+      "contentHash": "952bc17c5f0893720c5364dff3c87201ed2500ce8ec3e88f7739e128807d1441",
       "functions": [
         {
           "name": "changeUsername",
@@ -45886,6 +46023,31 @@
           ],
           "exported": true,
           "lineCount": 1
+        },
+        {
+          "name": "addSkill",
+          "params": [
+            "input"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "updateSkill",
+          "params": [
+            "id",
+            "input"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "deleteSkill",
+          "params": [
+            "id"
+          ],
+          "exported": true,
+          "lineCount": 1
         }
       ],
       "classes": [],
@@ -45897,9 +46059,16 @@
           ]
         },
         {
+          "source": "./types.help",
+          "specifiers": [
+            "HelpCategory"
+          ]
+        },
+        {
           "source": "./types",
           "specifiers": [
-            "Me"
+            "Me",
+            "Skill"
           ]
         },
         {
@@ -45913,14 +46082,17 @@
       "exports": [
         "changeUsername",
         "getMyEvents",
-        "getReliability"
+        "getReliability",
+        "addSkill",
+        "updateSkill",
+        "deleteSkill"
       ],
-      "totalLines": 14,
+      "totalLines": 27,
       "hasStructuralAnalysis": true
     },
     "frontend/src/api/errors.ts": {
       "filePath": "frontend/src/api/errors.ts",
-      "contentHash": "90af6b39fa41845d7c25c942d05b3ccf15a390644e771cb57891b9d8ae65ab62",
+      "contentHash": "2a7fa90db377aef9858fcd9947cfa7c50af7fd5cced71a664eed59a0da0108fa",
       "functions": [
         {
           "name": "friendlyError",
@@ -45952,7 +46124,7 @@
         "ApiError",
         "friendlyError"
       ],
-      "totalLines": 63,
+      "totalLines": 65,
       "hasStructuralAnalysis": true
     },
     "frontend/src/api/types.ai.ts": {
@@ -45989,13 +46161,14 @@
     },
     "frontend/src/api/types.help.ts": {
       "filePath": "frontend/src/api/types.help.ts",
-      "contentHash": "41b741fc676c80b93f78417658ec70419431a62d41902e6fa75c8938c02f5667",
+      "contentHash": "94ab0eea0189d39a976ef36ab16543c876a0199b43f6678076d3eb851d8a847a",
       "functions": [],
       "classes": [],
       "imports": [
         {
           "source": "./types",
           "specifiers": [
+            "Skill",
             "UserSummary"
           ]
         }
@@ -46009,7 +46182,7 @@
         "HELP_POINTS",
         "HELP_EXPIRY_MS"
       ],
-      "totalLines": 79,
+      "totalLines": 117,
       "hasStructuralAnalysis": true
     },
     "frontend/src/api/types.neighbourhoods.ts": {
@@ -46079,15 +46252,22 @@
     },
     "frontend/src/api/types.ts": {
       "filePath": "frontend/src/api/types.ts",
-      "contentHash": "29c04272903368d213f1ae0c1cd3911083704efe907a188bcf17754308ad1b78",
+      "contentHash": "149bfa931a6b7300f91fe3579ea60dec38f088ffe1ebeb5981475f3e2691730f",
       "functions": [],
       "classes": [],
-      "imports": [],
+      "imports": [
+        {
+          "source": "./types.help",
+          "specifiers": [
+            "HelpCategory"
+          ]
+        }
+      ],
       "exports": [
         "EVENT_CATEGORIES",
         "REVIEW_COMMENT_MAX"
       ],
-      "totalLines": 121,
+      "totalLines": 132,
       "hasStructuralAnalysis": true
     },
     "frontend/src/api/types.users.ts": {
@@ -46883,13 +47063,13 @@
     },
     "frontend/src/app/(tabs)/profile.tsx": {
       "filePath": "frontend/src/app/(tabs)/profile.tsx",
-      "contentHash": "6bae127f74d1cf5bff258b7e02f85dfcc9ff923959e8477c98edc218594645fa",
+      "contentHash": "bc9105b7540b169542f065e0efc7c60ac552a3ec449469d4a530fab8fa5fcd4f",
       "functions": [
         {
           "name": "ProfileScreen",
           "params": [],
           "exported": true,
-          "lineCount": 76
+          "lineCount": 81
         }
       ],
       "classes": [],
@@ -46936,6 +47116,12 @@
           "source": "@/features/users/ReliabilityLog",
           "specifiers": [
             "ReliabilityLog"
+          ]
+        },
+        {
+          "source": "@/features/users/SkillsEditor",
+          "specifiers": [
+            "SkillsEditor"
           ]
         },
         {
@@ -47009,7 +47195,7 @@
       "exports": [
         "ProfileScreen"
       ],
-      "totalLines": 108,
+      "totalLines": 114,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/_layout.tsx": {
@@ -47734,7 +47920,7 @@
     },
     "frontend/src/app/help/[id]/index.tsx": {
       "filePath": "frontend/src/app/help/[id]/index.tsx",
-      "contentHash": "ba71553238b7bafab216a8f77e900e13e195b40dfd3da3bfcd192377bc6a81f3",
+      "contentHash": "f8c68bd8304c16719b4b3a05636d86b55b1591d305541056f1ceded496af5cac",
       "functions": [
         {
           "name": "InfoRow",
@@ -48116,7 +48302,7 @@
     },
     "frontend/src/app/help/index.tsx": {
       "filePath": "frontend/src/app/help/index.tsx",
-      "contentHash": "3ecd1660d9702e2fcff4eeef7ffc49d3ca2c0aed84ac66680d5a475195b62169",
+      "contentHash": "992d58d9f26b8d13fdcba0aaabd80aa88a0dfe53911ace36a4360685c5d1acd9",
       "functions": [
         {
           "name": "HelpBoardScreen",
@@ -48130,7 +48316,7 @@
             "{ categories }"
           ],
           "exported": false,
-          "lineCount": 61
+          "lineCount": 63
         },
         {
           "name": "Mine",
@@ -48211,6 +48397,12 @@
           ]
         },
         {
+          "source": "@/features/users/skills",
+          "specifiers": [
+            "skillCategories"
+          ]
+        },
+        {
           "source": "@/hooks/useHelp",
           "specifiers": [
             "useHelpBoard",
@@ -48221,6 +48413,12 @@
           "source": "@/hooks/useNeighbourhoods",
           "specifiers": [
             "useNeighbourhoodPulse"
+          ]
+        },
+        {
+          "source": "@/hooks/queries",
+          "specifiers": [
+            "useMe"
           ]
         },
         {
@@ -48272,7 +48470,7 @@
       "exports": [
         "HelpBoardScreen"
       ],
-      "totalLines": 170,
+      "totalLines": 174,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/help/new.tsx": {
@@ -48535,7 +48733,7 @@
     },
     "frontend/src/app/pulse/[id].tsx": {
       "filePath": "frontend/src/app/pulse/[id].tsx",
-      "contentHash": "5e5daf4463ea7417f615fd0d9d841c1bf50b2b680d9d20e1eef8d59467c7dc73",
+      "contentHash": "bb0052597ae0a6361a254e6646053460b2bc28771e7aea609f8f26c7c02e958a",
       "functions": [
         {
           "name": "Tabs",
@@ -48559,7 +48757,7 @@
             "{ areaId, areas }"
           ],
           "exported": false,
-          "lineCount": 27
+          "lineCount": 28
         },
         {
           "name": "NeighbourhoodScreen",
@@ -48626,6 +48824,12 @@
           ]
         },
         {
+          "source": "@/features/users/skills",
+          "specifiers": [
+            "skillCategories"
+          ]
+        },
+        {
           "source": "@/features/neighbourhoods/pulseFormat",
           "specifiers": [
             "LEVEL_META"
@@ -48635,6 +48839,12 @@
           "source": "@/hooks/useHelp",
           "specifiers": [
             "useHelpBoard"
+          ]
+        },
+        {
+          "source": "@/hooks/queries",
+          "specifiers": [
+            "useMe"
           ]
         },
         {
@@ -48699,7 +48909,7 @@
       "exports": [
         "NeighbourhoodScreen"
       ],
-      "totalLines": 137,
+      "totalLines": 140,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/pulse/_layout.tsx": {
@@ -48828,13 +49038,13 @@
     },
     "frontend/src/app/users/[id].tsx": {
       "filePath": "frontend/src/app/users/[id].tsx",
-      "contentHash": "80bce801d4b119e8785796504237440b2102aaa4456a39b5f2af4e4abcd14aaa",
+      "contentHash": "796199f8c4001245d84e978a0107821f74b4b57f46a9f70354f160b78f965c2f",
       "functions": [
         {
           "name": "PublicProfileScreen",
           "params": [],
           "exported": true,
-          "lineCount": 57
+          "lineCount": 68
         }
       ],
       "classes": [],
@@ -48862,6 +49072,12 @@
           "source": "@/features/users/ReliabilityLine",
           "specifiers": [
             "ReliabilityLine"
+          ]
+        },
+        {
+          "source": "@/features/users/SkillChips",
+          "specifiers": [
+            "SkillChips"
           ]
         },
         {
@@ -48912,7 +49128,7 @@
       "exports": [
         "PublicProfileScreen"
       ],
-      "totalLines": 77,
+      "totalLines": 89,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/users/_layout.tsx": {
@@ -51749,7 +51965,7 @@
     },
     "frontend/src/features/help/HelpCards.tsx": {
       "filePath": "frontend/src/features/help/HelpCards.tsx",
-      "contentHash": "203b8d13f7e0c25ca63a8f3169d727a57f1795afa6cfa8a0064c240142551ac0",
+      "contentHash": "0f7b2cd604b7fb5594fee7fde7c89e2bc92dac2272ef3b8c920563f07443df17",
       "functions": [
         {
           "name": "openHelpRequest",
@@ -51762,18 +51978,18 @@
         {
           "name": "StateChip",
           "params": [
-            "{ request }"
+            "{ request, fitsMe }"
           ],
           "exported": false,
-          "lineCount": 7
+          "lineCount": 8
         },
         {
           "name": "HelpRequestRow",
           "params": [
-            "{ request, showRequester = true, now = Date.now() }"
+            "{\n  request,\n  showRequester = true,\n  myCategories,\n  now = Date.now(),\n}"
           ],
           "exported": true,
-          "lineCount": 39
+          "lineCount": 49
         }
       ],
       "classes": [],
@@ -51850,12 +52066,12 @@
         "openHelpRequest",
         "HelpRequestRow"
       ],
-      "totalLines": 85,
+      "totalLines": 96,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/help/OfferList.tsx": {
       "filePath": "frontend/src/features/help/OfferList.tsx",
-      "contentHash": "a4e616386b2fdc7863f9e918b68ef5f565b4eeacabf51a24993d3395077efdb0",
+      "contentHash": "14e7f01e8b897f6eb33510a97e488c79fb652de509f6488a12b19ec50588968e",
       "functions": [
         {
           "name": "offerChip",
@@ -51868,10 +52084,10 @@
         {
           "name": "OfferList",
           "params": [
-            "{ offers, now = Date.now() }"
+            "{ offers, category, now = Date.now() }"
           ],
           "exported": true,
-          "lineCount": 30
+          "lineCount": 32
         }
       ],
       "classes": [],
@@ -51893,7 +52109,20 @@
         {
           "source": "@/api/types.help",
           "specifiers": [
+            "HelpCategory",
             "HelpOffer"
+          ]
+        },
+        {
+          "source": "@/features/users/SkillChips",
+          "specifiers": [
+            "SkillChips"
+          ]
+        },
+        {
+          "source": "@/features/users/skills",
+          "specifiers": [
+            "skillsFor"
           ]
         },
         {
@@ -51937,12 +52166,12 @@
       "exports": [
         "OfferList"
       ],
-      "totalLines": 67,
+      "totalLines": 72,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/help/categories.ts": {
       "filePath": "frontend/src/features/help/categories.ts",
-      "contentHash": "924afaaf5c91b7c53752f6700c4920567905c06bf18742827210982b43bc48f4",
+      "contentHash": "0139631daa06b14c58af8ac984431303cd1377fe53fa39ffea1d7df64cdfc821",
       "functions": [
         {
           "name": "helpCategoryMeta",
@@ -51973,7 +52202,7 @@
         "HELP_CATEGORY_META",
         "helpCategoryMeta"
       ],
-      "totalLines": 20,
+      "totalLines": 32,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/help/checkInResult.ts": {
@@ -56987,7 +57216,7 @@
     },
     "frontend/src/hooks/useUsers.ts": {
       "filePath": "frontend/src/hooks/useUsers.ts",
-      "contentHash": "4d9d3c660269335b4f7d22ceff30a6541c4b918652a8ba3abcb494b44f28eb85",
+      "contentHash": "fe769711cd97b70bb60ec80342a484fe054c2a7684b6db33114c1cd8ab6403f2",
       "functions": [
         {
           "name": "useMyEvents",
@@ -57008,6 +57237,30 @@
           "params": [],
           "exported": true,
           "lineCount": 15
+        },
+        {
+          "name": "useSkillCache",
+          "params": [],
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "useAddSkill",
+          "params": [],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "useUpdateSkill",
+          "params": [],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "useDeleteSkill",
+          "params": [],
+          "exported": true,
+          "lineCount": 4
         }
       ],
       "classes": [],
@@ -57021,11 +57274,22 @@
           ]
         },
         {
+          "source": "@/api/types",
+          "specifiers": [
+            "Me",
+            "Skill"
+          ]
+        },
+        {
           "source": "@/api/endpoints.users",
           "specifiers": [
+            "addSkill",
             "changeUsername",
+            "deleteSkill",
             "getMyEvents",
-            "getReliability"
+            "getReliability",
+            "updateSkill",
+            "SkillInput"
           ]
         }
       ],
@@ -57033,9 +57297,12 @@
         "userKeys",
         "useMyEvents",
         "useReliability",
-        "useChangeUsername"
+        "useChangeUsername",
+        "useAddSkill",
+        "useUpdateSkill",
+        "useDeleteSkill"
       ],
-      "totalLines": 43,
+      "totalLines": 74,
       "hasStructuralAnalysis": true
     },
     "frontend/src/lib/bbox.ts": {
@@ -58776,7 +59043,7 @@
     },
     "frontend/testing/mocks/data.ts": {
       "filePath": "frontend/testing/mocks/data.ts",
-      "contentHash": "52071c35a7b22aaa61df0b75f4f33afd6624f6e68c5de0cea03f76c4f873d737",
+      "contentHash": "e2c1facaf3a60715ec519b7366ee386042b5c7f8c2f3a3a74b27938a5c5a8fd2",
       "functions": [
         {
           "name": "at",
@@ -58819,7 +59086,7 @@
           "params": [],
           "returnType": "MockState",
           "exported": true,
-          "lineCount": 204
+          "lineCount": 215
         }
       ],
       "classes": [],
@@ -58830,6 +59097,7 @@
             "EventCategory",
             "EventSource",
             "ParticipantStatus",
+            "Skill",
             "UserSummary"
           ]
         },
@@ -58865,7 +59133,7 @@
         "USER_IDS",
         "seed"
       ],
-      "totalLines": 281,
+      "totalLines": 294,
       "hasStructuralAnalysis": true
     },
     "frontend/testing/mocks/helpSeed.ts": {
@@ -59319,7 +59587,7 @@
     },
     "frontend/testing/mocks/routes/help.ts": {
       "filePath": "frontend/testing/mocks/routes/help.ts",
-      "contentHash": "282340bd733df6e29541d1903ee2e71c0cbc6972c69f7e1aa29fb1cab27e6483",
+      "contentHash": "09d7614b709b06f1f9c132633cdb4dee4f5cba0ccde2af8bbe489d47f1c9565f",
       "functions": [
         {
           "name": "requestById",
@@ -59916,8 +60184,37 @@
     },
     "frontend/testing/mocks/routes/users.ts": {
       "filePath": "frontend/testing/mocks/routes/users.ts",
-      "contentHash": "51412ab72a3a9a7e27bd3ad14de75a70c061f12e1ca80f2dfac61798264e4298",
-      "functions": [],
+      "contentHash": "49ecbd0204c263086e2dfb5f933d782f4e41efb39dcae28ce629f94b90abf4b4",
+      "functions": [
+        {
+          "name": "skillsOf",
+          "params": [
+            "userId"
+          ],
+          "returnType": "Skill[]",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "validSkill",
+          "params": [
+            "body",
+            "exceptId"
+          ],
+          "returnType": "{ name: string; category: HelpCategory }",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "mySkill",
+          "params": [
+            "id"
+          ],
+          "returnType": "Skill",
+          "exported": false,
+          "lineCount": 5
+        }
+      ],
       "classes": [],
       "imports": [
         {
@@ -59931,7 +60228,15 @@
           "specifiers": [
             "Me",
             "PublicProfile",
+            "Skill",
             "UserSummary"
+          ]
+        },
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HELP_CATEGORIES",
+            "HelpCategory"
           ]
         },
         {
@@ -59964,7 +60269,7 @@
       "exports": [
         "usersRoutes"
       ],
-      "totalLines": 94,
+      "totalLines": 156,
       "hasStructuralAnalysis": true
     },
     "frontend/testing/mocks/transitSeed.ts": {
@@ -60128,6 +60433,1898 @@
       "imports": [],
       "exports": [],
       "totalLines": 217,
+      "hasStructuralAnalysis": false
+    },
+    "backend/src/main/java/com/unihack8/backend/users/controller/SkillController.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/controller/SkillController.java",
+      "contentHash": "dc9b1846d469d5b80be851e8669f27eb8073d7882d523d6842b1add25b63fe72",
+      "functions": [
+        {
+          "name": "SkillController",
+          "params": [
+            "skills",
+            "currentUser"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "mine",
+          "params": [],
+          "returnType": "List<SkillResponse>",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "add",
+          "params": [
+            "request"
+          ],
+          "returnType": "SkillResponse",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "update",
+          "params": [
+            "id",
+            "request"
+          ],
+          "returnType": "SkillResponse",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "delete",
+          "params": [
+            "id"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [
+        {
+          "name": "SkillController",
+          "methods": [
+            "SkillController",
+            "mine",
+            "add",
+            "update",
+            "delete"
+          ],
+          "properties": [
+            "skills",
+            "currentUser"
+          ],
+          "exported": true,
+          "lineCount": 38
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.security.CurrentUser",
+          "specifiers": [
+            "CurrentUser"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.SkillRequest",
+          "specifiers": [
+            "SkillRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.SkillResponse",
+          "specifiers": [
+            "SkillResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.service.SkillService",
+          "specifiers": [
+            "SkillService"
+          ]
+        },
+        {
+          "source": "org.springframework.http.HttpStatus",
+          "specifiers": [
+            "HttpStatus"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.DeleteMapping",
+          "specifiers": [
+            "DeleteMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.GetMapping",
+          "specifiers": [
+            "GetMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.PatchMapping",
+          "specifiers": [
+            "PatchMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.PathVariable",
+          "specifiers": [
+            "PathVariable"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.PostMapping",
+          "specifiers": [
+            "PostMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RequestBody",
+          "specifiers": [
+            "RequestBody"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RequestMapping",
+          "specifiers": [
+            "RequestMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.ResponseStatus",
+          "specifiers": [
+            "ResponseStatus"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RestController",
+          "specifiers": [
+            "RestController"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "SkillController",
+        "mine",
+        "add",
+        "update",
+        "delete",
+        "SkillController"
+      ],
+      "totalLines": 60,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/domain/SkillRules.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/SkillRules.java",
+      "contentHash": "0313841f8f7d0af78c696e345112697846e39c1bba7bef330df2301fb752455c",
+      "functions": [
+        {
+          "name": "SkillRules",
+          "params": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "classes": [
+        {
+          "name": "SkillRules",
+          "methods": [
+            "SkillRules"
+          ],
+          "properties": [
+            "NAME_MIN",
+            "NAME_MAX",
+            "MAX_PER_USER"
+          ],
+          "exported": true,
+          "lineCount": 11
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "NAME_MIN",
+        "NAME_MAX",
+        "MAX_PER_USER",
+        "SkillRules"
+      ],
+      "totalLines": 15,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/domain/dto/SkillRequest.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/SkillRequest.java",
+      "contentHash": "5749311903a41a938966ffe3f430700521779349cf22695b4ac03fd76a471fa2",
+      "functions": [],
+      "classes": [
+        {
+          "name": "SkillRequest",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "SkillRequest"
+      ],
+      "totalLines": 11,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/domain/dto/SkillResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/SkillResponse.java",
+      "contentHash": "40af96ec096850ed2e7efc179d755c8a8ba7d023a6bb77fa17144839349220a0",
+      "functions": [],
+      "classes": [
+        {
+          "name": "SkillResponse",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "SkillResponse"
+      ],
+      "totalLines": 8,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/domain/entity/UserSkill.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/entity/UserSkill.java",
+      "contentHash": "1203485e58fa5630ac9c43daa04a868c7658923532b98d10bc50d4d39ebbd9e7",
+      "functions": [
+        {
+          "name": "UserSkill",
+          "params": [],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "UserSkill",
+          "params": [
+            "id",
+            "userId",
+            "name",
+            "category",
+            "createdAt"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "getId",
+          "params": [],
+          "returnType": "UUID",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "getUserId",
+          "params": [],
+          "returnType": "UUID",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "getName",
+          "params": [],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "getCategory",
+          "params": [],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "getCreatedAt",
+          "params": [],
+          "returnType": "Instant",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "edit",
+          "params": [
+            "name",
+            "category"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "UserSkill",
+          "methods": [
+            "UserSkill",
+            "UserSkill",
+            "getId",
+            "getUserId",
+            "getName",
+            "getCategory",
+            "getCreatedAt",
+            "edit"
+          ],
+          "properties": [
+            "id",
+            "userId",
+            "name",
+            "category",
+            "createdAt"
+          ],
+          "exported": true,
+          "lineCount": 62
+        }
+      ],
+      "imports": [
+        {
+          "source": "jakarta.persistence.Column",
+          "specifiers": [
+            "Column"
+          ]
+        },
+        {
+          "source": "jakarta.persistence.Entity",
+          "specifiers": [
+            "Entity"
+          ]
+        },
+        {
+          "source": "jakarta.persistence.Id",
+          "specifiers": [
+            "Id"
+          ]
+        },
+        {
+          "source": "jakarta.persistence.Table",
+          "specifiers": [
+            "Table"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "UserSkill",
+        "getId",
+        "getUserId",
+        "getName",
+        "getCategory",
+        "getCreatedAt",
+        "edit",
+        "UserSkill"
+      ],
+      "totalLines": 74,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/mapper/SkillMapper.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/mapper/SkillMapper.java",
+      "contentHash": "a465f74fe0dcfbfa3b5a40dc4782a6449adea514f373d72ff4b5942d8616fa1f",
+      "functions": [],
+      "classes": [
+        {
+          "name": "SkillMapper",
+          "methods": [
+            "toResponse"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.users.domain.dto.SkillResponse",
+          "specifiers": [
+            "SkillResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.entity.UserSkill",
+          "specifiers": [
+            "UserSkill"
+          ]
+        }
+      ],
+      "exports": [
+        "SkillMapper"
+      ],
+      "totalLines": 11,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/mapper/impl/SkillMapperImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/mapper/impl/SkillMapperImpl.java",
+      "contentHash": "8f05b3c7f8f6ff15bb5790dd5883ec4429e1496cbfa56c514dd8de4d59de3c9e",
+      "functions": [
+        {
+          "name": "toResponse",
+          "params": [
+            "skill"
+          ],
+          "returnType": "SkillResponse",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "SkillMapperImpl",
+          "methods": [
+            "toResponse"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.users.domain.dto.SkillResponse",
+          "specifiers": [
+            "SkillResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.entity.UserSkill",
+          "specifiers": [
+            "UserSkill"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.mapper.SkillMapper",
+          "specifiers": [
+            "SkillMapper"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        }
+      ],
+      "exports": [
+        "toResponse",
+        "SkillMapperImpl"
+      ],
+      "totalLines": 17,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/repository/UserSkillRepository.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/repository/UserSkillRepository.java",
+      "contentHash": "7c452d987f9c751067ffb18a8c722ab1ab7113e19875ae19d0a1e0dbdf19f298",
+      "functions": [],
+      "classes": [
+        {
+          "name": "UserSkillRepository",
+          "methods": [
+            "findByUserIdOrderByCreatedAtAscIdAsc",
+            "findByUserIdInOrderByCreatedAtAscIdAsc",
+            "findByIdAndUserId"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.users.domain.entity.UserSkill",
+          "specifiers": [
+            "UserSkill"
+          ]
+        },
+        {
+          "source": "org.springframework.data.jpa.repository.JpaRepository",
+          "specifiers": [
+            "JpaRepository"
+          ]
+        },
+        {
+          "source": "java.util.Collection",
+          "specifiers": [
+            "Collection"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "UserSkillRepository"
+      ],
+      "totalLines": 22,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/service/SkillService.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/service/SkillService.java",
+      "contentHash": "2cf71934ec1d3f5d7bc877920c21268414db11435baa0ca49328833430129e75",
+      "functions": [],
+      "classes": [
+        {
+          "name": "SkillService",
+          "methods": [
+            "skillsOf",
+            "skillsOf",
+            "add",
+            "update",
+            "delete"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 16
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.users.domain.dto.SkillRequest",
+          "specifiers": [
+            "SkillRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.SkillResponse",
+          "specifiers": [
+            "SkillResponse"
+          ]
+        },
+        {
+          "source": "java.util.Collection",
+          "specifiers": [
+            "Collection"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "SkillService"
+      ],
+      "totalLines": 28,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/users/service/impl/SkillServiceImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/users/service/impl/SkillServiceImpl.java",
+      "contentHash": "e72a657f7a8713775f124175519b1fe75623ca4b28de2a368555b49c19cc3f6a",
+      "functions": [
+        {
+          "name": "SkillServiceImpl",
+          "params": [
+            "skills",
+            "profiles",
+            "mapper",
+            "clock"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "skillsOf",
+          "params": [
+            "userId"
+          ],
+          "returnType": "List<SkillResponse>",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "skillsOf",
+          "params": [
+            "userIds"
+          ],
+          "returnType": "Map<UUID, List<SkillResponse>>",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "add",
+          "params": [
+            "userId",
+            "request"
+          ],
+          "returnType": "SkillResponse",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "update",
+          "params": [
+            "userId",
+            "skillId",
+            "request"
+          ],
+          "returnType": "SkillResponse",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "delete",
+          "params": [
+            "userId",
+            "skillId"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "save",
+          "params": [
+            "skill"
+          ],
+          "returnType": "UserSkill",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "validName",
+          "params": [
+            "request"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "validCategory",
+          "params": [
+            "request"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "requireNewName",
+          "params": [
+            "mine",
+            "name",
+            "except"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "SkillServiceImpl",
+          "methods": [
+            "SkillServiceImpl",
+            "skillsOf",
+            "skillsOf",
+            "add",
+            "update",
+            "delete",
+            "save",
+            "validName",
+            "validCategory",
+            "requireNewName"
+          ],
+          "properties": [
+            "skills",
+            "profiles",
+            "mapper",
+            "clock"
+          ],
+          "exported": true,
+          "lineCount": 111
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.help.domain.HelpRules",
+          "specifiers": [
+            "HelpRules"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.SkillRules",
+          "specifiers": [
+            "SkillRules"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.SkillRequest",
+          "specifiers": [
+            "SkillRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.SkillResponse",
+          "specifiers": [
+            "SkillResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.entity.UserSkill",
+          "specifiers": [
+            "UserSkill"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.mapper.SkillMapper",
+          "specifiers": [
+            "SkillMapper"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.repository.ProfileRepository",
+          "specifiers": [
+            "ProfileRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.repository.UserSkillRepository",
+          "specifiers": [
+            "UserSkillRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.service.SkillService",
+          "specifiers": [
+            "SkillService"
+          ]
+        },
+        {
+          "source": "org.springframework.dao.DataIntegrityViolationException",
+          "specifiers": [
+            "DataIntegrityViolationException"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Service",
+          "specifiers": [
+            "Service"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.annotation.Transactional",
+          "specifiers": [
+            "Transactional"
+          ]
+        },
+        {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.Collection",
+          "specifiers": [
+            "Collection"
+          ]
+        },
+        {
+          "source": "java.util.LinkedHashMap",
+          "specifiers": [
+            "LinkedHashMap"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Locale",
+          "specifiers": [
+            "Locale"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "SkillServiceImpl",
+        "skillsOf",
+        "skillsOf",
+        "add",
+        "update",
+        "delete",
+        "SkillServiceImpl"
+      ],
+      "totalLines": 138,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/users/controller/SkillIntegrationTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/users/controller/SkillIntegrationTest.java",
+      "contentHash": "0feea441ae409847a77be95bebec026c46b26125765c946e205e0710eb7c5eda",
+      "functions": [
+        {
+          "name": "setUp",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 21
+        },
+        {
+          "name": "auth",
+          "params": [
+            "user"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "add",
+          "params": [
+            "user",
+            "name",
+            "category"
+          ],
+          "returnType": "ResultActions",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "addId",
+          "params": [
+            "user",
+            "name",
+            "category"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "addAndRead",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "editAndDelete",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "othersCannotChangeMySkill",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "refusals",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 15
+        }
+      ],
+      "classes": [
+        {
+          "name": "SkillIntegrationTest",
+          "methods": [
+            "setUp",
+            "auth",
+            "add",
+            "addId",
+            "addAndRead",
+            "editAndDelete",
+            "othersCannotChangeMySkill",
+            "refusals"
+          ],
+          "properties": [
+            "ME",
+            "OTHER",
+            "mvc",
+            "jdbc"
+          ],
+          "exported": false,
+          "lineCount": 119
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.jayway.jsonpath.JsonPath",
+          "specifiers": [
+            "JsonPath"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.support.ReviewTestSchema",
+          "specifiers": [
+            "ReviewTestSchema"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.support.JwtTestTokens",
+          "specifiers": [
+            "JwtTestTokens"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.BeforeEach",
+          "specifiers": [
+            "BeforeEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Autowired",
+          "specifiers": [
+            "Autowired"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.test.context.SpringBootTest",
+          "specifiers": [
+            "SpringBootTest"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc",
+          "specifiers": [
+            "AutoConfigureMockMvc"
+          ]
+        },
+        {
+          "source": "org.springframework.http.MediaType",
+          "specifiers": [
+            "MediaType"
+          ]
+        },
+        {
+          "source": "org.springframework.jdbc.core.JdbcTemplate",
+          "specifiers": [
+            "JdbcTemplate"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.MockMvc",
+          "specifiers": [
+            "MockMvc"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.ResultActions",
+          "specifiers": [
+            "ResultActions"
+          ]
+        },
+        {
+          "source": "java.sql.Timestamp",
+          "specifiers": [
+            "Timestamp"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete",
+          "specifiers": [
+            "delete"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get",
+          "specifiers": [
+            "get"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch",
+          "specifiers": [
+            "patch"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post",
+          "specifiers": [
+            "post"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath",
+          "specifiers": [
+            "jsonPath"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.status",
+          "specifiers": [
+            "status"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 150,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/users/service/SkillServiceImplTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/users/service/SkillServiceImplTest.java",
+      "contentHash": "355cc9b54f91ac5bebdb885933df363f03f564ab5e5bf7be51288182c93da8f4",
+      "functions": [
+        {
+          "name": "setUp",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "skill",
+          "params": [
+            "user",
+            "name",
+            "category"
+          ],
+          "returnType": "UserSkill",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "fails",
+          "params": [
+            "call",
+            "code"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "addNormalises",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "addValidation",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "addDuplicate",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "addLimit",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "addRaceIsConflict",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "addUnknownUser",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "update",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "updateRefusals",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "delete",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "skillsOfMany",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "skillsOfNoneSkipsQuery",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        }
+      ],
+      "classes": [
+        {
+          "name": "SkillServiceImplTest",
+          "methods": [
+            "setUp",
+            "skill",
+            "fails",
+            "addNormalises",
+            "addValidation",
+            "addDuplicate",
+            "addLimit",
+            "addRaceIsConflict",
+            "addUnknownUser",
+            "update",
+            "updateRefusals",
+            "delete",
+            "skillsOfMany",
+            "skillsOfNoneSkipsQuery"
+          ],
+          "properties": [
+            "ME",
+            "OTHER",
+            "NOW",
+            "skills",
+            "profiles",
+            "service"
+          ],
+          "exported": false,
+          "lineCount": 153
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.SkillRequest",
+          "specifiers": [
+            "SkillRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.dto.SkillResponse",
+          "specifiers": [
+            "SkillResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.entity.UserSkill",
+          "specifiers": [
+            "UserSkill"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.mapper.impl.SkillMapperImpl",
+          "specifiers": [
+            "SkillMapperImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.repository.ProfileRepository",
+          "specifiers": [
+            "ProfileRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.repository.UserSkillRepository",
+          "specifiers": [
+            "UserSkillRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.service.impl.SkillServiceImpl",
+          "specifiers": [
+            "SkillServiceImpl"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.BeforeEach",
+          "specifiers": [
+            "BeforeEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.extension.ExtendWith",
+          "specifiers": [
+            "ExtendWith"
+          ]
+        },
+        {
+          "source": "org.mockito.Mock",
+          "specifiers": [
+            "Mock"
+          ]
+        },
+        {
+          "source": "org.mockito.junit.jupiter.MockitoExtension",
+          "specifiers": [
+            "MockitoExtension"
+          ]
+        },
+        {
+          "source": "org.springframework.dao.DataIntegrityViolationException",
+          "specifiers": [
+            "DataIntegrityViolationException"
+          ]
+        },
+        {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.time.ZoneOffset",
+          "specifiers": [
+            "ZoneOffset"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "java.util.stream.IntStream",
+          "specifiers": [
+            "IntStream"
+          ]
+        },
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "org.assertj.core.api.Assertions.assertThatThrownBy",
+          "specifiers": [
+            "assertThatThrownBy"
+          ]
+        },
+        {
+          "source": "org.mockito.ArgumentMatchers.any",
+          "specifiers": [
+            "any"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.never",
+          "specifiers": [
+            "never"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.verify",
+          "specifiers": [
+            "verify"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.verifyNoInteractions",
+          "specifiers": [
+            "verifyNoInteractions"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.when",
+          "specifiers": [
+            "when"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 191,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/__tests__/users.skills.test.tsx": {
+      "filePath": "frontend/__tests__/users.skills.test.tsx",
+      "contentHash": "5fc15c16ea78bf374c32c550dd3f5188a4e7ca446a0ffa290b0834d34cd4cbdf",
+      "functions": [
+        {
+          "name": "call",
+          "params": [
+            "method",
+            "path",
+            "body"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "skill",
+          "params": [
+            "id",
+            "name",
+            "category"
+          ],
+          "returnType": "Skill",
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "codeOf",
+          "params": [
+            "promise"
+          ],
+          "returnType": "Promise<string>",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "confirmAlert",
+          "params": [
+            "spy",
+            "label"
+          ],
+          "exported": false,
+          "lineCount": 4
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@testing-library/react-native",
+          "specifiers": [
+            "act",
+            "fireEvent",
+            "screen",
+            "waitFor",
+            "within"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "Alert"
+          ]
+        },
+        {
+          "source": "@/app/(tabs)/profile",
+          "specifiers": [
+            "ProfileScreen"
+          ]
+        },
+        {
+          "source": "@/app/help/index",
+          "specifiers": [
+            "HelpBoardScreen"
+          ]
+        },
+        {
+          "source": "@/app/help/[id]/index",
+          "specifiers": [
+            "HelpRequestScreen"
+          ]
+        },
+        {
+          "source": "@/app/users/[id]",
+          "specifiers": [
+            "PublicProfileScreen"
+          ]
+        },
+        {
+          "source": "@/api/errors",
+          "specifiers": [
+            "ApiError"
+          ]
+        },
+        {
+          "source": "@/api/types",
+          "specifiers": [
+            "Skill"
+          ]
+        },
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HELP_CATEGORIES"
+          ]
+        },
+        {
+          "source": "@/features/help/categories",
+          "specifiers": [
+            "HELP_CATEGORY_META"
+          ]
+        },
+        {
+          "source": "@/features/users/skills",
+          "specifiers": [
+            "cleanSkillName",
+            "matchingFirst",
+            "skillCategories",
+            "skillsFor",
+            "validateSkill"
+          ]
+        },
+        {
+          "source": "@test/mocks",
+          "specifiers": [
+            "getMockState",
+            "mockRequest",
+            "MOCK_ME_ID"
+          ]
+        },
+        {
+          "source": "./testUtils",
+          "specifiers": [
+            "HELP",
+            "IDS",
+            "renderScreen",
+            "setParams"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 220,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/users/SkillChips.tsx": {
+      "filePath": "frontend/src/features/users/SkillChips.tsx",
+      "contentHash": "182784ff44e3848ad6d792fec99f32eccb961e52ac8089b88dc918314d3bc08d",
+      "functions": [
+        {
+          "name": "SkillChips",
+          "params": [
+            "{ skills, highlight, testID = 'skill-chips' }"
+          ],
+          "exported": true,
+          "lineCount": 24
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react-native",
+          "specifiers": [
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "@/api/types",
+          "specifiers": [
+            "Skill"
+          ]
+        },
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HelpCategory"
+          ]
+        },
+        {
+          "source": "@/features/help/categories",
+          "specifiers": [
+            "helpCategoryMeta"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "Icon"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors",
+            "radius"
+          ]
+        },
+        {
+          "source": "./skills",
+          "specifiers": [
+            "matchingFirst"
+          ]
+        }
+      ],
+      "exports": [
+        "SkillChips"
+      ],
+      "totalLines": 56,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/users/SkillsEditor.tsx": {
+      "filePath": "frontend/src/features/users/SkillsEditor.tsx",
+      "contentHash": "ac49c32f6732fb6031dff203ea489075c57420c46e06a7a86479aeb97999dd1f",
+      "functions": [
+        {
+          "name": "SkillsEditor",
+          "params": [
+            "{ skills }"
+          ],
+          "exported": true,
+          "lineCount": 47
+        },
+        {
+          "name": "SkillRow",
+          "params": [
+            "{ skill, onEdit, onDelete }"
+          ],
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "SkillForm",
+          "params": [
+            "{ editing, others, onDone }"
+          ],
+          "exported": false,
+          "lineCount": 62
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "useState"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "Alert",
+            "Pressable",
+            "ScrollView",
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "@/api/errors",
+          "specifiers": [
+            "friendlyError"
+          ]
+        },
+        {
+          "source": "@/api/types",
+          "specifiers": [
+            "Skill"
+          ]
+        },
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HELP_CATEGORIES",
+            "HelpCategory"
+          ]
+        },
+        {
+          "source": "@/features/help/categories",
+          "specifiers": [
+            "helpCategoryMeta",
+            "HELP_CATEGORY_META"
+          ]
+        },
+        {
+          "source": "@/hooks/useUsers",
+          "specifiers": [
+            "useAddSkill",
+            "useDeleteSkill",
+            "useUpdateSkill"
+          ]
+        },
+        {
+          "source": "@/ui/Button",
+          "specifiers": [
+            "Button"
+          ]
+        },
+        {
+          "source": "@/ui/Chip",
+          "specifiers": [
+            "Chip"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "Icon"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/TextField",
+          "specifiers": [
+            "TextField"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors",
+            "radius"
+          ]
+        },
+        {
+          "source": "./skills",
+          "specifiers": [
+            "cleanSkillName",
+            "SKILL_LIMIT",
+            "SKILL_NAME_MAX",
+            "validateSkill"
+          ]
+        }
+      ],
+      "exports": [
+        "SkillsEditor"
+      ],
+      "totalLines": 180,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/users/skills.ts": {
+      "filePath": "frontend/src/features/users/skills.ts",
+      "contentHash": "06b3a77862a31d94c5b032e944956164e8ccafa1980a7c5f8696f8fc92863c21",
+      "functions": [
+        {
+          "name": "cleanSkillName",
+          "params": [
+            "name"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "validateSkill",
+          "params": [
+            "name",
+            "category",
+            "others"
+          ],
+          "returnType": "string | null",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "skillsFor",
+          "params": [
+            "skills",
+            "category"
+          ],
+          "returnType": "Skill[]",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "matchingFirst",
+          "params": [
+            "skills",
+            "category"
+          ],
+          "returnType": "Skill[]",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "skillCategories",
+          "params": [
+            "skills"
+          ],
+          "returnType": "ReadonlySet<string>",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/types",
+          "specifiers": [
+            "Skill"
+          ]
+        },
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HelpCategory"
+          ]
+        }
+      ],
+      "exports": [
+        "SKILL_NAME_MIN",
+        "SKILL_NAME_MAX",
+        "SKILL_LIMIT",
+        "cleanSkillName",
+        "validateSkill",
+        "skillsFor",
+        "matchingFirst",
+        "skillCategories"
+      ],
+      "totalLines": 40,
+      "hasStructuralAnalysis": true
+    },
+    "supabase/migrations/20261114000006_user_skills.sql": {
+      "filePath": "supabase/migrations/20261114000006_user_skills.sql",
+      "contentHash": "75a7f90aecd4b3542f001bb5cba4fe25858d9552eaaf040f7ae56853f5ddbcb1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 25,
       "hasStructuralAnalysis": false
     }
   }
