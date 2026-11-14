@@ -105,6 +105,7 @@ describe('route params', () => {
     durationMinutes: 12,
     distanceMeters: 1300,
     startsFromUser: false,
+    leaveNow: null,
   };
 
   it('round-trips a route', () => {

@@ -6,10 +6,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.unihack8.backend.ai.domain.ToolContext;
+import com.unihack8.backend.ai.domain.dto.LeaveNowDto;
+import com.unihack8.backend.ai.service.LeaveNowService;
 import com.unihack8.backend.ai.tool.ToolException;
 import com.unihack8.backend.common.dto.PageResponse;
 import com.unihack8.backend.common.exception.ApiException;
@@ -26,6 +29,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
@@ -36,14 +40,54 @@ class PlanRouteAndEventsToolTest {
     private static final GeoPoint USER = new GeoPoint(45.7537, 21.2257);
 
     private final RoutingService routing = mock(RoutingService.class);
+    private final LeaveNowService leaveNow = mock(LeaveNowService.class);
     private final EventService events = mock(EventService.class);
+
+    // "Leave now" for a trip from the user: in the tool answer for the model and remembered for the route card.
+    @Test
+    @SuppressWarnings("unchecked")
+    void leaveNowForATripFromTheUser() {
+        RoutePlanResponse transit = plan("TRANSIT");
+        when(routing.plan(eq(USER), any(), eq(TravelMode.TRANSIT), eq(NOW))).thenReturn(transit);
+        LeaveNowDto leave = new LeaveNowDto("1", "TRAM", "Gara de Nord", "Piața Libertății", 4,
+                Instant.parse("2026-11-14T16:11:00Z"), Instant.parse("2026-11-14T16:06:00Z"), LeaveNowDto.SOURCE_LIVE,
+                Instant.parse("2026-11-14T16:03:00Z"));
+        when(leaveNow.leaveNow(transit, NOW)).thenReturn(Optional.of(leave));
+        ToolContext context = new ToolContext(USER, NOW);
+
+        Map<String, Object> answer = new PlanRouteTool(routing, leaveNow).execute(Map.of("to_lat", 45.7505, "to_lon", 21.2075), context);
+
+        assertThat((Map<String, Object>) answer.get("leave_now")).containsEntry("vehicle", "tram")
+                .containsEntry("line", "1").containsEntry("stop", "Piața Libertății")
+                .containsEntry("board_at", "18:11").containsEntry("leave_in_minutes", 6L)
+                .containsEntry("time_is", "live (tracked vehicle)").containsEntry("too_late_for", "18:03");
+        assertThat(context.routes()).singleElement().satisfies(route -> assertThat(route.leaveNow()).isEqualTo(leave));
+    }
+
+    // No "leave now" for a route from another place, or for a trip at a later time.
+    @Test
+    void noLeaveNowWhenNotLeavingNowFromTheUser() {
+        when(routing.plan(any(), any(), any(), any())).thenReturn(plan("TRANSIT"));
+        ToolContext context = new ToolContext(USER, NOW);
+        PlanRouteTool tool = new PlanRouteTool(routing, leaveNow);
+
+        Map<String, Object> fromElsewhere = tool.execute(Map.of("from_lat", 45.7472, "from_lon", 21.2310,
+                "to_lat", 45.7505, "to_lon", 21.2075), context);
+        Map<String, Object> later = tool.execute(Map.of("to_lat", 45.7505, "to_lon", 21.2075,
+                "depart_at", "2026-11-15T09:00"), context);
+
+        assertThat(fromElsewhere).doesNotContainKey("leave_now");
+        assertThat(later).doesNotContainKey("leave_now");
+        assertThat(context.routes()).allSatisfy(route -> assertThat(route.leaveNow()).isNull());
+        verify(leaveNow, never()).leaveNow(any(), any());
+    }
 
     // A transit route is summarised with local times and its steps (no polylines).
     @Test
     @SuppressWarnings("unchecked")
     void transitRoute() {
         when(routing.plan(eq(USER), any(), eq(TravelMode.TRANSIT), eq(NOW))).thenReturn(plan("TRANSIT"));
-        Map<String, Object> answer = new PlanRouteTool(routing)
+        Map<String, Object> answer = new PlanRouteTool(routing, leaveNow)
                 .execute(Map.of("to_lat", 45.7505, "to_lon", 21.2075), new ToolContext(USER, NOW));
 
         assertThat(answer).containsEntry("mode", "TRANSIT").containsEntry("total_minutes", 18L)
@@ -59,7 +103,7 @@ class PlanRouteAndEventsToolTest {
         when(routing.plan(any(), any(), eq(TravelMode.TRANSIT), any()))
                 .thenThrow(new ApiException(ErrorCode.SOURCE_UNAVAILABLE));
         when(routing.plan(any(), any(), eq(TravelMode.WALK), any())).thenReturn(plan("WALK"));
-        Map<String, Object> answer = new PlanRouteTool(routing)
+        Map<String, Object> answer = new PlanRouteTool(routing, leaveNow)
                 .execute(Map.of("to_lat", 45.75, "to_lon", 21.20, "mode", "TRANSIT"), new ToolContext(USER, NOW));
         assertThat(answer).containsEntry("mode", "WALK").containsKey("note");
     }
@@ -69,7 +113,7 @@ class PlanRouteAndEventsToolTest {
     void remembersRouteFromTheUser() {
         when(routing.plan(eq(USER), any(), eq(TravelMode.TRANSIT), eq(NOW))).thenReturn(plan("TRANSIT"));
         ToolContext context = new ToolContext(USER, NOW);
-        Map<String, Object> answer = new PlanRouteTool(routing).execute(Map.of("to_lat", 45.7505, "to_lon", 21.2075), context);
+        Map<String, Object> answer = new PlanRouteTool(routing, leaveNow).execute(Map.of("to_lat", 45.7505, "to_lon", 21.2075), context);
 
         assertThat(answer).containsEntry("from", "user location");
         assertThat(context.routes()).singleElement().satisfies(route -> {
@@ -88,7 +132,7 @@ class PlanRouteAndEventsToolTest {
         GeoPoint university = new GeoPoint(45.7472, 21.2310);
         when(routing.plan(eq(university), any(), eq(TravelMode.WALK), eq(NOW))).thenReturn(plan("WALK"));
         ToolContext context = new ToolContext(USER, NOW);
-        Map<String, Object> answer = new PlanRouteTool(routing).execute(Map.of("from_lat", 45.7472, "from_lon", 21.2310,
+        Map<String, Object> answer = new PlanRouteTool(routing, leaveNow).execute(Map.of("from_lat", 45.7472, "from_lon", 21.2310,
                 "to_lat", 45.7505, "to_lon", 21.2075, "mode", "WALK"), context);
 
         assertThat(answer).containsEntry("from", "given point");
@@ -103,7 +147,7 @@ class PlanRouteAndEventsToolTest {
     void noLocationIsNotFromTheUser() {
         when(routing.plan(eq(ToolContext.CITY_CENTRE), any(), any(), any())).thenReturn(plan("WALK"));
         ToolContext context = new ToolContext(null, NOW);
-        Map<String, Object> answer = new PlanRouteTool(routing).execute(Map.of("to_lat", 45.7505, "to_lon", 21.2075), context);
+        Map<String, Object> answer = new PlanRouteTool(routing, leaveNow).execute(Map.of("to_lat", 45.7505, "to_lon", 21.2075), context);
         assertThat(answer.get("from").toString()).startsWith("city centre");
         assertThat(context.routes()).singleElement().satisfies(route -> assertThat(route.startsFromUser()).isFalse());
     }
@@ -111,7 +155,7 @@ class PlanRouteAndEventsToolTest {
     // The destination is required.
     @Test
     void destinationRequired() {
-        assertThatThrownBy(() -> new PlanRouteTool(routing).execute(Map.of(), new ToolContext(USER, NOW)))
+        assertThatThrownBy(() -> new PlanRouteTool(routing, leaveNow).execute(Map.of(), new ToolContext(USER, NOW)))
                 .isInstanceOf(ToolException.class);
     }
 

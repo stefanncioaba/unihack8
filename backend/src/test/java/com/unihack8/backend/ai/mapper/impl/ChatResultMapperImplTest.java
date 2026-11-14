@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.unihack8.backend.ai.domain.ToolContext;
 import com.unihack8.backend.ai.domain.dto.ChatResponse;
 import com.unihack8.backend.ai.domain.dto.ChatRouteDto;
+import com.unihack8.backend.ai.domain.dto.LeaveNowDto;
 import com.unihack8.backend.ai.domain.dto.RoutePointDto;
 import com.unihack8.backend.common.geo.GeoPoint;
 import com.unihack8.backend.events.domain.dto.EventSummary;
@@ -136,6 +137,22 @@ class ChatResultMapperImplTest {
         List<ChatRouteDto> routes = mapper.toResponse("ok", context).routes();
         assertThat(routes).extracting(ChatRouteDto::mode).containsExactly("WALK", "TRANSIT");
         assertThat(routes.get(1).durationMinutes()).isEqualTo(19);
+    }
+
+    // A route's "leave now" reaches the route card unchanged; routes without one keep null.
+    @Test
+    void leaveNowReachesTheRouteCard() {
+        GeoPoint user = new GeoPoint(45.7560, 21.2290);
+        Instant now = Instant.parse("2026-11-14T10:00:00Z");
+        LeaveNowDto leave = new LeaveNowDto("1", "TRAM", "Gara de Nord", "Piața Libertății", 4,
+                now.plusSeconds(540), now.plusSeconds(240), LeaveNowDto.SOURCE_LIVE, null);
+        ToolContext context = new ToolContext(user, now);
+        context.rememberRoute(new ToolContext.PlannedRoute(user, new GeoPoint(45.74, 21.24), "TRANSIT", 20, 2600, true, leave));
+        context.rememberRoute(new ToolContext.PlannedRoute(user, new GeoPoint(45.74, 21.24), "WALK", 30, 2200, true));
+
+        List<ChatRouteDto> routes = mapper.toResponse("ok", context).routes();
+        assertThat(routes.get(0).leaveNow()).isEqualTo(leave);
+        assertThat(routes.get(1).leaveNow()).isNull();
     }
 
     // Three remembered places, two with prices.

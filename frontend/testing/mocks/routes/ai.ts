@@ -66,6 +66,32 @@ function routeTo(place: PlaceSummary, request: ChatRequest, fromUniversity: bool
     distanceMeters: Math.round(meters * 1.3),
     // As the backend decides it (PLAN 18.3): only from the user's real position.
     startsFromUser: !fromUniversity && request.location !== null,
+    leaveNow: null,
+  };
+}
+
+/** A tram trip to a place with its "Leave now" box (PLAN 26): 4 min walk, tram 1 in 11 min, leave in 6 min. */
+function tramTo(place: PlaceSummary, request: ChatRequest): ChatRoute {
+  const walk = routeTo(place, request, false);
+  const now = Date.now();
+  const boardAt = now + 11 * 60_000;
+  return {
+    ...walk,
+    mode: 'TRANSIT',
+    durationMinutes: 20,
+    leaveNow: walk.startsFromUser
+      ? {
+          line: '1',
+          vehicleType: 'TRAM',
+          headsign: 'Gara de Nord',
+          stopName: 'Piața Libertății',
+          walkMinutes: 4,
+          boardAt: new Date(boardAt).toISOString(),
+          leaveAt: new Date(boardAt - 5 * 60_000).toISOString(),
+          source: 'LIVE',
+          missedBoardAt: new Date(now + 3 * 60_000).toISOString(),
+        }
+      : null,
   };
 }
 
@@ -118,6 +144,20 @@ function answer(request: ChatRequest): ChatAnswer {
   if (last.includes('ratelimit')) throw new ApiError(429, 'RATE_LIMITED', 'Too many AI requests. Try again in a minute.');
   if (last.includes('unavailable')) throw new ApiError(503, 'AI_UNAVAILABLE', 'The assistant did not answer.');
 
+  if (/by tram|by bus|public transport/.test(last)) {
+    const places = closest('cafe', 1, request.location);
+    const route = tramTo(places[0], request);
+    const leave = route.leaveNow;
+    return {
+      reply: leave
+        ? `Leave in 6 min to catch tram 1 at ${leave.stopName}. ${places[0].name} is about 20 min away.`
+        : `${places[0].name} is about 20 min away by tram.`,
+      places,
+      events: [],
+      sources: [],
+      routes: [route],
+    };
+  }
   if (/how do i get|directions|get to|route/.test(last)) {
     const fromUniversity = /university|universitate/.test(last);
     const places = closest('cafe', 1, request.location);

@@ -21,6 +21,7 @@ import com.unihack8.backend.ai.domain.gemini.GeminiPart;
 import com.unihack8.backend.ai.domain.gemini.GeminiRequest;
 import com.unihack8.backend.ai.domain.gemini.GeminiResponse;
 import com.unihack8.backend.ai.mapper.impl.ChatResultMapperImpl;
+import com.unihack8.backend.ai.service.LeaveNowService;
 import com.unihack8.backend.ai.tool.AiTool;
 import com.unihack8.backend.ai.tool.ToolException;
 import com.unihack8.backend.ai.tool.impl.PlanRouteTool;
@@ -95,7 +96,7 @@ class AiChatServiceImplTest {
                 Map.of("to_lat", 45.75, "to_lon", 21.22, "mode", "WALK")))));
         gemini.answer(content(GeminiPart.text("Walk to **Cafe Test**, 6 minutes.")));
 
-        ChatResponse response = service(3, List.of(tool, new PlanRouteTool(routing))).chat(USER, request("how do I get to a cafe?"));
+        ChatResponse response = service(3, List.of(tool, new PlanRouteTool(routing, mock(LeaveNowService.class)))).chat(USER, request("how do I get to a cafe?"));
 
         assertThat(response.routes()).singleElement().satisfies(route -> {
             assertThat(route.startsFromUser()).isTrue();
