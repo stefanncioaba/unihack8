@@ -10,6 +10,7 @@ import com.unihack8.backend.events.mapper.EventMapper;
 import com.unihack8.backend.events.repository.EventRepository;
 import com.unihack8.backend.events.repository.ParticipationRepository;
 import com.unihack8.backend.events.service.impl.EventServiceImpl;
+import com.unihack8.backend.reviews.repository.ReviewRepository;
 import com.unihack8.backend.users.domain.entity.Profile;
 import com.unihack8.backend.users.repository.ProfileRepository;
 import java.time.Clock;
@@ -38,13 +39,14 @@ class EventServiceImplTest {
     @Mock private EventRepository events;
     @Mock private ParticipationRepository participants;
     @Mock private ProfileRepository profiles;
+    @Mock private ReviewRepository reviews;
     @Mock private EventMapper mapper;
     private EventServiceImpl service;
 
     // Uses a fixed clock so all time-bound rules are deterministic.
     @BeforeEach
     void setUp() {
-        service = new EventServiceImpl(events, participants, profiles, mapper, Clock.fixed(NOW, ZoneOffset.UTC));
+        service = new EventServiceImpl(events, participants, profiles, reviews, mapper, Clock.fixed(NOW, ZoneOffset.UTC));
     }
 
     // A user gets a ticket when one spot is still open.
@@ -177,8 +179,8 @@ class EventServiceImplTest {
                 .thenReturn(Optional.of(participant("BANNED")));
         service.detail(EVENT, Optional.of(USER));
         service.detail(EVENT, Optional.of(USER));
-        verify(mapper).detail(any(), anyInt(), any(), isNull());
-        verify(mapper).detail(any(), anyInt(), any(), eq("BANNED"));
+        verify(mapper).detail(any(), anyInt(), any(), isNull(), any());
+        verify(mapper).detail(any(), anyInt(), any(), eq("BANNED"), any());
     }
 
     // Imported detail does not disclose an organizer even if a legacy row contains one.
@@ -186,7 +188,7 @@ class EventServiceImplTest {
     void externalDetailHasNoOrganizer() {
         when(events.find(EVENT)).thenReturn(Optional.of(externalEvent()));
         service.detail(EVENT, Optional.empty());
-        verify(mapper).detail(any(), anyInt(), isNull(), isNull());
+        verify(mapper).detail(any(), anyInt(), isNull(), isNull(), any());
         verifyNoInteractions(profiles);
     }
 

@@ -48,5 +48,9 @@ export const IDS = {
   picnic: 'e0000000-0000-4000-8000-000000000003', // full
   indieRock: 'e0000000-0000-4000-8000-000000000004', // external
   artWalk: 'e0000000-0000-4000-8000-000000000007', // the mock user already joined
+  photoWalk: 'e0000000-0000-4000-8000-000000000101', // over 10 days ago, the mock user attended (reviews closed)
+  coffeeCupping: 'e0000000-0000-4000-8000-000000000104', // ended hours ago, the mock user attended: reviews open
+  sushiWorkshop: 'e0000000-0000-4000-8000-000000000105', // organised by the mock user, over and settled, 2 reviews
   stella: '33333333-3333-4333-8333-333333333333',
+  andrei: '44444444-4444-4444-8444-444444444444',
 };

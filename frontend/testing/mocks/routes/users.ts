@@ -3,7 +3,7 @@ import { ApiError } from '@/api/errors';
 import type { Me, PublicProfile, UserSummary } from '@/api/types';
 import type { MyEvents, ReliabilityHistory } from '@/api/types.users';
 
-import { eventById, getState, me, toSummary, userById, type Route } from '../core';
+import { endOf, eventById, getState, me, toSummary, userById, type Route } from '../core';
 import { MOCK_ME_ID, type MockEvent } from '../data';
 
 export const usersRoutes: Route[] = [
@@ -81,7 +81,13 @@ export const usersRoutes: Route[] = [
     handler: ({ params }): PublicProfile => {
       const user = userById(params[0]);
       const attendedEvents = (getState().attended[user.id] ?? []).map((id) => toSummary(eventById(id)));
-      return { ...user, createdAt: getState().createdAt[user.id], attendedEvents };
+      // User events they organised that are already over, newest first, max 20.
+      const organizedEvents = getState()
+        .events.filter((e) => e.source === 'USER' && e.organizerId === user.id && endOf(e) < Date.now())
+        .sort((a, b) => Date.parse(b.startsAt) - Date.parse(a.startsAt))
+        .slice(0, 20)
+        .map(toSummary);
+      return { ...user, createdAt: getState().createdAt[user.id], attendedEvents, organizedEvents };
     },
   },
 ];

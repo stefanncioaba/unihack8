@@ -2,6 +2,7 @@ package com.unihack8.backend.users.repository;
 
 import com.unihack8.backend.users.domain.dto.AttendedEventResponse;
 import com.unihack8.backend.users.repository.impl.AttendedEventRepositoryImpl;
+import com.unihack8.backend.reviews.support.ReviewTestSchema;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,7 @@ class AttendedEventRepositoryImplTest {
                     event_id UUID NOT NULL, user_id UUID NOT NULL, status VARCHAR(10) NOT NULL,
                     PRIMARY KEY (event_id, user_id))
                 """);
+        ReviewTestSchema.create(jdbc);
         jdbc.update("DELETE FROM event_participants");
         jdbc.update("DELETE FROM events");
         repository = new AttendedEventRepositoryImpl(jdbc);

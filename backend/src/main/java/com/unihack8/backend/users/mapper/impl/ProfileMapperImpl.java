@@ -12,11 +12,12 @@ import java.util.List;
 @Component
 public class ProfileMapperImpl implements ProfileMapper {
 
-    // Maps stored profile fields and attendance into an API response.
+    // Maps stored profile fields, attendance and past organised events into an API response.
     @Override
-    public ProfileResponse toResponse(Profile profile, List<AttendedEventResponse> attendedEvents) {
+    public ProfileResponse toResponse(Profile profile, List<AttendedEventResponse> attendedEvents,
+                                      List<AttendedEventResponse> organizedEvents) {
         return new ProfileResponse(profile.getId(), profile.getUsername(), profile.getReliabilityScore(),
-                profile.getCreatedAt(), attendedEvents);
+                profile.getCreatedAt(), attendedEvents, organizedEvents);
     }
 
     // Maps the public fields needed for username search.

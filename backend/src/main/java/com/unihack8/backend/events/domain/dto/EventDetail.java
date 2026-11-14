@@ -8,5 +8,6 @@ import java.util.UUID;
 public record EventDetail(UUID id, String source, String title, String description, String category,
         String venueName, String address, Double lat, Double lon, Instant startsAt, Instant endsAt,
         String imageUrl, BigDecimal priceMin, BigDecimal priceMax, String externalUrl,
-        Integer capacity, Integer spotsLeft, int participantCount, UserSummary organizer, String myStatus) {
+        Integer capacity, Integer spotsLeft, int participantCount, UserSummary organizer, String myStatus,
+        Double averageRating, int reviewCount) {
 }

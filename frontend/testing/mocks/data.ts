@@ -32,6 +32,9 @@ export type MockEvent = {
   participants: MockParticipant[];
 };
 
+/** One attendee review (docs/API.md → GET /events/{id}/reviews). */
+export type MockReview = { userId: string; rating: number; comment: string | null; createdAt: string; updatedAt: string };
+
 export type MockState = {
   users: UserSummary[];
   createdAt: Record<string, string>;
@@ -40,6 +43,10 @@ export type MockState = {
   /** Reliability history per user id, newest first (docs/API.md → GET /users/{id}/reliability). */
   reliabilityLog: Record<string, ReliabilityEntry[]>;
   alerts: TransitAlert[];
+  /** Reviews per event id. */
+  reviews: Record<string, MockReview[]>;
+  /** Event ids whose organiser rating was already applied (settled once, 24 h after the end). */
+  settled: string[];
 };
 
 /** Bucharest wall-clock `hour:minute` on the day `days` from now, as a UTC ISO string. */
@@ -47,6 +54,11 @@ function at(days: number, hour: number, minute = 0): string {
   const t = toBucharest(Date.now());
   const d = new Date(Date.UTC(t.year, t.month - 1, t.day + days));
   return bucharestToUtcIso({ year: d.getUTCFullYear(), month: d.getUTCMonth() + 1, day: d.getUTCDate(), hour, minute });
+}
+
+/** UTC ISO time `hours` hours before now. */
+function hoursAgo(hours: number): string {
+  return new Date(Date.now() - hours * 3_600_000).toISOString();
 }
 
 /** Stable fake id for the Nth seeded event. */
@@ -182,6 +194,20 @@ export function seed(): MockState {
     user(103, 'Open mic night', 'ART', USER_IDS.andrei, 25, 3, at(-3, 20), 'Café Central', 45.7552, 21.2285, [
       { ...p(MOCK_ME_ID, 'NO_SHOW', 'demo-ticket-me-103'), joinedAt: at(-4, 18) },
     ]),
+    // Ended a couple of hours ago: reviews are still open, and I was checked in, so I can rate it.
+    {
+      ...user(104, 'Coffee cupping morning', 'FOOD', USER_IDS.stefan, 8, 0, hoursAgo(5), 'Café Central', 45.7552, 21.2285, [
+        { ...p(MOCK_ME_ID, 'ATTENDED', 'demo-ticket-me-104'), joinedAt: at(-2, 18) },
+        { ...p(USER_IDS.stella, 'ATTENDED', 'demo-ticket-stella-104'), joinedAt: at(-2, 18) },
+        { ...p(USER_IDS.andrei, 'ATTENDED', 'demo-ticket-andrei-104'), joinedAt: at(-2, 18) },
+      ]),
+      description: 'Taste four single-origin coffees and learn how to brew them.',
+    },
+    // Organised by me, over and settled: shows my past event with its reviews.
+    user(105, 'Sushi rolling workshop', 'FOOD', MOCK_ME_ID, 6, 0, at(-3, 18), 'Parcul Rozelor', 45.7507, 21.2297, [
+      { ...p(USER_IDS.stella, 'ATTENDED', 'demo-ticket-stella-105'), joinedAt: at(-4, 18) },
+      { ...p(USER_IDS.andrei, 'ATTENDED', 'demo-ticket-andrei-105'), joinedAt: at(-4, 18) },
+    ]),
   ];
 
   const attended: Record<string, string[]> = {
@@ -207,6 +233,25 @@ export function seed(): MockState {
     ...reliabilityLog[USER_IDS.me],
   ];
 
+  /** Shorthand for a seeded review written at `when`. */
+  const review = (userId: string, rating: number, comment: string | null, when: string): MockReview => ({
+    userId,
+    rating,
+    comment,
+    createdAt: when,
+    updatedAt: when,
+  });
+  const reviews: Record<string, MockReview[]> = {
+    [eventId(104)]: [
+      review(USER_IDS.stella, 5, 'Lovely people and great coffee.', hoursAgo(1)),
+      review(USER_IDS.andrei, 4, null, hoursAgo(1.5)),
+    ],
+    [eventId(105)]: [
+      review(USER_IDS.stella, 5, 'Best workshop this autumn!', at(-3, 22)),
+      review(USER_IDS.andrei, 4, 'Fun, a bit crowded.', at(-3, 21)),
+    ],
+  };
+
   return {
     users,
     createdAt: Object.fromEntries(users.map((u) => [u.id, '2026-11-13T15:20:00Z'])),
@@ -220,5 +265,8 @@ export function seed(): MockState {
         description: 'Until the end of the year, trams run on diverted routes. Check the line map for the new stops.',
       },
     ],
+    reviews,
+    // The workshop was settled before the seed (its reliability entry is left out to keep the seeded history short).
+    settled: [eventId(105)],
   };
 }

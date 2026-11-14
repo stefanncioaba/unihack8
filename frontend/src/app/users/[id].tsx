@@ -1,4 +1,4 @@
-// Public profile of another user: username, reliability score, attended events (PLAN 16.4, opened from 13.4 and 13.8).
+// Public profile of another user: username, reliability score, attended events and past events they organised (PLAN 16.4, opened from 13.4 and 13.8).
 import { useLocalSearchParams } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
@@ -51,6 +51,19 @@ export default function PublicProfileScreen() {
                 <EventListItem key={e.id} event={e} />
               ))}
             </View>
+          )}
+
+          {(user.data.organizedEvents ?? []).length > 0 && (
+            <>
+              <Text variant="heading" accessibilityRole="header">
+                Events organised
+              </Text>
+              <View style={{ gap: 10 }} testID="organized-events">
+                {user.data.organizedEvents.map((e) => (
+                  <EventListItem key={e.id} event={e} />
+                ))}
+              </View>
+            </>
           )}
         </View>
       )}

@@ -1,5 +1,5 @@
 // User search, public profile, my profile, map and AI tabs.
-import { fireEvent, screen, waitFor } from '@testing-library/react-native';
+import { fireEvent, screen, waitFor, within } from '@testing-library/react-native';
 
 import AiScreen from '@/app/(tabs)/ai';
 import MapScreen from '@/app/(tabs)/map';
@@ -41,6 +41,30 @@ describe('PublicProfileScreen', () => {
     expect(screen.getByText('Events attended')).toBeTruthy();
     expect(screen.getByText('Autumn photo walk')).toBeTruthy();
     expect(screen.getByText('Retro gaming evening')).toBeTruthy();
+  });
+
+  it('lists the past events someone organised, with their rating', async () => {
+    setParams({ id: IDS.andrei });
+    renderScreen(<PublicProfileScreen />);
+    expect(await screen.findByText('Events organised')).toBeTruthy();
+    const organised = within(screen.getByTestId('organized-events'));
+    expect(organised.getByText('Open mic night')).toBeTruthy();
+    expect(organised.getByText('Retro gaming evening')).toBeTruthy();
+  });
+
+  it('shows the rating of an organised event that has reviews', async () => {
+    setParams({ id: '22222222-2222-4222-8222-222222222222' }); // stefan
+    renderScreen(<PublicProfileScreen />);
+    const organised = within(await screen.findByTestId('organized-events'));
+    expect(organised.getByText('Coffee cupping morning')).toBeTruthy();
+    expect(organised.getByText('4.5 (2)')).toBeTruthy();
+  });
+
+  it('hides the organised section when there is nothing to show', async () => {
+    setParams({ id: IDS.stella });
+    renderScreen(<PublicProfileScreen />);
+    await screen.findByText('stella_99');
+    expect(screen.queryByText('Events organised')).toBeNull();
   });
 
   it('explains how the score works', async () => {

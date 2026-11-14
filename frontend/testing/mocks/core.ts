@@ -76,7 +76,43 @@ export function toSummary(e: MockEvent): EventSummary {
     priceMax: e.priceMax,
     capacity: e.capacity,
     spotsLeft: e.capacity === null ? null : Math.max(0, e.capacity - taken(e)),
+    ...ratingOf(e),
   };
+}
+
+/** Average (1 decimal, null without reviews) and number of reviews of an event. */
+export function ratingOf(e: MockEvent): { averageRating: number | null; reviewCount: number } {
+  const list = getState().reviews[e.id] ?? [];
+  if (list.length === 0) return { averageRating: null, reviewCount: 0 };
+  const avg = list.reduce((sum, r) => sum + r.rating, 0) / list.length;
+  return { averageRating: Math.round(avg * 10) / 10, reviewCount: list.length };
+}
+
+/** Reviews close 24 hours after the end of a user event; null for imported events. */
+export function reviewsCloseAt(e: MockEvent): number | null {
+  return e.source === 'EXTERNAL' ? null : endOf(e) + 24 * 3_600_000;
+}
+
+/** Organiser points from an average: round((avg − 3) × 2.5), at least +1 above 3 and at least −1 at or below 3 (±5 max). */
+export function ratingPoints(avg: number): number {
+  // Half away from zero, like the backend's ReviewRules (2 stars = -2.5 -> -3).
+  const raw = (avg - 3) * 2.5;
+  const points = Math.sign(raw) * Math.round(Math.abs(raw));
+  return avg > 3 ? Math.max(1, points) : Math.min(-1, points);
+}
+
+/** Applies the organiser's rating points once, when the review window has closed (no reviews: no change). */
+export function settleIfDue(e: MockEvent, now: number = Date.now()): void {
+  const close = reviewsCloseAt(e);
+  const state = getState();
+  if (close === null || now < close || state.settled.includes(e.id)) return;
+  state.settled.push(e.id);
+  const list = state.reviews[e.id] ?? [];
+  if (list.length === 0 || !e.organizerId) return;
+  const points = ratingPoints(list.reduce((sum, r) => sum + r.rating, 0) / list.length);
+  const organizer = userById(e.organizerId);
+  organizer.reliabilityScore = Math.max(0, organizer.reliabilityScore + points);
+  logReliability(organizer.id, points, 'EVENT_RATING', e);
 }
 
 /** Event detail shape, with my status. */

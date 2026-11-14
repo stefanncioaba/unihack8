@@ -72,6 +72,8 @@ For `VALIDATION_FAILED`, `fields` lists per-field errors when available (for exa
 | 409 | `NOT_JOINED` | You are not in this event (leave, ticket). |
 | 409 | `WRONG_EVENT` | The scanned ticket belongs to another event. |
 | 409 | `ALREADY_CHECKED_IN` | This ticket was already scanned. |
+| 403 | `NOT_ATTENDED` | Only participants the organiser checked in can review the event. |
+| 409 | `REVIEWS_CLOSED` | Reviews closed (24 h after the event ended, or the rating was settled). |
 | 429 | `RATE_LIMITED` | Too many AI requests; try again in a minute. |
 | 500 | `INTERNAL_ERROR` | Unexpected server error (details are only in the backend log). |
 | 503 | `AI_UNAVAILABLE` | Gemini did not answer. |
@@ -106,9 +108,13 @@ Used in lists, on the map and inside other answers. `spotsLeft` is `null` when t
   "priceMin": null,
   "priceMax": null,
   "capacity": 12,
-  "spotsLeft": 4
+  "spotsLeft": 4,
+  "averageRating": 4.5,
+  "reviewCount": 2
 }
 ```
+
+`averageRating` is the review average with one decimal (`null` without reviews); `reviewCount` is the number of reviews (see `GET /events/{id}/reviews`).
 
 `source` is `USER` or `EXTERNAL`. Event `category` is one of (filtering by `OTHER` also returns imported events stored without a category):
 `PARTY`, `CONCERT`, `THEATRE`, `SPORT`, `GAMES`, `FOOD`, `ART`, `MEETUP`, `OTHER`.
@@ -183,6 +189,7 @@ Username prefix, case-insensitive, max 20, sorted by username. `q` is required a
 ### `GET /users/{id}`
 
 Public profile. `attendedEvents`: events with status `ATTENDED`, newest first, max 20.
+`organizedEvents`: this user's own events that are already over (end, or start + 3 h), newest first, max 20 — with their ratings, so others can judge the organiser.
 
 ```json
 {
@@ -190,7 +197,8 @@ Public profile. `attendedEvents`: events with status `ATTENDED`, newest first, m
   "username": "stella_99",
   "reliabilityScore": 90,
   "createdAt": "2026-11-13T16:02:00Z",
-  "attendedEvents": [ { "...": "EventSummary" } ]
+  "attendedEvents": [ { "...": "EventSummary" } ],
+  "organizedEvents": [ { "...": "EventSummary" } ]
 }
 ```
 
@@ -227,7 +235,7 @@ Score and the 20 most recent changes.
 }
 ```
 
-`reason` is `ATTENDED`, `NO_SHOW` or `LATE_CANCEL`. `eventId` / `eventTitle` are `null` if the event was deleted.
+`reason` is `ATTENDED`, `NO_SHOW`, `LATE_CANCEL` or `EVENT_RATING` (the organiser's points from the event's average rating, from -5 to +5). `eventId` / `eventTitle` are `null` if the event was deleted.
 
 ---
 
@@ -266,7 +274,9 @@ Answer: paged list of **EventSummary**.
   "spotsLeft": 4,
   "participantCount": 8,
   "organizer": { "id": "8b0f6c1e-2d3a-4f5b-9c7d-1e2f3a4b5c6d", "username": "stefan", "reliabilityScore": 115 },
-  "myStatus": "JOINED"
+  "myStatus": "JOINED",
+  "averageRating": 4.5,
+  "reviewCount": 2
 }
 ```
 
@@ -374,6 +384,45 @@ Answer:
 
 Errors: `403 NOT_ORGANIZER`, `403 EXTERNAL_EVENT`, `404 TICKET_NOT_FOUND` (unknown token, or scanned text that is not a ticket), `409 WRONG_EVENT`, `409 ALREADY_CHECKED_IN`, `403 BANNED`, `409 NOT_JOINED` (the participant left), `409 EVENT_ENDED` (after the event's end, or start + 3 h without an end time), `400 VALIDATION_FAILED` (blank token).
 Scanning the same ticket twice never adds points twice.
+
+### `GET /events/{id}/reviews` — public (token optional)
+
+Every review with its author (most recently updated first), the average, and the caller's own state. The app polls it every 10 s so ratings show up live.
+
+```json
+{
+  "averageRating": 4.5,
+  "reviewCount": 2,
+  "reviews": [
+    {
+      "reviewer": { "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d", "username": "stella_99", "reliabilityScore": 95 },
+      "rating": 5,
+      "comment": "Great crowd, well organised.",
+      "createdAt": "2026-11-14T19:10:00Z",
+      "updatedAt": "2026-11-14T19:12:00Z"
+    }
+  ],
+  "reviewsCloseAt": "2026-11-15T21:00:00Z",
+  "settled": false,
+  "canReview": true,
+  "myReview": { "...": "same shape as one review, or null" }
+}
+```
+
+`reviewsCloseAt` is the event's end (or start + 3 h) + 24 h; `null` for imported events. `settled` turns `true` once the organiser's rating points were applied. `canReview` is `true` only for a signed-in caller who was checked in (`ATTENDED`), is not the organiser, while reviews are open.
+
+### `PUT /events/{id}/reviews/me`
+
+Creates or replaces the caller's review. Request:
+
+```json
+{ "rating": 4, "comment": "Nice, but it started 30 minutes late." }
+```
+
+`rating` is a whole number 1–5. `comment` is optional (blank = none), at most 300 characters. Answer: the saved review (shape above).
+Errors: `400 VALIDATION_FAILED`, `403 NOT_ATTENDED` (not checked in), `403 EXTERNAL_EVENT`, `409 IS_ORGANIZER`, `409 REVIEWS_CLOSED`, `404 NOT_FOUND`.
+
+**Organiser rating settlement.** A backend job (every 5 minutes) settles each user event once its reviews close: with reviews, the organiser gets `round((average − 3) × 2.5)` points (rounded away from zero; at least +1 above 3 stars, at least −1 at 3 stars or less), logged as `EVENT_RATING`. 5★ → +5, 4★ → +3, 3★ → −1, 2★ → −3, 1★ → −5. No reviews → no change. Each event is settled exactly once.
 
 ---
 

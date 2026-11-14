@@ -11,6 +11,7 @@ import com.unihack8.backend.reliability.repository.CheckInRepository;
 import com.unihack8.backend.reliability.service.NoShowService;
 import com.unihack8.backend.reliability.service.impl.NoShowServiceImpl;
 import com.unihack8.backend.support.JwtTestTokens;
+import com.unihack8.backend.reviews.support.ReviewTestSchema;
 import java.sql.Timestamp;
 import java.time.Clock;
 import java.time.Duration;
@@ -66,6 +67,7 @@ class ReliabilityIntegrationTest {
         jdbc.execute("CREATE TABLE IF NOT EXISTS reliability_log (id UUID PRIMARY KEY, user_id UUID NOT NULL, "
                 + "event_id UUID, points_change INTEGER NOT NULL, reason VARCHAR(30) NOT NULL, "
                 + "created_at TIMESTAMP WITH TIME ZONE NOT NULL)");
+        ReviewTestSchema.create(jdbc);
         jdbc.update("DELETE FROM reliability_log");
         jdbc.update("DELETE FROM event_participants");
         jdbc.update("DELETE FROM events");

@@ -12,6 +12,8 @@ import com.unihack8.backend.events.mapper.EventMapper;
 import com.unihack8.backend.events.repository.EventRepository;
 import com.unihack8.backend.events.repository.ParticipationRepository;
 import com.unihack8.backend.events.service.EventService;
+import com.unihack8.backend.reviews.domain.dto.RatingStats;
+import com.unihack8.backend.reviews.repository.ReviewRepository;
 import com.unihack8.backend.users.repository.ProfileRepository;
 import java.time.Clock;
 import java.time.Duration;
@@ -36,15 +38,17 @@ public class EventServiceImpl implements EventService {
     private final EventRepository events;
     private final ParticipationRepository participants;
     private final ProfileRepository profiles;
+    private final ReviewRepository reviews;
     private final EventMapper mapper;
     private final Clock clock;
 
-    // Coordinates event storage, participant state, profile reads, and time-dependent rules.
+    // Coordinates event storage, participant state, profile reads, ratings, and time-dependent rules.
     public EventServiceImpl(EventRepository events, ParticipationRepository participants,
-            ProfileRepository profiles, EventMapper mapper, Clock clock) {
+            ProfileRepository profiles, ReviewRepository reviews, EventMapper mapper, Clock clock) {
         this.events = events;
         this.participants = participants;
         this.profiles = profiles;
+        this.reviews = reviews;
         this.mapper = mapper;
         this.clock = clock;
     }
@@ -69,8 +73,11 @@ public class EventServiceImpl implements EventService {
         EventSearchCriteria criteria = new EventSearchCriteria(trim(q), categories, start, to, box, sourceFilter);
         PageParams params = box == null ? PageParams.of(page, size) : PageParams.forMap(page, size);
         Page<Event> result = events.search(criteria, params.toPageable(Sort.by("startsAt", "id")));
-        Map<UUID, Integer> counts = events.activeCounts(result.getContent().stream().map(Event::id).toList());
-        return PageResponse.of(result, e -> mapper.summary(e, counts.getOrDefault(e.id(), 0)));
+        List<UUID> ids = result.getContent().stream().map(Event::id).toList();
+        Map<UUID, Integer> counts = events.activeCounts(ids);
+        Map<UUID, RatingStats> ratings = reviews.stats(ids);
+        return PageResponse.of(result, e -> mapper.summary(e, counts.getOrDefault(e.id(), 0),
+                ratings.getOrDefault(e.id(), RatingStats.NONE)));
     }
 
     // Returns event detail, counts, organizer identity, and the caller's own status.
@@ -215,10 +222,10 @@ public class EventServiceImpl implements EventService {
     public MyEventsResponse mine(UUID caller) {
         List<MyEventsResponse.JoinedEvent> joined = participants.joinedBy(caller).stream().map(p -> {
             Event event = required(p.eventId());
-            return new MyEventsResponse.JoinedEvent(mapper.summary(event, events.activeCount(event.id())), p.status());
+            return new MyEventsResponse.JoinedEvent(summaryOf(event), p.status());
         }).toList();
         List<EventSummary> organizing = events.organizedBy(caller).stream()
-                .map(e -> mapper.summary(e, events.activeCount(e.id()))).toList();
+                .map(this::summaryOf).toList();
         return new MyEventsResponse(joined, organizing);
     }
 
@@ -246,7 +253,12 @@ public class EventServiceImpl implements EventService {
                 ? null : mapper.user(profile(event.organizerId()));
         String status = caller.flatMap(id -> participants.find(event.id(), id)).map(EventParticipant::status)
                 .filter(value -> !"CANCELLED".equals(value)).orElse(null);
-        return mapper.detail(event, events.activeCount(event.id()), organizer, status);
+        return mapper.detail(event, events.activeCount(event.id()), organizer, status, reviews.stats(event.id()));
+    }
+
+    // One list item with its current spot count and rating.
+    private EventSummary summaryOf(Event event) {
+        return mapper.summary(event, events.activeCount(event.id()), reviews.stats(event.id()));
     }
 
     // Reads a profile required by an event response.

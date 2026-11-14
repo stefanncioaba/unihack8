@@ -17,7 +17,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Pageable;
 
+import java.time.Clock;
 import java.time.Instant;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -37,6 +39,7 @@ import static org.mockito.Mockito.when;
 class UserServiceImplTest {
     private static final UUID USER_ID = UUID.fromString("11111111-1111-1111-1111-111111111111");
     private static final UUID EVENT_ID = UUID.fromString("22222222-2222-2222-2222-222222222222");
+    private static final Instant NOW = Instant.parse("2026-11-14T15:00:00Z");
 
     @Mock
     private ProfileRepository profiles;
@@ -49,7 +52,7 @@ class UserServiceImplTest {
     // Wires the real mapper while keeping persistence independent of Supabase.
     @BeforeEach
     void setUp() {
-        service = new UserServiceImpl(profiles, attendedEvents, new ProfileMapperImpl());
+        service = new UserServiceImpl(profiles, attendedEvents, new ProfileMapperImpl(), Clock.fixed(NOW, ZoneOffset.UTC));
     }
 
     // A profile includes confirmed event attendance.
@@ -157,6 +160,6 @@ class UserServiceImplTest {
     // One attended event in the EventSummary shape.
     private AttendedEventResponse attendedEvent() {
         return new AttendedEventResponse(EVENT_ID, "USER", "Meetup", "MEETUP", "Cafe", 45.75, 21.23,
-                Instant.parse("2026-11-12T18:00:00Z"), null, null, null, null, 12, 4);
+                Instant.parse("2026-11-12T18:00:00Z"), null, null, null, null, 12, 4, null, 0);
     }
 }

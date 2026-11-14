@@ -1,10 +1,40 @@
 // Mock routes: events. Shapes follow docs/API.md.
 import { ApiError } from '@/api/errors';
-import type { CheckInResult, EventCategory, EventDetail, EventSummary, NewEvent, Paged, Participant } from '@/api/types';
+import type { CheckInResult, EventCategory, EventDetail, EventReviews, EventSummary, NewEvent, Paged, Participant, Review } from '@/api/types';
+import { REVIEW_COMMENT_MAX } from '@/api/types';
 import { EVENT_CATEGORIES } from '@/api/types';
 
-import { asList, endOf, eventById, getState, logReliability, me, paginate, requireOrganizer, taken, toDetail, toSummary, userById, type Route } from '../core';
-import { MOCK_ME_ID, type MockEvent } from '../data';
+import {
+  asList,
+  endOf,
+  eventById,
+  getState,
+  logReliability,
+  me,
+  paginate,
+  ratingOf,
+  requireOrganizer,
+  reviewsCloseAt,
+  settleIfDue,
+  taken,
+  toDetail,
+  toSummary,
+  userById,
+  type Route,
+} from '../core';
+import { MOCK_ME_ID, type MockEvent, type MockReview } from '../data';
+
+/** API shape of a stored review. */
+function toReview(r: MockReview): Review {
+  return { reviewer: { ...userById(r.userId) }, rating: r.rating, comment: r.comment, createdAt: r.createdAt, updatedAt: r.updatedAt };
+}
+
+/** True when I was checked in, am not the organiser, and the window is open and not settled. */
+function canReview(e: MockEvent): boolean {
+  const close = reviewsCloseAt(e);
+  const mine = e.participants.find((p) => p.userId === MOCK_ME_ID);
+  return close !== null && mine?.status === 'ATTENDED' && e.organizerId !== MOCK_ME_ID && Date.now() < close && !getState().settled.includes(e.id);
+}
 
 export const eventsRoutes: Route[] = [
   {
@@ -163,6 +193,58 @@ export const eventsRoutes: Route[] = [
       logReliability(user.id, 5, 'ATTENDED', e);
       getState().attended[user.id] = [e.id, ...(getState().attended[user.id] ?? [])];
       return { user: { ...user }, status: 'ATTENDED', pointsChange: 5 };
+    },
+  },
+  {
+    method: 'GET',
+    pattern: /^\/events\/([^/]+)\/reviews$/,
+    handler: ({ params }): EventReviews => {
+      const e = eventById(params[0]);
+      settleIfDue(e);
+      const list = [...(getState().reviews[e.id] ?? [])].sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt));
+      const close = reviewsCloseAt(e);
+      const mine = list.find((r) => r.userId === MOCK_ME_ID);
+      return {
+        ...ratingOf(e),
+        reviews: list.map(toReview),
+        reviewsCloseAt: close === null ? null : new Date(close).toISOString(),
+        settled: getState().settled.includes(e.id),
+        canReview: canReview(e),
+        myReview: mine ? toReview(mine) : null,
+      };
+    },
+  },
+  {
+    method: 'PUT',
+    pattern: /^\/events\/([^/]+)\/reviews\/me$/,
+    handler: ({ params, body }): Review => {
+      const e = eventById(params[0]);
+      const rating = body?.rating;
+      const comment = typeof body?.comment === 'string' && body.comment.trim() ? body.comment.trim() : null;
+      const fields: Record<string, string> = {};
+      if (!Number.isInteger(rating) || rating < 1 || rating > 5) fields.rating = 'must be between 1 and 5';
+      if (comment && comment.length > REVIEW_COMMENT_MAX) fields.comment = `must be at most ${REVIEW_COMMENT_MAX} characters`;
+      if (Object.keys(fields).length) throw new ApiError(400, 'VALIDATION_FAILED', 'Invalid review.', fields);
+      if (e.source === 'EXTERNAL') throw new ApiError(403, 'EXTERNAL_EVENT', 'External events cannot be reviewed.');
+      if (e.organizerId === MOCK_ME_ID) throw new ApiError(409, 'IS_ORGANIZER', 'You organise this event.');
+      const mine = e.participants.find((p) => p.userId === MOCK_ME_ID);
+      if (mine?.status !== 'ATTENDED') throw new ApiError(403, 'NOT_ATTENDED', 'Only checked-in participants can review this event.');
+      settleIfDue(e);
+      const close = reviewsCloseAt(e)!;
+      if (Date.now() >= close || getState().settled.includes(e.id)) throw new ApiError(409, 'REVIEWS_CLOSED', 'Reviews for this event are closed.');
+
+      const now = new Date().toISOString();
+      const list = (getState().reviews[e.id] ??= []);
+      const existing = list.find((r) => r.userId === MOCK_ME_ID);
+      if (existing) {
+        existing.rating = rating;
+        existing.comment = comment;
+        existing.updatedAt = now;
+        return toReview(existing);
+      }
+      const created: MockReview = { userId: MOCK_ME_ID, rating, comment, createdAt: now, updatedAt: now };
+      list.push(created);
+      return toReview(created);
     },
   },
 ];

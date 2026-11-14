@@ -26,6 +26,8 @@ public enum ErrorCode {
     NOT_JOINED(HttpStatus.CONFLICT, "You are not in this event."),
     WRONG_EVENT(HttpStatus.CONFLICT, "This ticket belongs to another event."),
     ALREADY_CHECKED_IN(HttpStatus.CONFLICT, "This ticket was already scanned."),
+    NOT_ATTENDED(HttpStatus.FORBIDDEN, "Only checked-in participants can review this event."),
+    REVIEWS_CLOSED(HttpStatus.CONFLICT, "Reviews for this event are closed."),
     RATE_LIMITED(HttpStatus.TOO_MANY_REQUESTS, "Too many requests. Try again in a minute."),
     INTERNAL_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Something went wrong on our side."),
     AI_UNAVAILABLE(HttpStatus.SERVICE_UNAVAILABLE, "The assistant is not available right now."),

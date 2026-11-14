@@ -132,6 +132,26 @@ describe('ProfileScreen: my events (16.3)', () => {
     expect(within(attended).getByText('Retro gaming evening')).toBeTruthy();
   });
 
+  it('lists my organised events that are over, with their rating', async () => {
+    renderScreen(<ProfileScreen />);
+    const past = await screen.findByTestId('my-events-past-organized');
+    expect(within(past).getByText('Sushi rolling workshop')).toBeTruthy();
+    expect(within(past).getByText('4.5 (2)')).toBeTruthy();
+    expect(within(screen.getByTestId('my-events-organizing')).queryByText('Sushi rolling workshop')).toBeNull();
+  });
+
+  it('shows an EVENT_RATING entry with its sign in the history', async () => {
+    getMockState().reliabilityLog[ME] = [
+      { pointsChange: 4, reason: 'EVENT_RATING', eventId: null, eventTitle: 'Sushi rolling workshop', createdAt: new Date().toISOString() },
+      { pointsChange: -1, reason: 'EVENT_RATING', eventId: null, eventTitle: 'Open mic night', createdAt: new Date(Date.now() - 1000).toISOString() },
+    ];
+    renderScreen(<ProfileScreen />);
+    const log = await screen.findByTestId('reliability-log');
+    expect(within(log).getAllByText('Event rating')).toHaveLength(2);
+    expect(within(log).getByText('+4')).toBeTruthy();
+    expect(within(log).getByText('−1')).toBeTruthy();
+  });
+
   it('does not list an event I missed as attended', async () => {
     renderScreen(<ProfileScreen />);
     const attended = await screen.findByTestId('my-events-attended');
@@ -183,6 +203,8 @@ describe('groupMyEvents', () => {
     priceMax: null,
     capacity: null,
     spotsLeft: null,
+    averageRating: null,
+    reviewCount: 0,
   });
 
   it('keeps only future joined events as upcoming, and drops ended ones', () => {
@@ -222,6 +244,16 @@ describe('groupMyEvents', () => {
     const groups = groupMyEvents([], [ev('past', '2026-11-01T18:00:00Z'), ev('next', '2026-11-20T18:00:00Z')], now);
     expect(groups.organizing.map((e) => e.id)).toEqual(['next']);
   });
+
+  it('moves organised events that are over to pastOrganized, newest first', () => {
+    const groups = groupMyEvents(
+      [],
+      [ev('old', '2026-10-01T18:00:00Z'), ev('next', '2026-11-20T18:00:00Z'), ev('recent', '2026-11-10T18:00:00Z'), ev('running', '2026-11-14T10:00:00Z')],
+      now,
+    );
+    expect(groups.pastOrganized.map((e) => e.id)).toEqual(['recent', 'old']);
+    expect(groups.organizing.map((e) => e.id)).toEqual(['next', 'running']);
+  });
 });
 
 describe('reliability labels', () => {
@@ -235,5 +267,6 @@ describe('reliability labels', () => {
     expect(reasonLabel('ATTENDED')).toBe('Attended');
     expect(reasonLabel('NO_SHOW')).toBe('Missed the event');
     expect(reasonLabel('LATE_CANCEL')).toBe('Left late');
+    expect(reasonLabel('EVENT_RATING')).toBe('Event rating');
   });
 });

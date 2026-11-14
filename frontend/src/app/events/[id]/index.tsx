@@ -1,10 +1,11 @@
-// Event details: description, place, organiser, participants with reliability, join / leave (PLAN 13.4).
+// Event details: description, place, organiser, participants with reliability, join / leave (PLAN 13.4), and attendee reviews.
 import { router, useLocalSearchParams } from 'expo-router';
 import { Alert, Linking, Pressable, StyleSheet, View } from 'react-native';
 
 import { friendlyError } from '@/api/errors';
 import { categoryMeta } from '@/features/events/categories';
 import { EventArt } from '@/features/events/EventArt';
+import { EventReviews } from '@/features/events/EventReviews';
 import { isFull, priceLabel, spotsLabel } from '@/features/events/format';
 import { ParticipantList } from '@/features/events/ParticipantList';
 import { useBanParticipant, useEvent, useJoinEvent, useLeaveEvent, useMe, useParticipants } from '@/hooks/queries';
@@ -162,6 +163,8 @@ export default function EventDetailsScreen() {
           )}
         </View>
       )}
+
+      {e.source === 'USER' && <EventReviews eventId={e.id} />}
     </Shell>
   );
 }

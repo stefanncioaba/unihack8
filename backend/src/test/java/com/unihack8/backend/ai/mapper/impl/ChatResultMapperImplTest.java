@@ -50,7 +50,7 @@ class ChatResultMapperImplTest {
     void events() {
         ToolContext context = context();
         EventSummary event = new EventSummary(UUID.randomUUID(), "EXTERNAL", "Jazz Night at Scârț", "CONCERT",
-                "Scârț", 45.75, 21.23, Instant.parse("2026-11-14T18:00:00Z"), null, null, null, null, null, null);
+                "Scârț", 45.75, 21.23, Instant.parse("2026-11-14T18:00:00Z"), null, null, null, null, null, null, null, 0);
         context.rememberEvent(event);
         ChatResponse response = mapper.toResponse("Go to **Jazz Night** on Saturday.", context);
         assertThat(response.events()).containsExactly(event);
@@ -74,7 +74,7 @@ class ChatResultMapperImplTest {
         ToolContext context = new ToolContext(user, Instant.parse("2026-11-14T10:00:00Z"));
         context.rememberPlace(place("Starbucks"), List.of()); // at 45.75, 21.22
         EventSummary event = new EventSummary(UUID.randomUUID(), "USER", "Board games", "OTHER", "Club",
-                45.7400, 21.2400, Instant.parse("2026-11-14T18:00:00Z"), null, null, null, null, null, null);
+                45.7400, 21.2400, Instant.parse("2026-11-14T18:00:00Z"), null, null, null, null, null, null, null, 0);
         context.rememberEvent(event);
         GeoPoint nearStarbucks = new GeoPoint(45.7502, 21.2201); // about 25 m away
         context.rememberRoute(new ToolContext.PlannedRoute(user, nearStarbucks, "WALK", 14, 1100, true));

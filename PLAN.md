@@ -371,6 +371,20 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 ---
 
+## 22. Event reviews and organiser rating — Tracks A + C
+
+**Needs:** 5, 6 (done). Added 2026-11-14. **Goal:** after the organiser scans a participant's QR code, that attendee can rate the event 1–5 stars with an optional short reason. The event shows the rating live, with who reviewed and why; past organised events show it too. 24 h after the event ends the average moves the organiser's reliability: above 3 stars gains, 3 or less loses, scaled to the rating (±5 max).
+
+- [x] **22.1 Database:** `event_reviews` (one per attendee per event, rating 1–5, comment ≤ 300) and `events.review_settled_at` — migration `20261114000004_event_reviews.sql`. *Applied to Supabase 2026-11-14 and checked (7/7).*
+- [x] **22.2 API:** `GET /events/{id}/reviews` (public), `PUT /events/{id}/reviews/me` (checked-in attendees only, until end + 24 h); errors `NOT_ATTENDED`, `REVIEWS_CLOSED`. Contract in `docs/API.md`.
+- [x] **22.3 Ratings in answers:** `averageRating` / `reviewCount` on `EventSummary` and `EventDetail`; `organizedEvents` (past, with ratings) on `GET /users/{id}`.
+- [x] **22.4 Organiser rating job:** once per event, 24 h after the end: `round((avg − 3) × 2.5)`, at least ±1, logged as `EVENT_RATING`; no reviews → no change.
+- [x] **22.5 App:** reviews section on the event page (stars, count, list with reviewer and comment, live refresh every 10 s), star picker + comment form for checked-in attendees, stars on event list items, "Organised (past)" in My events, "Events organised" on public profiles, `EVENT_RATING` in the reliability history; mock backend has the same rules.
+- [x] **22.6 Tests:** backend and frontend (see `DOCS.md` → Event reviews).
+- [x] **22.7** `DOCS.md`, `docs/API.md` and the knowledge graph updated.
+
+---
+
 ## If time runs short — cut in this order
 
 1. Marker clustering (14.6) and AI result cards (15.4).

@@ -165,13 +165,13 @@ class EventControllerTest {
     // Representative list item for JSON contract assertions.
     private EventSummary summary() {
         return new EventSummary(EVENT, "USER", "Meetup", "MEETUP", "Hall", 45.7, 21.2,
-                Instant.parse("2026-11-14T17:00:00Z"), null, null, null, null, 2, 1);
+                Instant.parse("2026-11-14T17:00:00Z"), null, null, null, null, 2, 1, 4.5, 2);
     }
 
     // Representative detail with one participant and an organizer.
     private EventDetail detail(String status) {
         return new EventDetail(EVENT, "USER", "Meetup", null, "MEETUP", "Hall", null, 45.7, 21.2,
                 Instant.parse("2026-11-14T17:00:00Z"), null, null, null, null, null, 2, 1, 1,
-                new UserSummary(USER, "host", 100), status);
+                new UserSummary(USER, "host", 100), status, 4.5, 2);
     }
 }

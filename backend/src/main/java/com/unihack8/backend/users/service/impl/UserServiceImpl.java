@@ -16,6 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Clock;
 import java.util.List;
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -30,19 +31,23 @@ public class UserServiceImpl implements UserService {
     private final AttendedEventRepository attendedEvents;
     private final ProfileMapper mapper;
 
-    // Combines profile storage, attended events, and response mapping.
-    public UserServiceImpl(ProfileRepository profiles, AttendedEventRepository attendedEvents, ProfileMapper mapper) {
+    private final Clock clock;
+
+    // Combines profile storage, attended and organised events, response mapping, and the clock.
+    public UserServiceImpl(ProfileRepository profiles, AttendedEventRepository attendedEvents, ProfileMapper mapper,
+                           Clock clock) {
         this.profiles = profiles;
         this.attendedEvents = attendedEvents;
         this.mapper = mapper;
+        this.clock = clock;
     }
 
-    // Returns a profile and only its confirmed attended events.
+    // Returns a profile with its confirmed attended events and past organised events.
     @Override
     @Transactional(readOnly = true)
     public ProfileResponse getProfile(UUID userId) {
         Profile profile = profiles.findById(userId).orElseThrow(() -> ApiException.notFound("User"));
-        return mapper.toResponse(profile, attendedEvents.findAttendedByUserId(userId));
+        return toResponse(profile);
     }
 
     // Changes the username and handles a concurrent uniqueness conflict.
@@ -60,7 +65,7 @@ public class UserServiceImpl implements UserService {
         } catch (DataIntegrityViolationException exception) {
             throw new ApiException(ErrorCode.USERNAME_TAKEN);
         }
-        return mapper.toResponse(profile, attendedEvents.findAttendedByUserId(userId));
+        return toResponse(profile);
     }
 
     // Finds a stable, capped list of usernames matching the prefix.
@@ -89,5 +94,11 @@ public class UserServiceImpl implements UserService {
         if (username == null || !USERNAME.matcher(username).matches()) {
             throw new ApiException(ErrorCode.INVALID_USERNAME);
         }
+    }
+
+    // Full profile answer: attended events and past organised events, both with ratings.
+    private ProfileResponse toResponse(Profile profile) {
+        return mapper.toResponse(profile, attendedEvents.findAttendedByUserId(profile.getId()),
+                attendedEvents.findPastOrganizedByUserId(profile.getId(), clock.instant()));
     }
 }
