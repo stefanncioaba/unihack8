@@ -34,8 +34,8 @@
       "Jest"
     ],
     "description": "Hackathon mobile app for Timișoara (Connected Communities): Spring Boot API + Supabase + Expo app with events and QR reliability points, places map, live STPT transit, routing and an AI guide.",
-    "analyzedAt": "2026-11-14T13:19:32.293Z",
-    "gitCommitHash": "3f9aba219455e8af756af593d4cf9caab90922e5"
+    "analyzedAt": "2026-11-14T13:33:43.119Z",
+    "gitCommitHash": "508e0da3bfb5e3f8c1421262af25a7eec5834425"
   },
   "nodes": [
     {
@@ -935,87 +935,6 @@
         "test",
         "helper",
         "setup"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "type": "file",
-      "name": "ChatBubble.tsx",
-      "filePath": "frontend/src/features/ai/ChatBubble.tsx",
-      "summary": "Chat message bubble components for the AI assistant: user/assistant bubbles with cited sources, a thinking indicator and an error bubble with retry.",
-      "tags": [
-        "component",
-        "ai-chat",
-        "ui"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:frontend/src/features/ai/ChatBubble.tsx:Sources",
-      "type": "function",
-      "name": "Sources",
-      "filePath": "frontend/src/features/ai/ChatBubble.tsx",
-      "lineRange": [
-        17,
-        33
-      ],
-      "summary": "Renders the list of cited place/event sources under an assistant message.",
-      "tags": [
-        "component",
-        "ui",
-        "react"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/ai/ChatBubble.tsx:ChatBubble",
-      "type": "function",
-      "name": "ChatBubble",
-      "filePath": "frontend/src/features/ai/ChatBubble.tsx",
-      "lineRange": [
-        36,
-        47
-      ],
-      "summary": "Renders a user or assistant chat message bubble with optional sources.",
-      "tags": [
-        "component",
-        "ui",
-        "react"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/ai/ChatBubble.tsx:ThinkingBubble",
-      "type": "function",
-      "name": "ThinkingBubble",
-      "filePath": "frontend/src/features/ai/ChatBubble.tsx",
-      "lineRange": [
-        50,
-        59
-      ],
-      "summary": "Placeholder bubble shown while the assistant is generating a reply.",
-      "tags": [
-        "component",
-        "ui",
-        "react"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/ai/ChatBubble.tsx:ErrorBubble",
-      "type": "function",
-      "name": "ErrorBubble",
-      "filePath": "frontend/src/features/ai/ChatBubble.tsx",
-      "lineRange": [
-        62,
-        73
-      ],
-      "summary": "Bubble showing a friendly error message with a retry button.",
-      "tags": [
-        "component",
-        "ui",
-        "react"
       ],
       "complexity": "simple"
     },
@@ -19139,21 +19058,6 @@
       "complexity": "simple"
     },
     {
-      "id": "file:frontend/src/app/(tabs)/ai.tsx",
-      "type": "file",
-      "name": "ai.tsx",
-      "filePath": "frontend/src/app/(tabs)/ai.tsx",
-      "summary": "AI tab screen: an in-memory chat with the city guide that shows suggested questions when empty, chat bubbles with place/event result cards and route cards (with the \"Go\" journey button) under answers, and a \"New chat\" reset.",
-      "tags": [
-        "component",
-        "screen",
-        "ai-chat",
-        "entry-point",
-        "tested"
-      ],
-      "complexity": "moderate"
-    },
-    {
       "id": "file:frontend/src/app/(tabs)/map.tsx",
       "type": "file",
       "name": "map.tsx",
@@ -19168,23 +19072,6 @@
         "tested"
       ],
       "complexity": "complex"
-    },
-    {
-      "id": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
-      "type": "function",
-      "name": "AiScreen",
-      "filePath": "frontend/src/app/(tabs)/ai.tsx",
-      "lineRange": [
-        18,
-        76
-      ],
-      "summary": "Default-exported chat screen that wires useAiChat (passing the real position only when location is granted) to a FlatList of ChatBubbles with ResultCards and RouteCards, suggestions, and the chat input.",
-      "tags": [
-        "component",
-        "screen",
-        "ai-chat"
-      ],
-      "complexity": "moderate"
     },
     {
       "id": "function:frontend/src/app/(tabs)/map.tsx:MapBody",
@@ -20781,23 +20668,6 @@
       "complexity": "moderate"
     },
     {
-      "id": "file:frontend/src/app/(tabs)/index.tsx",
-      "type": "file",
-      "name": "index.tsx",
-      "filePath": "frontend/src/app/(tabs)/index.tsx",
-      "summary": "Expo Router Home tab screen showing the Timișoara header with a live transit pill, search field, event category chips, city transit info strip, a horizontal list of upcoming events and a create-event call to action.",
-      "tags": [
-        "component",
-        "screen",
-        "entry-point",
-        "events",
-        "transit",
-        "tested"
-      ],
-      "complexity": "moderate",
-      "languageNotes": "Expo Router file-based routing: the (tabs) group folder makes index.tsx the default tab route."
-    },
-    {
       "id": "file:frontend/src/app/(tabs)/profile.tsx",
       "type": "file",
       "name": "profile.tsx",
@@ -20829,42 +20699,6 @@
       ],
       "complexity": "simple",
       "languageNotes": "Bracketed filename [id].tsx defines a dynamic route segment read via useLocalSearchParams."
-    },
-    {
-      "id": "function:frontend/src/app/(tabs)/index.tsx:LivePill",
-      "type": "function",
-      "name": "LivePill",
-      "filePath": "frontend/src/app/(tabs)/index.tsx",
-      "lineRange": [
-        25,
-        34
-      ],
-      "summary": "Small pill showing a glowing gold 'Live' dot while transit data flows, or a grey 'Offline' label when the transit summary errors.",
-      "tags": [
-        "component",
-        "transit",
-        "status-indicator"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
-      "type": "function",
-      "name": "HomeScreen",
-      "filePath": "frontend/src/app/(tabs)/index.tsx",
-      "lineRange": [
-        37,
-        125
-      ],
-      "summary": "Default-exported Home screen that loads the user's position, transit summary and a category-filtered page of upcoming events, supports pull-to-refresh, and renders loading/error/empty states plus navigation to events, people search and event creation.",
-      "tags": [
-        "component",
-        "screen",
-        "events",
-        "transit",
-        "navigation"
-      ],
-      "complexity": "moderate"
     },
     {
       "id": "function:frontend/src/app/(tabs)/profile.tsx:ProfileScreen",
@@ -22249,35 +22083,6 @@
       "complexity": "moderate"
     },
     {
-      "id": "document:DOCS.md",
-      "type": "document",
-      "name": "DOCS.md",
-      "filePath": "DOCS.md",
-      "summary": "Living project documentation covering architecture, configuration, Supabase database, external data sources (STPT, LiveTickets, OpenStreetMap, Gemini), reliability rules and per-feature backend/frontend notes keyed to PLAN tasks; it now explains the transit summary's nextArrival (soonest arrival at the nearest stop, flagged last from the GTFS timetable) shown on the Home departure-board strip, plus current test counts.",
-      "tags": [
-        "documentation",
-        "architecture",
-        "entry-point",
-        "development",
-        "configuration"
-      ],
-      "complexity": "complex"
-    },
-    {
-      "id": "document:PLAN.md",
-      "type": "document",
-      "name": "PLAN.md",
-      "filePath": "PLAN.md",
-      "summary": "Task-by-task hackathon plan split into tracks A/B/C with checkbox subtasks from foundation through integration; includes the ticked task 13.9 (next arrival at the nearest stop on Home, marked when it is the last trip today), ticked tasks 18 and 19 (AI Go button, AI stays on topic) and pending task 20 (trip cost).",
-      "tags": [
-        "documentation",
-        "planning",
-        "roadmap",
-        "task-tracking"
-      ],
-      "complexity": "complex"
-    },
-    {
       "id": "document:docs/API.md",
       "type": "document",
       "name": "API.md",
@@ -22305,6 +22110,411 @@
         "pitch"
       ],
       "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/app/(tabs)/ai.tsx",
+      "type": "file",
+      "name": "ai.tsx",
+      "filePath": "frontend/src/app/(tabs)/ai.tsx",
+      "summary": "Expo Router AI tab screen that hosts the city-guide chat with result and route cards under answers, suggestions on an empty chat, and a \"New chat\" reset. It reads `ask`/`at` route params from Home shortcuts to start a fresh chat via askFresh, and renders SaveShortcut under each user bubble.",
+      "tags": [
+        "component",
+        "screen",
+        "ai-chat",
+        "routing",
+        "shortcuts",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
+      "type": "function",
+      "name": "AiScreen",
+      "filePath": "frontend/src/app/(tabs)/ai.tsx",
+      "lineRange": [
+        21,
+        92
+      ],
+      "summary": "Default-exported chat screen that wires useAiChat to the device position, de-duplicates incoming shortcut requests with a ref keyed on ask|at, and renders the hero, message list (ChatBubble with ResultCards/RouteCards and a SaveShortcut user action), thinking/error footers and the input.",
+      "tags": [
+        "component",
+        "screen",
+        "ai-chat",
+        "hook-consumer",
+        "shortcuts"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/src/app/(tabs)/index.tsx",
+      "type": "file",
+      "name": "index.tsx",
+      "filePath": "frontend/src/app/(tabs)/index.tsx",
+      "summary": "Home tab screen with the Timișoara header, people search entry, live transit pill, event search, category chips, the city info transit strip, the saved AI ShortcutBar and a horizontal list of upcoming events with pull-to-refresh.",
+      "tags": [
+        "component",
+        "screen",
+        "entry-point",
+        "home",
+        "events",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/app/(tabs)/index.tsx:LivePill",
+      "type": "function",
+      "name": "LivePill",
+      "filePath": "frontend/src/app/(tabs)/index.tsx",
+      "lineRange": [
+        26,
+        35
+      ],
+      "summary": "Small status pill showing a glowing gold \"Live\" dot while transit data loads, or a grey \"Offline\" label when the transit summary query fails.",
+      "tags": [
+        "component",
+        "status-indicator",
+        "transit",
+        "ui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "type": "function",
+      "name": "HomeScreen",
+      "filePath": "frontend/src/app/(tabs)/index.tsx",
+      "lineRange": [
+        38,
+        128
+      ],
+      "summary": "Default-exported Home page that loads the transit summary and a filtered page of upcoming events, supports pull-to-refresh of both, and lays out chips, CityInfoStrip, ShortcutBar, event cards with loading/error/empty states and a create-event button.",
+      "tags": [
+        "component",
+        "screen",
+        "home",
+        "data-fetching",
+        "navigation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "type": "file",
+      "name": "ChatBubble.tsx",
+      "filePath": "frontend/src/features/ai/ChatBubble.tsx",
+      "summary": "Chat bubble components for the AI tab: user and assistant message bubbles with source links, a thinking indicator, and an error bubble with retry. ChatBubble now takes a `userAction` slot drawn under user messages (used for saving shortcuts).",
+      "tags": [
+        "component",
+        "ui",
+        "ai-chat",
+        "presentation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/features/ai/ChatBubble.tsx:Sources",
+      "type": "function",
+      "name": "Sources",
+      "filePath": "frontend/src/features/ai/ChatBubble.tsx",
+      "lineRange": [
+        17,
+        33
+      ],
+      "summary": "Renders the list of web sources the assistant cited as tappable links that open the URL via Linking.",
+      "tags": [
+        "component",
+        "ui",
+        "links",
+        "ai-chat"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/ai/ChatBubble.tsx:ChatBubble",
+      "type": "function",
+      "name": "ChatBubble",
+      "filePath": "frontend/src/features/ai/ChatBubble.tsx",
+      "lineRange": [
+        36,
+        48
+      ],
+      "summary": "Renders one chat message aligned by role; assistant bubbles show sources and children (result cards) underneath, while user bubbles show the optional userAction node underneath.",
+      "tags": [
+        "component",
+        "ui",
+        "ai-chat",
+        "composition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/ai/ChatBubble.tsx:ThinkingBubble",
+      "type": "function",
+      "name": "ThinkingBubble",
+      "filePath": "frontend/src/features/ai/ChatBubble.tsx",
+      "lineRange": [
+        51,
+        60
+      ],
+      "summary": "Assistant-side bubble with a spinner and \"Thinking…\" label shown while a chat request is in flight.",
+      "tags": [
+        "component",
+        "ui",
+        "loading-state",
+        "ai-chat"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/ai/ChatBubble.tsx:ErrorBubble",
+      "type": "function",
+      "name": "ErrorBubble",
+      "filePath": "frontend/src/features/ai/ChatBubble.tsx",
+      "lineRange": [
+        63,
+        74
+      ],
+      "summary": "Assistant-side error bubble that shows a friendly error message and a \"Try again\" button calling onRetry.",
+      "tags": [
+        "component",
+        "ui",
+        "error-handling",
+        "ai-chat"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/features/ai/SaveShortcut.tsx",
+      "type": "file",
+      "name": "SaveShortcut.tsx",
+      "filePath": "frontend/src/features/ai/SaveShortcut.tsx",
+      "summary": "Small 'Save as shortcut' link rendered under a user question in the AI chat; toggles between saving the question to the Home shortcuts and removing it ('Saved to Home'), hiding itself when the list is full.",
+      "tags": [
+        "component",
+        "ai-chat",
+        "shortcuts",
+        "react-native",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/ai/SaveShortcut.tsx:SaveShortcut",
+      "type": "function",
+      "name": "SaveShortcut",
+      "filePath": "frontend/src/features/ai/SaveShortcut.tsx",
+      "lineRange": [
+        12,
+        30
+      ],
+      "summary": "Bookmark-style pressable that adds or removes the given question via useShortcuts, returning null while loading or when the list is full and the question is unsaved.",
+      "tags": [
+        "component",
+        "toggle",
+        "shortcuts"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "type": "file",
+      "name": "ShortcutBar.tsx",
+      "filePath": "frontend/src/features/ai/ShortcutBar.tsx",
+      "summary": "'Ask the city' Home section that shows saved AI questions as horizontally scrolling pill buttons; tapping asks on the AI tab, Edit/long-press reveals remove buttons, and an inline field adds new questions with duplicate and capacity checks.",
+      "tags": [
+        "component",
+        "home-screen",
+        "shortcuts",
+        "ai",
+        "react-native",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/features/ai/ShortcutBar.tsx:ShortcutButton",
+      "type": "function",
+      "name": "ShortcutButton",
+      "filePath": "frontend/src/features/ai/ShortcutBar.tsx",
+      "lineRange": [
+        15,
+        41
+      ],
+      "summary": "Renders one saved question as a navy pill with a gold sparkle that calls askOnAiTab, or as a removable pill with a close icon in edit mode.",
+      "tags": [
+        "component",
+        "button",
+        "shortcuts"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/ai/ShortcutBar.tsx:ShortcutBar",
+      "type": "function",
+      "name": "ShortcutBar",
+      "filePath": "frontend/src/features/ai/ShortcutBar.tsx",
+      "lineRange": [
+        44,
+        131
+      ],
+      "summary": "Section component managing editing/adding/draft state over useShortcuts: header with Edit/Done toggle, shortcut row, empty-state hint, and add field with save validation.",
+      "tags": [
+        "component",
+        "state-management",
+        "shortcuts",
+        "form"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/src/features/ai/shortcuts.ts",
+      "type": "file",
+      "name": "shortcuts.ts",
+      "filePath": "frontend/src/features/ai/shortcuts.ts",
+      "summary": "Saved AI question ('shortcut') store persisted in AsyncStorage and shared through a single TanStack Query entry, with normalization/duplicate helpers, the useShortcuts add/remove hook, and askOnAiTab navigation to /ai?ask=&at=.",
+      "tags": [
+        "hook",
+        "service",
+        "persistence",
+        "shortcuts",
+        "utility",
+        "tested"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Uses a TanStack Query mutation whose onSuccess writes setQueryData so every screen reading the same query key updates at once; staleTime Infinity keeps the local cache authoritative."
+    },
+    {
+      "id": "function:frontend/src/features/ai/shortcuts.ts:normalizeShortcut",
+      "type": "function",
+      "name": "normalizeShortcut",
+      "filePath": "frontend/src/features/ai/shortcuts.ts",
+      "lineRange": [
+        14,
+        16
+      ],
+      "summary": "Trims, collapses whitespace and caps a question at MAX_CHAT_MESSAGE_CHARS so equivalent questions compare equal.",
+      "tags": [
+        "utility",
+        "normalization",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/ai/shortcuts.ts:hasShortcut",
+      "type": "function",
+      "name": "hasShortcut",
+      "filePath": "frontend/src/features/ai/shortcuts.ts",
+      "lineRange": [
+        19,
+        22
+      ],
+      "summary": "Case-insensitive check whether a normalized question already exists in the saved list.",
+      "tags": [
+        "utility",
+        "validation",
+        "shortcuts"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/ai/shortcuts.ts:loadShortcuts",
+      "type": "function",
+      "name": "loadShortcuts",
+      "filePath": "frontend/src/features/ai/shortcuts.ts",
+      "lineRange": [
+        25,
+        33
+      ],
+      "summary": "Reads and parses the shortcut list from AsyncStorage, returning an empty list for missing or malformed data.",
+      "tags": [
+        "persistence",
+        "async-storage",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/ai/shortcuts.ts:askOnAiTab",
+      "type": "function",
+      "name": "askOnAiTab",
+      "filePath": "frontend/src/features/ai/shortcuts.ts",
+      "lineRange": [
+        41,
+        43
+      ],
+      "summary": "Navigates to the AI tab with the question as the ask param plus a timestamp so the same shortcut re-asks each time.",
+      "tags": [
+        "navigation",
+        "expo-router",
+        "ai"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/ai/shortcuts.ts:useShortcuts",
+      "type": "function",
+      "name": "useShortcuts",
+      "filePath": "frontend/src/features/ai/shortcuts.ts",
+      "lineRange": [
+        46,
+        75
+      ],
+      "summary": "Hook exposing saved shortcuts with add/remove/has/full; mutations reload the stored list, apply the change, persist it and update the shared query cache, ignoring blanks, duplicates and overflow beyond MAX_SHORTCUTS.",
+      "tags": [
+        "hook",
+        "tanstack-query",
+        "state-management",
+        "shortcuts"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "type": "file",
+      "name": "ai.shortcuts.test.tsx",
+      "filePath": "frontend/__tests__/ai.shortcuts.test.tsx",
+      "summary": "Jest + React Native Testing Library suite for the PLAN 13.10 AI shortcuts feature: covers the normalize/duplicate/load helpers, the Home ShortcutBar (add, dedupe, tap-to-ask, edit/remove, max-size limit) and the AI tab asking a shortcut on arrival plus Save as shortcut with undo.",
+      "tags": [
+        "test",
+        "ai-assistant",
+        "shortcuts",
+        "async-storage",
+        "integration-test"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Seeds AsyncStorage directly and re-renders AiScreen inside the same QueryClient/AuthContext providers to simulate new route params."
+    },
+    {
+      "id": "document:DOCS.md",
+      "type": "document",
+      "name": "DOCS.md",
+      "filePath": "DOCS.md",
+      "summary": "Living project documentation covering architecture, configuration, Supabase database, external data sources (STPT, LiveTickets, OpenStreetMap, Gemini), reliability rules and per-feature backend/frontend notes keyed to PLAN tasks; it now adds a Features -> Frontend row for 13.10 describing the Home 'Ask the city' AI shortcut bar (ShortcutBar, SaveShortcut, useShortcuts stored in AsyncStorage, max 12) that opens a fresh AI chat, alongside the nearest-stop nextArrival notes and current test counts.",
+      "tags": [
+        "documentation",
+        "architecture",
+        "entry-point",
+        "development",
+        "configuration"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:PLAN.md",
+      "type": "document",
+      "name": "PLAN.md",
+      "filePath": "PLAN.md",
+      "summary": "Task-by-task hackathon plan split into tracks A/B/C with checkbox subtasks from foundation through integration; includes the newly ticked task 13.10 (saved AI question shortcuts on Home that open the AI tab in a new chat, stored on-device, max 12), ticked task 13.9 (next arrival at the nearest stop), ticked tasks 18 and 19 and pending task 20 (trip cost).",
+      "tags": [
+        "documentation",
+        "planning",
+        "roadmap",
+        "task-tracking"
+      ],
+      "complexity": "complex"
     }
   ],
   "edges": [
@@ -23011,62 +23221,6 @@
     {
       "source": "file:frontend/__tests__/map.shell.test.tsx",
       "target": "function:frontend/src/lib/bbox.ts:bboxContains",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "target": "function:frontend/src/features/ai/ChatBubble.tsx:Sources",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ChatBubble",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ChatBubble",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ThinkingBubble",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ThinkingBubble",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ErrorBubble",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
-      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ErrorBubble",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/ai/ChatBubble.tsx:ChatBubble",
-      "target": "function:frontend/src/features/ai/ChatBubble.tsx:Sources",
       "type": "calls",
       "direction": "forward",
       "weight": 0.8
@@ -33544,13 +33698,6 @@
       "weight": 0.6
     },
     {
-      "source": "file:frontend/src/app/(tabs)/ai.tsx",
-      "target": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
       "source": "file:frontend/src/app/(tabs)/map.tsx",
       "target": "function:frontend/src/app/(tabs)/map.tsx:MapScreen",
       "type": "exports",
@@ -33560,55 +33707,6 @@
     {
       "source": "function:frontend/src/app/(tabs)/map.tsx:MapScreen",
       "target": "function:frontend/src/app/(tabs)/map.tsx:MapBody",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
-      "target": "function:frontend/src/hooks/useAi.ts:useAiChat",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
-      "target": "function:frontend/src/features/location/LocationProvider.tsx:useCurrentPosition",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
-      "target": "function:frontend/src/features/ai/RouteCards.tsx:RouteCards",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
-      "target": "function:frontend/src/features/ai/ResultCards.tsx:ResultCards",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
-      "target": "function:frontend/src/features/ai/Suggestions.tsx:Suggestions",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
-      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ChatBubble",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
-      "target": "function:frontend/src/features/ai/ChatInput.tsx:ChatInput",
       "type": "calls",
       "direction": "forward",
       "weight": 0.8
@@ -33726,20 +33824,6 @@
       "weight": 0.8
     },
     {
-      "source": "file:frontend/src/app/(tabs)/ai.tsx",
-      "target": "file:frontend/__tests__/ai.chat.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:frontend/src/app/(tabs)/ai.tsx",
-      "target": "file:frontend/__tests__/ai.routes.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "file:frontend/src/app/(tabs)/map.tsx",
       "target": "file:frontend/__tests__/map.directions.test.tsx",
       "type": "tested_by",
@@ -33766,13 +33850,6 @@
       "type": "tested_by",
       "direction": "forward",
       "weight": 0.5
-    },
-    {
-      "source": "file:frontend/src/app/(tabs)/ai.tsx",
-      "target": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
     },
     {
       "source": "file:frontend/src/app/(tabs)/map.tsx",
@@ -34993,27 +35070,6 @@
       "weight": 0.8
     },
     {
-      "source": "file:frontend/src/app/(tabs)/index.tsx",
-      "target": "function:frontend/src/app/(tabs)/index.tsx:LivePill",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/app/(tabs)/index.tsx",
-      "target": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/app/(tabs)/index.tsx",
-      "target": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
       "source": "file:frontend/src/app/(tabs)/profile.tsx",
       "target": "function:frontend/src/app/(tabs)/profile.tsx:ProfileScreen",
       "type": "contains",
@@ -35038,27 +35094,6 @@
       "source": "file:frontend/src/app/users/[id].tsx",
       "target": "function:frontend/src/app/users/[id].tsx:PublicProfileScreen",
       "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
-      "target": "function:frontend/src/features/location/LocationProvider.tsx:useCurrentPosition",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
-      "target": "function:frontend/src/hooks/useTransit.ts:useTransitSummary",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
-      "target": "function:frontend/src/hooks/queries.ts:useEventsPage",
-      "type": "calls",
       "direction": "forward",
       "weight": 0.8
     },
@@ -36232,13 +36267,6 @@
       "weight": 0.8
     },
     {
-      "source": "file:frontend/src/app/(tabs)/index.tsx",
-      "target": "file:frontend/__tests__/screens.home.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "file:frontend/src/app/events/index.tsx",
       "target": "file:frontend/__tests__/screens.home.test.tsx",
       "type": "tested_by",
@@ -36272,6 +36300,545 @@
       "type": "calls",
       "direction": "forward",
       "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/ai.tsx",
+      "target": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/index.tsx",
+      "target": "function:frontend/src/app/(tabs)/index.tsx:LivePill",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/index.tsx",
+      "target": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "target": "function:frontend/src/features/ai/ChatBubble.tsx:Sources",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ChatBubble",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ThinkingBubble",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ErrorBubble",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/ai.tsx",
+      "target": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/index.tsx",
+      "target": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ChatBubble",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ThinkingBubble",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/ai/ChatBubble.tsx",
+      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ErrorBubble",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
+      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ChatBubble",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
+      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ThinkingBubble",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
+      "target": "function:frontend/src/features/ai/ChatBubble.tsx:ErrorBubble",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
+      "target": "function:frontend/src/hooks/useAi.ts:useAiChat",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
+      "target": "function:frontend/src/features/location/LocationProvider.tsx:useCurrentPosition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
+      "target": "function:frontend/src/features/ai/SaveShortcut.tsx:SaveShortcut",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
+      "target": "function:frontend/src/features/ai/ResultCards.tsx:ResultCards",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
+      "target": "function:frontend/src/features/ai/RouteCards.tsx:RouteCards",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
+      "target": "function:frontend/src/features/ai/Suggestions.tsx:Suggestions",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
+      "target": "function:frontend/src/features/ai/ChatInput.tsx:ChatInput",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/ai.tsx:AiScreen",
+      "target": "function:frontend/src/features/ai/ChatMotif.tsx:ChatMotif",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "target": "function:frontend/src/app/(tabs)/index.tsx:LivePill",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "target": "function:frontend/src/features/location/LocationProvider.tsx:useCurrentPosition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "target": "function:frontend/src/hooks/useTransit.ts:useTransitSummary",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "target": "function:frontend/src/hooks/queries.ts:useEventsPage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "target": "function:frontend/src/features/ai/ShortcutBar.tsx:ShortcutBar",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "target": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "target": "function:frontend/src/features/events/EventCards.tsx:EventCard",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/ChatBubble.tsx:ChatBubble",
+      "target": "function:frontend/src/features/ai/ChatBubble.tsx:Sources",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/ChatBubble.tsx:ErrorBubble",
+      "target": "function:frontend/src/api/errors.ts:friendlyError",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/ai.tsx",
+      "target": "file:frontend/__tests__/ai.chat.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/ai.tsx",
+      "target": "file:frontend/__tests__/ai.routes.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/ai.tsx",
+      "target": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/index.tsx",
+      "target": "file:frontend/__tests__/screens.home.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/index.tsx",
+      "target": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:normalizeShortcut",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:normalizeShortcut",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:hasShortcut",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:hasShortcut",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:loadShortcuts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:loadShortcuts",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:askOnAiTab",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:askOnAiTab",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:useShortcuts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:useShortcuts",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/ai/SaveShortcut.tsx",
+      "target": "function:frontend/src/features/ai/SaveShortcut.tsx:SaveShortcut",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/SaveShortcut.tsx",
+      "target": "function:frontend/src/features/ai/SaveShortcut.tsx:SaveShortcut",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "target": "function:frontend/src/features/ai/ShortcutBar.tsx:ShortcutButton",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "target": "function:frontend/src/features/ai/ShortcutBar.tsx:ShortcutBar",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "target": "function:frontend/src/features/ai/ShortcutBar.tsx:ShortcutBar",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/SaveShortcut.tsx:SaveShortcut",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:useShortcuts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/SaveShortcut.tsx:SaveShortcut",
+      "target": "function:frontend/src/ui/Icon.tsx:Icon",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/SaveShortcut.tsx:SaveShortcut",
+      "target": "function:frontend/src/ui/Text.tsx:Text",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/ShortcutBar.tsx:ShortcutBar",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:useShortcuts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/ShortcutBar.tsx:ShortcutBar",
+      "target": "function:frontend/src/features/ai/ShortcutBar.tsx:ShortcutButton",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/ShortcutBar.tsx:ShortcutBar",
+      "target": "function:frontend/src/ui/Button.tsx:Button",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/ShortcutBar.tsx:ShortcutButton",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:askOnAiTab",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/ShortcutBar.tsx:ShortcutButton",
+      "target": "function:frontend/src/ui/Icon.tsx:Icon",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/shortcuts.ts:useShortcuts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:loadShortcuts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/shortcuts.ts:useShortcuts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:hasShortcut",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/shortcuts.ts:useShortcuts",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:normalizeShortcut",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/ai/shortcuts.ts:hasShortcut",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:normalizeShortcut",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "target": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/features/ai/SaveShortcut.tsx",
+      "target": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:normalizeShortcut",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:hasShortcut",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "target": "function:frontend/src/features/ai/shortcuts.ts:loadShortcuts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "target": "function:frontend/__tests__/testUtils.tsx:renderScreen",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "target": "function:frontend/__tests__/testUtils.tsx:setParams",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "target": "function:frontend/__tests__/testUtils.tsx:fakeAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/features/ai/SaveShortcut.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/features/ai/shortcuts.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "document:DOCS.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
     },
     {
       "source": "file:backend/src/main/java/com/unihack8/backend/ai/client/GeminiClient.java",
@@ -42690,6 +43257,54 @@
       "recoveredFromImportMap": true
     },
     {
+      "source": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "target": "file:frontend/__tests__/testUtils.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "target": "file:frontend/src/app/(tabs)/ai.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "target": "file:frontend/src/app/(tabs)/index.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "target": "file:frontend/src/features/ai/shortcuts.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "target": "file:frontend/src/features/auth/AuthProvider.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/ai.shortcuts.test.tsx",
+      "target": "file:frontend/testing/mocks/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
       "source": "file:frontend/__tests__/api.client.test.ts",
       "target": "file:frontend/src/api/client.ts",
       "type": "imports",
@@ -43875,6 +44490,14 @@
     },
     {
       "source": "file:frontend/src/app/(tabs)/ai.tsx",
+      "target": "file:frontend/src/features/ai/SaveShortcut.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/ai.tsx",
       "target": "file:frontend/src/features/ai/Suggestions.tsx",
       "type": "imports",
       "direction": "forward",
@@ -43924,6 +44547,14 @@
     {
       "source": "file:frontend/src/app/(tabs)/index.tsx",
       "target": "file:frontend/src/api/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/index.tsx",
+      "target": "file:frontend/src/features/ai/ShortcutBar.tsx",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -45338,8 +45969,96 @@
       "recoveredFromImportMap": true
     },
     {
+      "source": "file:frontend/src/features/ai/SaveShortcut.tsx",
+      "target": "file:frontend/src/features/ai/shortcuts.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/SaveShortcut.tsx",
+      "target": "file:frontend/src/ui/Icon.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/SaveShortcut.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/SaveShortcut.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "target": "file:frontend/src/api/types.ai.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "target": "file:frontend/src/features/ai/shortcuts.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "target": "file:frontend/src/ui/Button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "target": "file:frontend/src/ui/Icon.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/ShortcutBar.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
       "source": "file:frontend/src/features/ai/Suggestions.tsx",
       "target": "file:frontend/src/ui/Chip.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/ai/shortcuts.ts",
+      "target": "file:frontend/src/api/types.ai.ts",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -47953,7 +48672,10 @@
         "file:frontend/src/features/journey/progress.ts",
         "file:frontend/src/features/journey/useJourney.ts",
         "file:frontend/src/features/users/ReliabilityLine.tsx",
-        "file:frontend/src/ui/RoutePlate.tsx"
+        "file:frontend/src/ui/RoutePlate.tsx",
+        "file:frontend/src/features/ai/SaveShortcut.tsx",
+        "file:frontend/src/features/ai/ShortcutBar.tsx",
+        "file:frontend/src/features/ai/shortcuts.ts"
       ]
     },
     {
@@ -48164,7 +48886,8 @@
         "file:frontend/__tests__/live.backend.test.ts",
         "file:frontend/__tests__/network.offline.test.tsx",
         "file:frontend/__tests__/ai.routes.test.tsx",
-        "file:frontend/__tests__/map.journey.test.tsx"
+        "file:frontend/__tests__/map.journey.test.tsx",
+        "file:frontend/__tests__/ai.shortcuts.test.tsx"
       ]
     },
     {

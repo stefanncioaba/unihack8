@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "3f9aba219455e8af756af593d4cf9caab90922e5",
-  "generatedAt": "2026-11-14T13:19:32.855Z",
+  "gitCommitHash": "508e0da3bfb5e3f8c1421262af25a7eec5834425",
+  "generatedAt": "2026-11-14T13:33:43.669Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,22 +25,22 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "96ee714619b8235585155efd471d55a254a0fa2b822c07619f836a765d59115e",
+      "contentHash": "e91ba9e3684d3509903cfa956ca836d5fc974eb0a15094f77de9155d335cafd3",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 548,
+      "totalLines": 549,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "eea6840e808b444deb9be843a187e96bcc75a28b39b048828e546fd86ae7d901",
+      "contentHash": "f98af4bd437da87a0d0054d85ca9d3049473fe6d9d6cbafdd9b7ea97ddeffd05",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 370,
+      "totalLines": 371,
       "hasStructuralAnalysis": false
     },
     "README.md": {
@@ -30895,20 +30895,27 @@
     },
     "frontend/src/app/(tabs)/ai.tsx": {
       "filePath": "frontend/src/app/(tabs)/ai.tsx",
-      "contentHash": "e9e9fbd7dd77f137e1d109d4d9911dc800480a62a55e70c6465e62018db1364e",
+      "contentHash": "d09f00f91a3d9ac591f130f3310922a4869f6e065000bbee51bf7aaa49ac93e3",
       "functions": [
         {
           "name": "AiScreen",
           "params": [],
           "exported": true,
-          "lineCount": 59
+          "lineCount": 72
         }
       ],
       "classes": [],
       "imports": [
         {
+          "source": "expo-router",
+          "specifiers": [
+            "useLocalSearchParams"
+          ]
+        },
+        {
           "source": "react",
           "specifiers": [
+            "useEffect",
             "useRef"
           ]
         },
@@ -30938,6 +30945,12 @@
           "source": "@/features/ai/ChatMotif",
           "specifiers": [
             "ChatMotif"
+          ]
+        },
+        {
+          "source": "@/features/ai/SaveShortcut",
+          "specifiers": [
+            "SaveShortcut"
           ]
         },
         {
@@ -30993,12 +31006,12 @@
       "exports": [
         "AiScreen"
       ],
-      "totalLines": 85,
+      "totalLines": 101,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/(tabs)/index.tsx": {
       "filePath": "frontend/src/app/(tabs)/index.tsx",
-      "contentHash": "1474867a170f241ed3ab5b702c2088e4b877b933a60d4837c544b3cdd90f08d7",
+      "contentHash": "f02199b147de3a5ff31b9e81fba715faa5835f8f32096923e085aeb15afd98c4",
       "functions": [
         {
           "name": "LivePill",
@@ -31012,7 +31025,7 @@
           "name": "HomeScreen",
           "params": [],
           "exported": true,
-          "lineCount": 89
+          "lineCount": 91
         }
       ],
       "classes": [],
@@ -31045,6 +31058,12 @@
           "specifiers": [
             "EVENT_CATEGORIES",
             "EventCategory"
+          ]
+        },
+        {
+          "source": "@/features/ai/ShortcutBar",
+          "specifiers": [
+            "ShortcutBar"
           ]
         },
         {
@@ -31138,7 +31157,7 @@
       "exports": [
         "HomeScreen"
       ],
-      "totalLines": 160,
+      "totalLines": 163,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/(tabs)/map.tsx": {
@@ -32500,7 +32519,7 @@
     },
     "frontend/src/features/ai/ChatBubble.tsx": {
       "filePath": "frontend/src/features/ai/ChatBubble.tsx",
-      "contentHash": "019427becc0bcbdb2638419ec97210a7fd9eee926ec2f8e2c360ac37c6514b8e",
+      "contentHash": "5fe836f61ea5bcf6746e4679945cfefc193d32b28eccc72313a14ef425bf84d5",
       "functions": [
         {
           "name": "Sources",
@@ -32513,10 +32532,10 @@
         {
           "name": "ChatBubble",
           "params": [
-            "{ message, children }"
+            "{ message, children, userAction }"
           ],
           "exported": true,
-          "lineCount": 12
+          "lineCount": 13
         },
         {
           "name": "ThinkingBubble",
@@ -32599,7 +32618,7 @@
         "ThinkingBubble",
         "ErrorBubble"
       ],
-      "totalLines": 92,
+      "totalLines": 93,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/ai/ChatInput.tsx": {
@@ -35397,7 +35416,7 @@
     },
     "frontend/src/hooks/useAi.ts": {
       "filePath": "frontend/src/hooks/useAi.ts",
-      "contentHash": "c2ab1260443d7a3f99bd633435550c17eda7179e1257c67d3fedf85ddbe7ff22",
+      "contentHash": "396628a5836062278f64dd8090e6f047158e6783016617775602bb9534913515",
       "functions": [
         {
           "name": "newId",
@@ -35411,7 +35430,7 @@
             "location"
           ],
           "exported": true,
-          "lineCount": 69
+          "lineCount": 83
         }
       ],
       "classes": [],
@@ -35456,7 +35475,7 @@
       "exports": [
         "useAiChat"
       ],
-      "totalLines": 97,
+      "totalLines": 111,
       "hasStructuralAnalysis": true
     },
     "frontend/src/hooks/useDebounced.ts": {
@@ -39520,6 +39539,332 @@
         "NextArrivalDto"
       ],
       "totalLines": 12,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/__tests__/ai.shortcuts.test.tsx": {
+      "filePath": "frontend/__tests__/ai.shortcuts.test.tsx",
+      "contentHash": "2c5d7a88581c34653383c986bb9b425311c7513fa2d1c3fcee1dfcca11f449f6",
+      "functions": [
+        {
+          "name": "aiAgain",
+          "params": [
+            "client"
+          ],
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "seed",
+          "params": [
+            "list"
+          ],
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@react-native-async-storage/async-storage",
+          "specifiers": [
+            "AsyncStorage"
+          ]
+        },
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "QueryClientProvider",
+            "QueryClient"
+          ]
+        },
+        {
+          "source": "@testing-library/react-native",
+          "specifiers": [
+            "act",
+            "fireEvent",
+            "screen",
+            "waitFor",
+            "within"
+          ]
+        },
+        {
+          "source": "@/app/(tabs)/ai",
+          "specifiers": [
+            "AiScreen"
+          ]
+        },
+        {
+          "source": "@/app/(tabs)/index",
+          "specifiers": [
+            "HomeScreen"
+          ]
+        },
+        {
+          "source": "@/features/ai/shortcuts",
+          "specifiers": [
+            "hasShortcut",
+            "loadShortcuts",
+            "MAX_SHORTCUTS",
+            "normalizeShortcut",
+            "SHORTCUTS_STORAGE_KEY"
+          ]
+        },
+        {
+          "source": "@test/mocks",
+          "specifiers": [
+            "setMockLatency"
+          ]
+        },
+        {
+          "source": "@/features/auth/AuthProvider",
+          "specifiers": [
+            "AuthContext"
+          ]
+        },
+        {
+          "source": "./testUtils",
+          "specifiers": [
+            "fakeAuth",
+            "mockRouter",
+            "renderScreen",
+            "setParams"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 152,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/ai/SaveShortcut.tsx": {
+      "filePath": "frontend/src/features/ai/SaveShortcut.tsx",
+      "contentHash": "b6df998ed876666f6888b383c4e0934688820ffe5a32ddaaa205bde6d0f868ae",
+      "functions": [
+        {
+          "name": "SaveShortcut",
+          "params": [
+            "{ question }"
+          ],
+          "exported": true,
+          "lineCount": 19
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react-native",
+          "specifiers": [
+            "Pressable",
+            "StyleSheet"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "Icon"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors"
+          ]
+        },
+        {
+          "source": "./shortcuts",
+          "specifiers": [
+            "useShortcuts"
+          ]
+        }
+      ],
+      "exports": [
+        "SaveShortcut"
+      ],
+      "totalLines": 35,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/ai/ShortcutBar.tsx": {
+      "filePath": "frontend/src/features/ai/ShortcutBar.tsx",
+      "contentHash": "bda2c5e69a50bf263de1061a235d489e8189fc88f6ec513b7d2ab7c27fc7c8a9",
+      "functions": [
+        {
+          "name": "ShortcutButton",
+          "params": [
+            "{ text, editing, onLongPress, onRemove }"
+          ],
+          "exported": false,
+          "lineCount": 27
+        },
+        {
+          "name": "ShortcutBar",
+          "params": [],
+          "exported": true,
+          "lineCount": 88
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "useState"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "Pressable",
+            "ScrollView",
+            "StyleSheet",
+            "TextInput",
+            "View"
+          ]
+        },
+        {
+          "source": "@/api/types.ai",
+          "specifiers": [
+            "MAX_CHAT_MESSAGE_CHARS"
+          ]
+        },
+        {
+          "source": "@/ui/Button",
+          "specifiers": [
+            "Button"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "Icon"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors",
+            "PAGE_MARGIN",
+            "radius"
+          ]
+        },
+        {
+          "source": "./shortcuts",
+          "specifiers": [
+            "askOnAiTab",
+            "useShortcuts"
+          ]
+        }
+      ],
+      "exports": [
+        "ShortcutBar"
+      ],
+      "totalLines": 167,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/ai/shortcuts.ts": {
+      "filePath": "frontend/src/features/ai/shortcuts.ts",
+      "contentHash": "1a3877df7cd10495ade7d218a4f3e76eca3717b8e77a4f6b73c7eab819b91d21",
+      "functions": [
+        {
+          "name": "normalizeShortcut",
+          "params": [
+            "text"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "hasShortcut",
+          "params": [
+            "list",
+            "text"
+          ],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "loadShortcuts",
+          "params": [],
+          "returnType": "Promise<string[]>",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "saveShortcuts",
+          "params": [
+            "list"
+          ],
+          "returnType": "Promise<void>",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "askOnAiTab",
+          "params": [
+            "question"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "useShortcuts",
+          "params": [],
+          "exported": true,
+          "lineCount": 30
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@react-native-async-storage/async-storage",
+          "specifiers": [
+            "AsyncStorage"
+          ]
+        },
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "useMutation",
+            "useQuery",
+            "useQueryClient"
+          ]
+        },
+        {
+          "source": "expo-router",
+          "specifiers": [
+            "router"
+          ]
+        },
+        {
+          "source": "@/api/types.ai",
+          "specifiers": [
+            "MAX_CHAT_MESSAGE_CHARS"
+          ]
+        }
+      ],
+      "exports": [
+        "SHORTCUTS_STORAGE_KEY",
+        "MAX_SHORTCUTS",
+        "normalizeShortcut",
+        "hasShortcut",
+        "loadShortcuts",
+        "askOnAiTab",
+        "useShortcuts"
+      ],
+      "totalLines": 76,
       "hasStructuralAnalysis": true
     }
   }
