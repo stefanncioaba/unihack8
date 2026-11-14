@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "ab9abca27c26bd07e13ac1f32c1d0bc2aad8eef6",
-  "generatedAt": "2026-11-14T13:33:29.622Z",
+  "gitCommitHash": "1a45ceb76a356a8204ce738f35aee4497d7689c5",
+  "generatedAt": "2026-11-14T13:35:27.062Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,7 +25,7 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "a15b22ceeef86a3f6b4a54a0a3006d5bd39c00f23cd5ee8f7a5dd2ed679e902b",
+      "contentHash": "8cd650b14ba5c096a08d88397193f2376e91a3b6aef23914e15a8d13b604640e",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -35,12 +35,12 @@
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "68b1aa299c666621bd2e36a79fc0ad378b88125574b9b420102265639b5ef45c",
+      "contentHash": "95d45e2769c19d6d2dfdd025add98448bc738c3c61d2ff9b4c8c267ce058bcd9",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 382,
+      "totalLines": 383,
       "hasStructuralAnalysis": false
     },
     "README.md": {
@@ -30765,7 +30765,7 @@
     },
     "frontend/__tests__/map.filters.test.tsx": {
       "filePath": "frontend/__tests__/map.filters.test.tsx",
-      "contentHash": "63bb44d4329a3da3f532b85f2d942ba97f40e6b27cedf629644dcbf6f2fc5b28",
+      "contentHash": "5f08c692edd18b7fed058b4fd7f1f87acfe219ea11d7c76cc558374394b526aa",
       "functions": [
         {
           "name": "run",
@@ -30863,7 +30863,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 184,
+      "totalLines": 183,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/map.journey.test.tsx": {
@@ -31059,7 +31059,7 @@
     },
     "frontend/__tests__/map.liveTransit.test.tsx": {
       "filePath": "frontend/__tests__/map.liveTransit.test.tsx",
-      "contentHash": "d5535214b578e3fcbd5e432aef5d62a2ffb7d502840accfe779eb80b5d42c6fb",
+      "contentHash": "7d2aaff6126f52fe7fb57aca038fff10f4364e8ba9e052200fb2f93095f90a25",
       "functions": [
         {
           "name": "call",
@@ -31242,7 +31242,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 428,
+      "totalLines": 416,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/map.shell.test.tsx": {
@@ -31322,7 +31322,7 @@
     },
     "frontend/__tests__/map.transit.test.tsx": {
       "filePath": "frontend/__tests__/map.transit.test.tsx",
-      "contentHash": "4b602a3f450dc77c80d7e31042d96cba7035b6c5750576d118b9112164557547",
+      "contentHash": "54c09b015f50051bfccf60d0ccdad00ec565ecd4800cd053d696849725ded4ae",
       "functions": [
         {
           "name": "call",
@@ -31399,7 +31399,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 124,
+      "totalLines": 113,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/map.viewTracking.test.tsx": {
@@ -33181,13 +33181,13 @@
     },
     "frontend/src/app/(tabs)/map.tsx": {
       "filePath": "frontend/src/app/(tabs)/map.tsx",
-      "contentHash": "0dd53528a958e02a859943a59bc19dd3daa803b7bb1598ec8f521ba2ad8a05e3",
+      "contentHash": "547718d0c43a1f82424effa4cbc3e60e97db30103ab6ae008b21b4b35373344a",
       "functions": [
         {
           "name": "MapBody",
           "params": [],
           "exported": false,
-          "lineCount": 225
+          "lineCount": 206
         },
         {
           "name": "MapScreen",
@@ -33324,19 +33324,6 @@
           ]
         },
         {
-          "source": "@/features/transit/TransitControls",
-          "specifiers": [
-            "TransitControls"
-          ]
-        },
-        {
-          "source": "@/features/transit/lines",
-          "specifiers": [
-            "sameLine",
-            "vehiclesOfLine"
-          ]
-        },
-        {
           "source": "@/features/transit/TransitLayer",
           "specifiers": [
             "TransitLayer"
@@ -33359,7 +33346,6 @@
           "specifiers": [
             "useAllVehicles",
             "useStopsInArea",
-            "useTransitRoutes",
             "useTransitShapes"
           ]
         },
@@ -33410,7 +33396,7 @@
       "exports": [
         "MapScreen"
       ],
-      "totalLines": 316,
+      "totalLines": 295,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/(tabs)/profile.tsx": {
@@ -37603,47 +37589,6 @@
         "StopPanel"
       ],
       "totalLines": 121,
-      "hasStructuralAnalysis": true
-    },
-    "frontend/src/features/transit/TransitControls.tsx": {
-      "filePath": "frontend/src/features/transit/TransitControls.tsx",
-      "contentHash": "1ee6499ac4ee8a18be70f7150fe8bbf3ca07b9a6cfc74ecd007a1965afd3be8e",
-      "functions": [
-        {
-          "name": "TransitControls",
-          "params": [
-            "{ line, onSelectLine }"
-          ],
-          "exported": true,
-          "lineCount": 18
-        }
-      ],
-      "classes": [],
-      "imports": [
-        {
-          "source": "react-native",
-          "specifiers": [
-            "ScrollView",
-            "StyleSheet"
-          ]
-        },
-        {
-          "source": "@/hooks/useTransit",
-          "specifiers": [
-            "useTransitRoutes"
-          ]
-        },
-        {
-          "source": "@/ui/Chip",
-          "specifiers": [
-            "Chip"
-          ]
-        }
-      ],
-      "exports": [
-        "TransitControls"
-      ],
-      "totalLines": 38,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/transit/TransitLayer.tsx": {

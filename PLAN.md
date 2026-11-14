@@ -362,7 +362,7 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 - [x] **21.6 Directions:** live vehicles of the route's lines drawn along the route (preview and journey mode).
 - [x] **21.7 Profile:** reliability score no longer shows ".." instead of the number.
 - [x] **21.8a Tests and `DOCS.md` updated.**
-- [ ] **21.8b Knowledge graph updated** — skipped for now (48 changed files force a full rebuild of 474 files).
+- [x] **21.8b Knowledge graph updated** (full rebuild, then an incremental update after the line chips were removed).
 
 ---
 
