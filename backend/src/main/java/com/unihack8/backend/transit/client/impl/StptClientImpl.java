@@ -62,9 +62,20 @@ public class StptClientImpl implements StptClient {
     // Answer shape: { "success": true, "data": { "vehicles": [...] } }.
     @Override
     public List<StptVehicle> fetchVehicles(String route) {
-        JsonNode root = parse(http.get()
+        return vehicles(http.get()
                 .uri(b -> b.path("/gtfs-vehicles.php").queryParam("route", route).build())
                 .retrieve().body(String.class));
+    }
+
+    // Same answer shape; without ?route= STPT returns every line's vehicles.
+    @Override
+    public List<StptVehicle> fetchAllVehicles() {
+        return vehicles(http.get().uri("/gtfs-vehicles.php").retrieve().body(String.class));
+    }
+
+    // Reads data.vehicles from a /gtfs-vehicles.php body; success=false is a failure.
+    private List<StptVehicle> vehicles(String body) {
+        JsonNode root = parse(body);
         if (root.has("success") && !root.path("success").asBoolean()) {
             throw new IllegalStateException("STPT vehicles answer was not successful");
         }

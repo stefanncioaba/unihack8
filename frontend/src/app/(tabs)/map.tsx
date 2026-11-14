@@ -1,14 +1,14 @@
 // Map tab: dark map with the user's position and the Map joints (context + bottom panel).
-// Layers: places (14.2), events (14.3), transit stops and live vehicles (14.4) and directions (14.5).
+// Layers: places (14.2), events (14.3), transit (14.4: every line's path, every live vehicle, stops) and directions
+// (14.5, with the live vehicles of the route's lines). Tapping a vehicle opens its live panel.
 // Long-press anywhere to get directions to that spot. An AI route card opens it with a route preview, or with "Go" in
 // journey mode (PLAN 18.5): the route from the live position, the camera following the user and the current step.
 import { useLocalSearchParams } from 'expo-router';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import MapView, { Marker, type LongPressEvent, type MapPressEvent, type Region } from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import type { PlaceCategory } from '@/api/types.places';
 import { useDirectionsMode } from '@/features/directions/DirectionsContext';
 import { DirectionsLayer } from '@/features/directions/DirectionsLayer';
 import { JourneyLayer, JourneyPanel } from '@/features/journey/JourneyPanel';
@@ -18,15 +18,19 @@ import { useCurrentPosition } from '@/features/location/LocationProvider';
 import { EventMarkers } from '@/features/map/EventMarkers';
 import { MapFilterBar } from '@/features/map/MapFilterBar';
 import { MapPanel } from '@/features/map/MapPanel';
-import { MapProvider, useMapContext } from '@/features/map/MapContext';
+import type { TransitVehicle } from '@/api/types.transit';
+import { MapProvider, isTransitLayerSelection, useMapContext } from '@/features/map/MapContext';
+import { INITIAL_MAP_FILTERS, mapFiltersReducer, type MapFilterAction } from '@/features/map/mapFilters';
 import { PlaceMarkers } from '@/features/map/PlaceMarkers';
 import { TransitControls } from '@/features/transit/TransitControls';
+import { sameLine, vehiclesOfLine } from '@/features/transit/lines';
 import { TransitLayer } from '@/features/transit/TransitLayer';
 import { useEventsInArea } from '@/hooks/useMapEvents';
 import { usePlacesInArea } from '@/hooks/usePlaces';
-import { useStopsInArea, useTransitRoutes, useVehicles } from '@/hooks/useTransit';
+import { useAllVehicles, useStopsInArea, useTransitRoutes, useTransitShapes } from '@/hooks/useTransit';
 import { regionToBbox } from '@/lib/bbox';
 import { isValidCoordinate, regionFor } from '@/lib/geo';
+import { MAP_CHIP_BG } from '@/ui/Chip';
 import { Icon } from '@/ui/Icon';
 import { darkMapStyle } from '@/ui/mapStyle';
 import { Text } from '@/ui/Text';
@@ -42,42 +46,63 @@ const ZOOM_STOPS_MAX_SPAN = 0.03;
 function MapBody() {
   const params = useLocalSearchParams<{ lat?: string; lon?: string; title?: string; placeId?: string; eventId?: string; at?: string; route?: string }>();
   const { position, status, refresh } = useCurrentPosition();
-  const { bbox, selection, setVisibleBbox, select, setDestination } = useMapContext();
+  const { bbox, selection, destination, setVisibleBbox, select, setDestination } = useMapContext();
   const { setMode } = useDirectionsMode();
   const mapRef = useRef<MapView>(null);
   const [journeyTarget, setJourneyTarget] = useState<JourneyTarget | null>(null);
   const journey = useJourney(journeyTarget);
-  const [categories, setCategories] = useState<PlaceCategory[]>([]);
-  const [eventsOn, setEventsOn] = useState(true);
-  const [transitOn, setTransitOn] = useState(false);
+  const [filters, dispatchFilter] = useReducer(mapFiltersReducer, INITIAL_MAP_FILTERS);
+  const { placesOn, categories, eventsOn, transitOn } = filters;
   const [lineId, setLineId] = useState<string | null>(null);
 
   // Zoomed far out there would be too many pins: ask for places only below this span (about 6 km).
   const span = bbox ? bbox.maxLat - bbox.minLat : 0;
   const zoomedIn = span > 0 && span <= ZOOM_PLACES_MAX_SPAN;
-  const places = usePlacesInArea(bbox, categories, zoomedIn);
+  const placesVisible = placesOn && zoomedIn;
+  const places = usePlacesInArea(bbox, categories, placesVisible);
   const events = useEventsInArea(bbox, eventsOn);
   const labelsVisible = span > 0 && span <= ZOOM_LABELS_MAX_SPAN;
   const stopsVisible = transitOn && span > 0 && span <= ZOOM_STOPS_MAX_SPAN;
   const stops = useStopsInArea(bbox, stopsVisible);
   const lines = useTransitRoutes(transitOn);
   const line = (transitOn && lines.data?.find((r) => r.id === lineId)) || null;
-  const vehicles = useVehicles(line ? line.id : null);
+  // Every line's path and every live vehicle (one request each, shared by all lines); a chosen line filters them.
+  const shapes = useTransitShapes(transitOn);
+  const vehicles = useAllVehicles(transitOn);
+  const lineVehicles = useMemo(() => vehiclesOfLine(vehicles.data?.vehicles, line ? line.id : null), [vehicles.data, line]);
+  // Vehicles the transport layer draws; the directions / journey layers skip them so none is drawn twice.
+  const shownVehicleIds = useMemo(() => new Set(transitOn ? lineVehicles.map((v) => v.id) : []), [transitOn, lineVehicles]);
 
-  /** Turning transit off also forgets the chosen line. */
-  function toggleTransit() {
-    setTransitOn((on) => !on);
-    setLineId(null);
+  /** Opens a vehicle's live panel; a route being previewed stays drawn behind it. */
+  const selectVehicle = useCallback(
+    (v: TransitVehicle) => select({ type: 'vehicle', id: v.id, route: v.route, vehicle: v, returnTo: destination ?? undefined }),
+    [select, destination],
+  );
+
+  /** Applies a filter chip press; switching transport (on or off) also forgets the chosen line, and turning it off
+   * closes a stop or vehicle panel opened from the transport layer (its marker is gone). */
+  function changeFilter(action: MapFilterAction) {
+    if (action.type === 'transport') {
+      setLineId(null);
+      if (transitOn && isTransitLayerSelection(selection)) select(null);
+    }
+    dispatchFilter(action);
   }
 
-  /** Tapping a cluster zooms in on it (half the current view). */
-  function zoomTo(lat: number, lon: number) {
-    mapRef.current?.animateToRegion(regionFor({ lat, lon }, Math.max(span / 2, 0.004)), 350);
+  /** Chooses a line (or all lines); a vehicle or stop panel from the transport layer that is not on it is closed. */
+  function chooseLine(id: string | null) {
+    setLineId(id);
+    if (!id || !isTransitLayerSelection(selection)) return;
+    if (selection.type === 'vehicle' && !sameLine(selection.route, id)) select(null);
+    if (selection.type === 'stop') {
+      const stop = stops.data?.find((s) => s.id === selection.id);
+      if (stop && !stop.routes.some((r) => sameLine(r, id))) select(null);
+    }
   }
 
-  /** Adds or removes a place category from the filter. */
-  function toggleCategory(c: PlaceCategory) {
-    setCategories((current) => (current.includes(c) ? current.filter((x) => x !== c) : [...current, c]));
+  /** Tapping a cluster zooms in on it: to the given span, or half the current view. */
+  function zoomTo(lat: number, lon: number, targetSpan?: number) {
+    mapRef.current?.animateToRegion(regionFor({ lat, lon }, targetSpan ?? Math.max(span / 2, 0.004)), 350);
   }
 
   const lat = Number(params.lat);
@@ -161,7 +186,7 @@ function MapBody() {
         testID="main-map"
       >
         {focus && !params.placeId && !params.eventId && <Marker coordinate={{ latitude: focus.lat, longitude: focus.lon }} title={params.title} pinColor={colors.oxford} testID="focus-marker" />}
-        {zoomedIn && places.data && (
+        {placesVisible && places.data && (
           <PlaceMarkers
             places={places.data.items}
             selectedId={selection?.type === 'place' ? selection.id : undefined}
@@ -186,11 +211,18 @@ function MapBody() {
             stops={stopsVisible ? stops.data : undefined}
             line={line}
             vehicles={vehicles.data?.vehicles}
+            shapes={shapes.data}
             selectedStopId={selection?.type === 'stop' ? selection.id : undefined}
+            selectedVehicleId={selection?.type === 'vehicle' ? selection.id : undefined}
             onSelectStop={(id) => select({ type: 'stop', id })}
+            onSelectVehicle={selectVehicle}
           />
         )}
-        {journeyTarget ? <JourneyLayer target={journeyTarget} journey={journey} /> : <DirectionsLayer />}
+        {journeyTarget ? (
+          <JourneyLayer target={journeyTarget} journey={journey} hiddenVehicleIds={shownVehicleIds} />
+        ) : (
+          <DirectionsLayer hiddenVehicleIds={shownVehicleIds} />
+        )}
       </MapView>
 
       <SafeAreaView style={styles.overlay} edges={['top']} pointerEvents="box-none">
@@ -198,25 +230,19 @@ function MapBody() {
           <View style={styles.pill}>
             <Text variant="chip">{focus && params.title ? params.title : 'Timișoara'}</Text>
           </View>
-          <Pressable accessibilityRole="button" accessibilityLabel="Locate me" onPress={locate} style={styles.round}>
+          <Pressable accessibilityRole="button" accessibilityLabel="Locate me" onPress={locate} style={({ pressed }) => [styles.round, pressed && styles.pressed]}>
             <Icon name="locate-outline" size={18} />
           </Pressable>
         </View>
-        <MapFilterBar
-          categories={categories}
-          onToggleCategory={toggleCategory}
-          onClearCategories={() => setCategories([])}
-          eventsOn={eventsOn}
-          onToggleEvents={() => setEventsOn((v) => !v)}
-        />
-        {!zoomedIn && (
+        <MapFilterBar filters={filters} onChange={changeFilter} />
+        {transitOn && <TransitControls line={lineId} onSelectLine={chooseLine} />}
+        {placesOn && !zoomedIn && (
           <View style={styles.hint} testID="zoom-hint">
             <Text variant="caption" tone="muted">
               Zoom in to see places
             </Text>
           </View>
         )}
-        <TransitControls transitOn={transitOn} onToggleTransit={toggleTransit} line={lineId} onSelectLine={setLineId} />
         {transitOn && span > ZOOM_STOPS_MAX_SPAN && !line && (
           <View style={styles.hint} testID="stops-hint">
             <Text variant="caption" tone="muted">
@@ -224,16 +250,21 @@ function MapBody() {
             </Text>
           </View>
         )}
-        {line && vehicles.data && (vehicles.data.vehicles.length === 0 || vehicles.data.stale) && (
+        {transitOn && vehicles.data && ((line && lineVehicles.length === 0) || vehicles.data.stale) && (
           <View style={styles.hint} testID="vehicles-hint">
             <Text variant="caption" tone="muted">
-              {vehicles.data.vehicles.length === 0 ? `No vehicles on line ${line.name} right now` : 'Live positions are delayed'}
+              {line && lineVehicles.length === 0 ? `No vehicles on line ${line.name} right now` : 'Live positions are delayed'}
             </Text>
           </View>
         )}
       </SafeAreaView>
 
-      {journeyTarget ? <JourneyPanel target={journeyTarget} journey={journey} onEnd={() => setJourneyTarget(null)} /> : <MapPanel />}
+      {/* In journey mode a tapped vehicle's panel shows over the journey panel; closing it brings the journey back. */}
+      {journeyTarget && selection?.type !== 'vehicle' ? (
+        <JourneyPanel target={journeyTarget} journey={journey} onEnd={() => setJourneyTarget(null)} />
+      ) : (
+        <MapPanel />
+      )}
     </View>
   );
 }
@@ -257,7 +288,7 @@ const styles = StyleSheet.create({
     height: 26,
     borderRadius: 13,
     justifyContent: 'center',
-    backgroundColor: 'rgba(0,29,61,0.92)',
+    backgroundColor: MAP_CHIP_BG,
   },
   topRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
   pill: {
@@ -265,7 +296,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     borderRadius: 16,
     justifyContent: 'center',
-    backgroundColor: 'rgba(0,29,61,0.92)',
+    backgroundColor: MAP_CHIP_BG,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.borderStrong,
   },
@@ -275,8 +306,10 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(0,29,61,0.92)',
+    backgroundColor: MAP_CHIP_BG,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.borderStrong,
   },
+  // Same feedback as the chips: dim and shrink a little, keep the colours.
+  pressed: { opacity: 0.8, transform: [{ scale: 0.94 }] },
 });

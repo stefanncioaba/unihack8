@@ -67,7 +67,7 @@ export function ReliabilityLine({ score }: { score: number }) {
             </View>
           ))}
         {width > 0 && (
-          <View style={[styles.anchor, styles.plateAnchor, { left: at(linePosition(score)) }]}>
+          <View testID="score-plate-anchor" style={[styles.anchor, styles.plateAnchor, { left: at(linePosition(score)) }]}>
             <RoutePlate label={score.toLocaleString('en')} size="md" style={styles.plate} />
           </View>
         )}
@@ -96,6 +96,8 @@ export function ReliabilityLine({ score }: { score: number }) {
 }
 
 const PLATE = 42;
+/** Width reserved for the score plate (fits up to a 5-character label like `1,020`). */
+const PLATE_BOX = 90;
 
 const styles = StyleSheet.create({
   card: {
@@ -116,7 +118,9 @@ const styles = StyleSheet.create({
   dotPassed: { backgroundColor: colors.accent, borderColor: colors.bg },
   stopLabel: { marginTop: 6, width: 40, textAlign: 'center', fontSize: 10.5, color: colors.textMuted, fontVariant: ['tabular-nums'] },
   stopNext: { color: colors.gold, fontWeight: '700' },
-  plateAnchor: { top: 26 - (PLATE + 6) / 2 },
+  // The plate needs real width: inside the zero-width anchor its text was squeezed to "..". A wide box shifted back by
+  // half its width keeps the plate centred on the score.
+  plateAnchor: { top: 26 - (PLATE + 6) / 2, width: PLATE_BOX, marginLeft: -PLATE_BOX / 2 },
   plate: { borderWidth: 3, borderColor: colors.surface, borderBottomWidth: 3, height: PLATE + 6 },
   hidden: { position: 'absolute', width: 1, height: 1, opacity: 0 },
   fares: { flexDirection: 'row', paddingTop: 10, borderTopWidth: 1, borderTopColor: colors.borderStrong, borderStyle: 'dashed' },

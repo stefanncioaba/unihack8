@@ -5,7 +5,9 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import type { PlanMode, RouteLeg, RoutePlan } from '@/api/types.routing';
 import type { Destination } from '@/features/map/MapContext';
 import { useMapContext } from '@/features/map/MapContext';
+import { lineColor, nearestVehicle, resolveLineId, typeLabel, vehicleLineName } from '@/features/transit/lines';
 import { useRoutePlan } from '@/hooks/useRouting';
+import { useTransitRoutes, useVehiclesOfLines } from '@/hooks/useTransit';
 import { formatDistance } from '@/lib/format';
 import { formatTime } from '@/lib/time';
 import { Icon, type IconName } from '@/ui/Icon';
@@ -70,8 +72,37 @@ function tabStatus(q: { isPending: boolean; isError: boolean; data?: RoutePlan }
   return `${q.data.durationMinutes} min`;
 }
 
+/** The live vehicle of the first ride leg's line nearest its boarding stop (heading the leg's way when known).
+ * Tapping it opens the vehicle panel; the route stays drawn behind it. Renders nothing without a ride or a vehicle. */
+function NextVehicle({ legs, destination }: { legs: RouteLeg[]; destination: Destination }) {
+  const { select } = useMapContext();
+  const ride = legs.find((l) => l.mode !== 'WALK');
+  const routes = useTransitRoutes(!!ride);
+  const lineId = ride ? resolveLineId(ride.route, routes.data) : null;
+  const { vehicles } = useVehiclesOfLines(lineId ? [lineId] : []);
+  if (!ride?.from) return null;
+  const near = nearestVehicle(vehicles, ride.from, ride.headsign);
+  if (!near) return null;
+  const v = near.vehicle;
+  return (
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel="Show the nearest vehicle"
+      onPress={() => select({ type: 'vehicle', id: v.id, route: v.route, vehicle: v, returnTo: destination })}
+      style={styles.next}
+      testID="next-vehicle"
+    >
+      <View style={[styles.dot, { backgroundColor: lineColor(v.route) }]} />
+      <Text variant="caption" style={{ flex: 1 }}>
+        Live: {typeLabel(v.type).toLowerCase()} {vehicleLineName(v)} is {formatDistance(near.meters)} from {ride.from.name}
+      </Text>
+      <Icon name="chevron-forward" size={14} color={colors.textMuted} />
+    </Pressable>
+  );
+}
+
 /** Arrival line, notes and the list of steps of one route. */
-function PlanDetails({ plan, requested }: { plan: RoutePlan; requested: PlanMode }) {
+function PlanDetails({ plan, requested, destination }: { plan: RoutePlan; requested: PlanMode; destination: Destination }) {
   return (
     <View style={{ gap: 8 }} testID="route-details">
       <Text variant="cardTitle">
@@ -87,6 +118,7 @@ function PlanDetails({ plan, requested }: { plan: RoutePlan; requested: PlanMode
           Rough estimate in a straight line: the route planner is not available.
         </Text>
       )}
+      <NextVehicle legs={plan.legs} destination={destination} />
       <ScrollView style={{ maxHeight: 190 }} nestedScrollEnabled>
         {plan.legs.map((leg, i) => (
           <View key={i} style={styles.leg} testID="route-leg">
@@ -134,7 +166,7 @@ export function DirectionsPanel({ destination }: { destination: Destination }) {
       ) : current.isError ? (
         <ErrorState error={current.error} onRetry={() => current.refetch()} />
       ) : (
-        <PlanDetails plan={current.data} requested={mode} />
+        <PlanDetails plan={current.data} requested={mode} destination={destination} />
       )}
     </View>
   );
@@ -157,4 +189,6 @@ const styles = StyleSheet.create({
   leg: { flexDirection: 'row', gap: 10, alignItems: 'center', paddingVertical: 4 },
   legIcon: { width: 26, height: 26, borderRadius: 13, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.surfaceAlt },
   legIconRide: { backgroundColor: colors.gold },
+  next: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingVertical: 6, paddingHorizontal: 10, borderRadius: 10, backgroundColor: colors.surfaceAlt },
+  dot: { width: 10, height: 10, borderRadius: 5 },
 });

@@ -177,4 +177,23 @@ describe('MapScreen layers', () => {
     expect(await screen.findByTestId('zoom-hint')).toBeTruthy();
     await waitFor(() => expect(markers('place')).toHaveLength(0));
   });
+
+  it('keeps events visible at city-wide zoom as count bubbles, even while places wait for a zoom-in', async () => {
+    renderScreen(<MapScreen />);
+    await act(async () => {
+      fireEvent(screen.getByTestId('main-map'), 'regionChangeComplete', { latitude: 45.75, longitude: 21.22, latitudeDelta: 0.4, longitudeDelta: 0.4 });
+      await new Promise((r) => setTimeout(r, 400));
+    });
+    await waitFor(() => expect(clusters().length).toBeGreaterThan(0));
+    expect(markers('place')).toHaveLength(0);
+    const total = clusters().reduce((n, c) => n + Number(within(c).getByText(/^\d+$/).props.children), 0) + markers('event').length;
+    expect(total).toBeGreaterThan(3);
+  });
+
+  it('draws custom pins live for a moment, then stops tracking view changes', async () => {
+    renderScreen(<MapScreen />);
+    const first = await screen.findAllByTestId(/^cluster-/);
+    expect(first[0].props.tracksViewChanges).toBe(true);
+    await waitFor(() => expect(screen.getAllByTestId(/^cluster-/)[0].props.tracksViewChanges).toBe(false), { timeout: 2000 });
+  });
 });

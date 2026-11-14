@@ -6,14 +6,26 @@ import { createContext, useCallback, useContext, useMemo, useState, type ReactNo
 import { DirectionsProvider } from '@/features/directions/DirectionsContext';
 import { useDebounced } from '@/hooks/useDebounced';
 import { roundBbox, type Bbox } from '@/lib/bbox';
+import type { TransitVehicle } from '@/api/types.transit';
 import type { Coordinates } from '@/lib/geo';
 
-/** What the bottom panel shows. `id` is the place / event / stop id. */
+/** What the bottom panel shows. `id` is the place / event / stop / vehicle id.
+ * A vehicle keeps the snapshot it was tapped with (shown until its line's live data loads) and its line id, so the
+ * panel can follow it as positions refresh. `returnTo` is the destination whose route it was tapped on: the route
+ * stays drawn while the vehicle panel is open, and the panel offers a way back to the directions. */
 export type MapSelection =
   | { type: 'place'; id: string }
   | { type: 'event'; id: string }
   | { type: 'stop'; id: string }
+  | { type: 'vehicle'; id: string; route: string | null; vehicle: TransitVehicle; returnTo?: Destination }
   | { type: 'destination'; destination: Destination };
+
+/** True for a selection the transport layer opened: a stop, or a vehicle not tapped from directions (no returnTo). */
+export function isTransitLayerSelection(
+  selection: MapSelection | null,
+): selection is Extract<MapSelection, { type: 'stop' }> | Extract<MapSelection, { type: 'vehicle' }> {
+  return !!selection && (selection.type === 'stop' || (selection.type === 'vehicle' && !selection.returnTo));
+}
 
 /**
  * A point the user wants directions to. `origin` is set only when the route starts somewhere other than the user
@@ -29,7 +41,8 @@ export type MapContextValue = {
   /** The current bottom-panel selection (one at a time). */
   selection: MapSelection | null;
   select: (selection: MapSelection | null) => void;
-  /** The chosen destination for directions, or null. Setting it opens the directions panel. */
+  /** The chosen destination for directions, or null. Setting it opens the directions panel. It stays set while a
+   * vehicle tapped on its route is shown (selection `vehicle` with `returnTo`). */
   destination: Destination | null;
   setDestination: (destination: Destination | null) => void;
   /** Called by the map when its visible region changes (map shell only). */
@@ -37,6 +50,13 @@ export type MapContextValue = {
 };
 
 const MapContext = createContext<MapContextValue | null>(null);
+
+/** The destination a selection keeps drawn: its own, or the one a vehicle was tapped on. */
+export function destinationOf(selection: MapSelection | null): Destination | null {
+  if (selection?.type === 'destination') return selection.destination;
+  if (selection?.type === 'vehicle') return selection.returnTo ?? null;
+  return null;
+}
 
 type ProviderProps = { userPosition: Coordinates; initialBbox: Bbox; children: ReactNode };
 
@@ -59,7 +79,7 @@ export function MapProvider({ userPosition, initialBbox, children }: ProviderPro
       userPosition,
       selection,
       select,
-      destination: selection?.type === 'destination' ? selection.destination : null,
+      destination: destinationOf(selection),
       setDestination,
       setVisibleBbox,
     }),

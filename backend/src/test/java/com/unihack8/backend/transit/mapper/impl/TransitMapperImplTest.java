@@ -2,12 +2,15 @@ package com.unihack8.backend.transit.mapper.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.unihack8.backend.common.geo.GeoPoint;
 import com.unihack8.backend.transit.domain.dto.ArrivalDto;
 import com.unihack8.backend.transit.domain.dto.TransitRouteDto;
+import com.unihack8.backend.transit.domain.dto.TransitShapeDto;
 import com.unihack8.backend.transit.domain.dto.VehicleDto;
 import com.unihack8.backend.transit.domain.dto.stpt.StptArrival;
 import com.unihack8.backend.transit.domain.dto.stpt.StptRoute;
 import com.unihack8.backend.transit.domain.dto.stpt.StptVehicle;
+import com.unihack8.backend.transit.domain.model.RouteShape;
 import java.time.Instant;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -55,15 +58,57 @@ class TransitMapperImplTest {
         return TransitMapperImpl.routeType(new StptRoute("x", null, routeType, category, null));
     }
 
-    // lng -> lon, epoch ms -> Instant.
+    // lng -> lon, epoch ms -> Instant; line facts copied from the STPT line.
     @Test
     void vehicle() {
+        TransitRouteDto line = new TransitRouteDto("1", "TRAM", "1", "A", "B", "#e3a900");
         VehicleDto v = mapper.toVehicle(new StptVehicle("1010", 45.7, 21.2, 20.5, 10.0, "1", "Gara de Nord",
-                "Memorandumului", 1794594883000L, true));
+                "Memorandumului", 1794594883000L, true), line);
         assertThat(v.lon()).isEqualTo(21.2);
         assertThat(v.speedKmh()).isEqualTo(10.0);
         assertThat(v.nextStop()).isEqualTo("Memorandumului");
         assertThat(v.reportedAt()).isEqualTo(Instant.ofEpochMilli(1794594883000L));
+        assertThat(v.route()).isEqualTo("1");
+        assertThat(v.routeName()).isEqualTo("1");
+        assertThat(v.type()).isEqualTo("TRAM");
+        assertThat(v.color()).isEqualTo("#e3a900");
+    }
+
+    // Unknown line: route/routeName from STPT's vehicle, no type or colour.
+    @Test
+    void vehicleWithoutLine() {
+        VehicleDto v = mapper.toVehicle(new StptVehicle("GLM", 45.7, 21.2, null, null, "5c", null, null, null,
+                null), null);
+        assertThat(v.route()).isEqualTo("5c");
+        assertThat(v.routeName()).isEqualTo("5c");
+        assertThat(v.type()).isNull();
+        assertThat(v.color()).isNull();
+        assertThat(v.reportedAt()).isNull();
+    }
+
+    // Shape with an STPT line takes its id, name, type and colour; polylines are encoded.
+    @Test
+    void shapeWithLine() {
+        RouteShape shape = new RouteShape("E2", "3", "ff0000",
+                List.of(List.of(new GeoPoint(38.5, -120.2), new GeoPoint(40.7, -120.95))));
+        TransitShapeDto s = mapper.toShape(shape, new TransitRouteDto("E2", "EXPRESS", "E2", null, null, null));
+        assertThat(s.route()).isEqualTo("E2");
+        assertThat(s.type()).isEqualTo("EXPRESS");
+        assertThat(s.color()).isNull();
+        assertThat(s.polylines()).containsExactly("_p~iF~ps|U_ulLnnqC");
+    }
+
+    // Shape without an STPT line uses the GTFS route_type and colour.
+    @Test
+    void shapeWithoutLine() {
+        RouteShape shape = new RouteShape("1", "0", "e3a900",
+                List.of(List.of(new GeoPoint(45.7, 21.2), new GeoPoint(45.71, 21.21))));
+        TransitShapeDto s = mapper.toShape(shape, null);
+        assertThat(s.route()).isEqualTo("1");
+        assertThat(s.routeName()).isEqualTo("1");
+        assertThat(s.type()).isEqualTo("TRAM");
+        assertThat(s.color()).isEqualTo("#e3a900");
+        assertThat(s.polylines()).hasSize(1);
     }
 
     // Times are Romanian local time (UTC+2 in November), duplicates removed, only the first is live.

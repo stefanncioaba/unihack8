@@ -6,12 +6,12 @@ import { Marker } from 'react-native-maps';
 import type { EventSummary } from '@/api/types';
 import { categoryMeta } from '@/features/events/categories';
 import type { Bbox } from '@/lib/bbox';
-import { clusterPoints, shouldCluster } from '@/lib/cluster';
+import { clusterPoints, clusterZoomTarget, shouldCluster, spreadStacked } from '@/lib/cluster';
 import { Icon } from '@/ui/Icon';
 import { Text } from '@/ui/Text';
 import { colors } from '@/ui/theme';
 
-import { ClusterMarker } from './ClusterMarker';
+import { ClusterMarker, useBriefViewTracking } from './ClusterMarker';
 
 type Props = {
   events: EventSummary[];
@@ -20,8 +20,8 @@ type Props = {
   onSelect: (id: string) => void;
   /** Visible area, used to group nearby pins when zoomed out. */
   bbox: Bbox | null;
-  /** Zoom the map in on a point (tapping a cluster). */
-  onZoomTo: (lat: number, lon: number) => void;
+  /** Zoom the map in on a point (tapping a cluster), optionally to a given view span. */
+  onZoomTo: (lat: number, lon: number, span?: number) => void;
 };
 
 /** One event pin: yellow badge with the category icon, optional title pill. */
@@ -42,29 +42,53 @@ function EventPin({ event, selected, showLabel }: { event: EventSummary; selecte
   );
 }
 
+/** One event marker; redraws briefly when it appears or its look changes (see useBriefViewTracking). */
+function EventMarker({ event, selected, showLabel, onSelect }: { event: LocatedEvent; selected: boolean; showLabel: boolean; onSelect: (id: string) => void }) {
+  const tracking = useBriefViewTracking(`${selected}:${showLabel}`);
+  return (
+    <Marker
+      testID={`event-marker-${event.id}`}
+      coordinate={{ latitude: event.lat, longitude: event.lon }}
+      onPress={() => onSelect(event.id)}
+      tracksViewChanges={tracking}
+      anchor={{ x: 0.5, y: 0.5 }}
+    >
+      <EventPin event={event} selected={selected} showLabel={showLabel} />
+    </Marker>
+  );
+}
+
 /** An event that has coordinates (the shape the clustering needs). */
 type LocatedEvent = EventSummary & { lat: number; lon: number };
 
-/** All event pins (events without coordinates are skipped); nearby ones are grouped when zoomed out. */
+/** All event pins (events without coordinates are skipped); nearby ones are grouped into count bubbles when zoomed
+ * out, at any zoom level, so events stay visible city-wide. Tapping a bubble zooms in to fit its events; events at the
+ * very same spot are then fanned out slightly so each one can be tapped. */
 export function EventMarkers({ events, selectedId, showLabels, onSelect, bbox, onZoomTo }: Props) {
   const located = useMemo(() => events.filter((e): e is LocatedEvent => e.lat !== null && e.lon !== null), [events]);
-  const { singles, clusters } = useMemo(() => clusterPoints(located, bbox, shouldCluster(bbox)), [located, bbox]);
+  const { singles, clusters } = useMemo(() => {
+    const grouped = clusterPoints(located, bbox, shouldCluster(bbox));
+    // Events at the same venue would be drawn on top of each other once zoomed in: fan them out.
+    return { clusters: grouped.clusters, singles: spreadStacked(grouped.singles, bbox ? bbox.maxLat - bbox.minLat : 0) };
+  }, [located, bbox]);
   return (
     <>
       {clusters.map((c) => (
-        <ClusterMarker key={c.id} id={c.id} lat={c.lat} lon={c.lon} count={c.items.length} color={colors.gold} onPress={() => onZoomTo(c.lat, c.lon)} />
+        <ClusterMarker
+          key={c.id}
+          id={c.id}
+          lat={c.lat}
+          lon={c.lon}
+          count={c.items.length}
+          color={colors.gold}
+          onPress={() => {
+            const t = clusterZoomTarget(c.items, bbox ? bbox.maxLat - bbox.minLat : 0);
+            onZoomTo(t.lat, t.lon, t.span);
+          }}
+        />
       ))}
       {singles.map((e) => (
-        <Marker
-          key={e.id}
-          testID={`event-marker-${e.id}`}
-          coordinate={{ latitude: e.lat, longitude: e.lon }}
-          onPress={() => onSelect(e.id)}
-          tracksViewChanges={false}
-          anchor={{ x: 0.5, y: 0.5 }}
-        >
-          <EventPin event={e} selected={e.id === selectedId} showLabel={showLabels} />
-        </Marker>
+        <EventMarker key={e.id} event={e} selected={e.id === selectedId} showLabel={showLabels} onSelect={onSelect} />
       ))}
     </>
   );

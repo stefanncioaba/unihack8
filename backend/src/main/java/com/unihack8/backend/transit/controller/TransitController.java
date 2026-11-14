@@ -6,6 +6,7 @@ import com.unihack8.backend.transit.domain.dto.AlertDto;
 import com.unihack8.backend.transit.domain.dto.ArrivalsResponse;
 import com.unihack8.backend.transit.domain.dto.LastDeparturesResponse;
 import com.unihack8.backend.transit.domain.dto.TransitRouteDto;
+import com.unihack8.backend.transit.domain.dto.TransitShapeDto;
 import com.unihack8.backend.transit.domain.dto.TransitStopDto;
 import com.unihack8.backend.transit.domain.dto.TransitSummaryResponse;
 import com.unihack8.backend.transit.domain.dto.VehiclesResponse;
@@ -44,10 +45,16 @@ public class TransitController {
         return transit.stops(bbox == null || bbox.isBlank() ? null : BoundingBox.parse(bbox, "bbox"));
     }
 
-    // GET /transit/vehicles?route= — live vehicles of one line.
+    // GET /transit/vehicles?route= — live vehicles of one line, or of every line without route.
     @GetMapping("/vehicles")
-    public VehiclesResponse vehicles(@RequestParam String route) {
+    public VehiclesResponse vehicles(@RequestParam(required = false) String route) {
         return transit.vehicles(route);
+    }
+
+    // GET /transit/shapes?route= — drawn path of every line (or of one line).
+    @GetMapping("/shapes")
+    public List<TransitShapeDto> shapes(@RequestParam(required = false) String route) {
+        return transit.shapes(route);
     }
 
     // GET /transit/stops/{id}/arrivals — next arrivals at a stop.

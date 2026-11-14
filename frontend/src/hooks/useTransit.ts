@@ -1,15 +1,19 @@
 // TanStack Query hooks for transit data (STPT): home page line, alerts, and the Map tab's transit layer (14.4).
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQueries, useQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
 
 import {
+  getAllTransitVehicles,
   getLastDepartures,
   getStopArrivals,
   getTransitAlerts,
   getTransitRoutes,
   getTransitStops,
+  getTransitShapes,
   getTransitSummary,
   getTransitVehicles,
 } from '@/api/endpoints.transit';
+import type { TransitVehicle } from '@/api/types.transit';
 import { bboxParam, type Bbox } from '@/lib/bbox';
 import { toNearParam, type Coordinates } from '@/lib/geo';
 
@@ -25,6 +29,8 @@ export const transitKeys = {
   routes: ['transit', 'routes'] as const,
   stops: (bbox: string) => ['transit', 'stops', bbox] as const,
   vehicles: (route: string) => ['transit', 'vehicles', route] as const,
+  allVehicles: ['transit', 'all-vehicles'] as const,
+  shapes: ['transit', 'shapes'] as const,
   arrivals: (stopId: string) => ['transit', 'arrivals', stopId] as const,
   lastDepartures: (stopId: string) => ['transit', 'last-departures', stopId] as const,
 };
@@ -65,6 +71,39 @@ export function useVehicles(route: string | null) {
     enabled: !!route,
     refetchInterval: VEHICLES_REFRESH_MS,
   });
+}
+
+/** Every live vehicle of every line in one request, refreshed every 10 s (the backend shares it between clients). */
+export function useAllVehicles(enabled: boolean) {
+  return useQuery({
+    queryKey: transitKeys.allVehicles,
+    queryFn: getAllTransitVehicles,
+    enabled,
+    refetchInterval: VEHICLES_REFRESH_MS,
+    placeholderData: keepPreviousData,
+  });
+}
+
+/** Live vehicles of a few lines (the ride legs of a route), one cached query per line, merged into one list.
+ * `stale` is true when any of the answers is stale. */
+export function useVehiclesOfLines(routes: string[]) {
+  const results = useQueries({
+    queries: routes.map((route) => ({
+      queryKey: transitKeys.vehicles(route),
+      queryFn: () => getTransitVehicles(route),
+      refetchInterval: VEHICLES_REFRESH_MS,
+    })),
+  });
+  // useQueries returns a new array every render; merge again only when one of the answers changed.
+  const datas = results.map((r) => r.data);
+  const stamp = `${routes.join(',')}|${results.map((r) => r.dataUpdatedAt).join(',')}`;
+  const vehicles = useMemo<TransitVehicle[]>(() => datas.flatMap((d) => d?.vehicles ?? []), [stamp]); // eslint-disable-line react-hooks/exhaustive-deps
+  return { vehicles, stale: datas.some((d) => !!d?.stale) };
+}
+
+/** The drawn path of every line. Static and large, so it is fetched once per session. */
+export function useTransitShapes(enabled: boolean) {
+  return useQuery({ queryKey: transitKeys.shapes, queryFn: getTransitShapes, enabled, staleTime: Infinity, gcTime: Infinity });
 }
 
 /** Next arrivals at a stop, refreshed every 30 s. */

@@ -1,10 +1,11 @@
-// The one bottom panel of the Map tab. Shows whatever `selection` says: a place, an event, a transit stop or
-// directions. Person 1 owns the container and the place / event panels; the stop (14.4) and directions (14.5) panels
+// The one bottom panel of the Map tab. Shows whatever `selection` says: a place, an event, a transit stop, a live
+// vehicle or directions. Person 1 owns the container and the place / event panels; the stop (14.4) and directions (14.5) panels
 // live in features/transit and features/directions.
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { DirectionsPanel } from '@/features/directions/DirectionsPanel';
 import { StopPanel } from '@/features/transit/StopPanel';
+import { VehiclePanel } from '@/features/transit/VehiclePanel';
 import { Icon } from '@/ui/Icon';
 import { colors, radius } from '@/ui/theme';
 
@@ -21,6 +22,8 @@ function PanelContent({ selection }: { selection: MapSelection }) {
       return <EventPanel id={selection.id} />;
     case 'stop':
       return <StopPanel stopId={selection.id} />;
+    case 'vehicle':
+      return <VehiclePanel id={selection.id} route={selection.route} snapshot={selection.vehicle} returnTo={selection.returnTo} />;
     case 'destination':
       return <DirectionsPanel destination={selection.destination} />;
   }

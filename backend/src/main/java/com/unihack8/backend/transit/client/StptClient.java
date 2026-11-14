@@ -22,6 +22,9 @@ public interface StptClient {
     // Live vehicles of one line, from /gtfs-vehicles.php?route=.
     List<StptVehicle> fetchVehicles(String route);
 
+    // Live vehicles of every line in one call, from /gtfs-vehicles.php without a route.
+    List<StptVehicle> fetchAllVehicles();
+
     // Upcoming arrivals at one stop, from /proxy-smtt-cache.php?stopid=.
     List<StptArrival> fetchArrivals(String stopId);
 

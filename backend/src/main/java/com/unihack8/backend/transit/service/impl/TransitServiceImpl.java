@@ -14,6 +14,7 @@ import com.unihack8.backend.transit.domain.dto.LastDepartureDto;
 import com.unihack8.backend.transit.domain.dto.LastDeparturesResponse;
 import com.unihack8.backend.transit.domain.dto.NearestStopDto;
 import com.unihack8.backend.transit.domain.dto.TransitRouteDto;
+import com.unihack8.backend.transit.domain.dto.TransitShapeDto;
 import com.unihack8.backend.transit.domain.dto.TransitStopDto;
 import com.unihack8.backend.transit.domain.dto.TransitSummaryResponse;
 import com.unihack8.backend.transit.domain.dto.VehiclesResponse;
@@ -24,15 +25,18 @@ import com.unihack8.backend.transit.domain.dto.stpt.StptStop;
 import com.unihack8.backend.transit.domain.dto.stpt.StptVehicle;
 import com.unihack8.backend.transit.domain.model.ScheduledDeparture;
 import com.unihack8.backend.transit.mapper.TransitMapper;
+import com.unihack8.backend.transit.repository.ShapeRepository;
 import com.unihack8.backend.transit.repository.TimetableRepository;
 import com.unihack8.backend.transit.service.TransitService;
 import java.time.Clock;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -54,37 +58,54 @@ public class TransitServiceImpl implements TransitService {
     // Order of line types in GET /transit/routes.
     private static final List<String> TYPE_ORDER =
             List.of("TRAM", "TROLLEYBUS", "BUS", "EXPRESS", "METROPOLITAN", "BOAT");
+    // After STPT's line list fails (nothing cached), vehicles/shapes do not ask for it again for this long.
+    static final Duration ROUTES_RETRY_AFTER = Duration.ofSeconds(60);
+    // Shapes built without STPT's line facts (GTFS only) are reused this long before trying again.
+    static final Duration FALLBACK_SHAPES_TTL = Duration.ofMinutes(5);
 
     private final StptClient stpt;
     private final TransitMapper mapper;
     private final TimetableRepository timetable;
+    private final ShapeRepository shapeRepository;
     private final Clock clock;
     private final StaleCache<String, List<StptStop>> stopsCache;
     private final StaleCache<String, List<StptRoute>> routesCache;
     private final StaleCache<String, List<StptAlert>> alertsCache;
     private final StaleCache<String, List<StptVehicle>> vehiclesCache;
+    // Every line's vehicles in one STPT call, shared by all map clients for the vehicles TTL.
+    private final StaleCache<String, List<StptVehicle>> allVehiclesCache;
     private final StaleCache<String, List<StptArrival>> arrivalsCache;
+    // Built line shapes; kept once STPT's line list was available to give them types and colours.
+    private volatile List<TransitShapeDto> shapesCache;
+    // GTFS-only shapes built while STPT's line list was unavailable, and when they were built.
+    private volatile List<TransitShapeDto> fallbackShapes;
+    private volatile Instant fallbackShapesAt;
+    // Until this moment the line list is not fetched again for vehicles/shapes (set after a failed fetch).
+    private volatile Instant routesRetryAt;
 
     // One cache per kind of STPT data, with the lifetimes from StptProperties.
-    public TransitServiceImpl(StptClient stpt, TransitMapper mapper, TimetableRepository timetable, Clock clock,
-                              StptProperties props) {
+    public TransitServiceImpl(StptClient stpt, TransitMapper mapper, TimetableRepository timetable,
+                              ShapeRepository shapeRepository, Clock clock, StptProperties props) {
         this.stpt = stpt;
         this.mapper = mapper;
         this.timetable = timetable;
+        this.shapeRepository = shapeRepository;
         this.clock = clock;
         StptProperties.Ttl ttl = props.ttl();
         this.stopsCache = new StaleCache<>("STPT stops", ttl.staticData(), clock);
         this.routesCache = new StaleCache<>("STPT routes", ttl.staticData(), clock);
         this.alertsCache = new StaleCache<>("STPT alerts", ttl.alerts(), clock);
         this.vehiclesCache = new StaleCache<>("STPT vehicles", ttl.vehicles(), clock);
+        this.allVehiclesCache = new StaleCache<>("STPT all vehicles", ttl.vehicles(), clock);
         this.arrivalsCache = new StaleCache<>("STPT arrivals", ttl.arrivals(), clock);
     }
 
-    // Lines sorted by type, then by name with numbers in numeric order (2 before 11).
+    // Lines sorted by type, then by name with numbers in numeric order (2 before 11); lines without a name dropped.
     @Override
     public List<TransitRouteDto> routes() {
         return routesCache.get(ALL, k -> stpt.fetchRoutes()).value().stream()
                 .map(mapper::toRoute)
+                .filter(r -> r.id() != null && !r.id().isBlank())
                 .sorted(Comparator.comparingInt((TransitRouteDto r) -> typeRank(r.type()))
                         .thenComparing(TransitRouteDto::name, TransitServiceImpl::compareLineNames))
                 .toList();
@@ -99,13 +120,84 @@ public class TransitServiceImpl implements TransitService {
                 .toList();
     }
 
-    // Live positions of one line's vehicles.
+    // Live positions of one line's vehicles, or of every line's when route is null/blank.
     @Override
     public VehiclesResponse vehicles(String route) {
-        String line = requireText(route, "route");
-        StaleCache.Result<List<StptVehicle>> result = vehiclesCache.get(line, stpt::fetchVehicles);
-        return new VehiclesResponse(line, result.fetchedAt(), result.stale(),
-                result.value().stream().map(mapper::toVehicle).toList());
+        boolean all = route == null || route.isBlank();
+        String line = all ? null : route.trim();
+        StaleCache.Result<List<StptVehicle>> result = all
+                ? allVehiclesCache.get(ALL, k -> stpt.fetchAllVehicles())
+                : vehiclesCache.get(line, stpt::fetchVehicles);
+        Map<String, TransitRouteDto> lines = linesById();
+        return new VehiclesResponse(line, result.fetchedAt(), result.stale(), result.value().stream()
+                .map(v -> mapper.toVehicle(v, v.route() == null ? null : lines.get(lineKey(v.route()))))
+                .toList());
+    }
+
+    // Every line's path (sorted like GET /transit/routes), or only the asked line's.
+    @Override
+    public List<TransitShapeDto> shapes(String route) {
+        List<TransitShapeDto> all = allShapes();
+        if (route == null || route.isBlank()) {
+            return all;
+        }
+        String wanted = route.trim();
+        return all.stream().filter(s -> s.route().equalsIgnoreCase(wanted)).toList();
+    }
+
+    // Builds the shapes once; while STPT's line list is unavailable a GTFS-only build is reused for a few minutes.
+    private List<TransitShapeDto> allShapes() {
+        List<TransitShapeDto> cached = shapesCache;
+        if (cached != null) {
+            return cached;
+        }
+        Instant now = clock.instant();
+        List<TransitShapeDto> fallback = fallbackShapes;
+        Instant fallbackAt = fallbackShapesAt;
+        if (fallback != null && fallbackAt != null && fallbackAt.plus(FALLBACK_SHAPES_TTL).isAfter(now)) {
+            return fallback;
+        }
+        Map<String, TransitRouteDto> lines = linesById();
+        List<TransitShapeDto> built = shapeRepository.shapes().stream()
+                .map(s -> mapper.toShape(s, s.routeName() == null ? null : lines.get(lineKey(s.routeName()))))
+                .sorted(Comparator.comparingInt((TransitShapeDto s) -> typeRank(s.type()))
+                        .thenComparing(TransitShapeDto::routeName, TransitServiceImpl::compareLineNames))
+                .toList();
+        if (!built.isEmpty()) {
+            if (!lines.isEmpty()) {
+                shapesCache = built;
+                fallbackShapes = null;
+            } else {
+                fallbackShapes = built;
+                fallbackShapesAt = now;
+            }
+        }
+        return built;
+    }
+
+    // STPT lines by lower-case id; empty when STPT's line list cannot be loaded (then not retried for a minute).
+    private Map<String, TransitRouteDto> linesById() {
+        Instant retryAt = routesRetryAt;
+        if (retryAt != null && clock.instant().isBefore(retryAt)) {
+            return Map.of();
+        }
+        try {
+            Map<String, TransitRouteDto> byId = new HashMap<>();
+            for (TransitRouteDto r : routes()) {
+                if (r.id() != null && !r.id().isBlank()) {
+                    byId.putIfAbsent(lineKey(r.id()), r);
+                }
+            }
+            return byId;
+        } catch (RuntimeException e) {
+            routesRetryAt = clock.instant().plus(ROUTES_RETRY_AFTER);
+            return Map.of();
+        }
+    }
+
+    // Case-insensitive line key ("5B" and "5b" are the same line); callers pass a non-null id.
+    private static String lineKey(String id) {
+        return id.trim().toLowerCase(Locale.ROOT);
     }
 
     // Next arrivals at a stop, soonest first.
