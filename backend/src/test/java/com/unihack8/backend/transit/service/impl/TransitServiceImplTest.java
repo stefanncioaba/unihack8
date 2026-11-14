@@ -270,9 +270,9 @@ class TransitServiceImplTest {
         assertThat(service.lastDepartures("555").stopName()).isEqualTo("Gara de Nord");
     }
 
-    // Summary shows the next arrival at the nearest stop and says when it is the last one today.
+    // Summary from the timetable over an evening: next arrival at the nearest stop, then "last one today", then nothing.
     @Test
-    void summaryNextArrivalAndLastOne() {
+    void summaryFromTimetable() {
         when(timetable.lastDepartures("1", LocalDate.of(2026, 11, 13))).thenReturn(Optional.of(List.of(
                 new ScheduledDeparture("9", "Piața Gh. Domășneanu", 22 * 3600 + 52 * 60),
                 new ScheduledDeparture("2", "Shopping City", 23 * 3600 + 46 * 60))));
