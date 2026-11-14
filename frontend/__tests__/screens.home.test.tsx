@@ -2,20 +2,38 @@
 import { fireEvent, screen, waitFor, within } from '@testing-library/react-native';
 
 import type { TransitSummary } from '@/api/types.transit';
-import HomeScreen from '@/app/(tabs)/index';
+import HomeScreen, { eventCardWidth } from '@/app/(tabs)/index';
 import AllEventsScreen from '@/app/events/index';
 import { arrivalIn } from '@/features/transit/CityInfoStrip';
 import * as mocks from '@test/mocks';
 
 import { IDS, mockRouter, renderScreen, setParams } from './testUtils';
 
+describe('eventCardWidth (Home fits the screen)', () => {
+  it('uses the default width until the section is measured', () => {
+    expect(eventCardWidth(null)).toBe(264);
+  });
+
+  it('sizes the card from the free height (16:9 picture) and keeps it within limits', () => {
+    expect(eventCardWidth(240)).toBe(Math.round(((240 - 42 - 48) * 16) / 9));
+    expect(eventCardWidth(100)).toBe(150);
+    expect(eventCardWidth(900)).toBe(300);
+  });
+});
+
 describe('HomeScreen', () => {
+  it('does not offer pull-to-refresh or scrolling when it fits (fit mode)', async () => {
+    renderScreen(<HomeScreen />);
+    await screen.findByText('Upcoming events');
+    expect(screen.queryByText('Live')).toBeNull();
+  });
+
   it('shows the city info strip and the upcoming events', async () => {
     renderScreen(<HomeScreen />);
     expect(await screen.findByText(/Next tram 2 at/)).toBeTruthy();
     expect(await screen.findByText('Board games night')).toBeTruthy();
     expect(screen.getByText('Upcoming events')).toBeTruthy();
-    expect(screen.getByText('Live')).toBeTruthy();
+    expect(screen.queryByText('Live')).toBeNull();
   });
 
   it('shows date, place and free spots on a card', async () => {

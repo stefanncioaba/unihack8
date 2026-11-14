@@ -199,6 +199,7 @@ function MapBody() {
         onLongPress={onLongPress}
         showsUserLocation={status === 'granted' || (!!journeyTarget && journey.permission === 'granted')}
         showsMyLocationButton={false}
+        toolbarEnabled={false}
         userInterfaceStyle="dark"
         customMapStyle={darkMapStyle}
         testID="main-map"

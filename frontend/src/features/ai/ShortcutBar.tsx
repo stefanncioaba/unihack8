@@ -11,7 +11,7 @@ import { colors, PAGE_MARGIN, radius } from '@/ui/theme';
 
 import { askOnAiTab, useShortcuts } from './shortcuts';
 
-/** One saved question: a navy pill with a gold sparkle, or a remove button in edit mode. */
+/** One saved question: a text-only navy pill, or a remove button in edit mode. */
 function ShortcutButton({ text, editing, onLongPress, onRemove }: { text: string; editing: boolean; onLongPress: () => void; onRemove: () => void }) {
   if (editing) {
     return (
@@ -32,7 +32,6 @@ function ShortcutButton({ text, editing, onLongPress, onRemove }: { text: string
       onLongPress={onLongPress}
       style={styles.pill}
     >
-      <Icon name="sparkles" size={12} color={colors.gold} />
       <Text variant="chip" numberOfLines={1} style={styles.label}>
         {text}
       </Text>

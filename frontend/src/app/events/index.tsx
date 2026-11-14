@@ -51,7 +51,7 @@ export default function AllEventsScreen() {
 
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.chipsScroll} contentContainerStyle={styles.chips}>
         {EVENT_CATEGORIES.map((c) => (
-          <Chip key={c} label={CATEGORY_META[c].label} icon={CATEGORY_META[c].icon} selected={categories.includes(c)} onPress={() => toggle(c)} />
+          <Chip key={c} label={CATEGORY_META[c].label} selected={categories.includes(c)} onPress={() => toggle(c)} />
         ))}
       </ScrollView>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.chipsScroll} contentContainerStyle={styles.chips}>
@@ -96,7 +96,8 @@ function useEventsQuery(q: string, categories: EventCategory[], range: { from?: 
 const styles = StyleSheet.create({
   top: { paddingHorizontal: PAGE_MARGIN, paddingBottom: 12 },
   // Fixed height + no shrinking, so the rows are never clipped when the keyboard is open.
-  chipsScroll: { flexGrow: 0, flexShrink: 0, height: 30, marginBottom: 10 },
-  chips: { gap: 8, paddingHorizontal: PAGE_MARGIN },
+  // Taller than a chip (32) so the rounded bottom edge is never clipped; the margin is reduced to keep the spacing.
+  chipsScroll: { flexGrow: 0, flexShrink: 0, height: 38, marginBottom: 4 },
+  chips: { gap: 8, paddingHorizontal: PAGE_MARGIN, alignItems: 'center' },
   list: { paddingHorizontal: PAGE_MARGIN, paddingTop: 4, paddingBottom: 24 },
 });

@@ -7,6 +7,6 @@ import java.util.UUID;
 /** The AI assistant (PLAN task 11). Nothing is stored: every request carries the whole conversation. */
 public interface AiChatService {
 
-    // Answers the last user message using Gemini and our tools; 429 when over the rate limit, 503 when Gemini fails.
+    // Answers the last user message using Gemini and our tools; 503 when Gemini fails.
     ChatResponse chat(UUID userId, ChatRequest request);
 }
