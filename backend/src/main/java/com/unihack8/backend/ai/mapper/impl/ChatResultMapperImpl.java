@@ -106,7 +106,8 @@ public class ChatResultMapperImpl implements ChatResultMapper {
             ChatRouteDto dto = new ChatRouteDto(
                     new RoutePointDto(route.from().lat(), route.from().lon(), fromName),
                     new RoutePointDto(route.to().lat(), route.to().lon(), nameNear(route.to(), context)),
-                    route.mode(), route.durationMinutes(), route.distanceMeters(), route.startsFromUser());
+                    route.mode(), route.durationMinutes(), route.distanceMeters(), route.startsFromUser(),
+                    route.leaveNow());
             String key = round(route.from()) + ">" + round(route.to()) + ":" + route.mode();
             unique.remove(key);
             unique.put(key, dto);

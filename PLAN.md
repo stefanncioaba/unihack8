@@ -434,6 +434,35 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 ---
 
+## 26. AI "Leave now" box — Tracks B + C
+
+**Needs:** 9, 10, 18 (done). Added 2026-11-14. **Goal:** when the AI gives a tram/bus route that starts where the user is, it says "Leave in 6 min to catch tram 1 at Gara de Nord" — in the text **and** in a separate "Leave now" box under the route card, using the live STPT arrivals ("Will I make it?").
+
+- [x] **26.1 Contract first:** `routes[].leaveNow` in `docs/API.md` (line, vehicle type, stop, walk minutes, board/leave times, source, missed earlier vehicle); `null` for walking, other starts and later times.
+- [x] **26.2 Backend:** `LeaveNowService` matches the planner's boarding stop to the STPT stop and picks the first arrival the user can still reach on foot (+1 spare minute); falls back to the planner's time when STPT is down. `plan_route` returns `leave_now` to the model; the system prompt asks for one "Leave in N min…" sentence.
+- [x] **26.3 Mobile:** `LeaveNowBox` under the route card with a live countdown (Leave in N min → Leave now → Hurry → You won't make this one) and Live / Scheduled / Planned label.
+- [x] **26.4 Tests:** backend and frontend (see `DOCS.md` → AI "Leave now" box).
+- [x] **26.5a** `DOCS.md` and `docs/API.md` updated.
+- [x] **26.5b** Knowledge graph updated (hand-made incremental update with a Sonnet 5.5 agent; see `DOCS.md` → Knowledge graph).
+- [ ] **26.6** Try it on a phone with real STPT data and Gemini.
+
+---
+
+## 27. Timișoara news on Home — Tracks B + C
+
+**Needs:** 3, 12, 13 (done). Added 2026-11-14. **Goal:** a news section on Home and a News screen with the latest news from local news sites — **Timișoara only** — gathered into one list.
+
+- [x] **27.1 Sources:** RSS feeds checked on 2026-11-14: TION, Opinia Timișoarei, Timișoara Știri, Banatul Azi (DeBanat answers 403, the city hall site has no feed). Only headline, short summary, picture and a link to the full story are shown.
+- [x] **27.2 Contract first:** `GET /news` and `GET /news/sources` in `docs/API.md` (public).
+- [x] **27.3 Backend `news` package:** RSS client (timeouts, our User-Agent), hardened XML parsing, "Timișoara only" filter (links and the site's own name ignored), same story once, 10 min cache per site (a site down never breaks the others), pictures from the WordPress API when the feed has none, background warm-up at startup.
+- [x] **27.4 App:** "Timișoara news" strip on Home (swipeable, See all), News screen (site chips, search, endless scroll, pull to refresh, sites that are down named); a tap opens the article on the site.
+- [x] **27.5 Tests:** backend and frontend (see `DOCS.md` → Timișoara news). Live check against the 4 real sites: 39 Timișoara articles, 35 with a picture.
+- [x] **27.6a** `DOCS.md` and `docs/API.md` updated.
+- [x] **27.6b** Knowledge graph updated (hand-made incremental update with a Sonnet 5.5 agent; see `DOCS.md` → Knowledge graph).
+- [ ] **27.7** Ask the news sites for permission if the app is used beyond the hackathon (see open question 3).
+
+---
+
 ## If time runs short — cut in this order
 
 1. Marker clustering (14.6) and AI result cards (15.4).

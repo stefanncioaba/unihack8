@@ -101,7 +101,7 @@ const SHOPPING_CITY = { lat: 45.7275, lon: 21.2355 };
 function openJourney(answeredFrom = GPS, mode: 'WALK' | 'TRANSIT' = 'TRANSIT') {
   setParams(
     routeParams(
-      { from: { ...answeredFrom, name: 'Your location' }, to: { ...SHOPPING_CITY, name: 'Shopping City' }, mode, durationMinutes: 20, distanceMeters: 3500, startsFromUser: true },
+      { from: { ...answeredFrom, name: 'Your location' }, to: { ...SHOPPING_CITY, name: 'Shopping City' }, mode, durationMinutes: 20, distanceMeters: 3500, startsFromUser: true, leaveNow: null },
       true,
     ),
   );
@@ -207,7 +207,7 @@ describe('MapScreen route preview', () => {
     const spy = jest.spyOn(mocks, 'mockRequest');
     setParams(
       routeParams(
-        { from: { lat: 45.7472, lon: 21.231, name: 'West University' }, to: { ...SHOPPING_CITY, name: 'Shopping City' }, mode: 'WALK', durationMinutes: 30, distanceMeters: 3000, startsFromUser: false },
+        { from: { lat: 45.7472, lon: 21.231, name: 'West University' }, to: { ...SHOPPING_CITY, name: 'Shopping City' }, mode: 'WALK', durationMinutes: 30, distanceMeters: 3000, startsFromUser: false, leaveNow: null },
         false,
       ),
     );

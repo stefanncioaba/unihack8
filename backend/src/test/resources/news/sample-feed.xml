@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Made-up WordPress-style RSS feed for the news tests (PLAN 27); not copied from a real site. -->
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Știri Test</title>
+    <link>https://stiri.example.ro</link>
+    <item>
+      <title>Tramvaiele noi ajung în Timișoara &#8211; primele curse sâmbătă</title>
+      <link>https://stiri.example.ro/tramvaie-noi/</link>
+      <pubDate>Sat, 14 Nov 2026 16:00:00 +0000</pubDate>
+      <category><![CDATA[Local]]></category>
+      <description><![CDATA[<p>Primele tramvaie noi circulă de sâmbătă pe linia 1 &amp; linia 2. Biletele costă la fel. [&#8230;]</p>
+<p>Articolul <a href="https://stiri.example.ro/tramvaie-noi/">Tramvaiele noi ajung în Timișoara</a> apare prima dată în <a href="https://stiri.example.ro">Știri Test</a>.</p>]]></description>
+      <enclosure url="https://stiri.example.ro/img/tramvai.jpg" type="image/jpeg" length="1000"/>
+    </item>
+    <item>
+      <title>Accident în parcare la Lugoj</title>
+      <link>https://stiri.example.ro/lugoj/</link>
+      <pubDate>Sat, 14 Nov 2026 15:00:00 +0000</pubDate>
+      <description><![CDATA[<p>Trei mașini lovite într-o parcare din Lugoj.</p>
+<p>The post <a href="https://stiri.example.ro/lugoj/">Accident</a> appeared first on <a href="https://stiri.example.ro">Știri din Timișoara</a>.</p>]]></description>
+    </item>
+    <item>
+      <title>Concert în Piața Unirii</title>
+      <link>https://stiri.example.ro/concert/?utm_source=rss&amp;utm_medium=rss</link>
+      <pubDate>Sat, 14 Nov 2026 12:30:00 +0200</pubDate>
+      <description><![CDATA[Seara de jazz începe la ora 20.]]></description>
+      <content:encoded><![CDATA[<p><img src="https://stiri.example.ro/img/concert.jpg" alt=""/>Timişorenii sunt așteptați la un concert gratuit.</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Protest la București</title>
+      <link>https://timisoara-stiri.example.ro/protest/</link>
+      <pubDate>Sat, 14 Nov 2026 11:00:00 +0000</pubDate>
+      <description><![CDATA[Mii de oameni în fața Parlamentului. Mai multe pe https://timisoara-stiri.example.ro.]]></description>
+      <media:thumbnail url="https://stiri.example.ro/img/protest.jpg"/>
+    </item>
+    <item>
+      <title>Link periculos din Timisoara</title>
+      <link>javascript:alert(1)</link>
+      <pubDate>Sat, 14 Nov 2026 10:00:00 +0000</pubDate>
+      <description>Timisoara</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://stiri.example.ro/fara-titlu/</link>
+      <description>Timișoara</description>
+    </item>
+    <item>
+      <title>Parcul Rozelor din TIMIȘOARA se redeschide</title>
+      <link>https://stiri.example.ro/parc/</link>
+      <pubDate>not a date</pubDate>
+      <description><![CDATA[Parcul se redeschide după lucrări.]]></description>
+    </item>
+  </channel>
+</rss>

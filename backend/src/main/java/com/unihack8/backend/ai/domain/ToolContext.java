@@ -1,5 +1,6 @@
 package com.unihack8.backend.ai.domain;
 
+import com.unihack8.backend.ai.domain.dto.LeaveNowDto;
 import com.unihack8.backend.common.geo.GeoPoint;
 import com.unihack8.backend.events.domain.dto.EventSummary;
 import com.unihack8.backend.places.domain.dto.PlaceSummaryDto;
@@ -108,9 +109,18 @@ public class ToolContext {
         return new ArrayList<>(events.values());
     }
 
-    /** A route plan_route planned: its ends, the mode it really uses, and whether it starts at the user. */
+    /**
+     * A route plan_route planned: its ends, the mode it really uses, whether it starts at the user, and when to
+     * leave to catch its first tram/bus (null for walking routes and routes that do not start at the user).
+     */
     public record PlannedRoute(GeoPoint from, GeoPoint to, String mode, long durationMinutes, long distanceMeters,
-                               boolean startsFromUser) {
+                               boolean startsFromUser, LeaveNowDto leaveNow) {
+
+        // A route without "leave now" information.
+        public PlannedRoute(GeoPoint from, GeoPoint to, String mode, long durationMinutes, long distanceMeters,
+                            boolean startsFromUser) {
+            this(from, to, mode, durationMinutes, distanceMeters, startsFromUser, null);
+        }
     }
 
     /** A place returned by a tool and the prices the model saw for it. */

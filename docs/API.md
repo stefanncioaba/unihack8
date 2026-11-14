@@ -774,6 +774,44 @@ Every Timișoara area as a live card, **busiest first** (by `score`). Areas are 
 
 ---
 
+## News — PLAN task 27
+
+Timișoara news from local news sites' RSS feeds (TION, Opinia Timișoarei, Timișoara Știri, Banatul Azi). **Timișoara only:** an article is kept when its headline, text or categories name the city ("Timișoara", "timișorean(i)", with or without diacritics); links and the site's own name do not count, and county-only news (Lugoj, "județul Timiș") is left out. Each site is read at most every 10 minutes; the app never calls the sites. Only the headline, a short summary (≤ 220 characters) and the site's picture are returned; `url` opens the full story on the site.
+
+### `GET /news?source=tion&q=tramvai&page=0&size=20` — public
+
+All parameters optional. `source`: one site id from `GET /news/sources` (unknown id → `400 VALIDATION_FAILED` listing the valid ids). `q`: any word of 3+ letters in the headline or summary (accents ignored). Newest first (articles without a date last); the same story on two sites is listed once (the newest: headlines sharing ≥ 60 % and at least 3 meaningful words, published within 12 h). Paged like every list (`size` ≤ 100). `503 SOURCE_UNAVAILABLE` only when no asked site can be read and nothing is cached; one site down just leaves its articles out (or shows its last cached ones).
+
+```json
+{
+  "items": [
+    {
+      "id": "6f1c2a0e-1b7d-3c4e-9a51-2f0d8e7b6a43",
+      "sourceId": "tion",
+      "sourceName": "TION",
+      "title": "Primăria Timișoara montează 300 de suporturi pentru biciclete",
+      "summary": "Suporturile vor fi montate în tot orașul până la sfârșitul anului…",
+      "url": "https://www.tion.ro/...",
+      "imageUrl": "https://www.tion.ro/wp-content/uploads/....jpg",
+      "publishedAt": "2026-11-14T12:21:00Z"
+    }
+  ],
+  "page": 0, "size": 20, "totalItems": 39, "totalPages": 2
+}
+```
+
+- `id`: stable, built from the article link. `imageUrl`: from the feed, else the site's WordPress featured image; `null` when there is none. `publishedAt`: `null` when the site gave no date. Only `http(s)` links and pictures are returned.
+
+### `GET /news/sources` — public
+
+```json
+[ { "id": "tion", "name": "TION", "siteUrl": "https://www.tion.ro", "available": true, "stale": false, "articleCount": 5, "updatedAt": "2026-11-14T17:01:06Z" } ]
+```
+
+`available: false` = the site cannot be read and nothing is cached; `stale: true` = the last read failed and older articles are shown; `articleCount` = its Timișoara articles kept now.
+
+---
+
 ## Routing — PLAN task 10
 
 ### `GET /routes/plan?from=45.7537,21.2257&to=45.7489,21.2318&mode=TRANSIT`
@@ -851,6 +889,8 @@ Answer — `reply` is plain text (no markdown) in the user's language (Romanian 
 - `basis`: `TOTAL` when the answer is one plan (at most one place and at most one event, e.g. "concert, then pizza"; the totals are plain sums of the lines). `OPTIONS` when it offers alternatives (two or more places, or two or more events — the user picks one of each kind). The app labels it "Average total", "Average per option" (one kind) or "Average per plan" (alternatives plus another kind).
 - `note`: short remark (saved prices may have changed; recommendations without a stored price: "Not included (price unknown): …" for `TOTAL`, "No stored price for …" for `OPTIONS`).
 
+`routes[].leaveNow` (PLAN 26, "Leave now" box) says when to leave to catch the route's first tram/trolleybus/bus. It is `null` for walking routes, when `startsFromUser` is `false`, and for routes planned for a later time (`depart_at`). Fields: `line`, `vehicleType` (`TRAM` | `TROLLEYBUS` | `BUS`), `headsign` (or `null`), `stopName` (where to get on), `walkMinutes` (from the user to that stop), `boardAt` (when the vehicle the user can still catch reaches the stop), `leaveAt` (`boardAt` minus the walk and one spare minute; never before the answer time), `source` (`LIVE` = tracked vehicle, `TIMETABLE` = STPT's scheduled time, `PLAN` = the route planner's time because STPT's arrivals were unavailable), and `missedBoardAt` (an earlier vehicle of the same line that leaves before the user can reach the stop, or `null`). The app counts down to `leaveAt` itself.
+
 ```json
 {
   "reply": "- 5 to go: 127 m away (2 min walk). Espresso about 5 lei. Open until 19:00.\nPrices may have changed.",
@@ -864,7 +904,27 @@ Answer — `reply` is plain text (no markdown) in the user's language (Romanian 
       "mode": "WALK",
       "durationMinutes": 2,
       "distanceMeters": 127,
-      "startsFromUser": true
+      "startsFromUser": true,
+      "leaveNow": null
+    },
+    {
+      "from": { "lat": 45.7537, "lon": 21.2257, "name": "Your location" },
+      "to": { "lat": 45.7505, "lon": 21.2075, "name": "Gara de Nord" },
+      "mode": "TRANSIT",
+      "durationMinutes": 20,
+      "distanceMeters": 3400,
+      "startsFromUser": true,
+      "leaveNow": {
+        "line": "1",
+        "vehicleType": "TRAM",
+        "headsign": "Gara de Nord",
+        "stopName": "Piața Libertății",
+        "walkMinutes": 4,
+        "boardAt": "2026-11-14T18:41:00Z",
+        "leaveAt": "2026-11-14T18:36:00Z",
+        "source": "LIVE",
+        "missedBoardAt": "2026-11-14T18:33:00Z"
+      }
     }
   ],
   "cost": {
