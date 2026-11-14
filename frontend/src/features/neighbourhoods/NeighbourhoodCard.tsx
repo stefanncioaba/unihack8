@@ -59,11 +59,17 @@ function Header({ area }: { area: NeighbourhoodPulse }) {
   );
 }
 
-/** Full area card; event rows open the event, "Show on map" opens the Map tab there. */
+/** Full area card; tapping it opens the area's panel (Events | Help), event rows open the event, "Show on map" opens the Map tab there. */
 export function NeighbourhoodCard({ area }: { area: NeighbourhoodPulse }) {
   const firstAlert = area.transit.alerts[0];
   return (
-    <View style={styles.card} testID={`pulse-card-${area.id}`}>
+    <Pressable
+      style={({ pressed }) => [styles.card, pressed && { opacity: 0.92 }]}
+      testID={`pulse-card-${area.id}`}
+      accessibilityRole="button"
+      accessibilityLabel={`Open ${area.name}`}
+      onPress={() => router.push(`/pulse/${area.id}`)}
+    >
       <Header area={area} />
       <View style={styles.body}>
         <Row icon="calendar-outline" text={eventsLine(area)} testID={`pulse-events-${area.id}`} />
@@ -102,7 +108,7 @@ export function NeighbourhoodCard({ area }: { area: NeighbourhoodPulse }) {
           </Text>
         </Pressable>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
