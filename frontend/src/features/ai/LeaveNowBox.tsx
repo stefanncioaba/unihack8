@@ -1,4 +1,4 @@
-// "Leave now" box under an AI route card (PLAN 24): which tram/bus to catch, at which stop, and a live countdown
+// "Leave now" box under an AI route card (PLAN 25): which tram/bus to catch, at which stop, and a live countdown
 // to when the user has to start walking. "Will I make it?" is answered by the box's state.
 import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';

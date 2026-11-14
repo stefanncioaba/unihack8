@@ -70,7 +70,7 @@ function routeTo(place: PlaceSummary, request: ChatRequest, fromUniversity: bool
   };
 }
 
-/** A tram trip to a place with its "Leave now" box (PLAN 24): 4 min walk, tram 1 in 11 min, leave in 6 min. */
+/** A tram trip to a place with its "Leave now" box (PLAN 25): 4 min walk, tram 1 in 11 min, leave in 6 min. */
 function tramTo(place: PlaceSummary, request: ChatRequest): ChatRoute {
   const walk = routeTo(place, request, false);
   const now = Date.now();

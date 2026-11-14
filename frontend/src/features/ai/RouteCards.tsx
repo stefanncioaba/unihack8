@@ -1,6 +1,6 @@
 // Route cards under an assistant answer (PLAN 18.4): destination, walking / public transport and the time estimate.
 // "Go" (start the journey) appears only for a route that starts where the user is; every card can preview its route.
-// A tram/bus trip from the user also gets the "Leave now" box under its card (PLAN 24).
+// A tram/bus trip from the user also gets the "Leave now" box under its card (PLAN 25).
 import * as Location from 'expo-location';
 import { router } from 'expo-router';
 import { useState } from 'react';
@@ -84,7 +84,7 @@ function RouteResult({ route, index }: { route: ChatRoute; index: number }) {
           </Text>
         ) : null}
       </Card>
-      {/* "Leave now" box (PLAN 24): its own box under the card, only for a tram/bus trip from the user. */}
+      {/* "Leave now" box (PLAN 25): its own box under the card, only for a tram/bus trip from the user. */}
       {route.leaveNow ? <LeaveNowBox leave={route.leaveNow} index={index} /> : null}
     </View>
   );

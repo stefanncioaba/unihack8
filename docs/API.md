@@ -610,6 +610,44 @@ When no arrival is known (or STPT's arrivals are down) `nextArrival` is `null` a
 
 ---
 
+## Neighbourhoods — PLAN task 24
+
+### `GET /neighbourhoods/pulse` — public
+
+Every Timișoara area as a live card, **busiest first** (by `score`). Areas are hard-coded circles (`id`, centre, `radiusMeters`); an event, place, stop or vehicle belongs to the nearest centre whose circle covers it. Cached for 30 s on the server. A source that is down only empties its own section: STPT down → `transit.available: false`; events or places down → zero counts. Never 503.
+
+```json
+{
+  "generatedAt": "2026-11-14T18:00:00Z",
+  "areas": [
+    {
+      "id": "cetate", "name": "Cetate", "lat": 45.7568, "lon": 21.229, "radiusMeters": 750,
+      "level": "BUSY", "score": 21,
+      "events": {
+        "nowCount": 1, "tonightCount": 2, "freeSpots": 6,
+        "highlights": [
+          { "id": "…", "title": "Board games night", "category": "GAMES", "venueName": "Scârț Loc Lejer",
+            "startsAt": "2026-11-14T17:00:00Z", "endsAt": "2026-11-14T21:00:00Z",
+            "capacity": 12, "spotsLeft": 4, "imageUrl": null, "happeningNow": true }
+        ]
+      },
+      "transit": { "available": true, "lines": ["1", "2", "8", "E2"], "stopCount": 5, "liveVehicles": 3,
+                   "alerts": [ { "id": "A155", "title": "…", "description": "…" } ] },
+      "places": { "total": 120, "openNow": 64, "topCategories": ["restaurant", "cafe"] },
+      "people": { "going": 9, "reliableGoing": 7 }
+    }
+  ]
+}
+```
+
+- `events`: **now** = started and not ended (no `endsAt` → counts as 3 h long); **tonight** = starts later, before 05:00 local time. `freeSpots` sums `spotsLeft` of limited events. `highlights`: at most 3, running ones first, then by start.
+- `transit.lines`: line names of the stops inside the area; `alerts`: STPT alerts that name one of those lines after a line word ("linia 8", "tramvaiele 1 și 2") or one of the area's stop names.
+- `places.openNow`: places whose OpenStreetMap opening hours say open now (unknown hours are not counted); `topCategories`: up to 3 categories with the most open places.
+- `people`: different users `JOINED` or `ATTENDED` in the area's events now/tonight; `reliableGoing` = reliability score ≥ 100 (the starting score).
+- `level`: `score = 4 × now + 2 × tonight + going + min(openNow / 5, 8) + min(liveVehicles, 5)`; `BUSY` from 15, `STEADY` from 5, else `QUIET`.
+
+---
+
 ## Routing — PLAN task 10
 
 ### `GET /routes/plan?from=45.7537,21.2257&to=45.7489,21.2318&mode=TRANSIT`
@@ -687,7 +725,7 @@ Answer — `reply` is plain text (no markdown) in the user's language (Romanian 
 - `basis`: `TOTAL` when the answer is one plan (at most one place and at most one event, e.g. "concert, then pizza"; the totals are plain sums of the lines). `OPTIONS` when it offers alternatives (two or more places, or two or more events — the user picks one of each kind). The app labels it "Average total", "Average per option" (one kind) or "Average per plan" (alternatives plus another kind).
 - `note`: short remark (saved prices may have changed; recommendations without a stored price: "Not included (price unknown): …" for `TOTAL`, "No stored price for …" for `OPTIONS`).
 
-`routes[].leaveNow` (PLAN 24, "Leave now" box) says when to leave to catch the route's first tram/trolleybus/bus. It is `null` for walking routes, when `startsFromUser` is `false`, and for routes planned for a later time (`depart_at`). Fields: `line`, `vehicleType` (`TRAM` | `TROLLEYBUS` | `BUS`), `headsign` (or `null`), `stopName` (where to get on), `walkMinutes` (from the user to that stop), `boardAt` (when the vehicle the user can still catch reaches the stop), `leaveAt` (`boardAt` minus the walk and one spare minute; never before the answer time), `source` (`LIVE` = tracked vehicle, `TIMETABLE` = STPT's scheduled time, `PLAN` = the route planner's time because STPT's arrivals were unavailable), and `missedBoardAt` (an earlier vehicle of the same line that leaves before the user can reach the stop, or `null`). The app counts down to `leaveAt` itself.
+`routes[].leaveNow` (PLAN 25, "Leave now" box) says when to leave to catch the route's first tram/trolleybus/bus. It is `null` for walking routes, when `startsFromUser` is `false`, and for routes planned for a later time (`depart_at`). Fields: `line`, `vehicleType` (`TRAM` | `TROLLEYBUS` | `BUS`), `headsign` (or `null`), `stopName` (where to get on), `walkMinutes` (from the user to that stop), `boardAt` (when the vehicle the user can still catch reaches the stop), `leaveAt` (`boardAt` minus the walk and one spare minute; never before the answer time), `source` (`LIVE` = tracked vehicle, `TIMETABLE` = STPT's scheduled time, `PLAN` = the route planner's time because STPT's arrivals were unavailable), and `missedBoardAt` (an earlier vehicle of the same line that leaves before the user can reach the stop, or `null`). The app counts down to `leaveAt` itself.
 
 ```json
 {

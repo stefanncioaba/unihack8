@@ -24,7 +24,7 @@ export type ChatRoutePoint = { lat: number; lon: number; name: string | null };
 /** Where the time of the vehicle to catch comes from: a tracked vehicle, STPT's timetable, or the route planner. */
 export type LeaveNowSource = 'LIVE' | 'TIMETABLE' | 'PLAN';
 
-/** "Leave now": when to leave so the walk ends at the first stop in time for the first tram/bus (PLAN 24). */
+/** "Leave now": when to leave so the walk ends at the first stop in time for the first tram/bus (PLAN 25). */
 export type ChatLeaveNow = {
   line: string;
   /** TRAM, TROLLEYBUS or BUS. */

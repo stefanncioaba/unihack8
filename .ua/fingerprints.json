@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "b627605e985235e8d2b37dec6448b8079923a6a2",
-  "generatedAt": "2026-11-14T16:36:46.519Z",
+  "gitCommitHash": "53c8335c5c10f448926792940de55806af100256",
+  "generatedAt": "2026-11-14T16:50:28.414Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,22 +25,22 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "6c2425b9480a3935c14c9fece5d7d1ba7591e9b56c38a72cf981aae36672264a",
+      "contentHash": "d00e5eacec760c5a7d63f8df82e53578de77b03c3e84da895b724d7c13f921cb",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 656,
+      "totalLines": 678,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "06d53b3fe2779b7ccfd3f5c7ce80b680df4b8bfa00db8309f976c233cc35f892",
+      "contentHash": "875bd8df6dc0a4402f717604bd69651c5072648d51d73e30c953c30021899833",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 420,
+      "totalLines": 434,
       "hasStructuralAnalysis": false
     },
     "README.md": {
@@ -5025,7 +5025,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java",
-      "contentHash": "07d810e790dd4d85335b267fed7207a01f25d00b4bf14e39ce0469c4caa81d6a",
+      "contentHash": "f8c139c1403ec18102fac02a7c50f6d236bc195af2b0dda686c4f2e4a47e29d5",
       "functions": [
         {
           "name": "securityFilterChain",
@@ -33348,12 +33348,12 @@
     },
     "docs/API.md": {
       "filePath": "docs/API.md",
-      "contentHash": "fe539dc4e1e99c0b3dded0ea6f719dab2d2d42208ac3b8a876244d155beb9054",
+      "contentHash": "beacba10c0de7fcc693623b0a0873e86ad070213fdae6eaeea193099e47db744",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 721,
+      "totalLines": 759,
       "hasStructuralAnalysis": false
     },
     "docs/DEMO.md": {
@@ -37573,7 +37573,7 @@
     },
     "frontend/src/app/(tabs)/index.tsx": {
       "filePath": "frontend/src/app/(tabs)/index.tsx",
-      "contentHash": "fa1fb53719351de641750b7d50b96b34d9c4fc94e34453d80970d8e41e5ee994",
+      "contentHash": "0376f009d80e78ccfc302c0391050bd132c1f534f13731a5b9b0f79a879b7ec8",
       "functions": [
         {
           "name": "eventCardWidth",
@@ -37588,7 +37588,7 @@
           "name": "HomeScreen",
           "params": [],
           "exported": true,
-          "lineCount": 86
+          "lineCount": 97
         }
       ],
       "classes": [],
@@ -37708,7 +37708,7 @@
         "eventCardWidth",
         "HomeScreen"
       ],
-      "totalLines": 148,
+      "totalLines": 160,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/(tabs)/map.tsx": {
@@ -38097,13 +38097,13 @@
     },
     "frontend/src/app/_layout.tsx": {
       "filePath": "frontend/src/app/_layout.tsx",
-      "contentHash": "9c53138eeb12bebee1bc0406c5379b9858a8ce9f8cc89079127b0fc4dee614c7",
+      "contentHash": "582133fef48b0cc1f034c55a533ec69498165b32e68a85bb7863daf1352b6a77",
       "functions": [
         {
           "name": "Gate",
           "params": [],
           "exported": false,
-          "lineCount": 32
+          "lineCount": 33
         },
         {
           "name": "RootLayout",
@@ -38197,7 +38197,7 @@
       "exports": [
         "RootLayout"
       ],
-      "totalLines": 68,
+      "totalLines": 69,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/events/[id]/index.tsx": {
@@ -47450,7 +47450,7 @@
     },
     "frontend/testing/mocks/index.ts": {
       "filePath": "frontend/testing/mocks/index.ts",
-      "contentHash": "2ba2131a5f40aaa68751051a3a35831296701167f609f78d997856028edc5a35",
+      "contentHash": "0a4a0786372b93e160a58cfff7ee1ada1b65ee93c3394a974c94e4894fc284b2",
       "functions": [
         {
           "name": "mockRequest",
@@ -47509,6 +47509,12 @@
           ]
         },
         {
+          "source": "./routes/neighbourhoods",
+          "specifiers": [
+            "neighbourhoodsRoutes"
+          ]
+        },
+        {
           "source": "./routes/routing",
           "specifiers": [
             "routingRoutes"
@@ -47535,7 +47541,7 @@
         "setMockLatency",
         "mockRequest"
       ],
-      "totalLines": 36,
+      "totalLines": 37,
       "hasStructuralAnalysis": true
     },
     "frontend/testing/mocks/placesSeed.ts": {
@@ -48355,6 +48361,2503 @@
       "exports": [],
       "totalLines": 186,
       "hasStructuralAnalysis": false
+    },
+    "backend/src/main/java/com/unihack8/backend/neighbourhoods/controller/NeighbourhoodController.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/controller/NeighbourhoodController.java",
+      "contentHash": "57528d8d530bbbbc7010310a9cab67ad6b2160b6b716bfb919fef247e7d757bd",
+      "functions": [
+        {
+          "name": "NeighbourhoodController",
+          "params": [
+            "pulse"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "pulse",
+          "params": [],
+          "returnType": "NeighbourhoodPulseResponse",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "NeighbourhoodController",
+          "methods": [
+            "NeighbourhoodController",
+            "pulse"
+          ],
+          "properties": [
+            "pulse"
+          ],
+          "exported": true,
+          "lineCount": 17
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.NeighbourhoodPulseResponse",
+          "specifiers": [
+            "NeighbourhoodPulseResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.service.NeighbourhoodPulseService",
+          "specifiers": [
+            "NeighbourhoodPulseService"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.GetMapping",
+          "specifiers": [
+            "GetMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RequestMapping",
+          "specifiers": [
+            "RequestMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RestController",
+          "specifiers": [
+            "RestController"
+          ]
+        }
+      ],
+      "exports": [
+        "NeighbourhoodController",
+        "pulse",
+        "NeighbourhoodController"
+      ],
+      "totalLines": 27,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/NeighbourhoodPulseDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/NeighbourhoodPulseDto.java",
+      "contentHash": "a0a7056c14c3f4cf84eda91b74c0925bd000f37fafda2d0629d70827bb004d4a",
+      "functions": [],
+      "classes": [
+        {
+          "name": "NeighbourhoodPulseDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "NeighbourhoodPulseDto"
+      ],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/NeighbourhoodPulseResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/NeighbourhoodPulseResponse.java",
+      "contentHash": "5f082217decfc538307703bf38e0942c2f4da6bf35687a01d094e79a5a930f75",
+      "functions": [],
+      "classes": [
+        {
+          "name": "NeighbourhoodPulseResponse",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "NeighbourhoodPulseResponse"
+      ],
+      "totalLines": 9,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulseEventDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulseEventDto.java",
+      "contentHash": "2477ba7124bd14f16462bd75c5c6d09aafdf26b68cd84a149d8ae2e57195ea35",
+      "functions": [],
+      "classes": [
+        {
+          "name": "PulseEventDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "PulseEventDto"
+      ],
+      "totalLines": 16,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulseEventsDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulseEventsDto.java",
+      "contentHash": "79a5e62bc6cd43bdfef842b9cda82e970228fa969a2798c003ce53ed1f27daa0",
+      "functions": [],
+      "classes": [
+        {
+          "name": "PulseEventsDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "PulseEventsDto"
+      ],
+      "totalLines": 15,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulsePeopleDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulsePeopleDto.java",
+      "contentHash": "4c105c76fab131781631a9e9fa65f9e07e7ea307af6a558626014bd85109116e",
+      "functions": [],
+      "classes": [
+        {
+          "name": "PulsePeopleDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "PulsePeopleDto"
+      ],
+      "totalLines": 11,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulsePlacesDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulsePlacesDto.java",
+      "contentHash": "b7c9f64e8687c4171967b658251a057258b6ebd07b720853f0c07392d743642a",
+      "functions": [],
+      "classes": [
+        {
+          "name": "PulsePlacesDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "PulsePlacesDto"
+      ],
+      "totalLines": 14,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulseTransitDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulseTransitDto.java",
+      "contentHash": "2b65a88596488dd1588888645aa42e696d5088c5f289ed9d9bbd15f10cd467d6",
+      "functions": [
+        {
+          "name": "unavailable",
+          "params": [],
+          "returnType": "PulseTransitDto",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "PulseTransitDto",
+          "methods": [
+            "unavailable"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.AlertDto",
+          "specifiers": [
+            "AlertDto"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "unavailable",
+        "PulseTransitDto"
+      ],
+      "totalLines": 23,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/model/Neighbourhood.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/model/Neighbourhood.java",
+      "contentHash": "7f3834a8778ed522768efcf8a8a70bbd71b2b7cb513e55657ba35433ff699360",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Neighbourhood",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        }
+      ],
+      "exports": [
+        "Neighbourhood"
+      ],
+      "totalLines": 15,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/model/NeighbourhoodAreas.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/model/NeighbourhoodAreas.java",
+      "contentHash": "c89ae7a87d08c2cfc4c5cd4872a9897a2dd98f812dfc8705c94c749055d07a58",
+      "functions": [
+        {
+          "name": "NeighbourhoodAreas",
+          "params": [],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "assign",
+          "params": [
+            "lat",
+            "lon"
+          ],
+          "returnType": "Optional<Neighbourhood>",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "assign",
+          "params": [
+            "lat",
+            "lon",
+            "areas"
+          ],
+          "returnType": "Optional<Neighbourhood>",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "byId",
+          "params": [
+            "id"
+          ],
+          "returnType": "Optional<Neighbourhood>",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "NeighbourhoodAreas",
+          "methods": [
+            "NeighbourhoodAreas",
+            "assign",
+            "assign",
+            "byId"
+          ],
+          "properties": [
+            "ALL"
+          ],
+          "exported": true,
+          "lineCount": 39
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "java.util.Comparator",
+          "specifiers": [
+            "Comparator"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        }
+      ],
+      "exports": [
+        "ALL",
+        "assign",
+        "assign",
+        "byId",
+        "NeighbourhoodAreas"
+      ],
+      "totalLines": 52,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/neighbourhoods/mapper/NeighbourhoodPulseMapper.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/mapper/NeighbourhoodPulseMapper.java",
+      "contentHash": "178f3892a4a7abff52e51b3e4f625fe3ad18c5b763dde5c329ea587231153a0c",
+      "functions": [],
+      "classes": [
+        {
+          "name": "NeighbourhoodPulseMapper",
+          "methods": [
+            "toEvent",
+            "toPulse"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.events.domain.dto.EventSummary",
+          "specifiers": [
+            "EventSummary"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.NeighbourhoodPulseDto",
+          "specifiers": [
+            "NeighbourhoodPulseDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.PulseEventDto",
+          "specifiers": [
+            "PulseEventDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.PulseEventsDto",
+          "specifiers": [
+            "PulseEventsDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.PulsePeopleDto",
+          "specifiers": [
+            "PulsePeopleDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.PulsePlacesDto",
+          "specifiers": [
+            "PulsePlacesDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.PulseTransitDto",
+          "specifiers": [
+            "PulseTransitDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.model.Neighbourhood",
+          "specifiers": [
+            "Neighbourhood"
+          ]
+        }
+      ],
+      "exports": [
+        "NeighbourhoodPulseMapper"
+      ],
+      "totalLines": 21,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/neighbourhoods/mapper/impl/NeighbourhoodPulseMapperImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/mapper/impl/NeighbourhoodPulseMapperImpl.java",
+      "contentHash": "894924e9922c84f9a561eaa02af9c1ca136d00888679c21cd5e6d37b42f4a15a",
+      "functions": [
+        {
+          "name": "toEvent",
+          "params": [
+            "event",
+            "happeningNow"
+          ],
+          "returnType": "PulseEventDto",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "toPulse",
+          "params": [
+            "area",
+            "level",
+            "score",
+            "events",
+            "transit",
+            "places",
+            "people"
+          ],
+          "returnType": "NeighbourhoodPulseDto",
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "NeighbourhoodPulseMapperImpl",
+          "methods": [
+            "toEvent",
+            "toPulse"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 18
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.events.domain.dto.EventSummary",
+          "specifiers": [
+            "EventSummary"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.NeighbourhoodPulseDto",
+          "specifiers": [
+            "NeighbourhoodPulseDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.PulseEventDto",
+          "specifiers": [
+            "PulseEventDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.PulseEventsDto",
+          "specifiers": [
+            "PulseEventsDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.PulsePeopleDto",
+          "specifiers": [
+            "PulsePeopleDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.PulsePlacesDto",
+          "specifiers": [
+            "PulsePlacesDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.PulseTransitDto",
+          "specifiers": [
+            "PulseTransitDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.model.Neighbourhood",
+          "specifiers": [
+            "Neighbourhood"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.mapper.NeighbourhoodPulseMapper",
+          "specifiers": [
+            "NeighbourhoodPulseMapper"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        }
+      ],
+      "exports": [
+        "toEvent",
+        "toPulse",
+        "NeighbourhoodPulseMapperImpl"
+      ],
+      "totalLines": 33,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/neighbourhoods/service/NeighbourhoodPulseService.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/service/NeighbourhoodPulseService.java",
+      "contentHash": "c7a56203b09522bc00cbf3d26ebca0490c92a6bb14248b6477dc43a81da86897",
+      "functions": [],
+      "classes": [
+        {
+          "name": "NeighbourhoodPulseService",
+          "methods": [
+            "pulse"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.NeighbourhoodPulseResponse",
+          "specifiers": [
+            "NeighbourhoodPulseResponse"
+          ]
+        }
+      ],
+      "exports": [
+        "NeighbourhoodPulseService"
+      ],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/neighbourhoods/service/impl/AlertMatcher.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/service/impl/AlertMatcher.java",
+      "contentHash": "8d465ff4875a351fc399cba4ff7fbb1e820860a3d453a703260b0e3a1fd94871",
+      "functions": [
+        {
+          "name": "AlertMatcher",
+          "params": [],
+          "exported": false,
+          "lineCount": 2
+        },
+        {
+          "name": "concerns",
+          "params": [
+            "alert",
+            "lineNames",
+            "stopNames"
+          ],
+          "returnType": "boolean",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "mentionedLines",
+          "params": [
+            "normalizedText"
+          ],
+          "returnType": "Set<String>",
+          "exported": false,
+          "lineCount": 11
+        }
+      ],
+      "classes": [
+        {
+          "name": "AlertMatcher",
+          "methods": [
+            "AlertMatcher",
+            "concerns",
+            "mentionedLines"
+          ],
+          "properties": [
+            "LINES",
+            "NAME",
+            "MIN_STOP_NAME"
+          ],
+          "exported": false,
+          "lineCount": 45
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.text.TextMatch",
+          "specifiers": [
+            "TextMatch"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.AlertDto",
+          "specifiers": [
+            "AlertDto"
+          ]
+        },
+        {
+          "source": "java.util.Collection",
+          "specifiers": [
+            "Collection"
+          ]
+        },
+        {
+          "source": "java.util.Locale",
+          "specifiers": [
+            "Locale"
+          ]
+        },
+        {
+          "source": "java.util.Set",
+          "specifiers": [
+            "Set"
+          ]
+        },
+        {
+          "source": "java.util.regex.Matcher",
+          "specifiers": [
+            "Matcher"
+          ]
+        },
+        {
+          "source": "java.util.regex.Pattern",
+          "specifiers": [
+            "Pattern"
+          ]
+        },
+        {
+          "source": "java.util.stream.Collectors",
+          "specifiers": [
+            "Collectors"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 62,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/neighbourhoods/service/impl/NeighbourhoodPulseServiceImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/service/impl/NeighbourhoodPulseServiceImpl.java",
+      "contentHash": "3d89b5f94f3c1d33ac3ff0f7f98b5cd793a1e9f9f474dc4bb9f1e03ac474cd01",
+      "functions": [
+        {
+          "name": "NeighbourhoodPulseServiceImpl",
+          "params": [
+            "events",
+            "places",
+            "transit",
+            "mapper",
+            "clock"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "NeighbourhoodPulseServiceImpl",
+          "params": [
+            "events",
+            "places",
+            "transit",
+            "mapper",
+            "clock",
+            "areas"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "pulse",
+          "params": [],
+          "returnType": "NeighbourhoodPulseResponse",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "build",
+          "params": [
+            "now"
+          ],
+          "returnType": "NeighbourhoodPulseResponse",
+          "exported": false,
+          "lineCount": 19
+        },
+        {
+          "name": "score",
+          "params": [
+            "events",
+            "people",
+            "places",
+            "transit"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "level",
+          "params": [
+            "score"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "tonightEnds",
+          "params": [
+            "now"
+          ],
+          "returnType": "Instant",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "happeningNow",
+          "params": [
+            "event",
+            "now"
+          ],
+          "returnType": "boolean",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "eventsByArea",
+          "params": [
+            "now"
+          ],
+          "returnType": "Map<String, AreaEvents>",
+          "exported": false,
+          "lineCount": 23
+        },
+        {
+          "name": "people",
+          "params": [
+            "areaEvents"
+          ],
+          "returnType": "PulsePeopleDto",
+          "exported": false,
+          "lineCount": 19
+        },
+        {
+          "name": "places",
+          "params": [
+            "area",
+            "localNow"
+          ],
+          "returnType": "PulsePlacesDto",
+          "exported": false,
+          "lineCount": 29
+        },
+        {
+          "name": "transitByArea",
+          "params": [],
+          "returnType": "Map<String, PulseTransitDto>",
+          "exported": false,
+          "lineCount": 40
+        },
+        {
+          "name": "safe",
+          "params": [
+            "call",
+            "fallback",
+            "what"
+          ],
+          "returnType": "T",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "cityBox",
+          "params": [],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 11
+        }
+      ],
+      "classes": [
+        {
+          "name": "NeighbourhoodPulseServiceImpl",
+          "methods": [
+            "NeighbourhoodPulseServiceImpl",
+            "NeighbourhoodPulseServiceImpl",
+            "pulse",
+            "build",
+            "score",
+            "level",
+            "tonightEnds",
+            "happeningNow",
+            "eventsByArea",
+            "people",
+            "places",
+            "transitByArea",
+            "safe",
+            "cityBox"
+          ],
+          "properties": [
+            "log",
+            "CITY_ZONE",
+            "CACHE_TTL",
+            "DEFAULT_EVENT_LENGTH",
+            "NIGHT_ENDS",
+            "LOOK_BACK",
+            "RELIABLE_SCORE",
+            "MAX_HIGHLIGHTS",
+            "BUSY_SCORE",
+            "STEADY_SCORE",
+            "MAX_PLACES_PER_AREA",
+            "events",
+            "places",
+            "transit",
+            "mapper",
+            "clock",
+            "areas",
+            "cached",
+            "AREA_LINE_ORDER"
+          ],
+          "exported": true,
+          "lineCount": 291
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.dto.PageParams",
+          "specifiers": [
+            "PageParams"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.BoundingBox",
+          "specifiers": [
+            "BoundingBox"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.domain.dto.EventSummary",
+          "specifiers": [
+            "EventSummary"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.domain.dto.ParticipantResponse",
+          "specifiers": [
+            "ParticipantResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.service.EventService",
+          "specifiers": [
+            "EventService"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.NeighbourhoodPulseDto",
+          "specifiers": [
+            "NeighbourhoodPulseDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.NeighbourhoodPulseResponse",
+          "specifiers": [
+            "NeighbourhoodPulseResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.PulseEventDto",
+          "specifiers": [
+            "PulseEventDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.PulseEventsDto",
+          "specifiers": [
+            "PulseEventsDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.PulsePeopleDto",
+          "specifiers": [
+            "PulsePeopleDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.PulsePlacesDto",
+          "specifiers": [
+            "PulsePlacesDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.PulseTransitDto",
+          "specifiers": [
+            "PulseTransitDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.model.Neighbourhood",
+          "specifiers": [
+            "Neighbourhood"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.model.NeighbourhoodAreas",
+          "specifiers": [
+            "NeighbourhoodAreas"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.mapper.NeighbourhoodPulseMapper",
+          "specifiers": [
+            "NeighbourhoodPulseMapper"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.service.NeighbourhoodPulseService",
+          "specifiers": [
+            "NeighbourhoodPulseService"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.OpeningHours",
+          "specifiers": [
+            "OpeningHours"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceExploreCriteria",
+          "specifiers": [
+            "PlaceExploreCriteria"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceInsightDto",
+          "specifiers": [
+            "PlaceInsightDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.service.PlaceService",
+          "specifiers": [
+            "PlaceService"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.AlertDto",
+          "specifiers": [
+            "AlertDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitRouteDto",
+          "specifiers": [
+            "TransitRouteDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitStopDto",
+          "specifiers": [
+            "TransitStopDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.VehicleDto",
+          "specifiers": [
+            "VehicleDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.service.TransitService",
+          "specifiers": [
+            "TransitService"
+          ]
+        },
+        {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.time.LocalDateTime",
+          "specifiers": [
+            "LocalDateTime"
+          ]
+        },
+        {
+          "source": "java.time.LocalTime",
+          "specifiers": [
+            "LocalTime"
+          ]
+        },
+        {
+          "source": "java.time.ZoneId",
+          "specifiers": [
+            "ZoneId"
+          ]
+        },
+        {
+          "source": "java.time.ZonedDateTime",
+          "specifiers": [
+            "ZonedDateTime"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.Comparator",
+          "specifiers": [
+            "Comparator"
+          ]
+        },
+        {
+          "source": "java.util.HashMap",
+          "specifiers": [
+            "HashMap"
+          ]
+        },
+        {
+          "source": "java.util.HashSet",
+          "specifiers": [
+            "HashSet"
+          ]
+        },
+        {
+          "source": "java.util.LinkedHashMap",
+          "specifiers": [
+            "LinkedHashMap"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Locale",
+          "specifiers": [
+            "Locale"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.Set",
+          "specifiers": [
+            "Set"
+          ]
+        },
+        {
+          "source": "java.util.TreeSet",
+          "specifiers": [
+            "TreeSet"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "java.util.function.Function",
+          "specifiers": [
+            "Function"
+          ]
+        },
+        {
+          "source": "java.util.stream.Collectors",
+          "specifiers": [
+            "Collectors"
+          ]
+        },
+        {
+          "source": "org.slf4j.Logger",
+          "specifiers": [
+            "Logger"
+          ]
+        },
+        {
+          "source": "org.slf4j.LoggerFactory",
+          "specifiers": [
+            "LoggerFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Autowired",
+          "specifiers": [
+            "Autowired"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Service",
+          "specifiers": [
+            "Service"
+          ]
+        }
+      ],
+      "exports": [
+        "NeighbourhoodPulseServiceImpl",
+        "pulse",
+        "NeighbourhoodPulseServiceImpl"
+      ],
+      "totalLines": 349,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/neighbourhoods/controller/NeighbourhoodControllerTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/neighbourhoods/controller/NeighbourhoodControllerTest.java",
+      "contentHash": "c08309a4870a1d59222468e87e7f2e1320a8b83ae6f191b15c1925bf6738a677",
+      "functions": [
+        {
+          "name": "pulseWithoutToken",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 24
+        }
+      ],
+      "classes": [
+        {
+          "name": "NeighbourhoodControllerTest",
+          "methods": [
+            "pulseWithoutToken"
+          ],
+          "properties": [
+            "T",
+            "mvc",
+            "pulse"
+          ],
+          "exported": false,
+          "lineCount": 38
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.mockito.Mockito.when",
+          "specifiers": [
+            "when"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get",
+          "specifiers": [
+            "get"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath",
+          "specifiers": [
+            "jsonPath"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.status",
+          "specifiers": [
+            "status"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.NeighbourhoodPulseDto",
+          "specifiers": [
+            "NeighbourhoodPulseDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.NeighbourhoodPulseResponse",
+          "specifiers": [
+            "NeighbourhoodPulseResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.PulseEventDto",
+          "specifiers": [
+            "PulseEventDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.PulseEventsDto",
+          "specifiers": [
+            "PulseEventsDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.PulsePeopleDto",
+          "specifiers": [
+            "PulsePeopleDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.PulsePlacesDto",
+          "specifiers": [
+            "PulsePlacesDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.PulseTransitDto",
+          "specifiers": [
+            "PulseTransitDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.service.NeighbourhoodPulseService",
+          "specifiers": [
+            "NeighbourhoodPulseService"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.AlertDto",
+          "specifiers": [
+            "AlertDto"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Autowired",
+          "specifiers": [
+            "Autowired"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.test.context.SpringBootTest",
+          "specifiers": [
+            "SpringBootTest"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc",
+          "specifiers": [
+            "AutoConfigureMockMvc"
+          ]
+        },
+        {
+          "source": "org.springframework.test.context.bean.override.mockito.MockitoBean",
+          "specifiers": [
+            "MockitoBean"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.MockMvc",
+          "specifiers": [
+            "MockMvc"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 66,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/neighbourhoods/domain/model/NeighbourhoodAreasTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/neighbourhoods/domain/model/NeighbourhoodAreasTest.java",
+      "contentHash": "052dfcfa66eb3d2377f20f5ee8efd9d94b60c3279610022ef30b147ef202765e",
+      "functions": [
+        {
+          "name": "knownLandmarksLandInTheirArea",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "outsideEveryAreaIsEmpty",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "overlapGoesToNearestCentre",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "edgeOfRadiusIsInside",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "idsAreUniqueAndFindable",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "NeighbourhoodAreasTest",
+          "methods": [
+            "knownLandmarksLandInTheirArea",
+            "outsideEveryAreaIsEmpty",
+            "overlapGoesToNearestCentre",
+            "edgeOfRadiusIsInside",
+            "idsAreUniqueAndFindable"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 44
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "java.util.HashSet",
+          "specifiers": [
+            "HashSet"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 55,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/neighbourhoods/service/impl/AlertMatcherTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/neighbourhoods/service/impl/AlertMatcherTest.java",
+      "contentHash": "ff46abbcd30dc2825812a1d981ba9420719501ad00f27255a41bb7c0dd416c43",
+      "functions": [
+        {
+          "name": "alert",
+          "params": [
+            "text"
+          ],
+          "returnType": "AlertDto",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "lineWordFollowedByName",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "listsAndLetterLines",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "bareNumbersDoNotCount",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "stopNames",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "emptyAlert",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        }
+      ],
+      "classes": [
+        {
+          "name": "AlertMatcherTest",
+          "methods": [
+            "alert",
+            "lineWordFollowedByName",
+            "listsAndLetterLines",
+            "bareNumbersDoNotCount",
+            "stopNames",
+            "emptyAlert"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 44
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.AlertDto",
+          "specifiers": [
+            "AlertDto"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 54,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/neighbourhoods/service/impl/NeighbourhoodPulseServiceImplTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/neighbourhoods/service/impl/NeighbourhoodPulseServiceImplTest.java",
+      "contentHash": "1d94ecf0b75ed04f6b165d99c29113829f648a78b3325b10c2a9b28bcb2a657c",
+      "functions": [
+        {
+          "name": "event",
+          "params": [
+            "source",
+            "lat",
+            "lon",
+            "start",
+            "end",
+            "capacity",
+            "spotsLeft"
+          ],
+          "returnType": "EventSummary",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "place",
+          "params": [
+            "category",
+            "lat",
+            "lon",
+            "hours"
+          ],
+          "returnType": "PlaceInsightDto",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "participant",
+          "params": [
+            "id",
+            "score",
+            "status"
+          ],
+          "returnType": "ParticipantResponse",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "setUp",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 39
+        },
+        {
+          "name": "vehicle",
+          "params": [
+            "lat",
+            "lon"
+          ],
+          "returnType": "VehicleDto",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "buildsAreaCards",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 39
+        },
+        {
+          "name": "transitDownOnlyEmptiesTransit",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "vehiclesDownKeepsLines",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "eventsDown",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "cachesForThirtySeconds",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "levelsAndTonight",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        }
+      ],
+      "classes": [
+        {
+          "name": "NeighbourhoodPulseServiceImplTest",
+          "methods": [
+            "event",
+            "place",
+            "participant",
+            "setUp",
+            "vehicle",
+            "buildsAreaCards",
+            "transitDownOnlyEmptiesTransit",
+            "vehiclesDownKeepsLines",
+            "eventsDown",
+            "cachesForThirtySeconds",
+            "levelsAndTonight"
+          ],
+          "properties": [
+            "NOW",
+            "A",
+            "B",
+            "U1",
+            "U2",
+            "U3",
+            "events",
+            "places",
+            "transit",
+            "clock",
+            "service",
+            "running",
+            "noEnd",
+            "tonight"
+          ],
+          "exported": false,
+          "lineCount": 194
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "org.mockito.ArgumentMatchers.any",
+          "specifiers": [
+            "any"
+          ]
+        },
+        {
+          "source": "org.mockito.ArgumentMatchers.anyInt",
+          "specifiers": [
+            "anyInt"
+          ]
+        },
+        {
+          "source": "org.mockito.ArgumentMatchers.eq",
+          "specifiers": [
+            "eq"
+          ]
+        },
+        {
+          "source": "org.mockito.ArgumentMatchers.isNull",
+          "specifiers": [
+            "isNull"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.mock",
+          "specifiers": [
+            "mock"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.times",
+          "specifiers": [
+            "times"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.verify",
+          "specifiers": [
+            "verify"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.when",
+          "specifiers": [
+            "when"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.dto.PageResponse",
+          "specifiers": [
+            "PageResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.domain.dto.EventSummary",
+          "specifiers": [
+            "EventSummary"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.domain.dto.ParticipantResponse",
+          "specifiers": [
+            "ParticipantResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.domain.dto.UserSummary",
+          "specifiers": [
+            "UserSummary"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.service.EventService",
+          "specifiers": [
+            "EventService"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.NeighbourhoodPulseDto",
+          "specifiers": [
+            "NeighbourhoodPulseDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.NeighbourhoodPulseResponse",
+          "specifiers": [
+            "NeighbourhoodPulseResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.dto.PulseEventDto",
+          "specifiers": [
+            "PulseEventDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.domain.model.Neighbourhood",
+          "specifiers": [
+            "Neighbourhood"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.neighbourhoods.mapper.impl.NeighbourhoodPulseMapperImpl",
+          "specifiers": [
+            "NeighbourhoodPulseMapperImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceDetailDto",
+          "specifiers": [
+            "PlaceDetailDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceExploreCriteria",
+          "specifiers": [
+            "PlaceExploreCriteria"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceInsightDto",
+          "specifiers": [
+            "PlaceInsightDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.service.PlaceService",
+          "specifiers": [
+            "PlaceService"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.support.MutableClock",
+          "specifiers": [
+            "MutableClock"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.AlertDto",
+          "specifiers": [
+            "AlertDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitRouteDto",
+          "specifiers": [
+            "TransitRouteDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.TransitStopDto",
+          "specifiers": [
+            "TransitStopDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.VehicleDto",
+          "specifiers": [
+            "VehicleDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.VehiclesResponse",
+          "specifiers": [
+            "VehiclesResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.service.TransitService",
+          "specifiers": [
+            "TransitService"
+          ]
+        },
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.BeforeEach",
+          "specifiers": [
+            "BeforeEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 240,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/__tests__/screens.pulse.test.tsx": {
+      "filePath": "frontend/__tests__/screens.pulse.test.tsx",
+      "contentHash": "d994ae5317c32fd6f10eb2d5790a058bc94dd77bd3bd3820e6eea31fff69eb32",
+      "functions": [
+        {
+          "name": "area",
+          "params": [
+            "overrides"
+          ],
+          "returnType": "NeighbourhoodPulse",
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@testing-library/react-native",
+          "specifiers": [
+            "fireEvent",
+            "screen",
+            "waitFor",
+            "within"
+          ]
+        },
+        {
+          "source": "@/api/types.neighbourhoods",
+          "specifiers": [
+            "NeighbourhoodPulse"
+          ]
+        },
+        {
+          "source": "@/app/(tabs)/index",
+          "specifiers": [
+            "HomeScreen"
+          ]
+        },
+        {
+          "source": "@/app/pulse/index",
+          "specifiers": [
+            "NeighbourhoodPulseScreen"
+          ]
+        },
+        {
+          "source": "@/features/neighbourhoods/photos",
+          "specifiers": [
+            "neighbourhoodPhoto",
+            "NEIGHBOURHOOD_PHOTOS"
+          ]
+        },
+        {
+          "source": "@/features/neighbourhoods/pulseFormat",
+          "specifiers": [
+            "eventsLine",
+            "eventWhen",
+            "peopleLine",
+            "placesLine",
+            "transitLine"
+          ]
+        },
+        {
+          "source": "@test/mocks",
+          "specifiers": [
+            "* as mocks"
+          ]
+        },
+        {
+          "source": "@test/mocks/routes/neighbourhoods",
+          "specifiers": [
+            "mockPulseAreas"
+          ]
+        },
+        {
+          "source": "./testUtils",
+          "specifiers": [
+            "IDS",
+            "mockRouter",
+            "renderScreen"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 120,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/api/endpoints.neighbourhoods.ts": {
+      "filePath": "frontend/src/api/endpoints.neighbourhoods.ts",
+      "contentHash": "869cd42bef5e4e8235cd979d99087f928c440f9f29d312058fb048982400ab38",
+      "functions": [
+        {
+          "name": "getNeighbourhoodPulse",
+          "params": [],
+          "exported": true,
+          "lineCount": 1
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./client",
+          "specifiers": [
+            "api"
+          ]
+        },
+        {
+          "source": "./types.neighbourhoods",
+          "specifiers": [
+            "NeighbourhoodPulseResponse"
+          ]
+        }
+      ],
+      "exports": [
+        "getNeighbourhoodPulse"
+      ],
+      "totalLines": 7,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/api/types.neighbourhoods.ts": {
+      "filePath": "frontend/src/api/types.neighbourhoods.ts",
+      "contentHash": "0ef60d83bd3a848154a855be549e9a2b2311d211d95ed06486f75beff1856d62",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./types",
+          "specifiers": [
+            "EventCategory"
+          ]
+        },
+        {
+          "source": "./types.transit",
+          "specifiers": [
+            "TransitAlert"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 47,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/app/pulse/_layout.tsx": {
+      "filePath": "frontend/src/app/pulse/_layout.tsx",
+      "contentHash": "3b2304ee6fedc5b8a38454136b8419d8093b386473b9a109c14dccc17fee57f9",
+      "functions": [
+        {
+          "name": "PulseLayout",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "expo-router",
+          "specifiers": [
+            "Stack"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors"
+          ]
+        }
+      ],
+      "exports": [
+        "PulseLayout"
+      ],
+      "totalLines": 10,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/app/pulse/index.tsx": {
+      "filePath": "frontend/src/app/pulse/index.tsx",
+      "contentHash": "db93422d4d7e4088789430a9f68549d9905fd3ff031cb73b82fc9c51f886766f",
+      "functions": [
+        {
+          "name": "NeighbourhoodPulseScreen",
+          "params": [],
+          "exported": true,
+          "lineCount": 28
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react-native",
+          "specifiers": [
+            "FlatList",
+            "RefreshControl",
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "@/features/neighbourhoods/NeighbourhoodCard",
+          "specifiers": [
+            "NeighbourhoodCard"
+          ]
+        },
+        {
+          "source": "@/hooks/useNeighbourhoods",
+          "specifiers": [
+            "useNeighbourhoodPulse"
+          ]
+        },
+        {
+          "source": "@/lib/time",
+          "specifiers": [
+            "formatTime"
+          ]
+        },
+        {
+          "source": "@/ui/Screen",
+          "specifiers": [
+            "Screen"
+          ]
+        },
+        {
+          "source": "@/ui/ScreenHeader",
+          "specifiers": [
+            "ScreenHeader"
+          ]
+        },
+        {
+          "source": "@/ui/States",
+          "specifiers": [
+            "EmptyState",
+            "ErrorState",
+            "LoadingState"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors",
+            "PAGE_MARGIN"
+          ]
+        }
+      ],
+      "exports": [
+        "NeighbourhoodPulseScreen"
+      ],
+      "totalLines": 46,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx": {
+      "filePath": "frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
+      "contentHash": "0e0ff6e6482a44631a826bc9f622545b2978d4fff3f53503a14fa81b0271f0ff",
+      "functions": [
+        {
+          "name": "showOnMap",
+          "params": [
+            "area"
+          ],
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "Row",
+          "params": [
+            "{ icon, text, tone = 'primary', testID }"
+          ],
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "Header",
+          "params": [
+            "{ area }"
+          ],
+          "exported": false,
+          "lineCount": 25
+        },
+        {
+          "name": "NeighbourhoodCard",
+          "params": [
+            "{ area }"
+          ],
+          "exported": true,
+          "lineCount": 45
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "expo-linear-gradient",
+          "specifiers": [
+            "LinearGradient"
+          ]
+        },
+        {
+          "source": "expo-router",
+          "specifiers": [
+            "router"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "ImageBackground",
+            "Pressable",
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "@/api/types.neighbourhoods",
+          "specifiers": [
+            "NeighbourhoodPulse"
+          ]
+        },
+        {
+          "source": "@/features/events/EventCards",
+          "specifiers": [
+            "openEvent"
+          ]
+        },
+        {
+          "source": "@/ui/Chip",
+          "specifiers": [
+            "StatusChip"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "Icon",
+            "IconName"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors",
+            "radius"
+          ]
+        },
+        {
+          "source": "./photos",
+          "specifiers": [
+            "neighbourhoodPhoto"
+          ]
+        },
+        {
+          "source": "./pulseFormat",
+          "specifiers": [
+            "eventsLine",
+            "eventWhen",
+            "LEVEL_META",
+            "peopleLine",
+            "placesLine",
+            "transitLine"
+          ]
+        }
+      ],
+      "exports": [
+        "NeighbourhoodCard"
+      ],
+      "totalLines": 141,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/neighbourhoods/photos.ts": {
+      "filePath": "frontend/src/features/neighbourhoods/photos.ts",
+      "contentHash": "c66ad7bd5a1786e7ea730ba27992cd5d5b9335c7e1e5fca9ca2cbd83ee009129",
+      "functions": [
+        {
+          "name": "neighbourhoodPhoto",
+          "params": [
+            "id"
+          ],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react-native",
+          "specifiers": [
+            "ImageSourcePropType"
+          ]
+        }
+      ],
+      "exports": [
+        "NEIGHBOURHOOD_PHOTOS",
+        "neighbourhoodPhoto"
+      ],
+      "totalLines": 21,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/neighbourhoods/pulseFormat.ts": {
+      "filePath": "frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "contentHash": "a35a3d24d0c3ca3cfcf6ce29b27a2a65746b84b3b6693367390c9343861c4453",
+      "functions": [
+        {
+          "name": "plural",
+          "params": [
+            "n",
+            "one",
+            "many"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "eventsLine",
+          "params": [
+            "area"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "eventWhen",
+          "params": [
+            "event"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "transitLine",
+          "params": [
+            "area"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "placesLine",
+          "params": [
+            "area"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "peopleLine",
+          "params": [
+            "area"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/types.neighbourhoods",
+          "specifiers": [
+            "NeighbourhoodPulse",
+            "PulseEvent",
+            "PulseLevel"
+          ]
+        },
+        {
+          "source": "@/features/map/placeCategories",
+          "specifiers": [
+            "placeMeta"
+          ]
+        },
+        {
+          "source": "@/lib/time",
+          "specifiers": [
+            "formatTime"
+          ]
+        }
+      ],
+      "exports": [
+        "LEVEL_META",
+        "plural",
+        "eventsLine",
+        "eventWhen",
+        "transitLine",
+        "placesLine",
+        "peopleLine"
+      ],
+      "totalLines": 59,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/hooks/useNeighbourhoods.ts": {
+      "filePath": "frontend/src/hooks/useNeighbourhoods.ts",
+      "contentHash": "9a91490eb8acd171c2090fbc73a3ddf459090a02bdf4165357dde8c09f51d27d",
+      "functions": [
+        {
+          "name": "useNeighbourhoodPulse",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "useQuery"
+          ]
+        },
+        {
+          "source": "@/api/endpoints.neighbourhoods",
+          "specifiers": [
+            "getNeighbourhoodPulse"
+          ]
+        }
+      ],
+      "exports": [
+        "PULSE_REFRESH_MS",
+        "neighbourhoodKeys",
+        "useNeighbourhoodPulse"
+      ],
+      "totalLines": 15,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/testing/mocks/routes/neighbourhoods.ts": {
+      "filePath": "frontend/testing/mocks/routes/neighbourhoods.ts",
+      "contentHash": "47edbf30fb8c16d015bba5bb18b4ef52c42f6a75b95bb1fb79b174c1e1811dba",
+      "functions": [
+        {
+          "name": "mockPulseAreas",
+          "params": [],
+          "returnType": "NeighbourhoodPulse[]",
+          "exported": true,
+          "lineCount": 79
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/types.neighbourhoods",
+          "specifiers": [
+            "NeighbourhoodPulse",
+            "NeighbourhoodPulseResponse"
+          ]
+        },
+        {
+          "source": "../core",
+          "specifiers": [
+            "Route"
+          ]
+        }
+      ],
+      "exports": [
+        "mockPulseAreas",
+        "neighbourhoodsRoutes"
+      ],
+      "totalLines": 94,
+      "hasStructuralAnalysis": true
     }
   }
 }

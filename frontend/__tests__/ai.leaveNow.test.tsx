@@ -1,4 +1,4 @@
-// "Leave now" box under an AI route card (PLAN 24): countdown states, the vehicle to catch, and that it shows
+// "Leave now" box under an AI route card (PLAN 25): countdown states, the vehicle to catch, and that it shows
 // only for a tram/bus trip from the user.
 import { act, render, screen, within, fireEvent } from '@testing-library/react-native';
 

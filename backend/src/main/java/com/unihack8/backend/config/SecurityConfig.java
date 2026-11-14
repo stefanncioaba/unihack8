@@ -53,7 +53,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET,
                                 "/events", "/events/*", "/events/*/reviews",
                                 "/places", "/places/*",
-                                "/transit/**",
+                                "/transit/**", "/neighbourhoods/pulse",
                                 "/users/username-available").permitAll()
                         .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated())

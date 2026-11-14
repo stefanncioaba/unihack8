@@ -445,7 +445,28 @@ When the AI gives directions that start **where the user is**, its answer has a 
 
 **Not verified yet:** not tried on a phone (GPS accuracy, camera following, battery) and not against real Gemini — whether the model leaves out the start point for "how do I get there" is only asked for by the prompt.
 
-### AI "Leave now" box (PLAN task 24, Tracks B + C)
+### Neighbourhood Pulse (PLAN task 24, Tracks B + C)
+
+"See what your neighbourhood is doing right now." One screen with a live card per Timișoara area. It joins people (events, reliability), businesses (places), infrastructure (STPT) and data on one screen, per neighbourhood. No new tables.
+
+**Backend** (`neighbourhoods` package):
+- `domain/model/NeighbourhoodAreas` — the 9 hard-coded areas (`Neighbourhood`: id, name, centre, radius) and `assign(lat, lon)`: the nearest centre whose circle covers the point, so overlaps are never counted twice.
+- `service/impl/NeighbourhoodPulseServiceImpl` — reads each source **once for the whole city** and splits the results by area: `EventService.search` (events from 12 h ago until 05:00 local tomorrow, then filtered to "now" and "later tonight"), `EventService.participants` for user events (people `JOINED`/`ATTENDED`, reliable = score ≥ 100), `PlaceService.explore` per area with `OpeningHours` for "open now", and `TransitService` stops / routes / all vehicles / alerts. Each source is wrapped: when it fails only its section is empty (`transit.available: false` when STPT's stop list is down). The whole answer is cached for 30 s. Activity score and levels are in `docs/API.md` → Neighbourhoods.
+- `service/impl/AlertMatcher` — an STPT alert belongs to an area when it names one of the area's lines after a line word ("linia 8", "tramvaiele 1 și 2", "liniile E2, 33b") or one of its stop names (5+ letters). Bare numbers (dates, house numbers) never count.
+- `controller/NeighbourhoodController` — `GET /neighbourhoods/pulse`, public (added to `SecurityConfig`).
+- **"Quiet / busy" check-ins** do not exist in the app (they would need a table), so the `QUIET` / `STEADY` / `BUSY` level is computed from the live data instead.
+
+**Mobile:**
+- `app/pulse/index.tsx` (stack `app/pulse/_layout.tsx`, registered in the root layout) — opened from the yellow **Pulse** button in the Home header. List of `NeighbourhoodCard`s in the backend's order (busiest first), pull to refresh, refetch every 60 s (`hooks/useNeighbourhoods.ts`), loading / error / empty states.
+- `features/neighbourhoods/NeighbourhoodCard.tsx` — photo header with name and Busy / Steady / Quiet chip, then events (up to 3, tap to open; a yellow dot = happening now), transit lines and nearby vehicles, the first alert in red, open places with top categories, people going / reliable, and **Show on map** (opens the Map tab at the area's centre). Text lines are pure functions in `pulseFormat.ts`.
+- **Photos** — `features/neighbourhoods/photos.ts` maps area ids to bundled 800 px photos from Wikimedia Commons in `frontend/assets/neighbourhoods/` (CC BY / CC BY-SA; author and licence in `CREDITS.md` there and as a small line on each card). An area without a photo gets a plain navy header.
+- Types `api/types.neighbourhoods.ts`, endpoint `api/endpoints.neighbourhoods.ts`; test-only mock route `testing/mocks/routes/neighbourhoods.ts`.
+
+**Tests:** backend `NeighbourhoodAreasTest` (landmarks, outside, overlap, edge), `AlertMatcherTest` (line words, lists, letter lines, bare numbers, stop names), `NeighbourhoodPulseServiceImplTest` (every section from mocked sources, STPT down, vehicles/alerts down, events down, 30 s cache, levels, end of "tonight"), `NeighbourhoodControllerTest` (JSON shape, no token). Mobile `__tests__/screens.pulse.test.tsx` (text lines, photos, cards, order, transit down, area without photo, open event / map, error, Home button).
+
+**Not verified yet:** not tried on a phone or against live STPT / Supabase data; the area centres and radii are approximate.
+
+### AI "Leave now" box (PLAN task 25, Tracks B + C)
 
 When the AI plans a tram/trolleybus/bus route that starts **where the user is, now**, the answer says "Leave in 6 min to catch tram 1 at Piața Libertății (20:41)" in the text **and** the app shows it in its own **Leave now** box under the route card ("Will I make it?").
 
@@ -667,4 +688,5 @@ One graph for the whole repo, made with the **Understand-Anything** plugin (rule
 - **Before that, on `main` (2026-11-14, after the home page next-arrival change):** 459 files, 1385 nodes, 3409 edges, 20 layers, 34-step guided tour. This update added `NextArrivalDto` (layer Backend Transit) and the new `TransitServiceImpl` methods `nextArrival`, `isLastTrip`, `nextMessage`, plus `arrivalIn` in `CityInfoStrip`; tour steps 14 and 27 now describe the next-arrival strip. Note: the plugin cannot confirm deleted Java methods (no Java declaration-coverage adapter), so removing a Java method blocks the incremental update; keep or rename methods carefully. Before this, after tasks 18 and 19: 456 files, 1362 nodes, 3407 edges. Task 19 added the `SystemPrompt.SCOPE` node and the `SystemPromptTest` / `ScopeLiveCheckTest` nodes (tag `scope-guard`); task 18 added the AI navigation / journey mode files and tour step 31 "AI Navigation and Journey Mode". Before that, task 17 had 444 files, 1304 nodes, 3161 edges. The moved mock files (`frontend/src/mocks` → `frontend/testing/mocks`, unchanged content) kept their nodes under the new paths, tagged `test-only`.
 - **Left out on purpose** (`.ua/.understandignore`): secrets, build output, `.claude/`, and frontend noise (`package-lock.json`, `assets/`, `LICENSE`, `.npmrc`).
 - **Update it** after each change: run `/understand` (Claude Code) or the same command in Codex; it only reanalyzes changed files. `/understand-dashboard` opens the interactive view.
+- **Auto-update is on** (`"autoUpdate": true` in `.ua/config.json`, 2026-11-14): after every `git commit` / `merge` / `cherry-pick` / `rebase` that Claude Code runs, the plugin's hook updates the graph incrementally (only the files that changed structurally). A Claude Code session that starts with a stale graph also updates it. Commits made outside Claude Code do not trigger it until the next session starts. Keep the graph current: if more than 30 files change before an update, the plugin falls back to a full rebuild of the whole repo, which is slow and expensive.
 - **Codex:** the plugin's README lists Codex as supported (install it with the plugin's install script for `codex`); not tested by us yet.

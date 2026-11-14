@@ -403,17 +403,31 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 ---
 
-## 24. AI "Leave now" box — Tracks B + C
+## 24. Neighbourhood Pulse — Tracks B + C
+
+**Needs:** 5, 6, 8, 9 (done). Added 2026-11-14. **Goal:** "See what your neighbourhood is doing right now." One screen with a live card per Timișoara area (Cetate, Fabric, Iosefin, Elisabetin, Mehala, Complexul Studențesc, Circumvalațiunii, Fratelia, Soarelui): events now and tonight with free spots, STPT lines, live vehicles and service alerts, places open now, and how many reliable community members are going out there. No new tables.
+
+- [x] **24.1 Areas:** hard-coded centres and radii; a point-in-radius check (nearest centre wins on overlap) assigns events, places, stops and vehicles to an area.
+- [x] **24.2 API:** `GET /neighbourhoods/pulse` (public) combines the existing event, place, transit and participant services; cached 30 s; a source that is down only empties its own section. Contract in `docs/API.md`.
+- [x] **24.3 Busy / quiet:** a `QUIET` / `STEADY` / `BUSY` level from an activity score (events, people going, open places, vehicles). *There are no user "quiet / busy" check-ins in the app — that would need a table — so the level is computed from live data instead.*
+- [x] **24.4 App:** Pulse screen (`/pulse`, opened from the **Pulse** button on Home) with a photo per area, the four sections, tap an event to open it, "Show on map", pull to refresh, refresh every minute, loading / error / empty states.
+- [x] **24.5 Photos:** one Wikimedia Commons photo per area (free licences), bundled in `frontend/assets/neighbourhoods/` with credits in `CREDITS.md` and a credit line on each card.
+- [x] **24.6 Tests:** backend (areas, alert matching, the pulse service with sources down, cache, controller) and app (text lines, screen, Home button).
+- [x] **24.7** `DOCS.md`, `docs/API.md` and the knowledge graph updated.
+
+---
+
+## 25. AI "Leave now" box — Tracks B + C
 
 **Needs:** 9, 10, 18 (done). Added 2026-11-14. **Goal:** when the AI gives a tram/bus route that starts where the user is, it says "Leave in 6 min to catch tram 1 at Gara de Nord" — in the text **and** in a separate "Leave now" box under the route card, using the live STPT arrivals ("Will I make it?").
 
-- [x] **24.1 Contract first:** `routes[].leaveNow` in `docs/API.md` (line, vehicle type, stop, walk minutes, board/leave times, source, missed earlier vehicle); `null` for walking, other starts and later times.
-- [x] **24.2 Backend:** `LeaveNowService` matches the planner's boarding stop to the STPT stop and picks the first arrival the user can still reach on foot (+1 spare minute); falls back to the planner's time when STPT is down. `plan_route` returns `leave_now` to the model; the system prompt asks for one "Leave in N min…" sentence.
-- [x] **24.3 Mobile:** `LeaveNowBox` under the route card with a live countdown (Leave in N min → Leave now → Hurry → You won't make this one) and Live / Scheduled / Planned label.
-- [x] **24.4 Tests:** backend and frontend (see `DOCS.md` → AI "Leave now" box).
-- [x] **24.5a** `DOCS.md` and `docs/API.md` updated.
-- [ ] **24.5b** Knowledge graph updated (`/understand`; the plugin was not available in the session that built this).
-- [ ] **24.6** Try it on a phone with real STPT data and Gemini.
+- [x] **25.1 Contract first:** `routes[].leaveNow` in `docs/API.md` (line, vehicle type, stop, walk minutes, board/leave times, source, missed earlier vehicle); `null` for walking, other starts and later times.
+- [x] **25.2 Backend:** `LeaveNowService` matches the planner's boarding stop to the STPT stop and picks the first arrival the user can still reach on foot (+1 spare minute); falls back to the planner's time when STPT is down. `plan_route` returns `leave_now` to the model; the system prompt asks for one "Leave in N min…" sentence.
+- [x] **25.3 Mobile:** `LeaveNowBox` under the route card with a live countdown (Leave in N min → Leave now → Hurry → You won't make this one) and Live / Scheduled / Planned label.
+- [x] **25.4 Tests:** backend and frontend (see `DOCS.md` → AI "Leave now" box).
+- [x] **25.5a** `DOCS.md` and `docs/API.md` updated.
+- [ ] **25.5b** Knowledge graph updated (`/understand`; the plugin was not available in the session that built this).
+- [ ] **25.6** Try it on a phone with real STPT data and Gemini.
 
 ---
 
