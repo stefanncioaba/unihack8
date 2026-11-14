@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "0a33f158bd4ff8c7294f7098ea64a6895049358e",
-  "generatedAt": "2026-11-13T22:47:06.310Z",
+  "gitCommitHash": "df392fb065635d4d7590339962ff89a88e09d1c0",
+  "generatedAt": "2026-11-14T12:11:39.053Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,22 +25,22 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "fd60aeefe68be15b64cdf6ebf3dc057c571e6790580e21d8f55c2a5f04af0db8",
+      "contentHash": "60fb6c95d9a42f206173fad2c85182984eeb0d4a87bff80d2ef694fdb01886fa",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 507,
+      "totalLines": 527,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "614908eee9ae2752f79ec287d5dc14b89d1218aca2e5bf2f3ac7235ed3f41b17",
+      "contentHash": "b553ecb1714e1aa908d361b21a7d6a8ff372418b495ef4bf2048a473f88a63db",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 320,
+      "totalLines": 369,
       "hasStructuralAnalysis": false
     },
     "README.md": {
@@ -683,7 +683,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/domain/ToolContext.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/domain/ToolContext.java",
-      "contentHash": "cbd50e1a025febbbd2d5b5a2b4d82a9b361255f396d68a2254493ad46b75c350",
+      "contentHash": "24842e8566de3c741800e780b4e131b43bca142df2daf655d90b48cb3f8ca0c9",
       "functions": [
         {
           "name": "ToolContext",
@@ -735,6 +735,31 @@
           "lineCount": 3
         },
         {
+          "name": "startsFromUser",
+          "params": [
+            "start"
+          ],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "rememberRoute",
+          "params": [
+            "route"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "routes",
+          "params": [],
+          "returnType": "List<PlannedRoute>",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
           "name": "places",
           "params": [],
           "returnType": "List<FoundPlace>",
@@ -759,20 +784,25 @@
             "now",
             "rememberPlace",
             "rememberEvent",
+            "startsFromUser",
+            "rememberRoute",
+            "routes",
             "places",
             "events"
           ],
           "properties": [
             "CITY_CENTRE",
             "ZONE",
+            "USER_START_RADIUS_METERS",
             "origin",
             "locationKnown",
             "now",
             "places",
-            "events"
+            "events",
+            "routes"
           ],
           "exported": true,
-          "lineCount": 60
+          "lineCount": 91
         }
       ],
       "imports": [
@@ -846,17 +876,21 @@
       "exports": [
         "CITY_CENTRE",
         "ZONE",
+        "USER_START_RADIUS_METERS",
         "ToolContext",
         "origin",
         "locationKnown",
         "now",
         "rememberPlace",
         "rememberEvent",
+        "startsFromUser",
+        "rememberRoute",
+        "routes",
         "places",
         "events",
         "ToolContext"
       ],
-      "totalLines": 80,
+      "totalLines": 111,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/ai/domain/dto/ChatMessageDto.java": {
@@ -939,7 +973,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/domain/dto/ChatResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/domain/dto/ChatResponse.java",
-      "contentHash": "1b179aecae8448dbba0849fdbc0639290d8edc33916f6a727b7ddf41516f76d8",
+      "contentHash": "9c42be9417b94758ce2ffcd9ae37d09854db6fcd3c4b6553bf83c5ed8abf9f48",
       "functions": [],
       "classes": [
         {
@@ -973,7 +1007,7 @@
       "exports": [
         "ChatResponse"
       ],
-      "totalLines": 18,
+      "totalLines": 19,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/ai/domain/dto/LocationDto.java": {
@@ -1363,7 +1397,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/mapper/impl/ChatResultMapperImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/mapper/impl/ChatResultMapperImpl.java",
-      "contentHash": "ab86414e7b0f0445d3654f85e6267fb43ab210880a6bead4d5e44ae4bda436d9",
+      "contentHash": "fbe8a112bf988c128b1206d5a321004fea4bdc22f03939f43604ca52cb8b929a",
       "functions": [
         {
           "name": "toResponse",
@@ -1374,6 +1408,34 @@
           "returnType": "ChatResponse",
           "exported": true,
           "lineCount": 34
+        },
+        {
+          "name": "routes",
+          "params": [
+            "context"
+          ],
+          "returnType": "List<ChatRouteDto>",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "nameNear",
+          "params": [
+            "point",
+            "context"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 22
+        },
+        {
+          "name": "round",
+          "params": [
+            "point"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 3
         },
         {
           "name": "position",
@@ -1430,6 +1492,9 @@
           "name": "ChatResultMapperImpl",
           "methods": [
             "toResponse",
+            "routes",
+            "nameNear",
+            "round",
             "position",
             "firstBoldIndex",
             "sorted",
@@ -1438,11 +1503,13 @@
           ],
           "properties": [
             "MAX_SOURCES",
+            "NAME_MATCH_METERS",
+            "USER_LOCATION_NAME",
             "BOLD",
             "MIN_PLAIN_NAME_LENGTH"
           ],
           "exported": true,
-          "lineCount": 116
+          "lineCount": 167
         }
       ],
       "imports": [
@@ -1459,6 +1526,18 @@
           ]
         },
         {
+          "source": "com.unihack8.backend.ai.domain.dto.ChatRouteDto",
+          "specifiers": [
+            "ChatRouteDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.domain.dto.RoutePointDto",
+          "specifiers": [
+            "RoutePointDto"
+          ]
+        },
+        {
           "source": "com.unihack8.backend.ai.domain.dto.SourceDto",
           "specifiers": [
             "SourceDto"
@@ -1468,6 +1547,12 @@
           "source": "com.unihack8.backend.ai.mapper.ChatResultMapper",
           "specifiers": [
             "ChatResultMapper"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
           ]
         },
         {
@@ -1565,7 +1650,7 @@
         "toResponse",
         "ChatResultMapperImpl"
       ],
-      "totalLines": 145,
+      "totalLines": 199,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/ai/service/AiChatService.java": {
@@ -2130,7 +2215,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
-      "contentHash": "7a018f8eb093070421a020c05460d2ff973573e2f86edeca7ca5dd35f2036ed3",
+      "contentHash": "e9365fcd5b36ebb98f1c5995780f5fe929c0638cdddd7ff623c67135fb2aa1a0",
       "functions": [
         {
           "name": "SystemPrompt",
@@ -2145,7 +2230,7 @@
           ],
           "returnType": "String",
           "exported": false,
-          "lineCount": 56
+          "lineCount": 59
         }
       ],
       "classes": [
@@ -2159,7 +2244,7 @@
             "NOW"
           ],
           "exported": false,
-          "lineCount": 66
+          "lineCount": 69
         }
       ],
       "imports": [
@@ -2189,7 +2274,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 75,
+      "totalLines": 78,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/ai/tool/AiTool.java": {
@@ -2506,7 +2591,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/tool/impl/PlanRouteTool.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/tool/impl/PlanRouteTool.java",
-      "contentHash": "a2a6016513d8013c8d0014c83a7e7762d9a39c50f046077c2f027826b72ccc39",
+      "contentHash": "1ac84f3453831e6f9d6547707b232cc3610f7878fbf4a14c6d6ac2fa70605ab8",
       "functions": [
         {
           "name": "PlanRouteTool",
@@ -2538,7 +2623,7 @@
           ],
           "returnType": "Map<String, Object>",
           "exported": true,
-          "lineCount": 36
+          "lineCount": 40
         },
         {
           "name": "leg",
@@ -2564,7 +2649,7 @@
             "routingService"
           ],
           "exported": true,
-          "lineCount": 88
+          "lineCount": 92
         }
       ],
       "imports": [
@@ -2672,7 +2757,7 @@
         "execute",
         "PlanRouteTool"
       ],
-      "totalLines": 109,
+      "totalLines": 113,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/ai/tool/impl/SearchEventsTool.java": {
@@ -18203,7 +18288,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/ai/controller/AiControllerTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/controller/AiControllerTest.java",
-      "contentHash": "bd5edb6aabc68a2ce660dacecf6270a4387869f0222c150edaa00c8aae6046d4",
+      "contentHash": "0e9d3f28734c7ffbb7fab068125bb89915b01aeba3ec2e0fcae2f8ecde08ea79",
       "functions": [
         {
           "name": "withoutTokenIs401",
@@ -18217,7 +18302,7 @@
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 15
+          "lineCount": 24
         },
         {
           "name": "locationOptional",
@@ -18259,7 +18344,7 @@
             "chatService"
           ],
           "exported": false,
-          "lineCount": 78
+          "lineCount": 87
         }
       ],
       "imports": [
@@ -18303,6 +18388,18 @@
           "source": "com.unihack8.backend.ai.domain.dto.ChatResponse",
           "specifiers": [
             "ChatResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.domain.dto.ChatRouteDto",
+          "specifiers": [
+            "ChatRouteDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.domain.dto.RoutePointDto",
+          "specifiers": [
+            "RoutePointDto"
           ]
         },
         {
@@ -18397,12 +18494,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 106,
+      "totalLines": 117,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/ai/mapper/impl/ChatResultMapperImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/mapper/impl/ChatResultMapperImplTest.java",
-      "contentHash": "e551d864b4bb85e8ca34604b81791e2000cd2a8df0937445a6a23032759ddae8",
+      "contentHash": "9ebd90bdca91bf4b6b15cc3ec98d7841cda459ae5f3fc397a12a8de3bf9d5c70",
       "functions": [
         {
           "name": "boldNamesInReplyOrder",
@@ -18430,7 +18527,21 @@
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 7
+          "lineCount": 8
+        },
+        {
+          "name": "routesNamedAfterToolResults",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 26
+        },
+        {
+          "name": "sameRouteListedOnce",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
         },
         {
           "name": "context",
@@ -18466,6 +18577,8 @@
             "plainTextFallback",
             "events",
             "nothingMentioned",
+            "routesNamedAfterToolResults",
+            "sameRouteListedOnce",
             "context",
             "place",
             "price"
@@ -18474,7 +18587,7 @@
             "mapper"
           ],
           "exported": false,
-          "lineCount": 68
+          "lineCount": 112
         }
       ],
       "imports": [
@@ -18494,6 +18607,24 @@
           "source": "com.unihack8.backend.ai.domain.dto.ChatResponse",
           "specifiers": [
             "ChatResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.domain.dto.ChatRouteDto",
+          "specifiers": [
+            "ChatRouteDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.domain.dto.RoutePointDto",
+          "specifiers": [
+            "RoutePointDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
           ]
         },
         {
@@ -18546,12 +18677,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 85,
+      "totalLines": 132,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
-      "contentHash": "34b1a142ccebe759ee2ca2502328d4cbec989c0b2709255ad67eec595964101e",
+      "contentHash": "8d0f065c78b96d76a23c185981a2def76cc2d0ad6547108d41209876755546ec",
       "functions": [
         {
           "name": "toolCallLoop",
@@ -18559,6 +18690,20 @@
           "returnType": "void",
           "exported": false,
           "lineCount": 28
+        },
+        {
+          "name": "plannedRoutesInTheAnswer",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 20
+        },
+        {
+          "name": "noRoutesIsEmpty",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
         },
         {
           "name": "emptyToolResult",
@@ -18630,6 +18775,16 @@
           ],
           "returnType": "AiChatServiceImpl",
           "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "service",
+          "params": [
+            "maxToolRounds",
+            "tools"
+          ],
+          "returnType": "AiChatServiceImpl",
+          "exported": false,
           "lineCount": 8
         },
         {
@@ -18663,6 +18818,8 @@
           "name": "AiChatServiceImplTest",
           "methods": [
             "toolCallLoop",
+            "plannedRoutesInTheAnswer",
+            "noRoutesIsEmpty",
             "emptyToolResult",
             "toolErrorsGoBackToTheModel",
             "lastRoundForcesAnAnswer",
@@ -18672,6 +18829,7 @@
             "providerError",
             "allModelsBusy",
             "conversationRules",
+            "service",
             "service",
             "request",
             "content",
@@ -18687,7 +18845,7 @@
             "tool"
           ],
           "exported": false,
-          "lineCount": 250
+          "lineCount": 284
         }
       ],
       "imports": [
@@ -18701,6 +18859,24 @@
           "source": "org.assertj.core.api.Assertions.assertThatThrownBy",
           "specifiers": [
             "assertThatThrownBy"
+          ]
+        },
+        {
+          "source": "org.mockito.ArgumentMatchers.any",
+          "specifiers": [
+            "any"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.mock",
+          "specifiers": [
+            "mock"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.when",
+          "specifiers": [
+            "when"
           ]
         },
         {
@@ -18812,6 +18988,24 @@
           ]
         },
         {
+          "source": "com.unihack8.backend.ai.tool.impl.PlanRouteTool",
+          "specifiers": [
+            "PlanRouteTool"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.routing.domain.dto.RoutePlanResponse",
+          "specifiers": [
+            "RoutePlanResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.routing.service.RoutingService",
+          "specifiers": [
+            "RoutingService"
+          ]
+        },
+        {
           "source": "com.unihack8.backend.common.exception.ApiException",
           "specifiers": [
             "ApiException"
@@ -18909,7 +19103,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 292,
+      "totalLines": 332,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/ai/service/impl/InMemoryChatRateLimiterTest.java": {
@@ -19014,7 +19208,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/ai/tool/impl/PlanRouteAndEventsToolTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/tool/impl/PlanRouteAndEventsToolTest.java",
-      "contentHash": "d4cbd8f3fbe7f8fd90bd0df38424dfcb3c72703a92aabdc0ac1155514e96590b",
+      "contentHash": "98b01e8ff53ea0a4a856a4997179d7f6a6705db247285cc6381134403dd8b0e1",
       "functions": [
         {
           "name": "transitRoute",
@@ -19029,6 +19223,27 @@
           "returnType": "void",
           "exported": false,
           "lineCount": 9
+        },
+        {
+          "name": "remembersRouteFromTheUser",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 16
+        },
+        {
+          "name": "remembersRouteFromAnotherPlace",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "noLocationIsNotFromTheUser",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
         },
         {
           "name": "destinationRequired",
@@ -19079,6 +19294,9 @@
           "methods": [
             "transitRoute",
             "transitDownFallsBackToWalking",
+            "remembersRouteFromTheUser",
+            "remembersRouteFromAnotherPlace",
+            "noLocationIsNotFromTheUser",
             "destinationRequired",
             "eventsInWindow",
             "eventsBadCategory",
@@ -19092,7 +19310,7 @@
             "events"
           ],
           "exported": false,
-          "lineCount": 91
+          "lineCount": 135
         }
       ],
       "imports": [
@@ -19260,7 +19478,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 124,
+      "totalLines": 168,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/ai/tool/impl/SearchPlacesToolTest.java": {
@@ -28190,12 +28408,12 @@
     },
     "docs/API.md": {
       "filePath": "docs/API.md",
-      "contentHash": "6a4bc540454368db3166d0669f4fe36e4417d0bdf49424562ac49a546555edb3",
+      "contentHash": "d9224bde84bd28d9b186c8ef4eb1506461ea7f41b2791e4021e9fd629dd35522",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 597,
+      "totalLines": 607,
       "hasStructuralAnalysis": false
     },
     "docs/DEMO.md": {
@@ -28230,7 +28448,7 @@
     },
     "frontend/__tests__/ai.chat.test.tsx": {
       "filePath": "frontend/__tests__/ai.chat.test.tsx",
-      "contentHash": "efff28b3b988feb7fe2b2b2460fa69b2d658460ef2facc022628f4743d6eebd3",
+      "contentHash": "fd54571bd281880a3d4ca3c3616538e7b3f220949ec773fb57d060657a84f143",
       "functions": [
         {
           "name": "say",
@@ -29670,7 +29888,7 @@
     },
     "frontend/jest.setup.ts": {
       "filePath": "frontend/jest.setup.ts",
-      "contentHash": "b5dc1f0b00b24cf2fe25332ea33d37adfbdf748383fa6ed51fe6fca0437f2eec",
+      "contentHash": "74dbcfa1c20a924f708c8f9179198d2bcb0c3e55637004f583f13c1fefd6dc62",
       "functions": [],
       "classes": [],
       "imports": [
@@ -29689,7 +29907,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 122,
+      "totalLines": 134,
       "hasStructuralAnalysis": true
     },
     "frontend/package.json": {
@@ -30249,7 +30467,7 @@
     },
     "frontend/src/api/types.ai.ts": {
       "filePath": "frontend/src/api/types.ai.ts",
-      "contentHash": "feb97efd8c351fbad027c827c951e530b81720782a6411edd4622539a3e31e4c",
+      "contentHash": "f94746daccbc6c91067e75d8c9a5bf8306d8af6d98e307bc640ef8b26ed268e2",
       "functions": [],
       "classes": [],
       "imports": [
@@ -30264,13 +30482,19 @@
           "specifiers": [
             "PlaceSummary"
           ]
+        },
+        {
+          "source": "./types.routing",
+          "specifiers": [
+            "PlanMode"
+          ]
         }
       ],
       "exports": [
         "MAX_CHAT_MESSAGES",
         "MAX_CHAT_MESSAGE_CHARS"
       ],
-      "totalLines": 33,
+      "totalLines": 49,
       "hasStructuralAnalysis": true
     },
     "frontend/src/api/types.places.ts": {
@@ -30563,13 +30787,13 @@
     },
     "frontend/src/app/(tabs)/ai.tsx": {
       "filePath": "frontend/src/app/(tabs)/ai.tsx",
-      "contentHash": "361bf8fe101b421f2a57b5febda871d1180e72ae4ea0bbc875129752e02b1072",
+      "contentHash": "f0541c18fec01f4cf4649af3d44710d90b3d6d2d46ff2ada2f03cc3a8994420a",
       "functions": [
         {
           "name": "AiScreen",
           "params": [],
           "exported": true,
-          "lineCount": 58
+          "lineCount": 59
         }
       ],
       "classes": [],
@@ -30615,6 +30839,12 @@
           ]
         },
         {
+          "source": "@/features/ai/RouteCards",
+          "specifiers": [
+            "RouteCards"
+          ]
+        },
+        {
           "source": "@/features/ai/Suggestions",
           "specifiers": [
             "Suggestions"
@@ -30655,7 +30885,7 @@
       "exports": [
         "AiScreen"
       ],
-      "totalLines": 83,
+      "totalLines": 85,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/(tabs)/index.tsx": {
@@ -30798,13 +31028,13 @@
     },
     "frontend/src/app/(tabs)/map.tsx": {
       "filePath": "frontend/src/app/(tabs)/map.tsx",
-      "contentHash": "683a5f5d59a4cafb3b6288658337b37219e2b285501d40e4f4057d03e5f4603d",
+      "contentHash": "f8c6aedf8cde09535d8717f426bbd5c0421bb4628ba81239cd087b89f3b159bb",
       "functions": [
         {
           "name": "MapBody",
           "params": [],
           "exported": false,
-          "lineCount": 166
+          "lineCount": 198
         },
         {
           "name": "MapScreen",
@@ -30825,6 +31055,7 @@
           "source": "react",
           "specifiers": [
             "useEffect",
+            "useMemo",
             "useRef",
             "useState"
           ]
@@ -30860,9 +31091,35 @@
           ]
         },
         {
+          "source": "@/features/directions/DirectionsContext",
+          "specifiers": [
+            "useDirectionsMode"
+          ]
+        },
+        {
           "source": "@/features/directions/DirectionsLayer",
           "specifiers": [
             "DirectionsLayer"
+          ]
+        },
+        {
+          "source": "@/features/journey/JourneyPanel",
+          "specifiers": [
+            "JourneyLayer",
+            "JourneyPanel"
+          ]
+        },
+        {
+          "source": "@/features/journey/navigation",
+          "specifiers": [
+            "parseRouteParams"
+          ]
+        },
+        {
+          "source": "@/features/journey/useJourney",
+          "specifiers": [
+            "useJourney",
+            "JourneyTarget"
           ]
         },
         {
@@ -30975,7 +31232,7 @@
       "exports": [
         "MapScreen"
       ],
-      "totalLines": 246,
+      "totalLines": 283,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/(tabs)/profile.tsx": {
@@ -32695,13 +32952,13 @@
     },
     "frontend/src/features/directions/DirectionsLayer.tsx": {
       "filePath": "frontend/src/features/directions/DirectionsLayer.tsx",
-      "contentHash": "36a57a7681a8984bf5a103c79131b1e673edd858babf299c1b9ba246f2847bf8",
+      "contentHash": "e3f898843d13bfbdd6732e349ebe540b0e98aeacca0861bc359d090b93f96753",
       "functions": [
         {
           "name": "DirectionsLayer",
           "params": [],
           "exported": true,
-          "lineCount": 30
+          "lineCount": 38
         }
       ],
       "classes": [],
@@ -32747,12 +33004,12 @@
       "exports": [
         "DirectionsLayer"
       ],
-      "totalLines": 42,
+      "totalLines": 51,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/directions/DirectionsPanel.tsx": {
       "filePath": "frontend/src/features/directions/DirectionsPanel.tsx",
-      "contentHash": "645ffee3645c5aa5d9addda5808943b2a0c6542f29538ff6fa8a6595b7d0b9bb",
+      "contentHash": "13f0ed7dfea0c2cb42f2ba6dfb6fdb1f4b6dcc1aecd2957869026e1e5359e7c4",
       "functions": [
         {
           "name": "legIcon",
@@ -32812,7 +33069,7 @@
             "{ destination }"
           ],
           "exported": true,
-          "lineCount": 26
+          "lineCount": 32
         }
       ],
       "classes": [],
@@ -32902,7 +33159,7 @@
         "legTitle",
         "DirectionsPanel"
       ],
-      "totalLines": 155,
+      "totalLines": 161,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/events/DateTimeField.tsx": {
@@ -33822,7 +34079,7 @@
     },
     "frontend/src/features/map/MapContext.tsx": {
       "filePath": "frontend/src/features/map/MapContext.tsx",
-      "contentHash": "c04a5ea67bf89d1f39e3042888f1be0486539016dc4b99377a52b05d701ce8f2",
+      "contentHash": "36b8e3e2d3a47be1e29df2da187f5841edf789197b479f916d8a3b9c9a154e49",
       "functions": [
         {
           "name": "MapProvider",
@@ -33883,7 +34140,7 @@
         "MapProvider",
         "useMapContext"
       ],
-      "totalLines": 79,
+      "totalLines": 82,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/MapFilterBar.tsx": {
@@ -35081,7 +35338,7 @@
     },
     "frontend/src/hooks/useAi.ts": {
       "filePath": "frontend/src/hooks/useAi.ts",
-      "contentHash": "054508e963a903686bc7feb156ef1075774623a9c56af64428eddb9caffb26f8",
+      "contentHash": "c2ab1260443d7a3f99bd633435550c17eda7179e1257c67d3fedf85ddbe7ff22",
       "functions": [
         {
           "name": "newId",
@@ -35126,6 +35383,7 @@
             "MAX_CHAT_MESSAGE_CHARS",
             "MAX_CHAT_MESSAGES",
             "ChatRole",
+            "ChatRoute",
             "ChatSource"
           ]
         },
@@ -35139,7 +35397,7 @@
       "exports": [
         "useAiChat"
       ],
-      "totalLines": 96,
+      "totalLines": 97,
       "hasStructuralAnalysis": true
     },
     "frontend/src/hooks/useDebounced.ts": {
@@ -37202,7 +37460,7 @@
     },
     "frontend/testing/mocks/routes/ai.ts": {
       "filePath": "frontend/testing/mocks/routes/ai.ts",
-      "contentHash": "777d7740c5df05cb4a1f80e7484267a357c1af6eb57b3e63f212dac0c07a2220",
+      "contentHash": "235bf42b19b9bc8453c70820efb22bb052c82f36f79f2fb06f0da61c5b04678c",
       "functions": [
         {
           "name": "metersBetween",
@@ -37247,13 +37505,24 @@
           "lineCount": 7
         },
         {
+          "name": "routeTo",
+          "params": [
+            "place",
+            "request",
+            "fromUniversity"
+          ],
+          "returnType": "ChatRoute",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
           "name": "answer",
           "params": [
             "request"
           ],
           "returnType": "ChatAnswer",
           "exported": false,
-          "lineCount": 34
+          "lineCount": 49
         }
       ],
       "classes": [],
@@ -37274,7 +37543,8 @@
           "source": "@/api/types.ai",
           "specifiers": [
             "ChatAnswer",
-            "ChatRequest"
+            "ChatRequest",
+            "ChatRoute"
           ]
         },
         {
@@ -37302,7 +37572,7 @@
       "exports": [
         "aiRoutes"
       ],
-      "totalLines": 101,
+      "totalLines": 136,
       "hasStructuralAnalysis": true
     },
     "frontend/testing/mocks/routes/events.ts": {
@@ -37874,6 +38144,789 @@
       "exports": [],
       "totalLines": 186,
       "hasStructuralAnalysis": false
+    },
+    "backend/src/main/java/com/unihack8/backend/ai/domain/dto/ChatRouteDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/ai/domain/dto/ChatRouteDto.java",
+      "contentHash": "984db219a67936039962d827d716ffc1030d9b4fd1d2495075f0a6f2ca1c7044",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ChatRouteDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "ChatRouteDto"
+      ],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/ai/domain/dto/RoutePointDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/ai/domain/dto/RoutePointDto.java",
+      "contentHash": "0a729cf58d5cd92861ce2d356ff82113d43659bc1925b0712624247fef16f45f",
+      "functions": [],
+      "classes": [
+        {
+          "name": "RoutePointDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "RoutePointDto"
+      ],
+      "totalLines": 10,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/ai/domain/ToolContextTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/ai/domain/ToolContextTest.java",
+      "contentHash": "fe8c0388bae04e678040ad81639a7c9ba8778756cb8c39f406e65ba6e39a5d3f",
+      "functions": [
+        {
+          "name": "noStartWithLocationIsTheUser",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "startNearTheUserIsTheUser",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "otherStartIsNotTheUser",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "noLocationIsNeverTheUser",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "remembersRoutes",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "ToolContextTest",
+          "methods": [
+            "noStartWithLocationIsTheUser",
+            "startNearTheUserIsTheUser",
+            "otherStartIsNotTheUser",
+            "noLocationIsNeverTheUser",
+            "remembersRoutes"
+          ],
+          "properties": [
+            "NOW",
+            "USER"
+          ],
+          "exported": false,
+          "lineCount": 46
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 56,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/__tests__/ai.routes.test.tsx": {
+      "filePath": "frontend/__tests__/ai.routes.test.tsx",
+      "contentHash": "7388d74e43635d760afca4c97e40bfb96ce80606b366eb3bf9333f429f29a1a2",
+      "functions": [
+        {
+          "name": "say",
+          "params": [
+            "text"
+          ],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "renderChat",
+          "params": [],
+          "exported": false,
+          "lineCount": 7
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@testing-library/react-native",
+          "specifiers": [
+            "fireEvent",
+            "screen",
+            "waitFor",
+            "within"
+          ]
+        },
+        {
+          "source": "expo-location",
+          "specifiers": [
+            "* as Location"
+          ]
+        },
+        {
+          "source": "@/api/types.ai",
+          "specifiers": [
+            "ChatRoute"
+          ]
+        },
+        {
+          "source": "@/app/(tabs)/ai",
+          "specifiers": [
+            "AiScreen"
+          ]
+        },
+        {
+          "source": "@/features/journey/navigation",
+          "specifiers": [
+            "parseRouteParams",
+            "routeParams"
+          ]
+        },
+        {
+          "source": "@/features/location/LocationProvider",
+          "specifiers": [
+            "LocationProvider"
+          ]
+        },
+        {
+          "source": "./testUtils",
+          "specifiers": [
+            "mockRouter",
+            "renderScreen"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 126,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/__tests__/map.journey.test.tsx": {
+      "filePath": "frontend/__tests__/map.journey.test.tsx",
+      "contentHash": "66067b8ccd9ff5f16a21565cfc169a22aefd3aab4746aff2fbe67edcfcffa32b",
+      "functions": [
+        {
+          "name": "moveTo",
+          "params": [
+            "lat",
+            "lon"
+          ],
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "leg",
+          "params": [
+            "mode",
+            "from",
+            "to",
+            "minutes",
+            "extra"
+          ],
+          "returnType": "RouteLeg",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "openJourney",
+          "params": [
+            "answeredFrom",
+            "mode"
+          ],
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "planCalls",
+          "params": [
+            "spy"
+          ],
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@testing-library/react-native",
+          "specifiers": [
+            "act",
+            "fireEvent",
+            "screen",
+            "waitFor",
+            "within"
+          ]
+        },
+        {
+          "source": "expo-location",
+          "specifiers": [
+            "* as Location"
+          ]
+        },
+        {
+          "source": "@/api/types.routing",
+          "specifiers": [
+            "RouteLeg",
+            "RoutePlan"
+          ]
+        },
+        {
+          "source": "@/app/(tabs)/map",
+          "specifiers": [
+            "MapScreen"
+          ]
+        },
+        {
+          "source": "@/features/journey/navigation",
+          "specifiers": [
+            "routeParams"
+          ]
+        },
+        {
+          "source": "@/features/journey/progress",
+          "specifiers": [
+            "journeyProgress",
+            "nearestOnLine",
+            "stepText"
+          ]
+        },
+        {
+          "source": "@/lib/polyline",
+          "specifiers": [
+            "encodePolyline"
+          ]
+        },
+        {
+          "source": "@test/mocks",
+          "specifiers": [
+            "* as mocks"
+          ]
+        },
+        {
+          "source": "./testUtils",
+          "specifiers": [
+            "renderScreen",
+            "setParams"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 224,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/ai/RouteCards.tsx": {
+      "filePath": "frontend/src/features/ai/RouteCards.tsx",
+      "contentHash": "dfb314fc39bd971527f7fd543d4ab6026bd6197ff5d576c70725846d963570d2",
+      "functions": [
+        {
+          "name": "ensureLocationPermission",
+          "params": [],
+          "returnType": "Promise<boolean>",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "RouteResult",
+          "params": [
+            "{ route, index }"
+          ],
+          "exported": false,
+          "lineCount": 54
+        },
+        {
+          "name": "RouteCards",
+          "params": [
+            "{ routes }"
+          ],
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "expo-location",
+          "specifiers": [
+            "* as Location"
+          ]
+        },
+        {
+          "source": "expo-router",
+          "specifiers": [
+            "router"
+          ]
+        },
+        {
+          "source": "react",
+          "specifiers": [
+            "useState"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "@/api/types.ai",
+          "specifiers": [
+            "ChatRoute"
+          ]
+        },
+        {
+          "source": "@/features/journey/navigation",
+          "specifiers": [
+            "routeParams"
+          ]
+        },
+        {
+          "source": "@/features/location/LocationProvider",
+          "specifiers": [
+            "useCurrentPosition"
+          ]
+        },
+        {
+          "source": "@/lib/format",
+          "specifiers": [
+            "formatDistance"
+          ]
+        },
+        {
+          "source": "@/ui/Button",
+          "specifiers": [
+            "Button"
+          ]
+        },
+        {
+          "source": "@/ui/Card",
+          "specifiers": [
+            "Card"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "Icon"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors"
+          ]
+        }
+      ],
+      "exports": [
+        "ensureLocationPermission",
+        "RouteCards"
+      ],
+      "totalLines": 105,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/journey/JourneyPanel.tsx": {
+      "filePath": "frontend/src/features/journey/JourneyPanel.tsx",
+      "contentHash": "3a7e90cf1ad5eec54ebc3776321fb47504b9005fa0fc488655e6bbe8407b763c",
+      "functions": [
+        {
+          "name": "JourneyLayer",
+          "params": [
+            "{ target, journey }"
+          ],
+          "exported": true,
+          "lineCount": 27
+        },
+        {
+          "name": "JourneyBody",
+          "params": [
+            "{ target, journey }"
+          ],
+          "exported": false,
+          "lineCount": 69
+        },
+        {
+          "name": "JourneyPanel",
+          "params": [
+            "{ target, journey, onEnd }"
+          ],
+          "exported": true,
+          "lineCount": 13
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react-native",
+          "specifiers": [
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "react-native-maps",
+          "specifiers": [
+            "Marker",
+            "Polyline"
+          ]
+        },
+        {
+          "source": "@/features/directions/DirectionsPanel",
+          "specifiers": [
+            "legIcon"
+          ]
+        },
+        {
+          "source": "@/lib/format",
+          "specifiers": [
+            "formatDistance"
+          ]
+        },
+        {
+          "source": "@/ui/Button",
+          "specifiers": [
+            "Button"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "Icon"
+          ]
+        },
+        {
+          "source": "@/ui/States",
+          "specifiers": [
+            "ErrorState",
+            "LoadingState"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors",
+            "radius"
+          ]
+        },
+        {
+          "source": "./progress",
+          "specifiers": [
+            "legPoints",
+            "stepText"
+          ]
+        },
+        {
+          "source": "./useJourney",
+          "specifiers": [
+            "JourneyTarget",
+            "useJourney"
+          ]
+        }
+      ],
+      "exports": [
+        "JourneyLayer",
+        "JourneyPanel"
+      ],
+      "totalLines": 148,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/journey/navigation.ts": {
+      "filePath": "frontend/src/features/journey/navigation.ts",
+      "contentHash": "66846e033946661ee03c69519d97cd5280ea868ebb356c2713baa13767676788",
+      "functions": [
+        {
+          "name": "routeParams",
+          "params": [
+            "route",
+            "go",
+            "now"
+          ],
+          "returnType": "Record<string, string>",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "parseRouteParams",
+          "params": [
+            "params"
+          ],
+          "returnType": "RouteRequest | null",
+          "exported": true,
+          "lineCount": 19
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/types.ai",
+          "specifiers": [
+            "ChatRoute"
+          ]
+        },
+        {
+          "source": "@/api/types.routing",
+          "specifiers": [
+            "PlanMode"
+          ]
+        },
+        {
+          "source": "@/lib/geo",
+          "specifiers": [
+            "isValidCoordinate",
+            "Coordinates"
+          ]
+        }
+      ],
+      "exports": [
+        "routeParams",
+        "parseRouteParams"
+      ],
+      "totalLines": 52,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/journey/progress.ts": {
+      "filePath": "frontend/src/features/journey/progress.ts",
+      "contentHash": "f464f7b64475d8c3338466553d318d64c74e3b0f2b8b4909bbe600f18ef23930",
+      "functions": [
+        {
+          "name": "legPoints",
+          "params": [
+            "leg"
+          ],
+          "returnType": "Coordinates[]",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "toLocal",
+          "params": [
+            "origin",
+            "p"
+          ],
+          "returnType": "{ x: number; y: number }",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "toSegment",
+          "params": [
+            "p",
+            "a",
+            "b"
+          ],
+          "returnType": "{ meters: number; t: number }",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "lineLength",
+          "params": [
+            "points"
+          ],
+          "returnType": "number",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "nearestOnLine",
+          "params": [
+            "p",
+            "points"
+          ],
+          "returnType": "{ meters: number; metersAhead: number }",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "journeyProgress",
+          "params": [
+            "plan",
+            "position",
+            "currentStep",
+            "destination"
+          ],
+          "returnType": "JourneyProgress",
+          "exported": true,
+          "lineCount": 41
+        },
+        {
+          "name": "stepText",
+          "params": [
+            "leg",
+            "isLast",
+            "destinationName"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/types.routing",
+          "specifiers": [
+            "RouteLeg",
+            "RoutePlan"
+          ]
+        },
+        {
+          "source": "@/lib/geo",
+          "specifiers": [
+            "distanceMeters",
+            "Coordinates"
+          ]
+        },
+        {
+          "source": "@/lib/polyline",
+          "specifiers": [
+            "decodePolyline"
+          ]
+        }
+      ],
+      "exports": [
+        "OFF_ROUTE_METERS",
+        "ARRIVED_METERS",
+        "STEP_DONE_METERS",
+        "MOVED_REPLAN_METERS",
+        "legPoints",
+        "lineLength",
+        "nearestOnLine",
+        "journeyProgress",
+        "stepText"
+      ],
+      "totalLines": 129,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/journey/useJourney.ts": {
+      "filePath": "frontend/src/features/journey/useJourney.ts",
+      "contentHash": "967a5e9ff63bc687a02db41577321f3412d122558fb0ea920d51526ecdbf04cf",
+      "functions": [
+        {
+          "name": "useJourney",
+          "params": [
+            "target"
+          ],
+          "exported": true,
+          "lineCount": 105
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "useQuery"
+          ]
+        },
+        {
+          "source": "expo-location",
+          "specifiers": [
+            "* as Location"
+          ]
+        },
+        {
+          "source": "react",
+          "specifiers": [
+            "useCallback",
+            "useEffect",
+            "useMemo",
+            "useRef",
+            "useState"
+          ]
+        },
+        {
+          "source": "@/api/endpoints.routing",
+          "specifiers": [
+            "planRoute"
+          ]
+        },
+        {
+          "source": "@/api/types.routing",
+          "specifiers": [
+            "PlanMode"
+          ]
+        },
+        {
+          "source": "@/lib/geo",
+          "specifiers": [
+            "distanceMeters",
+            "toNearParam",
+            "Coordinates"
+          ]
+        },
+        {
+          "source": "./progress",
+          "specifiers": [
+            "journeyProgress",
+            "MOVED_REPLAN_METERS",
+            "OFF_ROUTE_METERS",
+            "JourneyProgress"
+          ]
+        }
+      ],
+      "exports": [
+        "useJourney"
+      ],
+      "totalLines": 133,
+      "hasStructuralAnalysis": true
     }
   }
 }

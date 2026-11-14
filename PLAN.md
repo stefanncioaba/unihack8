@@ -320,7 +320,7 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 - [x] **18.6 Mobile — during the journey:** move to the next step as the user advances, re-plan when the user is more than ~50 m off the route, and show "You have arrived" within ~30 m of the destination.
 - [x] **18.7 Guards:** "Go" asks for location permission if it was denied (no journey without it); if the user has moved more than ~200 m since the AI answered, the route is simply re-planned from the new position; network errors show the usual error + retry.
 - [x] **18.8 Tests:** backend — `startsFromUser` for user start / other start / start near the user / no location, and `routes[]` in the chat answer; mobile — button shown and hidden, "Go" opens journey mode, step advance, arrival, off-route re-plan (mocked positions).
-- [ ] **18.9** `DOCS.md` (AI assistant + Map sections) and the knowledge graph updated.
+- [x] **18.9** `DOCS.md` (AI assistant + Map sections) and the knowledge graph updated.
 
 ---
 
