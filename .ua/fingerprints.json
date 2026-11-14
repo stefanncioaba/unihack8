@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "2f538ea992f029021ba7fdc14d02009f4e1c693d",
-  "generatedAt": "2026-11-14T17:27:53.343Z",
+  "gitCommitHash": "5848283da5dadc8b2ee1f133ba4f85d453180448",
+  "generatedAt": "2026-11-14T17:31:12.200Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,22 +25,22 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "78b7439a9ab01fce5eff8861e81aa950fc1f5e49e6f81a06bb7b7767c0c502f7",
+      "contentHash": "11236b23d6bf91706eca201720c79df2f12bff7c30365f7673eaecc20fdfe4b4",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 708,
+      "totalLines": 710,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "007aa3ce484adae4f2adbb0c56b65157cdf555ac62a971bc1d302c41921bdc3d",
+      "contentHash": "2d2dddd5685289df4ab3ed29e7eb898e4994cdaaf46b2d1ce7b58dc9fd87d942",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 448,
+      "totalLines": 451,
       "hasStructuralAnalysis": false
     },
     "README.md": {
@@ -34689,7 +34689,7 @@
     },
     "frontend/__tests__/map.layers.test.tsx": {
       "filePath": "frontend/__tests__/map.layers.test.tsx",
-      "contentHash": "1f92cd29d29748f9414c22c997a9028beff75b97afca63e779e00b42acb00b61",
+      "contentHash": "cfd92caa50ae56a685f0a39e3bd1b652353eef68ad017705a3bb529baaf149f3",
       "functions": [
         {
           "name": "call",
@@ -34724,6 +34724,12 @@
       "classes": [],
       "imports": [
         {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "QueryClientProvider"
+          ]
+        },
+        {
           "source": "@testing-library/react-native",
           "specifiers": [
             "act",
@@ -34737,6 +34743,12 @@
           "source": "@/app/(tabs)/map",
           "specifiers": [
             "MapScreen"
+          ]
+        },
+        {
+          "source": "@/features/auth/AuthProvider",
+          "specifiers": [
+            "AuthContext"
           ]
         },
         {
@@ -34762,7 +34774,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 200,
+      "totalLines": 225,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/map.lineView.test.tsx": {
@@ -37730,13 +37742,13 @@
     },
     "frontend/src/app/(tabs)/map.tsx": {
       "filePath": "frontend/src/app/(tabs)/map.tsx",
-      "contentHash": "c3d937a851c57a6d9ad4b83b1d091f2834dcd7b967489ef43704226c0d5c326a",
+      "contentHash": "e1865d00a1e72d0dc66f338f539a262b3b4a810c448421abe41ca3c3c3ca400e",
       "functions": [
         {
           "name": "MapBody",
           "params": [],
           "exported": false,
-          "lineCount": 293
+          "lineCount": 308
         },
         {
           "name": "MapScreen",
@@ -37978,7 +37990,7 @@
       "exports": [
         "MapScreen"
       ],
-      "totalLines": 383,
+      "totalLines": 398,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/(tabs)/profile.tsx": {
@@ -50275,7 +50287,7 @@
     },
     "frontend/__tests__/screens.pulse.test.tsx": {
       "filePath": "frontend/__tests__/screens.pulse.test.tsx",
-      "contentHash": "d994ae5317c32fd6f10eb2d5790a058bc94dd77bd3bd3820e6eea31fff69eb32",
+      "contentHash": "649e65d357e7210ce6244d52422305303c649f60d151f73faa31633a2ae06b0b",
       "functions": [
         {
           "name": "area",
@@ -50311,9 +50323,23 @@
           ]
         },
         {
+          "source": "@/app/pulse/[id]",
+          "specifiers": [
+            "NeighbourhoodScreen"
+          ]
+        },
+        {
           "source": "@/app/pulse/index",
           "specifiers": [
             "NeighbourhoodPulseScreen"
+          ]
+        },
+        {
+          "source": "@/features/neighbourhoods/areas",
+          "specifiers": [
+            "areaBbox",
+            "areaIdOf",
+            "inArea"
           ]
         },
         {
@@ -50350,12 +50376,13 @@
           "specifiers": [
             "IDS",
             "mockRouter",
-            "renderScreen"
+            "renderScreen",
+            "setParams"
           ]
         }
       ],
       "exports": [],
-      "totalLines": 120,
+      "totalLines": 167,
       "hasStructuralAnalysis": true
     },
     "frontend/src/api/endpoints.neighbourhoods.ts": {
@@ -50521,7 +50548,7 @@
     },
     "frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx": {
       "filePath": "frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "contentHash": "0e0ff6e6482a44631a826bc9f622545b2978d4fff3f53503a14fa81b0271f0ff",
+      "contentHash": "45c440b0d229f42c1064a9b05e0256eb0901dd95b604556a238e243ace5cbd4a",
       "functions": [
         {
           "name": "showOnMap",
@@ -50553,7 +50580,7 @@
             "{ area }"
           ],
           "exported": true,
-          "lineCount": 45
+          "lineCount": 51
         }
       ],
       "classes": [],
@@ -50638,7 +50665,7 @@
       "exports": [
         "NeighbourhoodCard"
       ],
-      "totalLines": 141,
+      "totalLines": 147,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/neighbourhoods/photos.ts": {
@@ -55661,6 +55688,213 @@
       "exports": [],
       "totalLines": 54,
       "hasStructuralAnalysis": false
+    },
+    "frontend/src/app/pulse/[id].tsx": {
+      "filePath": "frontend/src/app/pulse/[id].tsx",
+      "contentHash": "f643ad1ef020a971634aa9ec03679cc9caf02cef213fd1b63f75182e588c4c0e",
+      "functions": [
+        {
+          "name": "Tabs",
+          "params": [
+            "{ tab, onChange }"
+          ],
+          "exported": false,
+          "lineCount": 20
+        },
+        {
+          "name": "EventsTab",
+          "params": [
+            "{ areaId, areas }"
+          ],
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "HelpTab",
+          "params": [],
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "NeighbourhoodScreen",
+          "params": [],
+          "exported": true,
+          "lineCount": 38
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "expo-linear-gradient",
+          "specifiers": [
+            "LinearGradient"
+          ]
+        },
+        {
+          "source": "expo-router",
+          "specifiers": [
+            "useLocalSearchParams"
+          ]
+        },
+        {
+          "source": "react",
+          "specifiers": [
+            "useMemo",
+            "useState"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "FlatList",
+            "ImageBackground",
+            "Pressable",
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "@/features/events/EventCards",
+          "specifiers": [
+            "EventListItem"
+          ]
+        },
+        {
+          "source": "@/features/neighbourhoods/areas",
+          "specifiers": [
+            "areaBbox",
+            "inArea"
+          ]
+        },
+        {
+          "source": "@/features/neighbourhoods/photos",
+          "specifiers": [
+            "neighbourhoodPhoto"
+          ]
+        },
+        {
+          "source": "@/features/neighbourhoods/pulseFormat",
+          "specifiers": [
+            "LEVEL_META"
+          ]
+        },
+        {
+          "source": "@/hooks/useMapEvents",
+          "specifiers": [
+            "useEventsInArea"
+          ]
+        },
+        {
+          "source": "@/hooks/useNeighbourhoods",
+          "specifiers": [
+            "useNeighbourhoodPulse"
+          ]
+        },
+        {
+          "source": "@/ui/Chip",
+          "specifiers": [
+            "StatusChip"
+          ]
+        },
+        {
+          "source": "@/ui/Screen",
+          "specifiers": [
+            "Screen"
+          ]
+        },
+        {
+          "source": "@/ui/ScreenHeader",
+          "specifiers": [
+            "ScreenHeader"
+          ]
+        },
+        {
+          "source": "@/ui/States",
+          "specifiers": [
+            "EmptyState",
+            "ErrorState",
+            "LoadingState"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors",
+            "PAGE_MARGIN",
+            "radius"
+          ]
+        }
+      ],
+      "exports": [
+        "NeighbourhoodScreen"
+      ],
+      "totalLines": 110,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/neighbourhoods/areas.ts": {
+      "filePath": "frontend/src/features/neighbourhoods/areas.ts",
+      "contentHash": "4f4fa60f1215b6283adcf5b4c79a8ca571de2926fe74173d91e5125e4ee1200f",
+      "functions": [
+        {
+          "name": "areaIdOf",
+          "params": [
+            "point",
+            "areas"
+          ],
+          "returnType": "string | null",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "areaBbox",
+          "params": [
+            "area"
+          ],
+          "returnType": "Bbox",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "inArea",
+          "params": [
+            "items",
+            "areaId",
+            "areas"
+          ],
+          "returnType": "T[]",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/lib/bbox",
+          "specifiers": [
+            "Bbox"
+          ]
+        },
+        {
+          "source": "@/lib/geo",
+          "specifiers": [
+            "distanceMeters",
+            "Coordinates"
+          ]
+        }
+      ],
+      "exports": [
+        "areaIdOf",
+        "areaBbox",
+        "inArea"
+      ],
+      "totalLines": 32,
+      "hasStructuralAnalysis": true
     }
   }
 }
