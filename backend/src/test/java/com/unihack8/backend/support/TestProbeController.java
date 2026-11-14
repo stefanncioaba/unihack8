@@ -52,6 +52,13 @@ public class TestProbeController {
         throw new IllegalStateException("secret internal detail");
     }
 
+    // Fails the way a write does when the app hangs up mid-response (like the map cancelling /places).
+    @GetMapping("/test-probe/hangup")
+    public void hangup() {
+        throw new org.springframework.http.converter.HttpMessageNotWritableException("Could not write JSON",
+                new java.io.IOException("Connection reset by peer"));
+    }
+
     // Validates a JSON body.
     @PostMapping("/test-probe/body")
     public Map<String, String> body(@Valid @RequestBody ProbeBody body) {

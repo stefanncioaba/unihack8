@@ -9,8 +9,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.unihack8.backend.support.JwtTestTokens;
+import java.io.IOException;
 import java.util.UUID;
+import org.apache.catalina.connector.ClientAbortException;
+import org.springframework.http.converter.HttpMessageNotWritableException;
+import org.springframework.web.context.request.async.AsyncRequestNotUsableException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -104,5 +110,32 @@ class GlobalExceptionHandlerTest {
                 .andExpect(status().isInternalServerError())
                 .andExpect(jsonPath("$.code").value("INTERNAL_ERROR"))
                 .andExpect(content().string(not(containsString("secret internal detail"))));
+    }
+
+    // A client hang-up writes no error body (nobody is listening) and is not reported as a 500.
+    @Test
+    void clientHangupWritesNoErrorBody() throws Exception {
+        mvc.perform(get("/test-probe/hangup").header("Authorization", AUTH))
+                .andExpect(content().string(""));
+    }
+
+    // Disconnects are recognised through wrapped causes: reset, broken pipe, Spring's and Tomcat's abort types.
+    @Test
+    void recognisesClientDisconnects() {
+        assertThat(GlobalExceptionHandler.isClientDisconnect(
+                new RuntimeException(new IOException("Connection reset by peer")))).isTrue();
+        assertThat(GlobalExceptionHandler.isClientDisconnect(new IOException("Broken pipe"))).isTrue();
+        assertThat(GlobalExceptionHandler.isClientDisconnect(
+                new HttpMessageNotWritableException("x", new AsyncRequestNotUsableException("gone")))).isTrue();
+        assertThat(GlobalExceptionHandler.isClientDisconnect(
+                new RuntimeException(new ClientAbortException("aborted")))).isTrue();
+    }
+
+    // Real failures (including unrelated IO errors) are still treated as errors.
+    @Test
+    void realErrorsAreNotDisconnects() {
+        assertThat(GlobalExceptionHandler.isClientDisconnect(new IllegalStateException("boom"))).isFalse();
+        assertThat(GlobalExceptionHandler.isClientDisconnect(new IOException("Disk full"))).isFalse();
+        assertThat(GlobalExceptionHandler.isClientDisconnect(new IOException((String) null))).isFalse();
     }
 }
