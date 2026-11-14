@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "a10642cfcfe0c72a757591c49e9cee815b8d9340",
-  "generatedAt": "2026-11-14T14:34:53.039Z",
+  "gitCommitHash": "a8e1a2ef9825693ec7f405d98e4a0d2e8c73a769",
+  "generatedAt": "2026-11-14T16:28:50.513Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,22 +25,22 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "5c8afe1a74aa71cb3b2cbbeca7a6d6e85f45e8ce0790b6a4743509a9c938dadb",
+      "contentHash": "bc853e221d80a09b80f20592add121314d7bdd5784e5337220e10750dd24536f",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 602,
+      "totalLines": 629,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "c58bebc24af8080e25dcb4307009025062662688e31d44c14b6013cd6ce4c681",
+      "contentHash": "9cf29c6bb8be8c23321942611a755db771a97025e2fa19fac80cf400e07987aa",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 402,
+      "totalLines": 408,
       "hasStructuralAnalysis": false
     },
     "README.md": {
@@ -683,7 +683,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/domain/ToolContext.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/domain/ToolContext.java",
-      "contentHash": "24842e8566de3c741800e780b4e131b43bca142df2daf655d90b48cb3f8ca0c9",
+      "contentHash": "028dc617adaae081428393837be1d522f5ce864a43a3f286a2123e11d75ad2fe",
       "functions": [
         {
           "name": "ToolContext",
@@ -723,7 +723,7 @@
           ],
           "returnType": "void",
           "exported": true,
-          "lineCount": 3
+          "lineCount": 10
         },
         {
           "name": "rememberEvent",
@@ -802,7 +802,7 @@
             "routes"
           ],
           "exported": true,
-          "lineCount": 91
+          "lineCount": 99
         }
       ],
       "imports": [
@@ -855,6 +855,12 @@
           ]
         },
         {
+          "source": "java.util.LinkedHashSet",
+          "specifiers": [
+            "LinkedHashSet"
+          ]
+        },
+        {
           "source": "java.util.List",
           "specifiers": [
             "List"
@@ -890,7 +896,34 @@
         "events",
         "ToolContext"
       ],
-      "totalLines": 111,
+      "totalLines": 120,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/ai/domain/dto/ChatCostDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/ai/domain/dto/ChatCostDto.java",
+      "contentHash": "3803f885a260bbe562f927609ca914d4e6105aae7e6e5874f3284ef376608b99",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ChatCostDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "ChatCostDto"
+      ],
+      "totalLines": 22,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/ai/domain/dto/ChatMessageDto.java": {
@@ -973,7 +1006,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/domain/dto/ChatResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/domain/dto/ChatResponse.java",
-      "contentHash": "5dc60f3a070dba18c6797345753e99bba0ea178c246bbaa8f50e527606df68eb",
+      "contentHash": "d50470cb0b6f56911ff8689f2abb521875a1822af74b8c1421d12cfaab8e4f0d",
       "functions": [],
       "classes": [
         {
@@ -1007,7 +1040,7 @@
       "exports": [
         "ChatResponse"
       ],
-      "totalLines": 19,
+      "totalLines": 20,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/ai/domain/dto/ChatRouteDto.java": {
@@ -1028,6 +1061,26 @@
         "ChatRouteDto"
       ],
       "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/ai/domain/dto/CostItemDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/ai/domain/dto/CostItemDto.java",
+      "contentHash": "2915e29f95374fcab123d4e2c5682de3e7b89cc9933a6d828164c80758060b9f",
+      "functions": [],
+      "classes": [
+        {
+          "name": "CostItemDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "CostItemDto"
+      ],
+      "totalLines": 16,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/ai/domain/dto/LocationDto.java": {
@@ -1400,6 +1453,60 @@
       "totalLines": 20,
       "hasStructuralAnalysis": true
     },
+    "backend/src/main/java/com/unihack8/backend/ai/mapper/ChatCostMapper.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/ai/mapper/ChatCostMapper.java",
+      "contentHash": "a3a8e3a7be6b16a905a47b749bfda132292c9c86e730b6b858d47219383034ba",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ChatCostMapper",
+          "methods": [
+            "toCost",
+            "toCost"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 20
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.ai.domain.ToolContext",
+          "specifiers": [
+            "ToolContext"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.domain.dto.ChatCostDto",
+          "specifiers": [
+            "ChatCostDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.text.TextMatch",
+          "specifiers": [
+            "TextMatch"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.domain.dto.EventSummary",
+          "specifiers": [
+            "EventSummary"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "ChatCostMapper"
+      ],
+      "totalLines": 30,
+      "hasStructuralAnalysis": true
+    },
     "backend/src/main/java/com/unihack8/backend/ai/mapper/ChatResultMapper.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/mapper/ChatResultMapper.java",
       "contentHash": "34b982372f6bda1c0483f1cec449a1eb44d8a054153e7766e7efe022e7cc2802",
@@ -1435,10 +1542,219 @@
       "totalLines": 12,
       "hasStructuralAnalysis": true
     },
+    "backend/src/main/java/com/unihack8/backend/ai/mapper/impl/ChatCostMapperImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/ai/mapper/impl/ChatCostMapperImpl.java",
+      "contentHash": "08f39297bc9a1c234f352ffb8b0e1a3072d5e17685628dd8d958d6e16d7fca45",
+      "functions": [
+        {
+          "name": "toCost",
+          "params": [
+            "plainReply",
+            "places",
+            "placePositions",
+            "events",
+            "eventPositions"
+          ],
+          "returnType": "ChatCostDto",
+          "exported": true,
+          "lineCount": 48
+        },
+        {
+          "name": "segment",
+          "params": [
+            "normalizedReply",
+            "position",
+            "boundaries"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "placeItem",
+          "params": [
+            "found",
+            "normalizedReply",
+            "segment",
+            "single"
+          ],
+          "returnType": "CostItemDto",
+          "exported": false,
+          "lineCount": 32
+        },
+        {
+          "name": "oneItemType",
+          "params": [
+            "prices"
+          ],
+          "returnType": "boolean",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "eventItem",
+          "params": [
+            "event"
+          ],
+          "returnType": "CostItemDto",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "namedIn",
+          "params": [
+            "item",
+            "normalizedReply"
+          ],
+          "returnType": "boolean",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "note",
+          "params": [
+            "items",
+            "unpriced",
+            "options"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "round",
+          "params": [
+            "lei"
+          ],
+          "returnType": "double",
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "ChatCostMapperImpl",
+          "methods": [
+            "toCost",
+            "segment",
+            "placeItem",
+            "oneItemType",
+            "eventItem",
+            "namedIn",
+            "note",
+            "round"
+          ],
+          "properties": [
+            "CURRENCY",
+            "TOTAL",
+            "OPTIONS",
+            "KIND_MENU",
+            "KIND_EVENT",
+            "MIN_ITEM_NAME_LENGTH"
+          ],
+          "exported": true,
+          "lineCount": 154
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.ai.domain.ToolContext",
+          "specifiers": [
+            "ToolContext"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.domain.dto.ChatCostDto",
+          "specifiers": [
+            "ChatCostDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.domain.dto.CostItemDto",
+          "specifiers": [
+            "CostItemDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.mapper.ChatCostMapper",
+          "specifiers": [
+            "ChatCostMapper"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.text.TextMatch",
+          "specifiers": [
+            "TextMatch"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.domain.dto.EventSummary",
+          "specifiers": [
+            "EventSummary"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PriceDto",
+          "specifiers": [
+            "PriceDto"
+          ]
+        },
+        {
+          "source": "java.math.BigDecimal",
+          "specifiers": [
+            "BigDecimal"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.regex.Pattern",
+          "specifiers": [
+            "Pattern"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        }
+      ],
+      "exports": [
+        "toCost",
+        "ChatCostMapperImpl"
+      ],
+      "totalLines": 189,
+      "hasStructuralAnalysis": true
+    },
     "backend/src/main/java/com/unihack8/backend/ai/mapper/impl/ChatResultMapperImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/mapper/impl/ChatResultMapperImpl.java",
-      "contentHash": "fbe8a112bf988c128b1206d5a321004fea4bdc22f03939f43604ca52cb8b929a",
+      "contentHash": "b233e58b121d2e33446befda5a8923ab5ab979031b9978fd9af3055f7dcf370b",
       "functions": [
+        {
+          "name": "ChatResultMapperImpl",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "ChatResultMapperImpl",
+          "params": [
+            "costMapper"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
         {
           "name": "toResponse",
           "params": [
@@ -1447,7 +1763,7 @@
           ],
           "returnType": "ChatResponse",
           "exported": true,
-          "lineCount": 34
+          "lineCount": 38
         },
         {
           "name": "routes",
@@ -1504,7 +1820,16 @@
           "params": [
             "mentions"
           ],
-          "returnType": "List<T>",
+          "returnType": "List<Mention<T>>",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "positions",
+          "params": [
+            "mentions"
+          ],
+          "returnType": "List<Integer>",
           "exported": false,
           "lineCount": 3
         },
@@ -1531,6 +1856,8 @@
         {
           "name": "ChatResultMapperImpl",
           "methods": [
+            "ChatResultMapperImpl",
+            "ChatResultMapperImpl",
             "toResponse",
             "routes",
             "nameNear",
@@ -1538,6 +1865,7 @@
             "position",
             "firstBoldIndex",
             "sorted",
+            "positions",
             "sources",
             "host"
           ],
@@ -1546,10 +1874,11 @@
             "NAME_MATCH_METERS",
             "USER_LOCATION_NAME",
             "BOLD",
-            "MIN_PLAIN_NAME_LENGTH"
+            "MIN_PLAIN_NAME_LENGTH",
+            "costMapper"
           ],
           "exported": true,
-          "lineCount": 167
+          "lineCount": 189
         }
       ],
       "imports": [
@@ -1581,6 +1910,12 @@
           "source": "com.unihack8.backend.ai.domain.dto.SourceDto",
           "specifiers": [
             "SourceDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.mapper.ChatCostMapper",
+          "specifiers": [
+            "ChatCostMapper"
           ]
         },
         {
@@ -1680,6 +2015,12 @@
           ]
         },
         {
+          "source": "org.springframework.beans.factory.annotation.Autowired",
+          "specifiers": [
+            "Autowired"
+          ]
+        },
+        {
           "source": "org.springframework.stereotype.Component",
           "specifiers": [
             "Component"
@@ -1687,10 +2028,12 @@
         }
       ],
       "exports": [
+        "ChatResultMapperImpl",
+        "ChatResultMapperImpl",
         "toResponse",
         "ChatResultMapperImpl"
       ],
-      "totalLines": 199,
+      "totalLines": 223,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/ai/service/AiChatService.java": {
@@ -16383,7 +16726,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/config/StptProperties.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/config/StptProperties.java",
-      "contentHash": "bea38ba5e6134b28814624040033138032cfba0566175453d7463a7d63131476",
+      "contentHash": "08947e1885a56c6f0012de97c59050ab551bbf57ade11a0aab4772119f30daee",
       "functions": [],
       "classes": [
         {
@@ -16391,7 +16734,7 @@
           "methods": [],
           "properties": [],
           "exported": true,
-          "lineCount": 17
+          "lineCount": 18
         }
       ],
       "imports": [
@@ -16417,7 +16760,7 @@
       "exports": [
         "StptProperties"
       ],
-      "totalLines": 34,
+      "totalLines": 35,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/transit/controller/TransitController.java": {
@@ -16851,6 +17194,53 @@
       "totalLines": 12,
       "hasStructuralAnalysis": true
     },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/ShapeStopDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/ShapeStopDto.java",
+      "contentHash": "ff7f6662057941aae54600ff40083ec268c286ba52646ab02522db130fbc6cd2",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ShapeStopDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "ShapeStopDto"
+      ],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/ShapeVariantDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/ShapeVariantDto.java",
+      "contentHash": "a086814119d917f765b589a086b866d8de6fa6eeb0825a51b2f4601b00f28f20",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ShapeVariantDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "ShapeVariantDto"
+      ],
+      "totalLines": 15,
+      "hasStructuralAnalysis": true
+    },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitRouteDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitRouteDto.java",
       "contentHash": "4fff6e1416d28de686470c9d5a3d5c123ca341faa5d951c5c5279a60e176087c",
@@ -16873,7 +17263,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitShapeDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitShapeDto.java",
-      "contentHash": "eefdc34556cd2d8014e9e5fb405af43c2568c8a7da2fd60b8bf4f530bf5ea0ab",
+      "contentHash": "9cf6785448a36b369e9f4c484cfb66d355b14baf4d4c2501ddb60bf10980db21",
       "functions": [],
       "classes": [
         {
@@ -16881,7 +17271,7 @@
           "methods": [],
           "properties": [],
           "exported": true,
-          "lineCount": 2
+          "lineCount": 3
         }
       ],
       "imports": [
@@ -16895,7 +17285,7 @@
       "exports": [
         "TransitShapeDto"
       ],
-      "totalLines": 15,
+      "totalLines": 17,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitStopDto.java": {
@@ -17128,15 +17518,25 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/model/RouteShape.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/model/RouteShape.java",
-      "contentHash": "f7409ce56c32a150fdfc00a1107033cddd5c9b8b479160ebd58eb04957f30b7b",
-      "functions": [],
+      "contentHash": "7be4b680bb16c39c7d453111c288f56f70aed0c53da6937eea4569a19b25ccd6",
+      "functions": [
+        {
+          "name": "points",
+          "params": [],
+          "returnType": "List<List<GeoPoint>>",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
       "classes": [
         {
           "name": "RouteShape",
-          "methods": [],
+          "methods": [
+            "points"
+          ],
           "properties": [],
           "exported": true,
-          "lineCount": 2
+          "lineCount": 7
         }
       ],
       "imports": [
@@ -17154,9 +17554,10 @@
         }
       ],
       "exports": [
+        "points",
         "RouteShape"
       ],
-      "totalLines": 16,
+      "totalLines": 21,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/model/ScheduledDeparture.java": {
@@ -17179,9 +17580,62 @@
       "totalLines": 12,
       "hasStructuralAnalysis": true
     },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/model/ShapePath.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/model/ShapePath.java",
+      "contentHash": "9ab43e0177eb2ff669ec9024524a581c59142afb132a658dad70619b9c287136",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ShapePath",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "ShapePath"
+      ],
+      "totalLines": 16,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/model/ShapeStop.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/model/ShapeStop.java",
+      "contentHash": "ef599c44e22f65ef5318c6d5828a2892f6c50c06bfa6f8c26f8891c780da1cd9",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ShapeStop",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "ShapeStop"
+      ],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
     "backend/src/main/java/com/unihack8/backend/transit/mapper/TransitMapper.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/mapper/TransitMapper.java",
-      "contentHash": "9dac4a76b93c23efd0e24248b32ee3a191f12c1ed628f8e2e50a1fc2c912d06e",
+      "contentHash": "4b023dd9645439821b1f66059f8b7997d0faca95500f0aceee00048335a83b9a",
       "functions": [],
       "classes": [
         {
@@ -17191,12 +17645,13 @@
             "toStop",
             "toVehicle",
             "toShape",
+            "withoutStops",
             "toArrivals",
             "toAlert"
           ],
           "properties": [],
           "exported": true,
-          "lineCount": 21
+          "lineCount": 25
         }
       ],
       "imports": [
@@ -17288,7 +17743,7 @@
       "exports": [
         "TransitMapper"
       ],
-      "totalLines": 40,
+      "totalLines": 44,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/transit/mapper/impl/PolylineEncoder.java": {
@@ -17357,7 +17812,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/mapper/impl/TransitMapperImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/mapper/impl/TransitMapperImpl.java",
-      "contentHash": "bcaf5ec6d61b38f92199098bfd7bb55739ef9b66c2087287357547307fd45398",
+      "contentHash": "170cbf0d0e277a34c915c22c6cbe4f5e91a79d9d446390789ef5bb2cc636a814",
       "functions": [
         {
           "name": "toRoute",
@@ -17375,7 +17830,7 @@
           ],
           "returnType": "String",
           "exported": false,
-          "lineCount": 24
+          "lineCount": 26
         },
         {
           "name": "toStop",
@@ -17404,6 +17859,33 @@
           ],
           "returnType": "TransitShapeDto",
           "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "withoutStops",
+          "params": [
+            "shape"
+          ],
+          "returnType": "TransitShapeDto",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "toVariant",
+          "params": [
+            "path"
+          ],
+          "returnType": "ShapeVariantDto",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "direction",
+          "params": [
+            "directionId"
+          ],
+          "returnType": "String",
+          "exported": false,
           "lineCount": 10
         },
         {
@@ -17454,6 +17936,9 @@
             "toStop",
             "toVehicle",
             "toShape",
+            "withoutStops",
+            "toVariant",
+            "direction",
             "toArrivals",
             "arrivalInstant",
             "parseMinutes",
@@ -17463,7 +17948,7 @@
             "CITY_ZONE"
           ],
           "exported": true,
-          "lineCount": 142
+          "lineCount": 177
         }
       ],
       "imports": [
@@ -17477,6 +17962,18 @@
           "source": "com.unihack8.backend.transit.domain.dto.ArrivalDto",
           "specifiers": [
             "ArrivalDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.ShapeStopDto",
+          "specifiers": [
+            "ShapeStopDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.ShapeVariantDto",
+          "specifiers": [
+            "ShapeVariantDto"
           ]
         },
         {
@@ -17537,6 +18034,12 @@
           "source": "com.unihack8.backend.transit.domain.model.RouteShape",
           "specifiers": [
             "RouteShape"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.model.ShapePath",
+          "specifiers": [
+            "ShapePath"
           ]
         },
         {
@@ -17629,11 +18132,12 @@
         "toStop",
         "toVehicle",
         "toShape",
+        "withoutStops",
         "toArrivals",
         "toAlert",
         "TransitMapperImpl"
       ],
-      "totalLines": 173,
+      "totalLines": 211,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/transit/repository/ShapeRepository.java": {
@@ -17822,7 +18326,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/repository/impl/GtfsShapeRepository.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/repository/impl/GtfsShapeRepository.java",
-      "contentHash": "32838410f695d76e3ce503c4c22cf2d20a3a90c6ed4ef95440bf745e483519ff",
+      "contentHash": "6817ce68bf650356c0a3977a20aafb5e903d3a57e1435704eebe4a5c57051684",
       "functions": [
         {
           "name": "GtfsShapeRepository",
@@ -17854,28 +18358,49 @@
           ],
           "returnType": "List<RouteShape>",
           "exported": false,
-          "lineCount": 71
+          "lineCount": 98
         },
         {
-          "name": "stopSequencePaths",
+          "name": "readStops",
+          "params": [
+            "zip",
+            "required"
+          ],
+          "returnType": "Map<String, ShapeStop>",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "readTripStops",
           "params": [
             "zip",
             "trips",
-            "tripRoute"
+            "stops",
+            "required"
           ],
-          "returnType": "Map<String, List<List<GeoPoint>>>",
+          "returnType": "Map<String, List<ShapeStop>>",
           "exported": false,
-          "lineCount": 32
+          "lineCount": 29
+        },
+        {
+          "name": "headsign",
+          "params": [
+            "trip",
+            "stops"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 6
         },
         {
           "name": "addPath",
           "params": [
             "paths",
-            "points"
+            "path"
           ],
           "returnType": "void",
           "exported": false,
-          "lineCount": 11
+          "lineCount": 12
         },
         {
           "name": "point",
@@ -17926,7 +18451,9 @@
             "GtfsShapeRepository",
             "shapes",
             "parse",
-            "stopSequencePaths",
+            "readStops",
+            "readTripStops",
+            "headsign",
             "addPath",
             "point",
             "integer",
@@ -17940,7 +18467,7 @@
             "loadAttempted"
           ],
           "exported": true,
-          "lineCount": 209
+          "lineCount": 260
         }
       ],
       "imports": [
@@ -17960,6 +18487,18 @@
           "source": "com.unihack8.backend.transit.domain.model.RouteShape",
           "specifiers": [
             "RouteShape"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.model.ShapePath",
+          "specifiers": [
+            "ShapePath"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.model.ShapeStop",
+          "specifiers": [
+            "ShapeStop"
           ]
         },
         {
@@ -18059,6 +18598,12 @@
           ]
         },
         {
+          "source": "java.util.TreeSet",
+          "specifiers": [
+            "TreeSet"
+          ]
+        },
+        {
           "source": "java.util.function.Consumer",
           "specifiers": [
             "Consumer"
@@ -18107,7 +18652,7 @@
         "shapes",
         "GtfsShapeRepository"
       ],
-      "totalLines": 245,
+      "totalLines": 300,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/transit/repository/impl/GtfsTimetableRepository.java": {
@@ -18477,7 +19022,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/service/TransitService.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/TransitService.java",
-      "contentHash": "1b9452f779cd398f7fde2fedf4ec95ab27c7b8164edddebc2604ba5a4fbe1e7f",
+      "contentHash": "4ab45606a7f9b392ba6404141c82f766d46f68daf377eeb53cae353585f205bc",
       "functions": [],
       "classes": [
         {
@@ -18494,7 +19039,7 @@
           ],
           "properties": [],
           "exported": true,
-          "lineCount": 26
+          "lineCount": 27
         }
       ],
       "imports": [
@@ -18574,12 +19119,12 @@
       "exports": [
         "TransitService"
       ],
-      "totalLines": 46,
+      "totalLines": 47,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "contentHash": "117ed5bf8ea5040c073c22c63cf4ce4f89953ea205333fbcd8586c3c494f2a38",
+      "contentHash": "c503cabcbe93855561a1e7d61b30946eb471b58400808076488e53d04b20d7dd",
       "functions": [
         {
           "name": "TransitServiceImpl",
@@ -18626,6 +19171,15 @@
           ],
           "returnType": "List<TransitShapeDto>",
           "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "withoutStops",
+          "params": [
+            "all"
+          ],
+          "returnType": "List<TransitShapeDto>",
+          "exported": false,
           "lineCount": 9
         },
         {
@@ -18855,6 +19409,7 @@
             "stops",
             "vehicles",
             "shapes",
+            "withoutStops",
             "allShapes",
             "linesById",
             "lineKey",
@@ -18905,10 +19460,11 @@
             "shapesCache",
             "fallbackShapes",
             "fallbackShapesAt",
+            "strippedShapes",
             "routesRetryAt"
           ],
           "exported": true,
-          "lineCount": 415
+          "lineCount": 433
         }
       ],
       "imports": [
@@ -19189,7 +19745,7 @@
         "summary",
         "TransitServiceImpl"
       ],
-      "totalLines": 464,
+      "totalLines": 482,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/users/controller/UserController.java": {
@@ -20591,7 +21147,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/ai/controller/AiControllerTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/controller/AiControllerTest.java",
-      "contentHash": "0e9d3f28734c7ffbb7fab068125bb89915b01aeba3ec2e0fcae2f8ecde08ea79",
+      "contentHash": "aa70fed1dcb6811a6d1f26fea7ce48fd6e46e2b98e4f5998fcd157375d0636cc",
       "functions": [
         {
           "name": "withoutTokenIs401",
@@ -20605,14 +21161,14 @@
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 24
+          "lineCount": 36
         },
         {
           "name": "locationOptional",
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 7
+          "lineCount": 8
         },
         {
           "name": "validation",
@@ -20647,7 +21203,7 @@
             "chatService"
           ],
           "exported": false,
-          "lineCount": 87
+          "lineCount": 100
         }
       ],
       "imports": [
@@ -20688,9 +21244,21 @@
           ]
         },
         {
+          "source": "com.unihack8.backend.ai.domain.dto.ChatCostDto",
+          "specifiers": [
+            "ChatCostDto"
+          ]
+        },
+        {
           "source": "com.unihack8.backend.ai.domain.dto.ChatResponse",
           "specifiers": [
             "ChatResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.domain.dto.CostItemDto",
+          "specifiers": [
+            "CostItemDto"
           ]
         },
         {
@@ -20797,12 +21365,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 117,
+      "totalLines": 132,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/ai/domain/ToolContextTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/domain/ToolContextTest.java",
-      "contentHash": "5ce1bda60213edf51643bf964b3b6ed656620110abfa1a7c0f24bd04d006153c",
+      "contentHash": "1d543088383b02ae06a8122a6c5d0be31a916c43b81b81eeec844260c5e30a8f",
       "functions": [
         {
           "name": "noStartWithLocationIsTheUser",
@@ -20838,6 +21406,24 @@
           "returnType": "void",
           "exported": false,
           "lineCount": 7
+        },
+        {
+          "name": "mergesPricesOfAPlaceReturnedTwice",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "price",
+          "params": [
+            "item",
+            "type",
+            "lei"
+          ],
+          "returnType": "PriceDto",
+          "exported": false,
+          "lineCount": 3
         }
       ],
       "classes": [
@@ -20848,14 +21434,16 @@
             "startNearTheUserIsTheUser",
             "otherStartIsNotTheUser",
             "noLocationIsNeverTheUser",
-            "remembersRoutes"
+            "remembersRoutes",
+            "mergesPricesOfAPlaceReturnedTwice",
+            "price"
           ],
           "properties": [
             "NOW",
             "USER"
           ],
           "exported": false,
-          "lineCount": 46
+          "lineCount": 66
         }
       ],
       "imports": [
@@ -20872,9 +21460,39 @@
           ]
         },
         {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceSummaryDto",
+          "specifiers": [
+            "PlaceSummaryDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PriceDto",
+          "specifiers": [
+            "PriceDto"
+          ]
+        },
+        {
+          "source": "java.math.BigDecimal",
+          "specifiers": [
+            "BigDecimal"
+          ]
+        },
+        {
           "source": "java.time.Instant",
           "specifiers": [
             "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
           ]
         },
         {
@@ -20885,12 +21503,256 @@
         }
       ],
       "exports": [],
-      "totalLines": 56,
+      "totalLines": 81,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/ai/mapper/impl/ChatCostMapperImplTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/ai/mapper/impl/ChatCostMapperImplTest.java",
+      "contentHash": "8f11e01263fb2dcc9f0d45efd88ea175144467e08d465f295e6d177469b6658a",
+      "functions": [
+        {
+          "name": "namedItemOfOnePlace",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "noItemNamedUsesStoredRange",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "placeAndEventAreSummed",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "alternativesAreAveragedNotSummed",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "unpricedAreNamedInNote",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "nullWithoutStoredPrices",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "twoPlacesAndOneEventAverageWithinKindThenSum",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "onePlaceAndTwoEventsAverageWithinKindThenSum",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "mixedItemTypesWithoutNamedItemGiveNoLine",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "itemsAreMatchedInThePlacesOwnPart",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "singleRecommendationSearchesTheWholeReply",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "segmentRunsToTheNextName",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "eventWithOnePriceEnd",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "found",
+          "params": [
+            "name"
+          ],
+          "returnType": "ToolContext.FoundPlace",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "price",
+          "params": [
+            "item",
+            "lei"
+          ],
+          "returnType": "PriceDto",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "price",
+          "params": [
+            "item",
+            "type",
+            "lei"
+          ],
+          "returnType": "PriceDto",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "event",
+          "params": [
+            "title",
+            "min",
+            "max"
+          ],
+          "returnType": "EventSummary",
+          "exported": false,
+          "lineCount": 5
+        }
+      ],
+      "classes": [
+        {
+          "name": "ChatCostMapperImplTest",
+          "methods": [
+            "namedItemOfOnePlace",
+            "noItemNamedUsesStoredRange",
+            "placeAndEventAreSummed",
+            "alternativesAreAveragedNotSummed",
+            "unpricedAreNamedInNote",
+            "nullWithoutStoredPrices",
+            "twoPlacesAndOneEventAverageWithinKindThenSum",
+            "onePlaceAndTwoEventsAverageWithinKindThenSum",
+            "mixedItemTypesWithoutNamedItemGiveNoLine",
+            "itemsAreMatchedInThePlacesOwnPart",
+            "singleRecommendationSearchesTheWholeReply",
+            "segmentRunsToTheNextName",
+            "eventWithOnePriceEnd",
+            "found",
+            "price",
+            "price",
+            "event"
+          ],
+          "properties": [
+            "mapper"
+          ],
+          "exported": false,
+          "lineCount": 185
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.domain.ToolContext",
+          "specifiers": [
+            "ToolContext"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.domain.dto.ChatCostDto",
+          "specifiers": [
+            "ChatCostDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.domain.dto.CostItemDto",
+          "specifiers": [
+            "CostItemDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.domain.dto.EventSummary",
+          "specifiers": [
+            "EventSummary"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceSummaryDto",
+          "specifiers": [
+            "PlaceSummaryDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PriceDto",
+          "specifiers": [
+            "PriceDto"
+          ]
+        },
+        {
+          "source": "java.math.BigDecimal",
+          "specifiers": [
+            "BigDecimal"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 203,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/ai/mapper/impl/ChatResultMapperImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/mapper/impl/ChatResultMapperImplTest.java",
-      "contentHash": "baa991c45619afef0c13a6db1579b5954aae9f0cb21827cad84360d857f1feb0",
+      "contentHash": "9514e64c20fa721bb88dd8ec63afee433449c79f2fca55f2c26e493bf13a1248",
       "functions": [
         {
           "name": "boldNamesInReplyOrder",
@@ -20918,7 +21780,21 @@
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 8
+          "lineCount": 9
+        },
+        {
+          "name": "costFromRecommendedPlacesOnly",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "costMatchesItemsPerPlace",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
         },
         {
           "name": "routesNamedAfterToolResults",
@@ -20968,6 +21844,8 @@
             "plainTextFallback",
             "events",
             "nothingMentioned",
+            "costFromRecommendedPlacesOnly",
+            "costMatchesItemsPerPlace",
             "routesNamedAfterToolResults",
             "sameRouteListedOnce",
             "context",
@@ -20978,7 +21856,7 @@
             "mapper"
           ],
           "exported": false,
-          "lineCount": 112
+          "lineCount": 140
         }
       ],
       "imports": [
@@ -21068,19 +21946,19 @@
         }
       ],
       "exports": [],
-      "totalLines": 132,
+      "totalLines": 160,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
-      "contentHash": "a7e986b767a0eb21744a3b72d4de24c071b14aa026365b3d77af5c6c26262cb0",
+      "contentHash": "645d322f125ffe6e92a72b39a61ece1febba4edae4c3fee35d416022252784ec",
       "functions": [
         {
           "name": "toolCallLoop",
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 28
+          "lineCount": 30
         },
         {
           "name": "plannedRoutesInTheAnswer",
@@ -21252,7 +22130,7 @@
             "tool"
           ],
           "exported": false,
-          "lineCount": 320
+          "lineCount": 322
         }
       ],
       "imports": [
@@ -21510,7 +22388,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 368,
+      "totalLines": 370,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/ai/service/impl/InMemoryChatRateLimiterTest.java": {
@@ -29953,7 +30831,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "contentHash": "56fde26477aba8638a65ae23a01046e45af1c8d8428d69d2521e4f21e0511cc3",
+      "contentHash": "330bd59ad5896e16e9768cefb7daba4e6e37a9db1809d963944b36ae4ea17702",
       "functions": [
         {
           "name": "routes",
@@ -29988,7 +30866,7 @@
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 17
+          "lineCount": 24
         },
         {
           "name": "sourceUnavailable",
@@ -30055,7 +30933,7 @@
             "transit"
           ],
           "exported": false,
-          "lineCount": 175
+          "lineCount": 182
         }
       ],
       "imports": [
@@ -30174,6 +31052,18 @@
           ]
         },
         {
+          "source": "com.unihack8.backend.transit.domain.dto.ShapeStopDto",
+          "specifiers": [
+            "ShapeStopDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.ShapeVariantDto",
+          "specifiers": [
+            "ShapeVariantDto"
+          ]
+        },
+        {
           "source": "com.unihack8.backend.transit.domain.dto.TransitShapeDto",
           "specifiers": [
             "TransitShapeDto"
@@ -30271,7 +31161,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 216,
+      "totalLines": 225,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/transit/mapper/impl/PolylineEncoderTest.java": {
@@ -30355,7 +31245,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/transit/mapper/impl/TransitMapperImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/transit/mapper/impl/TransitMapperImplTest.java",
-      "contentHash": "21d594d89296c176c3916ab333c86f3ade492f0249fd8e09f4797d9f58c01680",
+      "contentHash": "c2dd0878d7e2f5fbda9df27ed4f87963dbbe023db7ab2072998281dab1dd0878",
       "functions": [
         {
           "name": "routeEndsAndColour",
@@ -30376,7 +31266,7 @@
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 12
+          "lineCount": 13
         },
         {
           "name": "type",
@@ -30415,6 +31305,22 @@
           "returnType": "void",
           "exported": false,
           "lineCount": 11
+        },
+        {
+          "name": "shapeVariants",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "path",
+          "params": [
+            "points"
+          ],
+          "returnType": "ShapePath",
+          "exported": false,
+          "lineCount": 3
         },
         {
           "name": "arrivalsConvertLocalTimes",
@@ -30457,6 +31363,8 @@
             "vehicleWithoutLine",
             "shapeWithLine",
             "shapeWithoutLine",
+            "shapeVariants",
+            "path",
             "arrivalsConvertLocalTimes",
             "timetableArrivalsAreNotLive",
             "arrivalAfterMidnightIsNextDay",
@@ -30466,7 +31374,7 @@
             "mapper"
           ],
           "exported": false,
-          "lineCount": 141
+          "lineCount": 173
         }
       ],
       "imports": [
@@ -30492,6 +31400,18 @@
           "source": "com.unihack8.backend.transit.domain.dto.TransitRouteDto",
           "specifiers": [
             "TransitRouteDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.ShapeStopDto",
+          "specifiers": [
+            "ShapeStopDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.ShapeVariantDto",
+          "specifiers": [
+            "ShapeVariantDto"
           ]
         },
         {
@@ -30531,6 +31451,18 @@
           ]
         },
         {
+          "source": "com.unihack8.backend.transit.domain.model.ShapePath",
+          "specifiers": [
+            "ShapePath"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.model.ShapeStop",
+          "specifiers": [
+            "ShapeStop"
+          ]
+        },
+        {
           "source": "java.time.Instant",
           "specifiers": [
             "Instant"
@@ -30550,12 +31482,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 160,
+      "totalLines": 196,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/transit/repository/impl/GtfsShapeRepositoryTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/transit/repository/impl/GtfsShapeRepositoryTest.java",
-      "contentHash": "0f02a6780c148dfde6963f996abf9f2ea1b49e80b374ac521ee3fd2afaee0565",
+      "contentHash": "0dea4dc351f50d6557297955370c6388bf3bb6805931d90d0e916017b4c04c5d",
       "functions": [
         {
           "name": "zip",
@@ -30605,6 +31537,13 @@
           "lineCount": 18
         },
         {
+          "name": "directionsHeadsignsAndStops",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 36
+        },
+        {
           "name": "missingFile",
           "params": [],
           "returnType": "void",
@@ -30629,6 +31568,7 @@
             "shapesAreSimplified",
             "stopSequenceFallback",
             "mixedShapesAndFallback",
+            "directionsHeadsignsAndStops",
             "missingFile",
             "realFeedWhenPresent"
           ],
@@ -30639,7 +31579,7 @@
             "dir"
           ],
           "exported": false,
-          "lineCount": 172
+          "lineCount": 210
         }
       ],
       "imports": [
@@ -30659,6 +31599,18 @@
           "source": "com.unihack8.backend.transit.domain.model.RouteShape",
           "specifiers": [
             "RouteShape"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.model.ShapePath",
+          "specifiers": [
+            "ShapePath"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.model.ShapeStop",
+          "specifiers": [
+            "ShapeStop"
           ]
         },
         {
@@ -30735,7 +31687,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 193,
+      "totalLines": 233,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/transit/repository/impl/GtfsTimetableRepositoryTest.java": {
@@ -31028,7 +31980,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "contentHash": "544dfeab2e8d82e14fe97654bab7cd552c4ba037ff96ab6e91e3e75f91c175d2",
+      "contentHash": "d64d054653b258127e024c2e4295fb5c773d05286e9ed239519b0ca2516a4730",
       "functions": [
         {
           "name": "setUp",
@@ -31115,6 +32067,13 @@
           "lineCount": 14
         },
         {
+          "name": "shapeStopsOnlyForOneLine",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
           "name": "shapesCached",
           "params": [],
           "returnType": "void",
@@ -31165,7 +32124,7 @@
           ],
           "returnType": "RouteShape",
           "exported": false,
-          "lineCount": 4
+          "lineCount": 5
         },
         {
           "name": "arrivalsMergedAndSorted",
@@ -31303,6 +32262,7 @@
             "vehiclesStaleWhenSourceDown",
             "vehiclesUnavailableWithoutCache",
             "shapesSortedAndFiltered",
+            "shapeStopsOnlyForOneLine",
             "shapesCached",
             "shapesWithoutLineListUseGtfs",
             "vehiclesDoNotRetryFailedLineListAtOnce",
@@ -31337,7 +32297,7 @@
             "service"
           ],
           "exported": false,
-          "lineCount": 476
+          "lineCount": 493
         }
       ],
       "imports": [
@@ -31456,6 +32416,12 @@
           ]
         },
         {
+          "source": "com.unihack8.backend.transit.domain.dto.ShapeStopDto",
+          "specifiers": [
+            "ShapeStopDto"
+          ]
+        },
+        {
           "source": "com.unihack8.backend.transit.domain.dto.TransitShapeDto",
           "specifiers": [
             "TransitShapeDto"
@@ -31513,6 +32479,18 @@
           "source": "com.unihack8.backend.transit.domain.model.RouteShape",
           "specifiers": [
             "RouteShape"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.model.ShapePath",
+          "specifiers": [
+            "ShapePath"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.model.ShapeStop",
+          "specifiers": [
+            "ShapeStop"
           ]
         },
         {
@@ -31589,7 +32567,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 523,
+      "totalLines": 543,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java": {
@@ -32583,12 +33561,12 @@
     },
     "docs/API.md": {
       "filePath": "docs/API.md",
-      "contentHash": "b4eb971cd584522f06de8c82be24088d7a69de3bff341862a5a7fcdbde5f7762",
+      "contentHash": "ccf4221e195009f4c7cd6751b7d32c50d750d8569433ee2cab8f27b348facbf3",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 685,
+      "totalLines": 719,
       "hasStructuralAnalysis": false
     },
     "docs/DEMO.md": {
@@ -32710,6 +33688,69 @@
       ],
       "exports": [],
       "totalLines": 197,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/__tests__/ai.cost.test.tsx": {
+      "filePath": "frontend/__tests__/ai.cost.test.tsx",
+      "contentHash": "9319391fd12f1e3e135b14aaa267bf32d21156b94e8f6f7cc310e9aa68592688",
+      "functions": [
+        {
+          "name": "say",
+          "params": [
+            "text"
+          ],
+          "exported": false,
+          "lineCount": 4
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@testing-library/react-native",
+          "specifiers": [
+            "fireEvent",
+            "render",
+            "screen",
+            "within"
+          ]
+        },
+        {
+          "source": "@/api/types.ai",
+          "specifiers": [
+            "ChatCost"
+          ]
+        },
+        {
+          "source": "@/app/(tabs)/ai",
+          "specifiers": [
+            "AiScreen"
+          ]
+        },
+        {
+          "source": "@/features/ai/CostCard",
+          "specifiers": [
+            "CostCard",
+            "costAccessibilityLabel",
+            "costLabel",
+            "formatLei",
+            "formatRange"
+          ]
+        },
+        {
+          "source": "@test/mocks/routes/ai",
+          "specifiers": [
+            "mockCost"
+          ]
+        },
+        {
+          "source": "./testUtils",
+          "specifiers": [
+            "renderScreen"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 124,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/ai.routes.test.tsx": {
@@ -33533,7 +34574,7 @@
     },
     "frontend/__tests__/map.directionsFocus.test.tsx": {
       "filePath": "frontend/__tests__/map.directionsFocus.test.tsx",
-      "contentHash": "3b1bf61c30094be7f15ab4e6ff3a79dd76f3442299ebb22a3cfef37f9072c0df",
+      "contentHash": "b7f763a9c3a40fc4bdadf8c4897adf29313fef25672307b2be5bfe70d269a830",
       "functions": [
         {
           "name": "moveTo",
@@ -33577,6 +34618,25 @@
           ]
         },
         {
+          "source": "@/api/endpoints.transit",
+          "specifiers": [
+            "* as endpoints"
+          ]
+        },
+        {
+          "source": "@/api/types.routing",
+          "specifiers": [
+            "RouteLeg"
+          ]
+        },
+        {
+          "source": "@/api/types.transit",
+          "specifiers": [
+            "TransitVehicle",
+            "TransitVehicles"
+          ]
+        },
+        {
           "source": "@/app/(tabs)/map",
           "specifiers": [
             "MapScreen"
@@ -33586,7 +34646,20 @@
           "source": "@/features/map/mapFilters",
           "specifiers": [
             "INITIAL_MAP_FILTERS",
+            "mapFiltersReducer",
             "visibleLayers"
+          ]
+        },
+        {
+          "source": "@/features/transit/LegVehicles",
+          "specifiers": [
+            "LegVehicles"
+          ]
+        },
+        {
+          "source": "@/hooks/useTransit",
+          "specifiers": [
+            "VEHICLES_REFRESH_MS"
           ]
         },
         {
@@ -33597,12 +34670,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 77,
+      "totalLines": 149,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/map.filters.test.tsx": {
       "filePath": "frontend/__tests__/map.filters.test.tsx",
-      "contentHash": "5f08c692edd18b7fed058b4fd7f1f87acfe219ea11d7c76cc558374394b526aa",
+      "contentHash": "88d7facd601831e03cba1a7463c503905c08eb36ecfd6fb93eaee4d078c6767c",
       "functions": [
         {
           "name": "run",
@@ -33693,14 +34766,21 @@
           ]
         },
         {
+          "source": "@test/mocks/placesSeed",
+          "specifiers": [
+            "placeId"
+          ]
+        },
+        {
           "source": "./testUtils",
           "specifiers": [
-            "renderScreen"
+            "renderScreen",
+            "setParams"
           ]
         }
       ],
       "exports": [],
-      "totalLines": 183,
+      "totalLines": 292,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/map.journey.test.tsx": {
@@ -33894,9 +34974,140 @@
       "totalLines": 200,
       "hasStructuralAnalysis": true
     },
+    "frontend/__tests__/map.lineView.test.tsx": {
+      "filePath": "frontend/__tests__/map.lineView.test.tsx",
+      "contentHash": "56baed96ce803f85b0190e2d5a1fbceab950cdf8c749be92619bbed9f5c62fec",
+      "functions": [
+        {
+          "name": "vehicleMarkers",
+          "params": [],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "stopMarkers",
+          "params": [],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "vehicle",
+          "params": [
+            "over"
+          ],
+          "returnType": "TransitVehicle",
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "path",
+          "params": [
+            "n"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "stop",
+          "params": [
+            "id"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "moveTo",
+          "params": [
+            "latitudeDelta"
+          ],
+          "exported": false,
+          "lineCount": 6
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@testing-library/react-native",
+          "specifiers": [
+            "act",
+            "fireEvent",
+            "render",
+            "screen",
+            "waitFor",
+            "within"
+          ]
+        },
+        {
+          "source": "@/api/types.transit",
+          "specifiers": [
+            "TransitRoute",
+            "TransitShape",
+            "TransitVehicle"
+          ]
+        },
+        {
+          "source": "@/app/(tabs)/map",
+          "specifiers": [
+            "MapScreen"
+          ]
+        },
+        {
+          "source": "@/features/transit/LinePicker",
+          "specifiers": [
+            "LinePicker"
+          ]
+        },
+        {
+          "source": "@/features/transit/lineView",
+          "specifiers": [
+            "directionLabel",
+            "directionOfVehicle",
+            "groupLines",
+            "lineDirections",
+            "sameHeadsign",
+            "vehiclesInDirection"
+          ]
+        },
+        {
+          "source": "@/features/transit/vehicleAnimation",
+          "specifiers": [
+            "isMapMoving"
+          ]
+        },
+        {
+          "source": "@/lib/polyline",
+          "specifiers": [
+            "decodePolyline",
+            "encodePolyline"
+          ]
+        },
+        {
+          "source": "@test/mocks",
+          "specifiers": [
+            "* as mocks"
+          ]
+        },
+        {
+          "source": "@test/mocks/transitSeed",
+          "specifiers": [
+            "LINE_STOPS",
+            "MOCK_ROUTES"
+          ]
+        },
+        {
+          "source": "./testUtils",
+          "specifiers": [
+            "renderScreen"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 236,
+      "hasStructuralAnalysis": true
+    },
     "frontend/__tests__/map.liveTransit.test.tsx": {
       "filePath": "frontend/__tests__/map.liveTransit.test.tsx",
-      "contentHash": "85f980f9080897b2060e815afa3e5057b11f2866ade33b2009e328e73ce3ab7a",
+      "contentHash": "7ccf6ad6828f47b92ee0d23c82b7c432bf0502b1e52747cb9f4a21766a5860ef",
       "functions": [
         {
           "name": "call",
@@ -33948,7 +35159,7 @@
           "lineCount": 1
         },
         {
-          "name": "shapeLines",
+          "name": "routeLines",
           "params": [],
           "exported": false,
           "lineCount": 1
@@ -34016,8 +35227,14 @@
         {
           "source": "@/features/transit/lines",
           "specifiers": [
+            "FAMILY_PALETTES",
             "LINE_PALETTE",
+            "clearLineTypes",
             "decodeShapes",
+            "guessLineFamily",
+            "lineFamily",
+            "registerLineTypes",
+            "textOnColor",
             "isReportOld",
             "lineColor",
             "nearestVehicle",
@@ -34033,9 +35250,15 @@
           ]
         },
         {
+          "source": "@/features/transit/lineView",
+          "specifiers": [
+            "lineDirections"
+          ]
+        },
+        {
           "source": "@/features/transit/TransitLayer",
           "specifiers": [
-            "SHAPE_WIDTH",
+            "ROUTE_STYLE",
             "TransitLayer"
           ]
         },
@@ -34079,12 +35302,184 @@
         }
       ],
       "exports": [],
-      "totalLines": 418,
+      "totalLines": 533,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/__tests__/map.markers.test.tsx": {
+      "filePath": "frontend/__tests__/map.markers.test.tsx",
+      "contentHash": "62983873d4e42f540c086a7e1d8a717f1ce22dd1f0d0a5e4233fc103ef5593e7",
+      "functions": [
+        {
+          "name": "Probe",
+          "params": [],
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "flat",
+          "params": [
+            "node"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "allNodes",
+          "params": [
+            "root"
+          ],
+          "returnType": "ReactTestInstance[]",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "expectContained",
+          "params": [
+            "root"
+          ],
+          "exported": false,
+          "lineCount": 26
+        },
+        {
+          "name": "step",
+          "params": [
+            "kind",
+            "label"
+          ],
+          "returnType": "TripStep",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "noop",
+          "params": [],
+          "exported": false,
+          "lineCount": 1
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@testing-library/react-native",
+          "specifiers": [
+            "act",
+            "render",
+            "screen"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "StyleSheet",
+            "RNText"
+          ]
+        },
+        {
+          "source": "@/api/types.places",
+          "specifiers": [
+            "PlaceSummary"
+          ]
+        },
+        {
+          "source": "@/api/types",
+          "specifiers": [
+            "EventSummary"
+          ]
+        },
+        {
+          "source": "@/api/types.transit",
+          "specifiers": [
+            "TransitStop",
+            "TransitVehicle"
+          ]
+        },
+        {
+          "source": "@/app/(tabs)/map",
+          "specifiers": [
+            "MapScreen"
+          ]
+        },
+        {
+          "source": "@/features/directions/TripMarkers",
+          "specifiers": [
+            "TRIP_PILL",
+            "TripStepMarker",
+            "tripStepSize"
+          ]
+        },
+        {
+          "source": "@/features/directions/tripSteps",
+          "specifiers": [
+            "TripStep"
+          ]
+        },
+        {
+          "source": "@/features/map/ClusterMarker",
+          "specifiers": [
+            "ClusterMarker",
+            "MARKER_TRACK_MS",
+            "clusterSize",
+            "pinBox",
+            "useBriefViewTracking"
+          ]
+        },
+        {
+          "source": "@/features/map/EventMarkers",
+          "specifiers": [
+            "EVENT_PIN",
+            "EventMarkers"
+          ]
+        },
+        {
+          "source": "@/features/map/PlaceMarkers",
+          "specifiers": [
+            "PLACE_PIN",
+            "PlaceMarkers"
+          ]
+        },
+        {
+          "source": "@/features/transit/TransitLayer",
+          "specifiers": [
+            "STOP_ROOT_SIZE",
+            "TransitLayer"
+          ]
+        },
+        {
+          "source": "@/features/transit/VehicleMarker",
+          "specifiers": [
+            "VehicleMarker",
+            "badgeSize",
+            "vehicleMarkerSize"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "iconFontLoaded"
+          ]
+        },
+        {
+          "source": "@/ui/mapStyle",
+          "specifiers": [
+            "HIDDEN_POI_TYPES",
+            "HIDDEN_TRANSIT_TYPES",
+            "darkMapStyle"
+          ]
+        },
+        {
+          "source": "./testUtils",
+          "specifiers": [
+            "renderScreen"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 272,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/map.performance.test.tsx": {
       "filePath": "frontend/__tests__/map.performance.test.tsx",
-      "contentHash": "4b63973bd1292bab7b235d01b4792d89a68fa24d3dd5782354d3f7cc085e1d09",
+      "contentHash": "d1258b179e171749180f494537c8b49b85d991a4e1e887a6d4175bc70dbcca00",
       "functions": [
         {
           "name": "vehicle",
@@ -34172,6 +35567,12 @@
           ]
         },
         {
+          "source": "@/features/transit/lineView",
+          "specifiers": [
+            "lineDirections"
+          ]
+        },
+        {
           "source": "@/features/transit/TransitLayer",
           "specifiers": [
             "TransitLayer"
@@ -34210,7 +35611,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 311,
+      "totalLines": 314,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/map.shell.test.tsx": {
@@ -34372,7 +35773,7 @@
     },
     "frontend/__tests__/map.tripGuidance.test.tsx": {
       "filePath": "frontend/__tests__/map.tripGuidance.test.tsx",
-      "contentHash": "c77d6cac9dc49014128661de88e1fa785270d017a20e9c875f73def03a0ff468",
+      "contentHash": "9583d6c89c30d09cce46d8944a310532244b22ca157d13bce035601d9d8bd05c",
       "functions": [
         {
           "name": "leg",
@@ -34412,6 +35813,12 @@
           ],
           "exported": false,
           "lineCount": 1
+        },
+        {
+          "name": "markerIds",
+          "params": [],
+          "exported": false,
+          "lineCount": 5
         }
       ],
       "classes": [],
@@ -34437,6 +35844,12 @@
           "source": "react-native",
           "specifiers": [
             "StyleSheet"
+          ]
+        },
+        {
+          "source": "react-native-maps",
+          "specifiers": [
+            "Marker"
           ]
         },
         {
@@ -34496,7 +35909,15 @@
           "source": "@/features/transit/LegVehicles",
           "specifiers": [
             "approachingVehicleIds",
-            "LegVehicles"
+            "capVehiclesPerLine",
+            "LegVehicles",
+            "MAX_LEG_VEHICLES_PER_LINE"
+          ]
+        },
+        {
+          "source": "@/hooks/useTransit",
+          "specifiers": [
+            "transitKeys"
           ]
         },
         {
@@ -34532,7 +35953,71 @@
         }
       ],
       "exports": [],
-      "totalLines": 278,
+      "totalLines": 356,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/__tests__/map.vehicleAnimation.test.ts": {
+      "filePath": "frontend/__tests__/map.vehicleAnimation.test.ts",
+      "contentHash": "74d56301b7f8e7863cc0fd793e2d3984b7698b18a014fa439cd1d61a1a8787ef",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@testing-library/react-native",
+          "specifiers": [
+            "act",
+            "renderHook"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "Platform"
+          ]
+        },
+        {
+          "source": "react-native-maps",
+          "specifiers": [
+            "* as Maps"
+          ]
+        },
+        {
+          "source": "@/features/transit/vehicleAnimation",
+          "specifiers": [
+            "FRAME_MS",
+            "MAX_JS_GLIDES",
+            "SNAP_AFTER_MS",
+            "VEHICLE_ANIMATION_MS",
+            "arrowPoints",
+            "bearingStep",
+            "claimJsGlide",
+            "isGliding",
+            "isMapMoving",
+            "jumpDurationMs",
+            "lerpCoord",
+            "onMapMoveStart",
+            "planMove",
+            "positionAt",
+            "recordVehiclePoll",
+            "releaseJsGlide",
+            "resetJsGlides",
+            "resetVehiclePolls",
+            "runningJsGlides",
+            "setMapMoving",
+            "stillAt",
+            "vehiclePollGapMs"
+          ]
+        },
+        {
+          "source": "@/features/transit/useVehicleMotion",
+          "specifiers": [
+            "motionMode",
+            "useVehicleMotion"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 353,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/map.viewTracking.test.tsx": {
@@ -35451,7 +36936,7 @@
     },
     "frontend/src/api/endpoints.transit.ts": {
       "filePath": "frontend/src/api/endpoints.transit.ts",
-      "contentHash": "03bcb2bb0ae99bd5cbc227d832a72b498a4b594142b41476149d9ac928193ddd",
+      "contentHash": "e12e87c3852af598e872008bf17d842e5e141f627fb8d52a64fa347feebf09da",
       "functions": [
         {
           "name": "getTransitSummary",
@@ -35502,6 +36987,14 @@
           "lineCount": 1
         },
         {
+          "name": "getLineShape",
+          "params": [
+            "route"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
           "name": "getStopArrivals",
           "params": [
             "stopId"
@@ -35548,10 +37041,11 @@
         "getTransitVehicles",
         "getAllTransitVehicles",
         "getTransitShapes",
+        "getLineShape",
         "getStopArrivals",
         "getLastDepartures"
       ],
-      "totalLines": 31,
+      "totalLines": 34,
       "hasStructuralAnalysis": true
     },
     "frontend/src/api/endpoints.ts": {
@@ -35830,7 +37324,7 @@
     },
     "frontend/src/api/types.ai.ts": {
       "filePath": "frontend/src/api/types.ai.ts",
-      "contentHash": "f94746daccbc6c91067e75d8c9a5bf8306d8af6d98e307bc640ef8b26ed268e2",
+      "contentHash": "d30d0ec8fdcb1fb789302cad6ef4cd13aad21e9378a7c4e9a80e094b1d4c3c84",
       "functions": [],
       "classes": [],
       "imports": [
@@ -35857,7 +37351,7 @@
         "MAX_CHAT_MESSAGES",
         "MAX_CHAT_MESSAGE_CHARS"
       ],
-      "totalLines": 49,
+      "totalLines": 78,
       "hasStructuralAnalysis": true
     },
     "frontend/src/api/types.places.ts": {
@@ -35884,12 +37378,12 @@
     },
     "frontend/src/api/types.transit.ts": {
       "filePath": "frontend/src/api/types.transit.ts",
-      "contentHash": "55c72af882b7cc82de4b4117e695935ade1385d70b0fb688c5a95c6788b3eba3",
+      "contentHash": "5fe599944e269251656638d2de33dd434aae652fc2e9fa5c6fd89d066c82db8b",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 65,
+      "totalLines": 85,
       "hasStructuralAnalysis": true
     },
     "frontend/src/api/types.ts": {
@@ -36151,13 +37645,13 @@
     },
     "frontend/src/app/(tabs)/ai.tsx": {
       "filePath": "frontend/src/app/(tabs)/ai.tsx",
-      "contentHash": "d09f00f91a3d9ac591f130f3310922a4869f6e065000bbee51bf7aaa49ac93e3",
+      "contentHash": "b58da8adb13610a2829d8329439eab4f30198a29b82f1fdb5c8a4ab8bf21a9cb",
       "functions": [
         {
           "name": "AiScreen",
           "params": [],
           "exported": true,
-          "lineCount": 72
+          "lineCount": 73
         }
       ],
       "classes": [],
@@ -36201,6 +37695,12 @@
           "source": "@/features/ai/ChatMotif",
           "specifiers": [
             "ChatMotif"
+          ]
+        },
+        {
+          "source": "@/features/ai/CostCard",
+          "specifiers": [
+            "CostCard"
           ]
         },
         {
@@ -36262,7 +37762,7 @@
       "exports": [
         "AiScreen"
       ],
-      "totalLines": 101,
+      "totalLines": 103,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/(tabs)/index.tsx": {
@@ -36418,13 +37918,13 @@
     },
     "frontend/src/app/(tabs)/map.tsx": {
       "filePath": "frontend/src/app/(tabs)/map.tsx",
-      "contentHash": "17fe70dd3b16d278789b31073fb328cb9d6defe0890372267613c1db0f63fbc7",
+      "contentHash": "0820d58640a1c408cfc239956ea9d2421fd1fc9575827cf88a98ac4ff1285298",
       "functions": [
         {
           "name": "MapBody",
           "params": [],
           "exported": false,
-          "lineCount": 252
+          "lineCount": 296
         },
         {
           "name": "MapScreen",
@@ -36562,9 +38062,34 @@
           ]
         },
         {
+          "source": "@/features/transit/LinePicker",
+          "specifiers": [
+            "LinePicker"
+          ]
+        },
+        {
+          "source": "@/features/transit/lineView",
+          "specifiers": [
+            "directionOfVehicle",
+            "lineDirections"
+          ]
+        },
+        {
+          "source": "@/features/transit/lines",
+          "specifiers": [
+            "sameLine"
+          ]
+        },
+        {
           "source": "@/features/transit/TransitLayer",
           "specifiers": [
             "TransitLayer"
+          ]
+        },
+        {
+          "source": "@/features/transit/vehicleAnimation",
+          "specifiers": [
+            "setMapMoving"
           ]
         },
         {
@@ -36583,14 +38108,21 @@
           "source": "@/hooks/useTransit",
           "specifiers": [
             "useAllVehicles",
+            "useLineShape",
             "useStopsInArea",
-            "useTransitShapes"
+            "useTransitRoutes"
           ]
         },
         {
           "source": "@/lib/bbox",
           "specifiers": [
             "regionToBbox"
+          ]
+        },
+        {
+          "source": "@/lib/polyline",
+          "specifiers": [
+            "decodePolyline"
           ]
         },
         {
@@ -36634,7 +38166,7 @@
       "exports": [
         "MapScreen"
       ],
-      "totalLines": 341,
+      "totalLines": 395,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/(tabs)/profile.tsx": {
@@ -37989,6 +39521,112 @@
       "totalLines": 22,
       "hasStructuralAnalysis": true
     },
+    "frontend/src/features/ai/CostCard.tsx": {
+      "filePath": "frontend/src/features/ai/CostCard.tsx",
+      "contentHash": "fed10773779f23e3ca20b4f6a6411473faee62098296b52e2419c6173b5c6bd9",
+      "functions": [
+        {
+          "name": "formatLei",
+          "params": [
+            "lei"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "formatRange",
+          "params": [
+            "min",
+            "max"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "kindIcon",
+          "params": [
+            "kind"
+          ],
+          "returnType": "IconName",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "costLabel",
+          "params": [
+            "cost"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "costAccessibilityLabel",
+          "params": [
+            "cost"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "CostCard",
+          "params": [
+            "{ cost }"
+          ],
+          "exported": true,
+          "lineCount": 44
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react-native",
+          "specifiers": [
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "@/api/types.ai",
+          "specifiers": [
+            "ChatCost",
+            "ChatCostItem"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "Icon",
+            "IconName"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors",
+            "radius"
+          ]
+        }
+      ],
+      "exports": [
+        "formatLei",
+        "formatRange",
+        "costLabel",
+        "costAccessibilityLabel",
+        "CostCard"
+      ],
+      "totalLines": 108,
+      "hasStructuralAnalysis": true
+    },
     "frontend/src/features/ai/ResultCards.tsx": {
       "filePath": "frontend/src/features/ai/ResultCards.tsx",
       "contentHash": "9102894e218ac1908497e192cd745b4814752d545725fe2a35bf17a652ddb545",
@@ -38703,7 +40341,7 @@
     },
     "frontend/src/features/directions/DirectionsLayer.tsx": {
       "filePath": "frontend/src/features/directions/DirectionsLayer.tsx",
-      "contentHash": "16ed21ad3ab70dfa9d064dec3ed1dade47d09682cf3aadd7b4570c71f5b58bf0",
+      "contentHash": "c3efec0ef06a5d5643427a8f1b33c95e479e557414d4ae4a2548a3ed964dbfff",
       "functions": [
         {
           "name": "DirectionsLayer",
@@ -38806,7 +40444,7 @@
         "RouteLines",
         "DirectionsLayer"
       ],
-      "totalLines": 96,
+      "totalLines": 97,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/directions/DirectionsPanel.tsx": {
@@ -38991,7 +40629,7 @@
     },
     "frontend/src/features/directions/TripMarkers.tsx": {
       "filePath": "frontend/src/features/directions/TripMarkers.tsx",
-      "contentHash": "ac1b61b6f13141ec5f1e64cb520e36553cff809c1a17988c1b7682eb3ed74f64",
+      "contentHash": "d10a34a5af1c69b6641b4f9d406784105a633f6c9ce6c6424d372bcfd06b45a4",
       "functions": [
         {
           "name": "TripStepMarkerBase",
@@ -38999,7 +40637,17 @@
             "{ step }"
           ],
           "exported": false,
-          "lineCount": 31
+          "lineCount": 36
+        },
+        {
+          "name": "tripStepSize",
+          "params": [
+            "kind",
+            "label"
+          ],
+          "returnType": "{ width: number; height: number }",
+          "exported": true,
+          "lineCount": 7
         }
       ],
       "classes": [],
@@ -39071,14 +40719,17 @@
       ],
       "exports": [
         "TripStepMarker",
+        "TRIP_PILL",
+        "tripStepSize",
+        "MAP_STEP_KINDS",
         "TripMarkers"
       ],
-      "totalLines": 99,
+      "totalLines": 127,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/directions/tripSteps.ts": {
       "filePath": "frontend/src/features/directions/tripSteps.ts",
-      "contentHash": "412131ec372fc84edb1463a27b68242ecad845268944c0d464396c9e62aeb22c",
+      "contentHash": "8e4043547958358ec826b14aae019cf95c6815a1226ef34f2dad3cab087dea70",
       "functions": [
         {
           "name": "modeName",
@@ -40265,7 +41916,7 @@
     },
     "frontend/src/features/journey/JourneyPanel.tsx": {
       "filePath": "frontend/src/features/journey/JourneyPanel.tsx",
-      "contentHash": "28338df92b38b72454fb5ef43f3777f95b32fc9a4593231874a647c377b7fbca",
+      "contentHash": "e9541d76a071efd6abae4affc9e61c62455b72e892777805174d71e1263b43fd",
       "functions": [
         {
           "name": "JourneyLayer",
@@ -40724,7 +42375,7 @@
     },
     "frontend/src/features/map/ClusterMarker.tsx": {
       "filePath": "frontend/src/features/map/ClusterMarker.tsx",
-      "contentHash": "86b8f7c6089ced2f8fbe755608f6d68bbca26ce17a16237da52b3101782a321f",
+      "contentHash": "2df0f0cba3932ac6b3bf030f87dca856843f82c9cdb0a8404be1923510963a29",
       "functions": [
         {
           "name": "armAt",
@@ -40778,7 +42429,16 @@
           ],
           "returnType": "boolean",
           "exported": true,
-          "lineCount": 8
+          "lineCount": 11
+        },
+        {
+          "name": "clusterSize",
+          "params": [
+            "count"
+          ],
+          "returnType": "{ width: number; height: number }",
+          "exported": true,
+          "lineCount": 4
         },
         {
           "name": "ClusterMarker",
@@ -40786,7 +42446,17 @@
             "{ id, lat, lon, count, color, onPress }"
           ],
           "exported": true,
-          "lineCount": 12
+          "lineCount": 18
+        },
+        {
+          "name": "pinBox",
+          "params": [
+            "slot",
+            "labelWidth"
+          ],
+          "returnType": "{ width: number; height: number; anchor: { x: number; y: number } }",
+          "exported": true,
+          "lineCount": 5
         }
       ],
       "classes": [],
@@ -40812,6 +42482,12 @@
           ]
         },
         {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "useIconFontLoaded"
+          ]
+        },
+        {
           "source": "@/ui/Text",
           "specifiers": [
             "Text"
@@ -40832,22 +42508,26 @@
         "trackingTimerArmed",
         "pendingTrackingCount",
         "useBriefViewTracking",
-        "ClusterMarker"
+        "clusterSize",
+        "ClusterMarker",
+        "PIN_LABEL_GAP",
+        "PIN_LABEL_HEIGHT",
+        "pinBox"
       ],
-      "totalLines": 114,
+      "totalLines": 146,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/EventMarkers.tsx": {
       "filePath": "frontend/src/features/map/EventMarkers.tsx",
-      "contentHash": "394f74c037b784034cd398becc0899cdf5fd39d6932ac5e3ce7587a8b5699d29",
+      "contentHash": "2a56a513ad470900a3ffc27ea31af3baa4a3a04b51c5dffce47b5eea030ecde8",
       "functions": [
         {
           "name": "EventPin",
           "params": [
-            "{ event, selected, showLabel }"
+            "{ event, selected, showLabel, box }"
           ],
           "exported": false,
-          "lineCount": 16
+          "lineCount": 18
         },
         {
           "name": "EventMarkersBase",
@@ -40930,14 +42610,18 @@
           "source": "./ClusterMarker",
           "specifiers": [
             "ClusterMarker",
+            "PIN_LABEL_GAP",
+            "PIN_LABEL_HEIGHT",
+            "pinBox",
             "useBriefViewTracking"
           ]
         }
       ],
       "exports": [
+        "EVENT_PIN",
         "EventMarkers"
       ],
-      "totalLines": 115,
+      "totalLines": 130,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/EventPanel.tsx": {
@@ -41099,7 +42783,7 @@
     },
     "frontend/src/features/map/MapFilterBar.tsx": {
       "filePath": "frontend/src/features/map/MapFilterBar.tsx",
-      "contentHash": "976aadeb01ad93d4a8a0621d920c27073e94125a315c710dddf09976ff0e806c",
+      "contentHash": "229f3004cbb7000e616642df12c15b47750fbc6b166c2d8b751374aeff0ddacb",
       "functions": [
         {
           "name": "MapFilterBarBase",
@@ -41107,7 +42791,7 @@
             "{ filters, onChange, disabled = false }"
           ],
           "exported": false,
-          "lineCount": 21
+          "lineCount": 23
         }
       ],
       "classes": [],
@@ -41156,7 +42840,7 @@
       "exports": [
         "MapFilterBar"
       ],
-      "totalLines": 48,
+      "totalLines": 50,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/MapPanel.tsx": {
@@ -41253,15 +42937,15 @@
     },
     "frontend/src/features/map/PlaceMarkers.tsx": {
       "filePath": "frontend/src/features/map/PlaceMarkers.tsx",
-      "contentHash": "6b46cccd238dddef0a789276aea70ddbdc37e2349d6f962b9d56a627c4c7a95a",
+      "contentHash": "9590dadbdc63dff8db3fb5c56ef0e084bc7e1b7b5822d53a407cb4ad8b392b00",
       "functions": [
         {
           "name": "PlacePin",
           "params": [
-            "{ place, selected, showLabel }"
+            "{ place, selected, showLabel, box }"
           ],
           "exported": false,
-          "lineCount": 16
+          "lineCount": 18
         },
         {
           "name": "PlaceMarkersBase",
@@ -41335,7 +43019,11 @@
         {
           "source": "./ClusterMarker",
           "specifiers": [
-            "ClusterMarker"
+            "ClusterMarker",
+            "PIN_LABEL_GAP",
+            "PIN_LABEL_HEIGHT",
+            "pinBox",
+            "useBriefViewTracking"
           ]
         },
         {
@@ -41346,9 +43034,10 @@
         }
       ],
       "exports": [
+        "PLACE_PIN",
         "PlaceMarkers"
       ],
-      "totalLines": 102,
+      "totalLines": 112,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/PlacePanel.tsx": {
@@ -41446,7 +43135,7 @@
     },
     "frontend/src/features/map/mapFilters.ts": {
       "filePath": "frontend/src/features/map/mapFilters.ts",
-      "contentHash": "e9c8e3e35a54132c4559d1f6000d7be15d69a7e47dd74aa5e3929ac5de497c4b",
+      "contentHash": "9906fb99d3c88141a76b30534042288e50dad77fcf5bb4b69732f96995e92fb8",
       "functions": [
         {
           "name": "allPlacesSelected",
@@ -41486,6 +43175,24 @@
           "lineCount": 3
         },
         {
+          "name": "transportOn",
+          "params": [
+            "f"
+          ],
+          "returnType": "MapFilters",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "transportOff",
+          "params": [
+            "f"
+          ],
+          "returnType": "MapFilters",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
           "name": "mapFiltersReducer",
           "params": [
             "f",
@@ -41522,7 +43229,7 @@
         "mapFiltersReducer",
         "visibleLayers"
       ],
-      "totalLines": 71,
+      "totalLines": 89,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/placeCategories.ts": {
@@ -41651,7 +43358,7 @@
     },
     "frontend/src/features/transit/LegVehicles.tsx": {
       "filePath": "frontend/src/features/transit/LegVehicles.tsx",
-      "contentHash": "3c4158489711eec1010dd27a67622f98d53939c7759f739d303b88b9eba54084",
+      "contentHash": "4490d684956c1ea03eef27bc7ee4d392472d0f7d396d7a281db7980639972f14",
       "functions": [
         {
           "name": "useLegVehicles",
@@ -41671,6 +43378,26 @@
           "returnType": "Set<string>",
           "exported": true,
           "lineCount": 10
+        },
+        {
+          "name": "capVehiclesPerLine",
+          "params": [
+            "vehicles",
+            "max",
+            "keep"
+          ],
+          "returnType": "TransitVehicle[]",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "lineKey",
+          "params": [
+            "v"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 3
         }
       ],
       "classes": [],
@@ -41724,9 +43451,119 @@
       "exports": [
         "useLegVehicles",
         "approachingVehicleIds",
+        "MAX_LEG_VEHICLES_PER_LINE",
+        "capVehiclesPerLine",
         "LegVehicles"
       ],
-      "totalLines": 73,
+      "totalLines": 104,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/transit/LinePicker.tsx": {
+      "filePath": "frontend/src/features/transit/LinePicker.tsx",
+      "contentHash": "e9fc11c52b271a5f7eee8bfbe605e0a1700030be3b111087039bad544a1d3418",
+      "functions": [
+        {
+          "name": "LineTile",
+          "params": [
+            "{ id, name, onPress, large = false }"
+          ],
+          "exported": false,
+          "lineCount": 16
+        },
+        {
+          "name": "GroupStrip",
+          "params": [
+            "{ routes, onPick }"
+          ],
+          "exported": false,
+          "lineCount": 28
+        },
+        {
+          "name": "LineBar",
+          "params": [
+            "{ line, lineId, directions, directionIndex, onPick, onDirection }"
+          ],
+          "exported": false,
+          "lineCount": 34
+        },
+        {
+          "name": "LinePickerBase",
+          "params": [
+            "{ routes, lineId, directions, directionIndex, onPick, onDirection }"
+          ],
+          "exported": false,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "memo",
+            "useMemo"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "Pressable",
+            "ScrollView",
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "@/api/types.transit",
+          "specifiers": [
+            "TransitRoute"
+          ]
+        },
+        {
+          "source": "@/ui/Chip",
+          "specifiers": [
+            "MAP_CHIP_BG"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "Icon"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors"
+          ]
+        },
+        {
+          "source": "./lines",
+          "specifiers": [
+            "lineColor",
+            "sameLine",
+            "textOnColor",
+            "typeLabel"
+          ]
+        },
+        {
+          "source": "./lineView",
+          "specifiers": [
+            "groupLines",
+            "LineDirection"
+          ]
+        }
+      ],
+      "exports": [
+        "LinePicker"
+      ],
+      "totalLines": 160,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/transit/StopPanel.tsx": {
@@ -41840,15 +43677,15 @@
     },
     "frontend/src/features/transit/TransitLayer.tsx": {
       "filePath": "frontend/src/features/transit/TransitLayer.tsx",
-      "contentHash": "33302816a93219c861130be53561e15e97b6c0b3e6b6dc29b597d89da950c8d8",
+      "contentHash": "5633d221c7f829860f7b097faef537bf1fb72221f5f6789c6caf6e8ae539e028",
       "functions": [
         {
           "name": "TransitLayerBase",
           "params": [
-            "{ stops, line, vehicles, shapes, bbox, selectedStopId, selectedVehicleId, onSelectStop, onSelectVehicle }"
+            "{\n  stops,\n  lineId,\n  directions = [],\n  directionIndex = 0,\n  vehicles,\n  bbox,\n  selectedStopId,\n  selectedVehicleId,\n  onSelectStop,\n  onSelectVehicle,\n}"
           ],
           "exported": false,
-          "lineCount": 35
+          "lineCount": 50
         }
       ],
       "classes": [],
@@ -41880,8 +43717,6 @@
         {
           "source": "@/api/types.transit",
           "specifiers": [
-            "TransitRoute",
-            "TransitShape",
             "TransitStop",
             "TransitVehicle"
           ]
@@ -41899,12 +43734,6 @@
           ]
         },
         {
-          "source": "@/lib/polyline",
-          "specifiers": [
-            "decodePolyline"
-          ]
-        },
-        {
           "source": "@/ui/theme",
           "specifiers": [
             "colors"
@@ -41913,12 +43742,18 @@
         {
           "source": "./lines",
           "specifiers": [
-            "decodeShapes",
+            "lineColor",
             "sameLine",
             "vehiclesInView",
             "vehiclesOfLine",
-            "withAlpha",
-            "DrawnShape"
+            "withAlpha"
+          ]
+        },
+        {
+          "source": "./lineView",
+          "specifiers": [
+            "vehiclesInDirection",
+            "LineDirection"
           ]
         },
         {
@@ -41929,24 +43764,45 @@
         }
       ],
       "exports": [
-        "SHAPE_WIDTH",
-        "ShapeLines",
-        "TransitLayer"
+        "ROUTE_STYLE",
+        "LineRoute",
+        "TransitLayer",
+        "STOP_ROOT_SIZE"
       ],
-      "totalLines": 124,
+      "totalLines": 144,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/transit/VehicleMarker.tsx": {
       "filePath": "frontend/src/features/transit/VehicleMarker.tsx",
-      "contentHash": "5f9ae81e61b8bac585a39b0a38878497369e2e7b080d61b8f13c2bece834601e",
+      "contentHash": "0884973dccc5005cbfd9ced82e8ce4545e61409276985dc250c894881e968bb8",
       "functions": [
+        {
+          "name": "badgeSize",
+          "params": [
+            "name",
+            "selected"
+          ],
+          "returnType": "{ width: number; height: number }",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "vehicleMarkerSize",
+          "params": [
+            "name",
+            "selected"
+          ],
+          "returnType": "{ width: number; height: number }",
+          "exported": true,
+          "lineCount": 5
+        },
         {
           "name": "VehicleBadgeBase",
           "params": [
             "{ vehicle, selected = false }"
           ],
           "exported": false,
-          "lineCount": 15
+          "lineCount": 18
         },
         {
           "name": "sameBadge",
@@ -41959,12 +43815,20 @@
           "lineCount": 3
         },
         {
+          "name": "VehicleBodyBase",
+          "params": [
+            "{ vehicle, selected, bearing, testID }"
+          ],
+          "exported": false,
+          "lineCount": 29
+        },
+        {
           "name": "VehicleMarkerBase",
           "params": [
             "{ vehicle, selected = false, idPrefix = 'vehicle-marker', onPress }"
           ],
           "exported": false,
-          "lineCount": 18
+          "lineCount": 20
         },
         {
           "name": "sameVehicleMarker",
@@ -41974,7 +43838,7 @@
           ],
           "returnType": "boolean",
           "exported": true,
-          "lineCount": 11
+          "lineCount": 12
         }
       ],
       "classes": [],
@@ -41998,6 +43862,13 @@
           "source": "react-native-maps",
           "specifiers": [
             "Marker"
+          ]
+        },
+        {
+          "source": "react-native-svg",
+          "specifiers": [
+            "Svg",
+            "Polygon"
           ]
         },
         {
@@ -42028,19 +43899,37 @@
           "source": "./lines",
           "specifiers": [
             "lineColor",
+            "textOnColor",
             "typeLabel",
             "vehicleIcon",
-            "vehicleLineName"
+            "vehicleLineName",
+            "withAlpha"
+          ]
+        },
+        {
+          "source": "./useVehicleMotion",
+          "specifiers": [
+            "useVehicleMotion"
+          ]
+        },
+        {
+          "source": "./vehicleAnimation",
+          "specifiers": [
+            "arrowPoints",
+            "bearingStep"
           ]
         }
       ],
       "exports": [
+        "BADGE_SIZE",
+        "badgeSize",
+        "vehicleMarkerSize",
         "sameBadge",
         "VehicleBadge",
         "sameVehicleMarker",
         "VehicleMarker"
       ],
-      "totalLines": 106,
+      "totalLines": 179,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/transit/VehiclePanel.tsx": {
@@ -42171,9 +44060,143 @@
       "totalLines": 115,
       "hasStructuralAnalysis": true
     },
+    "frontend/src/features/transit/lineView.ts": {
+      "filePath": "frontend/src/features/transit/lineView.ts",
+      "contentHash": "28aafbbf673efba779143c503fdbbd9fb70a5529066fce8243893b9facaef87e",
+      "functions": [
+        {
+          "name": "groupLabel",
+          "params": [
+            "type"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "groupLines",
+          "params": [
+            "routes"
+          ],
+          "returnType": "LineGroup[]",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "directionLabel",
+          "params": [
+            "direction",
+            "headsign",
+            "index"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "better",
+          "params": [
+            "a",
+            "b"
+          ],
+          "returnType": "Candidate",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "lineDirections",
+          "params": [
+            "shapes",
+            "lineId",
+            "decode"
+          ],
+          "returnType": "LineDirection[]",
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "normalize",
+          "params": [
+            "s"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "sameHeadsign",
+          "params": [
+            "a",
+            "b"
+          ],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "vehiclesInDirection",
+          "params": [
+            "vehicles",
+            "directions",
+            "index"
+          ],
+          "returnType": "TransitVehicle[]",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "directionOfVehicle",
+          "params": [
+            "directions",
+            "headsign"
+          ],
+          "returnType": "number",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/types.transit",
+          "specifiers": [
+            "TransitRoute",
+            "TransitRouteType",
+            "TransitShape",
+            "TransitShapeStop",
+            "TransitVehicle"
+          ]
+        },
+        {
+          "source": "@/lib/geo",
+          "specifiers": [
+            "Coordinates"
+          ]
+        },
+        {
+          "source": "./lines",
+          "specifiers": [
+            "sameLine",
+            "typeLabel",
+            "vehicleIcon"
+          ]
+        }
+      ],
+      "exports": [
+        "LINE_GROUP_ORDER",
+        "groupLines",
+        "directionLabel",
+        "lineDirections",
+        "sameHeadsign",
+        "vehiclesInDirection",
+        "directionOfVehicle"
+      ],
+      "totalLines": 136,
+      "hasStructuralAnalysis": true
+    },
     "frontend/src/features/transit/lines.ts": {
       "filePath": "frontend/src/features/transit/lines.ts",
-      "contentHash": "33242565c5d486e22abe03d881dab0615cb9a665d374b8775b8bdf60e38eac99",
+      "contentHash": "786caf62fc3684db9c2fdc50755405ca2f91dce9aa19f0c1fec20ac71377b07a",
       "functions": [
         {
           "name": "hash",
@@ -42185,13 +44208,66 @@
           "lineCount": 5
         },
         {
+          "name": "registerLineTypes",
+          "params": [
+            "items"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "clearLineTypes",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "guessLineFamily",
+          "params": [
+            "route"
+          ],
+          "returnType": "LineFamily",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "lineFamily",
+          "params": [
+            "route"
+          ],
+          "returnType": "LineFamily",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "shadeIndex",
+          "params": [
+            "route",
+            "shades"
+          ],
+          "returnType": "number",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
           "name": "lineColor",
           "params": [
             "route"
           ],
           "returnType": "string",
           "exported": true,
-          "lineCount": 3
+          "lineCount": 4
+        },
+        {
+          "name": "textOnColor",
+          "params": [
+            "hex"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 7
         },
         {
           "name": "withAlpha",
@@ -42219,7 +44295,7 @@
           ],
           "returnType": "string",
           "exported": true,
-          "lineCount": 18
+          "lineCount": 20
         },
         {
           "name": "sameLine",
@@ -42367,9 +44443,16 @@
         }
       ],
       "exports": [
+        "FAMILY_PALETTES",
         "LINE_PALETTE",
         "VEHICLE_OLD_MS",
+        "registerLineTypes",
+        "clearLineTypes",
+        "guessLineFamily",
+        "lineFamily",
+        "shadeIndex",
         "lineColor",
+        "textOnColor",
         "withAlpha",
         "vehicleIcon",
         "typeLabel",
@@ -42385,7 +44468,300 @@
         "nearestVehicle",
         "decodeShapes"
       ],
-      "totalLines": 200,
+      "totalLines": 251,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/transit/useVehicleMotion.ts": {
+      "filePath": "frontend/src/features/transit/useVehicleMotion.ts",
+      "contentHash": "80e396b42632791399842444ef074fa30a59beaf8c496c082131a698cb52d9fc",
+      "functions": [
+        {
+          "name": "motionMode",
+          "params": [],
+          "returnType": "MotionMode",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "regionOf",
+          "params": [
+            "lat",
+            "lon"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "useVehicleMotion",
+          "params": [
+            "lat",
+            "lon"
+          ],
+          "exported": true,
+          "lineCount": 78
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "useEffect",
+            "useMemo",
+            "useRef",
+            "useState"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "Easing",
+            "Platform"
+          ]
+        },
+        {
+          "source": "react-native-maps",
+          "specifiers": [
+            "* as Maps"
+          ]
+        },
+        {
+          "source": "./vehicleAnimation",
+          "specifiers": [
+            "claimJsGlide",
+            "isGliding",
+            "isMapMoving",
+            "jumpDurationMs",
+            "onMapMoveStart",
+            "planMove",
+            "positionAt",
+            "releaseJsGlide",
+            "stillAt",
+            "vehiclePollGapMs",
+            "VehicleMove"
+          ]
+        }
+      ],
+      "exports": [
+        "motionMode",
+        "useVehicleMotion"
+      ],
+      "totalLines": 131,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/transit/vehicleAnimation.ts": {
+      "filePath": "frontend/src/features/transit/vehicleAnimation.ts",
+      "contentHash": "930650ae9080c01a1b7001c41350569613606470540379129fc93210e949c508",
+      "functions": [
+        {
+          "name": "lerpCoord",
+          "params": [
+            "a",
+            "b",
+            "t"
+          ],
+          "returnType": "Coordinates",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "positionAt",
+          "params": [
+            "move",
+            "now"
+          ],
+          "returnType": "Coordinates",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "stillAt",
+          "params": [
+            "point",
+            "now"
+          ],
+          "returnType": "VehicleMove",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "isGliding",
+          "params": [
+            "move",
+            "now"
+          ],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "planMove",
+          "params": [
+            "shown",
+            "target",
+            "gapMs",
+            "mapMoving"
+          ],
+          "returnType": "MovePlan",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "jumpDurationMs",
+          "params": [
+            "move",
+            "now"
+          ],
+          "returnType": "number",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "claimJsGlide",
+          "params": [
+            "owner",
+            "now",
+            "duration",
+            "max"
+          ],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "releaseJsGlide",
+          "params": [
+            "owner"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "runningJsGlides",
+          "params": [
+            "now"
+          ],
+          "returnType": "number",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "resetJsGlides",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "recordVehiclePoll",
+          "params": [
+            "at"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "vehiclePollGapMs",
+          "params": [],
+          "returnType": "number",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "resetVehiclePolls",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "setMapMoving",
+          "params": [
+            "moving"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "isMapMoving",
+          "params": [],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "onMapMoveStart",
+          "params": [
+            "listener"
+          ],
+          "returnType": "() => void",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "bearingStep",
+          "params": [
+            "bearing"
+          ],
+          "returnType": "number | null",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "arrowPoints",
+          "params": [
+            "bearing",
+            "cx",
+            "cy",
+            "base",
+            "tip",
+            "halfWidth"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/lib/geo",
+          "specifiers": [
+            "distanceMeters",
+            "Coordinates"
+          ]
+        }
+      ],
+      "exports": [
+        "VEHICLE_ANIMATION_MS",
+        "SNAP_AFTER_MS",
+        "SNAP_JUMP_METERS",
+        "lerpCoord",
+        "positionAt",
+        "stillAt",
+        "isGliding",
+        "planMove",
+        "FRAME_MS",
+        "jumpDurationMs",
+        "MAX_JS_GLIDES",
+        "claimJsGlide",
+        "releaseJsGlide",
+        "runningJsGlides",
+        "resetJsGlides",
+        "recordVehiclePoll",
+        "vehiclePollGapMs",
+        "resetVehiclePolls",
+        "setMapMoving",
+        "isMapMoving",
+        "onMapMoveStart",
+        "BEARING_STEP",
+        "bearingStep",
+        "arrowPoints"
+      ],
+      "totalLines": 168,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/users/MyEvents.tsx": {
@@ -42964,7 +45340,7 @@
     },
     "frontend/src/hooks/useAi.ts": {
       "filePath": "frontend/src/hooks/useAi.ts",
-      "contentHash": "396628a5836062278f64dd8090e6f047158e6783016617775602bb9534913515",
+      "contentHash": "202c87a54b9be1160e6427f449c86e8eb00e7c2827d73d13cb8fda2c6567499d",
       "functions": [
         {
           "name": "newId",
@@ -43008,6 +45384,7 @@
           "specifiers": [
             "MAX_CHAT_MESSAGE_CHARS",
             "MAX_CHAT_MESSAGES",
+            "ChatCost",
             "ChatRole",
             "ChatRoute",
             "ChatSource"
@@ -43023,7 +45400,7 @@
       "exports": [
         "useAiChat"
       ],
-      "totalLines": 111,
+      "totalLines": 113,
       "hasStructuralAnalysis": true
     },
     "frontend/src/hooks/useDebounced.ts": {
@@ -43225,8 +45602,40 @@
     },
     "frontend/src/hooks/useTransit.ts": {
       "filePath": "frontend/src/hooks/useTransit.ts",
-      "contentHash": "8611cb58b8bf69f46d6a85debeeb942ec5c93716024ea3ef89616d942a040f42",
+      "contentHash": "aac1beb5e66eb23f48dfa47ce662eeb2b6f7f85c13bef37c72259626c420070a",
       "functions": [
+        {
+          "name": "withVehicleFacts",
+          "params": [
+            "answer"
+          ],
+          "returnType": "TransitVehicles",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "fetchLineVehicles",
+          "params": [
+            "route"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "fetchAllVehicles",
+          "params": [],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "withShapeTypes",
+          "params": [
+            "shapes"
+          ],
+          "returnType": "TransitShape[]",
+          "exported": false,
+          "lineCount": 4
+        },
         {
           "name": "useTransitSummary",
           "params": [
@@ -43247,7 +45656,7 @@
             "enabled"
           ],
           "exported": true,
-          "lineCount": 3
+          "lineCount": 12
         },
         {
           "name": "useStopsInArea",
@@ -43288,7 +45697,15 @@
             "enabled"
           ],
           "exported": true,
-          "lineCount": 3
+          "lineCount": 9
+        },
+        {
+          "name": "useLineShape",
+          "params": [
+            "route"
+          ],
+          "exported": true,
+          "lineCount": 9
         },
         {
           "name": "useStopArrivals",
@@ -43328,6 +45745,7 @@
           "specifiers": [
             "getAllTransitVehicles",
             "getLastDepartures",
+            "getLineShape",
             "getStopArrivals",
             "getTransitAlerts",
             "getTransitRoutes",
@@ -43340,7 +45758,21 @@
         {
           "source": "@/api/types.transit",
           "specifiers": [
-            "TransitVehicle"
+            "TransitShape",
+            "TransitVehicle",
+            "TransitVehicles"
+          ]
+        },
+        {
+          "source": "@/features/transit/lines",
+          "specifiers": [
+            "registerLineTypes"
+          ]
+        },
+        {
+          "source": "@/features/transit/vehicleAnimation",
+          "specifiers": [
+            "recordVehiclePoll"
           ]
         },
         {
@@ -43370,10 +45802,11 @@
         "useAllVehicles",
         "useVehiclesOfLines",
         "useTransitShapes",
+        "useLineShape",
         "useStopArrivals",
         "useLastDepartures"
       ],
-      "totalLines": 118,
+      "totalLines": 171,
       "hasStructuralAnalysis": true
     },
     "frontend/src/hooks/useUsers.ts": {
@@ -44270,7 +46703,7 @@
     },
     "frontend/src/ui/Icon.tsx": {
       "filePath": "frontend/src/ui/Icon.tsx",
-      "contentHash": "05821e833e9bda9bad5e8d516a02b272faf3e9a0262e176bd3605245c08f8bc2",
+      "contentHash": "756003211f0a6172c32c7210e1e44cc7e8e0871cc8d38cfcd31733ad37754f32",
       "functions": [
         {
           "name": "Icon",
@@ -44279,6 +46712,36 @@
           ],
           "exported": true,
           "lineCount": 3
+        },
+        {
+          "name": "iconFontLoaded",
+          "params": [],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "loadIconFont",
+          "params": [],
+          "returnType": "Promise<void>",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "subscribeIconFont",
+          "params": [
+            "listener"
+          ],
+          "returnType": "() => void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "useIconFontLoaded",
+          "params": [],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 7
         }
       ],
       "classes": [],
@@ -44290,16 +46753,27 @@
           ]
         },
         {
+          "source": "expo-font",
+          "specifiers": [
+            "* as Font"
+          ]
+        },
+        {
           "source": "react",
           "specifiers": [
+            "useEffect",
+            "useSyncExternalStore",
             "ComponentProps"
           ]
         }
       ],
       "exports": [
-        "Icon"
+        "Icon",
+        "iconFontLoaded",
+        "loadIconFont",
+        "useIconFontLoaded"
       ],
-      "totalLines": 13,
+      "totalLines": 57,
       "hasStructuralAnalysis": true
     },
     "frontend/src/ui/OfflineBanner.tsx": {
@@ -44803,8 +47277,18 @@
     },
     "frontend/src/ui/mapStyle.ts": {
       "filePath": "frontend/src/ui/mapStyle.ts",
-      "contentHash": "7cfe194b4aa4679dca9e7c82b2999688d896b3d544d11fb2c736df5e67cae049",
-      "functions": [],
+      "contentHash": "705f8217f10f174dc96a14a4a4e52f883ee7031dc0feb853527e34b3742a721b",
+      "functions": [
+        {
+          "name": "hideLabels",
+          "params": [
+            "types"
+          ],
+          "returnType": "MapStyleElement[]",
+          "exported": false,
+          "lineCount": 6
+        }
+      ],
       "classes": [],
       "imports": [
         {
@@ -44815,9 +47299,11 @@
         }
       ],
       "exports": [
+        "HIDDEN_POI_TYPES",
+        "HIDDEN_TRANSIT_TYPES",
         "darkMapStyle"
       ],
-      "totalLines": 18,
+      "totalLines": 49,
       "hasStructuralAnalysis": true
     },
     "frontend/src/ui/theme.ts": {
@@ -45295,7 +47781,7 @@
     },
     "frontend/testing/mocks/routes/ai.ts": {
       "filePath": "frontend/testing/mocks/routes/ai.ts",
-      "contentHash": "235bf42b19b9bc8453c70820efb22bb052c82f36f79f2fb06f0da61c5b04678c",
+      "contentHash": "72106722ab0b45d017710f830de4e2afdbaf37e9d570fff40dacb0fe95119267",
       "functions": [
         {
           "name": "metersBetween",
@@ -45351,13 +47837,45 @@
           "lineCount": 15
         },
         {
+          "name": "round1",
+          "params": [
+            "lei"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "costItem",
+          "params": [
+            "label",
+            "detail",
+            "kind",
+            "minLei",
+            "maxLei"
+          ],
+          "returnType": "ChatCostItem",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "mockCost",
+          "params": [
+            "items",
+            "options",
+            "note"
+          ],
+          "returnType": "ChatCost | null",
+          "exported": true,
+          "lineCount": 22
+        },
+        {
           "name": "answer",
           "params": [
             "request"
           ],
           "returnType": "ChatAnswer",
           "exported": false,
-          "lineCount": 49
+          "lineCount": 62
         }
       ],
       "classes": [],
@@ -45378,6 +47896,8 @@
           "source": "@/api/types.ai",
           "specifiers": [
             "ChatAnswer",
+            "ChatCost",
+            "ChatCostItem",
             "ChatRequest",
             "ChatRoute"
           ]
@@ -45405,9 +47925,10 @@
         }
       ],
       "exports": [
+        "mockCost",
         "aiRoutes"
       ],
-      "totalLines": 136,
+      "totalLines": 192,
       "hasStructuralAnalysis": true
     },
     "frontend/testing/mocks/routes/events.ts": {
@@ -45717,7 +48238,7 @@
     },
     "frontend/testing/mocks/routes/transit.ts": {
       "filePath": "frontend/testing/mocks/routes/transit.ts",
-      "contentHash": "efe63151e1046682c6f0957478b345956cfa625c0632d2f98fe9f3b60790d93e",
+      "contentHash": "8dc2c27ed24594b39a2ec0b59be0914117685c8d07548e279dc8a50f922358bd",
       "functions": [
         {
           "name": "hash",
@@ -45755,6 +48276,16 @@
           "returnType": "number[]",
           "exported": false,
           "lineCount": 7
+        },
+        {
+          "name": "bearingBetween",
+          "params": [
+            "a",
+            "b"
+          ],
+          "returnType": "number | null",
+          "exported": false,
+          "lineCount": 5
         },
         {
           "name": "vehiclesFor",
@@ -45820,7 +48351,7 @@
       "exports": [
         "transitRoutes"
       ],
-      "totalLines": 164,
+      "totalLines": 175,
       "hasStructuralAnalysis": true
     },
     "frontend/testing/mocks/routes/users.ts": {
