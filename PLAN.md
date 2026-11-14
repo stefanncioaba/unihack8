@@ -426,8 +426,23 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 - [x] **25.3 Mobile:** `LeaveNowBox` under the route card with a live countdown (Leave in N min → Leave now → Hurry → You won't make this one) and Live / Scheduled / Planned label.
 - [x] **25.4 Tests:** backend and frontend (see `DOCS.md` → AI "Leave now" box).
 - [x] **25.5a** `DOCS.md` and `docs/API.md` updated.
-- [ ] **25.5b** Knowledge graph updated (`/understand`; the plugin was not available in the session that built this).
+- [x] **25.5b** Knowledge graph updated (hand-made incremental update with a Sonnet 5.5 agent; see `DOCS.md` → Knowledge graph).
 - [ ] **25.6** Try it on a phone with real STPT data and Gemini.
+
+---
+
+## 26. Timișoara news on Home — Tracks B + C
+
+**Needs:** 3, 12, 13 (done). Added 2026-11-14. **Goal:** a news section on Home and a News screen with the latest news from local news sites — **Timișoara only** — gathered into one list.
+
+- [x] **26.1 Sources:** RSS feeds checked on 2026-11-14: TION, Opinia Timișoarei, Timișoara Știri, Banatul Azi (DeBanat answers 403, the city hall site has no feed). Only headline, short summary, picture and a link to the full story are shown.
+- [x] **26.2 Contract first:** `GET /news` and `GET /news/sources` in `docs/API.md` (public).
+- [x] **26.3 Backend `news` package:** RSS client (timeouts, our User-Agent), hardened XML parsing, "Timișoara only" filter (links and the site's own name ignored), same story once, 10 min cache per site (a site down never breaks the others), pictures from the WordPress API when the feed has none, background warm-up at startup.
+- [x] **26.4 App:** "Timișoara news" strip on Home (swipeable, See all), News screen (site chips, search, endless scroll, pull to refresh, sites that are down named); a tap opens the article on the site.
+- [x] **26.5 Tests:** backend and frontend (see `DOCS.md` → Timișoara news). Live check against the 4 real sites: 39 Timișoara articles, 35 with a picture.
+- [x] **26.6a** `DOCS.md` and `docs/API.md` updated.
+- [x] **26.6b** Knowledge graph updated (hand-made incremental update with a Sonnet 5.5 agent; see `DOCS.md` → Knowledge graph).
+- [ ] **26.7** Ask the news sites for permission if the app is used beyond the hackathon (see open question 3).
 
 ---
 

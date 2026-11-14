@@ -648,6 +648,44 @@ Every Timișoara area as a live card, **busiest first** (by `score`). Areas are 
 
 ---
 
+## News — PLAN task 26
+
+Timișoara news from local news sites' RSS feeds (TION, Opinia Timișoarei, Timișoara Știri, Banatul Azi). **Timișoara only:** an article is kept when its headline, text or categories name the city ("Timișoara", "timișorean(i)", with or without diacritics); links and the site's own name do not count, and county-only news (Lugoj, "județul Timiș") is left out. Each site is read at most every 10 minutes; the app never calls the sites. Only the headline, a short summary (≤ 220 characters) and the site's picture are returned; `url` opens the full story on the site.
+
+### `GET /news?source=tion&q=tramvai&page=0&size=20` — public
+
+All parameters optional. `source`: one site id from `GET /news/sources` (unknown id → `400 VALIDATION_FAILED` listing the valid ids). `q`: any word of 3+ letters in the headline or summary (accents ignored). Newest first (articles without a date last); the same story on two sites is listed once (the newest: headlines sharing ≥ 60 % and at least 3 meaningful words, published within 12 h). Paged like every list (`size` ≤ 100). `503 SOURCE_UNAVAILABLE` only when no asked site can be read and nothing is cached; one site down just leaves its articles out (or shows its last cached ones).
+
+```json
+{
+  "items": [
+    {
+      "id": "6f1c2a0e-1b7d-3c4e-9a51-2f0d8e7b6a43",
+      "sourceId": "tion",
+      "sourceName": "TION",
+      "title": "Primăria Timișoara montează 300 de suporturi pentru biciclete",
+      "summary": "Suporturile vor fi montate în tot orașul până la sfârșitul anului…",
+      "url": "https://www.tion.ro/...",
+      "imageUrl": "https://www.tion.ro/wp-content/uploads/....jpg",
+      "publishedAt": "2026-11-14T12:21:00Z"
+    }
+  ],
+  "page": 0, "size": 20, "totalItems": 39, "totalPages": 2
+}
+```
+
+- `id`: stable, built from the article link. `imageUrl`: from the feed, else the site's WordPress featured image; `null` when there is none. `publishedAt`: `null` when the site gave no date. Only `http(s)` links and pictures are returned.
+
+### `GET /news/sources` — public
+
+```json
+[ { "id": "tion", "name": "TION", "siteUrl": "https://www.tion.ro", "available": true, "stale": false, "articleCount": 5, "updatedAt": "2026-11-14T17:01:06Z" } ]
+```
+
+`available: false` = the site cannot be read and nothing is cached; `stale: true` = the last read failed and older articles are shown; `articleCount` = its Timișoara articles kept now.
+
+---
+
 ## Routing — PLAN task 10
 
 ### `GET /routes/plan?from=45.7537,21.2257&to=45.7489,21.2318&mode=TRANSIT`

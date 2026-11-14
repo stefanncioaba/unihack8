@@ -1,4 +1,5 @@
-// Home tab: header, search, category chips, city info strip, AI shortcuts, upcoming events, create-event button.
+// Home tab: header, search, category chips, city info strip, AI shortcuts, Timișoara news, upcoming events,
+// create-event button.
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { FlatList, Pressable, ScrollView, StyleSheet, View } from 'react-native';
@@ -7,6 +8,7 @@ import { EVENT_CATEGORIES, type EventCategory } from '@/api/types';
 import { ShortcutBar } from '@/features/ai/ShortcutBar';
 import { CATEGORY_META } from '@/features/events/categories';
 import { EventCard } from '@/features/events/EventCards';
+import { NewsStrip } from '@/features/news/NewsStrip';
 import { CityInfoStrip } from '@/features/transit/CityInfoStrip';
 import { useEventsPage } from '@/hooks/queries';
 import { Button } from '@/ui/Button';
@@ -88,6 +90,9 @@ export default function HomeScreen() {
       </View>
 
       <ShortcutBar />
+
+      {/* Timișoara news from local news sites (PLAN 26); "See all" opens the News screen. */}
+      <NewsStrip />
 
       <View style={styles.events} onLayout={(e) => setSectionH(e.nativeEvent.layout.height)}>
         <View style={[styles.sectionHeader, { paddingHorizontal: PAGE_MARGIN }]}>
