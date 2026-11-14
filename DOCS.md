@@ -348,6 +348,13 @@ Public endpoints (no token) under `/transit`, contract in `docs/API.md` → Tran
 
 ### AI assistant (PLAN task 11, Track B)
 
+**Price box (PLAN 21.17):**
+- `POST /ai/chat` returns an optional `cost` built by `ChatCostMapper` (+ `impl`). It uses only prices the tools returned for the places and events the answer recommends (its result cards): stored menu prices, and event `price_min`/`price_max`.
+- Each item's average is (min + max) / 2.
+- `basis: TOTAL` (one plan) adds up the items. `basis: OPTIONS` (several alternatives) never adds them up; it shows the average per option.
+- The box is `null` when no stored price applies.
+- The app shows it as a gold-bordered `CostCard` under the answer: a big "≈ N lei", a label, the min–max range, one line per item, and a note. See `docs/API.md`.
+
 `POST /ai/chat` (needs a token; shape in `docs/API.md` → AI assistant). Answers questions like "where can I drink cheap coffee near me and how much will it cost", "where can I go out this weekend", "last tram near me" from **our own data only**: the model calls tools, and every venue, price, time and line it names comes from a tool result.
 
 **How a request runs** (`ai/service/impl/AiChatServiceImpl`):
@@ -568,7 +575,27 @@ Built on `stefan_dev` after merging `frontend/tibi`, in the spots Tibi's map she
   - One shared timer switches `tracksViewChanges` off for all markers, instead of one timer each.
   - The context `bbox` is memoised. The handlers in `map.tsx` are stable. Marker, panel and filter components are memoised.
   - Tests: `map.performance`, `map.tripGuidance`, `map.directionsFocus`, `PathSimplifierTest`.
-- **Not verified yet:** not run on a phone (Android marker rendering, how smooth it really feels, long board labels in the 240 px pill).
+- **Only our data on the map (21.12):**
+  - `ui/mapStyle.ts` hides Google's points of interest, transit stations and road shields; street names stay.
+  - The MapView turns off `showsPointsOfInterest`, buildings, indoors and traffic, for Apple Maps on iOS.
+  - Half-drawn icons came from Android capturing a marker before the Ionicons font had loaded. `ui/Icon.tsx` now reports when the font is ready (`useIconFontLoaded`), and `useBriefViewTracking` keeps markers redrawing until then.
+  - Every marker root has an exact size that contains all its content (`pinBox`, `clusterSize`, `vehicleMarkerSize`, `tripStepSize`), with no transforms, shadows or negative margins. Tests: `map.markers`.
+- **Transport is exclusive (21.13):** `mapFiltersReducer` saves places, categories and events in `beforeTransport` when Transport turns on, and switches them off. Turning Transport off restores them exactly. While Transport is on, the other chips are disabled.
+- **STPT-style line view (21.14), modelled on live.stpt.ro:**
+  - With Transport on and no line picked, only the live vehicles in view are drawn, with no route lines.
+  - `LinePicker.tsx` groups lines by type (trams, trolleybuses, buses, express, metropolitan, school) as coloured number tiles.
+  - Picking a line, or tapping one of its vehicles, fetches `GET /transit/shapes?route=` for that line only. It draws one direction as a 7 px line over a faint halo, with a Tur/Retur toggle labelled by headsign, that direction's tappable stop dots, and only that line's vehicles. × clears the line.
+  - `lineColor` gives each line its own shade within its type's colour family. Vehicle markers are round badges with a bearing arrow and a halo.
+  - Backend: each shape variant now carries `direction` (`TUR`/`RETUR`), `headsign` and its ordered `stops` (left out when no route is asked for). A `SCHOOL` type was added; the STPT category name `school` is a guess.
+- **Smooth vehicles (21.15):**
+  - Positions refresh every 5 s (frontend `VEHICLES_REFRESH_MS` and backend `stpt.ttl.vehicles`).
+  - Each move glides over 4.8 s: natively on Android with `animateMarkerToCoordinate`, and with an `AnimatedRegion` timing on iOS.
+  - A vehicle snaps instead of gliding when the previous update is more than 12 s old, when it jumped more than 1 km, or while the map is moving.
+  - The rules are in `vehicleAnimation.ts` and the hook in `useVehicleMotion.ts`. There are no per-marker JS timers.
+- **Directions show only the essentials (21.16):**
+  - On the map: the user, the origin pin (only when the route starts somewhere else), the destination, the route, the board and get-off markers, and the live vehicles of every ride line, anywhere on the line (up to 30 per line).
+  - The "Walk N min" labels are no longer drawn on the map; that information stays in the directions panel.
+- **Not verified yet:** not run on a phone (how smooth the glide is on Android and iOS, marker rendering after the font fix, the school-bus category name).
 
 #### Frontend — profile, transit and directions (Track C, Person 2)
 

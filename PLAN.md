@@ -366,6 +366,12 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 - [x] **21.9 Directions focus mode:** while directions are shown, the filters are off and greyed out; only the user, the route, its live vehicles and the destination are on the map.
 - [x] **21.10 Trip guidance on the map:** which tram/bus to board (line, direction, time), where to get off, and "Walk N min" labels.
 - [x] **21.11 Map lag fixed:** simplified shapes, memoised markers and lines, only in-view vehicles, one shared marker timer.
+- [x] **21.12 Only our data on the map:** the base map's own points of interest and transit stations are hidden. Map icons no longer show cut in half (icon font + fixed-size marker roots).
+- [x] **21.13 Transport is exclusive:** turning it on switches the other filters off and greys them out; turning it off restores the previous filters.
+- [x] **21.14 STPT-style line view:** vehicles only until a line is picked; then one line, one direction (Tur/Retur), its stops and its vehicles; colours by type family; bearing arrows.
+- [x] **21.15 Smooth vehicles:** 5 s refresh and a native glide between positions (like live.stpt.ro).
+- [x] **21.16 Directions show only the essentials:** you, the destination, the route, board/get-off markers and the live vehicles of the route's lines anywhere on the line.
+- [x] **21.17 AI price box:** an average total from stored prices only, shown as a highlighted box under the answer (`cost` in `POST /ai/chat`).
 - [x] **21.8a Tests and `DOCS.md` updated.**
 - [x] **21.8b Knowledge graph updated** (full rebuild, then an incremental update after the line chips were removed).
 
