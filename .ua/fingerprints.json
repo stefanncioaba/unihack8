@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "b18a60d12be1446577bf63c8135e7eef8a014294",
-  "generatedAt": "2026-11-14T16:33:11.969Z",
+  "gitCommitHash": "b627605e985235e8d2b37dec6448b8079923a6a2",
+  "generatedAt": "2026-11-14T16:36:46.519Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,22 +25,22 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "15c317d51b94ef18b0cab236ed4c2be8af871e16286c2d79e67cf5181c9837e6",
+      "contentHash": "6c2425b9480a3935c14c9fece5d7d1ba7591e9b56c38a72cf981aae36672264a",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 643,
+      "totalLines": 656,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "c9dd5f9b5099f5388b94d0cb2a9be93e05f87d856cf99f0ea02a763809490d31",
+      "contentHash": "06d53b3fe2779b7ccfd3f5c7ce80b680df4b8bfa00db8309f976c233cc35f892",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 408,
+      "totalLines": 420,
       "hasStructuralAnalysis": false
     },
     "README.md": {
@@ -2980,7 +2980,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/tool/impl/SearchEventsTool.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/tool/impl/SearchEventsTool.java",
-      "contentHash": "0a52791564b614562e3e11cb4286ade3616d8680228ff730e0070825c89526be",
+      "contentHash": "5b5bab234be203d9f435ccce11ab0bb1ba067f992d08bb2a2ccdc443ae05810d",
       "functions": [
         {
           "name": "SearchEventsTool",
@@ -3002,7 +3002,7 @@
           "params": [],
           "returnType": "Map<String, Object>",
           "exported": true,
-          "lineCount": 21
+          "lineCount": 22
         },
         {
           "name": "execute",
@@ -3053,7 +3053,7 @@
             "eventService"
           ],
           "exported": true,
-          "lineCount": 129
+          "lineCount": 131
         }
       ],
       "imports": [
@@ -3155,7 +3155,7 @@
         "execute",
         "SearchEventsTool"
       ],
-      "totalLines": 149,
+      "totalLines": 151,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/ai/tool/impl/SearchPlacesTool.java": {
@@ -5892,7 +5892,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/eventimport/mapper/impl/LiveTicketsEventMapperImpl.java",
-      "contentHash": "1276d880ae9186a471c6a1596c59fde3d5f2454df52aaaad5f0e58351b1a14fc",
+      "contentHash": "d69d919d749c33e68028cfecb1826f96fa14facea37e8e4772a8e81ed1df68dc",
       "functions": [
         {
           "name": "LiveTicketsEventMapperImpl",
@@ -6015,7 +6015,7 @@
             "wantedCity"
           ],
           "exported": true,
-          "lineCount": 169
+          "lineCount": 172
         }
       ],
       "imports": [
@@ -6129,7 +6129,7 @@
         "guessCategory",
         "LiveTicketsEventMapperImpl"
       ],
-      "totalLines": 195,
+      "totalLines": 198,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/eventimport/repository/ExternalEventRepository.java": {
@@ -8779,7 +8779,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
-      "contentHash": "ad22de46c0f1e69571366cc75718e235adb25d849e93b101d29dbaf2a1c2a461",
+      "contentHash": "29baa39f017d5ddbefb53c4b604bacad6851e73d160b13fe9309313a21dd093c",
       "functions": [
         {
           "name": "EventServiceImpl",
@@ -12480,13 +12480,22 @@
     },
     "backend/src/main/java/com/unihack8/backend/reliability/domain/ReliabilityRules.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/reliability/domain/ReliabilityRules.java",
-      "contentHash": "689d30d1a28fd4f3772b6b56409c6792dbffb708e0124a96a58eb779d37656a7",
+      "contentHash": "91e4114256d9bc96ab6198698970fc5b0df59f61fda5009661d55d034be388f1",
       "functions": [
         {
           "name": "ReliabilityRules",
           "params": [],
           "exported": true,
           "lineCount": 2
+        },
+        {
+          "name": "checkInBonus",
+          "params": [
+            "category"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 3
         },
         {
           "name": "effectiveEnd",
@@ -12504,6 +12513,7 @@
           "name": "ReliabilityRules",
           "methods": [
             "ReliabilityRules",
+            "checkInBonus",
             "effectiveEnd"
           ],
           "properties": [
@@ -12511,10 +12521,13 @@
             "NO_SHOW_POINTS",
             "ATTENDED_REASON",
             "NO_SHOW_REASON",
+            "VOLUNTEER_CATEGORY",
+            "VOLUNTEER_BONUS_POINTS",
+            "VOLUNTEER_BONUS_REASON",
             "DEFAULT_EVENT_LENGTH"
           ],
           "exported": true,
-          "lineCount": 18
+          "lineCount": 27
         }
       ],
       "imports": [
@@ -12536,11 +12549,15 @@
         "NO_SHOW_POINTS",
         "ATTENDED_REASON",
         "NO_SHOW_REASON",
+        "VOLUNTEER_CATEGORY",
+        "VOLUNTEER_BONUS_POINTS",
+        "VOLUNTEER_BONUS_REASON",
         "DEFAULT_EVENT_LENGTH",
+        "checkInBonus",
         "effectiveEnd",
         "ReliabilityRules"
       ],
-      "totalLines": 28,
+      "totalLines": 37,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/reliability/domain/dto/CheckInRequest.java": {
@@ -12572,7 +12589,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/reliability/domain/dto/CheckInResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/reliability/domain/dto/CheckInResponse.java",
-      "contentHash": "9de26859a990dd005ed07b760acdb2e9190e7c042a75152ef442740e7c75e0d8",
+      "contentHash": "10884379840b38ce41da67ca93e87d2e3c825bfa19d5ff34509246f6b43cd1c6",
       "functions": [],
       "classes": [
         {
@@ -13188,7 +13205,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/reliability/service/impl/CheckInServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/reliability/service/impl/CheckInServiceImpl.java",
-      "contentHash": "1080f3685d619ca630f7c8ba271f9bdeeaf4aec49df33409d1c290517fd45d0e",
+      "contentHash": "14d24992a0f4e07c87494b4cf0f559b987bf9b052aa558b3622c4887d0ebcdcc",
       "functions": [
         {
           "name": "CheckInServiceImpl",
@@ -13221,7 +13238,7 @@
           ],
           "returnType": "CheckInResponse",
           "exported": true,
-          "lineCount": 37
+          "lineCount": 42
         },
         {
           "name": "parseToken",
@@ -13250,7 +13267,7 @@
             "clock"
           ],
           "exported": true,
-          "lineCount": 83
+          "lineCount": 89
         }
       ],
       "imports": [
@@ -13375,7 +13392,7 @@
         "checkIn",
         "CheckInServiceImpl"
       ],
-      "totalLines": 110,
+      "totalLines": 116,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/reliability/service/impl/NoShowServiceImpl.java": {
@@ -24405,7 +24422,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/eventimport/mapper/LiveTicketsEventMapperImplTest.java",
-      "contentHash": "be19a631c8b522f1df0f7011f6476324d8da6b9fd0336bb23597774845d8e766",
+      "contentHash": "8198cb2d38f2f7bba9ac7eb7435aa433e4045175402de1db5ab3dd826834ba7e",
       "functions": [
         {
           "name": "event",
@@ -24484,7 +24501,7 @@
           ],
           "returnType": "void",
           "exported": false,
-          "lineCount": 15
+          "lineCount": 17
         }
       ],
       "classes": [
@@ -24506,7 +24523,7 @@
             "mapper"
           ],
           "exported": false,
-          "lineCount": 120
+          "lineCount": 122
         }
       ],
       "imports": [
@@ -24590,7 +24607,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 139,
+      "totalLines": 141,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/eventimport/service/impl/EventImportServiceImplTest.java": {
@@ -27711,7 +27728,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/reliability/ReliabilityIntegrationTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/reliability/ReliabilityIntegrationTest.java",
-      "contentHash": "84e9cf16342e7144e4594e0067b3a7a330178cb74442edccd5ee6a64b34b8e63",
+      "contentHash": "bd88cc1c8e340998adc6b007efc9e74739a3f857aa88de7aed07b2f831d9d3d1",
       "functions": [
         {
           "name": "setUp",
@@ -27820,6 +27837,13 @@
           "lineCount": 18
         },
         {
+          "name": "volunteerCheckInAddsBonus",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 21
+        },
+        {
           "name": "secondScanIsRejected",
           "params": [],
           "returnType": "void",
@@ -27906,6 +27930,7 @@
             "myTicketReturnsToken",
             "myTicketErrors",
             "checkInAddsPoints",
+            "volunteerCheckInAddsBonus",
             "secondScanIsRejected",
             "checkInValidatesOrganiserAndTicket",
             "checkInRejectsWrongStates",
@@ -27929,7 +27954,7 @@
             "now"
           ],
           "exported": false,
-          "lineCount": 325
+          "lineCount": 348
         }
       ],
       "imports": [
@@ -28103,7 +28128,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 362,
+      "totalLines": 385,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/reliability/config/NoShowJobTest.java": {
@@ -28177,6 +28202,47 @@
       ],
       "exports": [],
       "totalLines": 30,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/reliability/domain/ReliabilityRulesTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/reliability/domain/ReliabilityRulesTest.java",
+      "contentHash": "2e7bbaa80eb3f8f6e04439dcc3b9a77cb4c71f091d8de9ae8440e8750b033fb5",
+      "functions": [
+        {
+          "name": "bonusOnlyForVolunteerEvents",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "ReliabilityRulesTest",
+          "methods": [
+            "bonusOnlyForVolunteerEvents"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 10
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 18,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/reviews/ReviewIntegrationTest.java": {
@@ -33282,12 +33348,12 @@
     },
     "docs/API.md": {
       "filePath": "docs/API.md",
-      "contentHash": "9861d6988bfbaa3bb9a3f5197c3f52b90dd5dac2f0b74d3d8a796fad081ffb03",
+      "contentHash": "fe539dc4e1e99c0b3dded0ea6f719dab2d2d42208ac3b8a876244d155beb9054",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 719,
+      "totalLines": 721,
       "hasStructuralAnalysis": false
     },
     "docs/DEMO.md": {
@@ -35790,7 +35856,7 @@
     },
     "frontend/__tests__/mocks.backend.test.ts": {
       "filePath": "frontend/__tests__/mocks.backend.test.ts",
-      "contentHash": "03f000567977d0ae80fe4f6ba2d6b97004e26a11f81ad56444c5d3f7367b15ee",
+      "contentHash": "45f4b5e5e9395a894ea82cb5f193743bc0eb59b7aa36150336ef8c78652d4a67",
       "functions": [
         {
           "name": "call",
@@ -35819,6 +35885,12 @@
           ]
         },
         {
+          "source": "@test/mocks/core",
+          "specifiers": [
+            "getState"
+          ]
+        },
+        {
           "source": "./testUtils",
           "specifiers": [
             "IDS"
@@ -35826,7 +35898,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 146,
+      "totalLines": 163,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/mocks.reviews.test.ts": {
@@ -36005,7 +36077,7 @@
     },
     "frontend/__tests__/screens.event.test.tsx": {
       "filePath": "frontend/__tests__/screens.event.test.tsx",
-      "contentHash": "9f0e8589ae610486db3e38318177f5c2d6bd60a1950a6d8dcf4c19df8d7ce2c7",
+      "contentHash": "2ee9f2692e2c6c0b72b191cb06ef837f4e2f3c93a390ed10de9a99e8057d1a46",
       "functions": [
         {
           "name": "confirmAlert",
@@ -36071,7 +36143,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 324,
+      "totalLines": 339,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/screens.home.test.tsx": {
@@ -36136,7 +36208,7 @@
     },
     "frontend/__tests__/screens.profile.test.tsx": {
       "filePath": "frontend/__tests__/screens.profile.test.tsx",
-      "contentHash": "0de896955b2a897367c14d06b3db8ee75caa9deead953685f95aa690151abb42",
+      "contentHash": "dd167b13a7ff5eeddba60a1148a921179927e5798f2ed04d30f244a5c7d14d0c",
       "functions": [
         {
           "name": "startEditing",
@@ -36217,12 +36289,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 273,
+      "totalLines": 276,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/screens.users.test.tsx": {
       "filePath": "frontend/__tests__/screens.users.test.tsx",
-      "contentHash": "eec7f297e48a75c18d085ca6a0b250136f6921bddcd1691049455e110a8af719",
+      "contentHash": "2a37441cd4d39c18e9744227d631d5e1ca12da9979fd8adb8e1e188a8e475eaa",
       "functions": [],
       "classes": [],
       "imports": [
@@ -36288,7 +36360,7 @@
     },
     "frontend/__tests__/testUtils.tsx": {
       "filePath": "frontend/__tests__/testUtils.tsx",
-      "contentHash": "714ac12cb59179cb09a14a550795c36beaa29a9b22b25b6bcaffa202ba1b032b",
+      "contentHash": "54bdd6fb0de9f1bf394290c8a34e06e9648e7a93ab7302c54e8aa735f2052c6b",
       "functions": [
         {
           "name": "setParams",
@@ -36365,7 +36437,7 @@
         "renderScreen",
         "IDS"
       ],
-      "totalLines": 57,
+      "totalLines": 58,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/users.reliabilityLine.test.tsx": {
@@ -37110,7 +37182,7 @@
     },
     "frontend/src/api/types.ts": {
       "filePath": "frontend/src/api/types.ts",
-      "contentHash": "42ae39be0ec1a62ae51c1503cfaae98aa08bc91bb442da66181599393edab7d0",
+      "contentHash": "29c04272903368d213f1ae0c1cd3911083704efe907a188bcf17754308ad1b78",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -37118,12 +37190,12 @@
         "EVENT_CATEGORIES",
         "REVIEW_COMMENT_MAX"
       ],
-      "totalLines": 120,
+      "totalLines": 121,
       "hasStructuralAnalysis": true
     },
     "frontend/src/api/types.users.ts": {
       "filePath": "frontend/src/api/types.users.ts",
-      "contentHash": "492b040eb8477e7b42f2b8f98c2b8d0a6de12212faec3d5d1451a9aec32910b0",
+      "contentHash": "b9e835b37cc3093093bf1c0ba7ba261e23f45cce8a7e9344168725674eb94a29",
       "functions": [],
       "classes": [],
       "imports": [
@@ -37241,7 +37313,7 @@
     },
     "frontend/src/app/(auth)/sign-up.tsx": {
       "filePath": "frontend/src/app/(auth)/sign-up.tsx",
-      "contentHash": "91fe649473a69a88cc0993806b6cebfb3381351de21bab619fae57201c82969c",
+      "contentHash": "8c2b8b31d7b9c424d75b9c01a947ec61a07d92b7e04d5bb5bee9fd91999ee416",
       "functions": [
         {
           "name": "SignUpScreen",
@@ -37894,7 +37966,7 @@
     },
     "frontend/src/app/(tabs)/profile.tsx": {
       "filePath": "frontend/src/app/(tabs)/profile.tsx",
-      "contentHash": "22e7336346fdbb14a4f79db8d442daea9cceb1588a0459459072d14cd75f784e",
+      "contentHash": "6bae127f74d1cf5bff258b7e02f85dfcc9ff923959e8477c98edc218594645fa",
       "functions": [
         {
           "name": "ProfileScreen",
@@ -38130,7 +38202,7 @@
     },
     "frontend/src/app/events/[id]/index.tsx": {
       "filePath": "frontend/src/app/events/[id]/index.tsx",
-      "contentHash": "94a98f4381da475de92f82d0e3506d245069b8c405417b921dfa6201f92574c9",
+      "contentHash": "b772f5a33a3c8fe0be36c4fccbd26b48996b264e34855d0f64bb21d34c7e49f8",
       "functions": [
         {
           "name": "InfoRow",
@@ -38144,7 +38216,7 @@
           "name": "EventDetailsScreen",
           "params": [],
           "exported": true,
-          "lineCount": 135
+          "lineCount": 138
         },
         {
           "name": "Shell",
@@ -38183,7 +38255,8 @@
         {
           "source": "@/features/events/categories",
           "specifiers": [
-            "categoryMeta"
+            "categoryMeta",
+            "VOLUNTEER_BONUS"
           ]
         },
         {
@@ -38301,7 +38374,7 @@
       "exports": [
         "EventDetailsScreen"
       ],
-      "totalLines": 198,
+      "totalLines": 201,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/events/[id]/scan.tsx": {
@@ -38423,7 +38496,7 @@
     },
     "frontend/src/app/events/[id]/ticket.tsx": {
       "filePath": "frontend/src/app/events/[id]/ticket.tsx",
-      "contentHash": "531ecbbc75cef72bf0e6d4a6d891b9d992dbd4c03e1b8c2b2a2d10607b80a77f",
+      "contentHash": "6a9463f30cb4483f9b3698f4e9c0989d570cc24a7757370516131439dbda53f8",
       "functions": [
         {
           "name": "TicketScreen",
@@ -38924,7 +38997,7 @@
     },
     "frontend/src/app/users/search.tsx": {
       "filePath": "frontend/src/app/users/search.tsx",
-      "contentHash": "3d06e934bcc767c9e8e19d66c267b3bd1645f89250ee378fd27d1d62e7477318",
+      "contentHash": "c2442b6b62453a978f23c774e797d4552634a32770b9708b10353f8a53788dd1",
       "functions": [
         {
           "name": "UserSearchScreen",
@@ -41364,7 +41437,7 @@
     },
     "frontend/src/features/events/categories.ts": {
       "filePath": "frontend/src/features/events/categories.ts",
-      "contentHash": "34aed64c121c8f5faf1528d034e8bb7691aa0ed70c7ccc4a4dc6629eeaf23fe5",
+      "contentHash": "654554e6b72878ea22c068b440ae8f224292e1d740ebbf04197e992b1164ce99",
       "functions": [
         {
           "name": "categoryMeta",
@@ -41393,14 +41466,15 @@
       ],
       "exports": [
         "CATEGORY_META",
+        "VOLUNTEER_BONUS",
         "categoryMeta"
       ],
-      "totalLines": 23,
+      "totalLines": 27,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/events/checkInResult.ts": {
       "filePath": "frontend/src/features/events/checkInResult.ts",
-      "contentHash": "a3270a1fcaab38def99054d3d1c58ad7b55ac7d828a018b84a87572b45182b92",
+      "contentHash": "f3fad4fa5e2b2d6f7ed0586d1514124255bd260b836e93f973bbd8ca963395f7",
       "functions": [
         {
           "name": "outcomeFromSuccess",
@@ -44588,7 +44662,7 @@
     },
     "frontend/src/features/users/ReliabilityLine.tsx": {
       "filePath": "frontend/src/features/users/ReliabilityLine.tsx",
-      "contentHash": "22a586dff22189290dcdb13478b7a3727475e709419e791e46527c84a8a07da2",
+      "contentHash": "00134b2f7664030cd238484780ece0a4d74ceaf3e78f2924785dcb7f4b58d18f",
       "functions": [
         {
           "name": "linePosition",
@@ -44827,7 +44901,7 @@
     },
     "frontend/src/features/users/reliability.ts": {
       "filePath": "frontend/src/features/users/reliability.ts",
-      "contentHash": "1c9a7aa15f997666635b964e5727d0dce35d39eee0603c45180f759f38dc3338",
+      "contentHash": "64671ab35264a9453ca913e41a59c0e5cd5d9edb321dd57ed4a4a30fb8dddaf0",
       "functions": [
         {
           "name": "formatPoints",
@@ -44845,7 +44919,7 @@
           ],
           "returnType": "string",
           "exported": true,
-          "lineCount": 12
+          "lineCount": 14
         }
       ],
       "classes": [],
@@ -44863,7 +44937,7 @@
         "formatPoints",
         "reasonLabel"
       ],
-      "totalLines": 32,
+      "totalLines": 35,
       "hasStructuralAnalysis": true
     },
     "frontend/src/hooks/queries.ts": {
@@ -46570,7 +46644,7 @@
     },
     "frontend/src/ui/ReliabilityBadge.tsx": {
       "filePath": "frontend/src/ui/ReliabilityBadge.tsx",
-      "contentHash": "97592d9a1f106f20ee1ad97966668b82506601789791b4cfa290a020a516959b",
+      "contentHash": "177a371da01b5acf873376bef83c92eddc7a789d3ef600eaef37005733a03356",
       "functions": [
         {
           "name": "reliabilityColor",
@@ -47289,7 +47363,7 @@
     },
     "frontend/testing/mocks/data.ts": {
       "filePath": "frontend/testing/mocks/data.ts",
-      "contentHash": "e878c0eb5aa739e8b3953605229801f1870e6dc8ddac77fdf65f7a79670e397a",
+      "contentHash": "adbc69fbf01b758b355baacb4b84b1183bc96283327fc41aa04add8cb8386534",
       "functions": [
         {
           "name": "at",
@@ -47332,7 +47406,7 @@
           "params": [],
           "returnType": "MockState",
           "exported": true,
-          "lineCount": 200
+          "lineCount": 203
         }
       ],
       "classes": [],
@@ -47371,7 +47445,7 @@
         "USER_IDS",
         "seed"
       ],
-      "totalLines": 273,
+      "totalLines": 276,
       "hasStructuralAnalysis": true
     },
     "frontend/testing/mocks/index.ts": {
@@ -47655,7 +47729,7 @@
     },
     "frontend/testing/mocks/routes/events.ts": {
       "filePath": "frontend/testing/mocks/routes/events.ts",
-      "contentHash": "adae8e49659a7eb12d99af8ad0161888a0e88f634ba39d84ed236efffdcde743",
+      "contentHash": "9b281acc53d36ccfc86588ddf7b9426b51b749da13528b49ee7b670d2226e6a1",
       "functions": [
         {
           "name": "toReview",
@@ -47743,7 +47817,7 @@
       "exports": [
         "eventsRoutes"
       ],
-      "totalLines": 251,
+      "totalLines": 254,
       "hasStructuralAnalysis": true
     },
     "frontend/testing/mocks/routes/places.ts": {
