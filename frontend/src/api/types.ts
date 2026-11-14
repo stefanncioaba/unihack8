@@ -24,7 +24,8 @@ export type UserSummary = { id: string; username: string; reliabilityScore: numb
 
 export type Me = UserSummary & { createdAt: string };
 
-export type PublicProfile = UserSummary & { createdAt: string; attendedEvents: EventSummary[] };
+/** Public profile: attended events, and the user events they organised that are already over (newest first, max 20). */
+export type PublicProfile = UserSummary & { createdAt: string; attendedEvents: EventSummary[]; organizedEvents: EventSummary[] };
 
 export type EventSummary = {
   id: string;
@@ -41,6 +42,9 @@ export type EventSummary = {
   priceMax: number | null;
   capacity: number | null;
   spotsLeft: number | null;
+  /** Average of the attendee reviews, 1 decimal; null when nobody reviewed yet. */
+  averageRating: number | null;
+  reviewCount: number;
 };
 
 export type EventDetail = EventSummary & {
@@ -90,3 +94,26 @@ export type CheckInResult = { user: UserSummary; status: ParticipantStatus; poin
 export type BanResult = { userId: string; status: ParticipantStatus };
 
 export type UsernameAvailability = { username: string; available: boolean };
+
+/** One attendee review of an event (1–5 stars, optional comment of at most 300 characters). */
+export type Review = { reviewer: UserSummary; rating: number; comment: string | null; createdAt: string; updatedAt: string };
+
+/**
+ * Reviews of an event (GET /events/{id}/reviews). `reviewsCloseAt` is null for EXTERNAL events; `canReview` is true only
+ * for a checked-in attendee (not the organiser) before the window closes; `settled` once the organiser's points were applied.
+ */
+export type EventReviews = {
+  averageRating: number | null;
+  reviewCount: number;
+  reviews: Review[];
+  reviewsCloseAt: string | null;
+  settled: boolean;
+  canReview: boolean;
+  myReview: Review | null;
+};
+
+/** Body of PUT /events/{id}/reviews/me: creates or replaces my review. */
+export type ReviewInput = { rating: number; comment?: string | null };
+
+/** Longest review comment the API accepts. */
+export const REVIEW_COMMENT_MAX = 300;

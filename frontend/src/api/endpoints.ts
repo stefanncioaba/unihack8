@@ -4,6 +4,7 @@ import type {
   BanResult,
   CheckInResult,
   EventDetail,
+  EventReviews,
   EventQuery,
   EventSummary,
   JoinResult,
@@ -13,6 +14,8 @@ import type {
   Paged,
   Participant,
   PublicProfile,
+  Review,
+  ReviewInput,
   Ticket,
   UsernameAvailability,
   UserSummary,
@@ -65,3 +68,9 @@ export const getMyTicket = (id: string) => api<Ticket>('GET', `/events/${id}/my-
 /** Organiser only: check a scanned ticket in. */
 export const checkIn = (eventId: string, token: string) =>
   api<CheckInResult>('POST', `/events/${eventId}/check-in`, { body: { token } });
+
+/** Public: average rating, every review and whether I may review (token optional). */
+export const getEventReviews = (id: string) => api<EventReviews>('GET', `/events/${id}/reviews`);
+
+/** Checked-in attendee only: creates or replaces my review (403 NOT_ATTENDED, 409 REVIEWS_CLOSED / IS_ORGANIZER). */
+export const saveMyReview = (id: string, body: ReviewInput) => api<Review>('PUT', `/events/${id}/reviews/me`, { body });

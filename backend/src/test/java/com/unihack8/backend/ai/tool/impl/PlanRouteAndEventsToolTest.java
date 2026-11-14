@@ -162,6 +162,6 @@ class PlanRouteAndEventsToolTest {
     // Event on Saturday 19:00 UTC (21:00 local).
     private static EventSummary event(String title, double lat, double lon, String source) {
         return new EventSummary(UUID.randomUUID(), source, title, "CONCERT", "Venue", lat, lon,
-                Instant.parse("2026-11-14T19:00:00Z"), null, null, new BigDecimal("40.00"), new BigDecimal("40.00"), 10, 3);
+                Instant.parse("2026-11-14T19:00:00Z"), null, null, new BigDecimal("40.00"), new BigDecimal("40.00"), 10, 3, null, 0);
     }
 }

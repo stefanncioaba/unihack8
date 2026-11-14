@@ -35,7 +35,7 @@ describe('mock backend: GET /users/me/events', () => {
     expect(joinedIds).toContain(IDS.artWalk);
     expect(mine.joined.find((j: any) => j.event.id === IDS.artWalk).status).toBe('JOINED');
     expect(mine.joined.map((j: any) => j.status)).toEqual(expect.arrayContaining(['ATTENDED', 'NO_SHOW']));
-    expect(mine.organizing.map((e: any) => e.id)).toEqual([IDS.sunsetRun]);
+    expect(mine.organizing.map((e: any) => e.id)).toEqual([IDS.sushiWorkshop, IDS.sunsetRun]);
     const starts = mine.joined.map((j: any) => Date.parse(j.event.startsAt));
     expect([...starts].sort((a, b) => a - b)).toEqual(starts);
   });

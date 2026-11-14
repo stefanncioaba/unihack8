@@ -9,7 +9,8 @@ import java.util.List;
 
 public interface ProfileMapper {
     // Builds the full profile shown on profile pages.
-    ProfileResponse toResponse(Profile profile, List<AttendedEventResponse> attendedEvents);
+    ProfileResponse toResponse(Profile profile, List<AttendedEventResponse> attendedEvents,
+                               List<AttendedEventResponse> organizedEvents);
 
     // Builds the compact result shown in username search.
     ProfileSearchResult toSearchResult(Profile profile);

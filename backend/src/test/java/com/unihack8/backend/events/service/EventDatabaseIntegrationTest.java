@@ -4,6 +4,7 @@ import com.unihack8.backend.common.exception.ApiException;
 import com.unihack8.backend.common.exception.ErrorCode;
 import com.unihack8.backend.events.domain.dto.CreateEventRequest;
 import com.unihack8.backend.events.domain.dto.UpdateEventRequest;
+import com.unihack8.backend.reviews.support.ReviewTestSchema;
 import java.time.Instant;
 import java.sql.Timestamp;
 import java.util.HashMap;
@@ -47,6 +48,7 @@ class EventDatabaseIntegrationTest {
         jdbc.execute("CREATE TABLE IF NOT EXISTS reliability_log (id UUID PRIMARY KEY, user_id UUID NOT NULL, "
                 + "event_id UUID, points_change INTEGER NOT NULL, reason VARCHAR(30) NOT NULL, "
                 + "created_at TIMESTAMP WITH TIME ZONE NOT NULL)");
+        ReviewTestSchema.create(jdbc);
         jdbc.update("DELETE FROM reliability_log");
         jdbc.update("DELETE FROM event_participants");
         jdbc.update("DELETE FROM events");

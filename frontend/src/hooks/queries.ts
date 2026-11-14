@@ -6,6 +6,7 @@ import {
   checkIn,
   createEvent,
   getEvent,
+  getEventReviews,
   getMe,
   getMyTicket,
   getParticipants,
@@ -13,9 +14,10 @@ import {
   joinEvent,
   leaveEvent,
   listEvents,
+  saveMyReview,
   searchUsers,
 } from '@/api/endpoints';
-import type { EventQuery, NewEvent } from '@/api/types';
+import type { EventQuery, NewEvent, ReviewInput } from '@/api/types';
 
 export const EVENTS_PAGE_SIZE = 10;
 
@@ -28,7 +30,11 @@ export const keys = {
   event: (id: string) => ['events', 'detail', id] as const,
   participants: (id: string) => ['events', 'participants', id] as const,
   ticket: (id: string) => ['events', 'ticket', id] as const,
+  reviews: (id: string) => ['events', 'reviews', id] as const,
 };
+
+/** How often the reviews of an open event page refresh, so new ratings show up live. */
+export const REVIEWS_REFRESH_MS = 10_000;
 
 /** The signed-in user's profile. */
 export function useMe() {
@@ -126,5 +132,33 @@ export function useCreateEvent() {
   return useMutation({
     mutationFn: (body: NewEvent) => createEvent(body),
     onSuccess: () => Promise.all([client.invalidateQueries({ queryKey: ['events'] })]),
+  });
+}
+
+/** Reviews of an event (average, list, whether I may review); polled while the page is open. */
+export function useEventReviews(id: string | undefined, enabled = true) {
+  return useQuery({
+    queryKey: keys.reviews(id ?? ''),
+    queryFn: () => getEventReviews(id!),
+    enabled: !!id && enabled,
+    refetchInterval: REVIEWS_REFRESH_MS,
+  });
+}
+
+/** Saves my review, then refreshes the reviews, the event (its average) in every list, and profiles that show ratings. */
+export function useSaveReview(id: string) {
+  const client = useQueryClient();
+  return useMutation({
+    mutationFn: (body: ReviewInput) => saveMyReview(id, body),
+    onSuccess: () =>
+      Promise.all([
+        client.invalidateQueries({ queryKey: keys.reviews(id) }),
+        client.invalidateQueries({ queryKey: keys.event(id) }),
+        client.invalidateQueries({ queryKey: ['events', 'list'] }),
+        client.invalidateQueries({ queryKey: ['events', 'infinite'] }),
+        client.invalidateQueries({ queryKey: ['events', 'map'] }),
+        client.invalidateQueries({ queryKey: ['user'] }),
+        client.invalidateQueries({ queryKey: ['users', 'me', 'events'] }),
+      ]),
   });
 }

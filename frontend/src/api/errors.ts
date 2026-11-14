@@ -35,6 +35,8 @@ const FRIENDLY: Record<string, string> = {
   NOT_JOINED: 'You have not joined this event.',
   WRONG_EVENT: 'This ticket belongs to a different event.',
   ALREADY_CHECKED_IN: 'This ticket was already scanned.',
+  NOT_ATTENDED: 'Only checked-in participants can review this event.',
+  REVIEWS_CLOSED: 'Reviews for this event are closed.',
   RATE_LIMITED: 'Too many requests. Try again in a minute.',
   SOURCE_UNAVAILABLE: 'Live data is temporarily unavailable.',
   INTERNAL_ERROR: 'Something went wrong on our side. Try again.',

@@ -25,5 +25,7 @@ export function reasonLabel(reason: ReliabilityReason): string {
       return 'Missed the event';
     case 'LATE_CANCEL':
       return 'Left late';
+    case 'EVENT_RATING':
+      return 'Event rating';
   }
 }

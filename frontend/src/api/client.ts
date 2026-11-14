@@ -7,7 +7,7 @@ import { ApiError } from './errors';
 
 export type QueryValue = string | number | boolean | null | undefined | (string | number)[];
 export type QueryParams = Record<string, QueryValue>;
-export type Method = 'GET' | 'POST' | 'PATCH' | 'DELETE';
+export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 export type RequestOptions = { query?: QueryParams; body?: unknown; signal?: AbortSignal };
 
 const TIMEOUT_MS = 15_000;

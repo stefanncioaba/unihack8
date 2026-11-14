@@ -84,7 +84,7 @@ Shared code every feature uses. Feature packages (`users`, `events`, …) are cr
 
 ## Database (PLAN task 2)
 
-Applied to Supabase from `supabase/migrations/` in file order: the four schema migrations on 2026-11-13, the three `place_prices` migrations (table + data, PLAN 11.3) on 2026-11-14.
+Applied to Supabase from `supabase/migrations/` in file order: the four schema migrations on 2026-11-13, the three `place_prices` migrations (table + data, PLAN 11.3) on 2026-11-14. `20261114000004_event_reviews.sql` (PLAN 21) is in the repo but **not applied to Supabase yet** — apply it before deploying the backend that reads `event_reviews`.
 
 | Table | Purpose |
 |---|---|
@@ -92,6 +92,7 @@ Applied to Supabase from `supabase/migrations/` in file order: the four schema m
 | `events` | `source` = `USER` (needs `organizer_id`) or `EXTERNAL` (needs `external_id`, e.g. `livetickets:<id>`, unique). Optional `capacity` (null = unlimited), coordinates both set or both null. |
 | `event_participants` | Who joined which event (one row per pair), `status` (`JOINED`, `ATTENDED`, `NO_SHOW`, `CANCELLED`, `BANNED`), auto-generated `qr_token`. `checked_in_at` is set only for `ATTENDED`. |
 | `reliability_log` | Every score change: `points_change` (e.g. +5, −10) and `reason`. Kept when its event is deleted. |
+| `event_reviews` | One review per checked-in attendee per event (PLAN 21): `rating` 1–5, optional `comment` (≤ 300 chars), `created_at`, `updated_at`. `events.review_settled_at` marks when the organiser's rating points were applied. |
 | `places` | Places imported from OpenStreetMap; `osm_id` (e.g. `node/2845091337`) is unique so re-imports update rows. |
 | `place_prices` | Researched menu prices for the AI (PLAN 11.3): `place_name` (matches `places.name` or the OSM `brand` tag, case-insensitive), `item`, `item_type` (`COFFEE`, `PIZZA`, `FOOD`, `BEER`, `DRINK`), `price_lei`, `size`, `source_type`, `source_url`, `source_date`, `note`. See Features → AI assistant. |
 
@@ -108,7 +109,7 @@ Applied to Supabase from `supabase/migrations/` in file order: the four schema m
 
 ## Current state
 
-- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging), users/profile endpoints (task 4), events and participation (task 5), QR check-in, no-show job and reliability history (task 6), LiveTickets events import (task 7, 38 events), places (task 8, 1003 Timișoara places imported into Supabase), live transit (task 9, `/transit/**`) and routing (task 10, `/routes/plan`) and the AI assistant (task 11, `POST /ai/chat`, Gemini + our own tools + 232 stored menu prices). The combined backend has 360 tests passing, 1 live Gemini check skipped by default (2026-11-14, after the home page next-arrival change); the frontend 280 (plus 7 live-backend tests skipped by default; 2026-11-14, after the home page next-arrival change).
+- `backend/`: Spring Boot 4.1.2 (Java 21, Gradle) with the task-3 foundation (token security, error handling, current user, paging), users/profile endpoints (task 4), events and participation (task 5), QR check-in, no-show job and reliability history (task 6), LiveTickets events import (task 7, 38 events), places (task 8, 1003 Timișoara places imported into Supabase), live transit (task 9, `/transit/**`) and routing (task 10, `/routes/plan`) and the AI assistant (task 11, `POST /ai/chat`, Gemini + our own tools + 232 stored menu prices). Event reviews and organiser rating (task 21, package `reviews`). The combined backend has 384 tests passing, 1 live Gemini check skipped by default (2026-11-14, after event reviews); the frontend 311 (plus 7 live-backend tests skipped by default; 2026-11-14, after event reviews).
 - `supabase/`: migrations and schema tests for task 2, applied.
 - `docs/API.md`: API contract (task 1.6).
 - `infra/otp/`: OpenTripPlanner 2.7 setup (docker-compose, data download script). Its large data files are git-ignored. `GET /routes/plan` is implemented (task 10).
@@ -171,11 +172,13 @@ Checked by calling the API with our key on 2026-11-13 (this replaces the earlier
 | Still `JOINED` when the event ends (no-show) | −10 | `NO_SHOW` |
 | Leaves less than 2 hours before the start | −2 | `LATE_CANCEL` |
 | Leaves earlier | 0 | — (no log entry) |
+| Organiser, 24 h after their event ends, from the attendees' average rating (PLAN 21) | `round((avg − 3) × 2.5)`, −5 … +5 (5★ +5, 4★ +3, 3★ −1, 2★ −3, 1★ −5) | `EVENT_RATING` |
 
 - The score never goes below 0: a change that would go lower stops at 0 (the log still records the full rule value).
 - Being banned by an organiser costs no points by itself.
 - Only `USER` events count; imported events cannot be joined.
 - An event with no end time is treated as ending 3 hours after it starts (for no-shows and check-in).
+- Organiser rating: above 3 stars always gains at least +1, 3 stars or less always loses at least −1; an event with no reviews changes nothing. Applied once per event.
 
 ## Features
 
@@ -195,6 +198,23 @@ Package `reliability`, built on the events feature (task 5): it reuses `EventRep
 - **End-to-end on the real database (2026-11-13):** with 3 temporary test users and their events (deleted afterwards), through the real API with real-format tokens: create event, join, ticket, organiser scan +5, double scan refused, garbage QR refused, scan after the end refused, no-show job −10 once (job run repeatedly and after a restart), history with titles, profiles and user search — all passed. This found and fixed a PostgreSQL-only bug in `users/.../AttendedEventRepositoryImpl` (task 4): `spots_left` was a bigint read as Integer, so `GET /users/me` and `GET /users/{id}` answered 500 once a user had attended an event with limited spots; H2 in the tests hides this.
 - **Tests:** 15 — `ReliabilityIntegrationTest` (real endpoints and tokens on the H2 test database: ticket, check-in happy path, double scan, wrong event, unknown/garbage token, not organiser, imported/finished event, banned/left participant, no end time; no-show job, repeat run, 3-hour rule, score floor; history order and deleted events) and `NoShowJobTest`.
 
+
+### Event reviews and organiser rating (PLAN 21)
+
+Package `reviews` (`controller`, `config`, `domain/{entity,dto}`, `mapper`, `repository`, `service`, each with `impl`). It reuses the events feature's `EventRepository` (lookup and row lock), `ParticipationRepository` (attendance and `changeReliability`) and `EventMapper.user(...)`.
+
+| Endpoint | Who | What |
+|---|---|---|
+| `GET /events/{id}/reviews` | public (token optional) | Average (1 decimal), count, every review with its author, `reviewsCloseAt`, `settled`, the caller's `canReview` and `myReview`. |
+| `PUT /events/{id}/reviews/me` `{ rating, comment? }` | a checked-in attendee | Creates or replaces their review. |
+
+- **Who can review** (`ReviewServiceImpl`): only participants the organiser scanned (`ATTENDED`), never the organiser, only user events, from the scan until the event's end + 24 h (or until settled). One review per person; saving again replaces it and keeps `createdAt`. Rating 1–5, comment trimmed, blank = none, ≤ 300 characters. Saving locks the event row, like join and check-in.
+- **Ratings everywhere:** `EventSummary` and `EventDetail` carry `averageRating` and `reviewCount` (batched per page in `GET /events`), so lists, the map panel, "My events" and profiles can show stars. `GET /users/{id}` adds `organizedEvents`: the user's own events that are over, newest first, max 20, with ratings (`AttendedEventRepositoryImpl.findPastOrganizedByUserId`).
+- **Settlement job** (`ReviewSettlementJob` → `ReviewSettlementServiceImpl`): every 5 minutes (first run 2 minutes after start). For each user event whose review window is over, in its own transaction: `markSettled` (conditional on `review_settled_at IS NULL`, so it happens once), then, if there are reviews, `changeReliability(organizer, round((avg − 3) × 2.5) …, "EVENT_RATING")`. Settings: `reviews.settlement-job.enabled` (default `true`, `false` in tests), `.interval` (default `PT5M`), `.initial-delay` (default `PT2M`).
+- **Live in the app:** the event page polls `GET /events/{id}/reviews` every 10 s (`useEventReviews`, `REVIEWS_REFRESH_MS`).
+- **App** (`frontend/src/features/events/`): `EventReviews` (section under Participants on user events: gold average stars, "4.5 · 2 reviews", a hint "Reviews close …" / "Ratings settled", the form and the list), `ReviewForm` (5-star picker + optional comment with a n/300 counter, "Save review" / "Update review"; only when `canReview`), `ReviewList` (avatar, username → profile, date, stars, comment), `StarRating` (read-only with half stars, or a picker of five radio buttons), `reviews.ts` (text helpers). `RatingPill` ("★ 4.3 (12)") on event cards and list rows when there are reviews. My events adds "Organised (past)"; public profiles add "Events organised"; the reliability history labels `EVENT_RATING` as "Event rating". Saving refreshes reviews, the event, lists, the map and profiles.
+- **Mock backend** (`frontend/testing/mocks`): same rules and errors, same rounding as the backend; seeded "Coffee cupping morning" (ended ~2 h ago, demo user checked in, reviews open) and "Sushi rolling workshop" (the demo user's, already settled). Frontend tests: `mocks.reviews.test.ts`, `events.reviews.test.tsx` and new cases in the event, profile and users screen tests.
+- **Tests:** 23 — `ReviewRulesTest` (formula table, window), `ReviewServiceImplTest` (create, replace, not checked in, organiser, imported, closed, validation, list state), `ReviewIntegrationTest` (H2 + real endpoints and tokens: scan → review → rating on detail, list and my-events; only attendees; settlement once after the window, +4 for 4.5★; −3 for 2★ and no-review events settled without change; past organised events on the profile), plus a rounding test in `EventMapperImplTest`. `ReviewTestSchema` adds the review table to the H2 schemas of the other event tests.
 
 ### Users and profiles (PLAN 4)
 

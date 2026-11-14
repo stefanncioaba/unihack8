@@ -12,6 +12,7 @@ import { colors, radius } from '@/ui/theme';
 import { categoryMeta } from './categories';
 import { EventArt } from './EventArt';
 import { availabilityLabel, isFull } from './format';
+import { compactRating, ratingSummary } from './reviews';
 
 /** Opens the event details screen. */
 export function openEvent(id: string) {
@@ -23,6 +24,20 @@ function AvailabilityChip({ event }: { event: EventSummary }) {
   const label = availabilityLabel(event);
   if (!label) return null;
   return <StatusChip label={label} tone={isFull(event) ? 'danger' : event.source === 'EXTERNAL' ? 'muted' : 'signal'} />;
+}
+
+/** Small "★ 4.3 (12)" line; nothing when the event has no reviews. */
+export function RatingPill({ event }: { event: EventSummary }) {
+  const label = compactRating(event);
+  if (!label) return null;
+  return (
+    <View style={styles.rating} accessible accessibilityLabel={`Rated ${ratingSummary(event.averageRating, event.reviewCount)}`} testID={`event-rating-${event.id}`}>
+      <Icon name="star" size={11} color={colors.accent} />
+      <Text variant="caption" tone="accent">
+        {label}
+      </Text>
+    </View>
+  );
 }
 
 /** Small calendar page (yellow month strip over the day number) for the corner of event art. */
@@ -70,6 +85,7 @@ export function EventCard({ event, width = 264 }: { event: EventSummary; width?:
             {event.venueName ?? 'Timișoara'}
           </Text>
         </View>
+        <RatingPill event={event} />
         <AvailabilityChip event={event} />
       </View>
     </Pressable>
@@ -97,6 +113,7 @@ export function EventListItem({ event }: { event: EventSummary }) {
         <Text variant="caption" tone="muted" numberOfLines={1}>
           {event.venueName ?? 'Timișoara'}
         </Text>
+        <RatingPill event={event} />
       </View>
       <AvailabilityChip event={event} />
     </Pressable>
@@ -141,4 +158,5 @@ const styles = StyleSheet.create({
   },
   thumb: { width: 64, borderRadius: 10 },
   rowBody: { flex: 1, gap: 2 },
+  rating: { flexDirection: 'row', alignItems: 'center', gap: 3 },
 });

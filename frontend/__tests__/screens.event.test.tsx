@@ -117,6 +117,61 @@ describe('EventDetailsScreen', () => {
   });
 });
 
+describe('EventDetailsScreen: reviews', () => {
+  it('shows the average, the count, the window and every review with its author', async () => {
+    setParams({ id: IDS.coffeeCupping });
+    renderScreen(<EventDetailsScreen />);
+    expect(await screen.findByText('4.5 · 2 reviews')).toBeTruthy();
+    expect(screen.getByLabelText('Rated 4.5 out of 5')).toBeTruthy();
+    expect(screen.getByTestId('review-hint').props.children).toMatch(/^Reviews close /);
+    const stella = within(screen.getByTestId('review-stella_99'));
+    expect(stella.getByText('Lovely people and great coffee.')).toBeTruthy();
+    fireEvent.press(screen.getByRole('button', { name: 'Review by andrei_tm' }));
+    expect(mockRouter.push).toHaveBeenCalledWith(`/users/${IDS.andrei}`);
+  });
+
+  it('lets a checked-in attendee rate the event, then edit the review', async () => {
+    setParams({ id: IDS.coffeeCupping });
+    renderScreen(<EventDetailsScreen />);
+    expect(await screen.findByText('Rate this event')).toBeTruthy();
+    const save = screen.getByRole('button', { name: 'Save review' });
+    expect(save.props.accessibilityState).toMatchObject({ disabled: true });
+
+    fireEvent.press(screen.getByRole('radio', { name: '3 stars' }));
+    fireEvent.changeText(screen.getByLabelText('Comment (optional)'), 'Good beans');
+    expect(screen.getByText('10/300')).toBeTruthy();
+    fireEvent.press(screen.getByRole('button', { name: 'Save review' }));
+
+    expect(await screen.findByText('Edit your review')).toBeTruthy();
+    expect(await screen.findByText('4.0 · 3 reviews')).toBeTruthy();
+    expect(screen.getByText('Review saved')).toBeTruthy();
+    expect(within(screen.getByTestId('review-demo_user')).getByText('Good beans')).toBeTruthy();
+    expect(screen.getByRole('radio', { name: '3 stars' }).props.accessibilityState).toMatchObject({ selected: true });
+  });
+
+  it('shows no form to the organiser and says when the ratings are settled', async () => {
+    setParams({ id: IDS.sushiWorkshop });
+    renderScreen(<EventDetailsScreen />);
+    expect(await screen.findByText('4.5 · 2 reviews')).toBeTruthy();
+    expect(screen.getByText('Ratings settled')).toBeTruthy();
+    expect(screen.queryByTestId('review-form')).toBeNull();
+  });
+
+  it('shows no form to someone who was not checked in, and an empty state', async () => {
+    setParams({ id: IDS.boardGames });
+    renderScreen(<EventDetailsScreen />);
+    expect(await screen.findByText('No reviews yet')).toBeTruthy();
+    expect(screen.queryByTestId('review-form')).toBeNull();
+  });
+
+  it('has no reviews section on imported events', async () => {
+    setParams({ id: IDS.indieRock });
+    renderScreen(<EventDetailsScreen />);
+    await screen.findByText('60–120 lei');
+    expect(screen.queryByTestId('event-reviews')).toBeNull();
+  });
+});
+
 describe('NewEventScreen', () => {
   /** Drops the pin through the location picker. */
   async function pickLocation() {

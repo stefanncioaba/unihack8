@@ -58,7 +58,7 @@ class UserControllerTest {
     @Test
     void updatesUsername() throws Exception {
         when(users.updateUsername(USER_ID, "new_name")).thenReturn(
-                new ProfileResponse(USER_ID, "new_name", 100, Instant.parse("2026-11-13T10:00:00Z"), List.of()));
+                new ProfileResponse(USER_ID, "new_name", 100, Instant.parse("2026-11-13T10:00:00Z"), List.of(), List.of()));
 
         mvc.perform(patch("/users/me").header("Authorization", bearer(USER_ID))
                         .contentType(MediaType.APPLICATION_JSON)
@@ -186,7 +186,8 @@ class UserControllerTest {
     private ProfileResponse profile(UUID id) {
         AttendedEventResponse event = new AttendedEventResponse(UUID.fromString("33333333-3333-3333-3333-333333333333"),
                 "USER", "Meetup", "MEETUP", "Cafe", 45.75, 21.23, Instant.parse("2026-11-12T18:00:00Z"),
-                null, null, null, null, 12, 4);
-        return new ProfileResponse(id, "alex_21", 100, Instant.parse("2026-11-13T10:00:00Z"), List.of(event));
+                null, null, null, null, 12, 4, 4.5, 2);
+        return new ProfileResponse(id, "alex_21", 100, Instant.parse("2026-11-13T10:00:00Z"), List.of(event),
+                List.of(event));
     }
 }
