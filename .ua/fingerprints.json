@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "df392fb065635d4d7590339962ff89a88e09d1c0",
-  "generatedAt": "2026-11-14T12:11:39.053Z",
+  "gitCommitHash": "e9aa0d4fd8bc9c9de881e7509de3c34285ac2e19",
+  "generatedAt": "2026-11-14T12:20:17.040Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,17 +25,17 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "60fb6c95d9a42f206173fad2c85182984eeb0d4a87bff80d2ef694fdb01886fa",
+      "contentHash": "4633bf0b0b6cf8731b559c449f0b3774e6e61a948a26b24bfbbbf80b8597b67f",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 527,
+      "totalLines": 548,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "b553ecb1714e1aa908d361b21a7d6a8ff372418b495ef4bf2048a473f88a63db",
+      "contentHash": "810d3e7be04c5dc49a04b5b49076e6c5b7e013ac0073c2d119cdea3b5bcf94b1",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -2215,7 +2215,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
-      "contentHash": "e9365fcd5b36ebb98f1c5995780f5fe929c0638cdddd7ff623c67135fb2aa1a0",
+      "contentHash": "b27bf94e020617439d000f33e6f0a53f95610ae05b3962f0b12ad25cea5d764a",
       "functions": [
         {
           "name": "SystemPrompt",
@@ -2230,7 +2230,7 @@
           ],
           "returnType": "String",
           "exported": false,
-          "lineCount": 59
+          "lineCount": 60
         }
       ],
       "classes": [
@@ -2241,10 +2241,11 @@
             "build"
           ],
           "properties": [
-            "NOW"
+            "NOW",
+            "SCOPE"
           ],
           "exported": false,
-          "lineCount": 69
+          "lineCount": 103
         }
       ],
       "imports": [
@@ -2274,7 +2275,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 78,
+      "totalLines": 112,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/ai/tool/AiTool.java": {
@@ -18682,7 +18683,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
-      "contentHash": "8d0f065c78b96d76a23c185981a2def76cc2d0ad6547108d41209876755546ec",
+      "contentHash": "a7e986b767a0eb21744a3b72d4de24c071b14aa026365b3d77af5c6c26262cb0",
       "functions": [
         {
           "name": "toolCallLoop",
@@ -18762,6 +18763,20 @@
           "lineCount": 13
         },
         {
+          "name": "refusalIsANormalAnswerWithEmptyLists",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 16
+        },
+        {
+          "name": "refusalAfterCityTurnHasNoCards",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 16
+        },
+        {
           "name": "conversationRules",
           "params": [],
           "returnType": "void",
@@ -18828,6 +18843,8 @@
             "quotaRetryWaitsOnce",
             "providerError",
             "allModelsBusy",
+            "refusalIsANormalAnswerWithEmptyLists",
+            "refusalAfterCityTurnHasNoCards",
             "conversationRules",
             "service",
             "service",
@@ -18845,7 +18862,7 @@
             "tool"
           ],
           "exported": false,
-          "lineCount": 284
+          "lineCount": 320
         }
       ],
       "imports": [
@@ -19103,7 +19120,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 332,
+      "totalLines": 368,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/ai/service/impl/InMemoryChatRateLimiterTest.java": {
@@ -28408,12 +28425,12 @@
     },
     "docs/API.md": {
       "filePath": "docs/API.md",
-      "contentHash": "d9224bde84bd28d9b186c8ef4eb1506461ea7f41b2791e4021e9fd629dd35522",
+      "contentHash": "a0b1b71288e73e9897dad5ed7be8ad3e9894bd60297d4b45b4042b01a33835ec",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 607,
+      "totalLines": 609,
       "hasStructuralAnalysis": false
     },
     "docs/DEMO.md": {
@@ -29888,7 +29905,7 @@
     },
     "frontend/jest.setup.ts": {
       "filePath": "frontend/jest.setup.ts",
-      "contentHash": "74dbcfa1c20a924f708c8f9179198d2bcb0c3e55637004f583f13c1fefd6dc62",
+      "contentHash": "a99e593d118d487a759266f0d2ed822924deee57a7b0ca94cc5d3412a8866a30",
       "functions": [],
       "classes": [],
       "imports": [
@@ -29907,7 +29924,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 134,
+      "totalLines": 135,
       "hasStructuralAnalysis": true
     },
     "frontend/package.json": {
@@ -38926,6 +38943,350 @@
         "useJourney"
       ],
       "totalLines": 133,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "contentHash": "17708bb31a507cd6961f7fa72e34e8c0e45722ebe9beaf28a3ed4448d0751d80",
+      "functions": [
+        {
+          "name": "cases",
+          "params": [],
+          "returnType": "List<Case>",
+          "exported": false,
+          "lineCount": 17
+        },
+        {
+          "name": "scopeHoldsAgainstRealGemini",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 39
+        },
+        {
+          "name": "refuse",
+          "params": [
+            "label",
+            "text"
+          ],
+          "returnType": "Case",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "answer",
+          "params": [
+            "label",
+            "messages"
+          ],
+          "returnType": "Case",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "with",
+          "params": [
+            "earlier",
+            "text"
+          ],
+          "returnType": "List<ChatMessageDto>",
+          "exported": false,
+          "lineCount": 5
+        }
+      ],
+      "classes": [
+        {
+          "name": "ScopeLiveCheckTest",
+          "methods": [
+            "cases",
+            "scopeHoldsAgainstRealGemini",
+            "refuse",
+            "answer",
+            "with"
+          ],
+          "properties": [
+            "USER_LOCATION",
+            "COFFEE_TURN"
+          ],
+          "exported": false,
+          "lineCount": 141
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.client.impl.GeminiRestClient",
+          "specifiers": [
+            "GeminiRestClient"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.config.AiProperties",
+          "specifiers": [
+            "AiProperties"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.config.GeminiClientConfig",
+          "specifiers": [
+            "GeminiClientConfig"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.config.GeminiProperties",
+          "specifiers": [
+            "GeminiProperties"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.domain.ToolContext",
+          "specifiers": [
+            "ToolContext"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.domain.dto.ChatMessageDto",
+          "specifiers": [
+            "ChatMessageDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.domain.dto.ChatRequest",
+          "specifiers": [
+            "ChatRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.domain.dto.ChatResponse",
+          "specifiers": [
+            "ChatResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.domain.dto.LocationDto",
+          "specifiers": [
+            "LocationDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.mapper.impl.ChatResultMapperImpl",
+          "specifiers": [
+            "ChatResultMapperImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.tool.AiTool",
+          "specifiers": [
+            "AiTool"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.tool.impl.PlanRouteTool",
+          "specifiers": [
+            "PlanRouteTool"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.tool.impl.SearchEventsTool",
+          "specifiers": [
+            "SearchEventsTool"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.tool.impl.SearchPlacesTool",
+          "specifiers": [
+            "SearchPlacesTool"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.tool.impl.TransitInfoTool",
+          "specifiers": [
+            "TransitInfoTool"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.places.domain.dto.PlaceSummaryDto",
+          "specifiers": [
+            "PlaceSummaryDto"
+          ]
+        },
+        {
+          "source": "java.io.IOException",
+          "specifiers": [
+            "IOException"
+          ]
+        },
+        {
+          "source": "java.nio.file.Files",
+          "specifiers": [
+            "Files"
+          ]
+        },
+        {
+          "source": "java.nio.file.Path",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.Arrays",
+          "specifiers": [
+            "Arrays"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "java.util.concurrent.CopyOnWriteArrayList",
+          "specifiers": [
+            "CopyOnWriteArrayList"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Tag",
+          "specifiers": [
+            "Tag"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable",
+          "specifiers": [
+            "EnabledIfEnvironmentVariable"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 184,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/ai/service/impl/SystemPromptTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/SystemPromptTest.java",
+      "contentHash": "4cd7ab165c74515054ffd1ba2f300415c6bc07e4fd08d8adca68fa6d382627fb",
+      "functions": [
+        {
+          "name": "promptCarriesScopeBeforeRules",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "scopeListsInAndOut",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "scopeCannotBeTalkedOutOf",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "scopeDoesNotOverRefuse",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "SystemPromptTest",
+          "methods": [
+            "promptCarriesScopeBeforeRules",
+            "scopeListsInAndOut",
+            "scopeCannotBeTalkedOutOf",
+            "scopeDoesNotOverRefuse"
+          ],
+          "properties": [
+            "NOW"
+          ],
+          "exported": false,
+          "lineCount": 43
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.ai.domain.ToolContext",
+          "specifiers": [
+            "ToolContext"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 54,
       "hasStructuralAnalysis": true
     }
   }

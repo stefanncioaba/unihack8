@@ -33,8 +33,8 @@
       "Jest"
     ],
     "description": "Hackathon mobile app for Timișoara (Connected Communities): Spring Boot API + Supabase + Expo app with events and QR reliability points, places map, live STPT transit, routing and an AI guide.",
-    "analyzedAt": "2026-11-14T12:11:37.988Z",
-    "gitCommitHash": "df392fb065635d4d7590339962ff89a88e09d1c0"
+    "analyzedAt": "2026-11-14T12:20:16.619Z",
+    "gitCommitHash": "e9aa0d4fd8bc9c9de881e7509de3c34285ac2e19"
   },
   "nodes": [
     {
@@ -5530,51 +5530,6 @@
         "validation"
       ],
       "complexity": "simple"
-    },
-    {
-      "id": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
-      "type": "file",
-      "name": "SystemPrompt.java",
-      "filePath": "backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
-      "summary": "Builds the Gemini system instruction for the assistant, embedding the current Timisoara time, the user location status and rules for using tools and quoting only stored data.",
-      "tags": [
-        "ai-assistant",
-        "prompt-engineering",
-        "utility"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "class:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java:SystemPrompt",
-      "type": "class",
-      "name": "SystemPrompt",
-      "filePath": "backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
-      "lineRange": [
-        9,
-        74
-      ],
-      "summary": "Package-private utility class holding the system prompt template.",
-      "tags": [
-        "utility",
-        "prompt-engineering"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java:build",
-      "type": "function",
-      "name": "build",
-      "filePath": "backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
-      "lineRange": [
-        18,
-        73
-      ],
-      "summary": "Renders the system prompt text from the ToolContext (current time, origin and whether location is known).",
-      "tags": [
-        "prompt-engineering",
-        "ai-assistant"
-      ],
-      "complexity": "moderate"
     },
     {
       "id": "file:backend/src/main/java/com/unihack8/backend/ai/tool/AiTool.java",
@@ -21503,16 +21458,66 @@
       "complexity": "simple"
     },
     {
+      "id": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
+      "type": "file",
+      "name": "SystemPrompt.java",
+      "filePath": "backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
+      "summary": "Builds the Gemini system instruction for the Timisoara city-guide assistant: current local time, user location status, the strict SCOPE rule for refusing off-topic requests, and ten numbered rules for tool use, prices, routes (plan_route start-point guidance), opening hours, events, transit, bolding and language.",
+      "tags": [
+        "ai-assistant",
+        "prompt-engineering",
+        "scope-guard",
+        "utility",
+        "tested"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Uses Java text blocks with trailing backslash line continuations and String.formatted() to inject time, location and the SCOPE constant."
+    },
+    {
+      "id": "class:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java:SystemPrompt",
+      "type": "class",
+      "name": "SystemPrompt",
+      "filePath": "backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
+      "lineRange": [
+        9,
+        111
+      ],
+      "summary": "Package-private final utility class holding the SCOPE constant (in/out-of-scope topics, refusal format, jailbreak resistance, no over-refusal) and the prompt template.",
+      "tags": [
+        "utility",
+        "prompt-engineering",
+        "scope-guard"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java:build",
+      "type": "function",
+      "name": "build",
+      "filePath": "backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
+      "lineRange": [
+        51,
+        110
+      ],
+      "summary": "Renders the full system prompt from a ToolContext: formats the Timisoara time, describes whether distances are from the user or Piata Victoriei, and places the SCOPE section before the numbered rules, including when plan_route should omit from_lat/from_lon.",
+      "tags": [
+        "prompt-engineering",
+        "ai-assistant",
+        "scope-guard"
+      ],
+      "complexity": "moderate"
+    },
+    {
       "id": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
       "type": "file",
       "name": "AiChatServiceImplTest.java",
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
-      "summary": "JUnit tests for AiChatServiceImpl's Gemini tool-calling loop using in-file FakeGemini and FakeTool doubles: tool rounds, routes[] from plan_route, tool errors, forced final answer, model fallback, quota retry, provider errors and conversation trimming.",
+      "summary": "JUnit tests for AiChatServiceImpl's Gemini tool-calling loop using in-file FakeGemini and FakeTool doubles: tool rounds, routes[] from plan_route, tool errors, forced final answer, model fallback, quota retry, provider errors, scope refusals with empty lists, and conversation trimming.",
       "tags": [
         "test",
         "unit-test",
         "ai-assistant",
-        "service",
+        "scope-guard",
         "test-double"
       ],
       "complexity": "complex"
@@ -21524,9 +21529,9 @@
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
       "lineRange": [
         48,
-        331
+        367
       ],
-      "summary": "Test class with a fake Gemini client and fake tool that drives the AI chat service without network, including planned routes returned in the answer (PLAN 11.6, 18.2).",
+      "summary": "Test class driving the AI chat service without network through a queued fake Gemini client and a fake place tool, covering planned routes (PLAN 18.2) and refusals (PLAN 19.4).",
       "tags": [
         "test",
         "junit",
@@ -21565,6 +21570,23 @@
         "test",
         "routing",
         "ai-assistant"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java:noRoutesIsEmpty",
+      "type": "function",
+      "name": "noRoutesIsEmpty",
+      "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
+      "lineRange": [
+        112,
+        116
+      ],
+      "summary": "Checks that an answer without any plan_route call returns an empty, non-null routes list.",
+      "tags": [
+        "test",
+        "routing",
+        "edge-case"
       ],
       "complexity": "simple"
     },
@@ -21671,13 +21693,47 @@
       "complexity": "simple"
     },
     {
+      "id": "function:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java:refusalIsANormalAnswerWithEmptyLists",
+      "type": "function",
+      "name": "refusalIsANormalAnswerWithEmptyLists",
+      "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
+      "lineRange": [
+        221,
+        236
+      ],
+      "summary": "Checks an off-topic request (Python script) yields a normal one-sentence refusal with no tool run, empty non-null places/events/sources, and that the system instruction contains SystemPrompt.SCOPE (PLAN 19.4).",
+      "tags": [
+        "test",
+        "scope-guard",
+        "ai-assistant"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java:refusalAfterCityTurnHasNoCards",
+      "type": "function",
+      "name": "refusalAfterCityTurnHasNoCards",
+      "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
+      "lineRange": [
+        239,
+        254
+      ],
+      "summary": "Checks a Romanian refusal following an in-scope coffee turn returns no place, event or source cards from the earlier answer.",
+      "tags": [
+        "test",
+        "scope-guard",
+        "conversation"
+      ],
+      "complexity": "simple"
+    },
+    {
       "id": "function:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java:conversationRules",
       "type": "function",
       "name": "conversationRules",
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
       "lineRange": [
-        221,
-        239
+        257,
+        275
       ],
       "summary": "Checks conversation trimming: oldest messages dropped past the limit, leading assistant messages dropped, and the last message must be from the user.",
       "tags": [
@@ -21688,17 +21744,115 @@
       "complexity": "simple"
     },
     {
+      "id": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "type": "file",
+      "name": "ScopeLiveCheckTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "summary": "Opt-in live check (tag live, needs GEMINI_API_KEY) sending a fixed list of off-topic, jailbreak, mixed and in-scope prompts to real Gemini with the real system prompt and recording tool wrappers, asserting refusals call no tools and name nothing, and writing a results table to build/live-scope-check.txt.",
+      "tags": [
+        "test",
+        "integration-test",
+        "scope-guard",
+        "ai-assistant",
+        "live"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "JUnit 5 @Tag plus @EnabledIfEnvironmentVariable keeps the network test out of normal runs; a private record models each prompt case."
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java:ScopeLiveCheckTest",
+      "type": "class",
+      "name": "ScopeLiveCheckTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "lineRange": [
+        43,
+        183
+      ],
+      "summary": "Live Gemini scope test class with prompt cases, helpers and a RecordingTool double that keeps real tool declarations but returns fixed results (PLAN 19.5).",
+      "tags": [
+        "test",
+        "scope-guard",
+        "live"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java:cases",
+      "type": "function",
+      "name": "cases",
+      "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "lineRange": [
+        60,
+        76
+      ],
+      "summary": "Builds the fixed prompt list: off-topic and trick prompts that must be refused, plus normal questions and follow-ups that must be answered with tools.",
+      "tags": [
+        "test",
+        "fixture",
+        "scope-guard"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java:scopeHoldsAgainstRealGemini",
+      "type": "function",
+      "name": "scopeHoldsAgainstRealGemini",
+      "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "lineRange": [
+        79,
+        117
+      ],
+      "summary": "Wires a real GeminiRestClient and AiChatServiceImpl with recording tools, sends each case with throttling, checks refusal/answer behaviour and writes a markdown results table before asserting no failures.",
+      "tags": [
+        "test",
+        "integration-test",
+        "scope-guard"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/SystemPromptTest.java",
+      "type": "file",
+      "name": "SystemPromptTest.java",
+      "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/SystemPromptTest.java",
+      "summary": "Unit tests asserting SystemPrompt carries the strict SCOPE section before the numbered rules and that SCOPE lists in/out-of-scope topics, jailbreak resistance and no-over-refusal guidance (PLAN 19.1-19.3).",
+      "tags": [
+        "test",
+        "unit-test",
+        "scope-guard",
+        "prompt-engineering"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/src/test/java/com/unihack8/backend/ai/service/impl/SystemPromptTest.java:SystemPromptTest",
+      "type": "class",
+      "name": "SystemPromptTest",
+      "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/SystemPromptTest.java",
+      "lineRange": [
+        11,
+        53
+      ],
+      "summary": "Test class checking the scope rule text and its placement in the built prompt with and without a user location.",
+      "tags": [
+        "test",
+        "junit",
+        "scope-guard"
+      ],
+      "complexity": "simple"
+    },
+    {
       "id": "document:DOCS.md",
       "type": "document",
       "name": "DOCS.md",
       "filePath": "DOCS.md",
-      "summary": "Living project documentation covering architecture, configuration, database, external data sources (STPT, LiveTickets, OSM, Gemini), reliability rules, and per-feature notes for every PLAN task, now including the task 18 AI navigation Go button and journey mode.",
+      "summary": "Living project documentation covering architecture, configuration, database, external data sources (STPT, LiveTickets, OSM, Gemini), reliability rules and per-feature notes for every PLAN task, now including task 18 AI navigation (route cards with Go, journey mode on the map) and task 19 scope guard (SystemPrompt.SCOPE, refusal as a normal 200 with empty lists, SystemPromptTest and the opt-in ScopeLiveCheckTest results table).",
       "tags": [
         "documentation",
         "architecture",
         "feature-notes",
-        "ai-navigation",
-        "development"
+        "ai-assistant",
+        "scope-guard"
       ],
       "complexity": "complex"
     },
@@ -21707,7 +21861,7 @@
       "type": "document",
       "name": "PLAN.md",
       "filePath": "PLAN.md",
-      "summary": "Hackathon task plan split into tracks A/B/C with dependency map and definition of done; lists tasks 1-20 with checkboxes, including task 18 (AI navigation Go button, mostly done) and new tasks 19 (AI stays on topic) and 20 (trip cost in AI answers).",
+      "summary": "Task-by-task hackathon plan split into tracks A/B/C with checkbox subtasks from foundation through integration; tasks 18 (AI navigation Go button and journey mode) and 19 (AI stays on topic: strict scope, no over-refusal, refusal answer shape, tests) are ticked, with task 20 (trip cost) pending.",
       "tags": [
         "documentation",
         "planning",
@@ -21721,13 +21875,13 @@
       "type": "document",
       "name": "API.md",
       "filePath": "docs/API.md",
-      "summary": "REST API contract between the Spring Boot backend and the mobile app: conventions, paging and error shapes, shared DTOs, and endpoints for users, events, QR check-in, places, STPT transit, routing and POST /ai/chat, whose answer now includes routes[] with startsFromUser for the Go button.",
+      "summary": "REST API contract for the Spring Boot backend: conventions, shared objects and endpoints for users, events, check-in, places, STPT transit, routing and the AI assistant; POST /ai/chat documents routes[] with from/to, mode and startsFromUser for the Go button, and that off-topic requests get a normal 200 one-sentence refusal with empty lists.",
       "tags": [
         "documentation",
         "api-schema",
-        "api-contract",
-        "rest",
-        "ai-navigation"
+        "rest-api",
+        "contract",
+        "ai-assistant"
       ],
       "complexity": "complex"
     }
@@ -25627,13 +25781,6 @@
     },
     {
       "source": "function:backend/src/main/java/com/unihack8/backend/ai/service/impl/AiChatServiceImpl.java:chat",
-      "target": "function:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java:build",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:backend/src/main/java/com/unihack8/backend/ai/service/impl/AiChatServiceImpl.java:chat",
       "target": "function:backend/src/main/java/com/unihack8/backend/ai/service/impl/InMemoryChatRateLimiter.java:acquire",
       "type": "calls",
       "direction": "forward",
@@ -25673,20 +25820,6 @@
       "type": "exports",
       "direction": "forward",
       "weight": 0.8
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
-      "target": "class:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java:SystemPrompt",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
-      "target": "function:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java:build",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
     },
     {
       "source": "file:backend/src/main/java/com/unihack8/backend/ai/tool/AiTool.java",
@@ -34964,6 +35097,20 @@
       "weight": 0.8
     },
     {
+      "source": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
+      "target": "class:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java:SystemPrompt",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
+      "target": "function:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java:build",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
       "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
       "target": "class:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java:AiChatServiceImplTest",
       "type": "contains",
@@ -34980,6 +35127,13 @@
     {
       "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
       "target": "function:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java:plannedRoutesInTheAnswer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java:noRoutesIsEmpty",
       "type": "contains",
       "direction": "forward",
       "weight": 1
@@ -35028,10 +35182,73 @@
     },
     {
       "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java:refusalIsANormalAnswerWithEmptyLists",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java:refusalAfterCityTurnHasNoCards",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
       "target": "function:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java:conversationRules",
       "type": "contains",
       "direction": "forward",
       "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java:ScopeLiveCheckTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java:cases",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "target": "function:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java:scopeHoldsAgainstRealGemini",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/SystemPromptTest.java",
+      "target": "class:backend/src/test/java/com/unihack8/backend/ai/service/impl/SystemPromptTest.java:SystemPromptTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/SystemPromptTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
     },
     {
       "source": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/AiChatServiceImpl.java",
@@ -35041,36 +35258,50 @@
       "weight": 0.5
     },
     {
-      "source": "file:backend/src/main/java/com/unihack8/backend/ai/tool/impl/PlanRouteTool.java",
-      "target": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
+      "source": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/AiChatServiceImpl.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
       "type": "tested_by",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "file:backend/src/main/java/com/unihack8/backend/ai/mapper/impl/ChatResultMapperImpl.java",
-      "target": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
-      "type": "tested_by",
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/SystemPromptTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
+      "type": "depends_on",
       "direction": "forward",
-      "weight": 0.5
+      "weight": 0.6
     },
     {
-      "source": "function:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java:toolCallLoop",
-      "target": "function:backend/src/main/java/com/unihack8/backend/ai/service/impl/AiChatServiceImpl.java:chat",
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/AiChatServiceImpl.java",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/AiChatServiceImpl.java",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "class:backend/src/test/java/com/unihack8/backend/ai/service/impl/SystemPromptTest.java:SystemPromptTest",
+      "target": "function:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java:build",
       "type": "calls",
       "direction": "forward",
       "weight": 0.8
     },
     {
-      "source": "function:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java:plannedRoutesInTheAnswer",
-      "target": "function:backend/src/main/java/com/unihack8/backend/ai/service/impl/AiChatServiceImpl.java:chat",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java:plannedRoutesInTheAnswer",
-      "target": "function:backend/src/main/java/com/unihack8/backend/ai/tool/impl/PlanRouteTool.java:execute",
+      "source": "function:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java:scopeHoldsAgainstRealGemini",
+      "target": "function:backend/src/main/java/com/unihack8/backend/ai/config/GeminiClientConfig.java:geminiHttpClient",
       "type": "calls",
       "direction": "forward",
       "weight": 0.8
@@ -35328,6 +35559,41 @@
       "weight": 0.5
     },
     {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/SystemPromptTest.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/api/types.ai.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/__tests__/map.journey.test.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
       "source": "document:PLAN.md",
       "target": "document:DOCS.md",
       "type": "related",
@@ -35407,6 +35673,69 @@
     {
       "source": "document:PLAN.md",
       "target": "file:frontend/src/features/journey/useJourney.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/SystemPromptTest.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/domain/dto/ChatRouteDto.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/domain/dto/RoutePointDto.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/mapper/impl/ChatResultMapperImpl.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:frontend/src/features/journey/JourneyPanel.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:frontend/src/features/journey/navigation.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:frontend/src/features/journey/progress.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:frontend/src/app/(tabs)/map.tsx",
       "type": "documents",
       "direction": "forward",
       "weight": 0.5
@@ -35540,6 +35869,34 @@
     {
       "source": "document:docs/API.md",
       "target": "file:frontend/src/features/ai/RouteCards.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/domain/ToolContext.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/tool/impl/PlanRouteTool.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/API.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/mapper/impl/ChatResultMapperImpl.java",
       "type": "documents",
       "direction": "forward",
       "weight": 0.5
@@ -39819,6 +40176,150 @@
     {
       "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/InMemoryChatRateLimiterTest.java",
       "target": "file:backend/src/test/java/com/unihack8/backend/support/MutableClock.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/client/impl/GeminiRestClient.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/config/AiProperties.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/config/GeminiClientConfig.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/config/GeminiProperties.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/domain/ToolContext.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/domain/dto/ChatMessageDto.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/domain/dto/ChatRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/domain/dto/ChatResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/domain/dto/LocationDto.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/mapper/impl/ChatResultMapperImpl.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/tool/AiTool.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/tool/impl/PlanRouteTool.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/tool/impl/SearchEventsTool.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/tool/impl/SearchPlacesTool.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/tool/impl/TransitInfoTool.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceSummaryDto.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/SystemPromptTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/domain/ToolContext.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/SystemPromptTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -46873,7 +47374,9 @@
         "file:backend/src/test/java/com/unihack8/backend/reliability/ReliabilityIntegrationTest.java",
         "file:backend/src/test/java/com/unihack8/backend/reliability/config/NoShowJobTest.java",
         "config:backend/src/test/resources/application.properties",
-        "file:backend/src/test/java/com/unihack8/backend/ai/domain/ToolContextTest.java"
+        "file:backend/src/test/java/com/unihack8/backend/ai/domain/ToolContextTest.java",
+        "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+        "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/SystemPromptTest.java"
       ]
     },
     {
