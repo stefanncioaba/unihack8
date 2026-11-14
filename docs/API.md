@@ -4,7 +4,7 @@ The contract between the Spring backend (`backend/`) and the Expo app (`frontend
 The app always calls the real backend (PLAN 17.1); the Jest tests use a mock backend built from the examples below (`frontend/testing/mocks/`),
 so **change this file first, then the code**, and tell the team when you do.
 
-Covers PLAN tasks 4–11. Sign-up and login are not here: the app does them directly with Supabase.
+Covers PLAN tasks 4–11, 22, 24 and 25 (Neighbour Help Board). Sign-up and login are not here: the app does them directly with Supabase.
 
 ---
 
@@ -74,6 +74,12 @@ For `VALIDATION_FAILED`, `fields` lists per-field errors when available (for exa
 | 409 | `ALREADY_CHECKED_IN` | This ticket was already scanned. |
 | 403 | `NOT_ATTENDED` | Only participants the organiser checked in can review the event. |
 | 409 | `REVIEWS_CLOSED` | Reviews closed (24 h after the event ended, or the rating was settled). |
+| 403 | `NOT_REQUESTER` | Only the person who posted the help request can do this (cancel, scan). |
+| 409 | `IS_REQUESTER` | You cannot offer help on your own request. |
+| 409 | `ALREADY_OFFERED` | You already offered to help with this request. |
+| 409 | `NOT_OFFERED` | No current offer from you (or from the scanned helper). |
+| 409 | `HELP_CLOSED` | The help request is closed: already helped, cancelled, or 24 h passed. |
+| 409 | `WRONG_REQUEST` | The scanned helper ticket belongs to another help request. |
 | 429 | `RATE_LIMITED` | Reserved. The AI chat no longer has a per-user limit, so nothing returns it today. |
 | 500 | `INTERNAL_ERROR` | Unexpected server error (details are only in the backend log). |
 | 503 | `AI_UNAVAILABLE` | Gemini did not answer. |
@@ -428,6 +434,126 @@ Errors: `400 VALIDATION_FAILED`, `403 NOT_ATTENDED` (not checked in), `403 EXTER
 
 ---
 
+## Neighbour Help Board — PLAN task 25
+
+"Neighbours helping neighbours, with trust built in." A user posts that they need small help; other users offer to help.
+The requester picks whom to trust by their civic trust score, meets them, and scans the helper's QR code.
+**The first helper who is scanned closes the request.** All endpoints need a token.
+
+Rules (see `DOCS.md` → Reliability rules):
+
+- The scanned helper gets **+5** (`HELPED` log row; in `GET /users/{id}/reliability` its `eventId` and `eventTitle` are `null`). Nobody else's score changes: not the requester, not the other helpers.
+- Withdrawing an offer and cancelling a request are free. There is no limit on how many people can offer.
+- A request that nobody closed **disappears 24 hours after it was posted** (`expiresAt`): it leaves the board and can no longer be offered on or scanned. No points change.
+
+### HelpRequestSummary
+
+```json
+{
+  "id": "5d1e2f3a-4b5c-4d6e-8f70-1a2b3c4d5e6f",
+  "title": "Borrow a ladder for 30 minutes",
+  "category": "BORROW",
+  "address": "Strada Paris 12",
+  "lat": 45.7489,
+  "lon": 21.2318,
+  "requester": { "id": "8b0f6c1e-2d3a-4f5b-9c7d-1e2f3a4b5c6d", "username": "stefan", "reliabilityScore": 115 },
+  "status": "OPEN",
+  "createdAt": "2026-11-14T17:00:00Z",
+  "expiresAt": "2026-11-15T17:00:00Z",
+  "offerCount": 2,
+  "myOffer": "OFFERED"
+}
+```
+
+- `category` is one of `BORROW` (lend a tool or thing), `CARRY` (carry or move something), `PETS` (walk or feed a pet), `ERRANDS` (shopping, pick-ups), `REPAIRS` (small fixes, tech help), `OTHER`.
+- `status` is `OPEN`, `HELPED` (closed by a scan), `CANCELLED` (by the requester) or `EXPIRED` (24 h passed while open).
+- `address`, `lat` and `lon` are optional (`lat`/`lon` both or neither). `offerCount` counts current offers (`OFFERED` and `HELPED`).
+- `myOffer` is the caller's offer status, or `null`: `OFFERED`, `WITHDRAWN`, `HELPED` (the caller was scanned) or `NOT_NEEDED` (someone else was scanned first).
+
+### `GET /help-requests`
+
+The board: open, not expired requests, newest first, at most 50. Optional `near=lat,lon` sorts by distance instead (requests without a location last).
+Optional `bbox=minLon,minLat,maxLon,maxLat` (same format as `GET /events?bbox=`) keeps only requests **with a location inside the box** (edges included; min greater than max is a 400) — used by Neighbourhood Pulse for one area's requests; it combines with `near`.
+Answer: array of `HelpRequestSummary`. Errors: `400 VALIDATION_FAILED` (bad `near` or `bbox`).
+
+### `GET /help-requests/mine`
+
+```json
+{ "requested": [ HelpRequestSummary ], "offered": [ HelpRequestSummary ] }
+```
+
+The caller's own requests and the requests they offered on (every status, `WITHDRAWN` offers left out), newest first, at most 20 each.
+
+### `POST /help-requests`
+
+```json
+{ "title": "Borrow a ladder for 30 minutes", "description": "Changing a bulb in the hallway.", "category": "BORROW",
+  "address": "Strada Paris 12", "lat": 45.7489, "lon": 21.2318 }
+```
+
+`title` 3–80 characters, `description` optional ≤ 500, `address` optional ≤ 120, `category` from the list, `lat`/`lon` both or neither and valid.
+Answer `201`: `HelpRequestDetail`. Errors: `400 VALIDATION_FAILED`.
+
+### `GET /help-requests/{id}`
+
+`HelpRequestDetail` = `HelpRequestSummary` plus:
+
+```json
+{
+  "description": "Changing a bulb in the hallway.",
+  "closedAt": null,
+  "helper": null,
+  "offers": [
+    { "user": { "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d", "username": "stella_99", "reliabilityScore": 95 },
+      "status": "OFFERED", "offeredAt": "2026-11-14T17:10:00Z" }
+  ],
+  "isRequester": false,
+  "canOffer": false
+}
+```
+
+`helper` is the scanned helper (`UserSummary`) once `HELPED`. `offers` lists everyone who offered except withdrawn offers, oldest first.
+`canOffer` is true when the request is `OPEN`, the caller is not the requester and has no current offer.
+Expired and closed requests stay readable here. Errors: `404 NOT_FOUND`.
+
+### `DELETE /help-requests/{id}`
+
+Requester only, while `OPEN`: sets `CANCELLED` and `closedAt`. Offers keep their status (no points change for anyone). Answer: `HelpRequestDetail`.
+Errors: `403 NOT_REQUESTER`, `409 HELP_CLOSED` (already helped, cancelled or expired).
+
+### `POST /help-requests/{id}/offers`
+
+Offer to help. Answer `201`: `{ "requestId": "…", "qrToken": "…", "status": "OFFERED" }`. Offering again after withdrawing keeps the same QR token.
+Errors: `409 IS_REQUESTER`, `409 ALREADY_OFFERED`, `409 HELP_CLOSED`.
+
+### `DELETE /help-requests/{id}/offers/me`
+
+Withdraw an `OFFERED` offer; free. Answer: `{ "requestId": "…", "status": "WITHDRAWN" }`. Errors: `409 NOT_OFFERED`, `409 HELP_CLOSED`.
+
+### `GET /help-requests/{id}/my-ticket`
+
+The helper's QR code (it contains only `qrToken`): `{ "requestId": "…", "qrToken": "…", "status": "OFFERED" }`.
+`status` is `OFFERED`, `HELPED` or `NOT_NEEDED`. Errors: `409 NOT_OFFERED` (never offered, or withdrew).
+
+### `POST /help-requests/{id}/check-in`
+
+The requester scans a helper's QR code: `{ "token": "…" }`. Answer:
+
+```json
+{
+  "user": { "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d", "username": "stella_99", "reliabilityScore": 100 },
+  "status": "HELPED",
+  "pointsChange": 5
+}
+```
+
+The helper's offer becomes `HELPED`, every other offer `NOT_NEEDED` (no points), the request `HELPED` with `closedAt`.
+Errors: `403 NOT_REQUESTER`, `404 TICKET_NOT_FOUND` (unknown token or not a ticket), `409 WRONG_REQUEST` (ticket of another request),
+`409 NOT_OFFERED` (the helper withdrew), `409 HELP_CLOSED` (already helped — also a second scan — cancelled or expired), `400 VALIDATION_FAILED` (blank token).
+Checks run in this order: blank token (400), unknown request (404), `NOT_REQUESTER`, `HELP_CLOSED`, `TICKET_NOT_FOUND`, `WRONG_REQUEST`, `NOT_OFFERED`.
+
+---
+
 ## Places — PLAN task 8
 
 ### `GET /places` — public
@@ -610,6 +736,82 @@ When no arrival is known (or STPT's arrivals are down) `nextArrival` is `null` a
 
 ---
 
+## Neighbourhoods — PLAN task 24
+
+### `GET /neighbourhoods/pulse` — public
+
+Every Timișoara area as a live card, **busiest first** (by `score`). Areas are hard-coded circles (`id`, centre, `radiusMeters`); an event, place, stop or vehicle belongs to the nearest centre whose circle covers it. Cached for 30 s on the server. A source that is down only empties its own section: STPT down → `transit.available: false`; events or places down → zero counts. Never 503.
+
+```json
+{
+  "generatedAt": "2026-11-14T18:00:00Z",
+  "areas": [
+    {
+      "id": "cetate", "name": "Cetate", "lat": 45.7568, "lon": 21.229, "radiusMeters": 750,
+      "level": "BUSY", "score": 21,
+      "events": {
+        "nowCount": 1, "tonightCount": 2, "freeSpots": 6,
+        "highlights": [
+          { "id": "…", "title": "Board games night", "category": "GAMES", "venueName": "Scârț Loc Lejer",
+            "startsAt": "2026-11-14T17:00:00Z", "endsAt": "2026-11-14T21:00:00Z",
+            "capacity": 12, "spotsLeft": 4, "imageUrl": null, "happeningNow": true }
+        ]
+      },
+      "transit": { "available": true, "lines": ["1", "2", "8", "E2"], "stopCount": 5, "liveVehicles": 3,
+                   "alerts": [ { "id": "A155", "title": "…", "description": "…" } ] },
+      "places": { "total": 120, "openNow": 64, "topCategories": ["restaurant", "cafe"] },
+      "people": { "going": 9, "reliableGoing": 7 }
+    }
+  ]
+}
+```
+
+- `events`: **now** = started and not ended (no `endsAt` → counts as 3 h long); **tonight** = starts later, before 05:00 local time. `freeSpots` sums `spotsLeft` of limited events. `highlights`: at most 3, running ones first, then by start.
+- `transit.lines`: line names of the stops inside the area; `alerts`: STPT alerts that name one of those lines after a line word ("linia 8", "tramvaiele 1 și 2") or one of the area's stop names.
+- `places.openNow`: places whose OpenStreetMap opening hours say open now (unknown hours are not counted); `topCategories`: up to 3 categories with the most open places.
+- `people`: different users `JOINED` or `ATTENDED` in the area's events now/tonight; `reliableGoing` = reliability score ≥ 100 (the starting score).
+- `level`: `score = 4 × now + 2 × tonight + going + min(openNow / 5, 8) + min(liveVehicles, 5)`; `BUSY` from 15, `STEADY` from 5, else `QUIET`.
+
+---
+
+## News — PLAN task 27
+
+Timișoara news from local news sites' RSS feeds (TION, Opinia Timișoarei, Timișoara Știri, Banatul Azi). **Timișoara only:** an article is kept when its headline, text or categories name the city ("Timișoara", "timișorean(i)", with or without diacritics); links and the site's own name do not count, and county-only news (Lugoj, "județul Timiș") is left out. Each site is read at most every 10 minutes; the app never calls the sites. Only the headline, a short summary (≤ 220 characters) and the site's picture are returned; `url` opens the full story on the site.
+
+### `GET /news?source=tion&q=tramvai&page=0&size=20` — public
+
+All parameters optional. `source`: one site id from `GET /news/sources` (unknown id → `400 VALIDATION_FAILED` listing the valid ids). `q`: any word of 3+ letters in the headline or summary (accents ignored). Newest first (articles without a date last); the same story on two sites is listed once (the newest: headlines sharing ≥ 60 % and at least 3 meaningful words, published within 12 h). Paged like every list (`size` ≤ 100). `503 SOURCE_UNAVAILABLE` only when no asked site can be read and nothing is cached; one site down just leaves its articles out (or shows its last cached ones).
+
+```json
+{
+  "items": [
+    {
+      "id": "6f1c2a0e-1b7d-3c4e-9a51-2f0d8e7b6a43",
+      "sourceId": "tion",
+      "sourceName": "TION",
+      "title": "Primăria Timișoara montează 300 de suporturi pentru biciclete",
+      "summary": "Suporturile vor fi montate în tot orașul până la sfârșitul anului…",
+      "url": "https://www.tion.ro/...",
+      "imageUrl": "https://www.tion.ro/wp-content/uploads/....jpg",
+      "publishedAt": "2026-11-14T12:21:00Z"
+    }
+  ],
+  "page": 0, "size": 20, "totalItems": 39, "totalPages": 2
+}
+```
+
+- `id`: stable, built from the article link. `imageUrl`: from the feed, else the site's WordPress featured image; `null` when there is none. `publishedAt`: `null` when the site gave no date. Only `http(s)` links and pictures are returned.
+
+### `GET /news/sources` — public
+
+```json
+[ { "id": "tion", "name": "TION", "siteUrl": "https://www.tion.ro", "available": true, "stale": false, "articleCount": 5, "updatedAt": "2026-11-14T17:01:06Z" } ]
+```
+
+`available: false` = the site cannot be read and nothing is cached; `stale: true` = the last read failed and older articles are shown; `articleCount` = its Timișoara articles kept now.
+
+---
+
 ## Routing — PLAN task 10
 
 ### `GET /routes/plan?from=45.7537,21.2257&to=45.7489,21.2318&mode=TRANSIT`
@@ -687,6 +889,8 @@ Answer — `reply` is plain text (no markdown) in the user's language (Romanian 
 - `basis`: `TOTAL` when the answer is one plan (at most one place and at most one event, e.g. "concert, then pizza"; the totals are plain sums of the lines). `OPTIONS` when it offers alternatives (two or more places, or two or more events — the user picks one of each kind). The app labels it "Average total", "Average per option" (one kind) or "Average per plan" (alternatives plus another kind).
 - `note`: short remark (saved prices may have changed; recommendations without a stored price: "Not included (price unknown): …" for `TOTAL`, "No stored price for …" for `OPTIONS`).
 
+`routes[].leaveNow` (PLAN 26, "Leave now" box) says when to leave to catch the route's first tram/trolleybus/bus. It is `null` for walking routes, when `startsFromUser` is `false`, and for routes planned for a later time (`depart_at`). Fields: `line`, `vehicleType` (`TRAM` | `TROLLEYBUS` | `BUS`), `headsign` (or `null`), `stopName` (where to get on), `walkMinutes` (from the user to that stop), `boardAt` (when the vehicle the user can still catch reaches the stop), `leaveAt` (`boardAt` minus the walk and one spare minute; never before the answer time), `source` (`LIVE` = tracked vehicle, `TIMETABLE` = STPT's scheduled time, `PLAN` = the route planner's time because STPT's arrivals were unavailable), and `missedBoardAt` (an earlier vehicle of the same line that leaves before the user can reach the stop, or `null`). The app counts down to `leaveAt` itself.
+
 ```json
 {
   "reply": "- 5 to go: 127 m away (2 min walk). Espresso about 5 lei. Open until 19:00.\nPrices may have changed.",
@@ -700,7 +904,27 @@ Answer — `reply` is plain text (no markdown) in the user's language (Romanian 
       "mode": "WALK",
       "durationMinutes": 2,
       "distanceMeters": 127,
-      "startsFromUser": true
+      "startsFromUser": true,
+      "leaveNow": null
+    },
+    {
+      "from": { "lat": 45.7537, "lon": 21.2257, "name": "Your location" },
+      "to": { "lat": 45.7505, "lon": 21.2075, "name": "Gara de Nord" },
+      "mode": "TRANSIT",
+      "durationMinutes": 20,
+      "distanceMeters": 3400,
+      "startsFromUser": true,
+      "leaveNow": {
+        "line": "1",
+        "vehicleType": "TRAM",
+        "headsign": "Gara de Nord",
+        "stopName": "Piața Libertății",
+        "walkMinutes": 4,
+        "boardAt": "2026-11-14T18:41:00Z",
+        "leaveAt": "2026-11-14T18:36:00Z",
+        "source": "LIVE",
+        "missedBoardAt": "2026-11-14T18:33:00Z"
+      }
     }
   ],
   "cost": {

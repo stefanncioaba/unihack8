@@ -43,6 +43,9 @@ function Gate() {
           <Stack.Screen name="(tabs)" />
           <Stack.Screen name="events" />
           <Stack.Screen name="users" />
+          <Stack.Screen name="pulse" />
+          <Stack.Screen name="help" />
+          <Stack.Screen name="news" />
         </Stack.Protected>
         <Stack.Protected guard={!signedIn}>
           <Stack.Screen name="(auth)" />

@@ -3,7 +3,9 @@ package com.unihack8.backend.common.exception;
 import com.unihack8.backend.common.dto.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
+import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.async.AsyncRequestNotUsableException;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
@@ -127,8 +130,42 @@ public class GlobalExceptionHandler {
     // Anything unexpected: log it, never leak internals to the client.
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleUnexpected(Exception ex, HttpServletRequest request) {
+        if (isClientDisconnect(ex)) {
+            // The app cancelled the request (e.g. the map moved and a newer /places call replaced it).
+            // Nobody is listening, so write nothing and keep it out of the error log.
+            log.debug("Client disconnected during {} {}: {}", request.getMethod(), request.getRequestURI(),
+                    rootMessage(ex));
+            return null;
+        }
         log.error("Unhandled error on {} {}", request.getMethod(), request.getRequestURI(), ex);
         return respond(ErrorCode.INTERNAL_ERROR, null, null, request);
+    }
+
+    // True when the error only means the client hung up mid-response (abort, reset, broken pipe).
+    static boolean isClientDisconnect(Throwable ex) {
+        for (Throwable t = ex; t != null; t = t.getCause() == t ? null : t.getCause()) {
+            if (t instanceof AsyncRequestNotUsableException
+                    || "ClientAbortException".equals(t.getClass().getSimpleName())) {
+                return true;
+            }
+            if (t instanceof IOException && t.getMessage() != null) {
+                String msg = t.getMessage().toLowerCase(Locale.ROOT);
+                if (msg.contains("connection reset") || msg.contains("broken pipe")
+                        || msg.contains("connection was aborted") || msg.contains("connection abort")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // Message of the deepest cause, for a one-line debug log.
+    private static String rootMessage(Throwable ex) {
+        Throwable t = ex;
+        while (t.getCause() != null && t.getCause() != t) {
+            t = t.getCause();
+        }
+        return t.getClass().getSimpleName() + ": " + t.getMessage();
     }
 
     // Builds the response entity with the code's HTTP status.

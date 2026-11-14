@@ -403,6 +403,66 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 ---
 
+## 24. Neighbourhood Pulse — Tracks B + C
+
+**Needs:** 5, 6, 8, 9 (done). Added 2026-11-14. **Goal:** "See what your neighbourhood is doing right now." One screen with a live card per Timișoara area (Cetate, Fabric, Iosefin, Elisabetin, Mehala, Complexul Studențesc, Circumvalațiunii, Fratelia, Soarelui): events now and tonight with free spots, STPT lines, live vehicles and service alerts, places open now, and how many reliable community members are going out there. No new tables.
+
+- [x] **24.1 Areas:** hard-coded centres and radii; a point-in-radius check (nearest centre wins on overlap) assigns events, places, stops and vehicles to an area.
+- [x] **24.2 API:** `GET /neighbourhoods/pulse` (public) combines the existing event, place, transit and participant services; cached 30 s; a source that is down only empties its own section. Contract in `docs/API.md`.
+- [x] **24.3 Busy / quiet:** a `QUIET` / `STEADY` / `BUSY` level from an activity score (events, people going, open places, vehicles). *There are no user "quiet / busy" check-ins in the app — that would need a table — so the level is computed from live data instead.*
+- [x] **24.4 App:** Pulse screen (`/pulse`, opened from the **Pulse** button on Home) with a photo per area, the four sections, tap an event to open it, "Show on map", pull to refresh, refresh every minute, loading / error / empty states.
+- [x] **24.5 Photos:** one Wikimedia Commons photo per area (free licences), bundled in `frontend/assets/neighbourhoods/` with credits in `CREDITS.md` and a credit line on each card.
+- [x] **24.6 Tests:** backend (areas, alert matching, the pulse service with sources down, cache, controller) and app (text lines, screen, Home button).
+- [x] **24.7** `DOCS.md`, `docs/API.md` and the knowledge graph updated.
+- [x] **24.8 Area panel:** tapping a Pulse card opens `/pulse/<area>` with the photo and two tabs: **Events** (upcoming events inside the area, same nearest-centre rule as the backend) and **Help**.
+- [x] **24.9 Help tab:** the area's open help requests from the Neighbour Help Board (task 25), newest first: `GET /help-requests?bbox=` around the area, then the same nearest-centre rule; tap one to open it, "Ask for help" when there are none.
+- [x] **24.10 Map pin fix:** the "Show on map" pin opens the trip card when tapped and disappears once that card is closed (it comes back only when "Show on map" is pressed again).
+
+---
+
+## 25. Neighbour Help Board — Tracks A + C
+
+**Needs:** 5, 6 (done). Added 2026-11-14. **Goal:** "Neighbours helping neighbours, with trust built in." Users post small help requests (borrow a ladder, walk a dog, carry a bag); others offer to help and the requester decides whom to trust by their civic trust score. The requester scans the helper's QR code like an event check-in: the first scanned helper closes the request and gets +5; nobody else's points change. A request nobody closes disappears after 24 h.
+
+- [x] **25.1 Rules (agreed 2026-11-14):** scanned helper +5 (`HELPED`, like attending); requester unchanged; other helpers 0; withdrawing and cancelling free; unlimited offers; 24 h expiry with no points. In `DOCS.md` → Reliability rules.
+- [x] **25.2 Database:** `help_requests` and `help_offers` — migration `20261114000005_help_board.sql`. *Applied to Supabase 2026-11-14 and checked (5/5).*
+- [x] **25.3 API:** board (with `near` and `bbox`, the latter for Neighbourhood Pulse's per-area list), mine, create, detail, cancel, offer, withdraw, my-ticket, check-in (package `help`); errors `NOT_REQUESTER`, `IS_REQUESTER`, `ALREADY_OFFERED`, `NOT_OFFERED`, `HELP_CLOSED`, `WRONG_REQUEST`. Contract in `docs/API.md`.
+- [x] **25.4 First scan closes:** row lock + conditional updates; other offers become `NOT_NEEDED`; a second scan is refused and pays nothing.
+- [x] **25.5 App:** Help board, post form, detail with offers and trust scores, offer / withdraw, helper QR ticket, requester scanner, closed / expired states, entry from Home, "Helped a neighbour" in the history; test-only mock route `testing/mocks/routes/help.ts` with the same rules.
+- [x] **25.6 Tests:** backend and frontend (see `DOCS.md` → Neighbour Help Board).
+- [x] **25.7** `DOCS.md`, `docs/API.md` and the knowledge graph updated.
+
+---
+
+## 26. AI "Leave now" box — Tracks B + C
+
+**Needs:** 9, 10, 18 (done). Added 2026-11-14. **Goal:** when the AI gives a tram/bus route that starts where the user is, it says "Leave in 6 min to catch tram 1 at Gara de Nord" — in the text **and** in a separate "Leave now" box under the route card, using the live STPT arrivals ("Will I make it?").
+
+- [x] **26.1 Contract first:** `routes[].leaveNow` in `docs/API.md` (line, vehicle type, stop, walk minutes, board/leave times, source, missed earlier vehicle); `null` for walking, other starts and later times.
+- [x] **26.2 Backend:** `LeaveNowService` matches the planner's boarding stop to the STPT stop and picks the first arrival the user can still reach on foot (+1 spare minute); falls back to the planner's time when STPT is down. `plan_route` returns `leave_now` to the model; the system prompt asks for one "Leave in N min…" sentence.
+- [x] **26.3 Mobile:** `LeaveNowBox` under the route card with a live countdown (Leave in N min → Leave now → Hurry → You won't make this one) and Live / Scheduled / Planned label.
+- [x] **26.4 Tests:** backend and frontend (see `DOCS.md` → AI "Leave now" box).
+- [x] **26.5a** `DOCS.md` and `docs/API.md` updated.
+- [x] **26.5b** Knowledge graph updated (hand-made incremental update with a Sonnet 5.5 agent; see `DOCS.md` → Knowledge graph).
+- [ ] **26.6** Try it on a phone with real STPT data and Gemini.
+
+---
+
+## 27. Timișoara news on Home — Tracks B + C
+
+**Needs:** 3, 12, 13 (done). Added 2026-11-14. **Goal:** a news section on Home and a News screen with the latest news from local news sites — **Timișoara only** — gathered into one list.
+
+- [x] **27.1 Sources:** RSS feeds checked on 2026-11-14: TION, Opinia Timișoarei, Timișoara Știri, Banatul Azi (DeBanat answers 403, the city hall site has no feed). Only headline, short summary, picture and a link to the full story are shown.
+- [x] **27.2 Contract first:** `GET /news` and `GET /news/sources` in `docs/API.md` (public).
+- [x] **27.3 Backend `news` package:** RSS client (timeouts, our User-Agent), hardened XML parsing, "Timișoara only" filter (links and the site's own name ignored), same story once, 10 min cache per site (a site down never breaks the others), pictures from the WordPress API when the feed has none, background warm-up at startup.
+- [x] **27.4 App:** "Timișoara news" strip on Home (swipeable, See all), News screen (site chips, search, endless scroll, pull to refresh, sites that are down named); a tap opens the article on the site.
+- [x] **27.5 Tests:** backend and frontend (see `DOCS.md` → Timișoara news). Live check against the 4 real sites: 39 Timișoara articles, 35 with a picture.
+- [x] **27.6a** `DOCS.md` and `docs/API.md` updated.
+- [x] **27.6b** Knowledge graph updated (hand-made incremental update with a Sonnet 5.5 agent; see `DOCS.md` → Knowledge graph).
+- [ ] **27.7** Ask the news sites for permission if the app is used beyond the hackathon (see open question 3).
+
+---
+
 ## If time runs short — cut in this order
 
 1. Marker clustering (14.6) and AI result cards (15.4).

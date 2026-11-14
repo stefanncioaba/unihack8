@@ -55,3 +55,14 @@ export const IDS = {
   stella: '33333333-3333-4333-8333-333333333333',
   andrei: '44444444-4444-4444-8444-444444444444',
 };
+
+/** Fixed ids of the seeded help requests (testing/mocks/helpSeed.ts). */
+export const HELP = {
+  ladder: 'd0000000-0000-4000-8000-000000000001', // stefan's, stella offered; I can offer
+  sofa: 'd0000000-0000-4000-8000-000000000002', // mine: stella + andrei offered, maria withdrew
+  dogWalk: 'd0000000-0000-4000-8000-000000000003', // andrei's, I offered (demo-help-ticket-me-3)
+  parcel: 'd0000000-0000-4000-8000-000000000004', // stella's, no location
+  bike: 'd0000000-0000-4000-8000-000000000005', // maria's
+  plants: 'd0000000-0000-4000-8000-000000000006', // posted 25 h ago: expired
+  groceries: 'd0000000-0000-4000-8000-000000000007', // helped by andrei, my offer not needed
+};

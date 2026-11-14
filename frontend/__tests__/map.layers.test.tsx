@@ -1,7 +1,9 @@
 // Map layers: places (14.2) and events (14.3), plus the mock /places and /events?bbox routes they use.
+import { QueryClientProvider } from '@tanstack/react-query';
 import { act, fireEvent, screen, waitFor, within } from '@testing-library/react-native';
 
 import MapScreen from '@/app/(tabs)/map';
+import { AuthContext } from '@/features/auth/AuthProvider';
 import { mockRequest } from '@test/mocks';
 import { placeId } from '@test/mocks/placesSeed';
 
@@ -83,6 +85,29 @@ describe('MapScreen opened from elsewhere ("Show on map")', () => {
     renderScreen(<MapScreen />);
     expect(screen.getByTestId('focus-marker')).toBeTruthy();
     expect(screen.queryByTestId('map-panel')).toBeNull();
+  });
+
+  it('opens the trip card from the plain pin, and the pin is gone once that card is closed', async () => {
+    setParams({ lat: '45.7568', lon: '21.229', title: 'Cetate', at: '1' });
+    const { rerender, client, auth } = renderScreen(<MapScreen />);
+    fireEvent.press(screen.getByTestId('focus-marker'));
+    expect(await screen.findByTestId('directions-panel')).toBeTruthy();
+    expect(screen.queryByTestId('focus-marker')).toBeNull();
+
+    fireEvent.press(screen.getByLabelText('Close panel'));
+    await waitFor(() => expect(screen.queryByTestId('map-panel')).toBeNull());
+    expect(screen.queryByTestId('focus-marker')).toBeNull();
+
+    // Pressing "Show on map" again (new `at`) brings the pin back.
+    setParams({ lat: '45.7568', lon: '21.229', title: 'Cetate', at: '2' });
+    rerender(
+      <QueryClientProvider client={client}>
+        <AuthContext.Provider value={auth}>
+          <MapScreen />
+        </AuthContext.Provider>
+      </QueryClientProvider>,
+    );
+    await waitFor(() => expect(screen.getByTestId('focus-marker')).toBeTruthy());
   });
 });
 

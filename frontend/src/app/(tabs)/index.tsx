@@ -1,4 +1,5 @@
-// Home tab: header, search, category chips, city info strip, AI shortcuts, upcoming events, create-event button.
+// Home tab: header (Pulse, Help board, people), search, category chips, city info strip, AI shortcuts,
+// Timișoara news, upcoming events, create-event button.
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { FlatList, Pressable, ScrollView, StyleSheet, View } from 'react-native';
@@ -7,8 +8,10 @@ import { EVENT_CATEGORIES, type EventCategory } from '@/api/types';
 import { ShortcutBar } from '@/features/ai/ShortcutBar';
 import { CATEGORY_META } from '@/features/events/categories';
 import { EventCard } from '@/features/events/EventCards';
+import { NewsStrip } from '@/features/news/NewsStrip';
 import { CityInfoStrip } from '@/features/transit/CityInfoStrip';
 import { useEventsPage } from '@/hooks/queries';
+import { useHelpBoard } from '@/hooks/useHelp';
 import { Button } from '@/ui/Button';
 import { Chip } from '@/ui/Chip';
 import { Icon } from '@/ui/Icon';
@@ -52,6 +55,18 @@ export default function HomeScreen() {
         <View style={styles.headerRight}>
           <Pressable
             accessibilityRole="button"
+            accessibilityLabel="Neighbourhood pulse"
+            onPress={() => router.push('/pulse')}
+            style={[styles.iconButton, styles.pulseButton]}
+          >
+            <Icon name="pulse-outline" size={16} color={colors.accent} />
+            <Text variant="chip" tone="accent">
+              Pulse
+            </Text>
+          </Pressable>
+          <HelpButton />
+          <Pressable
+            accessibilityRole="button"
             accessibilityLabel="Find people"
             onPress={() => router.push('/users/search')}
             style={styles.iconButton}
@@ -77,6 +92,9 @@ export default function HomeScreen() {
       </View>
 
       <ShortcutBar />
+
+      {/* Timișoara news from local news sites (PLAN 26); "See all" opens the News screen. */}
+      <NewsStrip />
 
       <View style={styles.events} onLayout={(e) => setSectionH(e.nativeEvent.layout.height)}>
         <View style={[styles.sectionHeader, { paddingHorizontal: PAGE_MARGIN }]}>
@@ -123,9 +141,36 @@ export default function HomeScreen() {
   );
 }
 
+/** Header button to the Neighbour Help Board, with the number of open requests when there are any. */
+function HelpButton() {
+  const board = useHelpBoard();
+  const count = board.data?.length ?? 0;
+  return (
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel="Neighbour help board"
+      accessibilityHint={count > 0 ? `${count} open requests` : undefined}
+      onPress={() => router.push('/help')}
+      style={[styles.iconButton, styles.pulseButton]}
+    >
+      <Icon name="hand-left-outline" size={16} color={colors.accent} />
+      <Text variant="chip" tone="accent">
+        Help
+      </Text>
+      {count > 0 ? (
+        <View style={styles.countBadge} testID="help-count">
+          <Text variant="chip" style={{ color: colors.signal, fontSize: 10 }}>
+            {count}
+          </Text>
+        </View>
+      ) : null}
+    </Pressable>
+  );
+}
+
 const styles = StyleSheet.create({
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: PAGE_MARGIN, paddingTop: 10, paddingBottom: 14 },
-  headerRight: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  headerRight: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   iconButton: {
     width: 34,
     height: 34,
@@ -136,6 +181,8 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.border,
   },
+  pulseButton: { width: 'auto', flexDirection: 'row', gap: 5, paddingHorizontal: 12 },
+  countBadge: { minWidth: 16, height: 16, borderRadius: 8, paddingHorizontal: 4, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(142,197,255,0.14)' },
   block: { marginBottom: 14, paddingHorizontal: PAGE_MARGIN },
   chipsScroll: { marginBottom: 10, flexGrow: 0, flexShrink: 0, height: 38 },
   chips: { gap: 8, paddingHorizontal: PAGE_MARGIN, alignItems: 'center' },

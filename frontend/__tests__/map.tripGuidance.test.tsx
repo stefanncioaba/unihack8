@@ -311,7 +311,7 @@ describe('MapScreen trip guidance', () => {
   it('journey mode: the board / get-off markers for the legs ahead and only the essentials', async () => {
     setParams(
       routeParams(
-        { from: { lat: 45.76, lon: 21.23, name: 'Your location' }, to: { lat: 45.7275, lon: 21.2355, name: 'Shopping City' }, mode: 'TRANSIT', durationMinutes: 20, distanceMeters: 3500, startsFromUser: true },
+        { from: { lat: 45.76, lon: 21.23, name: 'Your location' }, to: { lat: 45.7275, lon: 21.2355, name: 'Shopping City' }, mode: 'TRANSIT', durationMinutes: 20, distanceMeters: 3500, startsFromUser: true, leaveNow: null },
         true,
       ),
     );
@@ -328,7 +328,7 @@ describe('MapScreen trip guidance', () => {
   it('journey mode: once off the tram its board / get-off markers go', async () => {
     setParams(
       routeParams(
-        { from: { lat: 45.76, lon: 21.23, name: 'Your location' }, to: { lat: 45.7275, lon: 21.2355, name: 'Shopping City' }, mode: 'TRANSIT', durationMinutes: 20, distanceMeters: 3500, startsFromUser: true },
+        { from: { lat: 45.76, lon: 21.23, name: 'Your location' }, to: { lat: 45.7275, lon: 21.2355, name: 'Shopping City' }, mode: 'TRANSIT', durationMinutes: 20, distanceMeters: 3500, startsFromUser: true, leaveNow: null },
         true,
       ),
     );

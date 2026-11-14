@@ -11,6 +11,7 @@ import com.unihack8.backend.ai.domain.dto.ChatCostDto;
 import com.unihack8.backend.ai.domain.dto.ChatResponse;
 import com.unihack8.backend.ai.domain.dto.CostItemDto;
 import com.unihack8.backend.ai.domain.dto.ChatRouteDto;
+import com.unihack8.backend.ai.domain.dto.LeaveNowDto;
 import com.unihack8.backend.ai.domain.dto.RoutePointDto;
 import com.unihack8.backend.ai.domain.dto.SourceDto;
 import com.unihack8.backend.ai.service.AiChatService;
@@ -18,6 +19,7 @@ import com.unihack8.backend.common.exception.ApiException;
 import com.unihack8.backend.common.exception.ErrorCode;
 import com.unihack8.backend.places.domain.dto.PlaceSummaryDto;
 import com.unihack8.backend.support.JwtTestTokens;
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
@@ -60,7 +62,7 @@ class AiControllerTest {
                 List.of(new PlaceSummaryDto(placeId, "node/1", "5 to go", "cafe", 45.75, 21.22, null, 127)),
                 List.of(), List.of(new SourceDto("5 to go prices (playtech.ro)", "https://playtech.ro/x")),
                 List.of(new ChatRouteDto(new RoutePointDto(45.7537, 21.2257, "Your location"),
-                        new RoutePointDto(45.75, 21.22, "5 to go"), "WALK", 2, 127, true)),
+                        new RoutePointDto(45.75, 21.22, "5 to go"), "WALK", 2, 127, true, null)),
                 new ChatCostDto("RON", "TOTAL", List.of(new CostItemDto("5 to go", "Espresso", "MENU", 5.0, 5.0, 5.0)),
                         5.0, 5.0, 5.0, "Saved menu prices; they may have changed.")));
 
@@ -88,6 +90,32 @@ class AiControllerTest {
                 .andExpect(jsonPath("$.cost.items[0].detail").value("Espresso"))
                 .andExpect(jsonPath("$.cost.items[0].kind").value("MENU"))
                 .andExpect(jsonPath("$.cost.items[0].averageLei").value(5.0));
+    }
+
+    // "Leave now" on a transit route card (docs/API.md): ISO times in UTC; null on a walking route.
+    @Test
+    void leaveNowShape() throws Exception {
+        LeaveNowDto leave = new LeaveNowDto("1", "TRAM", "Gara de Nord", "Piața Libertății", 4,
+                Instant.parse("2026-11-14T18:41:00Z"), Instant.parse("2026-11-14T18:36:00Z"), "LIVE",
+                Instant.parse("2026-11-14T18:33:00Z"));
+        RoutePointDto from = new RoutePointDto(45.7537, 21.2257, "Your location");
+        RoutePointDto to = new RoutePointDto(45.7505, 21.2075, "Gara de Nord");
+        when(chatService.chat(eq(USER), any())).thenReturn(new ChatResponse("Leave in 6 min.", List.of(), List.of(), List.of(),
+                List.of(new ChatRouteDto(from, to, "TRANSIT", 20, 3400, true, leave),
+                        new ChatRouteDto(from, to, "WALK", 35, 2600, true, null)), null));
+
+        mvc.perform(post("/ai/chat").header("Authorization", BEARER).contentType(MediaType.APPLICATION_JSON).content(BODY))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.routes[0].leaveNow.line").value("1"))
+                .andExpect(jsonPath("$.routes[0].leaveNow.vehicleType").value("TRAM"))
+                .andExpect(jsonPath("$.routes[0].leaveNow.headsign").value("Gara de Nord"))
+                .andExpect(jsonPath("$.routes[0].leaveNow.stopName").value("Piața Libertății"))
+                .andExpect(jsonPath("$.routes[0].leaveNow.walkMinutes").value(4))
+                .andExpect(jsonPath("$.routes[0].leaveNow.boardAt").value("2026-11-14T18:41:00Z"))
+                .andExpect(jsonPath("$.routes[0].leaveNow.leaveAt").value("2026-11-14T18:36:00Z"))
+                .andExpect(jsonPath("$.routes[0].leaveNow.source").value("LIVE"))
+                .andExpect(jsonPath("$.routes[0].leaveNow.missedBoardAt").value("2026-11-14T18:33:00Z"))
+                .andExpect(jsonPath("$.routes[1].leaveNow").isEmpty());
     }
 
     // Location is optional (permission denied).
