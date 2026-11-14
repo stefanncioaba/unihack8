@@ -1,13 +1,17 @@
-// Neighbour Help Board: "Neighbours helping neighbours, with trust built in." Open requests nearby, and my own (PLAN 25).
+// Neighbour Help Board: "Neighbours helping neighbours, with trust built in." Open requests nearby, grouped by
+// neighbourhood (your area first), and my own (PLAN 25).
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { FlatList, RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
+import { FlatList, RefreshControl, ScrollView, SectionList, StyleSheet, View } from 'react-native';
 
 import { HELP_CATEGORIES, type HelpCategory, type HelpRequestSummary } from '@/api/types.help';
 import { HELP_CATEGORY_META } from '@/features/help/categories';
 import { filterByCategory } from '@/features/help/format';
+import { groupByNeighbourhood } from '@/features/help/groupByArea';
 import { HelpRequestRow } from '@/features/help/HelpCards';
+import { useCurrentPosition } from '@/features/location/LocationProvider';
 import { useHelpBoard, useMyHelpRequests } from '@/hooks/useHelp';
+import { useNeighbourhoodPulse } from '@/hooks/useNeighbourhoods';
 import { Button } from '@/ui/Button';
 import { Chip } from '@/ui/Chip';
 import { Screen } from '@/ui/Screen';
@@ -55,28 +59,66 @@ export default function HelpBoardScreen() {
   );
 }
 
-/** Open requests (filtered), refreshed every 30 s and on pull-down. */
+/** Open requests (filtered), one section per neighbourhood with yours first; refreshed every 30 s and on pull-down.
+ * If the neighbourhoods fail to load it is one flat list, closest first. */
 function Board({ categories }: { categories: HelpCategory[] }) {
   const board = useHelpBoard();
-  if (board.isPending) return <LoadingState label="Loading requests…" />;
+  const pulse = useNeighbourhoodPulse();
+  const { position, isFallback } = useCurrentPosition();
+  // Waits for the neighbourhoods too, so the list does not jump from flat to grouped.
+  if (board.isPending || pulse.isPending) return <LoadingState label="Loading requests…" />;
   if (board.isError) return <ErrorState error={board.error} onRetry={() => board.refetch()} />;
   const items = filterByCategory(board.data, categories);
+  const refresh = <RefreshControl refreshing={board.isRefetching} onRefresh={() => board.refetch()} tintColor={colors.signal} />;
+  const empty =
+    categories.length > 0 ? (
+      <EmptyState icon="search-outline" title="Nothing in these categories" message="Try another category, or ask for help yourself." />
+    ) : (
+      <EmptyState icon="hand-left-outline" title="Nobody needs help right now" message="Need a hand yourself? Ask your neighbours." />
+    );
+
+  const areas = pulse.data?.areas ?? [];
+  if (areas.length === 0) {
+    return (
+      <FlatList
+        testID="help-list"
+        data={items}
+        keyExtractor={(r) => r.id}
+        renderItem={({ item }) => <HelpRequestRow request={item} />}
+        ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+        contentContainerStyle={styles.list}
+        refreshControl={refresh}
+        ListEmptyComponent={empty}
+      />
+    );
+  }
+
+  const sections = groupByNeighbourhood(items, areas, isFallback ? null : position);
   return (
-    <FlatList
+    <SectionList
       testID="help-list"
-      data={items}
+      sections={sections}
       keyExtractor={(r) => r.id}
       renderItem={({ item }) => <HelpRequestRow request={item} />}
+      renderSectionHeader={({ section }) => (
+        <View style={styles.areaHeader} testID={`help-area-${section.key}`} accessibilityRole="header">
+          <Text variant="heading">
+            {section.title} ({section.data.length})
+          </Text>
+          {section.isHere ? (
+            <Text variant="chip" style={{ color: colors.signal }}>
+              {"YOU'RE HERE"}
+            </Text>
+          ) : null}
+        </View>
+      )}
       ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+      stickySectionHeadersEnabled={false}
+      // The open board is short: draw it in one pass instead of growing after the first 10 rows.
+      initialNumToRender={30}
       contentContainerStyle={styles.list}
-      refreshControl={<RefreshControl refreshing={board.isRefetching} onRefresh={() => board.refetch()} tintColor={colors.signal} />}
-      ListEmptyComponent={
-        categories.length > 0 ? (
-          <EmptyState icon="search-outline" title="Nothing in these categories" message="Try another category, or ask for help yourself." />
-        ) : (
-          <EmptyState icon="hand-left-outline" title="Nobody needs help right now" message="Need a hand yourself? Ask your neighbours." />
-        )
-      }
+      refreshControl={refresh}
+      ListEmptyComponent={empty}
     />
   );
 }
@@ -122,5 +164,6 @@ const styles = StyleSheet.create({
   chips: { gap: 8, paddingHorizontal: PAGE_MARGIN, alignItems: 'center' },
   list: { paddingHorizontal: PAGE_MARGIN, paddingTop: 4, paddingBottom: 16, gap: 0, width: '100%', maxWidth: 720, alignSelf: 'center' },
   section: { gap: 10, marginBottom: 18 },
+  areaHeader: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingTop: 14, paddingBottom: 8, backgroundColor: colors.bg },
   cta: { paddingHorizontal: PAGE_MARGIN, paddingTop: 8, paddingBottom: 8, width: '100%', maxWidth: 720, alignSelf: 'center' },
 });

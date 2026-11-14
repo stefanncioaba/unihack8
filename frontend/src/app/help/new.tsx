@@ -1,6 +1,6 @@
 // Ask for help: title, optional description, category, optional address and map pin (PLAN 25).
 import { router } from 'expo-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { friendlyError } from '@/api/errors';
@@ -19,11 +19,17 @@ import { TextField } from '@/ui/TextField';
 
 /** The form for posting a help request; opens the new request's page when done. */
 export default function NewHelpRequestScreen() {
-  const { position } = useCurrentPosition();
+  const { position, isFallback } = useCurrentPosition();
   const create = useCreateHelpRequest();
   const [form, setForm] = useState<HelpForm>(() => emptyHelpForm());
   const [errors, setErrors] = useState<HelpFormErrors>({});
   const [picking, setPicking] = useState(false);
+  const [pinMoved, setPinMoved] = useState(false);
+
+  // Pins the request where the phone is, once its real position is known, unless the user already chose a spot.
+  useEffect(() => {
+    if (!isFallback && !pinMoved) setForm((f) => ({ ...f, point: { lat: position.lat, lon: position.lon } }));
+  }, [isFallback, pinMoved, position.lat, position.lon]);
 
   /** Updates one field and clears its error. */
   function set<K extends keyof HelpForm>(key: K, value: HelpForm[K]) {
@@ -101,7 +107,7 @@ export default function NewHelpRequestScreen() {
 
         <View style={{ gap: 8 }}>
           <Text variant="caption" tone="muted">
-            Location (optional)
+            Location
           </Text>
           <Button
             title={form.point ? `Pinned at ${form.point.lat.toFixed(4)}, ${form.point.lon.toFixed(4)}` : 'Choose on map'}
@@ -110,7 +116,9 @@ export default function NewHelpRequestScreen() {
             iconLeft
             onPress={() => setPicking(true)}
           />
-          {form.point ? <Button title="Remove pin" variant="ghost" small onPress={() => set('point', null)} /> : null}
+          <Text variant="caption" tone="muted">
+            {pinMoved || isFallback ? 'Your request shows up in the neighbourhood of this pin.' : 'Set to where you are now. Tap to move it.'}
+          </Text>
           {errors.point ? (
             <Text variant="caption" tone="danger">
               {errors.point}
@@ -133,6 +141,7 @@ export default function NewHelpRequestScreen() {
         onClose={() => setPicking(false)}
         onConfirm={(point) => {
           set('point', point);
+          setPinMoved(true);
           setPicking(false);
         }}
       />

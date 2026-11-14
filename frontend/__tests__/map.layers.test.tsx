@@ -111,6 +111,39 @@ describe('MapScreen opened from elsewhere ("Show on map")', () => {
   });
 });
 
+describe('the "Show on map" pin goes away when the user does something else', () => {
+  const focused = (value: boolean) => act(() => (globalThis as unknown as { __setRouteFocused: (f: boolean) => void }).__setRouteFocused(value));
+
+  it('leaving the Map tab (another menu, a search) removes it, and it stays away on return', () => {
+    setParams({ lat: '45.7489', lon: '21.2318', title: 'Somewhere', at: '1' });
+    renderScreen(<MapScreen />);
+    expect(screen.getByTestId('focus-marker')).toBeTruthy();
+    focused(false);
+    focused(true);
+    expect(screen.queryByTestId('focus-marker')).toBeNull();
+  });
+
+  it('starting directions from elsewhere (long press) removes it for good', async () => {
+    setParams({ lat: '45.7489', lon: '21.2318', title: 'Somewhere', at: '1' });
+    renderScreen(<MapScreen />);
+    fireEvent(screen.getByTestId('main-map'), 'longPress', { nativeEvent: { coordinate: { latitude: 45.7275, longitude: 21.2355 } } });
+    await screen.findByTestId('directions-panel');
+    expect(screen.queryByTestId('focus-marker')).toBeNull();
+    fireEvent.press(screen.getByLabelText('Close panel'));
+    await waitFor(() => expect(screen.queryByTestId('map-panel')).toBeNull());
+    expect(screen.queryByTestId('focus-marker')).toBeNull();
+  });
+
+  it('picking another place removes it', async () => {
+    setParams({ lat: '45.7489', lon: '21.2318', title: 'Somewhere', at: '1' });
+    renderScreen(<MapScreen />);
+    fireEvent(screen.getByTestId('main-map'), 'regionChangeComplete', { latitude: 45.75, longitude: 21.22, latitudeDelta: 0.02, longitudeDelta: 0.02 });
+    fireEvent.press((await screen.findAllByTestId(/^place-marker-/))[0]);
+    await screen.findByTestId('place-panel');
+    expect(screen.queryByTestId('focus-marker')).toBeNull();
+  });
+});
+
 describe('MapScreen layers', () => {
   it('shows place and event pins for the visible area', async () => {
     renderScreen(<MapScreen />);

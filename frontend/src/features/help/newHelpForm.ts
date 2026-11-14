@@ -1,4 +1,4 @@
-// Ask-for-help form: blank values, validation (same rules as the API) and the request body (PLAN 25).
+// Ask-for-help form: blank values, validation (the API rules, plus a required pin) and the request body (PLAN 25).
 import {
   HELP_ADDRESS_MAX,
   HELP_DESCRIPTION_MAX,
@@ -14,7 +14,7 @@ export type HelpForm = {
   description: string;
   category: HelpCategory | null;
   address: string;
-  /** Optional pin on the map. */
+  /** Pin on the map (required, so the request lands in a neighbourhood); pre-filled with the phone's position. */
   point: Coordinates | null;
 };
 
@@ -38,16 +38,18 @@ export function validateHelpForm(form: HelpForm): { errors: HelpFormErrors; payl
   if (description.length > HELP_DESCRIPTION_MAX) errors.description = `Keep the description under ${HELP_DESCRIPTION_MAX} characters.`;
   if (!form.category) errors.category = 'Pick a category.';
   if (address.length > HELP_ADDRESS_MAX) errors.address = `Keep the address under ${HELP_ADDRESS_MAX} characters.`;
-  if (form.point && !isValidCoordinate(form.point.lat, form.point.lon)) errors.point = 'Choose the location again.';
+  if (!form.point) errors.point = 'Pin where you need help.';
+  else if (!isValidCoordinate(form.point.lat, form.point.lon)) errors.point = 'Choose the location again.';
 
-  if (Object.keys(errors).length > 0 || !form.category) return { errors, payload: null };
+  if (Object.keys(errors).length > 0 || !form.category || !form.point) return { errors, payload: null };
 
   const payload: NewHelpRequest = {
     title,
     category: form.category,
     ...(description ? { description } : {}),
     ...(address ? { address } : {}),
-    ...(form.point ? { lat: form.point.lat, lon: form.point.lon } : {}),
+    lat: form.point.lat,
+    lon: form.point.lon,
   };
   return { errors, payload };
 }

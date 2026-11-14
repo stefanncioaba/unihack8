@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "69cb57946684bc71c0253fcb1f9fbdd57b78bb91",
-  "generatedAt": "2026-11-14T17:52:30.562Z",
+  "gitCommitHash": "078b1dce6eaec808aad6c687bd48580d110018e2",
+  "generatedAt": "2026-11-14T18:15:33.383Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,7 +25,7 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "beea50df7e8ea46dcbf2d52afdd097a7242dc0596a19df244a596f9467080455",
+      "contentHash": "9e2d91d6e4c95a4307f9e7473b36df10c41ebd14e32279d7442c8f061b9a6a58",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -35,12 +35,12 @@
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "da6ee7c82a21df067cd489ccff9836ec63e6f80b88238a3b81ac6423c76356e0",
+      "contentHash": "d23af29e037ad605178d7b5afd449d636a9ddfe68fcde5f288c3406e91e434ed",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 480,
+      "totalLines": 481,
       "hasStructuralAnalysis": false
     },
     "README.md": {
@@ -44112,7 +44112,7 @@
     },
     "frontend/__tests__/screens.help.test.tsx": {
       "filePath": "frontend/__tests__/screens.help.test.tsx",
-      "contentHash": "150f34c924d51af1d70346daa394a571eef2b16b42e069493ed99447b461d369",
+      "contentHash": "2bb18f0dc67797a7ce4cbb67a21103d1cd84d49d83e497ad9480b12e6782fb72",
       "functions": [
         {
           "name": "minutes",
@@ -44226,6 +44226,12 @@
           ]
         },
         {
+          "source": "@/features/location/LocationProvider",
+          "specifiers": [
+            "LocationProvider"
+          ]
+        },
+        {
           "source": "@/features/users/ReliabilityLog",
           "specifiers": [
             "ReliabilityLog"
@@ -44268,7 +44274,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 456,
+      "totalLines": 502,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/screens.home.test.tsx": {
@@ -47747,7 +47753,7 @@
     },
     "frontend/src/app/help/index.tsx": {
       "filePath": "frontend/src/app/help/index.tsx",
-      "contentHash": "8bf427329ab7fb51652f183f9a54f0cf3b4e59a60ec10ffa043d436dc578ab82",
+      "contentHash": "3ecd1660d9702e2fcff4eeef7ffc49d3ca2c0aed84ac66680d5a475195b62169",
       "functions": [
         {
           "name": "HelpBoardScreen",
@@ -47761,7 +47767,7 @@
             "{ categories }"
           ],
           "exported": false,
-          "lineCount": 24
+          "lineCount": 61
         },
         {
           "name": "Mine",
@@ -47798,6 +47804,7 @@
             "FlatList",
             "RefreshControl",
             "ScrollView",
+            "SectionList",
             "StyleSheet",
             "View"
           ]
@@ -47823,9 +47830,21 @@
           ]
         },
         {
+          "source": "@/features/help/groupByArea",
+          "specifiers": [
+            "groupByNeighbourhood"
+          ]
+        },
+        {
           "source": "@/features/help/HelpCards",
           "specifiers": [
             "HelpRequestRow"
+          ]
+        },
+        {
+          "source": "@/features/location/LocationProvider",
+          "specifiers": [
+            "useCurrentPosition"
           ]
         },
         {
@@ -47833,6 +47852,12 @@
           "specifiers": [
             "useHelpBoard",
             "useMyHelpRequests"
+          ]
+        },
+        {
+          "source": "@/hooks/useNeighbourhoods",
+          "specifiers": [
+            "useNeighbourhoodPulse"
           ]
         },
         {
@@ -47884,18 +47909,18 @@
       "exports": [
         "HelpBoardScreen"
       ],
-      "totalLines": 127,
+      "totalLines": 170,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/help/new.tsx": {
       "filePath": "frontend/src/app/help/new.tsx",
-      "contentHash": "11d8df435084715c141d3e3ce99ca338cd0aa2bb8e82b297fd8d335617507cdb",
+      "contentHash": "f1e8f304c4745aea9f0e48f1a58c202fb6f92a57857a6bb27647302412c02862",
       "functions": [
         {
           "name": "NewHelpRequestScreen",
           "params": [],
           "exported": true,
-          "lineCount": 121
+          "lineCount": 130
         }
       ],
       "classes": [],
@@ -47909,6 +47934,7 @@
         {
           "source": "react",
           "specifiers": [
+            "useEffect",
             "useState"
           ]
         },
@@ -48008,7 +48034,7 @@
       "exports": [
         "NewHelpRequestScreen"
       ],
-      "totalLines": 148,
+      "totalLines": 157,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/news/_layout.tsx": {
@@ -51760,7 +51786,7 @@
     },
     "frontend/src/features/help/newHelpForm.ts": {
       "filePath": "frontend/src/features/help/newHelpForm.ts",
-      "contentHash": "4a8ce25839acf099499df3c151a71b71d7b2ba330df44d706599d3746777c2ff",
+      "contentHash": "eda696e56c1e96c0a7689d6caf84ebfabab09ebd7f7912aa4ea6693f2a56e14e",
       "functions": [
         {
           "name": "emptyHelpForm",
@@ -51776,7 +51802,7 @@
           ],
           "returnType": "{ errors: HelpFormErrors; payload: NewHelpRequest | null }",
           "exported": true,
-          "lineCount": 25
+          "lineCount": 27
         }
       ],
       "classes": [],
@@ -51804,7 +51830,7 @@
         "emptyHelpForm",
         "validateHelpForm"
       ],
-      "totalLines": 54,
+      "totalLines": 56,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/journey/JourneyPanel.tsx": {
@@ -59694,6 +59720,91 @@
       "exports": [],
       "totalLines": 217,
       "hasStructuralAnalysis": false
+    },
+    "frontend/__tests__/help.groupByArea.test.ts": {
+      "filePath": "frontend/__tests__/help.groupByArea.test.ts",
+      "contentHash": "f1ce4c9caf80bbe9a45fec740c03dc9c286578eaf75887e1ee7565e9ce08fe05",
+      "functions": [
+        {
+          "name": "req",
+          "params": [
+            "id",
+            "lat",
+            "lon"
+          ],
+          "returnType": "HelpRequestSummary",
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HelpRequestSummary"
+          ]
+        },
+        {
+          "source": "@/features/help/groupByArea",
+          "specifiers": [
+            "groupByNeighbourhood",
+            "OUTSIDE_KEY",
+            "OUTSIDE_TITLE",
+            "NamedArea"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 51,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/help/groupByArea.ts": {
+      "filePath": "frontend/src/features/help/groupByArea.ts",
+      "contentHash": "ee3a9f5f661e76c23a34174acb707ba9411515b353e37e42a8b9e82adc2f7021",
+      "functions": [
+        {
+          "name": "groupByNeighbourhood",
+          "params": [
+            "requests",
+            "areas",
+            "here"
+          ],
+          "returnType": "HelpAreaSection[]",
+          "exported": true,
+          "lineCount": 19
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HelpRequestSummary"
+          ]
+        },
+        {
+          "source": "@/features/neighbourhoods/areas",
+          "specifiers": [
+            "areaIdOf",
+            "AreaCircle"
+          ]
+        },
+        {
+          "source": "@/lib/geo",
+          "specifiers": [
+            "distanceMeters",
+            "Coordinates"
+          ]
+        }
+      ],
+      "exports": [
+        "OUTSIDE_KEY",
+        "OUTSIDE_TITLE",
+        "groupByNeighbourhood"
+      ],
+      "totalLines": 40,
+      "hasStructuralAnalysis": true
     }
   }
 }

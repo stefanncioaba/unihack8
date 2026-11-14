@@ -431,6 +431,7 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 - [x] **25.5 App:** Help board, post form, detail with offers and trust scores, offer / withdraw, helper QR ticket, requester scanner, closed / expired states, entry from Home, "Helped a neighbour" in the history; test-only mock route `testing/mocks/routes/help.ts` with the same rules.
 - [x] **25.6 Tests:** backend and frontend (see `DOCS.md` → Neighbour Help Board).
 - [x] **25.7** `DOCS.md`, `docs/API.md` and the knowledge graph updated.
+- [x] **25.8 By neighbourhood (2026-11-14):** the board's Nearby list is grouped by Neighbourhood Pulse area (yours first, then closest, "Outside the neighbourhoods" last), and the post form pins the request at your position (movable, required) so every new request appears in its area on the board and in the Pulse Help tab.
 
 ---
 

@@ -14,6 +14,7 @@ import NewHelpRequestScreen from '@/app/help/new';
 import { helpOutcomeFromError, helpOutcomeFromSuccess } from '@/features/help/checkInResult';
 import { expiresIn, filterByCategory, myOfferLabel, offersLabel, statusLine, ticketState, timeAgo } from '@/features/help/format';
 import { emptyHelpForm, validateHelpForm } from '@/features/help/newHelpForm';
+import { LocationProvider } from '@/features/location/LocationProvider';
 import { ReliabilityLog } from '@/features/users/ReliabilityLog';
 import { entrySubject, reasonLabel } from '@/features/users/reliability';
 import { useHelpBoard } from '@/hooks/useHelp';
@@ -88,8 +89,13 @@ describe('help text helpers', () => {
 
 describe('validateHelpForm', () => {
   it('mirrors the API rules', () => {
-    const base = { ...emptyHelpForm(), title: 'Borrow a drill', category: 'BORROW' as const };
-    expect(validateHelpForm(emptyHelpForm()).errors).toEqual({ title: 'Say what you need help with.', category: 'Pick a category.' });
+    const base = { ...emptyHelpForm(), title: 'Borrow a drill', category: 'BORROW' as const, point: { lat: 45.75, lon: 21.22 } };
+    expect(validateHelpForm(emptyHelpForm()).errors).toEqual({
+      title: 'Say what you need help with.',
+      category: 'Pick a category.',
+      point: 'Pin where you need help.',
+    });
+    expect(validateHelpForm(base).payload).not.toBeNull();
     expect(validateHelpForm({ ...base, title: ' ab ' }).errors.title).toBe('Use at least 3 characters.');
     expect(validateHelpForm({ ...base, title: 'x'.repeat(81) }).errors.title).toBe('Keep the title under 80 characters.');
     expect(validateHelpForm({ ...base, description: 'x'.repeat(501) }).errors.description).toBe('Keep the description under 500 characters.');
@@ -97,8 +103,10 @@ describe('validateHelpForm', () => {
     expect(validateHelpForm({ ...base, point: { lat: 200, lon: 0 } }).errors.point).toBeTruthy();
   });
 
-  it('builds a trimmed body with only the filled optional fields', () => {
-    expect(validateHelpForm({ ...emptyHelpForm(), title: ' Borrow a drill ', category: 'BORROW', description: '  ' }).payload).toEqual({ title: 'Borrow a drill', category: 'BORROW' });
+  it('builds a trimmed body with the pin and only the filled optional fields', () => {
+    expect(
+      validateHelpForm({ ...emptyHelpForm(), title: ' Borrow a drill ', category: 'BORROW', description: '  ', point: { lat: 45.75, lon: 21.22 } }).payload,
+    ).toEqual({ title: 'Borrow a drill', category: 'BORROW', lat: 45.75, lon: 21.22 });
     expect(
       validateHelpForm({ title: 'Borrow a drill', category: 'BORROW', description: ' Ten minutes ', address: ' Strada Paris 1 ', point: { lat: 45.75, lon: 21.22 } }).payload,
     ).toEqual({ title: 'Borrow a drill', category: 'BORROW', description: 'Ten minutes', address: 'Strada Paris 1', lat: 45.75, lon: 21.22 });
@@ -149,6 +157,28 @@ describe('HelpBoardScreen', () => {
     expect(within(screen.getByTestId(`help-card-${HELP.groceries}`)).getByText('Helped')).toBeTruthy();
   });
 
+  it('groups nearby requests by neighbourhood, mine first and the ones outside last', async () => {
+    renderScreen(
+      <LocationProvider>
+        <HelpBoardScreen />
+      </LocationProvider>,
+    );
+    const here = await screen.findByTestId('help-area-cetate');
+    expect(within(here).getByText("YOU'RE HERE")).toBeTruthy();
+    const outside = screen.getByTestId('help-area-outside');
+    expect(within(outside).getByText(/^Outside the neighbourhoods \(\d+\)$/)).toBeTruthy();
+    // Areas with no open requests get no section.
+    expect(screen.queryByTestId('help-area-somewhere-new')).toBeNull();
+    // Cetate's header comes before its requests, and those come before the outside section.
+    const order = screen.root
+      .findAll((n: { props: { testID?: unknown } }) => typeof n.props.testID === 'string' && /^help-(area|card)-/.test(n.props.testID))
+      .map((n: { props: { testID?: unknown } }) => n.props.testID as string)
+      .filter((id: string, i: number, all: string[]) => all.indexOf(id) === i);
+    expect(order.indexOf('help-area-cetate')).toBeLessThan(order.indexOf(`help-card-${HELP.dogWalk}`));
+    expect(order.indexOf(`help-card-${HELP.dogWalk}`)).toBeLessThan(order.indexOf('help-area-outside'));
+    expect(order.indexOf('help-area-outside')).toBeLessThan(order.indexOf(`help-card-${HELP.ladder}`));
+  });
+
   it('says when nobody needs help, and shows errors with retry', async () => {
     const spy = jest.spyOn(mocks, 'mockRequest').mockResolvedValue([]);
     renderScreen(<HelpBoardScreen />);
@@ -166,6 +196,8 @@ describe('NewHelpRequestScreen', () => {
     fireEvent.press(screen.getByRole('button', { name: 'Post request' }));
     expect(screen.getByText('Say what you need help with.')).toBeTruthy();
     expect(screen.getByText('Pick a category.')).toBeTruthy();
+    // Without a known position nothing is pinned, so the pin is asked for too.
+    expect(screen.getByText('Pin where you need help.')).toBeTruthy();
     expect(mockRouter.replace).not.toHaveBeenCalled();
   });
 
@@ -196,13 +228,27 @@ describe('NewHelpRequestScreen', () => {
     expect(created).toMatchObject({ category: 'BORROW', address: 'Strada Paris 1', lat: 45.75, lon: 21.22 });
   });
 
-  it('can remove the pin again', async () => {
-    renderScreen(<NewHelpRequestScreen />);
-    fireEvent.press(screen.getByRole('button', { name: 'Choose on map' }));
+  it('pins the request where I am, and a spot I choose replaces it', async () => {
+    renderScreen(
+      <LocationProvider>
+        <NewHelpRequestScreen />
+      </LocationProvider>,
+    );
+    expect(await screen.findByRole('button', { name: 'Pinned at 45.7600, 21.2300' })).toBeTruthy();
+    expect(screen.getByText('Set to where you are now. Tap to move it.')).toBeTruthy();
+    expect(screen.queryByRole('button', { name: 'Remove pin' })).toBeNull();
+
+    fireEvent.press(screen.getByRole('button', { name: 'Pinned at 45.7600, 21.2300' }));
     fireEvent(await screen.findByTestId('picker-map'), 'press', { nativeEvent: { coordinate: { latitude: 45.75, longitude: 21.22 } } });
     fireEvent.press(screen.getByRole('button', { name: 'Use this location' }));
-    fireEvent.press(screen.getByRole('button', { name: 'Remove pin' }));
-    expect(screen.getByRole('button', { name: 'Choose on map' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Pinned at 45.7500, 21.2200' })).toBeTruthy();
+    expect(screen.getByText('Your request shows up in the neighbourhood of this pin.')).toBeTruthy();
+
+    fireEvent.changeText(screen.getByLabelText('What do you need?'), 'Borrow a hammer');
+    fireEvent.press(screen.getByRole('button', { name: 'Borrow' }));
+    fireEvent.press(screen.getByRole('button', { name: 'Post request' }));
+    await waitFor(() => expect(mockRouter.replace).toHaveBeenCalled());
+    expect(mocks.getMockState().helpRequests.find((r) => r.title === 'Borrow a hammer')).toMatchObject({ lat: 45.75, lon: 21.22 });
   });
 });
 

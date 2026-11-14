@@ -35,8 +35,8 @@
       "Jest"
     ],
     "description": "Hackathon mobile app for Timișoara (Connected Communities): Spring Boot API + Supabase + Expo app with events and QR reliability points, places map, live STPT transit, routing and an AI guide.",
-    "analyzedAt": "2026-11-14T17:52:30.227Z",
-    "gitCommitHash": "69cb57946684bc71c0253fcb1f9fbdd57b78bb91"
+    "analyzedAt": "2026-11-14T18:15:32.929Z",
+    "gitCommitHash": "078b1dce6eaec808aad6c687bd48580d110018e2"
   },
   "nodes": [
     {
@@ -29793,19 +29793,6 @@
       "complexity": "simple"
     },
     {
-      "id": "file:frontend/__tests__/screens.help.test.tsx",
-      "type": "file",
-      "name": "screens.help.test.tsx",
-      "filePath": "frontend/__tests__/screens.help.test.tsx",
-      "summary": "Jest tests for the Neighbour Help Board: text helpers, form validation, board, create, request detail (neighbour and requester), ticket, QR scan screens, home entry point and HELPED reliability entries.",
-      "tags": [
-        "test",
-        "help",
-        "screens"
-      ],
-      "complexity": "complex"
-    },
-    {
       "id": "file:frontend/src/api/endpoints.help.ts",
       "type": "file",
       "name": "endpoints.help.ts",
@@ -30315,123 +30302,6 @@
       "complexity": "simple"
     },
     {
-      "id": "file:frontend/src/app/help/index.tsx",
-      "type": "file",
-      "name": "index.tsx",
-      "filePath": "frontend/src/app/help/index.tsx",
-      "summary": "Neighbour Help Board home screen with Board and Mine tabs, category filter chips, and a button to post a new request.",
-      "tags": [
-        "screen",
-        "help-board",
-        "list",
-        "filter",
-        "expo-router",
-        "tested"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:frontend/src/app/help/index.tsx:HelpBoardScreen",
-      "type": "function",
-      "name": "HelpBoardScreen",
-      "filePath": "frontend/src/app/help/index.tsx",
-      "lineRange": [
-        22,
-        56
-      ],
-      "summary": "Board home component switching between Board and Mine tabs with category filtering.",
-      "tags": [
-        "react-component",
-        "ui",
-        "component"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/app/help/index.tsx:Board",
-      "type": "function",
-      "name": "Board",
-      "filePath": "frontend/src/app/help/index.tsx",
-      "lineRange": [
-        59,
-        82
-      ],
-      "summary": "Lists open help requests from the board query with category filtering and empty/error states.",
-      "tags": [
-        "react-component",
-        "ui",
-        "component"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/app/help/index.tsx:Mine",
-      "type": "function",
-      "name": "Mine",
-      "filePath": "frontend/src/app/help/index.tsx",
-      "lineRange": [
-        85,
-        100
-      ],
-      "summary": "Lists the requests the user posted or offered to help with.",
-      "tags": [
-        "react-component",
-        "ui",
-        "component"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/app/help/index.tsx:Section",
-      "type": "function",
-      "name": "Section",
-      "filePath": "frontend/src/app/help/index.tsx",
-      "lineRange": [
-        103,
-        116
-      ],
-      "summary": "Titled section wrapper grouping request rows.",
-      "tags": [
-        "react-component",
-        "ui",
-        "component"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "file:frontend/src/app/help/new.tsx",
-      "type": "file",
-      "name": "new.tsx",
-      "filePath": "frontend/src/app/help/new.tsx",
-      "summary": "Form screen to post a new help request with title, description, category, and location picker, validated before submit.",
-      "tags": [
-        "screen",
-        "help-board",
-        "form",
-        "validation",
-        "expo-router",
-        "tested"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:frontend/src/app/help/new.tsx:NewHelpRequestScreen",
-      "type": "function",
-      "name": "NewHelpRequestScreen",
-      "filePath": "frontend/src/app/help/new.tsx",
-      "lineRange": [
-        21,
-        141
-      ],
-      "summary": "Form component managing help request fields, location selection, validation and creation mutation.",
-      "tags": [
-        "react-component",
-        "ui",
-        "component"
-      ],
-      "complexity": "moderate"
-    },
-    {
       "id": "file:frontend/src/features/help/HelpCards.tsx",
       "type": "file",
       "name": "HelpCards.tsx",
@@ -30632,7 +30502,8 @@
         "utility",
         "formatting",
         "help-board",
-        "pure-functions"
+        "pure-functions",
+        "tested"
       ],
       "complexity": "moderate"
     },
@@ -30782,7 +30653,8 @@
         "validation",
         "form",
         "help-board",
-        "utility"
+        "utility",
+        "tested"
       ],
       "complexity": "moderate"
     },
@@ -30987,7 +30859,8 @@
         "hook",
         "help",
         "react-query",
-        "api-client"
+        "api-client",
+        "tested"
       ],
       "complexity": "moderate"
     },
@@ -31778,20 +31651,6 @@
         23,
         42
       ]
-    },
-    {
-      "id": "document:PLAN.md",
-      "type": "document",
-      "name": "PLAN.md",
-      "filePath": "PLAN.md",
-      "summary": "Hackathon task plan organised by numbered tasks and tracks with checkboxes, from setup through Neighbourhood Pulse (24), the Neighbour Help Board (25), the AI Leave now box (26) and Timisoara news (27), plus cut order and open questions.",
-      "tags": [
-        "documentation",
-        "planning",
-        "roadmap",
-        "tasks"
-      ],
-      "complexity": "complex"
     },
     {
       "id": "file:backend/src/main/java/com/unihack8/backend/ai/domain/dto/LeaveNowDto.java",
@@ -34782,17 +34641,214 @@
       "complexity": "simple"
     },
     {
+      "id": "file:frontend/__tests__/help.groupByArea.test.ts",
+      "type": "file",
+      "name": "help.groupByArea.test.ts",
+      "filePath": "frontend/__tests__/help.groupByArea.test.ts",
+      "summary": "Jest unit tests for groupByNeighbourhood: verifies the Help Board Nearby list is split into neighbourhood sections with your own area first, others by distance, empty areas dropped and unpinned/outside requests last.",
+      "tags": [
+        "test",
+        "help",
+        "neighbourhoods",
+        "grouping"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/__tests__/screens.help.test.tsx",
+      "type": "file",
+      "name": "screens.help.test.tsx",
+      "filePath": "frontend/__tests__/screens.help.test.tsx",
+      "summary": "Jest tests for the Neighbour Help Board: text helpers, form validation, the board screen (including the neighbourhood-grouped Nearby list), create, request detail as neighbour and requester, ticket, QR scan screens, home entry point and HELPED reliability entries.",
+      "tags": [
+        "test",
+        "help",
+        "screens",
+        "integration-test"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/app/help/index.tsx",
+      "type": "file",
+      "name": "index.tsx",
+      "filePath": "frontend/src/app/help/index.tsx",
+      "summary": "Help Board screen (expo-router /help) with category filter chips and Nearby/Mine tabs; the Nearby board loads open help requests plus Neighbourhood Pulse areas and renders them in a SectionList grouped by neighbourhood (your area first, marked \"You're here\").",
+      "tags": [
+        "component",
+        "screen",
+        "help-board",
+        "neighbourhood",
+        "entry-point",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/app/help/index.tsx:HelpBoardScreen",
+      "type": "function",
+      "name": "HelpBoardScreen",
+      "filePath": "frontend/src/app/help/index.tsx",
+      "lineRange": [
+        26,
+        60
+      ],
+      "summary": "Default-exported screen holding the selected help categories and active tab, rendering the header, category chips, tab switch and an 'Ask for help' button that routes to /help/new.",
+      "tags": [
+        "component",
+        "screen",
+        "state",
+        "navigation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/app/help/index.tsx:Board",
+      "type": "function",
+      "name": "Board",
+      "filePath": "frontend/src/app/help/index.tsx",
+      "lineRange": [
+        64,
+        124
+      ],
+      "summary": "Nearby tab: fetches the help board and neighbourhood pulse, filters by category, and groups requests with groupByNeighbourhood relative to the user's real position (fallback position ignored), rendering a pull-to-refresh SectionList with loading/empty/error states.",
+      "tags": [
+        "component",
+        "data-fetching",
+        "grouping",
+        "neighbourhood"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/app/help/index.tsx:Mine",
+      "type": "function",
+      "name": "Mine",
+      "filePath": "frontend/src/app/help/index.tsx",
+      "lineRange": [
+        127,
+        142
+      ],
+      "summary": "Mine tab listing the user's own requests and the requests they offered to help with, using useMyHelpRequests with loading and error states.",
+      "tags": [
+        "component",
+        "data-fetching",
+        "help-board"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/app/help/index.tsx:Section",
+      "type": "function",
+      "name": "Section",
+      "filePath": "frontend/src/app/help/index.tsx",
+      "lineRange": [
+        145,
+        158
+      ],
+      "summary": "Small titled list section that shows HelpRequestRow items or an empty-message placeholder, optionally showing the requester.",
+      "tags": [
+        "component",
+        "list",
+        "presentational"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/app/help/new.tsx",
+      "type": "file",
+      "name": "new.tsx",
+      "filePath": "frontend/src/app/help/new.tsx",
+      "summary": "Ask-for-help form screen (/help/new) with title, description, category, optional address and a required map pin that is pre-filled with the phone's real position until the user moves it; validates via newHelpForm and submits with useCreateHelpRequest.",
+      "tags": [
+        "component",
+        "screen",
+        "form",
+        "validation",
+        "geolocation",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/app/help/new.tsx:NewHelpRequestScreen",
+      "type": "function",
+      "name": "NewHelpRequestScreen",
+      "filePath": "frontend/src/app/help/new.tsx",
+      "lineRange": [
+        21,
+        150
+      ],
+      "summary": "Default-exported form screen managing HelpForm state, auto-pinning to the current (non-fallback) position, opening LocationPickerModal to move the pin, validating with validateHelpForm and posting the request, showing friendly API errors.",
+      "tags": [
+        "component",
+        "form",
+        "validation",
+        "geolocation",
+        "mutation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/src/features/help/groupByArea.ts",
+      "type": "file",
+      "name": "groupByArea.ts",
+      "filePath": "frontend/src/features/help/groupByArea.ts",
+      "summary": "Pure helper that groups Help Board requests into neighbourhood sections using the same area circles as Neighbourhood Pulse, ordering your current area first, then others by distance, with outside/unpinned requests last.",
+      "tags": [
+        "utility",
+        "help",
+        "neighbourhoods",
+        "grouping",
+        "geo",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/help/groupByArea.ts:groupByNeighbourhood",
+      "type": "function",
+      "name": "groupByNeighbourhood",
+      "filePath": "frontend/src/features/help/groupByArea.ts",
+      "lineRange": [
+        21,
+        39
+      ],
+      "summary": "Buckets requests by areaIdOf, ranks areas (current area first, then by distanceMeters, stable by list order), drops empty areas and appends an Outside the neighbourhoods section.",
+      "tags": [
+        "utility",
+        "grouping",
+        "sorting",
+        "geo"
+      ],
+      "complexity": "moderate"
+    },
+    {
       "id": "document:DOCS.md",
       "type": "document",
       "name": "DOCS.md",
       "filePath": "DOCS.md",
-      "summary": "Living project documentation covering architecture, configuration and running, the Supabase database, external data sources, reliability (civic trust) rules and per-feature sections (Neighbourhood Pulse, Neighbour Help Board, AI Leave now box, Timisoara news), plus knowledge graph notes. Its GlobalExceptionHandler entry now notes that client hang-ups (connection reset, broken pipe) are logged at DEBUG with no error body.",
+      "summary": "Living technical documentation for the Timișoara Connected Communities app covering backend packages, API endpoints, frontend screens and features; now documents the neighbourhood-grouped Help Board and the required, auto-pinned help request location.",
       "tags": [
         "documentation",
-        "api-reference",
         "architecture",
-        "overview",
-        "error-handling"
+        "api-reference",
+        "frontend",
+        "backend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:PLAN.md",
+      "type": "document",
+      "name": "PLAN.md",
+      "filePath": "PLAN.md",
+      "summary": "Project roadmap with numbered task sections and checkboxes per track (through 25 Help Board, 26 Leave now, 27 news), including newly ticked item 25.8 grouping the board by neighbourhood and pinning requests at the user's position.",
+      "tags": [
+        "documentation",
+        "planning",
+        "roadmap",
+        "task-tracking"
       ],
       "complexity": "complex"
     },
@@ -55553,13 +55609,6 @@
       "weight": 0.8
     },
     {
-      "source": "file:frontend/src/app/(tabs)/index.tsx",
-      "target": "file:frontend/__tests__/screens.help.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "file:frontend/src/api/endpoints.help.ts",
       "target": "file:frontend/src/api/client.ts",
       "type": "depends_on",
@@ -55651,13 +55700,6 @@
       "weight": 1
     },
     {
-      "source": "file:frontend/src/app/help/[id]/index.tsx",
-      "target": "file:frontend/__tests__/screens.help.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "file:frontend/src/app/help/[id]/scan.tsx",
       "target": "function:frontend/src/app/help/[id]/scan.tsx:HelpScanScreen",
       "type": "contains",
@@ -55670,13 +55712,6 @@
       "type": "exports",
       "direction": "forward",
       "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/scan.tsx",
-      "target": "file:frontend/__tests__/screens.help.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
     },
     {
       "source": "file:frontend/src/app/help/[id]/ticket.tsx",
@@ -55700,13 +55735,6 @@
       "weight": 1
     },
     {
-      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
-      "target": "file:frontend/__tests__/screens.help.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "file:frontend/src/app/help/_layout.tsx",
       "target": "function:frontend/src/app/help/_layout.tsx:HelpLayout",
       "type": "contains",
@@ -55719,76 +55747,6 @@
       "type": "exports",
       "direction": "forward",
       "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/app/help/_layout.tsx",
-      "target": "file:frontend/__tests__/screens.help.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:frontend/src/app/help/index.tsx",
-      "target": "function:frontend/src/app/help/index.tsx:HelpBoardScreen",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/app/help/index.tsx",
-      "target": "function:frontend/src/app/help/index.tsx:HelpBoardScreen",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/app/help/index.tsx",
-      "target": "function:frontend/src/app/help/index.tsx:Board",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/app/help/index.tsx",
-      "target": "function:frontend/src/app/help/index.tsx:Mine",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/app/help/index.tsx",
-      "target": "function:frontend/src/app/help/index.tsx:Section",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/app/help/index.tsx",
-      "target": "file:frontend/__tests__/screens.help.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:frontend/src/app/help/new.tsx",
-      "target": "function:frontend/src/app/help/new.tsx:NewHelpRequestScreen",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/app/help/new.tsx",
-      "target": "function:frontend/src/app/help/new.tsx:NewHelpRequestScreen",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/app/help/new.tsx",
-      "target": "file:frontend/__tests__/screens.help.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
     },
     {
       "source": "file:frontend/src/features/help/HelpCards.tsx",
@@ -56671,13 +56629,6 @@
       "type": "calls",
       "direction": "forward",
       "weight": 0.8
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "file:frontend/src/app/pulse/[id].tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
     },
     {
       "source": "file:backend/src/main/java/com/unihack8/backend/ai/domain/dto/LeaveNowDto.java",
@@ -58227,34 +58178,6 @@
       "weight": 0.5
     },
     {
-      "source": "document:PLAN.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/LeaveNowServiceImpl.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/news/controller/NewsController.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "file:frontend/src/features/ai/LeaveNowBox.tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "file:frontend/src/app/news/index.tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "document:docs/API.md",
       "target": "file:backend/src/main/java/com/unihack8/backend/ai/domain/dto/LeaveNowDto.java",
       "type": "documents",
@@ -58937,6 +58860,314 @@
       "source": "file:backend/src/main/java/com/unihack8/backend/common/exception/GlobalExceptionHandler.java",
       "target": "file:backend/src/test/java/com/unihack8/backend/common/exception/GlobalExceptionHandlerTest.java",
       "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/features/help/groupByArea.ts",
+      "target": "file:frontend/__tests__/help.groupByArea.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/__tests__/help.groupByArea.test.ts",
+      "target": "function:frontend/src/features/help/groupByArea.ts:groupByNeighbourhood",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
+      "target": "file:frontend/__tests__/screens.help.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/app/help/new.tsx",
+      "target": "file:frontend/__tests__/screens.help.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/index.tsx",
+      "target": "file:frontend/__tests__/screens.help.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
+      "target": "file:frontend/__tests__/screens.help.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/scan.tsx",
+      "target": "file:frontend/__tests__/screens.help.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/features/help/format.ts",
+      "target": "file:frontend/__tests__/screens.help.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/features/help/newHelpForm.ts",
+      "target": "file:frontend/__tests__/screens.help.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/hooks/useHelp.ts",
+      "target": "file:frontend/__tests__/screens.help.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
+      "target": "function:frontend/src/app/help/index.tsx:HelpBoardScreen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
+      "target": "function:frontend/src/app/help/index.tsx:Board",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
+      "target": "function:frontend/src/app/help/index.tsx:Mine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
+      "target": "function:frontend/src/app/help/index.tsx:Section",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
+      "target": "function:frontend/src/app/help/index.tsx:HelpBoardScreen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/app/help/new.tsx",
+      "target": "function:frontend/src/app/help/new.tsx:NewHelpRequestScreen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/app/help/new.tsx",
+      "target": "function:frontend/src/app/help/new.tsx:NewHelpRequestScreen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/help/index.tsx:Board",
+      "target": "function:frontend/src/hooks/useHelp.ts:useHelpBoard",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/help/index.tsx:Board",
+      "target": "function:frontend/src/hooks/useNeighbourhoods.ts:useNeighbourhoodPulse",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/help/index.tsx:Board",
+      "target": "function:frontend/src/features/location/LocationProvider.tsx:useCurrentPosition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/help/index.tsx:Board",
+      "target": "function:frontend/src/features/help/format.ts:filterByCategory",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/help/index.tsx:Board",
+      "target": "function:frontend/src/features/help/groupByArea.ts:groupByNeighbourhood",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/help/index.tsx:Mine",
+      "target": "function:frontend/src/hooks/useHelp.ts:useMyHelpRequests",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/help/new.tsx:NewHelpRequestScreen",
+      "target": "function:frontend/src/features/location/LocationProvider.tsx:useCurrentPosition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/help/new.tsx:NewHelpRequestScreen",
+      "target": "function:frontend/src/hooks/useHelp.ts:useCreateHelpRequest",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/help/new.tsx:NewHelpRequestScreen",
+      "target": "function:frontend/src/features/help/newHelpForm.ts:validateHelpForm",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/help/new.tsx:NewHelpRequestScreen",
+      "target": "function:frontend/src/features/help/newHelpForm.ts:emptyHelpForm",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/help/new.tsx:NewHelpRequestScreen",
+      "target": "function:frontend/src/api/errors.ts:friendlyError",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/help/groupByArea.ts",
+      "target": "function:frontend/src/features/help/groupByArea.ts:groupByNeighbourhood",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/help/groupByArea.ts",
+      "target": "function:frontend/src/features/help/groupByArea.ts:groupByNeighbourhood",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/help/groupByArea.ts:groupByNeighbourhood",
+      "target": "function:frontend/src/features/neighbourhoods/areas.ts:areaIdOf",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/help/groupByArea.ts:groupByNeighbourhood",
+      "target": "function:frontend/src/lib/geo.ts:distanceMeters",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/app/help/index.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/app/help/new.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/features/help/groupByArea.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:frontend/src/app/help/index.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:frontend/src/app/help/new.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:frontend/src/features/help/groupByArea.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "document:DOCS.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:frontend/src/app/pulse/[id].tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/LeaveNowServiceImpl.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:backend/src/main/java/com/unihack8/backend/news/controller/NewsController.java",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:frontend/src/features/ai/LeaveNowBox.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:frontend/src/app/news/index.tsx",
+      "type": "documents",
       "direction": "forward",
       "weight": 0.5
     },
@@ -68868,6 +69099,22 @@
       "recoveredFromImportMap": true
     },
     {
+      "source": "file:frontend/__tests__/help.groupByArea.test.ts",
+      "target": "file:frontend/src/api/types.help.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/help.groupByArea.test.ts",
+      "target": "file:frontend/src/features/help/groupByArea.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
       "source": "file:frontend/__tests__/layout.root.test.tsx",
       "target": "file:frontend/src/app/_layout.tsx",
       "type": "imports",
@@ -70230,6 +70477,14 @@
     {
       "source": "file:frontend/__tests__/screens.help.test.tsx",
       "target": "file:frontend/src/features/help/newHelpForm.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.help.test.tsx",
+      "target": "file:frontend/src/features/location/LocationProvider.tsx",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -72421,7 +72676,31 @@
     },
     {
       "source": "file:frontend/src/app/help/index.tsx",
+      "target": "file:frontend/src/features/help/groupByArea.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
+      "target": "file:frontend/src/features/location/LocationProvider.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
       "target": "file:frontend/src/hooks/useHelp.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
+      "target": "file:frontend/src/hooks/useNeighbourhoods.ts",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -74486,6 +74765,30 @@
     {
       "source": "file:frontend/src/features/help/format.ts",
       "target": "file:frontend/src/api/types.help.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/groupByArea.ts",
+      "target": "file:frontend/src/api/types.help.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/groupByArea.ts",
+      "target": "file:frontend/src/features/neighbourhoods/areas.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/groupByArea.ts",
+      "target": "file:frontend/src/lib/geo.ts",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -77674,7 +77977,8 @@
         "file:frontend/src/app/news/index.tsx",
         "file:frontend/src/features/news/NewsCard.tsx",
         "file:frontend/src/features/news/NewsStrip.tsx",
-        "file:frontend/src/features/news/newsFormat.ts"
+        "file:frontend/src/features/news/newsFormat.ts",
+        "file:frontend/src/features/help/groupByArea.ts"
       ]
     },
     {
@@ -77928,7 +78232,8 @@
         "file:frontend/__tests__/screens.help.test.tsx",
         "file:frontend/__tests__/mocks.help.test.ts",
         "file:frontend/__tests__/ai.leaveNow.test.tsx",
-        "file:frontend/__tests__/screens.news.test.tsx"
+        "file:frontend/__tests__/screens.news.test.tsx",
+        "file:frontend/__tests__/help.groupByArea.test.ts"
       ]
     },
     {

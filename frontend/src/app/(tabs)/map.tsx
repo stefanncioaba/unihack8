@@ -4,7 +4,7 @@
 // directions (14.5, with the live vehicles of the route's lines). Tapping a vehicle opens its live panel.
 // Long-press anywhere to get directions to that spot. An AI route card opens it with a route preview, or with "Go" in
 // journey mode (PLAN 18.5): the route from the live position, the camera following the user and the current step.
-import { useLocalSearchParams } from 'expo-router';
+import { useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import MapView, { Marker, type LongPressEvent, type MapPressEvent, type Region } from 'react-native-maps';
@@ -186,12 +186,18 @@ function MapBody() {
     if (focus) setDestination({ coords: focus, title: params.title || 'Selected spot' });
   }, [focus?.lat, focus?.lon, params.title, setDestination]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // When the trip card is closed (directions were shown, now they are not), the pin goes away too.
-  const wasShowingDirections = useRef(showingDirections);
+  // The "Show on map" pin is only for the moment it was asked for: it goes away as soon as the user does something
+  // else: directions open (or close), another place / event / stop is picked, or they leave the Map tab (another menu,
+  // a search, a screen on top). Asking for it again (a new `at`) brings it back.
+  const lastSelection = useRef(selection);
   useEffect(() => {
-    if (wasShowingDirections.current && !showingDirections) setFocusDismissed(true);
-    wasShowingDirections.current = showingDirections;
+    if (selection && selection !== lastSelection.current) setFocusDismissed(true);
+    lastSelection.current = selection;
+  }, [selection]);
+  useEffect(() => {
+    if (showingDirections) setFocusDismissed(true);
   }, [showingDirections]);
+  useFocusEffect(useCallback(() => () => setFocusDismissed(true), []));
 
   // Directions open: frame the whole trip (start and destination) so the route and its vehicles are in view.
   const tripStart = destination?.origin?.coords ?? position;
