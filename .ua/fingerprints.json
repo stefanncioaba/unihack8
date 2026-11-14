@@ -2130,7 +2130,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
-      "contentHash": "7a018f8eb093070421a020c05460d2ff973573e2f86edeca7ca5dd35f2036ed3",
+      "contentHash": "6b3ae2cb2c718cc396a17058bafefe907c7c7a3d7fe69712fed01bf1c2f3f59c",
       "functions": [
         {
           "name": "SystemPrompt",
@@ -2189,7 +2189,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 75,
+      "totalLines": 108,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/ai/tool/AiTool.java": {
@@ -18551,7 +18551,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
-      "contentHash": "34b1a142ccebe759ee2ca2502328d4cbec989c0b2709255ad67eec595964101e",
+      "contentHash": "f4cfaeb1d1a73e7207dd9e09b0010febb102b039573f6099449ed6174c9f3e14",
       "functions": [
         {
           "name": "toolCallLoop",
@@ -18909,7 +18909,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 292,
+      "totalLines": 327,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/ai/service/impl/InMemoryChatRateLimiterTest.java": {
@@ -37874,6 +37874,24 @@
       "exports": [],
       "totalLines": 186,
       "hasStructuralAnalysis": false
+    },
+    "backend/src/test/java/com/unihack8/backend/ai/service/impl/SystemPromptTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/SystemPromptTest.java",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "contentHash": "080ea21fb74e0ece01261b2a3830c80f4af944d47cbfee4ab4164b114f418e38",
+      "totalLines": 53
+    },
+    "backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "contentHash": "999e907db7e0b9d5fefe2c1936376eff94cb3ff7d2effeff3e4c1ce28b350887",
+      "totalLines": 183
     }
   }
 }

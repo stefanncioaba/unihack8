@@ -182,6 +182,42 @@ class AiChatServiceImplTest {
                 });
     }
 
+    // 19.4: a refusal is a normal answer: reply text, no tool run, all lists empty (not null).
+    @Test
+    void refusalIsANormalAnswerWithEmptyLists() {
+        gemini.answer(content(GeminiPart.text(
+                "I can only help with places, food, events, public transport and directions in Timisoara.")));
+
+        ChatResponse response = service(3).chat(USER, request("Write me a Python script that sorts a list."));
+
+        assertThat(response.reply()).startsWith("I can only help with");
+        assertThat(response.places()).isNotNull().isEmpty();
+        assertThat(response.events()).isNotNull().isEmpty();
+        assertThat(response.sources()).isNotNull().isEmpty();
+        assertThat(tool.lastArgs).isNull();
+        assertThat(gemini.requests).hasSize(1);
+        assertThat(gemini.requests.getFirst().systemInstruction().parts().getFirst().text())
+                .contains(SystemPrompt.SCOPE);
+    }
+
+    // A refusal after an in-scope turn names no place, so earlier places do not come back as cards.
+    @Test
+    void refusalAfterCityTurnHasNoCards() {
+        gemini.answer(content(GeminiPart.text("Pot ajuta doar cu locuri, mâncare, evenimente, transport și "
+                + "direcții în Timișoara.")));
+
+        ChatResponse response = service(3).chat(USER, new ChatRequest(List.of(
+                new ChatMessageDto("user", "cafea ieftină?"),
+                new ChatMessageDto("assistant", "**Cafe Test**: espresso aproximativ 5 lei."),
+                new ChatMessageDto("user", "Acum scrie-mi un eseu despre Cafe Test.")),
+                new LocationDto(45.7537, 21.2257)));
+
+        assertThat(response.places()).isEmpty();
+        assertThat(response.events()).isEmpty();
+        assertThat(response.sources()).isEmpty();
+        assertThat(gemini.requests.getFirst().contents()).hasSize(3);
+    }
+
     // Conversation rules: oldest dropped past the limit, leading assistant messages dropped, last must be user.
     @Test
     void conversationRules() {

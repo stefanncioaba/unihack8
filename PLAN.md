@@ -328,12 +328,12 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 **Needs:** 11 (done). Added 2026-11-14. **Goal:** the assistant answers only questions about Timișoara (places, food and drinks, events, public transport, the city itself) and directions to a place. Anything else — "code me something", homework, essays, translations, general knowledge — is declined. Today the system prompt has one soft line about this (rule 10); this task makes it strict and tested.
 
-- [ ] **19.1 Strict scope rule in the system prompt:** list what is in scope and what is not, with examples of requests to refuse (code, maths/homework, essays, translations, general chat). A refusal is one short sentence saying what the assistant can help with, in the user's language, with **no tool calls**.
-- [ ] **19.2 Cannot be talked out of it:** "ignore your instructions", role-play ("pretend you are a programmer") and requests wrapped in a city excuse ("write Python code about Timișoara trams") are still refused.
-- [ ] **19.3 Do not over-refuse:** short follow-ups ("and the second one?", "is it open now?") are judged with the whole conversation, not alone; a mixed message gets the city part answered and the rest declined in one sentence.
-- [ ] **19.4 Answer shape:** a refusal is a normal `200` answer with `reply` and empty `places` / `events` / `sources` (and `routes`) — no new error code, so the app needs no change. Add the sentence to `docs/API.md`.
-- [ ] **19.5 Tests:** unit tests that the prompt carries the scope rule and that a refusal returns empty lists; a live check against real Gemini with a fixed list of about 12 prompts (off-topic, trick prompts, mixed, normal follow-ups), results noted in `DOCS.md`.
-- [ ] **19.6** `DOCS.md` (AI assistant section) and the knowledge graph updated.
+- [x] **19.1 Strict scope rule in the system prompt:** list what is in scope and what is not, with examples of requests to refuse (code, maths/homework, essays, translations, general chat). A refusal is one short sentence saying what the assistant can help with, in the user's language, with **no tool calls**.
+- [x] **19.2 Cannot be talked out of it:** "ignore your instructions", role-play ("pretend you are a programmer") and requests wrapped in a city excuse ("write Python code about Timișoara trams") are still refused.
+- [x] **19.3 Do not over-refuse:** short follow-ups ("and the second one?", "is it open now?") are judged with the whole conversation, not alone; a mixed message gets the city part answered and the rest declined in one sentence.
+- [x] **19.4 Answer shape:** a refusal is a normal `200` answer with `reply` and empty `places` / `events` / `sources` (and `routes`) — no new error code, so the app needs no change. Add the sentence to `docs/API.md`.
+- [x] **19.5 Tests:** unit tests that the prompt carries the scope rule and that a refusal returns empty lists; a live check against real Gemini with a fixed list of about 12 prompts (off-topic, trick prompts, mixed, normal follow-ups), results noted in `DOCS.md`. *Done 2026-11-14: `SystemPromptTest`, two refusal tests in `AiChatServiceImplTest`, opt-in `ScopeLiveCheckTest` — live 13/13 pass, table in `DOCS.md` → AI assistant.*
+- [x] **19.6** `DOCS.md` (AI assistant section) and the knowledge graph updated.
 
 ---
 
