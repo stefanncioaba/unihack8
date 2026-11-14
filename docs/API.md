@@ -482,6 +482,8 @@ All public. `stale: true` means STPT did not answer and this is the last cached 
 
 ### `GET /transit/vehicles?route=1`
 
+`route` is optional. With it: the vehicles of that one line. Without it: every live vehicle of every line in one answer, with `"route": null` at the top level (one STPT call, shared by all clients for 10 s, so polling every 10 s is fine).
+Each vehicle carries its line: `route` is the line id (same as `GET /transit/routes` `id`), `routeName` the name to show (e.g. `"1"`, `"E2"`), `type` and `color` as in `GET /transit/routes`. `type` / `color` are `null` when the line is not in STPT's line list (or that list could not be loaded); `route` / `routeName` are then STPT's own line name, and both are `null` when STPT reports a vehicle without a line. If STPT's line list fails with nothing cached, it is not asked for again for 60 s (vehicles and shapes come back without STPT's type/colour meanwhile).
 Refresh every 10 s on the map.
 
 ```json
@@ -492,6 +494,10 @@ Refresh every 10 s on the map.
   "vehicles": [
     {
       "id": "1010",
+      "route": "1",
+      "routeName": "1",
+      "type": "TRAM",
+      "color": "#e3a900",
       "lat": 45.73853,
       "lon": 21.22507,
       "bearing": 20.2,
@@ -503,6 +509,25 @@ Refresh every 10 s on the map.
     }
   ]
 }
+```
+
+### `GET /transit/shapes?route=1`
+
+The drawn path of every line, for map overlays. `route` is optional (only that line; case-insensitive; unknown line gives `[]`).
+`polylines` are Google encoded polylines, precision 5 (decode with `frontend/src/lib/polyline.ts`), one per direction/variant of the line.
+Built from the STPT GTFS file (`shapes.txt`; trips without a shape are drawn through their stops in order). `type` / `color` come from STPT's line list, or from the GTFS file when that list is down (then express/metropolitan lines show as `BUS`; that GTFS-only answer is reused for 5 minutes, then rebuilt with STPT's line facts). The app draws each line in its own colour from a fixed palette (by line id), not STPT's `color`, since STPT gives every line of a vehicle type the same colour.
+Sorted like `GET /transit/routes`. Kept in memory: it only changes when the GTFS file does. `[]` when the backend has no GTFS file (`infra/otp/get-data.sh`). All lines are about 130 KB, so fetch it once per app session.
+
+```json
+[
+  {
+    "route": "1",
+    "routeName": "1",
+    "type": "TRAM",
+    "color": "#e3a900",
+    "polylines": ["_p~iF~ps|U_ulLnnqC", "..."]
+  }
+]
 ```
 
 ### `GET /transit/stops/{id}/arrivals`

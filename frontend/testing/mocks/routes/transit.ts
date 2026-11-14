@@ -1,6 +1,7 @@
 // Mock routes: transit (STPT). Shapes follow docs/API.md -> Transit.
 import { ApiError } from '@/api/errors';
-import type { LastDepartures, StopArrivals, TransitArrival, TransitStop, TransitSummary, TransitVehicles } from '@/api/types.transit';
+import type { LastDepartures, StopArrivals, TransitArrival, TransitShape, TransitStop, TransitSummary, TransitVehicles } from '@/api/types.transit';
+import { encodePolyline } from '@/lib/polyline';
 import { bucharestToUtcIso, toBucharest } from '@/lib/time';
 
 import { getState, type Route } from '../core';
@@ -39,6 +40,7 @@ function parseBbox(raw: unknown): number[] {
 /** Two vehicles per running line, sliding between consecutive stops as time passes. */
 function vehiclesFor(route: string, now: number): TransitVehicles['vehicles'] {
   if (LINES_NOT_RUNNING.includes(route)) return [];
+  const line = MOCK_ROUTES.find((r) => r.id === route)!;
   const order = LINE_STOPS[route].map(stopById);
   const t = now / 120_000;
   return [0, 0.5].map((offset, i) => {
@@ -48,6 +50,10 @@ function vehiclesFor(route: string, now: number): TransitVehicles['vehicles'] {
     const f = pos - Math.floor(pos);
     return {
       id: `${route}-${100 + i}`,
+      route,
+      routeName: line.name,
+      type: line.type,
+      color: line.color,
       lat: a.lat + (b.lat - a.lat) * f,
       lon: a.lon + (b.lon - a.lon) * f,
       bearing: null,
@@ -87,10 +93,29 @@ export const transitRoutes: Route[] = [
     method: 'GET',
     pattern: /^\/transit\/vehicles$/,
     handler: ({ query }): TransitVehicles => {
-      const route = String(query.route ?? '');
-      if (!LINE_STOPS[route]) throw new ApiError(404, 'NOT_FOUND', 'Line not found');
       const now = Date.now();
+      // No `route`: every live vehicle of every line in one answer.
+      if (query.route === undefined || query.route === '') {
+        return { route: null, updatedAt: new Date(now).toISOString(), stale: false, vehicles: MOCK_ROUTES.flatMap((r) => vehiclesFor(r.id, now)) };
+      }
+      const route = String(query.route);
+      if (!LINE_STOPS[route]) throw new ApiError(404, 'NOT_FOUND', 'Line not found');
       return { route, updatedAt: new Date(now).toISOString(), stale: false, vehicles: vehiclesFor(route, now) };
+    },
+  },
+  {
+    method: 'GET',
+    pattern: /^\/transit\/shapes$/,
+    handler: ({ query }): TransitShape[] => {
+      // Straight lines through each line's stops (both directions run the same stops, so one polyline per line).
+      const wanted = query.route === undefined || query.route === '' ? null : String(query.route).toUpperCase();
+      return MOCK_ROUTES.filter((r) => !wanted || r.id.toUpperCase() === wanted).map((r) => ({
+        route: r.id,
+        routeName: r.name,
+        type: r.type,
+        color: r.color,
+        polylines: [encodePolyline(LINE_STOPS[r.id].map((id) => stopById(id)))],
+      }));
     },
   },
   {

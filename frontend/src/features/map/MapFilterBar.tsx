@@ -1,26 +1,34 @@
-// Top chip row of the Map tab: the Events toggle and the place category filters (PLAN 14.2, 14.3).
+// Top chip row of the Map tab (PLAN 14.2-14.4): "All places", "Events", "Transport", then the place categories.
+// The rules for what each press does live in mapFilters.ts.
 import { ScrollView, StyleSheet } from 'react-native';
 
-import { PLACE_CATEGORIES, type PlaceCategory } from '@/api/types.places';
+import { PLACE_CATEGORIES } from '@/api/types.places';
 import { Chip } from '@/ui/Chip';
+import { allPlacesSelected, categorySelected, type MapFilterAction, type MapFilters } from './mapFilters';
 import { PLACE_META } from './placeCategories';
 
 type Props = {
-  categories: PlaceCategory[];
-  onToggleCategory: (category: PlaceCategory) => void;
-  onClearCategories: () => void;
-  eventsOn: boolean;
-  onToggleEvents: () => void;
+  filters: MapFilters;
+  onChange: (action: MapFilterAction) => void;
 };
 
-/** Horizontal chips: "Events" on/off, "All places", then one chip per category (multi-select). */
-export function MapFilterBar({ categories, onToggleCategory, onClearCategories, eventsOn, onToggleEvents }: Props) {
+/** Horizontal chips: the three layer chips first, then one chip per place category (multi-select). */
+export function MapFilterBar({ filters, onChange }: Props) {
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row} style={styles.scroll} keyboardShouldPersistTaps="handled">
-      <Chip label="Events" icon="calendar-outline" selected={eventsOn} onPress={onToggleEvents} style={styles.chip} testID="chip-events" />
-      <Chip label="All places" selected={categories.length === 0} onPress={onClearCategories} style={styles.chip} />
+      <Chip overMap label="All places" icon="location-outline" selected={allPlacesSelected(filters)} onPress={() => onChange({ type: 'allPlaces' })} testID="chip-places" />
+      <Chip overMap label="Events" icon="calendar-outline" selected={filters.eventsOn} onPress={() => onChange({ type: 'events' })} testID="chip-events" />
+      <Chip overMap label="Transport" icon="bus-outline" selected={filters.transitOn} onPress={() => onChange({ type: 'transport' })} testID="chip-transit" />
       {PLACE_CATEGORIES.map((c) => (
-        <Chip key={c} label={PLACE_META[c].label} icon={PLACE_META[c].icon} selected={categories.includes(c)} onPress={() => onToggleCategory(c)} style={styles.chip} />
+        <Chip
+          key={c}
+          overMap
+          label={PLACE_META[c].label}
+          icon={PLACE_META[c].icon}
+          selected={categorySelected(filters, c)}
+          onPress={() => onChange({ type: 'category', category: c })}
+          testID={`chip-category-${c}`}
+        />
       ))}
     </ScrollView>
   );
@@ -29,6 +37,4 @@ export function MapFilterBar({ categories, onToggleCategory, onClearCategories, 
 const styles = StyleSheet.create({
   scroll: { flexGrow: 0, flexShrink: 0, height: 34, marginHorizontal: -16 },
   row: { gap: 8, paddingHorizontal: 16, alignItems: 'center' },
-  // Dark translucent fill so the chips stay readable over the map.
-  chip: { backgroundColor: 'rgba(0,29,61,0.92)' },
 });

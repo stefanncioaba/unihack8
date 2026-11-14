@@ -2,7 +2,9 @@ package com.unihack8.backend.transit.service.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -18,6 +20,8 @@ import com.unihack8.backend.transit.domain.dto.ArrivalsResponse;
 import com.unihack8.backend.transit.domain.dto.LastDepartureDto;
 import com.unihack8.backend.transit.domain.dto.LastDeparturesResponse;
 import com.unihack8.backend.transit.domain.dto.TransitRouteDto;
+import com.unihack8.backend.transit.domain.dto.TransitShapeDto;
+import com.unihack8.backend.transit.domain.dto.VehicleDto;
 import com.unihack8.backend.transit.domain.dto.TransitSummaryResponse;
 import com.unihack8.backend.transit.domain.dto.VehiclesResponse;
 import com.unihack8.backend.transit.domain.dto.stpt.StptAlert;
@@ -25,8 +29,10 @@ import com.unihack8.backend.transit.domain.dto.stpt.StptArrival;
 import com.unihack8.backend.transit.domain.dto.stpt.StptRoute;
 import com.unihack8.backend.transit.domain.dto.stpt.StptStop;
 import com.unihack8.backend.transit.domain.dto.stpt.StptVehicle;
+import com.unihack8.backend.transit.domain.model.RouteShape;
 import com.unihack8.backend.transit.domain.model.ScheduledDeparture;
 import com.unihack8.backend.transit.mapper.impl.TransitMapperImpl;
+import com.unihack8.backend.transit.repository.ShapeRepository;
 import com.unihack8.backend.transit.repository.TimetableRepository;
 import java.time.Duration;
 import java.time.Instant;
@@ -45,6 +51,7 @@ class TransitServiceImplTest {
 
     private final StptClient stpt = mock(StptClient.class);
     private final TimetableRepository timetable = mock(TimetableRepository.class);
+    private final ShapeRepository shapeRepository = mock(ShapeRepository.class);
     private final MutableClock clock = new MutableClock(NOW);
     private TransitServiceImpl service;
 
@@ -55,7 +62,7 @@ class TransitServiceImplTest {
                 Duration.ofSeconds(5), "test", new StptProperties.Ttl(Duration.ofSeconds(10),
                 Duration.ofSeconds(20), Duration.ofMinutes(5), Duration.ofHours(24)), "unused.zip");
         // No timetable unless a test says otherwise (Mockito answers Optional.empty()).
-        service = new TransitServiceImpl(stpt, new TransitMapperImpl(), timetable, clock, props);
+        service = new TransitServiceImpl(stpt, new TransitMapperImpl(), timetable, shapeRepository, clock, props);
 
         when(stpt.fetchStops()).thenReturn(List.of(
                 new StptStop("1", "Dâmbovița (Ion Barac)", 45.74015, 21.19611, List.of("2", "9")),
@@ -99,16 +106,82 @@ class TransitServiceImplTest {
                 .singleElement().satisfies(s -> assertThat(s.id()).isEqualTo("1"));
     }
 
-    // Vehicles carry the fetch time and are not stale on success.
+    // Vehicles carry the fetch time, are not stale on success, and carry their line's type and colour.
     @Test
     void vehiclesFresh() {
-        when(stpt.fetchVehicles("1")).thenReturn(List.of(
-                new StptVehicle("1010", 45.7, 21.2, 10.0, 5.0, "1", "Gara de Nord", "X", 1L, true)));
-        VehiclesResponse r = service.vehicles(" 1 ");
-        assertThat(r.route()).isEqualTo("1");
+        when(stpt.fetchVehicles("2")).thenReturn(List.of(
+                new StptVehicle("1010", 45.7, 21.2, 10.0, 5.0, "2", "Shopping City", "X", 1L, true)));
+        VehiclesResponse r = service.vehicles(" 2 ");
+        assertThat(r.route()).isEqualTo("2");
         assertThat(r.stale()).isFalse();
         assertThat(r.updatedAt()).isEqualTo(NOW);
+        assertThat(r.vehicles()).singleElement().satisfies(v -> {
+            assertThat(v.route()).isEqualTo("2");
+            assertThat(v.routeName()).isEqualTo("2");
+            assertThat(v.type()).isEqualTo("TRAM");
+            assertThat(v.color()).isEqualTo("#e3a900");
+        });
+        verify(stpt, never()).fetchAllVehicles();
+    }
+
+    // Without a route: one STPT call for every line, route null, each vehicle tagged with its line.
+    @Test
+    void allVehiclesWithoutRoute() {
+        when(stpt.fetchAllVehicles()).thenReturn(List.of(
+                new StptVehicle("1010", 45.7, 21.2, 10.0, 5.0, "2", "Shopping City", "X", 1L, true),
+                new StptVehicle("B1", 45.7, 21.2, null, null, "m14", "A", "Y", 2L, false),
+                new StptVehicle("B2", 45.7, 21.2, null, null, "99", "Z", "Y", 2L, false)));
+
+        VehiclesResponse r = service.vehicles(null);
+
+        assertThat(r.route()).isNull();
+        assertThat(r.stale()).isFalse();
+        assertThat(r.vehicles()).extracting(VehicleDto::route).containsExactly("2", "M14", "99");
+        assertThat(r.vehicles()).extracting(VehicleDto::type).containsExactly("TRAM", "TROLLEYBUS", null);
+        assertThat(r.vehicles()).extracting(VehicleDto::color).containsExactly("#e3a900", "#6f2095", null);
+        assertThat(service.vehicles(" ").vehicles()).hasSize(3);
+        verify(stpt, never()).fetchVehicles(anyString());
+    }
+
+    // The all-vehicles answer is shared for the vehicles TTL (10 s), then fetched again.
+    @Test
+    void allVehiclesCached() {
+        when(stpt.fetchAllVehicles()).thenReturn(List.of());
+        service.vehicles(null);
+        clock.advance(Duration.ofSeconds(5));
+        service.vehicles(null);
+        verify(stpt, times(1)).fetchAllVehicles();
+        clock.advance(Duration.ofSeconds(6));
+        service.vehicles(null);
+        verify(stpt, times(2)).fetchAllVehicles();
+    }
+
+    // STPT down after a success: last vehicles of every line come back stale.
+    @Test
+    void allVehiclesStaleWhenSourceDown() {
+        when(stpt.fetchAllVehicles()).thenReturn(List.of(
+                new StptVehicle("1010", 45.7, 21.2, 10.0, 5.0, "2", "Shopping City", "X", 1L, true)));
+        service.vehicles(null);
+        clock.advance(Duration.ofSeconds(30));
+        when(stpt.fetchAllVehicles()).thenThrow(new IllegalStateException("timeout"));
+
+        VehiclesResponse r = service.vehicles(null);
+
+        assertThat(r.stale()).isTrue();
+        assertThat(r.updatedAt()).isEqualTo(NOW);
         assertThat(r.vehicles()).hasSize(1);
+    }
+
+    // STPT's line list down: vehicles still come back, without type and colour.
+    @Test
+    void vehiclesWithoutLineList() {
+        when(stpt.fetchRoutes()).thenThrow(new IllegalStateException("timeout"));
+        when(stpt.fetchAllVehicles()).thenReturn(List.of(
+                new StptVehicle("1010", 45.7, 21.2, 10.0, 5.0, "2", "Shopping City", "X", 1L, true)));
+        assertThat(service.vehicles(null).vehicles()).singleElement().satisfies(v -> {
+            assertThat(v.route()).isEqualTo("2");
+            assertThat(v.type()).isNull();
+        });
     }
 
     // STPT down after a success: last vehicles come back with stale=true (PLAN 9.7).
@@ -136,12 +209,112 @@ class TransitServiceImplTest {
                 .extracting(e -> ((ApiException) e).code()).isEqualTo(ErrorCode.SOURCE_UNAVAILABLE);
     }
 
-    // Blank route is a validation error.
+    // Shapes take STPT's line type/colour, are sorted like the routes list and can be filtered.
     @Test
-    void vehiclesNeedRoute() {
-        assertThatThrownBy(() -> service.vehicles(" "))
-                .isInstanceOf(ApiException.class)
-                .extracting(e -> ((ApiException) e).code()).isEqualTo(ErrorCode.VALIDATION_FAILED);
+    void shapesSortedAndFiltered() {
+        when(shapeRepository.shapes()).thenReturn(List.of(
+                shape("13", "3", null), shape("M14", "11", "6f2095"), shape("2", "0", "e3a900")));
+
+        List<TransitShapeDto> shapes = service.shapes(null);
+
+        assertThat(shapes).extracting(TransitShapeDto::route).containsExactly("2", "M14", "13");
+        assertThat(shapes.get(1).type()).isEqualTo("TROLLEYBUS");
+        assertThat(shapes.get(1).color()).isEqualTo("#6f2095");
+        assertThat(shapes.get(0).polylines()).hasSize(1);
+        assertThat(service.shapes("m14")).extracting(TransitShapeDto::route).containsExactly("M14");
+        assertThat(service.shapes("nope")).isEmpty();
+    }
+
+    // Shapes are built once and kept in memory.
+    @Test
+    void shapesCached() {
+        when(shapeRepository.shapes()).thenReturn(List.of(shape("2", "0", "e3a900")));
+        service.shapes(null);
+        service.shapes("2");
+        clock.advance(Duration.ofDays(2));
+        service.shapes(null);
+        verify(shapeRepository, times(1)).shapes();
+    }
+
+    // Line list down: GTFS type/colour are used; that build is reused for a few minutes, then rebuilt with STPT.
+    @Test
+    void shapesWithoutLineListUseGtfs() {
+        when(stpt.fetchRoutes()).thenThrow(new IllegalStateException("timeout"));
+        when(shapeRepository.shapes()).thenReturn(List.of(shape("E4b", "3", null)));
+
+        assertThat(service.shapes(null)).singleElement().satisfies(s -> {
+            assertThat(s.type()).isEqualTo("BUS");
+            assertThat(s.color()).isNull();
+        });
+        service.shapes(null);
+        service.shapes("e4b");
+        verify(shapeRepository, times(1)).shapes();
+        verify(stpt, times(1)).fetchRoutes();
+
+        // STPT is back after the fallback window: the shapes get STPT's type and are cached for good.
+        org.mockito.Mockito.reset(stpt);
+        when(stpt.fetchRoutes()).thenReturn(List.of(new StptRoute("E4b", "C - D", "3", "express", null)));
+        clock.advance(TransitServiceImpl.FALLBACK_SHAPES_TTL.plusSeconds(1));
+        assertThat(service.shapes(null)).singleElement().satisfies(s -> assertThat(s.type()).isEqualTo("EXPRESS"));
+        service.shapes(null);
+        verify(shapeRepository, times(2)).shapes();
+    }
+
+    // Line list down and nothing cached: vehicle polls do not ask STPT for it again until the retry window ends.
+    @Test
+    void vehiclesDoNotRetryFailedLineListAtOnce() {
+        when(stpt.fetchRoutes()).thenThrow(new IllegalStateException("timeout"));
+        when(stpt.fetchAllVehicles()).thenReturn(List.of(
+                new StptVehicle("1010", 45.7, 21.2, 10.0, 5.0, "2", "Shopping City", "X", 1L, true)));
+
+        service.vehicles(null);
+        clock.advance(Duration.ofSeconds(11)); // vehicles cache expired, line-list retry window not yet
+        service.vehicles(null);
+        verify(stpt, times(1)).fetchRoutes();
+
+        clock.advance(TransitServiceImpl.ROUTES_RETRY_AFTER);
+        service.vehicles(null);
+        verify(stpt, times(2)).fetchRoutes();
+    }
+
+    // A line without a short name is skipped instead of breaking routes, vehicles and shapes.
+    @Test
+    void lineWithoutNameIsSkipped() {
+        when(stpt.fetchRoutes()).thenReturn(List.of(
+                new StptRoute(null, "A - B", "3", "urban", null),
+                new StptRoute("2", "C - D", "0", "tram", "e3a900")));
+        when(stpt.fetchAllVehicles()).thenReturn(List.of(
+                new StptVehicle("1010", 45.7, 21.2, 10.0, 5.0, "2", "Shopping City", "X", 1L, true)));
+        when(shapeRepository.shapes()).thenReturn(List.of(shape("2", "0", "e3a900")));
+
+        assertThat(service.routes()).extracting(TransitRouteDto::id).containsExactly("2");
+        assertThat(service.vehicles(null).vehicles()).singleElement()
+                .satisfies(v -> assertThat(v.type()).isEqualTo("TRAM"));
+        assertThat(service.shapes(null)).singleElement().satisfies(s -> assertThat(s.type()).isEqualTo("TRAM"));
+    }
+
+    // A vehicle STPT reports without a line keeps route null (documented) and gets no type.
+    @Test
+    void vehicleWithoutRoute() {
+        when(stpt.fetchAllVehicles()).thenReturn(List.of(
+                new StptVehicle("X1", 45.7, 21.2, null, null, null, null, null, 1L, null)));
+        assertThat(service.vehicles(null).vehicles()).singleElement().satisfies(v -> {
+            assertThat(v.route()).isNull();
+            assertThat(v.type()).isNull();
+        });
+    }
+
+    // No timetable file: no shapes.
+    @Test
+    void noShapesWithoutFile() {
+        when(shapeRepository.shapes()).thenReturn(List.of());
+        assertThat(service.shapes(null)).isEmpty();
+    }
+
+    // A two-point shape for a line.
+    private static RouteShape shape(String name, String type, String color) {
+        return new RouteShape(name, type, color,
+                List.of(List.of(new GeoPoint(45.70, 21.20), new GeoPoint(45.71, 21.21))));
     }
 
     // Arrivals from all lines are merged and sorted, duplicates dropped, stop name filled in.

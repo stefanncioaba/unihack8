@@ -10,21 +10,42 @@ type Props = {
   selected?: boolean;
   onPress?: () => void;
   icon?: IconName;
+  /** Layout tweaks only (margins, size). Colours come from `selected` / `overMap`, so they can't be wiped out. */
   style?: StyleProp<ViewStyle>;
+  /** Translucent navy fill with a stronger border, readable over the map. */
+  overMap?: boolean;
   testID?: string;
 };
 
-/** Filter chip: navy when idle, solid signal yellow with ink text when selected. */
-export function Chip({ label, selected, onPress, icon, style, testID }: Props) {
-  const fg = selected ? colors.onAccent : colors.textMuted;
+/** Background / border / text colours for a chip in each state (exported for tests). */
+export function chipColors(selected: boolean, overMap: boolean) {
+  if (selected) return { backgroundColor: colors.accent, borderColor: colors.accent, fg: colors.onAccent };
+  if (overMap) return { backgroundColor: MAP_CHIP_BG, borderColor: colors.borderStrong, fg: colors.text };
+  return { backgroundColor: colors.surface, borderColor: colors.border, fg: colors.textMuted };
+}
+
+/** Translucent Prussian Blue used by controls floating over the map. */
+export const MAP_CHIP_BG = 'rgba(0,29,61,0.92)';
+
+/** Pressable style for a chip. State colours go last so a caller's style can never override the selected yellow;
+ * pressed only dims and shrinks it. */
+export function chipStyle(selected: boolean, overMap: boolean, style?: StyleProp<ViewStyle>) {
+  const { backgroundColor, borderColor } = chipColors(selected, overMap);
+  return ({ pressed }: { pressed: boolean }): StyleProp<ViewStyle> => [styles.chip, style, { backgroundColor, borderColor }, pressed && styles.pressed];
+}
+
+/** Filter chip: navy when idle, solid signal yellow with ink text when selected. Pressing only dims and shrinks it a
+ * little, so a selected chip keeps its yellow while the finger is down. */
+export function Chip({ label, selected = false, onPress, icon, style, overMap = false, testID }: Props) {
+  const { fg } = chipColors(selected, overMap);
   return (
     <Pressable
       testID={testID}
       accessibilityRole="button"
       accessibilityLabel={label}
-      accessibilityState={{ selected: !!selected }}
+      accessibilityState={{ selected }}
       onPress={onPress}
-      style={[styles.chip, selected && styles.selected, style]}
+      style={chipStyle(selected, overMap, style)}
     >
       {icon && <Icon name={icon} size={12} color={fg} />}
       <Text variant="chip" style={{ color: fg }}>
@@ -63,6 +84,6 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.border,
   },
-  selected: { backgroundColor: colors.accent, borderColor: colors.accent },
+  pressed: { opacity: 0.8, transform: [{ scale: 0.96 }] },
   status: { paddingHorizontal: 9, height: 22, borderRadius: radius.chip, alignItems: 'center', justifyContent: 'center' },
 });

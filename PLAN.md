@@ -256,6 +256,7 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 - [x] **13.7 Organiser scanner:** camera QR scan → check-in result (success, already scanned, wrong event); ban button in the participant list.
 - [x] **13.8 User search:** search by username → opens the public profile (16.4).
 - [x] **13.9 Next arrival on Home:** the city info strip shows the next arrival at the nearest stop ("Next tram 2 at … arrives at 21:45 (in 4 min)"), and says when that trip is the last one today (`nextArrival` in `GET /transit/summary`).
+- [x] **13.10 AI shortcuts on Home:** save AI questions ("Find cheapest coffee") as buttons on Home — from "Save as shortcut" under a sent question in the chat, or "Add" on Home; tapping one opens the AI tab and asks it in a new chat; Edit / long press removes. Stored on the device (AsyncStorage), max 12.
 
 ---
 
@@ -351,19 +352,33 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 - [ ] **20.7 Tests:** fare calculation (walk only, one ride, a change of line, unknown fare), the cost fields in the `plan_route` result, the prompt rule, and a live check with real routes noted in `DOCS.md`.
 - [ ] **20.8** `DOCS.md` (AI assistant section) and the knowledge graph updated.
 
+## 21. Map filters and live transit network — Track C (+ B for the API)
+
+**Needs:** 9, 14 (done). Added 2026-11-14. **Goal:** clearer map filters, events visible at any zoom, and the whole STPT network live on the map.
+
+- [x] **21.1 Filter row:** first chips are All places, Events, Transport. All places can be turned off only while Events or Transport is on.
+- [x] **21.2 Chip colours:** selected chips keep their colour when pressed (map style no longer overrides the selected fill).
+- [x] **21.3 Events zoomed out:** count bubbles at any zoom level, tap to zoom in; Android custom markers render.
+- [x] **21.4 Backend:** `GET /transit/vehicles` without `route` gives all vehicles; new `GET /transit/shapes` (GTFS shapes) — `docs/API.md`.
+- [x] **21.5 Transport layer:** every line drawn in its own colour, all vehicles live (no line picking: the whole network shows at once), tap a vehicle for its info panel.
+- [x] **21.6 Directions:** live vehicles of the route's lines drawn along the route (preview and journey mode).
+- [x] **21.7 Profile:** reliability score no longer shows ".." instead of the number.
+- [x] **21.8a Tests and `DOCS.md` updated.**
+- [x] **21.8b Knowledge graph updated** (full rebuild, then an incremental update after the line chips were removed).
+
 ---
 
-## 21. Event reviews and organiser rating — Tracks A + C
+## 22. Event reviews and organiser rating — Tracks A + C
 
 **Needs:** 5, 6 (done). Added 2026-11-14. **Goal:** after the organiser scans a participant's QR code, that attendee can rate the event 1–5 stars with an optional short reason. The event shows the rating live, with who reviewed and why; past organised events show it too. 24 h after the event ends the average moves the organiser's reliability: above 3 stars gains, 3 or less loses, scaled to the rating (±5 max).
 
-- [x] **21.1 Database:** `event_reviews` (one per attendee per event, rating 1–5, comment ≤ 300) and `events.review_settled_at` — migration `20261114000004_event_reviews.sql`. *Applied to Supabase 2026-11-14 and checked (7/7).*
-- [x] **21.2 API:** `GET /events/{id}/reviews` (public), `PUT /events/{id}/reviews/me` (checked-in attendees only, until end + 24 h); errors `NOT_ATTENDED`, `REVIEWS_CLOSED`. Contract in `docs/API.md`.
-- [x] **21.3 Ratings in answers:** `averageRating` / `reviewCount` on `EventSummary` and `EventDetail`; `organizedEvents` (past, with ratings) on `GET /users/{id}`.
-- [x] **21.4 Organiser rating job:** once per event, 24 h after the end: `round((avg − 3) × 2.5)`, at least ±1, logged as `EVENT_RATING`; no reviews → no change.
-- [x] **21.5 App:** reviews section on the event page (stars, count, list with reviewer and comment, live refresh every 10 s), star picker + comment form for checked-in attendees, stars on event list items, "Organised (past)" in My events, "Events organised" on public profiles, `EVENT_RATING` in the reliability history; mock backend has the same rules.
-- [x] **21.6 Tests:** backend and frontend (see `DOCS.md` → Event reviews).
-- [x] **21.7** `DOCS.md`, `docs/API.md` and the knowledge graph updated.
+- [x] **22.1 Database:** `event_reviews` (one per attendee per event, rating 1–5, comment ≤ 300) and `events.review_settled_at` — migration `20261114000004_event_reviews.sql`. *Applied to Supabase 2026-11-14 and checked (7/7).*
+- [x] **22.2 API:** `GET /events/{id}/reviews` (public), `PUT /events/{id}/reviews/me` (checked-in attendees only, until end + 24 h); errors `NOT_ATTENDED`, `REVIEWS_CLOSED`. Contract in `docs/API.md`.
+- [x] **22.3 Ratings in answers:** `averageRating` / `reviewCount` on `EventSummary` and `EventDetail`; `organizedEvents` (past, with ratings) on `GET /users/{id}`.
+- [x] **22.4 Organiser rating job:** once per event, 24 h after the end: `round((avg − 3) × 2.5)`, at least ±1, logged as `EVENT_RATING`; no reviews → no change.
+- [x] **22.5 App:** reviews section on the event page (stars, count, list with reviewer and comment, live refresh every 10 s), star picker + comment form for checked-in attendees, stars on event list items, "Organised (past)" in My events, "Events organised" on public profiles, `EVENT_RATING` in the reliability history; mock backend has the same rules.
+- [x] **22.6 Tests:** backend and frontend (see `DOCS.md` → Event reviews).
+- [x] **22.7** `DOCS.md`, `docs/API.md` and the knowledge graph updated.
 
 ---
 

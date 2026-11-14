@@ -11,7 +11,7 @@ import { Icon } from '@/ui/Icon';
 import { Text } from '@/ui/Text';
 import { colors } from '@/ui/theme';
 
-type BubbleProps = { message: UiMessage; children?: ReactNode };
+type BubbleProps = { message: UiMessage; children?: ReactNode; userAction?: ReactNode };
 
 /** Links to the web pages the assistant used. */
 function Sources({ sources }: { sources: ChatSource[] }) {
@@ -32,8 +32,8 @@ function Sources({ sources }: { sources: ChatSource[] }) {
   );
 }
 
-/** One message. `children` (result cards) are drawn under an assistant bubble. */
-export function ChatBubble({ message, children }: BubbleProps) {
+/** One message. `children` (result cards) are drawn under an assistant bubble, `userAction` under a user bubble. */
+export function ChatBubble({ message, children, userAction }: BubbleProps) {
   const mine = message.role === 'user';
   return (
     <View style={[styles.row, mine ? styles.rowMine : styles.rowTheirs]} testID={`chat-message-${message.role}`}>
@@ -42,6 +42,7 @@ export function ChatBubble({ message, children }: BubbleProps) {
         {!mine && message.sources && message.sources.length > 0 ? <Sources sources={message.sources} /> : null}
       </View>
       {!mine && children}
+      {mine && userAction}
     </View>
   );
 }

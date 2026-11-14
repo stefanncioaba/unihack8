@@ -93,6 +93,18 @@ class StptClientImplTest {
         assertThat(v.isAccessible()).isTrue();
     }
 
+    // Without a route STPT is asked once, with no query, for every line's vehicles.
+    @Test
+    void parsesAllVehicles() throws IOException {
+        server.expect(requestTo(BASE + "/gtfs-vehicles.php"))
+                .andRespond(withSuccess(fixture("vehicles-route-1.json"), MediaType.APPLICATION_JSON));
+
+        List<StptVehicle> vehicles = client.fetchAllVehicles();
+
+        assertThat(vehicles).extracting(StptVehicle::route).containsExactly("1", "1");
+        server.verify();
+    }
+
     // "success": false is treated as a failure, so the cache can serve the last value.
     @Test
     void unsuccessfulVehiclesAnswerFails() {

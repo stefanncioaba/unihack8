@@ -6,6 +6,7 @@ import com.unihack8.backend.transit.domain.dto.AlertDto;
 import com.unihack8.backend.transit.domain.dto.ArrivalsResponse;
 import com.unihack8.backend.transit.domain.dto.LastDeparturesResponse;
 import com.unihack8.backend.transit.domain.dto.TransitRouteDto;
+import com.unihack8.backend.transit.domain.dto.TransitShapeDto;
 import com.unihack8.backend.transit.domain.dto.TransitStopDto;
 import com.unihack8.backend.transit.domain.dto.TransitSummaryResponse;
 import com.unihack8.backend.transit.domain.dto.VehiclesResponse;
@@ -24,8 +25,11 @@ public interface TransitService {
     // All stops, or only those inside the map viewport when bbox is given.
     List<TransitStopDto> stops(BoundingBox bbox);
 
-    // Live vehicles of one line.
+    // Live vehicles of one line, or of every line when route is null/blank.
     VehiclesResponse vehicles(String route);
+
+    // Drawn path of every line (or only one when route is given), from the GTFS file; empty without it.
+    List<TransitShapeDto> shapes(String route);
 
     // Next arrivals at a stop; 404 for an unknown stop.
     ArrivalsResponse arrivals(String stopId);

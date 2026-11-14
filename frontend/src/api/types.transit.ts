@@ -25,9 +25,14 @@ export type TransitRoute = { id: string; type: TransitRouteType; name: string; f
 /** One stop with the lines that serve it. */
 export type TransitStop = { id: string; name: string; lat: number; lon: number; routes: string[] };
 
-/** One live vehicle of a line. */
+/** One live vehicle. `route` is the line id (same as TransitRoute.id), `routeName` the name to show; `type` and
+ * `color` are null when the line is not in STPT's line list, `route` / `routeName` when STPT gave no line. */
 export type TransitVehicle = {
   id: string;
+  route: string | null;
+  routeName: string | null;
+  type: TransitRouteType | null;
+  color: string | null;
   lat: number;
   lon: number;
   bearing: number | null;
@@ -38,8 +43,11 @@ export type TransitVehicle = {
   reportedAt: string;
 };
 
-/** Live vehicles of one line (`stale` = STPT did not answer, last cached value). */
-export type TransitVehicles = { route: string; updatedAt: string; stale: boolean; vehicles: TransitVehicle[] };
+/** Live vehicles of one line, or of every line when `route` is null (`stale` = STPT did not answer, last cached value). */
+export type TransitVehicles = { route: string | null; updatedAt: string; stale: boolean; vehicles: TransitVehicle[] };
+
+/** The drawn path of one line: one Google encoded polyline (precision 5) per direction / variant. */
+export type TransitShape = { route: string; routeName: string; type: TransitRouteType; color: string | null; polylines: string[] };
 
 /** One upcoming arrival at a stop (`live: false` = from the timetable). */
 export type TransitArrival = { route: string; headsign: string; arrivesAt: string; minutes: number; live: boolean };

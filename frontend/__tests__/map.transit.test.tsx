@@ -36,6 +36,7 @@ describe('mock /transit endpoints', () => {
   it('places vehicles of a line between its stops, and none for a line that is not running', async () => {
     const v = await call('/transit/vehicles', { route: '1' });
     expect(v).toMatchObject({ route: '1', stale: false });
+    expect(v.vehicles[0]).toMatchObject({ route: '1', routeName: '1', type: 'TRAM', color: '#e3a900' });
     expect(v.vehicles).toHaveLength(2);
     const lineStops = MOCK_STOPS.filter((s) => LINE_STOPS['1'].includes(s.id));
     const [minLat, maxLat] = [Math.min(...lineStops.map((s) => s.lat)), Math.max(...lineStops.map((s) => s.lat))];
@@ -84,26 +85,16 @@ describe('MapScreen transit layer', () => {
     expect(stopMarkers()).toHaveLength(0);
   });
 
-  it('shows the live vehicles of a chosen line and only the stops it serves', async () => {
+  it('shows the live vehicles of every running line and the stops of every line, with no line to pick', async () => {
     renderScreen(<MapScreen />);
     await moveTo(0.02);
     fireEvent.press(screen.getByTestId('chip-transit'));
-    fireEvent.press(await screen.findByTestId('chip-line-1'));
-    await waitFor(() => expect(vehicleMarkers()).toHaveLength(2));
+    await waitFor(() => expect(vehicleMarkers()).toHaveLength(8));
+    expect(vehicleMarkers().some((m) => m.props.testID.startsWith('vehicle-marker-1-'))).toBe(true);
+    expect(vehicleMarkers().some((m) => m.props.testID.startsWith('vehicle-marker-14-'))).toBe(true);
     const ids = stopMarkers().map((m) => m.props.testID.replace('stop-marker-', ''));
-    expect(ids.length).toBeGreaterThan(0);
-    expect(ids.every((id) => LINE_STOPS['1'].includes(id))).toBe(true);
-
-    fireEvent.press(screen.getByTestId('chip-line-1')); // tap again = no line
-    await waitFor(() => expect(vehicleMarkers()).toHaveLength(0));
-  });
-
-  it('says when a line has no vehicles out', async () => {
-    renderScreen(<MapScreen />);
-    await moveTo(0.02);
-    fireEvent.press(screen.getByTestId('chip-transit'));
-    fireEvent.press(await screen.findByTestId('chip-line-E4'));
-    expect(await screen.findByText('No vehicles on line E4 right now')).toBeTruthy();
+    expect(ids.some((id) => !LINE_STOPS['1'].includes(id))).toBe(true);
+    expect(screen.queryByTestId(/^chip-line-/)).toBeNull();
   });
 
   it('opens a stop panel with next arrivals and last departures', async () => {

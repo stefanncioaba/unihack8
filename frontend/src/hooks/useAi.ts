@@ -92,5 +92,19 @@ export function useAiChat(location: Location) {
     setThinking(false);
   }, [commit]);
 
-  return { messages, thinking, error, send, retry, reset };
+  /** Starts a new chat with `text` as its first question (used by Home shortcuts); works even while thinking. */
+  const askFresh = useCallback(
+    async (text: string) => {
+      const content = text.trim();
+      if (!content) return;
+      generation.current += 1;
+      const history = [{ id: newId(), role: 'user' as const, content }];
+      commit(history);
+      setError(null);
+      await ask(history);
+    },
+    [ask, commit],
+  );
+
+  return { messages, thinking, error, send, retry, reset, askFresh };
 }

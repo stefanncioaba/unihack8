@@ -20,6 +20,7 @@ import com.unihack8.backend.transit.domain.dto.LastDeparturesResponse;
 import com.unihack8.backend.transit.domain.dto.NearestStopDto;
 import com.unihack8.backend.transit.domain.dto.NextArrivalDto;
 import com.unihack8.backend.transit.domain.dto.TransitRouteDto;
+import com.unihack8.backend.transit.domain.dto.TransitShapeDto;
 import com.unihack8.backend.transit.domain.dto.TransitStopDto;
 import com.unihack8.backend.transit.domain.dto.TransitSummaryResponse;
 import com.unihack8.backend.transit.domain.dto.VehicleDto;
@@ -28,6 +29,7 @@ import com.unihack8.backend.transit.service.TransitService;
 import java.time.Instant;
 import java.util.List;
 import java.util.Locale;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -75,22 +77,57 @@ class TransitControllerTest {
                 .andExpect(jsonPath("$.code").value("VALIDATION_FAILED"));
     }
 
-    // Vehicles answer with stale flag and ISO times; missing route is 400.
+    // Vehicles of one line answer with stale flag, ISO times and the line's facts.
     @Test
     void vehicles() throws Exception {
         when(transit.vehicles("1")).thenReturn(new VehiclesResponse("1", T, true, List.of(
-                new VehicleDto("1010", 45.73853, 21.22507, 20.2, 10.0, "Gara de Nord", "Memorandumului", true,
-                        Instant.parse("2026-11-14T18:00:01Z")))));
+                new VehicleDto("1010", "1", "1", "TRAM", "#e3a900", 45.73853, 21.22507, 20.2, 10.0,
+                        "Gara de Nord", "Memorandumului", true, Instant.parse("2026-11-14T18:00:01Z")))));
         mvc.perform(get("/transit/vehicles").param("route", "1"))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.route").value("1"))
                 .andExpect(jsonPath("$.stale").value(true))
                 .andExpect(jsonPath("$.updatedAt").value("2026-11-14T18:00:05Z"))
                 .andExpect(jsonPath("$.vehicles[0].lon").value(21.22507))
                 .andExpect(jsonPath("$.vehicles[0].nextStop").value("Memorandumului"))
+                .andExpect(jsonPath("$.vehicles[0].route").value("1"))
+                .andExpect(jsonPath("$.vehicles[0].routeName").value("1"))
+                .andExpect(jsonPath("$.vehicles[0].type").value("TRAM"))
+                .andExpect(jsonPath("$.vehicles[0].color").value("#e3a900"))
                 .andExpect(jsonPath("$.vehicles[0].reportedAt").value("2026-11-14T18:00:01Z"));
+    }
+
+    // Without route: every line's vehicles, route null in the answer.
+    @Test
+    void allVehicles() throws Exception {
+        when(transit.vehicles(null)).thenReturn(new VehiclesResponse(null, T, false, List.of(
+                new VehicleDto("1010", "1", "1", "TRAM", "#e3a900", 45.7, 21.2, null, null, null, null, null, null),
+                new VehicleDto("GLM", "5c", "5c", null, null, 45.75, 21.25, null, null, null, null, null, null))));
         mvc.perform(get("/transit/vehicles"))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.code").value("VALIDATION_FAILED"));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.route").value(Matchers.nullValue()))
+                .andExpect(jsonPath("$.vehicles.length()").value(2))
+                .andExpect(jsonPath("$.vehicles[1].route").value("5c"))
+                .andExpect(jsonPath("$.vehicles[1].type").value(Matchers.nullValue()));
+    }
+
+    // Shapes of every line, or of one line with route=.
+    @Test
+    void shapes() throws Exception {
+        TransitShapeDto tram = new TransitShapeDto("1", "1", "TRAM", "#e3a900", List.of("_p~iF~ps|U", "??"));
+        when(transit.shapes(null)).thenReturn(List.of(tram));
+        when(transit.shapes("1")).thenReturn(List.of(tram));
+        mvc.perform(get("/transit/shapes"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].route").value("1"))
+                .andExpect(jsonPath("$[0].routeName").value("1"))
+                .andExpect(jsonPath("$[0].type").value("TRAM"))
+                .andExpect(jsonPath("$[0].color").value("#e3a900"))
+                .andExpect(jsonPath("$[0].polylines[0]").value("_p~iF~ps|U"));
+        mvc.perform(get("/transit/shapes").param("route", "1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(1));
+        verify(transit).shapes("1");
     }
 
     // STPT down with nothing cached is 503 SOURCE_UNAVAILABLE.

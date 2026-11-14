@@ -1,9 +1,13 @@
 // Journey mode on the Map tab (PLAN 18.5–18.7): the route line and destination pin on the map, and a panel with the
 // current step, the time and distance left and an "End" button. Replaces the normal bottom panel while it runs.
+import { useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Marker, Polyline } from 'react-native-maps';
 
+import type { TransitVehicle } from '@/api/types.transit';
 import { legIcon } from '@/features/directions/DirectionsPanel';
+import { useMapContext } from '@/features/map/MapContext';
+import { LegVehicles } from '@/features/transit/LegVehicles';
 import { formatDistance } from '@/lib/format';
 import { Button } from '@/ui/Button';
 import { Icon } from '@/ui/Icon';
@@ -16,8 +20,14 @@ import type { JourneyTarget, useJourney } from './useJourney';
 
 type Journey = ReturnType<typeof useJourney>;
 
-/** Route line (walking dashed, rides solid) and the destination pin. Goes inside <MapView>. */
-export function JourneyLayer({ target, journey }: { target: JourneyTarget; journey: Journey }) {
+/** Route line (walking dashed, rides solid), the destination pin and the live vehicles of the ride legs' lines (tap one
+ * for its panel; closing it brings the journey panel back). Goes inside <MapView>. */
+export function JourneyLayer({ target, journey, hiddenVehicleIds }: { target: JourneyTarget; journey: Journey; hiddenVehicleIds?: ReadonlySet<string> }) {
+  const { selection, select } = useMapContext();
+  /** Opens the vehicle panel over the journey. */
+  const openVehicle = (v: TransitVehicle) => select({ type: 'vehicle', id: v.id, route: v.route, vehicle: v });
+  // Only the legs still ahead: once off the tram, its line's vehicles are no longer interesting.
+  const legsAhead = useMemo(() => journey.plan.data?.legs.slice(journey.stepIndex), [journey.plan.data, journey.stepIndex]);
   return (
     <>
       <Marker
@@ -41,6 +51,14 @@ export function JourneyLayer({ target, journey }: { target: JourneyTarget; journ
             />
           );
         })}
+      {!journey.arrived && (
+        <LegVehicles
+          legs={legsAhead}
+          hiddenIds={hiddenVehicleIds}
+          selectedId={selection?.type === 'vehicle' ? selection.id : undefined}
+          onSelect={openVehicle}
+        />
+      )}
     </>
   );
 }

@@ -1,9 +1,10 @@
-// Home tab: header, search, category chips, city info strip, upcoming events, create-event button.
+// Home tab: header, search, category chips, city info strip, AI shortcuts, upcoming events, create-event button.
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { FlatList, Pressable, RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 
 import { EVENT_CATEGORIES, type EventCategory } from '@/api/types';
+import { ShortcutBar } from '@/features/ai/ShortcutBar';
 import { CATEGORY_META } from '@/features/events/categories';
 import { EventCard } from '@/features/events/EventCards';
 import { useCurrentPosition } from '@/features/location/LocationProvider';
@@ -81,6 +82,8 @@ export default function HomeScreen() {
       <View style={[styles.block, { paddingHorizontal: PAGE_MARGIN }]}>
         <CityInfoStrip />
       </View>
+
+      <ShortcutBar />
 
       <View style={[styles.sectionHeader, { paddingHorizontal: PAGE_MARGIN }]}>
         <Text variant="heading" accessibilityRole="header">

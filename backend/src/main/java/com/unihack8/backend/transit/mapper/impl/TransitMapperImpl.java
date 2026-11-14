@@ -3,6 +3,7 @@ package com.unihack8.backend.transit.mapper.impl;
 import com.unihack8.backend.transit.domain.dto.AlertDto;
 import com.unihack8.backend.transit.domain.dto.ArrivalDto;
 import com.unihack8.backend.transit.domain.dto.TransitRouteDto;
+import com.unihack8.backend.transit.domain.dto.TransitShapeDto;
 import com.unihack8.backend.transit.domain.dto.TransitStopDto;
 import com.unihack8.backend.transit.domain.dto.VehicleDto;
 import com.unihack8.backend.transit.domain.dto.stpt.StptAlert;
@@ -10,6 +11,7 @@ import com.unihack8.backend.transit.domain.dto.stpt.StptArrival;
 import com.unihack8.backend.transit.domain.dto.stpt.StptRoute;
 import com.unihack8.backend.transit.domain.dto.stpt.StptStop;
 import com.unihack8.backend.transit.domain.dto.stpt.StptVehicle;
+import com.unihack8.backend.transit.domain.model.RouteShape;
 import com.unihack8.backend.transit.mapper.TransitMapper;
 import java.time.Duration;
 import java.time.Instant;
@@ -79,12 +81,27 @@ public class TransitMapperImpl implements TransitMapper {
                 stop.routes() == null ? List.of() : List.copyOf(stop.routes()));
     }
 
-    // Renames lng/speed/stop and turns the epoch-ms timestamp into an Instant.
+    // Renames lng/speed/stop, turns the epoch-ms timestamp into an Instant and adds the line's facts.
     @Override
-    public VehicleDto toVehicle(StptVehicle v) {
+    public VehicleDto toVehicle(StptVehicle v, TransitRouteDto line) {
         Instant reportedAt = v.timestamp() == null ? null : Instant.ofEpochMilli(v.timestamp());
-        return new VehicleDto(v.id(), v.lat(), v.lng(), v.bearing(), v.speed(), v.headsign(), v.stop(),
+        String route = line != null ? line.id() : v.route();
+        String routeName = line != null ? line.name() : v.route();
+        return new VehicleDto(v.id(), route, routeName, line == null ? null : line.type(),
+                line == null ? null : line.color(), v.lat(), v.lng(), v.bearing(), v.speed(), v.headsign(), v.stop(),
                 v.isAccessible(), reportedAt);
+    }
+
+    // Encodes each path; without an STPT line the GTFS route_type and colour are used.
+    @Override
+    public TransitShapeDto toShape(RouteShape shape, TransitRouteDto line) {
+        List<String> polylines = shape.paths().stream().map(PolylineEncoder::encode).toList();
+        if (line != null) {
+            return new TransitShapeDto(line.id(), line.name(), line.type(), line.color(), polylines);
+        }
+        String color = shape.color() == null || shape.color().isBlank() ? null : "#" + shape.color();
+        String type = routeType(new StptRoute(shape.routeName(), null, shape.routeType(), null, null));
+        return new TransitShapeDto(shape.routeName(), shape.routeName(), type, color, polylines);
     }
 
     // One item per distinct time, live only for the vehicle-tracked first time.

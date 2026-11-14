@@ -1,10 +1,13 @@
 // AI tab: chat with the city guide (PLAN 15.1–15.3), with result and route cards under answers (15.4, 18.4). The conversation lives in memory only; "New chat" clears it.
-import { useRef } from 'react';
+// `/ai?ask=…&at=…` (a Home shortcut, PLAN 13.10) starts a new chat with that question; each question can be saved as a shortcut.
+import { useLocalSearchParams } from 'expo-router';
+import { useEffect, useRef } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 
 import { ChatBubble, ErrorBubble, ThinkingBubble } from '@/features/ai/ChatBubble';
 import { ChatInput } from '@/features/ai/ChatInput';
 import { ChatMotif } from '@/features/ai/ChatMotif';
+import { SaveShortcut } from '@/features/ai/SaveShortcut';
 import { ResultCards } from '@/features/ai/ResultCards';
 import { RouteCards } from '@/features/ai/RouteCards';
 import { Suggestions } from '@/features/ai/Suggestions';
@@ -21,6 +24,19 @@ export default function AiScreen() {
   const chat = useAiChat(isFallback ? null : position);
   const listRef = useRef<FlatList<UiMessage>>(null);
   const empty = chat.messages.length === 0;
+  const params = useLocalSearchParams<{ ask?: string; at?: string }>();
+  // The last shortcut request handled, so a re-render does not ask the same question again.
+  const handled = useRef<string | null>(null);
+  const { askFresh } = chat;
+
+  // A shortcut from Home: start a new chat with its question. `at` makes the same shortcut twice a new request.
+  useEffect(() => {
+    const ask = typeof params.ask === 'string' ? params.ask : '';
+    const key = `${ask}|${params.at ?? ''}`;
+    if (!ask.trim() || handled.current === key) return;
+    handled.current = key;
+    askFresh(ask);
+  }, [params.ask, params.at, askFresh]);
 
   return (
     <Screen glow="lamp">
@@ -50,7 +66,7 @@ export default function AiScreen() {
             data={chat.messages}
             keyExtractor={(m) => m.id}
             renderItem={({ item }) => (
-              <ChatBubble message={item}>
+              <ChatBubble message={item} userAction={<SaveShortcut question={item.content} />}>
                 <ResultCards message={item} />
                 <RouteCards routes={item.routes} />
               </ChatBubble>
