@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "5848283da5dadc8b2ee1f133ba4f85d453180448",
-  "generatedAt": "2026-11-14T17:31:12.200Z",
+  "gitCommitHash": "eeb5ffd3d5019064f5bbc5d18efc89ab11d064f1",
+  "generatedAt": "2026-11-14T17:34:43.944Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,7 +25,7 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "11236b23d6bf91706eca201720c79df2f12bff7c30365f7673eaecc20fdfe4b4",
+      "contentHash": "8eb3f978dd2dfd795d91bd8415baae07418aaba318013700bbc7352cd5d5e306",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -35,7 +35,7 @@
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "2d2dddd5685289df4ab3ed29e7eb898e4994cdaaf46b2d1ce7b58dc9fd87d942",
+      "contentHash": "03989b2128d9dbf19efd0594919d5cb6b40546b268bc87cf85d3a2cf4dc98d16",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -50287,7 +50287,7 @@
     },
     "frontend/__tests__/screens.pulse.test.tsx": {
       "filePath": "frontend/__tests__/screens.pulse.test.tsx",
-      "contentHash": "649e65d357e7210ce6244d52422305303c649f60d151f73faa31633a2ae06b0b",
+      "contentHash": "ae29143f57048cbd09d75baef595f9ef706faf951e0726c4986a040bb9ad6470",
       "functions": [
         {
           "name": "area",
@@ -50382,7 +50382,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 167,
+      "totalLines": 180,
       "hasStructuralAnalysis": true
     },
     "frontend/src/api/endpoints.neighbourhoods.ts": {
@@ -55691,7 +55691,7 @@
     },
     "frontend/src/app/pulse/[id].tsx": {
       "filePath": "frontend/src/app/pulse/[id].tsx",
-      "contentHash": "f643ad1ef020a971634aa9ec03679cc9caf02cef213fd1b63f75182e588c4c0e",
+      "contentHash": "bf113af163ba0c775aed7a64d02eda8f068753fc3d8c94fdc68bfb97e8712ae2",
       "functions": [
         {
           "name": "Tabs",
@@ -55711,9 +55711,11 @@
         },
         {
           "name": "HelpTab",
-          "params": [],
+          "params": [
+            "{ areaId, areas }"
+          ],
           "exported": false,
-          "lineCount": 3
+          "lineCount": 27
         },
         {
           "name": "NeighbourhoodScreen",
@@ -55733,6 +55735,7 @@
         {
           "source": "expo-router",
           "specifiers": [
+            "router",
             "useLocalSearchParams"
           ]
         },
@@ -55760,6 +55763,12 @@
           ]
         },
         {
+          "source": "@/features/help/HelpCards",
+          "specifiers": [
+            "HelpRequestRow"
+          ]
+        },
+        {
           "source": "@/features/neighbourhoods/areas",
           "specifiers": [
             "areaBbox",
@@ -55779,6 +55788,12 @@
           ]
         },
         {
+          "source": "@/hooks/useHelp",
+          "specifiers": [
+            "useHelpBoard"
+          ]
+        },
+        {
           "source": "@/hooks/useMapEvents",
           "specifiers": [
             "useEventsInArea"
@@ -55788,6 +55803,12 @@
           "source": "@/hooks/useNeighbourhoods",
           "specifiers": [
             "useNeighbourhoodPulse"
+          ]
+        },
+        {
+          "source": "@/lib/bbox",
+          "specifiers": [
+            "bboxParam"
           ]
         },
         {
@@ -55834,7 +55855,7 @@
       "exports": [
         "NeighbourhoodScreen"
       ],
-      "totalLines": 110,
+      "totalLines": 137,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/neighbourhoods/areas.ts": {

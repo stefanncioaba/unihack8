@@ -34,8 +34,8 @@
       "Jest"
     ],
     "description": "Hackathon mobile app for Timișoara (Connected Communities): Spring Boot API + Supabase + Expo app with events and QR reliability points, places map, live STPT transit, routing and an AI guide.",
-    "analyzedAt": "2026-11-14T17:31:12.056Z",
-    "gitCommitHash": "5848283da5dadc8b2ee1f133ba4f85d453180448"
+    "analyzedAt": "2026-11-14T17:34:43.602Z",
+    "gitCommitHash": "eeb5ffd3d5019064f5bbc5d18efc89ab11d064f1"
   },
   "nodes": [
     {
@@ -31850,11 +31850,39 @@
       "complexity": "moderate"
     },
     {
+      "id": "document:DOCS.md",
+      "type": "document",
+      "name": "DOCS.md",
+      "filePath": "DOCS.md",
+      "summary": "Main project documentation covering the backend packages, API endpoints, frontend screens, data model and features including Neighbourhood Pulse and the Neighbour Help Board.",
+      "tags": [
+        "documentation",
+        "api-reference",
+        "architecture",
+        "overview"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:PLAN.md",
+      "type": "document",
+      "name": "PLAN.md",
+      "filePath": "PLAN.md",
+      "summary": "Hackathon task plan organised by numbered tasks and tracks with checkboxes, from setup through Neighbourhood Pulse (24) and the Neighbour Help Board (25), plus cut order and open questions.",
+      "tags": [
+        "documentation",
+        "planning",
+        "roadmap",
+        "tasks"
+      ],
+      "complexity": "complex"
+    },
+    {
       "id": "file:frontend/src/app/pulse/[id].tsx",
       "type": "file",
       "name": "[id].tsx",
       "filePath": "frontend/src/app/pulse/[id].tsx",
-      "summary": "Neighbourhood panel screen opened from a Pulse card: photo header with level chip and an Events | Help tab switch; Events lists upcoming events inside the area, while the Help tab is currently a placeholder empty state for the area help requests.",
+      "summary": "Neighbourhood panel screen (opened from a Pulse card): photo, activity level and two tabs, Events (upcoming events in the area) and Help (the area's open Neighbour Help Board requests, tap to open, \"Ask for help\" when empty).",
       "tags": [
         "screen",
         "expo-router",
@@ -31899,34 +31927,6 @@
         23,
         42
       ]
-    },
-    {
-      "id": "document:DOCS.md",
-      "type": "document",
-      "name": "DOCS.md",
-      "filePath": "DOCS.md",
-      "summary": "Main project documentation covering the backend packages, API endpoints, frontend screens, data model and features including Neighbourhood Pulse and the Neighbour Help Board.",
-      "tags": [
-        "documentation",
-        "api-reference",
-        "architecture",
-        "overview"
-      ],
-      "complexity": "complex"
-    },
-    {
-      "id": "document:PLAN.md",
-      "type": "document",
-      "name": "PLAN.md",
-      "filePath": "PLAN.md",
-      "summary": "Hackathon task plan organised by numbered tasks and tracks with checkboxes, from setup through Neighbourhood Pulse (24) and the Neighbour Help Board (25), plus cut order and open questions.",
-      "tags": [
-        "documentation",
-        "planning",
-        "roadmap",
-        "tasks"
-      ],
-      "complexity": "complex"
     }
   ],
   "edges": [
@@ -53785,13 +53785,6 @@
       "weight": 0.5
     },
     {
-      "source": "file:frontend/src/app/pulse/[id].tsx",
-      "target": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "file:frontend/src/app/pulse/index.tsx",
       "target": "file:frontend/__tests__/screens.pulse.test.tsx",
       "type": "tested_by",
@@ -53802,69 +53795,6 @@
       "source": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
       "target": "file:frontend/__tests__/screens.pulse.test.tsx",
       "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:frontend/src/app/pulse/[id].tsx",
-      "target": "function:frontend/src/app/pulse/[id].tsx:NeighbourhoodScreen",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/app/pulse/[id].tsx",
-      "target": "function:frontend/src/app/pulse/[id].tsx:NeighbourhoodScreen",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/app/pulse/[id].tsx",
-      "target": "function:frontend/src/app/pulse/[id].tsx:Tabs",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "function:frontend/src/app/pulse/[id].tsx:NeighbourhoodScreen",
-      "target": "function:frontend/src/app/pulse/[id].tsx:Tabs",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/pulse/[id].tsx:NeighbourhoodScreen",
-      "target": "function:frontend/src/hooks/useNeighbourhoods.ts:useNeighbourhoodPulse",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/app/pulse/[id].tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/features/neighbourhoods/areas.ts",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "file:frontend/src/app/pulse/[id].tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "document:PLAN.md",
-      "type": "related",
       "direction": "forward",
       "weight": 0.5
     },
@@ -55558,590 +55488,6 @@
     },
     {
       "source": "file:backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/security/CurrentUser.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/CreateHelpRequest.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestDetail.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestSummary.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpTicketResponse.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/MyHelpResponse.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/WithdrawResponse.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/reliability/domain/dto/CheckInRequest.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/reliability/domain/dto/CheckInResponse.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpOfferResponse.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestDetail.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestSummary.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/HelpMapper.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestDetail.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/HelpMapper.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestSummary.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/HelpMapper.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpOfferView.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/HelpMapper.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequestView.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/HelpRules.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpOfferResponse.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestDetail.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestSummary.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpOfferView.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequest.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequestView.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/mapper/HelpMapper.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpOfferRepository.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpOffer.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpOfferRepository.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpOfferView.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpRequestRepository.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpRequestRepository.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequest.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpRequestRepository.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequestView.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/impl/HelpOfferRepositoryImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpOffer.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/impl/HelpOfferRepositoryImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpOfferView.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/impl/HelpOfferRepositoryImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpOfferRepository.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/impl/HelpRequestRepositoryImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/impl/HelpRequestRepositoryImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequest.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/impl/HelpRequestRepositoryImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequestView.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/impl/HelpRequestRepositoryImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpRequestRepository.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/CreateHelpRequest.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestDetail.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestSummary.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpTicketResponse.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/MyHelpResponse.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/WithdrawResponse.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/reliability/domain/dto/CheckInResponse.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/events/repository/ParticipationRepository.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/HelpRules.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/CreateHelpRequest.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestDetail.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestSummary.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpTicketResponse.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/MyHelpResponse.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/WithdrawResponse.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpOffer.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequest.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequestView.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/mapper/HelpMapper.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpOfferRepository.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpRequestRepository.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/reliability/domain/ReliabilityRules.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/reliability/domain/dto/CheckInResponse.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
       "target": "file:backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java",
       "type": "imports",
       "direction": "forward",
@@ -60765,126 +60111,6 @@
       "recoveredFromImportMap": true
     },
     {
-      "source": "file:backend/src/test/java/com/unihack8/backend/help/HelpIntegrationTest.java",
-      "target": "file:backend/src/test/java/com/unihack8/backend/help/support/HelpTestSchema.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/help/HelpIntegrationTest.java",
-      "target": "file:backend/src/test/java/com/unihack8/backend/support/JwtTestTokens.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/help/domain/HelpRulesTest.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/reliability/domain/ReliabilityRules.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/events/repository/ParticipationRepository.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/CreateHelpRequest.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpOffer.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequest.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpOfferRepository.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpRequestRepository.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
-      "target": "file:backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
       "source": "file:backend/src/test/java/com/unihack8/backend/neighbourhoods/controller/NeighbourhoodControllerTest.java",
       "target": "file:backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/NeighbourhoodPulseDto.java",
       "type": "imports",
@@ -64117,30 +63343,6 @@
       "recoveredFromImportMap": true
     },
     {
-      "source": "file:frontend/__tests__/mocks.help.test.ts",
-      "target": "file:frontend/__tests__/testUtils.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/mocks.help.test.ts",
-      "target": "file:frontend/src/api/errors.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/mocks.help.test.ts",
-      "target": "file:frontend/testing/mocks/index.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
       "source": "file:frontend/__tests__/mocks.reviews.test.ts",
       "target": "file:frontend/__tests__/testUtils.tsx",
       "type": "imports",
@@ -64269,134 +63471,6 @@
       "recoveredFromImportMap": true
     },
     {
-      "source": "file:frontend/__tests__/screens.help.test.tsx",
-      "target": "file:frontend/__tests__/testUtils.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.help.test.tsx",
-      "target": "file:frontend/src/api/errors.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.help.test.tsx",
-      "target": "file:frontend/src/app/(tabs)/index.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.help.test.tsx",
-      "target": "file:frontend/src/app/help/[id]/index.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.help.test.tsx",
-      "target": "file:frontend/src/app/help/[id]/scan.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.help.test.tsx",
-      "target": "file:frontend/src/app/help/[id]/ticket.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.help.test.tsx",
-      "target": "file:frontend/src/app/help/index.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.help.test.tsx",
-      "target": "file:frontend/src/app/help/new.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.help.test.tsx",
-      "target": "file:frontend/src/features/help/checkInResult.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.help.test.tsx",
-      "target": "file:frontend/src/features/help/format.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.help.test.tsx",
-      "target": "file:frontend/src/features/help/newHelpForm.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.help.test.tsx",
-      "target": "file:frontend/src/features/users/ReliabilityLog.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.help.test.tsx",
-      "target": "file:frontend/src/features/users/reliability.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.help.test.tsx",
-      "target": "file:frontend/src/hooks/useHelp.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.help.test.tsx",
-      "target": "file:frontend/src/lib/queryClient.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.help.test.tsx",
-      "target": "file:frontend/testing/mocks/index.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
       "source": "file:frontend/__tests__/screens.home.test.tsx",
       "target": "file:frontend/__tests__/testUtils.tsx",
       "type": "imports",
@@ -64511,86 +63585,6 @@
     {
       "source": "file:frontend/__tests__/screens.profile.test.tsx",
       "target": "file:frontend/testing/mocks/index.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "target": "file:frontend/__tests__/testUtils.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "target": "file:frontend/src/api/types.neighbourhoods.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "target": "file:frontend/src/app/(tabs)/index.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "target": "file:frontend/src/app/pulse/[id].tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "target": "file:frontend/src/app/pulse/index.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "target": "file:frontend/src/features/neighbourhoods/areas.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "target": "file:frontend/src/features/neighbourhoods/photos.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "target": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "target": "file:frontend/testing/mocks/index.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
-      "target": "file:frontend/testing/mocks/routes/neighbourhoods.ts",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -64719,22 +63713,6 @@
     {
       "source": "file:frontend/src/api/endpoints.ai.ts",
       "target": "file:frontend/src/api/types.ai.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/api/endpoints.help.ts",
-      "target": "file:frontend/src/api/client.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/api/endpoints.help.ts",
-      "target": "file:frontend/src/api/types.help.ts",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -64870,14 +63848,6 @@
     },
     {
       "source": "file:frontend/src/api/types.ai.ts",
-      "target": "file:frontend/src/api/types.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/api/types.help.ts",
       "target": "file:frontend/src/api/types.ts",
       "type": "imports",
       "direction": "forward",
@@ -66143,590 +65113,6 @@
     {
       "source": "file:frontend/src/app/events/new.tsx",
       "target": "file:frontend/src/ui/TextField.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/index.tsx",
-      "target": "file:frontend/src/api/errors.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/index.tsx",
-      "target": "file:frontend/src/api/types.help.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/index.tsx",
-      "target": "file:frontend/src/features/help/OfferList.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/index.tsx",
-      "target": "file:frontend/src/features/help/categories.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/index.tsx",
-      "target": "file:frontend/src/features/help/format.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/index.tsx",
-      "target": "file:frontend/src/hooks/useHelp.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/index.tsx",
-      "target": "file:frontend/src/lib/time.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/index.tsx",
-      "target": "file:frontend/src/ui/Avatar.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/index.tsx",
-      "target": "file:frontend/src/ui/Button.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/index.tsx",
-      "target": "file:frontend/src/ui/Card.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/index.tsx",
-      "target": "file:frontend/src/ui/Chip.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/index.tsx",
-      "target": "file:frontend/src/ui/Icon.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/index.tsx",
-      "target": "file:frontend/src/ui/ReliabilityBadge.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/index.tsx",
-      "target": "file:frontend/src/ui/Screen.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/index.tsx",
-      "target": "file:frontend/src/ui/ScreenHeader.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/index.tsx",
-      "target": "file:frontend/src/ui/States.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/index.tsx",
-      "target": "file:frontend/src/ui/Text.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/index.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/scan.tsx",
-      "target": "file:frontend/src/features/help/checkInResult.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/scan.tsx",
-      "target": "file:frontend/src/features/scan/QrScanner.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/scan.tsx",
-      "target": "file:frontend/src/hooks/useHelp.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/scan.tsx",
-      "target": "file:frontend/src/ui/Screen.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/scan.tsx",
-      "target": "file:frontend/src/ui/ScreenHeader.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/scan.tsx",
-      "target": "file:frontend/src/ui/Text.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
-      "target": "file:frontend/src/api/types.help.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
-      "target": "file:frontend/src/features/help/format.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
-      "target": "file:frontend/src/features/scan/QrTile.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
-      "target": "file:frontend/src/hooks/useHelp.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
-      "target": "file:frontend/src/ui/Chip.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
-      "target": "file:frontend/src/ui/Icon.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
-      "target": "file:frontend/src/ui/Screen.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
-      "target": "file:frontend/src/ui/ScreenHeader.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
-      "target": "file:frontend/src/ui/States.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
-      "target": "file:frontend/src/ui/Text.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/_layout.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/index.tsx",
-      "target": "file:frontend/src/api/types.help.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/index.tsx",
-      "target": "file:frontend/src/features/help/HelpCards.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/index.tsx",
-      "target": "file:frontend/src/features/help/categories.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/index.tsx",
-      "target": "file:frontend/src/features/help/format.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/index.tsx",
-      "target": "file:frontend/src/hooks/useHelp.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/index.tsx",
-      "target": "file:frontend/src/ui/Button.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/index.tsx",
-      "target": "file:frontend/src/ui/Chip.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/index.tsx",
-      "target": "file:frontend/src/ui/Screen.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/index.tsx",
-      "target": "file:frontend/src/ui/ScreenHeader.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/index.tsx",
-      "target": "file:frontend/src/ui/States.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/index.tsx",
-      "target": "file:frontend/src/ui/Text.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/index.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/new.tsx",
-      "target": "file:frontend/src/api/errors.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/new.tsx",
-      "target": "file:frontend/src/api/types.help.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/new.tsx",
-      "target": "file:frontend/src/features/events/LocationPickerModal.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/new.tsx",
-      "target": "file:frontend/src/features/help/categories.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/new.tsx",
-      "target": "file:frontend/src/features/help/newHelpForm.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/new.tsx",
-      "target": "file:frontend/src/features/location/LocationProvider.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/new.tsx",
-      "target": "file:frontend/src/hooks/useHelp.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/new.tsx",
-      "target": "file:frontend/src/ui/Button.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/new.tsx",
-      "target": "file:frontend/src/ui/Chip.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/new.tsx",
-      "target": "file:frontend/src/ui/Screen.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/new.tsx",
-      "target": "file:frontend/src/ui/ScreenHeader.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/new.tsx",
-      "target": "file:frontend/src/ui/Text.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/help/new.tsx",
-      "target": "file:frontend/src/ui/TextField.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/[id].tsx",
-      "target": "file:frontend/src/features/events/EventCards.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/[id].tsx",
-      "target": "file:frontend/src/features/neighbourhoods/areas.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/[id].tsx",
-      "target": "file:frontend/src/features/neighbourhoods/photos.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/[id].tsx",
-      "target": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/[id].tsx",
-      "target": "file:frontend/src/hooks/useMapEvents.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/[id].tsx",
-      "target": "file:frontend/src/hooks/useNeighbourhoods.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/[id].tsx",
-      "target": "file:frontend/src/ui/Chip.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/[id].tsx",
-      "target": "file:frontend/src/ui/Screen.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/[id].tsx",
-      "target": "file:frontend/src/ui/ScreenHeader.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/[id].tsx",
-      "target": "file:frontend/src/ui/States.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/[id].tsx",
-      "target": "file:frontend/src/ui/Text.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/pulse/[id].tsx",
-      "target": "file:frontend/src/ui/theme.ts",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -68213,190 +66599,6 @@
       "recoveredFromImportMap": true
     },
     {
-      "source": "file:frontend/src/features/help/HelpCards.tsx",
-      "target": "file:frontend/src/api/types.help.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/HelpCards.tsx",
-      "target": "file:frontend/src/features/help/categories.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/HelpCards.tsx",
-      "target": "file:frontend/src/features/help/format.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/HelpCards.tsx",
-      "target": "file:frontend/src/ui/Chip.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/HelpCards.tsx",
-      "target": "file:frontend/src/ui/Icon.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/HelpCards.tsx",
-      "target": "file:frontend/src/ui/ReliabilityBadge.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/HelpCards.tsx",
-      "target": "file:frontend/src/ui/Text.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/HelpCards.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/OfferList.tsx",
-      "target": "file:frontend/src/api/types.help.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/OfferList.tsx",
-      "target": "file:frontend/src/features/help/format.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/OfferList.tsx",
-      "target": "file:frontend/src/ui/Avatar.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/OfferList.tsx",
-      "target": "file:frontend/src/ui/Chip.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/OfferList.tsx",
-      "target": "file:frontend/src/ui/ReliabilityBadge.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/OfferList.tsx",
-      "target": "file:frontend/src/ui/Text.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/OfferList.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/categories.ts",
-      "target": "file:frontend/src/api/types.help.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/categories.ts",
-      "target": "file:frontend/src/ui/Icon.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/checkInResult.ts",
-      "target": "file:frontend/src/api/errors.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/checkInResult.ts",
-      "target": "file:frontend/src/api/types.help.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/checkInResult.ts",
-      "target": "file:frontend/src/features/events/checkInResult.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/format.ts",
-      "target": "file:frontend/src/api/types.help.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/newHelpForm.ts",
-      "target": "file:frontend/src/api/types.help.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/help/newHelpForm.ts",
-      "target": "file:frontend/src/lib/geo.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
       "source": "file:frontend/src/features/journey/JourneyPanel.tsx",
       "target": "file:frontend/src/api/types.routing.ts",
       "type": "imports",
@@ -69141,78 +67343,6 @@
       "recoveredFromImportMap": true
     },
     {
-      "source": "file:frontend/src/features/scan/QrScanner.tsx",
-      "target": "file:frontend/src/features/events/checkInResult.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/scan/QrScanner.tsx",
-      "target": "file:frontend/src/ui/Button.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/scan/QrScanner.tsx",
-      "target": "file:frontend/src/ui/Card.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/scan/QrScanner.tsx",
-      "target": "file:frontend/src/ui/Icon.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/scan/QrScanner.tsx",
-      "target": "file:frontend/src/ui/States.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/scan/QrScanner.tsx",
-      "target": "file:frontend/src/ui/Text.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/scan/QrScanner.tsx",
-      "target": "file:frontend/src/ui/TextField.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/scan/QrScanner.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/scan/QrTile.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
       "source": "file:frontend/src/features/transit/CityInfoStrip.tsx",
       "target": "file:frontend/src/features/location/LocationProvider.tsx",
       "type": "imports",
@@ -69949,38 +68079,6 @@
       "recoveredFromImportMap": true
     },
     {
-      "source": "file:frontend/src/hooks/useHelp.ts",
-      "target": "file:frontend/src/api/endpoints.help.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/hooks/useHelp.ts",
-      "target": "file:frontend/src/api/types.help.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/hooks/useHelp.ts",
-      "target": "file:frontend/src/features/location/LocationProvider.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/hooks/useHelp.ts",
-      "target": "file:frontend/src/lib/geo.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
       "source": "file:frontend/src/hooks/useMapEvents.ts",
       "target": "file:frontend/src/api/endpoints.ts",
       "type": "imports",
@@ -70477,14 +68575,6 @@
       "recoveredFromImportMap": true
     },
     {
-      "source": "file:frontend/testing/mocks/helpSeed.ts",
-      "target": "file:frontend/src/api/types.help.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
       "source": "file:frontend/testing/mocks/index.ts",
       "target": "file:frontend/src/api/errors.ts",
       "type": "imports",
@@ -70647,62 +68737,6 @@
     {
       "source": "file:frontend/testing/mocks/routes/events.ts",
       "target": "file:frontend/testing/mocks/data.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/testing/mocks/routes/help.ts",
-      "target": "file:frontend/src/api/errors.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/testing/mocks/routes/help.ts",
-      "target": "file:frontend/src/api/types.help.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/testing/mocks/routes/help.ts",
-      "target": "file:frontend/src/api/types.users.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/testing/mocks/routes/help.ts",
-      "target": "file:frontend/src/lib/geo.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/testing/mocks/routes/help.ts",
-      "target": "file:frontend/testing/mocks/core.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/testing/mocks/routes/help.ts",
-      "target": "file:frontend/testing/mocks/data.ts",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/testing/mocks/routes/help.ts",
-      "target": "file:frontend/testing/mocks/helpSeed.ts",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -70911,6 +68945,2060 @@
     {
       "source": "file:frontend/testing/mocks/transitSeed.ts",
       "target": "file:frontend/src/api/types.transit.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "function:frontend/src/app/pulse/[id].tsx:NeighbourhoodScreen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "function:frontend/src/app/pulse/[id].tsx:NeighbourhoodScreen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "function:frontend/src/app/pulse/[id].tsx:Tabs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "function:frontend/src/app/pulse/[id].tsx:NeighbourhoodScreen",
+      "target": "function:frontend/src/app/pulse/[id].tsx:Tabs",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/pulse/[id].tsx:NeighbourhoodScreen",
+      "target": "function:frontend/src/hooks/useNeighbourhoods.ts:useNeighbourhoodPulse",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/app/pulse/[id].tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/features/neighbourhoods/areas.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:PLAN.md",
+      "target": "file:frontend/src/app/pulse/[id].tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "document:PLAN.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/app/events/[id]/scan.tsx",
+      "target": "file:frontend/src/ui/Button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/events/[id]/scan.tsx",
+      "target": "file:frontend/src/ui/Card.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/events/[id]/scan.tsx",
+      "target": "file:frontend/src/ui/Icon.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/events/[id]/scan.tsx",
+      "target": "file:frontend/src/ui/States.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/events/[id]/scan.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/events/[id]/scan.tsx",
+      "target": "file:frontend/src/ui/TextField.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/events/[id]/scan.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/events/[id]/ticket.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/security/CurrentUser.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/CreateHelpRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestDetail.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestSummary.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpTicketResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/MyHelpResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/WithdrawResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/reliability/domain/dto/CheckInRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/controller/HelpController.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/reliability/domain/dto/CheckInResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpOfferResponse.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestDetail.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestSummary.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/HelpMapper.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestDetail.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/HelpMapper.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestSummary.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/HelpMapper.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpOfferView.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/HelpMapper.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequestView.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/HelpRules.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpOfferResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestDetail.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestSummary.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpOfferView.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequestView.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/mapper/HelpMapper.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpOfferRepository.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpOffer.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpOfferRepository.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpOfferView.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpRequestRepository.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpRequestRepository.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpRequestRepository.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequestView.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/impl/HelpOfferRepositoryImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpOffer.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/impl/HelpOfferRepositoryImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpOfferView.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/impl/HelpOfferRepositoryImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpOfferRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/impl/HelpRequestRepositoryImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/impl/HelpRequestRepositoryImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/impl/HelpRequestRepositoryImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequestView.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/repository/impl/HelpRequestRepositoryImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpRequestRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/CreateHelpRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestDetail.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestSummary.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpTicketResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/MyHelpResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/WithdrawResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/reliability/domain/dto/CheckInResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/BoundingBox.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/geo/GeoPoint.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/domain/dto/UserSummary.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/repository/ParticipationRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/HelpRules.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/CreateHelpRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestDetail.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpRequestSummary.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/HelpTicketResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/MyHelpResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/WithdrawResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpOffer.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequestView.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/mapper/HelpMapper.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpOfferRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpRequestRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/service/HelpService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/reliability/domain/ReliabilityRules.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/reliability/domain/dto/CheckInResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/help/HelpIntegrationTest.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/help/support/HelpTestSchema.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/help/HelpIntegrationTest.java",
+      "target": "file:backend/src/test/java/com/unihack8/backend/support/JwtTestTokens.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/help/domain/HelpRulesTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/reliability/domain/ReliabilityRules.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ApiException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/events/repository/ParticipationRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/dto/CreateHelpRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpOffer.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/domain/entity/HelpRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/mapper/impl/HelpMapperImpl.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpOfferRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/repository/HelpRequestRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/help/service/impl/HelpServiceImpl.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/domain/entity/Profile.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:backend/src/test/java/com/unihack8/backend/help/service/HelpServiceImplTest.java",
+      "target": "file:backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/mocks.help.test.ts",
+      "target": "file:frontend/__tests__/testUtils.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/mocks.help.test.ts",
+      "target": "file:frontend/src/api/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/mocks.help.test.ts",
+      "target": "file:frontend/testing/mocks/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.help.test.tsx",
+      "target": "file:frontend/__tests__/testUtils.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.help.test.tsx",
+      "target": "file:frontend/src/api/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.help.test.tsx",
+      "target": "file:frontend/src/app/(tabs)/index.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.help.test.tsx",
+      "target": "file:frontend/src/app/help/[id]/index.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.help.test.tsx",
+      "target": "file:frontend/src/app/help/[id]/scan.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.help.test.tsx",
+      "target": "file:frontend/src/app/help/[id]/ticket.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.help.test.tsx",
+      "target": "file:frontend/src/app/help/index.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.help.test.tsx",
+      "target": "file:frontend/src/app/help/new.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.help.test.tsx",
+      "target": "file:frontend/src/features/help/checkInResult.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.help.test.tsx",
+      "target": "file:frontend/src/features/help/format.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.help.test.tsx",
+      "target": "file:frontend/src/features/help/newHelpForm.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.help.test.tsx",
+      "target": "file:frontend/src/features/users/ReliabilityLog.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.help.test.tsx",
+      "target": "file:frontend/src/features/users/reliability.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.help.test.tsx",
+      "target": "file:frontend/src/hooks/useHelp.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.help.test.tsx",
+      "target": "file:frontend/src/lib/queryClient.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.help.test.tsx",
+      "target": "file:frontend/testing/mocks/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "target": "file:frontend/__tests__/testUtils.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "target": "file:frontend/src/api/types.neighbourhoods.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "target": "file:frontend/src/app/(tabs)/index.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "target": "file:frontend/src/app/pulse/[id].tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "target": "file:frontend/src/app/pulse/index.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "target": "file:frontend/src/features/neighbourhoods/areas.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "target": "file:frontend/src/features/neighbourhoods/photos.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "target": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "target": "file:frontend/testing/mocks/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/__tests__/screens.pulse.test.tsx",
+      "target": "file:frontend/testing/mocks/routes/neighbourhoods.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/api/endpoints.help.ts",
+      "target": "file:frontend/src/api/client.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/api/endpoints.help.ts",
+      "target": "file:frontend/src/api/types.help.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/api/types.help.ts",
+      "target": "file:frontend/src/api/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/index.tsx",
+      "target": "file:frontend/src/api/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/index.tsx",
+      "target": "file:frontend/src/api/types.help.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/index.tsx",
+      "target": "file:frontend/src/features/help/OfferList.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/index.tsx",
+      "target": "file:frontend/src/features/help/categories.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/index.tsx",
+      "target": "file:frontend/src/features/help/format.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/index.tsx",
+      "target": "file:frontend/src/hooks/useHelp.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/index.tsx",
+      "target": "file:frontend/src/lib/time.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/index.tsx",
+      "target": "file:frontend/src/ui/Avatar.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/index.tsx",
+      "target": "file:frontend/src/ui/Button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/index.tsx",
+      "target": "file:frontend/src/ui/Card.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/index.tsx",
+      "target": "file:frontend/src/ui/Chip.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/index.tsx",
+      "target": "file:frontend/src/ui/Icon.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/index.tsx",
+      "target": "file:frontend/src/ui/ReliabilityBadge.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/index.tsx",
+      "target": "file:frontend/src/ui/Screen.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/index.tsx",
+      "target": "file:frontend/src/ui/ScreenHeader.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/index.tsx",
+      "target": "file:frontend/src/ui/States.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/index.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/index.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/scan.tsx",
+      "target": "file:frontend/src/features/help/checkInResult.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/scan.tsx",
+      "target": "file:frontend/src/features/scan/QrScanner.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/scan.tsx",
+      "target": "file:frontend/src/hooks/useHelp.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/scan.tsx",
+      "target": "file:frontend/src/ui/Screen.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/scan.tsx",
+      "target": "file:frontend/src/ui/ScreenHeader.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/scan.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
+      "target": "file:frontend/src/api/types.help.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
+      "target": "file:frontend/src/features/help/format.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
+      "target": "file:frontend/src/features/scan/QrTile.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
+      "target": "file:frontend/src/hooks/useHelp.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
+      "target": "file:frontend/src/ui/Chip.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
+      "target": "file:frontend/src/ui/Icon.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
+      "target": "file:frontend/src/ui/Screen.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
+      "target": "file:frontend/src/ui/ScreenHeader.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
+      "target": "file:frontend/src/ui/States.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/[id]/ticket.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/_layout.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
+      "target": "file:frontend/src/api/types.help.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
+      "target": "file:frontend/src/features/help/HelpCards.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
+      "target": "file:frontend/src/features/help/categories.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
+      "target": "file:frontend/src/features/help/format.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
+      "target": "file:frontend/src/hooks/useHelp.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
+      "target": "file:frontend/src/ui/Button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
+      "target": "file:frontend/src/ui/Chip.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
+      "target": "file:frontend/src/ui/Screen.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
+      "target": "file:frontend/src/ui/ScreenHeader.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
+      "target": "file:frontend/src/ui/States.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/index.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/new.tsx",
+      "target": "file:frontend/src/api/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/new.tsx",
+      "target": "file:frontend/src/api/types.help.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/new.tsx",
+      "target": "file:frontend/src/features/events/LocationPickerModal.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/new.tsx",
+      "target": "file:frontend/src/features/help/categories.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/new.tsx",
+      "target": "file:frontend/src/features/help/newHelpForm.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/new.tsx",
+      "target": "file:frontend/src/features/location/LocationProvider.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/new.tsx",
+      "target": "file:frontend/src/hooks/useHelp.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/new.tsx",
+      "target": "file:frontend/src/ui/Button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/new.tsx",
+      "target": "file:frontend/src/ui/Chip.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/new.tsx",
+      "target": "file:frontend/src/ui/Screen.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/new.tsx",
+      "target": "file:frontend/src/ui/ScreenHeader.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/new.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/help/new.tsx",
+      "target": "file:frontend/src/ui/TextField.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "file:frontend/src/features/events/EventCards.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "file:frontend/src/features/help/HelpCards.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "file:frontend/src/features/neighbourhoods/areas.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "file:frontend/src/features/neighbourhoods/photos.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "file:frontend/src/features/neighbourhoods/pulseFormat.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "file:frontend/src/hooks/useHelp.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "file:frontend/src/hooks/useMapEvents.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "file:frontend/src/hooks/useNeighbourhoods.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "file:frontend/src/lib/bbox.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "file:frontend/src/ui/Chip.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "file:frontend/src/ui/Screen.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "file:frontend/src/ui/ScreenHeader.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "file:frontend/src/ui/States.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/HelpCards.tsx",
+      "target": "file:frontend/src/api/types.help.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/HelpCards.tsx",
+      "target": "file:frontend/src/features/help/categories.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/HelpCards.tsx",
+      "target": "file:frontend/src/features/help/format.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/HelpCards.tsx",
+      "target": "file:frontend/src/ui/Chip.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/HelpCards.tsx",
+      "target": "file:frontend/src/ui/Icon.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/HelpCards.tsx",
+      "target": "file:frontend/src/ui/ReliabilityBadge.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/HelpCards.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/HelpCards.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/OfferList.tsx",
+      "target": "file:frontend/src/api/types.help.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/OfferList.tsx",
+      "target": "file:frontend/src/features/help/format.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/OfferList.tsx",
+      "target": "file:frontend/src/ui/Avatar.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/OfferList.tsx",
+      "target": "file:frontend/src/ui/Chip.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/OfferList.tsx",
+      "target": "file:frontend/src/ui/ReliabilityBadge.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/OfferList.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/OfferList.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/categories.ts",
+      "target": "file:frontend/src/api/types.help.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/categories.ts",
+      "target": "file:frontend/src/ui/Icon.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/checkInResult.ts",
+      "target": "file:frontend/src/api/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/checkInResult.ts",
+      "target": "file:frontend/src/api/types.help.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/checkInResult.ts",
+      "target": "file:frontend/src/features/events/checkInResult.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/format.ts",
+      "target": "file:frontend/src/api/types.help.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/newHelpForm.ts",
+      "target": "file:frontend/src/api/types.help.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/help/newHelpForm.ts",
+      "target": "file:frontend/src/lib/geo.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/scan/QrScanner.tsx",
+      "target": "file:frontend/src/features/events/checkInResult.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/scan/QrScanner.tsx",
+      "target": "file:frontend/src/ui/Button.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/scan/QrScanner.tsx",
+      "target": "file:frontend/src/ui/Card.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/scan/QrScanner.tsx",
+      "target": "file:frontend/src/ui/Icon.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/scan/QrScanner.tsx",
+      "target": "file:frontend/src/ui/States.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/scan/QrScanner.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/scan/QrScanner.tsx",
+      "target": "file:frontend/src/ui/TextField.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/scan/QrScanner.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/scan/QrTile.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/hooks/useHelp.ts",
+      "target": "file:frontend/src/api/endpoints.help.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/hooks/useHelp.ts",
+      "target": "file:frontend/src/api/types.help.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/hooks/useHelp.ts",
+      "target": "file:frontend/src/features/location/LocationProvider.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/hooks/useHelp.ts",
+      "target": "file:frontend/src/lib/geo.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/testing/mocks/helpSeed.ts",
+      "target": "file:frontend/src/api/types.help.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/testing/mocks/routes/help.ts",
+      "target": "file:frontend/src/api/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/testing/mocks/routes/help.ts",
+      "target": "file:frontend/src/api/types.help.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/testing/mocks/routes/help.ts",
+      "target": "file:frontend/src/api/types.users.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/testing/mocks/routes/help.ts",
+      "target": "file:frontend/src/lib/geo.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/testing/mocks/routes/help.ts",
+      "target": "file:frontend/testing/mocks/core.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/testing/mocks/routes/help.ts",
+      "target": "file:frontend/testing/mocks/data.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/testing/mocks/routes/help.ts",
+      "target": "file:frontend/testing/mocks/helpSeed.ts",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
