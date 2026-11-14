@@ -7,6 +7,7 @@ import { getMockLatency, type Query, type Route } from './core';
 import { aiRoutes } from './routes/ai';
 import { eventsRoutes } from './routes/events';
 import { placesRoutes } from './routes/places';
+import { neighbourhoodsRoutes } from './routes/neighbourhoods';
 import { routingRoutes } from './routes/routing';
 import { transitRoutes } from './routes/transit';
 import { usersRoutes } from './routes/users';
@@ -15,7 +16,7 @@ export { MOCK_ME_ID } from './data';
 export { getMockLatency, getState as getMockState, resetMocks, setMockLatency } from './core';
 
 // Order matters inside one file (e.g. `/users/me` before `/users/{id}`), not between files.
-const routes: Route[] = [...usersRoutes, ...eventsRoutes, ...transitRoutes, ...placesRoutes, ...routingRoutes, ...aiRoutes];
+const routes: Route[] = [...usersRoutes, ...eventsRoutes, ...transitRoutes, ...placesRoutes, ...routingRoutes, ...aiRoutes, ...neighbourhoodsRoutes];
 
 /** Entry point used by the API client when an area is mocked. */
 export async function mockRequest(method: string, path: string, query: Query = {}, body?: unknown): Promise<unknown> {

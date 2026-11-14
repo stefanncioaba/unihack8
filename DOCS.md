@@ -426,6 +426,27 @@ When the AI gives directions that start **where the user is**, its answer has a 
 
 **Not verified yet:** not tried on a phone (GPS accuracy, camera following, battery) and not against real Gemini — whether the model leaves out the start point for "how do I get there" is only asked for by the prompt.
 
+### Neighbourhood Pulse (PLAN task 23, Tracks B + C)
+
+"See what your neighbourhood is doing right now." One screen with a live card per Timișoara area. It joins people (events, reliability), businesses (places), infrastructure (STPT) and data on one screen, per neighbourhood. No new tables.
+
+**Backend** (`neighbourhoods` package):
+- `domain/model/NeighbourhoodAreas` — the 9 hard-coded areas (`Neighbourhood`: id, name, centre, radius) and `assign(lat, lon)`: the nearest centre whose circle covers the point, so overlaps are never counted twice.
+- `service/impl/NeighbourhoodPulseServiceImpl` — reads each source **once for the whole city** and splits the results by area: `EventService.search` (events from 12 h ago until 05:00 local tomorrow, then filtered to "now" and "later tonight"), `EventService.participants` for user events (people `JOINED`/`ATTENDED`, reliable = score ≥ 100), `PlaceService.explore` per area with `OpeningHours` for "open now", and `TransitService` stops / routes / all vehicles / alerts. Each source is wrapped: when it fails only its section is empty (`transit.available: false` when STPT's stop list is down). The whole answer is cached for 30 s. Activity score and levels are in `docs/API.md` → Neighbourhoods.
+- `service/impl/AlertMatcher` — an STPT alert belongs to an area when it names one of the area's lines after a line word ("linia 8", "tramvaiele 1 și 2", "liniile E2, 33b") or one of its stop names (5+ letters). Bare numbers (dates, house numbers) never count.
+- `controller/NeighbourhoodController` — `GET /neighbourhoods/pulse`, public (added to `SecurityConfig`).
+- **"Quiet / busy" check-ins** do not exist in the app (they would need a table), so the `QUIET` / `STEADY` / `BUSY` level is computed from the live data instead.
+
+**Mobile:**
+- `app/pulse/index.tsx` (stack `app/pulse/_layout.tsx`, registered in the root layout) — opened from the yellow **Pulse** button in the Home header. List of `NeighbourhoodCard`s in the backend's order (busiest first), pull to refresh, refetch every 60 s (`hooks/useNeighbourhoods.ts`), loading / error / empty states.
+- `features/neighbourhoods/NeighbourhoodCard.tsx` — photo header with name and Busy / Steady / Quiet chip, then events (up to 3, tap to open; a yellow dot = happening now), transit lines and nearby vehicles, the first alert in red, open places with top categories, people going / reliable, and **Show on map** (opens the Map tab at the area's centre). Text lines are pure functions in `pulseFormat.ts`.
+- **Photos** — `features/neighbourhoods/photos.ts` maps area ids to bundled 800 px photos from Wikimedia Commons in `frontend/assets/neighbourhoods/` (CC BY / CC BY-SA; author and licence in `CREDITS.md` there and as a small line on each card). An area without a photo gets a plain navy header.
+- Types `api/types.neighbourhoods.ts`, endpoint `api/endpoints.neighbourhoods.ts`; test-only mock route `testing/mocks/routes/neighbourhoods.ts`.
+
+**Tests:** backend `NeighbourhoodAreasTest` (landmarks, outside, overlap, edge), `AlertMatcherTest` (line words, lists, letter lines, bare numbers, stop names), `NeighbourhoodPulseServiceImplTest` (every section from mocked sources, STPT down, vehicles/alerts down, events down, 30 s cache, levels, end of "tonight"), `NeighbourhoodControllerTest` (JSON shape, no token). Mobile `__tests__/screens.pulse.test.tsx` (text lines, photos, cards, order, transit down, area without photo, open event / map, error, Home button).
+
+**Not verified yet:** not tried on a phone or against live STPT / Supabase data; the area centres and radii are approximate.
+
 ### Integration: real data only (PLAN task 17)
 
 **17.1 No mock data in the app (2026-11-14).**

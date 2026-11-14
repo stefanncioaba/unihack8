@@ -52,6 +52,17 @@ export default function HomeScreen() {
         <View style={styles.headerRight}>
           <Pressable
             accessibilityRole="button"
+            accessibilityLabel="Neighbourhood pulse"
+            onPress={() => router.push('/pulse')}
+            style={[styles.iconButton, styles.pulseButton]}
+          >
+            <Icon name="pulse-outline" size={16} color={colors.accent} />
+            <Text variant="chip" tone="accent">
+              Pulse
+            </Text>
+          </Pressable>
+          <Pressable
+            accessibilityRole="button"
             accessibilityLabel="Find people"
             onPress={() => router.push('/users/search')}
             style={styles.iconButton}
@@ -136,6 +147,7 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.border,
   },
+  pulseButton: { width: 'auto', flexDirection: 'row', gap: 5, paddingHorizontal: 12 },
   block: { marginBottom: 14, paddingHorizontal: PAGE_MARGIN },
   chipsScroll: { marginBottom: 10, flexGrow: 0, flexShrink: 0, height: 38 },
   chips: { gap: 8, paddingHorizontal: PAGE_MARGIN, alignItems: 'center' },

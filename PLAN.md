@@ -385,6 +385,20 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 ---
 
+## 23. Neighbourhood Pulse — Tracks B + C
+
+**Needs:** 5, 6, 8, 9 (done). Added 2026-11-14. **Goal:** "See what your neighbourhood is doing right now." One screen with a live card per Timișoara area (Cetate, Fabric, Iosefin, Elisabetin, Mehala, Complexul Studențesc, Circumvalațiunii, Fratelia, Soarelui): events now and tonight with free spots, STPT lines, live vehicles and service alerts, places open now, and how many reliable community members are going out there. No new tables.
+
+- [x] **23.1 Areas:** hard-coded centres and radii; a point-in-radius check (nearest centre wins on overlap) assigns events, places, stops and vehicles to an area.
+- [x] **23.2 API:** `GET /neighbourhoods/pulse` (public) combines the existing event, place, transit and participant services; cached 30 s; a source that is down only empties its own section. Contract in `docs/API.md`.
+- [x] **23.3 Busy / quiet:** a `QUIET` / `STEADY` / `BUSY` level from an activity score (events, people going, open places, vehicles). *There are no user "quiet / busy" check-ins in the app — that would need a table — so the level is computed from live data instead.*
+- [x] **23.4 App:** Pulse screen (`/pulse`, opened from the **Pulse** button on Home) with a photo per area, the four sections, tap an event to open it, "Show on map", pull to refresh, refresh every minute, loading / error / empty states.
+- [x] **23.5 Photos:** one Wikimedia Commons photo per area (free licences), bundled in `frontend/assets/neighbourhoods/` with credits in `CREDITS.md` and a credit line on each card.
+- [x] **23.6 Tests:** backend (areas, alert matching, the pulse service with sources down, cache, controller) and app (text lines, screen, Home button).
+- [x] **23.7** `DOCS.md`, `docs/API.md` and the knowledge graph updated.
+
+---
+
 ## If time runs short — cut in this order
 
 1. Marker clustering (14.6) and AI result cards (15.4).
