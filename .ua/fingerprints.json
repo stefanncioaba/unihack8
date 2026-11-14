@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "078b1dce6eaec808aad6c687bd48580d110018e2",
-  "generatedAt": "2026-11-14T18:15:33.383Z",
+  "gitCommitHash": "07ec2127c2e0511e7a58a6a74496f641a911a2e2",
+  "generatedAt": "2026-11-14T19:18:52.915Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,22 +25,22 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "9e2d91d6e4c95a4307f9e7473b36df10c41ebd14e32279d7442c8f061b9a6a58",
+      "contentHash": "50f32e942cd60827c920911dd076adf4e2d27cbbe6adae5974e8022b9d78e764",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 750,
+      "totalLines": 769,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "d23af29e037ad605178d7b5afd449d636a9ddfe68fcde5f288c3406e91e434ed",
+      "contentHash": "72c887293841b515f3b82bc1147fee941cc9479f95cb78bda110438f3c392fb8",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 481,
+      "totalLines": 482,
       "hasStructuralAnalysis": false
     },
     "README.md": {
@@ -11742,7 +11742,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/controller/NeighbourhoodController.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/controller/NeighbourhoodController.java",
-      "contentHash": "57528d8d530bbbbc7010310a9cab67ad6b2160b6b716bfb919fef247e7d757bd",
+      "contentHash": "d72dcb5b2c0f4762848925aecf87749f647a95ed3036c87afab250329d2f9817",
       "functions": [
         {
           "name": "NeighbourhoodController",
@@ -11816,7 +11816,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/NeighbourhoodPulseDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/NeighbourhoodPulseDto.java",
-      "contentHash": "a0a7056c14c3f4cf84eda91b74c0925bd000f37fafda2d0629d70827bb004d4a",
+      "contentHash": "515f7768d96425ee2f1a64fa86b600b610066d7dba91ce4be5ead8aaad321335",
       "functions": [],
       "classes": [
         {
@@ -11836,7 +11836,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/NeighbourhoodPulseResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/NeighbourhoodPulseResponse.java",
-      "contentHash": "5f082217decfc538307703bf38e0942c2f4da6bf35687a01d094e79a5a930f75",
+      "contentHash": "cf85f8922d04826a89af45991df7358072f0a28527cd5b4dbab56c02a433199a",
       "functions": [],
       "classes": [
         {
@@ -11869,7 +11869,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulseEventDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulseEventDto.java",
-      "contentHash": "2477ba7124bd14f16462bd75c5c6d09aafdf26b68cd84a149d8ae2e57195ea35",
+      "contentHash": "24eaffbf87ec7e1e89102fc44326ec1f1b7d0b55f614a2e0c9ac4360c056d358",
       "functions": [],
       "classes": [
         {
@@ -11902,7 +11902,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulseEventsDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulseEventsDto.java",
-      "contentHash": "79a5e62bc6cd43bdfef842b9cda82e970228fa969a2798c003ce53ed1f27daa0",
+      "contentHash": "2d0f64d8f8b500bbe72c0020b98138a883a5e8710586d32289f9b6c7f2cb768e",
       "functions": [],
       "classes": [
         {
@@ -11929,7 +11929,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulsePeopleDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulsePeopleDto.java",
-      "contentHash": "4c105c76fab131781631a9e9fa65f9e07e7ea307af6a558626014bd85109116e",
+      "contentHash": "374411c4df8cc57a650e5c179cf4c2514478b2c394e4a085b1fdb9948a2904c8",
       "functions": [],
       "classes": [
         {
@@ -11949,7 +11949,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulsePlacesDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulsePlacesDto.java",
-      "contentHash": "b7c9f64e8687c4171967b658251a057258b6ebd07b720853f0c07392d743642a",
+      "contentHash": "5b1c32568640c05b73203c1b36c758be4c13d278715131218cc55618d09c5e17",
       "functions": [],
       "classes": [
         {
@@ -11976,7 +11976,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulseTransitDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulseTransitDto.java",
-      "contentHash": "2b65a88596488dd1588888645aa42e696d5088c5f289ed9d9bbd15f10cd467d6",
+      "contentHash": "9393cae55398f9cf1c77b58144c42cf91e11086d7dd367b7fd5b56bcffb31463",
       "functions": [
         {
           "name": "unavailable",
@@ -12020,7 +12020,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/model/Neighbourhood.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/model/Neighbourhood.java",
-      "contentHash": "7f3834a8778ed522768efcf8a8a70bbd71b2b7cb513e55657ba35433ff699360",
+      "contentHash": "98677a3eb7115b5099ced507c8058f13ad574d4d544d69024e164d047c627a38",
       "functions": [],
       "classes": [
         {
@@ -12047,7 +12047,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/model/NeighbourhoodAreas.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/model/NeighbourhoodAreas.java",
-      "contentHash": "c89ae7a87d08c2cfc4c5cd4872a9897a2dd98f812dfc8705c94c749055d07a58",
+      "contentHash": "3557b27e15939f5820f1f5dcf18fb14ddc84f2504dd47ad45861a3ef6a03e611",
       "functions": [
         {
           "name": "NeighbourhoodAreas",
@@ -12140,7 +12140,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/mapper/NeighbourhoodPulseMapper.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/mapper/NeighbourhoodPulseMapper.java",
-      "contentHash": "178f3892a4a7abff52e51b3e4f625fe3ad18c5b763dde5c329ea587231153a0c",
+      "contentHash": "93ec9fadcee34df8bb71f10705cbd1d1dc35041e6c2c52a3940a7fe1df6bb202",
       "functions": [],
       "classes": [
         {
@@ -12212,7 +12212,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/mapper/impl/NeighbourhoodPulseMapperImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/mapper/impl/NeighbourhoodPulseMapperImpl.java",
-      "contentHash": "894924e9922c84f9a561eaa02af9c1ca136d00888679c21cd5e6d37b42f4a15a",
+      "contentHash": "a0a8cc4d72aabb11a3d7b2aa2b91ec2ff005a2bcf928cb57440c686c0b0220a4",
       "functions": [
         {
           "name": "toEvent",
@@ -12324,7 +12324,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/service/NeighbourhoodPulseService.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/service/NeighbourhoodPulseService.java",
-      "contentHash": "c7a56203b09522bc00cbf3d26ebca0490c92a6bb14248b6477dc43a81da86897",
+      "contentHash": "974f090c7616d14bbf8c3bb06e35dac79351d225c39cb7b6af89d2876bd7ab6d",
       "functions": [],
       "classes": [
         {
@@ -12353,7 +12353,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/service/impl/AlertMatcher.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/service/impl/AlertMatcher.java",
-      "contentHash": "8d465ff4875a351fc399cba4ff7fbb1e820860a3d453a703260b0e3a1fd94871",
+      "contentHash": "bdf5a9df7eca1e51b488aca34ba0096066771623b4a6e614cb95e6c04533de6b",
       "functions": [
         {
           "name": "AlertMatcher",
@@ -12455,7 +12455,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/service/impl/NeighbourhoodPulseServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/service/impl/NeighbourhoodPulseServiceImpl.java",
-      "contentHash": "3d89b5f94f3c1d33ac3ff0f7f98b5cd793a1e9f9f474dc4bb9f1e03ac474cd01",
+      "contentHash": "d2ac5ed0258389f8ed359b71f0d6a35cf00c810b5fcdf3831b037fd0c40e4631",
       "functions": [
         {
           "name": "NeighbourhoodPulseServiceImpl",
@@ -32698,7 +32698,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/neighbourhoods/controller/NeighbourhoodControllerTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/neighbourhoods/controller/NeighbourhoodControllerTest.java",
-      "contentHash": "c08309a4870a1d59222468e87e7f2e1320a8b83ae6f191b15c1925bf6738a677",
+      "contentHash": "8e74c62bb40e9f0f7fc89b6a53f14cf9276045d476f4281f2ff868c7261f5ae7",
       "functions": [
         {
           "name": "pulseWithoutToken",
@@ -32863,7 +32863,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/neighbourhoods/domain/model/NeighbourhoodAreasTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/neighbourhoods/domain/model/NeighbourhoodAreasTest.java",
-      "contentHash": "052dfcfa66eb3d2377f20f5ee8efd9d94b60c3279610022ef30b147ef202765e",
+      "contentHash": "f235929f98e2efd1ab57f00e6f12ec35e74b3aeeeef3f49dff6930dc1c8187d9",
       "functions": [
         {
           "name": "knownLandmarksLandInTheirArea",
@@ -32954,7 +32954,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/neighbourhoods/service/impl/AlertMatcherTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/neighbourhoods/service/impl/AlertMatcherTest.java",
-      "contentHash": "ff46abbcd30dc2825812a1d981ba9420719501ad00f27255a41bb7c0dd416c43",
+      "contentHash": "8fef1611f92e50a3563e23f0039eb1b81e6ac9b20dfe88fb9319fef22e21b66b",
       "functions": [
         {
           "name": "alert",
@@ -33049,7 +33049,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/neighbourhoods/service/impl/NeighbourhoodPulseServiceImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/neighbourhoods/service/impl/NeighbourhoodPulseServiceImplTest.java",
-      "contentHash": "1d94ecf0b75ed04f6b165d99c29113829f648a78b3325b10c2a9b28bcb2a657c",
+      "contentHash": "022ae72d2f13dbf0e2dbc072859337fcd3221095377ada6439e4dc026d47b79b",
       "functions": [
         {
           "name": "event",
@@ -41822,6 +41822,45 @@
       "totalLines": 82,
       "hasStructuralAnalysis": true
     },
+    "frontend/__tests__/help.groupByArea.test.ts": {
+      "filePath": "frontend/__tests__/help.groupByArea.test.ts",
+      "contentHash": "3e435dd5e2f22e6bd9781d9a47dd2abec24ce04cf3cf7afb8c0ae078adab2dc4",
+      "functions": [
+        {
+          "name": "req",
+          "params": [
+            "id",
+            "lat",
+            "lon"
+          ],
+          "returnType": "HelpRequestSummary",
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HelpRequestSummary"
+          ]
+        },
+        {
+          "source": "@/features/help/groupByArea",
+          "specifiers": [
+            "countByArea",
+            "groupByNeighbourhood",
+            "OUTSIDE_KEY",
+            "OUTSIDE_TITLE",
+            "NamedArea"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 58,
+      "hasStructuralAnalysis": true
+    },
     "frontend/__tests__/layout.root.test.tsx": {
       "filePath": "frontend/__tests__/layout.root.test.tsx",
       "contentHash": "7acd042bb4cb53b547e353762e5d832989011dc82a1850bb2191d158fad481da",
@@ -41861,7 +41900,7 @@
     },
     "frontend/__tests__/lib.cluster.test.ts": {
       "filePath": "frontend/__tests__/lib.cluster.test.ts",
-      "contentHash": "13fc2e9aaf78e496dcd20181e2bb6c706f640fec4a9715b87bc8b44cc8f0eed4",
+      "contentHash": "a94753a40f461776d538d21c6d37f8ea1c994c5ff612dcfb18d6a7c0e4a31db1",
       "functions": [
         {
           "name": "pt",
@@ -41887,6 +41926,7 @@
           "specifiers": [
             "CLUSTER_MIN_SPAN",
             "CLUSTER_ZOOM_MIN_SPAN",
+            "clusterCellSize",
             "clusterPoints",
             "clusterZoomTarget",
             "shouldCluster",
@@ -41895,7 +41935,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 123,
+      "totalLines": 146,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/lib.format.test.ts": {
@@ -42577,7 +42617,7 @@
     },
     "frontend/__tests__/map.layers.test.tsx": {
       "filePath": "frontend/__tests__/map.layers.test.tsx",
-      "contentHash": "aabb83960d3515b13b65801ffeaadd198078324425f41e7667eec318dc564f9d",
+      "contentHash": "8441875967bb189674baf2a265a3be313641fdd8384d9b2112c9a4eacfd1cd21",
       "functions": [
         {
           "name": "call",
@@ -42662,12 +42702,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 225,
+      "totalLines": 258,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/map.lineView.test.tsx": {
       "filePath": "frontend/__tests__/map.lineView.test.tsx",
-      "contentHash": "56baed96ce803f85b0190e2d5a1fbceab950cdf8c749be92619bbed9f5c62fec",
+      "contentHash": "66cea31f7571a781df09ef9cee2da8799662d28122881faac7beec9d41e07773",
       "functions": [
         {
           "name": "vehicleMarkers",
@@ -42793,12 +42833,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 236,
+      "totalLines": 248,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/map.liveTransit.test.tsx": {
       "filePath": "frontend/__tests__/map.liveTransit.test.tsx",
-      "contentHash": "7ccf6ad6828f47b92ee0d23c82b7c432bf0502b1e52747cb9f4a21766a5860ef",
+      "contentHash": "5fc4b5af9f7052a47329573df7845308a57838bc39066bc51b8859c714d7674a",
       "functions": [
         {
           "name": "call",
@@ -42954,6 +42994,12 @@
           ]
         },
         {
+          "source": "@/features/transit/VehicleMarker",
+          "specifiers": [
+            "vehicleImages"
+          ]
+        },
+        {
           "source": "@/features/transit/VehiclePanel",
           "specifiers": [
             "speedLabel"
@@ -42998,7 +43044,7 @@
     },
     "frontend/__tests__/map.markers.test.tsx": {
       "filePath": "frontend/__tests__/map.markers.test.tsx",
-      "contentHash": "62983873d4e42f540c086a7e1d8a717f1ce22dd1f0d0a5e4233fc103ef5593e7",
+      "contentHash": "bde4ac00644a2cc2a52f153609f88038b31cc5c903f6136cf77cda4c8e6d126f",
       "functions": [
         {
           "name": "Probe",
@@ -43093,9 +43139,8 @@
         {
           "source": "@/features/directions/TripMarkers",
           "specifiers": [
-            "TRIP_PILL",
             "TripStepMarker",
-            "tripStepSize"
+            "tripStepImage"
           ]
         },
         {
@@ -43109,29 +43154,30 @@
           "specifiers": [
             "ClusterMarker",
             "MARKER_TRACK_MS",
-            "clusterSize",
-            "pinBox",
             "useBriefViewTracking"
           ]
         },
         {
           "source": "@/features/map/EventMarkers",
           "specifiers": [
-            "EVENT_PIN",
             "EventMarkers"
+          ]
+        },
+        {
+          "source": "@/features/map/markerImages",
+          "specifiers": [
+            "clusterImage"
           ]
         },
         {
           "source": "@/features/map/PlaceMarkers",
           "specifiers": [
-            "PLACE_PIN",
             "PlaceMarkers"
           ]
         },
         {
           "source": "@/features/transit/TransitLayer",
           "specifiers": [
-            "STOP_ROOT_SIZE",
             "TransitLayer"
           ]
         },
@@ -43140,7 +43186,7 @@
           "specifiers": [
             "VehicleMarker",
             "badgeSize",
-            "vehicleMarkerSize"
+            "vehicleImages"
           ]
         },
         {
@@ -43165,12 +43211,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 272,
+      "totalLines": 275,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/map.performance.test.tsx": {
       "filePath": "frontend/__tests__/map.performance.test.tsx",
-      "contentHash": "d1258b179e171749180f494537c8b49b85d991a4e1e887a6d4175bc70dbcca00",
+      "contentHash": "ff2649cecc5e37cb9cf2ffb0cfaef996df2cd6a96e7c4faba5c07c7d725eb728",
       "functions": [
         {
           "name": "vehicle",
@@ -43302,12 +43348,38 @@
         }
       ],
       "exports": [],
-      "totalLines": 314,
+      "totalLines": 310,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/__tests__/map.placesArea.test.ts": {
+      "filePath": "frontend/__tests__/map.placesArea.test.ts",
+      "contentHash": "06f368c8436f0ae9c92cb5bc793ced26acf6f5e6c4efeef383485cc12a212f05",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/hooks/usePlaces",
+          "specifiers": [
+            "FETCH_MARGIN",
+            "nextFetchArea"
+          ]
+        },
+        {
+          "source": "@/lib/bbox",
+          "specifiers": [
+            "bboxCovers",
+            "roundBbox",
+            "Bbox"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 44,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/map.shell.test.tsx": {
       "filePath": "frontend/__tests__/map.shell.test.tsx",
-      "contentHash": "9ae7f961ed10a3ec9a43ada335739007eb60b1f9cae8b7f0c114ea8ad409219a",
+      "contentHash": "f2315fcd6847a5621c8221b739d1b548fba1c6c6dc7eac41dda0b963e7833969",
       "functions": [
         {
           "name": "setup",
@@ -43358,7 +43430,9 @@
           "source": "@/lib/bbox",
           "specifiers": [
             "bboxContains",
+            "bboxCovers",
             "bboxParam",
+            "expandBbox",
             "regionToBbox",
             "roundBbox"
           ]
@@ -43377,12 +43451,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 105,
+      "totalLines": 111,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/map.transit.test.tsx": {
       "filePath": "frontend/__tests__/map.transit.test.tsx",
-      "contentHash": "54c09b015f50051bfccf60d0ccdad00ec565ecd4800cd053d696849725ded4ae",
+      "contentHash": "c523ed4c8187ec8b22f8ce4271d979def20ca6ea1a8ea40c25b902d13a65d71e",
       "functions": [
         {
           "name": "call",
@@ -43459,12 +43533,52 @@
         }
       ],
       "exports": [],
-      "totalLines": 113,
+      "totalLines": 114,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/__tests__/map.transitImages.test.ts": {
+      "filePath": "frontend/__tests__/map.transitImages.test.ts",
+      "contentHash": "0b79e376a5ed18785dcbc27c062c7d4663c3365c490862f647bbac6a4b300c79",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/features/transit/lines",
+          "specifiers": [
+            "FAMILY_PALETTES",
+            "clearLineTypes",
+            "lineColor",
+            "registerLineTypes"
+          ]
+        },
+        {
+          "source": "@/features/transit/transitImages",
+          "specifiers": [
+            "STOP_IMAGES",
+            "TYPE_IMAGES",
+            "VEHICLE_IMAGES"
+          ]
+        },
+        {
+          "source": "@/features/transit/VehicleMarker",
+          "specifiers": [
+            "vehicleImages"
+          ]
+        },
+        {
+          "source": "@/api/types.transit",
+          "specifiers": [
+            "TransitRouteType"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 33,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/map.tripGuidance.test.tsx": {
       "filePath": "frontend/__tests__/map.tripGuidance.test.tsx",
-      "contentHash": "0e6af0b1e33c65cdf40d2446db6fb7006bbbc01d19a455a8e6901291c6a190e3",
+      "contentHash": "1b56806c31830ce28423f64c1f6c5009a6acc622ebaa3a8ec99beba5a024ab1d",
       "functions": [
         {
           "name": "leg",
@@ -43644,7 +43758,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 356,
+      "totalLines": 345,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/map.vehicleAnimation.test.ts": {
@@ -44483,7 +44597,7 @@
     },
     "frontend/__tests__/screens.pulse.test.tsx": {
       "filePath": "frontend/__tests__/screens.pulse.test.tsx",
-      "contentHash": "ae29143f57048cbd09d75baef595f9ef706faf951e0726c4986a040bb9ad6470",
+      "contentHash": "cbaf038df865f2a6c7210f127691df7a74571a45c31ba1959f1750c8e8732c1a",
       "functions": [
         {
           "name": "area",
@@ -44550,6 +44664,7 @@
           "specifiers": [
             "eventsLine",
             "eventWhen",
+            "helpLine",
             "peopleLine",
             "placesLine",
             "transitLine"
@@ -44578,7 +44693,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 180,
+      "totalLines": 209,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/screens.users.test.tsx": {
@@ -44783,7 +44898,7 @@
     },
     "frontend/jest.setup.ts": {
       "filePath": "frontend/jest.setup.ts",
-      "contentHash": "a99e593d118d487a759266f0d2ed822924deee57a7b0ca94cc5d3412a8866a30",
+      "contentHash": "5bb9ef4e65c365e6ca94b5540914ed00635848c8332199cf7b6438dbf228e68c",
       "functions": [],
       "classes": [],
       "imports": [
@@ -44802,7 +44917,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 135,
+      "totalLines": 150,
       "hasStructuralAnalysis": true
     },
     "frontend/package.json": {
@@ -44814,6 +44929,246 @@
       "exports": [],
       "totalLines": 68,
       "hasStructuralAnalysis": false
+    },
+    "frontend/scripts/generate_marker_images.py": {
+      "filePath": "frontend/scripts/generate_marker_images.py",
+      "contentHash": "729352b5d432e6f8c0959ad0c920baa47eb3f800bab923ce2959d8e0a0244643",
+      "functions": [
+        {
+          "name": "canvas",
+          "params": [
+            "w_dp",
+            "h_dp"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "finish",
+          "params": [
+            "img",
+            "w_dp",
+            "h_dp",
+            "path"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "round_pin",
+          "params": [
+            "path",
+            "size_dp",
+            "fill",
+            "ring_alpha",
+            "icon",
+            "glyph_dp",
+            "glyph_color",
+            "slot_dp"
+          ],
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "cluster",
+          "params": [
+            "path",
+            "count",
+            "fill",
+            "text_color"
+          ],
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "main",
+          "params": [],
+          "exported": true,
+          "lineCount": 47
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "PIL",
+          "specifiers": [
+            "Image",
+            "ImageDraw",
+            "ImageFont"
+          ]
+        }
+      ],
+      "exports": [
+        "canvas",
+        "finish",
+        "round_pin",
+        "cluster",
+        "main"
+      ],
+      "totalLines": 138,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/scripts/generate_transit_images.py": {
+      "filePath": "frontend/scripts/generate_transit_images.py",
+      "contentHash": "a79ee245892f6b8f9ccdf4c654575550f02d711cd0512b17b7af04d44cf0c48a",
+      "functions": [
+        {
+          "name": "palettes",
+          "params": [],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "js_hash",
+          "params": [
+            "s"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "shade_index",
+          "params": [
+            "route",
+            "shades"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "text_on",
+          "params": [
+            "hexcolor"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "rgba",
+          "params": [
+            "hexcolor",
+            "alpha"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "badge_size",
+          "params": [
+            "name",
+            "selected"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "vehicle_image",
+          "params": [
+            "path",
+            "name",
+            "family",
+            "color",
+            "selected"
+          ],
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "stop_image",
+          "params": [
+            "path",
+            "color",
+            "selected"
+          ],
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "trip_image",
+          "params": [
+            "path",
+            "color",
+            "glyph_name",
+            "ring_color",
+            "fill",
+            "glyph_color"
+          ],
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "main",
+          "params": [],
+          "exported": true,
+          "lineCount": 60
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "PIL",
+          "specifiers": [
+            "ImageDraw",
+            "ImageFont"
+          ]
+        },
+        {
+          "source": "generate_marker_images",
+          "specifiers": [
+            "base"
+          ]
+        }
+      ],
+      "exports": [
+        "palettes",
+        "js_hash",
+        "shade_index",
+        "text_on",
+        "rgba",
+        "badge_size",
+        "vehicle_image",
+        "stop_image",
+        "trip_image",
+        "main"
+      ],
+      "totalLines": 201,
+      "hasStructuralAnalysis": true
     },
     "frontend/src/api/client.ts": {
       "filePath": "frontend/src/api/client.ts",
@@ -45043,7 +45398,7 @@
     },
     "frontend/src/api/endpoints.neighbourhoods.ts": {
       "filePath": "frontend/src/api/endpoints.neighbourhoods.ts",
-      "contentHash": "869cd42bef5e4e8235cd979d99087f928c440f9f29d312058fb048982400ab38",
+      "contentHash": "748a2d513d36a5bdbe676c10a755f25b89beec6ae7bee41b7a59408fcc1a8d42",
       "functions": [
         {
           "name": "getNeighbourhoodPulse",
@@ -45659,7 +46014,7 @@
     },
     "frontend/src/api/types.neighbourhoods.ts": {
       "filePath": "frontend/src/api/types.neighbourhoods.ts",
-      "contentHash": "0ef60d83bd3a848154a855be549e9a2b2311d211d95ed06486f75beff1856d62",
+      "contentHash": "9d5bc905eb9c33ed448e2e2712e02b5d40a8900aa45c2a0bac638e0f5628c266",
       "functions": [],
       "classes": [],
       "imports": [
@@ -46273,13 +46628,13 @@
     },
     "frontend/src/app/(tabs)/map.tsx": {
       "filePath": "frontend/src/app/(tabs)/map.tsx",
-      "contentHash": "e1865d00a1e72d0dc66f338f539a262b3b4a810c448421abe41ca3c3c3ca400e",
+      "contentHash": "b21e9e1021583724126031abb900c6e0d0c941d330bc0b8209b6bebf942d7800",
       "functions": [
         {
           "name": "MapBody",
           "params": [],
           "exported": false,
-          "lineCount": 308
+          "lineCount": 320
         },
         {
           "name": "MapScreen",
@@ -46293,6 +46648,7 @@
         {
           "source": "expo-router",
           "specifiers": [
+            "useFocusEffect",
             "useLocalSearchParams"
           ]
         },
@@ -46390,6 +46746,7 @@
         {
           "source": "@/api/types.transit",
           "specifiers": [
+            "TransitRouteType",
             "TransitVehicle"
           ]
         },
@@ -46521,7 +46878,7 @@
       "exports": [
         "MapScreen"
       ],
-      "totalLines": 398,
+      "totalLines": 409,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/(tabs)/profile.tsx": {
@@ -46657,7 +47014,7 @@
     },
     "frontend/src/app/_layout.tsx": {
       "filePath": "frontend/src/app/_layout.tsx",
-      "contentHash": "ea14f681a247f0bb28f9c0aee17fdb1cfee88a44b97819cb2ff430b4fa9b72cf",
+      "contentHash": "ca6dba69d8436710a112deb99b8563cab7137c38719d292d9066501f9885399a",
       "functions": [
         {
           "name": "Gate",
@@ -46730,6 +47087,12 @@
           ]
         },
         {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "loadIconFont"
+          ]
+        },
+        {
           "source": "@/ui/OfflineBanner",
           "specifiers": [
             "OfflineBanner"
@@ -46757,7 +47120,7 @@
       "exports": [
         "RootLayout"
       ],
-      "totalLines": 71,
+      "totalLines": 75,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/events/[id]/index.tsx": {
@@ -48172,7 +48535,7 @@
     },
     "frontend/src/app/pulse/[id].tsx": {
       "filePath": "frontend/src/app/pulse/[id].tsx",
-      "contentHash": "bf113af163ba0c775aed7a64d02eda8f068753fc3d8c94fdc68bfb97e8712ae2",
+      "contentHash": "5e5daf4463ea7417f615fd0d9d841c1bf50b2b680d9d20e1eef8d59467c7dc73",
       "functions": [
         {
           "name": "Tabs",
@@ -48341,7 +48704,7 @@
     },
     "frontend/src/app/pulse/_layout.tsx": {
       "filePath": "frontend/src/app/pulse/_layout.tsx",
-      "contentHash": "3b2304ee6fedc5b8a38454136b8419d8093b386473b9a109c14dccc17fee57f9",
+      "contentHash": "a21e4428f52a42ec7687209deab3dd2691c23ce21bf5180dcd565a7362a468d5",
       "functions": [
         {
           "name": "PulseLayout",
@@ -48373,17 +48736,23 @@
     },
     "frontend/src/app/pulse/index.tsx": {
       "filePath": "frontend/src/app/pulse/index.tsx",
-      "contentHash": "db93422d4d7e4088789430a9f68549d9905fd3ff031cb73b82fc9c51f886766f",
+      "contentHash": "f60e4c3b00e9d2c2b06ceb87c611c0da45a6ee8dd26a7ffc2f74044270ea8dc0",
       "functions": [
         {
           "name": "NeighbourhoodPulseScreen",
           "params": [],
           "exported": true,
-          "lineCount": 28
+          "lineCount": 33
         }
       ],
       "classes": [],
       "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "useMemo"
+          ]
+        },
         {
           "source": "react-native",
           "specifiers": [
@@ -48394,9 +48763,21 @@
           ]
         },
         {
+          "source": "@/features/help/groupByArea",
+          "specifiers": [
+            "countByArea"
+          ]
+        },
+        {
           "source": "@/features/neighbourhoods/NeighbourhoodCard",
           "specifiers": [
             "NeighbourhoodCard"
+          ]
+        },
+        {
+          "source": "@/hooks/useHelp",
+          "specifiers": [
+            "useHelpBoard"
           ]
         },
         {
@@ -48442,7 +48823,7 @@
       "exports": [
         "NeighbourhoodPulseScreen"
       ],
-      "totalLines": 46,
+      "totalLines": 55,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/users/[id].tsx": {
@@ -50108,25 +50489,24 @@
     },
     "frontend/src/features/directions/TripMarkers.tsx": {
       "filePath": "frontend/src/features/directions/TripMarkers.tsx",
-      "contentHash": "d10a34a5af1c69b6641b4f9d406784105a633f6c9ce6c6424d372bcfd06b45a4",
+      "contentHash": "db53888371486863b6a1a9764c6b9f290286daf53129125d192e0fe3ed9e6fd2",
       "functions": [
+        {
+          "name": "tripStepImage",
+          "params": [
+            "step"
+          ],
+          "returnType": "number",
+          "exported": true,
+          "lineCount": 4
+        },
         {
           "name": "TripStepMarkerBase",
           "params": [
             "{ step }"
           ],
           "exported": false,
-          "lineCount": 36
-        },
-        {
-          "name": "tripStepSize",
-          "params": [
-            "kind",
-            "label"
-          ],
-          "returnType": "{ width: number; height: number }",
-          "exported": true,
-          "lineCount": 7
+          "lineCount": 14
         }
       ],
       "classes": [],
@@ -50136,13 +50516,6 @@
           "specifiers": [
             "memo",
             "useMemo"
-          ]
-        },
-        {
-          "source": "react-native",
-          "specifiers": [
-            "StyleSheet",
-            "View"
           ]
         },
         {
@@ -50164,28 +50537,9 @@
           ]
         },
         {
-          "source": "@/features/map/ClusterMarker",
+          "source": "@/features/transit/transitImages",
           "specifiers": [
-            "useBriefViewTracking"
-          ]
-        },
-        {
-          "source": "@/ui/Icon",
-          "specifiers": [
-            "Icon"
-          ]
-        },
-        {
-          "source": "@/ui/Text",
-          "specifiers": [
-            "Text"
-          ]
-        },
-        {
-          "source": "@/ui/theme",
-          "specifiers": [
-            "colors",
-            "radius"
+            "TRIP_IMAGES"
           ]
         },
         {
@@ -50197,13 +50551,12 @@
         }
       ],
       "exports": [
+        "tripStepImage",
         "TripStepMarker",
-        "TRIP_PILL",
-        "tripStepSize",
         "MAP_STEP_KINDS",
         "TripMarkers"
       ],
-      "totalLines": 127,
+      "totalLines": 75,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/directions/tripSteps.ts": {
@@ -51784,6 +52137,64 @@
       "totalLines": 87,
       "hasStructuralAnalysis": true
     },
+    "frontend/src/features/help/groupByArea.ts": {
+      "filePath": "frontend/src/features/help/groupByArea.ts",
+      "contentHash": "151e09653d31b51ad06bea48dcfb8d4a925f7d4956408aa14ee331283a6cea7b",
+      "functions": [
+        {
+          "name": "groupByNeighbourhood",
+          "params": [
+            "requests",
+            "areas",
+            "here"
+          ],
+          "returnType": "HelpAreaSection[]",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "countByArea",
+          "params": [
+            "requests",
+            "areas"
+          ],
+          "returnType": "Record<string, number>",
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/types.help",
+          "specifiers": [
+            "HelpRequestSummary"
+          ]
+        },
+        {
+          "source": "@/features/neighbourhoods/areas",
+          "specifiers": [
+            "areaIdOf",
+            "AreaCircle"
+          ]
+        },
+        {
+          "source": "@/lib/geo",
+          "specifiers": [
+            "distanceMeters",
+            "Coordinates"
+          ]
+        }
+      ],
+      "exports": [
+        "OUTSIDE_KEY",
+        "OUTSIDE_TITLE",
+        "groupByNeighbourhood",
+        "countByArea"
+      ],
+      "totalLines": 50,
+      "hasStructuralAnalysis": true
+    },
     "frontend/src/features/help/newHelpForm.ts": {
       "filePath": "frontend/src/features/help/newHelpForm.ts",
       "contentHash": "eda696e56c1e96c0a7689d6caf84ebfabab09ebd7f7912aa4ea6693f2a56e14e",
@@ -52294,7 +52705,7 @@
     },
     "frontend/src/features/map/ClusterMarker.tsx": {
       "filePath": "frontend/src/features/map/ClusterMarker.tsx",
-      "contentHash": "4933eeb4e787872f0400e542d9efe948d8ec4295d67143a6dac174b656d0995a",
+      "contentHash": "95e83af9212f5fd94b388054cb402e93b3108d04bfaf0c7ed7c15383efadc58a",
       "functions": [
         {
           "name": "armAt",
@@ -52351,23 +52762,6 @@
           "lineCount": 11
         },
         {
-          "name": "clusterSize",
-          "params": [
-            "count"
-          ],
-          "returnType": "{ width: number; height: number }",
-          "exported": true,
-          "lineCount": 4
-        },
-        {
-          "name": "ClusterMarker",
-          "params": [
-            "{ id, lat, lon, count, color, onPress }"
-          ],
-          "exported": true,
-          "lineCount": 18
-        },
-        {
           "name": "pinBox",
           "params": [
             "slot",
@@ -52375,7 +52769,7 @@
           ],
           "returnType": "{ width: number; height: number; anchor: { x: number; y: number } }",
           "exported": true,
-          "lineCount": 5
+          "lineCount": 6
         }
       ],
       "classes": [],
@@ -52383,15 +52777,10 @@
         {
           "source": "react",
           "specifiers": [
+            "memo",
             "useEffect",
+            "useMemo",
             "useState"
-          ]
-        },
-        {
-          "source": "react-native",
-          "specifiers": [
-            "StyleSheet",
-            "View"
           ]
         },
         {
@@ -52407,15 +52796,9 @@
           ]
         },
         {
-          "source": "@/ui/Text",
+          "source": "./markerImages",
           "specifiers": [
-            "Text"
-          ]
-        },
-        {
-          "source": "@/ui/theme",
-          "specifiers": [
-            "colors"
+            "clusterImage"
           ]
         }
       ],
@@ -52427,31 +52810,31 @@
         "trackingTimerArmed",
         "pendingTrackingCount",
         "useBriefViewTracking",
-        "clusterSize",
         "ClusterMarker",
         "PIN_LABEL_GAP",
         "PIN_LABEL_HEIGHT",
+        "PIN_SIDE_SLACK",
         "pinBox"
       ],
-      "totalLines": 146,
+      "totalLines": 127,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/EventMarkers.tsx": {
       "filePath": "frontend/src/features/map/EventMarkers.tsx",
-      "contentHash": "9a8a8a6970101ed013b078176aa7756296068bb66990a2a2e5a4afe3b70d3e17",
+      "contentHash": "74fcaf7b297181d7cd92d39526cea8acadc551bee01a3f274927afc0fac1dc16",
       "functions": [
         {
-          "name": "EventPin",
+          "name": "eventPinImages",
           "params": [
-            "{ event, selected, showLabel, box }"
+            "category"
           ],
-          "exported": false,
-          "lineCount": 18
+          "exported": true,
+          "lineCount": 3
         },
         {
           "name": "EventMarkersBase",
           "params": [
-            "{ events, selectedId, showLabels, onSelect, bbox, onZoomTo }"
+            "{ events, selectedId, onSelect, bbox, onZoomTo }"
           ],
           "exported": false,
           "lineCount": 29
@@ -52468,13 +52851,6 @@
           ]
         },
         {
-          "source": "react-native",
-          "specifiers": [
-            "StyleSheet",
-            "View"
-          ]
-        },
-        {
           "source": "react-native-maps",
           "specifiers": [
             "Marker"
@@ -52484,12 +52860,6 @@
           "source": "@/api/types",
           "specifiers": [
             "EventSummary"
-          ]
-        },
-        {
-          "source": "@/features/events/categories",
-          "specifiers": [
-            "categoryMeta"
           ]
         },
         {
@@ -52508,39 +52878,23 @@
           ]
         },
         {
-          "source": "@/ui/Icon",
-          "specifiers": [
-            "Icon"
-          ]
-        },
-        {
-          "source": "@/ui/Text",
-          "specifiers": [
-            "Text"
-          ]
-        },
-        {
-          "source": "@/ui/theme",
-          "specifiers": [
-            "colors"
-          ]
-        },
-        {
           "source": "./ClusterMarker",
           "specifiers": [
-            "ClusterMarker",
-            "PIN_LABEL_GAP",
-            "PIN_LABEL_HEIGHT",
-            "pinBox",
-            "useBriefViewTracking"
+            "ClusterMarker"
+          ]
+        },
+        {
+          "source": "./markerImages",
+          "specifiers": [
+            "EVENT_PIN_IMAGES"
           ]
         }
       ],
       "exports": [
-        "EVENT_PIN",
+        "eventPinImages",
         "EventMarkers"
       ],
-      "totalLines": 130,
+      "totalLines": 87,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/EventPanel.tsx": {
@@ -52856,23 +53210,23 @@
     },
     "frontend/src/features/map/PlaceMarkers.tsx": {
       "filePath": "frontend/src/features/map/PlaceMarkers.tsx",
-      "contentHash": "ca84480b01f1d522606fdb8d77820bad3cd693fcbbbd2e55ebd311f394a9be7f",
+      "contentHash": "bfd5cc7af1880ea91f37f6f60d6b25232d40dc8ed29bc1e66479fbd18de535a3",
       "functions": [
         {
-          "name": "PlacePin",
+          "name": "placePinImages",
           "params": [
-            "{ place, selected, showLabel, box }"
+            "category"
           ],
-          "exported": false,
-          "lineCount": 18
+          "exported": true,
+          "lineCount": 3
         },
         {
           "name": "PlaceMarkersBase",
           "params": [
-            "{ places, selectedId, showLabels, onSelect, bbox, onZoomTo }"
+            "{ places, selectedId, onSelect, bbox, onZoomTo }"
           ],
           "exported": false,
-          "lineCount": 13
+          "lineCount": 17
         }
       ],
       "classes": [],
@@ -52883,13 +53237,6 @@
             "memo",
             "useCallback",
             "useMemo"
-          ]
-        },
-        {
-          "source": "react-native",
-          "specifiers": [
-            "StyleSheet",
-            "View"
           ]
         },
         {
@@ -52908,7 +53255,8 @@
           "source": "@/lib/cluster",
           "specifiers": [
             "shouldCluster",
-            "clusterPoints"
+            "clusterPoints",
+            "spreadStacked"
           ]
         },
         {
@@ -52918,45 +53266,23 @@
           ]
         },
         {
-          "source": "@/ui/Icon",
-          "specifiers": [
-            "Icon"
-          ]
-        },
-        {
-          "source": "@/ui/Text",
-          "specifiers": [
-            "Text"
-          ]
-        },
-        {
-          "source": "@/ui/theme",
-          "specifiers": [
-            "colors"
-          ]
-        },
-        {
           "source": "./ClusterMarker",
           "specifiers": [
-            "ClusterMarker",
-            "PIN_LABEL_GAP",
-            "PIN_LABEL_HEIGHT",
-            "pinBox",
-            "useBriefViewTracking"
+            "ClusterMarker"
           ]
         },
         {
-          "source": "./placeCategories",
+          "source": "./markerImages",
           "specifiers": [
-            "placeMeta"
+            "PLACE_PIN_IMAGES"
           ]
         }
       ],
       "exports": [
-        "PLACE_PIN",
+        "placePinImages",
         "PlaceMarkers"
       ],
-      "totalLines": 112,
+      "totalLines": 70,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/PlacePanel.tsx": {
@@ -53151,6 +53477,32 @@
       "totalLines": 89,
       "hasStructuralAnalysis": true
     },
+    "frontend/src/features/map/markerImages.ts": {
+      "filePath": "frontend/src/features/map/markerImages.ts",
+      "contentHash": "c075397d6d7f88e55116a1d36cb72731331e0bc56625c6eb230b527c3380d50e",
+      "functions": [
+        {
+          "name": "clusterImage",
+          "params": [
+            "kind",
+            "count"
+          ],
+          "returnType": "MarkerImage",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "PLACE_PIN_IMAGES",
+        "EVENT_PIN_IMAGES",
+        "MAX_CLUSTER_IMAGE",
+        "clusterImage"
+      ],
+      "totalLines": 250,
+      "hasStructuralAnalysis": true
+    },
     "frontend/src/features/map/placeCategories.ts": {
       "filePath": "frontend/src/features/map/placeCategories.ts",
       "contentHash": "01167284c2585b3b5a326df98d9325c20fba51e5064a3f6e737a416b6c1f7203",
@@ -53189,7 +53541,7 @@
     },
     "frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx": {
       "filePath": "frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "contentHash": "3250733f885bbb985bbb62d42a826dd1eeb3bc108d24a64e5bf474e6e294c2f7",
+      "contentHash": "ca626228fde5482e230ab672186f7b5c45a853cd3797d5e55ccdd4182ada5c95",
       "functions": [
         {
           "name": "showOnMap",
@@ -53218,10 +53570,10 @@
         {
           "name": "NeighbourhoodCard",
           "params": [
-            "{ area }"
+            "{ area, helpCount }"
           ],
           "exported": true,
-          "lineCount": 51
+          "lineCount": 61
         }
       ],
       "classes": [],
@@ -53296,6 +53648,7 @@
           "specifiers": [
             "eventsLine",
             "eventWhen",
+            "helpLine",
             "LEVEL_META",
             "peopleLine",
             "placesLine",
@@ -53306,12 +53659,12 @@
       "exports": [
         "NeighbourhoodCard"
       ],
-      "totalLines": 147,
+      "totalLines": 158,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/neighbourhoods/areas.ts": {
       "filePath": "frontend/src/features/neighbourhoods/areas.ts",
-      "contentHash": "7f54c2fd9c5cf295b85046ef884d61a4ce6bcdce717144e9c7ed6b823d373a2b",
+      "contentHash": "4f4fa60f1215b6283adcf5b4c79a8ca571de2926fe74173d91e5125e4ee1200f",
       "functions": [
         {
           "name": "areaIdOf",
@@ -53370,7 +53723,7 @@
     },
     "frontend/src/features/neighbourhoods/photos.ts": {
       "filePath": "frontend/src/features/neighbourhoods/photos.ts",
-      "contentHash": "c66ad7bd5a1786e7ea730ba27992cd5d5b9335c7e1e5fca9ca2cbd83ee009129",
+      "contentHash": "3236b8d335a0e6812b55c73196b81cca014853a1eb96ccd90e232e2546ca9268",
       "functions": [
         {
           "name": "neighbourhoodPhoto",
@@ -53399,7 +53752,7 @@
     },
     "frontend/src/features/neighbourhoods/pulseFormat.ts": {
       "filePath": "frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "contentHash": "a35a3d24d0c3ca3cfcf6ce29b27a2a65746b84b3b6693367390c9343861c4453",
+      "contentHash": "a3258eb7f7e77a20abf68643a435b417f7a5e4076ed82bbad37ac2b8c1ac611c",
       "functions": [
         {
           "name": "plural",
@@ -53456,6 +53809,15 @@
           "returnType": "string",
           "exported": true,
           "lineCount": 5
+        },
+        {
+          "name": "helpLine",
+          "params": [
+            "count"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 4
         }
       ],
       "classes": [],
@@ -53488,9 +53850,10 @@
         "eventWhen",
         "transitLine",
         "placesLine",
-        "peopleLine"
+        "peopleLine",
+        "helpLine"
       ],
-      "totalLines": 59,
+      "totalLines": 65,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/news/NewsCard.tsx": {
@@ -54015,7 +54378,7 @@
     },
     "frontend/src/features/transit/LinePicker.tsx": {
       "filePath": "frontend/src/features/transit/LinePicker.tsx",
-      "contentHash": "e7b67c4831a99ea5b906a1ab28341c7faad156796f2bbf47850b3396b2bd7041",
+      "contentHash": "83c887eb78906d2e47c8d6dfdb5bb12cade775ef634677779f6d5f6743972534",
       "functions": [
         {
           "name": "LineTile",
@@ -54023,15 +54386,15 @@
             "{ id, name, onPress, large = false }"
           ],
           "exported": false,
-          "lineCount": 16
+          "lineCount": 17
         },
         {
           "name": "GroupStrip",
           "params": [
-            "{ routes, onPick }"
+            "{ routes, mode, onMode, onPick }"
           ],
           "exported": false,
-          "lineCount": 28
+          "lineCount": 40
         },
         {
           "name": "LineBar",
@@ -54044,7 +54407,7 @@
         {
           "name": "LinePickerBase",
           "params": [
-            "{ routes, lineId, directions, directionIndex, onPick, onDirection }"
+            "{ routes, mode, onMode, lineId, directions, directionIndex, onPick, onDirection }"
           ],
           "exported": false,
           "lineCount": 5
@@ -54071,7 +54434,8 @@
         {
           "source": "@/api/types.transit",
           "specifiers": [
-            "TransitRoute"
+            "TransitRoute",
+            "TransitRouteType"
           ]
         },
         {
@@ -54101,10 +54465,12 @@
         {
           "source": "./lines",
           "specifiers": [
+            "FAMILY_PALETTES",
             "lineColor",
+            "lineFamily",
             "sameLine",
-            "textOnColor",
-            "typeLabel"
+            "typeLabel",
+            "withAlpha"
           ]
         },
         {
@@ -54118,7 +54484,7 @@
       "exports": [
         "LinePicker"
       ],
-      "totalLines": 160,
+      "totalLines": 191,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/transit/StopPanel.tsx": {
@@ -54232,7 +54598,7 @@
     },
     "frontend/src/features/transit/TransitLayer.tsx": {
       "filePath": "frontend/src/features/transit/TransitLayer.tsx",
-      "contentHash": "d1b1cd2bda49adc1ec0621475533dda66b960912e976ab6c4e86ab2c71e4bb2f",
+      "contentHash": "8c012597b7fc0787f6f102251ab6241ee12ecc2f5907fdc9674c586ec85da038",
       "functions": [
         {
           "name": "TransitLayerBase",
@@ -54256,13 +54622,6 @@
           ]
         },
         {
-          "source": "react-native",
-          "specifiers": [
-            "StyleSheet",
-            "View"
-          ]
-        },
-        {
           "source": "react-native-maps",
           "specifiers": [
             "Marker",
@@ -54274,12 +54633,6 @@
           "specifiers": [
             "TransitStop",
             "TransitVehicle"
-          ]
-        },
-        {
-          "source": "@/features/map/ClusterMarker",
-          "specifiers": [
-            "useBriefViewTracking"
           ]
         },
         {
@@ -54312,6 +54665,12 @@
           ]
         },
         {
+          "source": "./transitImages",
+          "specifiers": [
+            "STOP_IMAGES"
+          ]
+        },
+        {
           "source": "./VehicleMarker",
           "specifiers": [
             "VehicleMarker"
@@ -54321,15 +54680,14 @@
       "exports": [
         "ROUTE_STYLE",
         "LineRoute",
-        "TransitLayer",
-        "STOP_ROOT_SIZE"
+        "TransitLayer"
       ],
-      "totalLines": 144,
+      "totalLines": 126,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/transit/VehicleMarker.tsx": {
       "filePath": "frontend/src/features/transit/VehicleMarker.tsx",
-      "contentHash": "48a836dd2a6526157cf738210dd706d6df20accc7605c5098fd3395bded512ae",
+      "contentHash": "f7e6e715e1024684c6b4d05c530378a323a9428cea4501962cdf8e8bad2e62ef",
       "functions": [
         {
           "name": "badgeSize",
@@ -54342,14 +54700,13 @@
           "lineCount": 4
         },
         {
-          "name": "vehicleMarkerSize",
+          "name": "vehicleImages",
           "params": [
-            "name",
-            "selected"
+            "vehicle"
           ],
-          "returnType": "{ width: number; height: number }",
+          "returnType": "{ normal: number; selected: number }",
           "exported": true,
-          "lineCount": 5
+          "lineCount": 3
         },
         {
           "name": "VehicleBadgeBase",
@@ -54370,20 +54727,12 @@
           "lineCount": 3
         },
         {
-          "name": "VehicleBodyBase",
-          "params": [
-            "{ vehicle, selected, bearing, testID }"
-          ],
-          "exported": false,
-          "lineCount": 29
-        },
-        {
           "name": "VehicleMarkerBase",
           "params": [
             "{ vehicle, selected = false, idPrefix = 'vehicle-marker', onPress }"
           ],
           "exported": false,
-          "lineCount": 20
+          "lineCount": 18
         },
         {
           "name": "sameVehicleMarker",
@@ -54393,7 +54742,7 @@
           ],
           "returnType": "boolean",
           "exported": true,
-          "lineCount": 12
+          "lineCount": 11
         }
       ],
       "classes": [],
@@ -54420,22 +54769,9 @@
           ]
         },
         {
-          "source": "react-native-svg",
-          "specifiers": [
-            "Svg",
-            "Polygon"
-          ]
-        },
-        {
           "source": "@/api/types.transit",
           "specifiers": [
             "TransitVehicle"
-          ]
-        },
-        {
-          "source": "@/features/map/ClusterMarker",
-          "specifiers": [
-            "useBriefViewTracking"
           ]
         },
         {
@@ -54454,11 +54790,18 @@
           "source": "./lines",
           "specifiers": [
             "lineColor",
+            "lineFamily",
             "textOnColor",
             "typeLabel",
             "vehicleIcon",
-            "vehicleLineName",
-            "withAlpha"
+            "vehicleLineName"
+          ]
+        },
+        {
+          "source": "./transitImages",
+          "specifiers": [
+            "TYPE_IMAGES",
+            "VEHICLE_IMAGES"
           ]
         },
         {
@@ -54466,25 +54809,18 @@
           "specifiers": [
             "useVehicleMotion"
           ]
-        },
-        {
-          "source": "./vehicleAnimation",
-          "specifiers": [
-            "arrowPoints",
-            "bearingStep"
-          ]
         }
       ],
       "exports": [
         "BADGE_SIZE",
         "badgeSize",
-        "vehicleMarkerSize",
+        "vehicleImages",
         "sameBadge",
         "VehicleBadge",
         "sameVehicleMarker",
         "VehicleMarker"
       ],
-      "totalLines": 179,
+      "totalLines": 125,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/transit/VehiclePanel.tsx": {
@@ -55024,6 +55360,21 @@
         "decodeShapes"
       ],
       "totalLines": 251,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/transit/transitImages.ts": {
+      "filePath": "frontend/src/features/transit/transitImages.ts",
+      "contentHash": "d7ec9a2ba255110ccf18c1584004fa9605bb3e8262fb0d222bd4d67a50672697",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "VEHICLE_IMAGES",
+        "TYPE_IMAGES",
+        "TRIP_IMAGES",
+        "STOP_IMAGES"
+      ],
+      "totalLines": 242,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/transit/useVehicleMotion.ts": {
@@ -56198,7 +56549,7 @@
     },
     "frontend/src/hooks/useNeighbourhoods.ts": {
       "filePath": "frontend/src/hooks/useNeighbourhoods.ts",
-      "contentHash": "9a91490eb8acd171c2090fbc73a3ddf459090a02bdf4165357dde8c09f51d27d",
+      "contentHash": "50fd0c69a1599f1ce448ff5d80fc18ffdb417b2cf5154384600892fc72acb067",
       "functions": [
         {
           "name": "useNeighbourhoodPulse",
@@ -56290,8 +56641,18 @@
     },
     "frontend/src/hooks/usePlaces.ts": {
       "filePath": "frontend/src/hooks/usePlaces.ts",
-      "contentHash": "0fbd78944433fa673e2c2d066fed1ff78db7767c48f9bfc436e0ec3afe1dcc31",
+      "contentHash": "0165c1981326f03c101fe0d3226ef0e48e9bb598652343bbc58d107b673f10b2",
       "functions": [
+        {
+          "name": "nextFetchArea",
+          "params": [
+            "current",
+            "view"
+          ],
+          "returnType": "Bbox",
+          "exported": true,
+          "lineCount": 5
+        },
         {
           "name": "usePlacesInArea",
           "params": [
@@ -56300,7 +56661,7 @@
             "enabled"
           ],
           "exported": true,
-          "lineCount": 9
+          "lineCount": 22
         },
         {
           "name": "usePlace",
@@ -56321,6 +56682,13 @@
           ]
         },
         {
+          "source": "react",
+          "specifiers": [
+            "useMemo",
+            "useState"
+          ]
+        },
+        {
           "source": "@/api/endpoints.places",
           "specifiers": [
             "getPlace",
@@ -56336,18 +56704,26 @@
         {
           "source": "@/lib/bbox",
           "specifiers": [
+            "bboxContains",
+            "bboxCovers",
             "bboxParam",
+            "expandBbox",
+            "roundBbox",
             "Bbox"
           ]
         }
       ],
       "exports": [
         "MAX_MAP_PLACES",
+        "FETCH_MARGIN",
+        "REFETCH_SPAN_RATIO",
+        "VIEW_MARGIN",
         "placeKeys",
+        "nextFetchArea",
         "usePlacesInArea",
         "usePlace"
       ],
-      "totalLines": 32,
+      "totalLines": 65,
       "hasStructuralAnalysis": true
     },
     "frontend/src/hooks/useRouting.ts": {
@@ -56664,7 +57040,7 @@
     },
     "frontend/src/lib/bbox.ts": {
       "filePath": "frontend/src/lib/bbox.ts",
-      "contentHash": "2f608e8c8ba2e76ad6dbe73e907d4c09b644f47889273093cd10e2bc1704a38a",
+      "contentHash": "64aa30ea26ec271bdb464b4609825286176536181bedf31c674a42894a3a3ffa",
       "functions": [
         {
           "name": "regionToBbox",
@@ -56682,7 +57058,27 @@
           ],
           "returnType": "Bbox",
           "exported": true,
-          "lineCount": 4
+          "lineCount": 5
+        },
+        {
+          "name": "expandBbox",
+          "params": [
+            "b",
+            "factor"
+          ],
+          "returnType": "Bbox",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "bboxCovers",
+          "params": [
+            "outer",
+            "inner"
+          ],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 3
         },
         {
           "name": "bboxParam",
@@ -56716,16 +57112,28 @@
       "exports": [
         "regionToBbox",
         "roundBbox",
+        "expandBbox",
+        "bboxCovers",
         "bboxParam",
         "bboxContains"
       ],
-      "totalLines": 33,
+      "totalLines": 48,
       "hasStructuralAnalysis": true
     },
     "frontend/src/lib/cluster.ts": {
       "filePath": "frontend/src/lib/cluster.ts",
-      "contentHash": "53c1059ee6fa9e822319d254d1421fdcc511f33ffe2b311cf1037731fac3ca04",
+      "contentHash": "e1a810e6416e554f5ace5d3f217b988a9d94a983e54f56e363c5d7fc9d065165",
       "functions": [
+        {
+          "name": "clusterCellSize",
+          "params": [
+            "span",
+            "cells"
+          ],
+          "returnType": "number",
+          "exported": true,
+          "lineCount": 3
+        },
         {
           "name": "clusterPoints",
           "params": [
@@ -56779,6 +57187,7 @@
       ],
       "exports": [
         "CLUSTER_CELLS",
+        "clusterCellSize",
         "clusterPoints",
         "CLUSTER_MIN_SPAN",
         "shouldCluster",
@@ -56787,7 +57196,7 @@
         "SAME_SPOT_DEG",
         "spreadStacked"
       ],
-      "totalLines": 94,
+      "totalLines": 102,
       "hasStructuralAnalysis": true
     },
     "frontend/src/lib/format.ts": {
@@ -59081,7 +59490,7 @@
     },
     "frontend/testing/mocks/routes/neighbourhoods.ts": {
       "filePath": "frontend/testing/mocks/routes/neighbourhoods.ts",
-      "contentHash": "47edbf30fb8c16d015bba5bb18b4ef52c42f6a75b95bb1fb79b174c1e1811dba",
+      "contentHash": "782d32f689fee513e9d29dca0a605afc56e3c9a203997adc75486bb1b8b58616",
       "functions": [
         {
           "name": "mockPulseAreas",
@@ -59720,91 +60129,6 @@
       "exports": [],
       "totalLines": 217,
       "hasStructuralAnalysis": false
-    },
-    "frontend/__tests__/help.groupByArea.test.ts": {
-      "filePath": "frontend/__tests__/help.groupByArea.test.ts",
-      "contentHash": "f1ce4c9caf80bbe9a45fec740c03dc9c286578eaf75887e1ee7565e9ce08fe05",
-      "functions": [
-        {
-          "name": "req",
-          "params": [
-            "id",
-            "lat",
-            "lon"
-          ],
-          "returnType": "HelpRequestSummary",
-          "exported": false,
-          "lineCount": 3
-        }
-      ],
-      "classes": [],
-      "imports": [
-        {
-          "source": "@/api/types.help",
-          "specifiers": [
-            "HelpRequestSummary"
-          ]
-        },
-        {
-          "source": "@/features/help/groupByArea",
-          "specifiers": [
-            "groupByNeighbourhood",
-            "OUTSIDE_KEY",
-            "OUTSIDE_TITLE",
-            "NamedArea"
-          ]
-        }
-      ],
-      "exports": [],
-      "totalLines": 51,
-      "hasStructuralAnalysis": true
-    },
-    "frontend/src/features/help/groupByArea.ts": {
-      "filePath": "frontend/src/features/help/groupByArea.ts",
-      "contentHash": "ee3a9f5f661e76c23a34174acb707ba9411515b353e37e42a8b9e82adc2f7021",
-      "functions": [
-        {
-          "name": "groupByNeighbourhood",
-          "params": [
-            "requests",
-            "areas",
-            "here"
-          ],
-          "returnType": "HelpAreaSection[]",
-          "exported": true,
-          "lineCount": 19
-        }
-      ],
-      "classes": [],
-      "imports": [
-        {
-          "source": "@/api/types.help",
-          "specifiers": [
-            "HelpRequestSummary"
-          ]
-        },
-        {
-          "source": "@/features/neighbourhoods/areas",
-          "specifiers": [
-            "areaIdOf",
-            "AreaCircle"
-          ]
-        },
-        {
-          "source": "@/lib/geo",
-          "specifiers": [
-            "distanceMeters",
-            "Coordinates"
-          ]
-        }
-      ],
-      "exports": [
-        "OUTSIDE_KEY",
-        "OUTSIDE_TITLE",
-        "groupByNeighbourhood"
-      ],
-      "totalLines": 40,
-      "hasStructuralAnalysis": true
     }
   }
 }
