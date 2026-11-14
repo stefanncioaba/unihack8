@@ -17,17 +17,28 @@ export function openHelpRequest(id: string) {
   router.push(`/help/${id}`);
 }
 
-/** Chip for a closed request, or for my own offer on an open one. */
-function StateChip({ request }: { request: HelpRequestSummary }) {
+/** Chip for a closed request, for my own offer on an open one, or "Fits your skills" (PLAN 28) when I can help. */
+function StateChip({ request, fitsMe }: { request: HelpRequestSummary; fitsMe: boolean }) {
   if (request.status !== 'OPEN') {
     return <StatusChip label={statusLabel(request)} tone={request.status === 'HELPED' ? 'signal' : 'muted'} />;
   }
   const mine = myOfferLabel(request.myOffer);
-  return mine ? <StatusChip label={mine} tone="signal" /> : null;
+  if (mine) return <StatusChip label={mine} tone="signal" />;
+  return fitsMe ? <StatusChip label="Fits your skills" tone="accent" /> : null;
 }
 
-/** Tappable row; `showRequester` is off in "You asked", where the requester is me. */
-export function HelpRequestRow({ request, showRequester = true, now = Date.now() }: { request: HelpRequestSummary; showRequester?: boolean; now?: number }) {
+/** Tappable row; `showRequester` is off in "You asked", where the requester is me. `myCategories`: categories of my skills. */
+export function HelpRequestRow({
+  request,
+  showRequester = true,
+  myCategories,
+  now = Date.now(),
+}: {
+  request: HelpRequestSummary;
+  showRequester?: boolean;
+  myCategories?: ReadonlySet<string>;
+  now?: number;
+}) {
   const meta = helpCategoryMeta(request.category);
   const timing = request.status === 'OPEN' ? `${timeAgo(request.createdAt, now)} · ${expiresIn(request.expiresAt, now)}` : timeAgo(request.createdAt, now);
   return (
@@ -62,7 +73,7 @@ export function HelpRequestRow({ request, showRequester = true, now = Date.now()
           </Text>
         ) : null}
       </View>
-      <StateChip request={request} />
+      <StateChip request={request} fitsMe={showRequester && !!myCategories?.has(request.category)} />
     </Pressable>
   );
 }

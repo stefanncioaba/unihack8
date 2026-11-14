@@ -48,6 +48,7 @@ class HelpIntegrationTest {
     void setUp() {
         HelpTestSchema.create(jdbc);
         jdbc.update("DELETE FROM reliability_log WHERE user_id IN (?,?,?)", ASKER, HELPER, SECOND);
+        jdbc.update("DELETE FROM user_skills WHERE user_id IN (?,?,?)", ASKER, HELPER, SECOND);
         jdbc.update("DELETE FROM profiles WHERE id IN (?,?,?)", ASKER, HELPER, SECOND);
         for (UUID id : List.of(ASKER, HELPER, SECOND)) {
             jdbc.update("INSERT INTO profiles (id,username,reliability_score,created_at) VALUES (?,?,100,?)",
@@ -119,6 +120,33 @@ class HelpIntegrationTest {
         Instant created = jdbc.queryForObject("SELECT created_at FROM help_requests WHERE id=?", Timestamp.class, id)
                 .toInstant();
         assertThat(Instant.parse(expires)).isEqualTo(created.plus(Duration.ofHours(24)));
+    }
+
+    // PLAN 28: each offer on the detail page lists that helper's profile skills; helpers without skills get [].
+    @Test
+    void offersShowHelperSkills() throws Exception {
+        UUID id = postRequest();
+        mvc.perform(MockMvcRequestBuildersShortcut.json(post("/users/me/skills"), HELPER,
+                "{\"name\":\"Carpentry\",\"category\":\"CARPENTRY\"}")).andExpect(status().isCreated());
+        mvc.perform(MockMvcRequestBuildersShortcut.json(post("/users/me/skills"), HELPER,
+                "{\"name\":\"Ladders and heights\",\"category\":\"borrow\"}")).andExpect(status().isCreated());
+        offer(id, HELPER);
+        offer(id, SECOND);
+        mvc.perform(get("/help-requests/" + id).header("Authorization", auth(ASKER)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.offers[0].user.id").value(HELPER.toString()))
+                .andExpect(jsonPath("$.offers[0].skills.length()").value(2))
+                .andExpect(jsonPath("$.offers[0].skills[0].name").value("Carpentry"))
+                .andExpect(jsonPath("$.offers[0].skills[1].category").value("BORROW"))
+                .andExpect(jsonPath("$.offers[1].skills.length()").value(0));
+    }
+
+    // PLAN 28: the new categories can be posted.
+    @Test
+    void newCategoriesAccepted() throws Exception {
+        ask("{\"title\":\"Fix a dripping tap\",\"category\":\"PLUMBING\"}").andExpect(status().isCreated())
+                .andExpect(jsonPath("$.category").value("PLUMBING"));
+        ask("{\"title\":\"Keep my gran company\",\"category\":\"ELDERLY\"}").andExpect(status().isCreated());
     }
 
     // The board needs a token.

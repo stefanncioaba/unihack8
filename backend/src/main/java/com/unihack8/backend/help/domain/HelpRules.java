@@ -2,6 +2,7 @@ package com.unihack8.backend.help.domain;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -18,7 +19,11 @@ public final class HelpRules {
     public static final int ADDRESS_MAX = 120;
     public static final int BOARD_LIMIT = 50;
     public static final int MINE_LIMIT = 20;
-    public static final Set<String> CATEGORIES = Set.of("BORROW", "CARRY", "PETS", "ERRANDS", "REPAIRS", "OTHER");
+    // Kinds of help, in the order the app shows them (PLAN 28 added CARPENTRY to ELDERLY). Skills use the same list.
+    public static final List<String> CATEGORY_ORDER = List.of("BORROW", "CARRY", "PETS", "ERRANDS", "REPAIRS",
+            "CARPENTRY", "PLUMBING", "ELECTRICAL", "PAINTING", "GARDENING", "CLEANING", "TECH", "TUTORING", "COOKING",
+            "BIKES", "CARS", "ELDERLY", "OTHER");
+    public static final Set<String> CATEGORIES = Set.copyOf(CATEGORY_ORDER);
 
     // Stored request statuses; EXPIRED is never stored, it is computed from expires_at.
     public static final String OPEN = "OPEN";

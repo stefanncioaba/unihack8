@@ -6,6 +6,7 @@ import com.unihack8.backend.support.JwtTestTokens;
 import com.unihack8.backend.users.domain.dto.AttendedEventResponse;
 import com.unihack8.backend.users.domain.dto.ProfileResponse;
 import com.unihack8.backend.users.domain.dto.ProfileSearchResult;
+import com.unihack8.backend.users.domain.dto.SkillResponse;
 import com.unihack8.backend.users.domain.dto.UsernameAvailabilityResponse;
 import com.unihack8.backend.users.service.UserService;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class UserControllerTest {
     private static final UUID USER_ID = UUID.fromString("11111111-1111-1111-1111-111111111111");
     private static final UUID OTHER_ID = UUID.fromString("22222222-2222-2222-2222-222222222222");
+    private static final UUID SKILL_ID = UUID.fromString("77777777-7777-7777-7777-777777777777");
 
     @Autowired
     private MockMvc mvc;
@@ -51,14 +53,17 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.reliabilityScore").value(100))
                 .andExpect(jsonPath("$.attendedEvents[0].title").value("Meetup"))
                 .andExpect(jsonPath("$.attendedEvents[0].spotsLeft").value(4))
-                .andExpect(jsonPath("$.attendedEvents[0].endsAt").isEmpty());
+                .andExpect(jsonPath("$.attendedEvents[0].endsAt").isEmpty())
+                .andExpect(jsonPath("$.skills[0].name").value("Carpentry"))
+                .andExpect(jsonPath("$.skills[0].category").value("CARPENTRY"));
     }
 
     // PATCH /users/me returns the updated profile.
     @Test
     void updatesUsername() throws Exception {
         when(users.updateUsername(USER_ID, "new_name")).thenReturn(
-                new ProfileResponse(USER_ID, "new_name", 100, Instant.parse("2026-11-13T10:00:00Z"), List.of(), List.of()));
+                new ProfileResponse(USER_ID, "new_name", 100, Instant.parse("2026-11-13T10:00:00Z"), List.of(), List.of(),
+                        List.of()));
 
         mvc.perform(patch("/users/me").header("Authorization", bearer(USER_ID))
                         .contentType(MediaType.APPLICATION_JSON)
@@ -188,6 +193,6 @@ class UserControllerTest {
                 "USER", "Meetup", "MEETUP", "Cafe", 45.75, 21.23, Instant.parse("2026-11-12T18:00:00Z"),
                 null, null, null, null, 12, 4, 4.5, 2);
         return new ProfileResponse(id, "alex_21", 100, Instant.parse("2026-11-13T10:00:00Z"), List.of(event),
-                List.of(event));
+                List.of(event), List.of(new SkillResponse(SKILL_ID, "Carpentry", "CARPENTRY")));
     }
 }

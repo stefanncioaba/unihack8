@@ -29,6 +29,7 @@ import java.time.Instant;
 import java.time.ZoneOffset;
 import java.util.Optional;
 import java.util.UUID;
+import com.unihack8.backend.users.service.SkillService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -49,12 +50,13 @@ class HelpServiceImplTest {
     @Mock private HelpOfferRepository offers;
     @Mock private ParticipationRepository participations;
     @Mock private ProfileRepository profiles;
+    @Mock private SkillService skills;
     private HelpServiceImpl service;
 
     // Real mapper, fixed clock.
     @BeforeEach
     void setUp() {
-        service = new HelpServiceImpl(requests, offers, participations, profiles, new HelpMapperImpl(),
+        service = new HelpServiceImpl(requests, offers, participations, profiles, new HelpMapperImpl(), skills,
                 Clock.fixed(NOW, ZoneOffset.UTC));
     }
 

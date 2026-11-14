@@ -170,7 +170,7 @@ export default function HelpRequestScreen() {
             Pick someone you trust: check their civic trust score, meet, then scan their QR code. The first scan closes the request.
           </Text>
         ) : null}
-        {r.offers.length === 0 ? <Text tone="muted">Nobody has offered yet.</Text> : <OfferList offers={r.offers} />}
+        {r.offers.length === 0 ? <Text tone="muted">Nobody has offered yet.</Text> : <OfferList offers={r.offers} category={r.category} />}
       </View>
     </Shell>
   );

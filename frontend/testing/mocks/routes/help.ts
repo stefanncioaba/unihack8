@@ -76,7 +76,7 @@ function toDetail(r: MockHelpRequest): HelpRequestDetail {
     offers: r.offers
       .filter((o) => o.status !== 'WITHDRAWN')
       .sort((a, b) => Date.parse(a.offeredAt) - Date.parse(b.offeredAt))
-      .map((o) => ({ user: { ...userById(o.userId) }, status: o.status, offeredAt: o.offeredAt })),
+      .map((o) => ({ user: { ...userById(o.userId) }, status: o.status, offeredAt: o.offeredAt, skills: [...(getState().skills[o.userId] ?? [])] })),
     isRequester,
     canOffer: summary.status === 'OPEN' && !isRequester && !current,
   };

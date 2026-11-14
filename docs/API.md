@@ -80,6 +80,8 @@ For `VALIDATION_FAILED`, `fields` lists per-field errors when available (for exa
 | 409 | `NOT_OFFERED` | No current offer from you (or from the scanned helper). |
 | 409 | `HELP_CLOSED` | The help request is closed: already helped, cancelled, or 24 h passed. |
 | 409 | `WRONG_REQUEST` | The scanned helper ticket belongs to another help request. |
+| 409 | `SKILL_EXISTS` | You already listed a skill with this name (case-insensitive). |
+| 409 | `SKILL_LIMIT` | You already have 10 skills. |
 | 429 | `RATE_LIMITED` | Reserved. The AI chat no longer has a per-user limit, so nothing returns it today. |
 | 500 | `INTERNAL_ERROR` | Unexpected server error (details are only in the backend log). |
 | 503 | `AI_UNAVAILABLE` | Gemini did not answer. |
@@ -168,9 +170,14 @@ Called by the sign-up screen before creating the account.
   "id": "8b0f6c1e-2d3a-4f5b-9c7d-1e2f3a4b5c6d",
   "username": "stefan",
   "reliabilityScore": 115,
-  "createdAt": "2026-11-13T15:20:00Z"
+  "createdAt": "2026-11-13T15:20:00Z",
+  "attendedEvents": [ { "...": "EventSummary" } ],
+  "organizedEvents": [ { "...": "EventSummary" } ],
+  "skills": [ { "id": "7c1d2e3f-4a5b-4c6d-8e9f-0a1b2c3d4e5f", "name": "Carpentry", "category": "CARPENTRY" } ]
 }
 ```
+
+Same shape as `GET /users/{id}`. `skills` (PLAN 28): oldest first, at most 10, `[]` when none.
 
 ### `PATCH /users/me`
 
@@ -205,9 +212,24 @@ Public profile. `attendedEvents`: events with status `ATTENDED`, newest first, m
   "reliabilityScore": 90,
   "createdAt": "2026-11-13T16:02:00Z",
   "attendedEvents": [ { "...": "EventSummary" } ],
-  "organizedEvents": [ { "...": "EventSummary" } ]
+  "organizedEvents": [ { "...": "EventSummary" } ],
+  "skills": [ { "id": "7c1d2e3f-4a5b-4c6d-8e9f-0a1b2c3d4e5f", "name": "Dog walking", "category": "PETS" } ]
 }
 ```
+
+### Skills — PLAN 28
+
+A skill is `{ "id", "name", "category" }`: `name` is 2–40 characters (trimmed, inner spaces collapsed), `category` is one of the
+Help Board categories (see `HelpRequestSummary`; sent in any case, stored upper-case). At most 10 per user; the same name only once
+per user (ignoring case). Everyone sees them on `GET /users/{id}` and next to the helper's offers on `GET /help-requests/{id}`.
+
+- `GET /users/me/skills` — my skills, oldest first.
+- `POST /users/me/skills` — body `{ "name": "Carpentry", "category": "CARPENTRY" }` → `201` with the skill.
+  Errors: `400 VALIDATION_FAILED`, `409 SKILL_EXISTS`, `409 SKILL_LIMIT`.
+- `PATCH /users/me/skills/{id}` — same body → `200` with the skill. Errors: `400 VALIDATION_FAILED`, `404 NOT_FOUND` (not mine), `409 SKILL_EXISTS`.
+- `DELETE /users/me/skills/{id}` — `204`. Errors: `404 NOT_FOUND` (not mine or already deleted).
+
+All need a token.
 
 ### `GET /users/me/events` — PLAN 5.8
 
@@ -465,7 +487,7 @@ Rules (see `DOCS.md` → Reliability rules):
 }
 ```
 
-- `category` is one of `BORROW` (lend a tool or thing), `CARRY` (carry or move something), `PETS` (walk or feed a pet), `ERRANDS` (shopping, pick-ups), `REPAIRS` (small fixes, tech help), `OTHER`.
+- `category` is one of `BORROW` (lend a tool or thing), `CARRY` (carry or move something), `PETS` (walk or feed a pet), `ERRANDS` (shopping, pick-ups), `REPAIRS` (small fixes around the home), and since PLAN 28 `CARPENTRY`, `PLUMBING`, `ELECTRICAL`, `PAINTING`, `GARDENING`, `CLEANING`, `TECH` (phones, computers), `TUTORING`, `COOKING`, `BIKES`, `CARS`, `ELDERLY` (keeping an older neighbour company), then `OTHER`. The app shows them in this order.
 - `status` is `OPEN`, `HELPED` (closed by a scan), `CANCELLED` (by the requester) or `EXPIRED` (24 h passed while open).
 - `address`, `lat` and `lon` are optional (`lat`/`lon` both or neither). `offerCount` counts current offers (`OFFERED` and `HELPED`).
 - `myOffer` is the caller's offer status, or `null`: `OFFERED`, `WITHDRAWN`, `HELPED` (the caller was scanned) or `NOT_NEEDED` (someone else was scanned first).
@@ -505,14 +527,16 @@ Answer `201`: `HelpRequestDetail`. Errors: `400 VALIDATION_FAILED`.
   "helper": null,
   "offers": [
     { "user": { "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d", "username": "stella_99", "reliabilityScore": 95 },
-      "status": "OFFERED", "offeredAt": "2026-11-14T17:10:00Z" }
+      "status": "OFFERED", "offeredAt": "2026-11-14T17:10:00Z",
+      "skills": [ { "id": "7c1d2e3f-4a5b-4c6d-8e9f-0a1b2c3d4e5f", "name": "Ladders and heights", "category": "BORROW" } ] }
   ],
   "isRequester": false,
   "canOffer": false
 }
 ```
 
-`helper` is the scanned helper (`UserSummary`) once `HELPED`. `offers` lists everyone who offered except withdrawn offers, oldest first.
+`helper` is the scanned helper (`UserSummary`) once `HELPED`. `offers` lists everyone who offered except withdrawn offers, oldest first,
+each with that helper's profile `skills` (PLAN 28, `[]` when none) so the requester can see who fits the task.
 `canOffer` is true when the request is `OPEN`, the caller is not the requester and has no current offer.
 Expired and closed requests stay readable here. Errors: `404 NOT_FOUND`.
 

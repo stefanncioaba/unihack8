@@ -1,5 +1,7 @@
 // Response and request shapes of the Spring API. Source of truth: docs/API.md.
 
+import type { HelpCategory } from './types.help';
+
 export type EventCategory = 'PARTY' | 'CONCERT' | 'THEATRE' | 'SPORT' | 'GAMES' | 'FOOD' | 'ART' | 'MEETUP' | 'VOLUNTEER' | 'OTHER';
 
 export const EVENT_CATEGORIES: EventCategory[] = [
@@ -23,10 +25,19 @@ export type Paged<T> = { items: T[]; page: number; size: number; totalItems: num
 
 export type UserSummary = { id: string; username: string; reliabilityScore: number };
 
-export type Me = UserSummary & { createdAt: string };
+/** A skill on a profile (PLAN 28), e.g. "Carpentry" in CARPENTRY; the category is a Help Board category. */
+export type Skill = { id: string; name: string; category: HelpCategory };
 
-/** Public profile: attended events, and the user events they organised that are already over (newest first, max 20). */
-export type PublicProfile = UserSummary & { createdAt: string; attendedEvents: EventSummary[]; organizedEvents: EventSummary[] };
+/** My profile. `skills` is always sent by the API (oldest first); optional only for older cached answers. */
+export type Me = UserSummary & { createdAt: string; skills?: Skill[] };
+
+/** Public profile: attended events, the user events they organised that are already over (newest first, max 20), and skills. */
+export type PublicProfile = UserSummary & {
+  createdAt: string;
+  attendedEvents: EventSummary[];
+  organizedEvents: EventSummary[];
+  skills?: Skill[];
+};
 
 export type EventSummary = {
   id: string;

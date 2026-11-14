@@ -41,6 +41,8 @@ const FRIENDLY: Record<string, string> = {
   IS_REQUESTER: 'You cannot offer help on your own request.',
   ALREADY_OFFERED: 'You already offered to help with this request.',
   NOT_OFFERED: 'There is no current offer to help on this request.',
+  SKILL_EXISTS: 'You already listed this skill.',
+  SKILL_LIMIT: 'You can list at most 10 skills. Delete one to add another.',
   HELP_CLOSED: 'This help request is closed: someone already helped, it was cancelled, or 24 hours passed.',
   WRONG_REQUEST: 'This QR code belongs to a different help request.',
   RATE_LIMITED: 'Too many requests. Try again in a minute.',

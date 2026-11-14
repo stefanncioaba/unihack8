@@ -35,7 +35,15 @@ class HelpRulesTest {
     void helperPointsMatchAttendance() {
         assertThat(ReliabilityRules.HELPED_POINTS).isEqualTo(5).isEqualTo(ReliabilityRules.ATTENDED_POINTS);
         assertThat(ReliabilityRules.HELPED_REASON).isEqualTo("HELPED");
-        assertThat(HelpRules.CATEGORIES).containsExactlyInAnyOrder("BORROW", "CARRY", "PETS", "ERRANDS", "REPAIRS",
-                "OTHER");
+    }
+
+    // PLAN 28: 18 categories in display order, OTHER last; the set and the list agree.
+    @Test
+    void categoriesInOrder() {
+        assertThat(HelpRules.CATEGORY_ORDER).containsExactly("BORROW", "CARRY", "PETS", "ERRANDS", "REPAIRS",
+                "CARPENTRY", "PLUMBING", "ELECTRICAL", "PAINTING", "GARDENING", "CLEANING", "TECH", "TUTORING",
+                "COOKING", "BIKES", "CARS", "ELDERLY", "OTHER");
+        assertThat(HelpRules.CATEGORIES).containsExactlyInAnyOrderElementsOf(HelpRules.CATEGORY_ORDER);
+        assertThat(HelpRules.CATEGORY_ORDER).allMatch(c -> c.length() <= 20);
     }
 }

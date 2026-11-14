@@ -1,8 +1,11 @@
-// People who offered to help, with their civic trust score, so the requester can choose whom to trust (PLAN 25).
+// People who offered to help, with their civic trust score and skills (PLAN 28: the ones that fit the request are
+// highlighted), so the requester can choose whom to trust (PLAN 25).
 import { router } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 
-import type { HelpOffer } from '@/api/types.help';
+import type { HelpCategory, HelpOffer } from '@/api/types.help';
+import { SkillChips } from '@/features/users/SkillChips';
+import { skillsFor } from '@/features/users/skills';
 import { Avatar } from '@/ui/Avatar';
 import { StatusChip } from '@/ui/Chip';
 import { ReliabilityBadge } from '@/ui/ReliabilityBadge';
@@ -18,8 +21,8 @@ function offerChip(offer: HelpOffer) {
   return null;
 }
 
-/** Vertical list of offers; tapping a row opens that person's profile. */
-export function OfferList({ offers, now = Date.now() }: { offers: HelpOffer[]; now?: number }) {
+/** Vertical list of offers; tapping a row opens that person's profile. `category` is the request's, for highlighting. */
+export function OfferList({ offers, category, now = Date.now() }: { offers: HelpOffer[]; category?: HelpCategory; now?: number }) {
   return (
     <View style={styles.list} testID="offer-list">
       {offers.map((o) => (
@@ -38,7 +41,9 @@ export function OfferList({ offers, now = Date.now() }: { offers: HelpOffer[]; n
             </Text>
             <Text variant="caption" tone="muted">
               Offered {timeAgo(o.offeredAt, now).toLowerCase()}
+              {category && skillsFor(o.skills, category).length > 0 ? ' · Has a matching skill' : ''}
             </Text>
+            <SkillChips skills={o.skills} highlight={category} testID={`offer-skills-${o.user.username}`} />
           </View>
           <View style={styles.badges}>
             {offerChip(o)}
@@ -54,7 +59,7 @@ const styles = StyleSheet.create({
   list: { gap: 8 },
   row: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     gap: 12,
     padding: 10,
     borderRadius: radius.card,

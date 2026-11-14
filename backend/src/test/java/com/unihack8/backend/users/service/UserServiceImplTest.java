@@ -8,6 +8,7 @@ import com.unihack8.backend.users.mapper.impl.ProfileMapperImpl;
 import com.unihack8.backend.users.repository.AttendedEventRepository;
 import com.unihack8.backend.users.repository.ProfileRepository;
 import com.unihack8.backend.users.service.impl.UserServiceImpl;
+import com.unihack8.backend.users.service.SkillService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -47,12 +48,16 @@ class UserServiceImplTest {
     @Mock
     private AttendedEventRepository attendedEvents;
 
+    @Mock
+    private SkillService skills;
+
     private UserServiceImpl service;
 
     // Wires the real mapper while keeping persistence independent of Supabase.
     @BeforeEach
     void setUp() {
-        service = new UserServiceImpl(profiles, attendedEvents, new ProfileMapperImpl(), Clock.fixed(NOW, ZoneOffset.UTC));
+        service = new UserServiceImpl(profiles, attendedEvents, new ProfileMapperImpl(), skills,
+                Clock.fixed(NOW, ZoneOffset.UTC));
     }
 
     // A profile includes confirmed event attendance.

@@ -28,6 +28,10 @@ import java.time.Clock;
 import java.time.Instant;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import com.unihack8.backend.users.service.SkillService;
+import com.unihack8.backend.users.domain.dto.SkillResponse;
+import com.unihack8.backend.help.domain.entity.HelpOfferView;
 import java.util.Locale;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
@@ -50,17 +54,19 @@ public class HelpServiceImpl implements HelpService {
     private final ParticipationRepository participations;
     private final ProfileRepository profiles;
     private final HelpMapper mapper;
+    private final SkillService skills;
     private final Clock clock;
 
     // Reuses the events feature's reliability writer and the users feature's profiles.
     public HelpServiceImpl(HelpRequestRepository requests, HelpOfferRepository offers,
                            ParticipationRepository participations, ProfileRepository profiles, HelpMapper mapper,
-                           Clock clock) {
+                           SkillService skills, Clock clock) {
         this.requests = requests;
         this.offers = offers;
         this.participations = participations;
         this.profiles = profiles;
         this.mapper = mapper;
+        this.skills = skills;
         this.clock = clock;
     }
 
@@ -106,7 +112,7 @@ public class HelpServiceImpl implements HelpService {
         }
         String category = body.category() == null ? null : body.category().trim().toUpperCase(Locale.ROOT);
         if (category == null || !HelpRules.CATEGORIES.contains(category)) {
-            throw invalid("Category must be one of BORROW, CARRY, PETS, ERRANDS, REPAIRS, OTHER.");
+            throw invalid("Category must be one of " + String.join(", ", HelpRules.CATEGORY_ORDER) + ".");
         }
         String address = trimToNull(body.address());
         if (address != null && address.length() > HelpRules.ADDRESS_MAX) {
@@ -126,7 +132,9 @@ public class HelpServiceImpl implements HelpService {
     @Transactional(readOnly = true)
     public HelpRequestDetail detail(UUID id, UUID caller) {
         HelpRequestView view = requests.findView(id, caller).orElseThrow(() -> ApiException.notFound("Help request"));
-        return mapper.toDetail(view, offers.offers(id), caller, clock.instant());
+        List<HelpOfferView> list = offers.offers(id);
+        Map<UUID, List<SkillResponse>> helperSkills = skills.skillsOf(list.stream().map(o -> o.offer().helperId()).toList());
+        return mapper.toDetail(view, list, helperSkills, caller, clock.instant());
     }
 
     // Requester only, while open; nobody's points change.

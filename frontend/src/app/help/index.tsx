@@ -10,8 +10,10 @@ import { filterByCategory } from '@/features/help/format';
 import { groupByNeighbourhood } from '@/features/help/groupByArea';
 import { HelpRequestRow } from '@/features/help/HelpCards';
 import { useCurrentPosition } from '@/features/location/LocationProvider';
+import { skillCategories } from '@/features/users/skills';
 import { useHelpBoard, useMyHelpRequests } from '@/hooks/useHelp';
 import { useNeighbourhoodPulse } from '@/hooks/useNeighbourhoods';
+import { useMe } from '@/hooks/queries';
 import { Button } from '@/ui/Button';
 import { Chip } from '@/ui/Chip';
 import { Screen } from '@/ui/Screen';
@@ -63,6 +65,8 @@ export default function HelpBoardScreen() {
  * If the neighbourhoods fail to load it is one flat list, closest first. */
 function Board({ categories }: { categories: HelpCategory[] }) {
   const board = useHelpBoard();
+  // PLAN 28: requests in a category I have a skill in get a "Fits your skills" chip.
+  const mine = skillCategories(useMe().data?.skills);
   const pulse = useNeighbourhoodPulse();
   const { position, isFallback } = useCurrentPosition();
   // Waits for the neighbourhoods too, so the list does not jump from flat to grouped.
@@ -84,7 +88,7 @@ function Board({ categories }: { categories: HelpCategory[] }) {
         testID="help-list"
         data={items}
         keyExtractor={(r) => r.id}
-        renderItem={({ item }) => <HelpRequestRow request={item} />}
+        renderItem={({ item }) => <HelpRequestRow request={item} myCategories={mine} />}
         ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
         contentContainerStyle={styles.list}
         refreshControl={refresh}
@@ -99,7 +103,7 @@ function Board({ categories }: { categories: HelpCategory[] }) {
       testID="help-list"
       sections={sections}
       keyExtractor={(r) => r.id}
-      renderItem={({ item }) => <HelpRequestRow request={item} />}
+      renderItem={({ item }) => <HelpRequestRow request={item} myCategories={mine} />}
       renderSectionHeader={({ section }) => (
         <View style={styles.areaHeader} testID={`help-area-${section.key}`} accessibilityRole="header">
           <Text variant="heading">

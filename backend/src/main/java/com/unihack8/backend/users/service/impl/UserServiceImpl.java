@@ -9,6 +9,7 @@ import com.unihack8.backend.users.domain.entity.Profile;
 import com.unihack8.backend.users.mapper.ProfileMapper;
 import com.unihack8.backend.users.repository.AttendedEventRepository;
 import com.unihack8.backend.users.repository.ProfileRepository;
+import com.unihack8.backend.users.service.SkillService;
 import com.unihack8.backend.users.service.UserService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
@@ -30,15 +31,17 @@ public class UserServiceImpl implements UserService {
     private final ProfileRepository profiles;
     private final AttendedEventRepository attendedEvents;
     private final ProfileMapper mapper;
+    private final SkillService skills;
 
     private final Clock clock;
 
-    // Combines profile storage, attended and organised events, response mapping, and the clock.
+    // Combines profile storage, attended and organised events, skills, response mapping, and the clock.
     public UserServiceImpl(ProfileRepository profiles, AttendedEventRepository attendedEvents, ProfileMapper mapper,
-                           Clock clock) {
+                           SkillService skills, Clock clock) {
         this.profiles = profiles;
         this.attendedEvents = attendedEvents;
         this.mapper = mapper;
+        this.skills = skills;
         this.clock = clock;
     }
 
@@ -96,9 +99,10 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    // Full profile answer: attended events and past organised events, both with ratings.
+    // Full profile answer: attended events and past organised events (both with ratings) and skills.
     private ProfileResponse toResponse(Profile profile) {
         return mapper.toResponse(profile, attendedEvents.findAttendedByUserId(profile.getId()),
-                attendedEvents.findPastOrganizedByUserId(profile.getId(), clock.instant()));
+                attendedEvents.findPastOrganizedByUserId(profile.getId(), clock.instant()),
+                skills.skillsOf(profile.getId()));
     }
 }

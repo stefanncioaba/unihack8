@@ -5,7 +5,7 @@ package com.unihack8.backend.help.domain.dto;
  *
  * @param title       3-80 characters
  * @param description optional, at most 500 characters
- * @param category    BORROW, CARRY, PETS, ERRANDS, REPAIRS or OTHER
+ * @param category    one of HelpRules.CATEGORY_ORDER (BORROW ... ELDERLY, OTHER)
  * @param address     optional, at most 120 characters
  * @param lat         optional, together with lon
  * @param lon         optional, together with lat

@@ -93,8 +93,9 @@ Applied to Supabase from `supabase/migrations/` in file order: the four schema m
 | `event_participants` | Who joined which event (one row per pair), `status` (`JOINED`, `ATTENDED`, `NO_SHOW`, `CANCELLED`, `BANNED`), auto-generated `qr_token`. `checked_in_at` is set only for `ATTENDED`. |
 | `reliability_log` | Every score change: `points_change` (e.g. +5, −10) and `reason`. Kept when its event is deleted. |
 | `event_reviews` | One review per checked-in attendee per event (PLAN 22): `rating` 1–5, optional `comment` (≤ 300 chars), `created_at`, `updated_at`. `events.review_settled_at` marks when the organiser's rating points were applied. |
-| `help_requests` | Neighbour Help Board (PLAN 25): `requester_id`, `title` (3–80), optional `description` (≤ 500), `category` (`BORROW`, `CARRY`, `PETS`, `ERRANDS`, `REPAIRS`, `OTHER`), optional `address` and coordinates (both or neither), `status` (`OPEN`, `HELPED`, `CANCELLED`; `EXPIRED` is computed), `expires_at` (= `created_at` + 24 h), `closed_at` (set exactly when not open), `helper_id`. |
+| `help_requests` | Neighbour Help Board (PLAN 25): `requester_id`, `title` (3–80), optional `description` (≤ 500), `category` (`BORROW`, `CARRY`, `PETS`, `ERRANDS`, `REPAIRS`, `CARPENTRY`, `PLUMBING`, `ELECTRICAL`, `PAINTING`, `GARDENING`, `CLEANING`, `TECH`, `TUTORING`, `COOKING`, `BIKES`, `CARS`, `ELDERLY`, `OTHER`; the last 12 before `OTHER` added by PLAN 28), optional `address` and coordinates (both or neither), `status` (`OPEN`, `HELPED`, `CANCELLED`; `EXPIRED` is computed), `expires_at` (= `created_at` + 24 h), `closed_at` (set exactly when not open), `helper_id`. |
 | `help_offers` | Who offered to help (one row per request and helper): `status` (`OFFERED`, `WITHDRAWN`, `HELPED`, `NOT_NEEDED`), auto-generated `qr_token`, `checked_in_at` only for `HELPED`; a partial unique index allows one `HELPED` per request. |
+| `user_skills` | Profile skills (PLAN 28): `user_id` (cascade on profile delete), `name` (2–40), `category` (a Help Board category), `created_at`. Unique index on `(user_id, lower(name))`; at most 10 per user (checked by the backend). RLS on, no policies (only the backend reads it). |
 | `places` | Places imported from OpenStreetMap; `osm_id` (e.g. `node/2845091337`) is unique so re-imports update rows. |
 | `place_prices` | Researched menu prices for the AI (PLAN 11.3): `place_name` (matches `places.name` or the OSM `brand` tag, case-insensitive), `item`, `item_type` (`COFFEE`, `PIZZA`, `FOOD`, `BEER`, `DRINK`), `price_lei`, `size`, `source_type`, `source_url`, `source_date`, `note`. See Features → AI assistant. |
 
@@ -242,7 +243,8 @@ Package `com.unihack8.backend.users` (`controller`, `service` + `impl`, `reposit
 - `GET /users/search?q=` — username prefix, case-insensitive, `_` and `%` taken literally, **sorted by username**, at most 20. A blank or missing `q` is `400 VALIDATION_FAILED`.
 - All of these except `username-available` need a token. Errors use the shared shape (`ApiException` + `ErrorCode`); the users package has no exception classes of its own.
 - Profiles are read through JPA (`Profile` → `profiles`). Attended events come from one plain SQL query over `events` and `event_participants` (`AttendedEventRepositoryImpl`), so this package needs no entities for tables the events feature owns. `GET /users/me/events` is implemented by the events package (PLAN 5.8); `GET /users/{id}/reliability` (PLAN 6.4) is served by the reliability package (task 6).
-- **Tests** (`src/test/.../users`): `UserServiceImplTest` (Mockito rules), `UserControllerTest` (MockMvc with real HS256 test tokens), `ProfileRepositoryTest` and `AttendedEventRepositoryImplTest` (H2). No test touches Supabase.
+- **Skills (PLAN 28):** see Features → Profile skills.
+- **Tests** (`src/test/.../users`): `UserServiceImplTest` (Mockito rules), `UserControllerTest` (MockMvc with real HS256 test tokens), `ProfileRepositoryTest` and `AttendedEventRepositoryImplTest` (H2), `SkillServiceImplTest` and `SkillIntegrationTest` (skills). No test touches Supabase.
 
 Sections are added here as each PLAN task is implemented: Reliability, Transit, Routing, AI, Frontend.
 
@@ -473,6 +475,27 @@ When the AI gives directions that start **where the user is**, its answer has a 
 **Tests:** backend 21 — `HelpRulesTest` (24 h, `EXPIRED`, +5 = attendance), `HelpServiceImplTest` (Mockito: only the scanned helper scores, a lost race gives nothing, refusals, re-offer keeps the token, validation), `HelpIntegrationTest` (H2 + real endpoints and tokens: post and board, token required, validation, two helpers → first scan +5 and closes, others `NOT_NEEDED` with no points, second scan refused, scan refusals, withdraw / re-offer, 24 h expiry, cancel, mine, `near` sort, `bbox` filter); `HelpTestSchema` is the H2 copy of the migration. Frontend 59 — `__tests__/mocks.help.test.ts` (16: every rule and error of the mock, `bbox`), `__tests__/help.groupByArea.test.ts` (5: my area first, distance order, unknown position, empty areas left out, per-area counts for Pulse) and `__tests__/screens.help.test.tsx` (38: board grouped by neighbourhood, Mine, form validation with the required pin, pre-filled pin, detail as helper and requester, offer / withdraw / cancel, ticket states, scanner success and errors, Home button, hook parameters, `HELPED` label); the profile test now expects three +5 rules.
 
 **Not verified yet:** not tried on a phone (camera scan of a helper's QR) or end to end against Supabase with real users.
+
+### Profile skills and more help categories (PLAN task 28, Tracks A + C)
+
+Every user can list what they are good at — "Carpentry", "Bike repair", "Tutoring maths" — so a requester on the Help Board sees which helpers fit the task, and a neighbour sees which requests they could help with. Contract: `docs/API.md` → Users → Skills.
+
+**Categories:** the Help Board now has 18 categories: `BORROW`, `CARRY`, `PETS`, `ERRANDS`, `REPAIRS`, `CARPENTRY`, `PLUMBING`, `ELECTRICAL`, `PAINTING`, `GARDENING`, `CLEANING`, `TECH`, `TUTORING`, `COOKING`, `BIKES`, `CARS`, `ELDERLY`, `OTHER`. The first five keep their meaning (`REPAIRS` is now "small fixes around the home", since `TECH` has its own). A skill's category is one of the same list, so "fits this request" is simply "same category". The order lives in `HelpRules.CATEGORY_ORDER` (backend) and `HELP_CATEGORIES` (app); labels, icons and hints in `features/help/categories.ts`.
+
+**Database:** migration `20261114000006_user_skills.sql` widens the `help_requests.category` check and adds `user_skills` (see the table list). **Not applied to Supabase yet** — until it is, the real backend will not start (`ddl-auto=validate` needs the `user_skills` table) and new categories are refused by the old check.
+
+**Backend** (package `users`): `UserSkill` entity (JPA, `user_skills`), `UserSkillRepository` (Spring Data), `SkillMapper` + `impl`, `SkillService` + `SkillServiceImpl`, `SkillController` (`/users/me/skills`: `GET`, `POST`, `PATCH /{id}`, `DELETE /{id}`), limits in `domain/SkillRules` (2–40 characters, 10 per user). The service trims the name and collapses inner spaces, upper-cases the category, refuses a duplicate name (`409 SKILL_EXISTS`, also when two requests race — the unique index answers) and an 11th skill (`409 SKILL_LIMIT`); another user's skill answers `404` like a missing one. `ProfileResponse` (`GET /users/me`, `GET /users/{id}`) has `skills`; `HelpOfferResponse` has the helper's `skills`, loaded for all helpers of a request in one query (`SkillService.skillsOf(ids)`).
+
+**Mobile:**
+- Profile tab → **My skills** (`features/users/SkillsEditor.tsx`): each skill with its category icon and **Edit** / **Delete** (delete asks first); **Add a skill** opens a name field plus category chips. The same rules as the API are checked before sending (`features/users/skills.ts`), server errors are shown under the field; at 10 skills the button is replaced by a note. The cached profile is updated in place and public profiles and help details are refreshed (`useAddSkill`, `useUpdateSkill`, `useDeleteSkill` in `hooks/useUsers.ts`).
+- Public profile → **Skills** as pills (`SkillChips`), or "X has not listed any skills yet."
+- Help request page → under each offer the helper's skills; the ones in the request's category come first with a check mark and the row says "Has a matching skill".
+- Help board and the Pulse area Help tab → an open request in a category I have a skill in (and without my offer) shows a **Fits your skills** chip.
+- Mock backend (tests only): `/users/me/skills` routes with the same rules in `testing/mocks/routes/users.ts`; seeded skills for stefan, stella_99 and andrei_tm (demo_user starts with none); offers in `routes/help.ts` carry skills.
+
+**Tests:** backend — `SkillServiceImplTest` (11: normalising, validation, duplicate, limit, race → 409, unknown user, edit, edit refusals, delete, grouping by user, no query for no IDs), `SkillIntegrationTest` (4, H2 + real endpoints and tokens: add and read on my and a public profile, edit and delete, others cannot change my skill, every refusal), `HelpIntegrationTest` (+2: offers carry helper skills, new categories accepted), `HelpRulesTest` (+1: the 18 categories in order), `UserControllerTest` (profile has `skills`). Frontend — `__tests__/users.skills.test.tsx` (14: category list and meta, skill rules, mock routes, add / validate / edit / delete / limit on the Profile tab, public profile, helpers' skills with matches first, "Fits your skills" and the new filter chips).
+
+**Not verified yet:** not tried on a phone, and not run against Supabase (the migration is not applied).
 
 ### Neighbourhood Pulse (PLAN task 24, Tracks B + C)
 

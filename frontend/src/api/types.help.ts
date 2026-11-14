@@ -1,10 +1,48 @@
 // Response and request shapes of the Neighbour Help Board (docs/API.md → "Neighbour Help Board — PLAN task 25").
-import type { UserSummary } from './types';
+import type { Skill, UserSummary } from './types';
 
-/** What kind of help is needed. */
-export type HelpCategory = 'BORROW' | 'CARRY' | 'PETS' | 'ERRANDS' | 'REPAIRS' | 'OTHER';
+/** What kind of help is needed (PLAN 28 added CARPENTRY … ELDERLY). Profile skills use the same categories. */
+export type HelpCategory =
+  | 'BORROW'
+  | 'CARRY'
+  | 'PETS'
+  | 'ERRANDS'
+  | 'REPAIRS'
+  | 'CARPENTRY'
+  | 'PLUMBING'
+  | 'ELECTRICAL'
+  | 'PAINTING'
+  | 'GARDENING'
+  | 'CLEANING'
+  | 'TECH'
+  | 'TUTORING'
+  | 'COOKING'
+  | 'BIKES'
+  | 'CARS'
+  | 'ELDERLY'
+  | 'OTHER';
 
-export const HELP_CATEGORIES: HelpCategory[] = ['BORROW', 'CARRY', 'PETS', 'ERRANDS', 'REPAIRS', 'OTHER'];
+/** Display order (same as the API's list), OTHER last. */
+export const HELP_CATEGORIES: HelpCategory[] = [
+  'BORROW',
+  'CARRY',
+  'PETS',
+  'ERRANDS',
+  'REPAIRS',
+  'CARPENTRY',
+  'PLUMBING',
+  'ELECTRICAL',
+  'PAINTING',
+  'GARDENING',
+  'CLEANING',
+  'TECH',
+  'TUTORING',
+  'COOKING',
+  'BIKES',
+  'CARS',
+  'ELDERLY',
+  'OTHER',
+];
 
 /** OPEN until a helper is scanned (HELPED), the requester cancels, or 24 h pass (EXPIRED). */
 export type HelpStatus = 'OPEN' | 'HELPED' | 'CANCELLED' | 'EXPIRED';
@@ -29,8 +67,8 @@ export type HelpRequestSummary = {
   myOffer: HelpOfferStatus | null;
 };
 
-/** One person who offered to help (withdrawn offers are left out). */
-export type HelpOffer = { user: UserSummary; status: HelpOfferStatus; offeredAt: string };
+/** One person who offered to help (withdrawn offers are left out), with their profile skills (PLAN 28). */
+export type HelpOffer = { user: UserSummary; status: HelpOfferStatus; offeredAt: string; skills: Skill[] };
 
 /** Full request: the summary plus description, offers and what the caller may do. */
 export type HelpRequestDetail = HelpRequestSummary & {

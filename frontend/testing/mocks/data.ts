@@ -1,6 +1,6 @@
 // Seed data for the mock backend. Shapes follow docs/API.md. Dates are relative to "now"
 // so the demo always shows upcoming events.
-import type { EventCategory, EventSource, ParticipantStatus, UserSummary } from '@/api/types';
+import type { EventCategory, EventSource, ParticipantStatus, Skill, UserSummary } from '@/api/types';
 import type { TransitAlert } from '@/api/types.transit';
 import type { ReliabilityEntry } from '@/api/types.users';
 import { bucharestToUtcIso, toBucharest } from '@/lib/time';
@@ -51,6 +51,8 @@ export type MockState = {
   settled: string[];
   /** Neighbour Help Board requests with their offers (PLAN 25). */
   helpRequests: MockHelpRequest[];
+  /** Profile skills per user id, oldest first (PLAN 28). demo_user starts with none. */
+  skills: Record<string, Skill[]>;
 };
 
 /** Bucharest wall-clock `hour:minute` on the day `days` from now, as a UTC ISO string. */
@@ -276,5 +278,16 @@ export function seed(): MockState {
     // The workshop was settled before the seed (its reliability entry is left out to keep the seeded history short).
     settled: [eventId(105)],
     helpRequests: seedHelpRequests(USER_IDS),
+    skills: {
+      [USER_IDS.stefan]: [
+        { id: 'e0000000-0000-4000-8000-000000000001', name: 'Carpentry', category: 'CARPENTRY' },
+        { id: 'e0000000-0000-4000-8000-000000000002', name: 'Moving furniture', category: 'CARRY' },
+      ],
+      [USER_IDS.stella]: [{ id: 'e0000000-0000-4000-8000-000000000003', name: 'Dog walking', category: 'PETS' }],
+      [USER_IDS.andrei]: [
+        { id: 'e0000000-0000-4000-8000-000000000004', name: 'Bike repair', category: 'BIKES' },
+        { id: 'e0000000-0000-4000-8000-000000000005', name: 'Computer help', category: 'TECH' },
+      ],
+    },
   };
 }

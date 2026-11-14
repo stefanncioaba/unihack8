@@ -1,5 +1,5 @@
 // Profile tab: my identity (with change username), reliability score and history, my events, find people, sign out.
-// PLAN 12.2 sign-out; 16.1 score explanation and history; 16.2 change username; 16.3 my events.
+// PLAN 12.2 sign-out; 16.1 score explanation and history; 16.2 change username; 16.3 my events; 28 my skills.
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
@@ -8,6 +8,7 @@ import { useAuth } from '@/features/auth/AuthProvider';
 import { MyEvents } from '@/features/users/MyEvents';
 import { ReliabilityLine } from '@/features/users/ReliabilityLine';
 import { ReliabilityLog } from '@/features/users/ReliabilityLog';
+import { SkillsEditor } from '@/features/users/SkillsEditor';
 import { UsernameEditor } from '@/features/users/UsernameEditor';
 import { useMe } from '@/hooks/queries';
 import { formatDate } from '@/lib/time';
@@ -70,6 +71,11 @@ export default function ProfileScreen() {
             </View>
           )}
           <ReliabilityLine score={me.data.reliabilityScore} />
+
+          <Text variant="heading" accessibilityRole="header">
+            My skills
+          </Text>
+          <SkillsEditor skills={me.data.skills ?? []} />
 
           <Text variant="heading" accessibilityRole="header">
             My events

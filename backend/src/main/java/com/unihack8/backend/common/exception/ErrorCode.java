@@ -34,6 +34,8 @@ public enum ErrorCode {
     NOT_OFFERED(HttpStatus.CONFLICT, "You have not offered to help with this."),
     HELP_CLOSED(HttpStatus.CONFLICT, "This help request is closed."),
     WRONG_REQUEST(HttpStatus.CONFLICT, "This QR code belongs to another help request."),
+    SKILL_EXISTS(HttpStatus.CONFLICT, "You already listed this skill."),
+    SKILL_LIMIT(HttpStatus.CONFLICT, "You can list at most 10 skills."),
     RATE_LIMITED(HttpStatus.TOO_MANY_REQUESTS, "Too many requests. Try again in a minute."),
     INTERNAL_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Something went wrong on our side."),
     AI_UNAVAILABLE(HttpStatus.SERVICE_UNAVAILABLE, "The assistant is not available right now."),

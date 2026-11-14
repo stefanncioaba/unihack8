@@ -8,8 +8,10 @@ import { EventListItem } from '@/features/events/EventCards';
 import { HelpRequestRow } from '@/features/help/HelpCards';
 import { areaBbox, inArea } from '@/features/neighbourhoods/areas';
 import { neighbourhoodPhoto } from '@/features/neighbourhoods/photos';
+import { skillCategories } from '@/features/users/skills';
 import { LEVEL_META } from '@/features/neighbourhoods/pulseFormat';
 import { useHelpBoard } from '@/hooks/useHelp';
+import { useMe } from '@/hooks/queries';
 import { useEventsInArea } from '@/hooks/useMapEvents';
 import { useNeighbourhoodPulse } from '@/hooks/useNeighbourhoods';
 import { bboxParam } from '@/lib/bbox';
@@ -59,6 +61,7 @@ function EventsTab({ areaId, areas }: { areaId: string; areas: Parameters<typeof
 function HelpTab({ areaId, areas }: { areaId: string; areas: Parameters<typeof inArea>[2] }) {
   const area = areas.find((a) => a.id === areaId)!;
   const query = useHelpBoard({ bbox: bboxParam(areaBbox(area)) });
+  const mine = skillCategories(useMe().data?.skills);
   const requests = useMemo(() => (query.data ? inArea(query.data, areaId, areas) : []), [query.data, areaId, areas]);
   if (query.isPending) return <LoadingState label="Loading help requests…" />;
   if (query.isError) return <ErrorState error={query.error} onRetry={() => query.refetch()} />;
@@ -77,7 +80,7 @@ function HelpTab({ areaId, areas }: { areaId: string; areas: Parameters<typeof i
     <FlatList
       data={requests}
       keyExtractor={(r) => r.id}
-      renderItem={({ item }) => <HelpRequestRow request={item} />}
+      renderItem={({ item }) => <HelpRequestRow request={item} myCategories={mine} />}
       contentContainerStyle={styles.list}
       testID="area-help"
     />

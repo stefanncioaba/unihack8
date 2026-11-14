@@ -1,9 +1,10 @@
-// Public profile of another user: username, reliability score, attended events and past events they organised (PLAN 16.4, opened from 13.4 and 13.8).
+// Public profile of another user: username, reliability score, skills (PLAN 28), attended events and past events they organised (PLAN 16.4, opened from 13.4 and 13.8).
 import { useLocalSearchParams } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
 import { EventListItem } from '@/features/events/EventCards';
 import { ReliabilityLine } from '@/features/users/ReliabilityLine';
+import { SkillChips } from '@/features/users/SkillChips';
 import { useUser } from '@/hooks/queries';
 import { formatDate } from '@/lib/time';
 import { Avatar } from '@/ui/Avatar';
@@ -39,6 +40,17 @@ export default function PublicProfileScreen() {
           </View>
 
           <ReliabilityLine score={user.data.reliabilityScore} />
+
+          <Text variant="heading" accessibilityRole="header">
+            Skills
+          </Text>
+          {(user.data.skills ?? []).length === 0 ? (
+            <Text tone="muted" testID="no-skills">
+              {user.data.username} has not listed any skills yet.
+            </Text>
+          ) : (
+            <SkillChips skills={user.data.skills} testID="profile-skills" />
+          )}
 
           <Text variant="heading" accessibilityRole="header">
             Events attended

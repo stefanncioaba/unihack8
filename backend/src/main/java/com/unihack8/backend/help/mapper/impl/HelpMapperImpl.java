@@ -9,8 +9,10 @@ import com.unihack8.backend.help.domain.entity.HelpOfferView;
 import com.unihack8.backend.help.domain.entity.HelpRequest;
 import com.unihack8.backend.help.domain.entity.HelpRequestView;
 import com.unihack8.backend.help.mapper.HelpMapper;
+import com.unihack8.backend.users.domain.dto.SkillResponse;
 import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +31,8 @@ public class HelpMapperImpl implements HelpMapper {
 
     // Adds the description, the helper (the HELPED offer), the offers and the caller's options.
     @Override
-    public HelpRequestDetail toDetail(HelpRequestView view, List<HelpOfferView> offers, UUID caller, Instant now) {
+    public HelpRequestDetail toDetail(HelpRequestView view, List<HelpOfferView> offers,
+                                      Map<UUID, List<SkillResponse>> skills, UUID caller, Instant now) {
         HelpRequest r = view.request();
         boolean isRequester = caller != null && caller.equals(r.requesterId());
         boolean hasCurrentOffer = HelpRules.OFFERED.equals(view.myOffer()) || HelpRules.HELPED.equals(view.myOffer());
@@ -38,7 +41,8 @@ public class HelpMapperImpl implements HelpMapper {
         UserSummary helper = offers.stream().filter(o -> HelpRules.HELPED.equals(o.offer().status()))
                 .map(HelpMapperImpl::user).findFirst().orElse(null);
         List<HelpOfferResponse> items = offers.stream()
-                .map(o -> new HelpOfferResponse(user(o), o.offer().status(), o.offer().offeredAt())).toList();
+                .map(o -> new HelpOfferResponse(user(o), o.offer().status(), o.offer().offeredAt(),
+                        skills.getOrDefault(o.offer().helperId(), List.of()))).toList();
         return new HelpRequestDetail(r.id(), r.title(), r.description(), r.category(), r.address(), r.lat(), r.lon(),
                 requester(view), HelpRules.effectiveStatus(r.status(), r.expiresAt(), now), r.createdAt(),
                 r.expiresAt(), r.closedAt(), view.offerCount(), view.myOffer(), helper, items, isRequester, canOffer);
