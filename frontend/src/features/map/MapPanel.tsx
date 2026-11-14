@@ -54,13 +54,15 @@ const styles = StyleSheet.create({
   card: {
     padding: 14,
     borderRadius: radius.card + 2,
-    backgroundColor: 'rgba(0,29,61,0.97)',
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: colors.borderStrong,
+    // Oxford Navy (lighter than the dark map) with a pale signal-blue edge, so the card stands out from the map.
+    backgroundColor: colors.oxford,
+    borderWidth: 1,
+    borderColor: 'rgba(142,197,255,0.45)',
     shadowColor: '#000',
-    shadowOpacity: 0.35,
-    shadowRadius: 12,
+    shadowOpacity: 0.55,
+    shadowRadius: 14,
     shadowOffset: { width: 0, height: 4 },
+    elevation: 10,
   },
   close: { position: 'absolute', top: 10, right: 10, zIndex: 2 },
 });

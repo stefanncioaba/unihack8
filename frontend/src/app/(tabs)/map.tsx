@@ -247,9 +247,6 @@ function MapBody() {
 
       <SafeAreaView style={styles.overlay} edges={['top']} pointerEvents="box-none">
         <View style={styles.topRow} pointerEvents="box-none">
-          <View style={styles.pill}>
-            <Text variant="chip">{focus && params.title ? params.title : 'Timișoara'}</Text>
-          </View>
           <Pressable accessibilityRole="button" accessibilityLabel="Locate me" onPress={locate} style={({ pressed }) => [styles.round, pressed && styles.pressed]}>
             <Icon name="locate-outline" size={18} />
           </Pressable>
@@ -316,16 +313,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: MAP_CHIP_BG,
   },
-  topRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
-  pill: {
-    height: 32,
-    paddingHorizontal: 14,
-    borderRadius: 16,
-    justifyContent: 'center',
-    backgroundColor: MAP_CHIP_BG,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: colors.borderStrong,
-  },
+  topRow: { flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'flex-start' },
   round: {
     width: 40,
     height: 40,

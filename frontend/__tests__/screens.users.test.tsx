@@ -126,7 +126,8 @@ describe('MapScreen', () => {
     setParams({ lat: '45.7489', lon: '21.2318', title: 'Board games night' });
     renderScreen(<MapScreen />);
     expect(screen.getByTestId('focus-marker')).toBeTruthy();
-    expect(screen.getByText('Board games night')).toBeTruthy();
+    // The title pill at the top left was removed; the title only labels the pin.
+    expect(screen.queryByText('Board games night')).toBeNull();
   });
 
   it('ignores invalid coordinates', () => {
