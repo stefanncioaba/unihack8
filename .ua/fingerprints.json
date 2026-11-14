@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "aa45884b5f67734e094b1f373bcc0ae93115e47e",
-  "generatedAt": "2026-11-14T12:33:43.308Z",
+  "gitCommitHash": "3f9aba219455e8af756af593d4cf9caab90922e5",
+  "generatedAt": "2026-11-14T13:19:32.855Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,7 +25,7 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "08e5aa9acbb135678b1e158601fbeef41b9f66d83690fbc282c003bd4b137db6",
+      "contentHash": "96ee714619b8235585155efd471d55a254a0fa2b822c07619f836a765d59115e",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -35,12 +35,12 @@
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "810d3e7be04c5dc49a04b5b49076e6c5b7e013ac0073c2d119cdea3b5bcf94b1",
+      "contentHash": "eea6840e808b444deb9be843a187e96bcc75a28b39b048828e546fd86ae7d901",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 369,
+      "totalLines": 370,
       "hasStructuralAnalysis": false
     },
     "README.md": {
@@ -15363,7 +15363,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitSummaryResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitSummaryResponse.java",
-      "contentHash": "6fcbc36451b2b9a61a86b8b86d8ae8a8fa302ba938e2c53e9abad2dd51011eeb",
+      "contentHash": "bc0bfd33c79247dac1cab7af36686acd4f8a6cba14ae1e60176511e7f4cd6c7d",
       "functions": [],
       "classes": [
         {
@@ -15385,7 +15385,7 @@
       "exports": [
         "TransitSummaryResponse"
       ],
-      "totalLines": 9,
+      "totalLines": 12,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/VehicleDto.java": {
@@ -16457,7 +16457,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/service/impl/TransitServiceImpl.java",
-      "contentHash": "76247fa57a8abb76dcc90a9881aa14fe3636aa2ed3b339012f9dff4ef810ebd6",
+      "contentHash": "5c45ab610dff638a95e145d8a73bf5d8a07f17b06d1cba35669d7ef69fbbbe75",
       "functions": [
         {
           "name": "TransitServiceImpl",
@@ -16538,7 +16538,38 @@
           ],
           "returnType": "TransitSummaryResponse",
           "exported": true,
-          "lineCount": 12
+          "lineCount": 15
+        },
+        {
+          "name": "nextArrival",
+          "params": [
+            "stopId",
+            "last"
+          ],
+          "returnType": "NextArrivalDto",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "isLastTrip",
+          "params": [
+            "arrival",
+            "last"
+          ],
+          "returnType": "boolean",
+          "exported": false,
+          "lineCount": 16
+        },
+        {
+          "name": "nextMessage",
+          "params": [
+            "stopName",
+            "next",
+            "romanian"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 14
         },
         {
           "name": "message",
@@ -16673,6 +16704,9 @@
             "lastDepartures",
             "liveLastDepartures",
             "summary",
+            "nextArrival",
+            "isLastTrip",
+            "nextMessage",
             "message",
             "typeOf",
             "vehicleWord",
@@ -16694,6 +16728,7 @@
             "ALL",
             "CITY_ZONE",
             "HOUR_MINUTE",
+            "LAST_TRIP_TOLERANCE",
             "TYPE_ORDER",
             "stpt",
             "mapper",
@@ -16706,7 +16741,7 @@
             "arrivalsCache"
           ],
           "exported": true,
-          "lineCount": 270
+          "lineCount": 327
         }
       ],
       "imports": [
@@ -16786,6 +16821,12 @@
           "source": "com.unihack8.backend.transit.domain.dto.NearestStopDto",
           "specifiers": [
             "NearestStopDto"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.transit.domain.dto.NextArrivalDto",
+          "specifiers": [
+            "NextArrivalDto"
           ]
         },
         {
@@ -16873,6 +16914,12 @@
           ]
         },
         {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
           "source": "java.time.Instant",
           "specifiers": [
             "Instant"
@@ -16956,7 +17003,7 @@
         "summary",
         "TransitServiceImpl"
       ],
-      "totalLines": 314,
+      "totalLines": 373,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/users/controller/UserController.java": {
@@ -26384,7 +26431,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/transit/controller/TransitControllerTest.java",
-      "contentHash": "e4637e4957ea55967f1c95d5dfc1c5bbf133793b2ac77b5fbea9a51cbcbfb6c9",
+      "contentHash": "fe699194bed7a395a4c6f4efc15fecb84fa725e6ff76f908c32d6c1ecbcbe720",
       "functions": [
         {
           "name": "routes",
@@ -26440,7 +26487,7 @@
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 21
+          "lineCount": 26
         },
         {
           "name": "languageChoice",
@@ -26470,7 +26517,7 @@
             "transit"
           ],
           "exported": false,
-          "lineCount": 135
+          "lineCount": 140
         }
       ],
       "imports": [
@@ -26577,6 +26624,12 @@
           ]
         },
         {
+          "source": "com.unihack8.backend.transit.domain.dto.NextArrivalDto",
+          "specifiers": [
+            "NextArrivalDto"
+          ]
+        },
+        {
           "source": "com.unihack8.backend.transit.domain.dto.TransitRouteDto",
           "specifiers": [
             "TransitRouteDto"
@@ -26668,7 +26721,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 173,
+      "totalLines": 179,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/transit/mapper/impl/TransitMapperImplTest.java": {
@@ -27034,7 +27087,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java",
-      "contentHash": "3a46814194490b4c1aea77555031692ca74bb4539a9d4b1e86b71b8232ee3d0a",
+      "contentHash": "9936eb2199895695c1eb19b5438f043b88dd6b8201cb9e021bb0786e1a94aacd",
       "functions": [
         {
           "name": "setUp",
@@ -27125,7 +27178,7 @@
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 11
+          "lineCount": 13
         },
         {
           "name": "summaryInRomanianWithAlertsDown",
@@ -27139,7 +27192,7 @@
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 7
+          "lineCount": 8
         },
         {
           "name": "lastDeparturesFromTimetable",
@@ -27178,6 +27231,20 @@
         },
         {
           "name": "summaryFromTimetable",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 29
+        },
+        {
+          "name": "summaryFallsBackToLastDepartureWhenArrivalsDown",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "lastTripDetection",
           "params": [],
           "returnType": "void",
           "exported": false,
@@ -27223,6 +27290,8 @@
             "emptyTimetableFallsBackToLive",
             "stopKnownOnlyToTimetable",
             "summaryFromTimetable",
+            "summaryFallsBackToLastDepartureWhenArrivalsDown",
+            "lastTripDetection",
             "lineNameOrder",
             "vehicleWords"
           ],
@@ -27234,7 +27303,7 @@
             "service"
           ],
           "exported": false,
-          "lineCount": 263
+          "lineCount": 309
         }
       ],
       "imports": [
@@ -27450,7 +27519,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 304,
+      "totalLines": 350,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java": {
@@ -28425,17 +28494,17 @@
     },
     "docs/API.md": {
       "filePath": "docs/API.md",
-      "contentHash": "a0b1b71288e73e9897dad5ed7be8ad3e9894bd60297d4b45b4042b01a33835ec",
+      "contentHash": "d1b02994cde0e0f1bd4b0f6aceb6188134e9bfc91940ea1a4c4a094b09adf03e",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 609,
+      "totalLines": 611,
       "hasStructuralAnalysis": false
     },
     "docs/DEMO.md": {
       "filePath": "docs/DEMO.md",
-      "contentHash": "89c19229070a208e0a00a145dc777504962c9040d93e54942615af0b0a8ad676",
+      "contentHash": "be804b7442df12e4d2d15b9a20b3a7956f2fef6ada413a40494780e490bab4ac",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -28931,7 +29000,7 @@
     },
     "frontend/__tests__/live.backend.test.ts": {
       "filePath": "frontend/__tests__/live.backend.test.ts",
-      "contentHash": "b43c5c8b53333864493614b57437cb4e0b1d5f0e401ce63a5593ffee20779441",
+      "contentHash": "245aeb80e9d86be0fedb48a7a1bc77720282d79a342e612d661dc715931b1c62",
       "functions": [
         {
           "name": "expectKeys",
@@ -29372,7 +29441,7 @@
     },
     "frontend/__tests__/mocks.backend.test.ts": {
       "filePath": "frontend/__tests__/mocks.backend.test.ts",
-      "contentHash": "52d7c3cac53f670c3857292417a34a2571e69c1e51ad8acf6485701e7ee00102",
+      "contentHash": "43f76a21b92c4b135d09be0204747ba52af6b97435b5ab1fe2ba20dab10dbbcb",
       "functions": [
         {
           "name": "call",
@@ -29408,7 +29477,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 145,
+      "totalLines": 146,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/mocks.users.test.ts": {
@@ -29615,7 +29684,7 @@
     },
     "frontend/__tests__/screens.home.test.tsx": {
       "filePath": "frontend/__tests__/screens.home.test.tsx",
-      "contentHash": "c73755a4f0d0206be737d9140994e3d93f29ce120d6ea6d9681a3ebb447de47c",
+      "contentHash": "d2caaa6b438e19cf1d493bcb7b012c9346a6baf802c7cc999545aed6ec4a3d01",
       "functions": [],
       "classes": [],
       "imports": [
@@ -29626,6 +29695,12 @@
             "screen",
             "waitFor",
             "within"
+          ]
+        },
+        {
+          "source": "@/api/types.transit",
+          "specifiers": [
+            "TransitSummary"
           ]
         },
         {
@@ -29641,6 +29716,18 @@
           ]
         },
         {
+          "source": "@/features/transit/CityInfoStrip",
+          "specifiers": [
+            "arrivalIn"
+          ]
+        },
+        {
+          "source": "@test/mocks",
+          "specifiers": [
+            "* as mocks"
+          ]
+        },
+        {
           "source": "./testUtils",
           "specifiers": [
             "IDS",
@@ -29651,7 +29738,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 134,
+      "totalLines": 164,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/screens.profile.test.tsx": {
@@ -30146,7 +30233,7 @@
     },
     "frontend/src/api/endpoints.transit.ts": {
       "filePath": "frontend/src/api/endpoints.transit.ts",
-      "contentHash": "35057f14b01739d18e8ff6145f4e3d552a640103ac9c69a8918eb2e9da098bea",
+      "contentHash": "0cfdfe53310d45d43d66ec1875f9c34689aa463c7a0eb0858684612249966bd6",
       "functions": [
         {
           "name": "getTransitSummary",
@@ -30542,12 +30629,12 @@
     },
     "frontend/src/api/types.transit.ts": {
       "filePath": "frontend/src/api/types.transit.ts",
-      "contentHash": "d5f29c95ad55568c5e16f584bfc22b3c41e4289f8f1bb8c9541b87fe27e0d843",
+      "contentHash": "6ca37273b2e813db9177a8c64c6cd5b4a96fdd222b50679dc7ffcb6497374344",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 52,
+      "totalLines": 57,
       "hasStructuralAnalysis": true
     },
     "frontend/src/api/types.ts": {
@@ -34532,13 +34619,22 @@
     },
     "frontend/src/features/transit/CityInfoStrip.tsx": {
       "filePath": "frontend/src/features/transit/CityInfoStrip.tsx",
-      "contentHash": "95f3c17ac4cae11cc74362f87a18049f8aa728af6753286c988529e7a3c26e86",
+      "contentHash": "15fcf4bacc1b08a481d8a8f19242e07dddbd1fe0a661e33e5d71fea022c43208",
       "functions": [
         {
           "name": "CityInfoStrip",
           "params": [],
           "exported": true,
-          "lineCount": 83
+          "lineCount": 90
+        },
+        {
+          "name": "arrivalIn",
+          "params": [
+            "minutes"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 3
         }
       ],
       "classes": [],
@@ -34603,9 +34699,10 @@
         }
       ],
       "exports": [
-        "CityInfoStrip"
+        "CityInfoStrip",
+        "arrivalIn"
       ],
-      "totalLines": 126,
+      "totalLines": 141,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/transit/StopPanel.tsx": {
@@ -35551,7 +35648,7 @@
     },
     "frontend/src/hooks/useTransit.ts": {
       "filePath": "frontend/src/hooks/useTransit.ts",
-      "contentHash": "fd805aa57cbda19d9d735a33190376b483c6032e27713d189221bba85699ec74",
+      "contentHash": "8b39450c2ce9186bca93437b3fefd7ea908bdb31bdf8c73bcedbb3fe5f5ca4ae",
       "functions": [
         {
           "name": "useTransitSummary",
@@ -37823,7 +37920,7 @@
     },
     "frontend/testing/mocks/routes/transit.ts": {
       "filePath": "frontend/testing/mocks/routes/transit.ts",
-      "contentHash": "c6eaa97e3cce9b938e3003b82d8fbdee3b864f537d54b29d76b8b7fce21412b9",
+      "contentHash": "a995e0c722ac76ef7f5fc7c06fd9508d594dc5d40065d4c104041ab352104fb7",
       "functions": [
         {
           "name": "hash",
@@ -37919,7 +38016,7 @@
       "exports": [
         "transitRoutes"
       ],
-      "totalLines": 138,
+      "totalLines": 139,
       "hasStructuralAnalysis": true
     },
     "frontend/testing/mocks/routes/users.ts": {
@@ -39396,6 +39493,33 @@
         "RoutePlate"
       ],
       "totalLines": 60,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/NextArrivalDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/NextArrivalDto.java",
+      "contentHash": "8ccf0db2dfbc23df8941037e743053929d0caf94ee8d13cb8171eb76ae864b66",
+      "functions": [],
+      "classes": [
+        {
+          "name": "NextArrivalDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        }
+      ],
+      "exports": [
+        "NextArrivalDto"
+      ],
+      "totalLines": 12,
       "hasStructuralAnalysis": true
     }
   }
