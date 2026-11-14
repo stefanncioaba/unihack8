@@ -34,8 +34,8 @@
       "Jest"
     ],
     "description": "Hackathon mobile app for Timișoara (Connected Communities): Spring Boot API + Supabase + Expo app with events and QR reliability points, places map, live STPT transit, routing and an AI guide.",
-    "analyzedAt": "2026-11-14T17:26:28.134Z",
-    "gitCommitHash": "c9a05472db8fad4b143484a8bba720a5df7a689b"
+    "analyzedAt": "2026-11-14T17:27:53.180Z",
+    "gitCommitHash": "2f538ea992f029021ba7fdc14d02009f4e1c693d"
   },
   "nodes": [
     {
@@ -31755,20 +31755,6 @@
       ]
     },
     {
-      "id": "document:DOCS.md",
-      "type": "document",
-      "name": "DOCS.md",
-      "filePath": "DOCS.md",
-      "summary": "Project documentation covering architecture, configuration, database, external data sources, reliability rules, per-feature backend and mobile notes (including the new Neighbour Help Board section) and the knowledge graph.",
-      "tags": [
-        "documentation",
-        "architecture",
-        "features",
-        "reference"
-      ],
-      "complexity": "complex"
-    },
-    {
       "id": "document:PLAN.md",
       "type": "document",
       "name": "PLAN.md",
@@ -31807,6 +31793,20 @@
         "database",
         "schema-checks",
         "sql"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:DOCS.md",
+      "type": "document",
+      "name": "DOCS.md",
+      "filePath": "DOCS.md",
+      "summary": "Main project documentation covering architecture, configuration, database, external data sources (STPT, LiveTickets, OSM, Gemini), reliability rules, and every shipped feature through the Neighbour Help Board and Neighbourhood Pulse, plus frontend notes and a knowledge-graph note.",
+      "tags": [
+        "documentation",
+        "architecture",
+        "api-reference",
+        "project-overview"
       ],
       "complexity": "complex"
     }
@@ -53618,34 +53618,6 @@
       "weight": 0.5
     },
     {
-      "source": "document:DOCS.md",
-      "target": "table:supabase/migrations/20261114000005_help_board.sql:help_requests",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "table:supabase/migrations/20261114000005_help_board.sql:help_offers",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "document:docs/API.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "document:DOCS.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "document:PLAN.md",
       "target": "table:supabase/migrations/20261114000005_help_board.sql:help_requests",
       "type": "documents",
@@ -70584,6 +70556,62 @@
       "direction": "forward",
       "weight": 0.7,
       "recoveredFromImportMap": true
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "document:PLAN.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "document:AGENTS.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "document:docs/API.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "document:docs/DEMO.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "document:frontend/AGENTS.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "document:infra/otp/README.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/features/map/mapFilters.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/features/users/ReliabilityLine.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
     }
   ],
   "layers": [
