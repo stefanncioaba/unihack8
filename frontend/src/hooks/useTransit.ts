@@ -1,10 +1,13 @@
 // TanStack Query hooks for transit data (STPT): home page line, alerts, and the Map tab's transit layer (14.4).
+// Answers with lines (routes, vehicles, shapes) teach lines.ts each line's type before they reach the screen, so line
+// colours come from the right type family; vehicle answers also note the poll time for the smooth movement.
 import { keepPreviousData, useQueries, useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 
 import {
   getAllTransitVehicles,
   getLastDepartures,
+  getLineShape,
   getStopArrivals,
   getTransitAlerts,
   getTransitRoutes,
@@ -13,12 +16,14 @@ import {
   getTransitSummary,
   getTransitVehicles,
 } from '@/api/endpoints.transit';
-import type { TransitVehicle } from '@/api/types.transit';
+import type { TransitShape, TransitVehicle, TransitVehicles } from '@/api/types.transit';
+import { registerLineTypes } from '@/features/transit/lines';
+import { recordVehiclePoll } from '@/features/transit/vehicleAnimation';
 import { bboxParam, type Bbox } from '@/lib/bbox';
 import { toNearParam, type Coordinates } from '@/lib/geo';
 
-/** Live vehicle positions refresh this often (docs/API.md: every 10 s). */
-export const VEHICLES_REFRESH_MS = 10_000;
+/** Live vehicle positions refresh this often (docs/API.md: every 5 s; the markers glide between positions). */
+export const VEHICLES_REFRESH_MS = 5_000;
 /** Stop arrivals refresh this often while the stop panel is open. */
 export const ARRIVALS_REFRESH_MS = 30_000;
 
@@ -31,9 +36,29 @@ export const transitKeys = {
   vehicles: (route: string) => ['transit', 'vehicles', route] as const,
   allVehicles: ['transit', 'all-vehicles'] as const,
   shapes: ['transit', 'shapes'] as const,
+  lineShape: (route: string) => ['transit', 'shapes', route.toUpperCase()] as const,
   arrivals: (stopId: string) => ['transit', 'arrivals', stopId] as const,
   lastDepartures: (stopId: string) => ['transit', 'last-departures', stopId] as const,
 };
+
+/** Vehicle answer side effects: learn each line's type and note the poll time. */
+function withVehicleFacts(answer: TransitVehicles): TransitVehicles {
+  registerLineTypes(answer.vehicles);
+  recordVehiclePoll();
+  return answer;
+}
+
+/** Live vehicles of one line, with their facts noted. */
+const fetchLineVehicles = async (route: string) => withVehicleFacts(await getTransitVehicles(route));
+
+/** Every live vehicle, with their facts noted. */
+const fetchAllVehicles = async () => withVehicleFacts(await getAllTransitVehicles());
+
+/** Shapes answer side effect: learn each line's type. */
+function withShapeTypes(shapes: TransitShape[]): TransitShape[] {
+  registerLineTypes(shapes);
+  return shapes;
+}
 
 /** Home page transit line near a position (shows the next arrival, so refreshed every 30 s). */
 export function useTransitSummary(position: Coordinates) {
@@ -48,7 +73,16 @@ export function useTransitAlerts() {
 
 /** All lines (rarely changes, so cached for an hour). */
 export function useTransitRoutes(enabled = true) {
-  return useQuery({ queryKey: transitKeys.routes, queryFn: getTransitRoutes, enabled, staleTime: 60 * 60_000 });
+  return useQuery({
+    queryKey: transitKeys.routes,
+    queryFn: async () => {
+      const routes = await getTransitRoutes();
+      registerLineTypes(routes);
+      return routes;
+    },
+    enabled,
+    staleTime: 60 * 60_000,
+  });
 }
 
 /** Stops in the visible area. Keeps the old stops while panning. */
@@ -63,21 +97,21 @@ export function useStopsInArea(bbox: Bbox | null, enabled: boolean) {
   });
 }
 
-/** Live vehicles of the chosen line, refreshed every 10 s. Off when no line is chosen. */
+/** Live vehicles of the chosen line, refreshed every 5 s. Off when no line is chosen. */
 export function useVehicles(route: string | null) {
   return useQuery({
     queryKey: transitKeys.vehicles(route ?? ''),
-    queryFn: () => getTransitVehicles(route!),
+    queryFn: () => fetchLineVehicles(route!),
     enabled: !!route,
     refetchInterval: VEHICLES_REFRESH_MS,
   });
 }
 
-/** Every live vehicle of every line in one request, refreshed every 10 s (the backend shares it between clients). */
+/** Every live vehicle of every line in one request, refreshed every 5 s (the backend shares it between clients). */
 export function useAllVehicles(enabled: boolean) {
   return useQuery({
     queryKey: transitKeys.allVehicles,
-    queryFn: getAllTransitVehicles,
+    queryFn: fetchAllVehicles,
     enabled,
     refetchInterval: VEHICLES_REFRESH_MS,
     placeholderData: keepPreviousData,
@@ -90,7 +124,7 @@ export function useVehiclesOfLines(routes: string[]) {
   const results = useQueries({
     queries: routes.map((route) => ({
       queryKey: transitKeys.vehicles(route),
-      queryFn: () => getTransitVehicles(route),
+      queryFn: () => fetchLineVehicles(route),
       refetchInterval: VEHICLES_REFRESH_MS,
     })),
   });
@@ -101,9 +135,28 @@ export function useVehiclesOfLines(routes: string[]) {
   return { vehicles, stale: datas.some((d) => !!d?.stale) };
 }
 
-/** The drawn path of every line. Static and large, so it is fetched once per session. */
+/** The drawn path of every line (no stops). Static and large, so it is fetched once per session. The Map tab no
+ * longer draws the whole network; kept for other screens. */
 export function useTransitShapes(enabled: boolean) {
-  return useQuery({ queryKey: transitKeys.shapes, queryFn: getTransitShapes, enabled, staleTime: Infinity, gcTime: Infinity });
+  return useQuery({
+    queryKey: transitKeys.shapes,
+    queryFn: async () => withShapeTypes(await getTransitShapes()),
+    enabled,
+    staleTime: Infinity,
+    gcTime: Infinity,
+  });
+}
+
+/** The drawn path of one line with each direction's headsign and stops, fetched only when that line is picked
+ * (static: kept for the session). Off without a line. */
+export function useLineShape(route: string | null) {
+  return useQuery({
+    queryKey: transitKeys.lineShape(route ?? ''),
+    queryFn: async () => withShapeTypes(await getLineShape(route!)),
+    enabled: !!route,
+    staleTime: Infinity,
+    gcTime: 30 * 60_000,
+  });
 }
 
 /** Next arrivals at a stop, refreshed every 30 s. */

@@ -2,6 +2,8 @@ package com.unihack8.backend.transit.mapper.impl;
 
 import com.unihack8.backend.transit.domain.dto.AlertDto;
 import com.unihack8.backend.transit.domain.dto.ArrivalDto;
+import com.unihack8.backend.transit.domain.dto.ShapeStopDto;
+import com.unihack8.backend.transit.domain.dto.ShapeVariantDto;
 import com.unihack8.backend.transit.domain.dto.TransitRouteDto;
 import com.unihack8.backend.transit.domain.dto.TransitShapeDto;
 import com.unihack8.backend.transit.domain.dto.TransitStopDto;
@@ -12,6 +14,7 @@ import com.unihack8.backend.transit.domain.dto.stpt.StptRoute;
 import com.unihack8.backend.transit.domain.dto.stpt.StptStop;
 import com.unihack8.backend.transit.domain.dto.stpt.StptVehicle;
 import com.unihack8.backend.transit.domain.model.RouteShape;
+import com.unihack8.backend.transit.domain.model.ShapePath;
 import com.unihack8.backend.transit.mapper.TransitMapper;
 import java.time.Duration;
 import java.time.Instant;
@@ -62,6 +65,8 @@ public class TransitMapperImpl implements TransitMapper {
                 return "METROPOLITAN";
             case "vaporetto":
                 return "BOAT";
+            case "school":
+                return "SCHOOL";
             default:
                 break;
         }
@@ -92,16 +97,49 @@ public class TransitMapperImpl implements TransitMapper {
                 v.isAccessible(), reportedAt);
     }
 
-    // Encodes each path; without an STPT line the GTFS route_type and colour are used.
+    // Encodes each path (with its direction, headsign and stops); without an STPT line the GTFS route_type and
+    // colour are used.
     @Override
     public TransitShapeDto toShape(RouteShape shape, TransitRouteDto line) {
-        List<String> polylines = shape.paths().stream().map(PolylineEncoder::encode).toList();
+        List<ShapeVariantDto> variants = shape.paths().stream().map(TransitMapperImpl::toVariant).toList();
+        List<String> polylines = variants.stream().map(ShapeVariantDto::polyline).toList();
         if (line != null) {
-            return new TransitShapeDto(line.id(), line.name(), line.type(), line.color(), polylines);
+            return new TransitShapeDto(line.id(), line.name(), line.type(), line.color(), polylines, variants);
         }
         String color = shape.color() == null || shape.color().isBlank() ? null : "#" + shape.color();
         String type = routeType(new StptRoute(shape.routeName(), null, shape.routeType(), null, null));
-        return new TransitShapeDto(shape.routeName(), shape.routeName(), type, color, polylines);
+        return new TransitShapeDto(shape.routeName(), shape.routeName(), type, color, polylines, variants);
+    }
+
+    // Drops every variant's stop list.
+    @Override
+    public TransitShapeDto withoutStops(TransitShapeDto shape) {
+        List<ShapeVariantDto> variants = shape.variants() == null ? List.of() : shape.variants().stream()
+                .map(v -> new ShapeVariantDto(v.polyline(), v.direction(), v.headsign(), null))
+                .toList();
+        return new TransitShapeDto(shape.route(), shape.routeName(), shape.type(), shape.color(), shape.polylines(),
+                variants);
+    }
+
+    // One path: encoded polyline, TUR/RETUR from the GTFS direction_id, headsign and stops.
+    private static ShapeVariantDto toVariant(ShapePath path) {
+        List<ShapeStopDto> stops = path.stops() == null ? List.of() : path.stops().stream()
+                .map(s -> new ShapeStopDto(s.id(), s.name(), s.lat(), s.lon()))
+                .toList();
+        return new ShapeVariantDto(PolylineEncoder.encode(path.points()), direction(path.directionId()),
+                path.headsign(), stops);
+    }
+
+    // GTFS direction_id 0 -> "TUR", 1 -> "RETUR", anything else -> null.
+    static String direction(Integer directionId) {
+        if (directionId == null) {
+            return null;
+        }
+        return switch (directionId) {
+            case 0 -> "TUR";
+            case 1 -> "RETUR";
+            default -> null;
+        };
     }
 
     // One item per distinct time, live only for the vehicle-tracked first time.

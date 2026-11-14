@@ -4,6 +4,7 @@
 import { QueryClientProvider } from '@tanstack/react-query';
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
 import { StyleSheet } from 'react-native';
+import { Marker } from 'react-native-maps';
 
 import type { RouteLeg } from '@/api/types.routing';
 import type { RoutePlan } from '@/api/types.routing';
@@ -13,7 +14,8 @@ import { TripStepMarker } from '@/features/directions/TripMarkers';
 import { boardLabel, legLineColor, legStrokeColor, pathMidpoint, tripSteps } from '@/features/directions/tripSteps';
 import { routeParams } from '@/features/journey/navigation';
 import { MARKER_TRACK_MS } from '@/features/map/ClusterMarker';
-import { approachingVehicleIds, LegVehicles } from '@/features/transit/LegVehicles';
+import { approachingVehicleIds, capVehiclesPerLine, LegVehicles, MAX_LEG_VEHICLES_PER_LINE } from '@/features/transit/LegVehicles';
+import { transitKeys } from '@/hooks/useTransit';
 import { lineColor } from '@/features/transit/lines';
 import { VehicleBadge } from '@/features/transit/VehicleMarker';
 import { encodePolyline } from '@/lib/polyline';
@@ -198,6 +200,34 @@ describe('LegVehicles', () => {
   });
 });
 
+describe('LegVehicles shows the whole line', () => {
+  /** A live vehicle of line 1 at a point. */
+  const at = (id: string, lat: number, lon: number) =>
+    ({ id, route: '1', routeName: '1', type: 'TRAM', color: null, lat, lon, bearing: null, speedKmh: null, headsign: null, nextStop: null, accessible: false, reportedAt: AT }) as TransitVehicle;
+
+  it('draws vehicles far from the route and outside any view, not only those near it', async () => {
+    const legs = [leg('TRAM', STOP_A, STOP_B, 5, { route: '1' })];
+    const { client } = renderScreen(<LegVehicles legs={legs} onSelect={jest.fn()} />);
+    await waitFor(() => expect(screen.queryAllByTestId(/^leg-vehicle-marker-/).length).toBeGreaterThan(0));
+    // One at the boarding stop, one ~15 km away at the other end of the line.
+    const vehicles = [at('near', STOP_A[0], STOP_A[1]), at('far', 45.62, 21.35)];
+    await act(async () => client.setQueryData(transitKeys.vehicles('1'), { route: '1', updatedAt: AT, stale: false, vehicles }));
+    await waitFor(() => expect(screen.getByTestId('leg-vehicle-marker-far')).toBeTruthy());
+    expect(screen.getByTestId('leg-vehicle-marker-near')).toBeTruthy();
+  });
+
+  it('caps each line at MAX_LEG_VEHICLES_PER_LINE, never dropping the approaching vehicle', () => {
+    const many = Array.from({ length: 40 }, (_, i) => at(`v${i}`, 45.7 + i * 0.001, 21.2));
+    const other = { ...at('b1', 45.7, 21.2), route: '2' };
+    const capped = capVehiclesPerLine([...many, other], MAX_LEG_VEHICLES_PER_LINE, new Set(['v39']));
+    expect(MAX_LEG_VEHICLES_PER_LINE).toBe(30);
+    expect(capped.filter((v) => v.route === '1')).toHaveLength(30);
+    expect(capped.map((v) => v.id)).toContain('v39');
+    expect(capped.map((v) => v.id)).toContain('b1');
+    expect(capVehiclesPerLine(many.slice(0, 3))).toHaveLength(3);
+  });
+});
+
 describe('approachingVehicleIds', () => {
   /** A vehicle of a line at a point. */
   const vehicle = (id: string, route: string, lat: number, headsign: string | null = null) =>
@@ -220,17 +250,32 @@ function longPress(lat: number, lon: number) {
 /** The label of a step marker found by its testID. */
 const stepLabel = (testID: string) => String(within(screen.getByTestId(testID)).getByText(/./).props.children);
 
+/** Every map marker on screen, by testID (the mock draws Marker and Polyline alike: markers are the ones with a
+ * single `coordinate`). */
+const markerIds = () =>
+  screen
+    .UNSAFE_queryAllByType(Marker)
+    .filter((m) => m.props.coordinate !== undefined)
+    .map((m) => String(m.props.testID));
+
+/** Marker kinds allowed while a route is shown: the pins, board / get-off and the ride lines' live vehicles (drawn by
+ * LegVehicles only; the Transport layer's `vehicle-marker-` must not leak in). */
+const ESSENTIAL = /^(destination-marker|origin-marker|journey-destination|trip-step-(board|alight)-\d+|leg-vehicle-marker-.+)$/;
+
 describe('MapScreen trip guidance', () => {
   afterEach(() => setParams({}));
 
-  it('directions preview: board, get-off and walk markers with the right text', async () => {
+  it('directions preview: board and get-off markers with the right text, no walk labels on the map', async () => {
     renderScreen(<MapScreen />);
     longPress(45.7275, 21.2355);
     await waitFor(() => expect(screen.getByTestId('trip-step-board-1')).toBeTruthy());
-    expect(stepLabel('trip-step-walk-0')).toMatch(/^Walk \d+ min$/);
     expect(stepLabel('trip-step-board-1')).toMatch(/^Board Tram \d+ → .+ · \d\d:\d\d$/);
     expect(stepLabel('trip-step-alight-1')).toMatch(/^Get off at .+/);
-    expect(stepLabel('trip-step-walk-2')).toMatch(/^Walk \d+ min to Dropped pin$/);
+    // The walks are only in the panel (and drawn as the dashed line), not as labels on the map.
+    expect(screen.queryAllByTestId(/^trip-step-walk-/)).toHaveLength(0);
+    expect(screen.queryByText(/^Walk \d+ min/)).toBeNull();
+    const panel = within(screen.getByTestId('directions-panel'));
+    expect((await panel.findAllByText(/^Walk to /)).length).toBeGreaterThan(0);
     expect(screen.getByText(/^Board Tram \d+ →/)).toBeTruthy();
     // Rides are drawn in their line colour, walks dashed.
     const ride = screen.getByTestId('route-line-1');
@@ -239,15 +284,42 @@ describe('MapScreen trip guidance', () => {
     expect(screen.getByTestId('route-line-0').props.lineDashPattern).toEqual([8, 8]);
   });
 
-  it('walking route: a single walk label and no board marker', async () => {
+  it('directions preview: nothing but the essentials is drawn (no places, events, stops, walk labels)', async () => {
     renderScreen(<MapScreen />);
-    longPress(45.7545, 21.2265);
-    await waitFor(() => expect(screen.getByTestId('trip-step-walk-0')).toBeTruthy());
-    expect(stepLabel('trip-step-walk-0')).toMatch(/^Walk \d+ min to Dropped pin$/);
-    expect(screen.queryAllByTestId(/^trip-step-board-/)).toHaveLength(0);
+    // Load places and events in view first, so a leak would show.
+    await act(async () => {
+      fireEvent(screen.getByTestId('main-map'), 'regionChangeComplete', { latitude: 45.7537, longitude: 21.2257, latitudeDelta: 0.02, longitudeDelta: 0.02 });
+      await new Promise((r) => setTimeout(r, 400));
+    });
+    await waitFor(() => expect(markerIds().some((id) => !ESSENTIAL.test(id))).toBe(true));
+    // Turn Transport on too, so a leak of its vehicles into directions mode would show.
+    fireEvent.press(screen.getByTestId('chip-transit'));
+    await waitFor(() => expect(screen.queryAllByTestId(/^vehicle-marker-/).length).toBeGreaterThan(0));
+    longPress(45.7275, 21.2355);
+    await waitFor(() => expect(screen.getByTestId('trip-step-board-1')).toBeTruthy());
+    await waitFor(() => expect(screen.queryAllByTestId(/^leg-vehicle-marker-/).length).toBeGreaterThan(0));
+    await waitFor(() => expect(screen.queryAllByTestId(/^vehicle-marker-/)).toHaveLength(0));
+    const ids = markerIds();
+    expect(ids).toContain('destination-marker');
+    expect(ids.filter((id) => !ESSENTIAL.test(id))).toEqual([]);
+    // The route starts at the user, so there is no separate origin pin (the user's own dot is the MapView's).
+    expect(ids).not.toContain('origin-marker');
+    // Opening one of the line's vehicles keeps the same essentials on the map.
+    fireEvent.press(screen.getAllByTestId(/^leg-vehicle-marker-/)[0]);
+    await waitFor(() => expect(screen.getByTestId('trip-step-board-1')).toBeTruthy());
+    expect(markerIds().filter((id) => !ESSENTIAL.test(id))).toEqual([]);
   });
 
-  it('journey mode: the same markers for the legs ahead, naming the destination', async () => {
+  it('walking route: no walk label and no board marker on the map', async () => {
+    renderScreen(<MapScreen />);
+    longPress(45.7545, 21.2265);
+    await waitFor(() => expect(screen.getByTestId('destination-marker')).toBeTruthy());
+    await waitFor(() => expect(screen.getAllByTestId(/^route-line-/).length).toBeGreaterThan(0));
+    expect(screen.queryAllByTestId(/^trip-step-/)).toHaveLength(0);
+    expect(markerIds().filter((id) => !ESSENTIAL.test(id))).toEqual([]);
+  });
+
+  it('journey mode: the board / get-off markers for the legs ahead and only the essentials', async () => {
     setParams(
       routeParams(
         { from: { lat: 45.76, lon: 21.23, name: 'Your location' }, to: { lat: 45.7275, lon: 21.2355, name: 'Shopping City' }, mode: 'TRANSIT', durationMinutes: 20, distanceMeters: 3500, startsFromUser: true },
@@ -258,10 +330,13 @@ describe('MapScreen trip guidance', () => {
     await waitFor(() => expect(screen.getByTestId('trip-step-board-1')).toBeTruthy());
     expect(stepLabel('trip-step-board-1')).toMatch(/^Board Tram \d+ →/);
     expect(stepLabel('trip-step-alight-1')).toMatch(/^Get off at /);
-    expect(stepLabel('trip-step-walk-2')).toMatch(/^Walk \d+ min to Shopping City$/);
+    expect(screen.queryAllByTestId(/^trip-step-walk-/)).toHaveLength(0);
+    await waitFor(() => expect(screen.queryAllByTestId(/^leg-vehicle-marker-/).length).toBeGreaterThan(0));
+    expect(markerIds()).toContain('journey-destination');
+    expect(markerIds().filter((id) => !ESSENTIAL.test(id))).toEqual([]);
   });
 
-  it('journey mode: once the first walk is done its marker goes, the ride markers stay', async () => {
+  it('journey mode: once off the tram its board / get-off markers go', async () => {
     setParams(
       routeParams(
         { from: { lat: 45.76, lon: 21.23, name: 'Your location' }, to: { lat: 45.7275, lon: 21.2355, name: 'Shopping City' }, mode: 'TRANSIT', durationMinutes: 20, distanceMeters: 3500, startsFromUser: true },
@@ -269,13 +344,12 @@ describe('MapScreen trip guidance', () => {
       ),
     );
     renderScreen(<MapScreen />);
-    await waitFor(() => expect(screen.getByTestId('trip-step-walk-0')).toBeTruthy());
+    await waitFor(() => expect(screen.getByTestId('trip-step-board-1')).toBeTruthy());
     const plan = (await mocks.mockRequest('GET', '/routes/plan', { from: '45.76000,21.23000', to: '45.72750,21.23550', mode: 'TRANSIT' })) as RoutePlan;
-    const stop = plan.legs[0].to!;
+    const stop = plan.legs[1].to!;
     await act(async () => (globalThis as unknown as { __moveTo: (a: number, b: number) => void }).__moveTo(stop.lat, stop.lon));
-    await waitFor(() => expect(screen.queryByTestId('trip-step-walk-0')).toBeNull());
-    expect(screen.getByTestId('trip-step-board-1')).toBeTruthy();
-    expect(screen.getByTestId('trip-step-alight-1')).toBeTruthy();
-    expect(screen.getByTestId('trip-step-walk-2')).toBeTruthy();
+    await waitFor(() => expect(screen.queryByTestId('trip-step-board-1')).toBeNull());
+    expect(screen.queryByTestId('trip-step-alight-1')).toBeNull();
+    expect(screen.queryAllByTestId(/^trip-step-/)).toHaveLength(0);
   });
 });

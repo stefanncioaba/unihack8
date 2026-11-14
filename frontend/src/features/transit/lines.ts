@@ -8,30 +8,24 @@ import { distanceMeters, type Coordinates } from '@/lib/geo';
 import { parseIso } from '@/lib/time';
 import type { IconName } from '@/ui/Icon';
 
-/** One colour per line (readable on the dark map, none of them the app's gold). STPT colours every line of a vehicle
- * type the same (all trams one colour), so the app picks each line's colour from this palette instead. */
-export const LINE_PALETTE = [
-  '#E4572E',
-  '#29B6F6',
-  '#66BB6A',
-  '#AB47BC',
-  '#FF8A65',
-  '#26C6DA',
-  '#EC407A',
-  '#9CCC65',
-  '#7E57C2',
-  '#FF7043',
-  '#5C6BC0',
-  '#8D6E63',
-  '#EF5350',
-  '#42A5F5',
-  '#26A69A',
-  '#BA68C8',
-  '#F06292',
-  '#00E676',
-  '#4DD0E1',
-  '#A1887F',
-] as const;
+/** The hue family a line is coloured from: its vehicle type (live.stpt.ro groups and colours lines the same way). */
+export type LineFamily = 'TRAM' | 'TROLLEYBUS' | 'BUS' | 'EXPRESS' | 'METROPOLITAN' | 'SCHOOL' | 'BOAT';
+
+/** Ten shades per type family, readable on the dark map: trams yellows / golds, trolleybuses purples, city buses
+ * teals, express oranges, school reds, metropolitan blues / greens, boats light blues. Each line gets one shade of its
+ * family (see lineColor), so lines of one type look related but can still be told apart. */
+export const FAMILY_PALETTES: Record<LineFamily, readonly string[]> = {
+  TRAM: ['#FFD700', '#FFC107', '#F2B807', '#FFE45C', '#E0A800', '#FFCA28', '#D4A017', '#FFDF4F', '#F9A825', '#FFEB3B'],
+  TROLLEYBUS: ['#9C27B0', '#AB47BC', '#BA68C8', '#8E24AA', '#CE93D8', '#7B1FA2', '#B388FF', '#9575CD', '#D05CE3', '#7C4DFF'],
+  BUS: ['#009688', '#26A69A', '#4DB6AC', '#00897B', '#1DE9B6', '#00BFA5', '#80CBC4', '#00796B', '#64FFDA', '#14B8A6'],
+  EXPRESS: ['#FF9800', '#FFA726', '#FB8C00', '#FFB74D', '#F57C00', '#FF8F00', '#FFAB40', '#EF6C00', '#FF9E40', '#E65100'],
+  METROPOLITAN: ['#1E88E5', '#43A047', '#42A5F5', '#66BB6A', '#29B6F6', '#2E7D32', '#5C6BC0', '#9CCC65', '#039BE5', '#00C853'],
+  SCHOOL: ['#E53935', '#EF5350', '#F44336', '#FF5252', '#D32F2F', '#E57373', '#FF1744', '#C62828', '#FF6E6E', '#B71C1C'],
+  BOAT: ['#4FC3F7', '#81D4FA', '#03A9F4', '#29B6F6', '#B3E5FC', '#0288D1', '#4DD0E1', '#00B8D4', '#80DEEA', '#0097A7'],
+};
+
+/** Every colour a line can get (all families). */
+export const LINE_PALETTE: readonly string[] = Object.values(FAMILY_PALETTES).flat();
 
 /** A vehicle report older than this is shown as "may be out of date". */
 export const VEHICLE_OLD_MS = 2 * 60_000;
@@ -43,10 +37,65 @@ function hash(s: string): number {
   return h;
 }
 
-/** The line's colour: a stable palette colour per line id (same line, same colour, any letter case). STPT's own
+// Line id (upper case) -> type, learnt from the line list, vehicles and shapes as they load (see registerLineTypes).
+const knownTypes = new Map<string, TransitRouteType>();
+
+/** Remembers the type of each line (from GET /transit/routes items, vehicles or shapes), so lineColor, which only gets
+ * a line id, picks the right hue family. The data hooks call it before the answer reaches the screen. */
+export function registerLineTypes(items: { id?: string | null; route?: string | null; type: TransitRouteType | null }[] | undefined): void {
+  for (const item of items ?? []) {
+    const id = (item.id ?? item.route ?? '').trim().toUpperCase();
+    if (id && item.type && !knownTypes.has(id)) knownTypes.set(id, item.type);
+  }
+}
+
+/** Forgets every learnt line type (tests). */
+export function clearLineTypes(): void {
+  knownTypes.clear();
+}
+
+/** A line's family from its name when its type is not known yet: `E..` express, `M..` metropolitan, `S..` school,
+ * `Tv..` tram, `Tb..` trolleybus, anything else a city bus. */
+export function guessLineFamily(route: string): LineFamily {
+  const id = route.trim().toUpperCase();
+  if (/^E\d/.test(id)) return 'EXPRESS';
+  if (/^M\d/.test(id)) return 'METROPOLITAN';
+  if (/^S\d/.test(id)) return 'SCHOOL';
+  if (/^TV/.test(id)) return 'TRAM';
+  if (/^TB/.test(id)) return 'TROLLEYBUS';
+  return 'BUS';
+}
+
+/** The hue family of a line: its known type, else a guess from its name. */
+export function lineFamily(route: string | null | undefined): LineFamily {
+  const id = (route ?? '').trim();
+  return knownTypes.get(id.toUpperCase()) ?? guessLineFamily(id);
+}
+
+/** Index of a line's shade within its family: from the number in its id, so consecutive lines (1, 2, 3 or E1, E2) get
+ * different shades, plus its letters (5 and 5b differ); a hash for ids without a number. */
+export function shadeIndex(route: string, shades: number): number {
+  const id = route.trim().toUpperCase();
+  const m = /(\d+)/.exec(id);
+  if (!m) return hash(id) % shades;
+  const letters = id.replace(m[1], '');
+  return (Number(m[1]) + (letters ? hash(letters) : 0)) % shades;
+}
+
+/** The line's colour: a stable shade of its type's family (same line, same colour, any letter case). STPT's own
  * colour is ignored on purpose, since it is the same for every line of a type. */
 export function lineColor(route: string | null | undefined): string {
-  return LINE_PALETTE[hash((route ?? '').trim()) % LINE_PALETTE.length];
+  const palette = FAMILY_PALETTES[lineFamily(route)];
+  return palette[shadeIndex((route ?? '').trim(), palette.length)];
+}
+
+/** Text / icon colour readable on a line colour: ink on light shades (yellows, light teals), white on the rest. */
+export function textOnColor(hex: string): string {
+  const m = /^#([0-9a-f]{6})$/i.exec(hex);
+  if (!m) return '#fff';
+  const n = parseInt(m[1], 16);
+  const [r, g, b] = [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  return 0.299 * r + 0.587 * g + 0.114 * b > 160 ? '#000814' : '#fff';
 }
 
 /** `#rrggbb` (or `#rgb`) with an opacity, as `rgba(...)`. Other strings come back unchanged. */
@@ -85,6 +134,8 @@ export function typeLabel(type: TransitRouteType | null | undefined): string {
       return 'Express bus';
     case 'METROPOLITAN':
       return 'Metropolitan bus';
+    case 'SCHOOL':
+      return 'School bus';
     case 'BOAT':
       return 'Boat';
     default:

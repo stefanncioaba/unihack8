@@ -10,6 +10,7 @@ import { DirectionsLayer } from '@/features/directions/DirectionsLayer';
 import { MARKER_TRACK_MS, pendingTrackingCount, scheduleTrackingOff, trackingTimerArmed, trackingTimerArms, useBriefViewTracking } from '@/features/map/ClusterMarker';
 import { MapProvider, useMapContext, type MapContextValue } from '@/features/map/MapContext';
 import * as lines from '@/features/transit/lines';
+import { lineDirections } from '@/features/transit/lineView';
 import { TransitLayer } from '@/features/transit/TransitLayer';
 import { sameVehicleMarker, VehicleMarker } from '@/features/transit/VehicleMarker';
 import type { Bbox } from '@/lib/bbox';
@@ -81,25 +82,27 @@ describe('TransitLayer re-renders', () => {
   const shapes: TransitShape[] = [
     { route: '1', routeName: '1', type: 'TRAM', color: null, polylines: [polyline.encodePolyline([{ lat: 45.75, lon: 21.2 }, { lat: 45.76, lon: 21.21 }])] },
   ];
+  const directions = lineDirections(shapes, '1', polyline.decodePolyline);
   const fleet = (reportedAt: string, lat = 45.75) => [vehicle({ id: 'a', reportedAt, lat }), vehicle({ id: 'b', route: '14', routeName: '14', reportedAt })];
 
   /** The layer with fixed handlers, so only the data changes between renders. */
   const handlers = { onSelectStop: jest.fn(), onSelectVehicle: jest.fn() };
   const layer = (vehicles: TransitVehicle[], bbox?: Bbox | null) => (
-    <TransitLayer stops={undefined} line={null} vehicles={vehicles} shapes={shapes} bbox={bbox} {...handlers} />
+    <TransitLayer stops={undefined} lineId={null} vehicles={vehicles} bbox={bbox} {...handlers} />
   );
 
-  it('does not decode or redraw the line paths when the vehicles refresh', () => {
-    const decode = jest.spyOn(polyline, 'decodePolyline');
+  it('does not redraw the chosen line route when the vehicles refresh', () => {
+    const lineLayer = (vehicles: TransitVehicle[]) => (
+      <TransitLayer stops={undefined} lineId="1" directions={directions} directionIndex={0} vehicles={vehicles} {...handlers} />
+    );
     const alpha = jest.spyOn(lines, 'withAlpha');
-    const { rerender } = render(layer(fleet('2026-11-14T10:00:00Z')));
-    expect(decode).toHaveBeenCalledTimes(1);
+    const { rerender } = render(lineLayer(fleet('2026-11-14T10:00:00Z')));
     const drawn = alpha.mock.calls.length;
-    expect(drawn).toBeGreaterThan(0);
+    expect(drawn).toBeGreaterThan(0); // the halo
+    expect(screen.getByTestId('line-route-1')).toBeTruthy();
 
-    rerender(layer(fleet('2026-11-14T10:00:10Z', 45.751)));
-    expect(decode).toHaveBeenCalledTimes(1); // shapes decoded once per shapes answer
-    expect(alpha.mock.calls.length).toBe(drawn); // the polylines were not re-rendered
+    rerender(lineLayer(fleet('2026-11-14T10:00:10Z', 45.751)));
+    expect(alpha.mock.calls.length).toBe(drawn); // the route was not re-rendered
   });
 
   it('does not re-render a badge when the refresh only changed its report time or position', () => {

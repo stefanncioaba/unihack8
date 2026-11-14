@@ -14,7 +14,7 @@ import { ClusterMarker, MARKER_TRACK_MS, clusterSize, pinBox, useBriefViewTracki
 import { EVENT_PIN, EventMarkers } from '@/features/map/EventMarkers';
 import { PLACE_PIN, PlaceMarkers } from '@/features/map/PlaceMarkers';
 import { STOP_ROOT_SIZE, TransitLayer } from '@/features/transit/TransitLayer';
-import { VehicleMarker, vehicleMarkerSize } from '@/features/transit/VehicleMarker';
+import { VehicleMarker, badgeSize, vehicleMarkerSize } from '@/features/transit/VehicleMarker';
 import { iconFontLoaded } from '@/ui/Icon';
 import { HIDDEN_POI_TYPES, HIDDEN_TRANSIT_TYPES, darkMapStyle } from '@/ui/mapStyle';
 
@@ -65,7 +65,8 @@ function allNodes(root: ReactTestInstance): ReactTestInstance[] {
 }
 
 /** Checks a marker root: explicit numeric size, collapsable off, every sized child fits inside, no negative margins,
- * no transforms and no shadows anywhere in it. */
+ * no transforms and no shadows anywhere in it. Absolutely placed layers (the vehicle halo and bearing arrow) are only
+ * allowed with explicit numeric left / top / width / height that keep them inside the root's box. */
 function expectContained(root: ReactTestInstance) {
   const style = flat(root);
   expect(typeof style.width).toBe('number');
@@ -78,7 +79,13 @@ function expectContained(root: ReactTestInstance) {
     }
     expect(s.transform).toBeUndefined();
     expect(s.shadowOpacity).toBeUndefined();
-    expect(s.position).not.toBe('absolute');
+    if (s.position === 'absolute') {
+      for (const key of ['left', 'top', 'width', 'height'] as const) expect(typeof s[key]).toBe('number');
+      expect(s.left as number).toBeGreaterThanOrEqual(0);
+      expect(s.top as number).toBeGreaterThanOrEqual(0);
+      expect((s.left as number) + (s.width as number)).toBeLessThanOrEqual(style.width as number);
+      expect((s.top as number) + (s.height as number)).toBeLessThanOrEqual(style.height as number);
+    }
     if (node !== root) {
       if (typeof s.width === 'number') expect(s.width).toBeLessThanOrEqual(style.width as number);
       if (typeof s.height === 'number') expect(s.height).toBeLessThanOrEqual(style.height as number);
@@ -225,18 +232,26 @@ describe('marker roots hold their whole content', () => {
     expect(clusterSize(1234).width).toBeGreaterThan(clusterSize(12).width);
   });
 
-  it('vehicle badge sits in a root wide enough for its line name, selected or not', () => {
+  it('vehicle badge, halo and bearing arrow sit in a square root that holds them, selected or not', () => {
     const { rerender } = render(<VehicleMarker vehicle={vehicle} onPress={noop} />);
     expectContained(screen.getByTestId('marker-root-vehicle-marker-v1'));
     expect(flat(screen.getByTestId('marker-root-vehicle-marker-v1'))).toMatchObject(vehicleMarkerSize('Tv14', false));
-    rerender(<VehicleMarker vehicle={vehicle} selected onPress={noop} />);
+    expect(screen.queryByTestId('marker-root-vehicle-marker-v1-arrow')).toBeNull(); // no bearing, no arrow
+    rerender(<VehicleMarker vehicle={{ ...vehicle, bearing: 133 }} selected onPress={noop} />);
+    expectContained(screen.getByTestId('marker-root-vehicle-marker-v1'));
     expect(flat(screen.getByTestId('marker-root-vehicle-marker-v1'))).toMatchObject(vehicleMarkerSize('Tv14', true));
+    expect(screen.getByTestId('marker-root-vehicle-marker-v1-arrow')).toBeTruthy();
+    // The square holds the badge's longer side plus room for the halo and arrow all around.
+    const size = vehicleMarkerSize('Tv14', true);
+    expect(size.width).toBe(size.height);
+    expect(size.width).toBeGreaterThanOrEqual(badgeSize('Tv14', true).width + 16);
     expect(vehicleMarkerSize('Tv14', true).height).toBeGreaterThanOrEqual(28);
     expect(vehicleMarkerSize('M14', false).width).toBeLessThan(vehicleMarkerSize('M14', true).width);
+    expect(badgeSize('7', false)).toEqual({ width: 28, height: 28 }); // short names are round
   });
 
   it('stop dot root holds the selected dot', () => {
-    render(<TransitLayer stops={[stop]} line={null} vehicles={[]} shapes={[]} selectedStopId="s1" onSelectStop={noop} onSelectVehicle={noop} />);
+    render(<TransitLayer stops={[stop]} lineId={null} vehicles={[]} selectedStopId="s1" onSelectStop={noop} onSelectVehicle={noop} />);
     expectContained(screen.getByTestId('marker-root-stop-s1'));
     expect(flat(screen.getByTestId('marker-root-stop-s1'))).toMatchObject({ width: STOP_ROOT_SIZE, height: STOP_ROOT_SIZE });
   });

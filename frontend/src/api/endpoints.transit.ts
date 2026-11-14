@@ -20,8 +20,11 @@ export const getTransitVehicles = (route: string) => api<TransitVehicles>('GET',
 /** Live vehicles of every line in one answer (`route` is null). */
 export const getAllTransitVehicles = () => api<TransitVehicles>('GET', '/transit/vehicles');
 
-/** The drawn path of every line (large and static: fetch once per session). */
+/** The drawn path of every line (large and static: fetch once per session), without stop lists. */
 export const getTransitShapes = () => api<TransitShape[]>('GET', '/transit/shapes');
+
+/** The drawn path of one line, each direction with its headsign and stops (fetched when the line is picked). */
+export const getLineShape = (route: string) => api<TransitShape[]>('GET', '/transit/shapes', { query: { route } });
 
 /** Next arrivals at a stop. */
 export const getStopArrivals = (stopId: string) => api<StopArrivals>('GET', `/transit/stops/${encodeURIComponent(stopId)}/arrivals`);

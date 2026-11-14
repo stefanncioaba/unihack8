@@ -60,7 +60,7 @@ public class TransitServiceImpl implements TransitService {
     private static final Duration LAST_TRIP_TOLERANCE = Duration.ofMinutes(3);
     // Order of line types in GET /transit/routes.
     private static final List<String> TYPE_ORDER =
-            List.of("TRAM", "TROLLEYBUS", "BUS", "EXPRESS", "METROPOLITAN", "BOAT");
+            List.of("TRAM", "TROLLEYBUS", "BUS", "EXPRESS", "METROPOLITAN", "SCHOOL", "BOAT");
     // After STPT's line list fails (nothing cached), vehicles/shapes do not ask for it again for this long.
     static final Duration ROUTES_RETRY_AFTER = Duration.ofSeconds(60);
     // Shapes built without STPT's line facts (GTFS only) are reused this long before trying again.
@@ -83,6 +83,12 @@ public class TransitServiceImpl implements TransitService {
     // GTFS-only shapes built while STPT's line list was unavailable, and when they were built.
     private volatile List<TransitShapeDto> fallbackShapes;
     private volatile Instant fallbackShapesAt;
+    // The all-lines answer without stops, and the full build it was made from.
+    private volatile StrippedShapes strippedShapes;
+
+    /** A stop-less copy of one shapes build. */
+    private record StrippedShapes(List<TransitShapeDto> source, List<TransitShapeDto> shapes) {
+    }
     // Until this moment the line list is not fetched again for vehicles/shapes (set after a failed fetch).
     private volatile Instant routesRetryAt;
 
@@ -137,15 +143,27 @@ public class TransitServiceImpl implements TransitService {
                 .toList());
     }
 
-    // Every line's path (sorted like GET /transit/routes), or only the asked line's.
+    // Every line's path (sorted like GET /transit/routes) without stop lists, or only the asked line's with its
+    // stops per direction.
     @Override
     public List<TransitShapeDto> shapes(String route) {
         List<TransitShapeDto> all = allShapes();
         if (route == null || route.isBlank()) {
-            return all;
+            return withoutStops(all);
         }
         String wanted = route.trim();
         return all.stream().filter(s -> s.route().equalsIgnoreCase(wanted)).toList();
+    }
+
+    // The all-lines answer without stop lists, built once per shapes build.
+    private List<TransitShapeDto> withoutStops(List<TransitShapeDto> all) {
+        StrippedShapes stripped = strippedShapes;
+        if (stripped != null && stripped.source() == all) {
+            return stripped.shapes();
+        }
+        List<TransitShapeDto> shapes = all.stream().map(mapper::withoutStops).toList();
+        strippedShapes = new StrippedShapes(all, shapes);
+        return shapes;
     }
 
     // Builds the shapes once; while STPT's line list is unavailable a GTFS-only build is reused for a few minutes.

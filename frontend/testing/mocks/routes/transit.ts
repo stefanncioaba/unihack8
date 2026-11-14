@@ -37,6 +37,13 @@ function parseBbox(raw: unknown): number[] {
   return b;
 }
 
+/** Rough compass bearing (degrees from north, clockwise) from one stop to the next; null at the end of the line. */
+function bearingBetween(a: TransitStop, b: TransitStop): number | null {
+  if (a.id === b.id) return null;
+  const deg = (Math.atan2((b.lon - a.lon) * Math.cos((a.lat * Math.PI) / 180), b.lat - a.lat) * 180) / Math.PI;
+  return Math.round(((deg % 360) + 360) % 360);
+}
+
 /** Two vehicles per running line, sliding between consecutive stops as time passes. */
 function vehiclesFor(route: string, now: number): TransitVehicles['vehicles'] {
   if (LINES_NOT_RUNNING.includes(route)) return [];
@@ -56,7 +63,7 @@ function vehiclesFor(route: string, now: number): TransitVehicles['vehicles'] {
       color: line.color,
       lat: a.lat + (b.lat - a.lat) * f,
       lon: a.lon + (b.lon - a.lon) * f,
-      bearing: null,
+      bearing: bearingBetween(a, b),
       speedKmh: 18,
       headsign: headsignFrom(route, a.id),
       nextStop: b.name,
@@ -107,15 +114,19 @@ export const transitRoutes: Route[] = [
     method: 'GET',
     pattern: /^\/transit\/shapes$/,
     handler: ({ query }): TransitShape[] => {
-      // Straight lines through each line's stops (both directions run the same stops, so one polyline per line).
+      // Straight lines through each line's stops: Tur in stop order (heading to `to`), Retur reversed (to `from`).
+      // Stops only for one line (route=), like the backend.
       const wanted = query.route === undefined || query.route === '' ? null : String(query.route).toUpperCase();
-      return MOCK_ROUTES.filter((r) => !wanted || r.id.toUpperCase() === wanted).map((r) => ({
-        route: r.id,
-        routeName: r.name,
-        type: r.type,
-        color: r.color,
-        polylines: [encodePolyline(LINE_STOPS[r.id].map((id) => stopById(id)))],
-      }));
+      return MOCK_ROUTES.filter((r) => !wanted || r.id.toUpperCase() === wanted).map((r) => {
+        const there = LINE_STOPS[r.id].map((id) => stopById(id));
+        const back = [...there].reverse();
+        const stopsOf = (list: TransitStop[]) => (wanted ? list.map((st) => ({ id: st.id, name: st.name, lat: st.lat, lon: st.lon })) : null);
+        const variants = [
+          { polyline: encodePolyline(there), direction: 'TUR' as const, headsign: r.to, stops: stopsOf(there) },
+          { polyline: encodePolyline(back), direction: 'RETUR' as const, headsign: r.from, stops: stopsOf(back) },
+        ];
+        return { route: r.id, routeName: r.name, type: r.type, color: r.color, polylines: variants.map((v) => v.polyline), variants };
+      });
     },
   },
   {

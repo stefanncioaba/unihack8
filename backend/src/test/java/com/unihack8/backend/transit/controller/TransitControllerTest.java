@@ -20,6 +20,8 @@ import com.unihack8.backend.transit.domain.dto.LastDeparturesResponse;
 import com.unihack8.backend.transit.domain.dto.NearestStopDto;
 import com.unihack8.backend.transit.domain.dto.NextArrivalDto;
 import com.unihack8.backend.transit.domain.dto.TransitRouteDto;
+import com.unihack8.backend.transit.domain.dto.ShapeStopDto;
+import com.unihack8.backend.transit.domain.dto.ShapeVariantDto;
 import com.unihack8.backend.transit.domain.dto.TransitShapeDto;
 import com.unihack8.backend.transit.domain.dto.TransitStopDto;
 import com.unihack8.backend.transit.domain.dto.TransitSummaryResponse;
@@ -114,7 +116,9 @@ class TransitControllerTest {
     // Shapes of every line, or of one line with route=.
     @Test
     void shapes() throws Exception {
-        TransitShapeDto tram = new TransitShapeDto("1", "1", "TRAM", "#e3a900", List.of("_p~iF~ps|U", "??"));
+        TransitShapeDto tram = new TransitShapeDto("1", "1", "TRAM", "#e3a900", List.of("_p~iF~ps|U", "??"),
+                List.of(new ShapeVariantDto("_p~iF~ps|U", "TUR", "Gara de Nord",
+                        List.of(new ShapeStopDto("1", "A", 45.7, 21.2))), new ShapeVariantDto("??", "RETUR", "A", null)));
         when(transit.shapes(null)).thenReturn(List.of(tram));
         when(transit.shapes("1")).thenReturn(List.of(tram));
         mvc.perform(get("/transit/shapes"))
@@ -123,7 +127,12 @@ class TransitControllerTest {
                 .andExpect(jsonPath("$[0].routeName").value("1"))
                 .andExpect(jsonPath("$[0].type").value("TRAM"))
                 .andExpect(jsonPath("$[0].color").value("#e3a900"))
-                .andExpect(jsonPath("$[0].polylines[0]").value("_p~iF~ps|U"));
+                .andExpect(jsonPath("$[0].polylines[0]").value("_p~iF~ps|U"))
+                .andExpect(jsonPath("$[0].variants[0].direction").value("TUR"))
+                .andExpect(jsonPath("$[0].variants[0].headsign").value("Gara de Nord"))
+                .andExpect(jsonPath("$[0].variants[0].stops[0].id").value("1"))
+                .andExpect(jsonPath("$[0].variants[0].stops[0].lat").value(45.7))
+                .andExpect(jsonPath("$[0].variants[1].direction").value("RETUR"));
         mvc.perform(get("/transit/shapes").param("route", "1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(1));

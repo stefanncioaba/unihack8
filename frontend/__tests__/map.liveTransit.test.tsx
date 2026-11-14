@@ -1,5 +1,6 @@
-// Live transit on the map: every line's path and every live vehicle, the vehicle panel, and the live vehicles of a
-// route's ride legs in directions and journey mode. Helpers (colours, leg -> line mapping, ages) are tested directly.
+// Live transit on the map: every live vehicle (no route lines until a line is picked), the vehicle panel, and the live
+// vehicles of a route's ride legs in directions and journey mode. Helpers (colours, leg -> line mapping, ages) are
+// tested directly. The one-line view (picker, Tur / Retur) is in map.lineView.test.tsx.
 import { QueryClientProvider } from '@tanstack/react-query';
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
 import { useEffect } from 'react';
@@ -10,8 +11,14 @@ import MapScreen from '@/app/(tabs)/map';
 import { MapProvider, destinationOf, useMapContext } from '@/features/map/MapContext';
 import { MapPanel } from '@/features/map/MapPanel';
 import {
+  FAMILY_PALETTES,
   LINE_PALETTE,
+  clearLineTypes,
   decodeShapes,
+  guessLineFamily,
+  lineFamily,
+  registerLineTypes,
+  textOnColor,
   isReportOld,
   lineColor,
   nearestVehicle,
@@ -25,7 +32,8 @@ import {
   vehiclesOfLine,
   withAlpha,
 } from '@/features/transit/lines';
-import { SHAPE_WIDTH, TransitLayer } from '@/features/transit/TransitLayer';
+import { lineDirections } from '@/features/transit/lineView';
+import { ROUTE_STYLE, TransitLayer } from '@/features/transit/TransitLayer';
 import { speedLabel } from '@/features/transit/VehiclePanel';
 import { createQueryClient } from '@/lib/queryClient';
 import { decodePolyline, encodePolyline } from '@/lib/polyline';
@@ -71,12 +79,14 @@ async function moveTo(latitudeDelta: number) {
 
 const vehicleMarkers = () => screen.queryAllByTestId(/^vehicle-marker-/);
 const legVehicleMarkers = () => screen.queryAllByTestId(/^leg-vehicle-marker-/);
-const shapeLines = () => screen.queryAllByTestId(/^shape-line-/);
+const routeLines = () => screen.queryAllByTestId(/^(shape-line-|line-route-)/);
 
 afterEach(() => jest.restoreAllMocks());
 
 describe('line helpers', () => {
-  it('gives every line a stable palette colour of its own (STPT colours every tram the same)', () => {
+  afterEach(() => clearLineTypes());
+
+  it('gives every line a stable shade of its own (STPT colours every tram the same)', () => {
     const e4 = lineColor('E4');
     expect(LINE_PALETTE).toContain(e4);
     expect(lineColor('e4 ')).toBe(e4); // same line in another case: same colour
@@ -84,6 +94,50 @@ describe('line helpers', () => {
     const colours = new Set(['E1', 'E2', 'E3', 'E4', 'E6', 'E7', 'E8', 'M14', 'M30', '33'].map((r) => lineColor(r)));
     expect(colours.size).toBeGreaterThan(5);
     expect(lineColor('1')).not.toBe(lineColor('2'));
+  });
+
+  it('colours each line from its type family (trams yellow, trolleybuses purple, buses teal, express orange ...)', () => {
+    registerLineTypes([
+      { id: '1', type: 'TRAM' },
+      { id: '2', type: 'TRAM' },
+      { id: '14', type: 'TROLLEYBUS' },
+      { id: '33', type: 'BUS' },
+      { id: '77', type: 'EXPRESS' },
+      { id: 'X1', type: 'SCHOOL' },
+    ]);
+    registerLineTypes([{ route: 'M30', type: 'METROPOLITAN' }, { route: null, type: 'BUS' }]); // vehicles carry `route`
+    expect(FAMILY_PALETTES.TRAM).toContain(lineColor('1'));
+    expect(FAMILY_PALETTES.TRAM).toContain(lineColor('2'));
+    expect(lineColor('1')).not.toBe(lineColor('2')); // same family, own shade
+    expect(FAMILY_PALETTES.TROLLEYBUS).toContain(lineColor('14'));
+    expect(FAMILY_PALETTES.BUS).toContain(lineColor('33'));
+    expect(FAMILY_PALETTES.EXPRESS).toContain(lineColor('77'));
+    expect(FAMILY_PALETTES.SCHOOL).toContain(lineColor('x1'));
+    expect(FAMILY_PALETTES.METROPOLITAN).toContain(lineColor('M30'));
+    // Consecutive lines of a family get different shades.
+    const trams = ['1', '2', '4', '5', '6', '7', '8', '9'];
+    registerLineTypes(trams.map((id) => ({ id, type: 'TRAM' as const })));
+    expect(new Set(trams.map(lineColor)).size).toBe(trams.length);
+    // The first type learnt for a line sticks.
+    registerLineTypes([{ id: '1', type: 'BUS' }]);
+    expect(lineFamily('1')).toBe('TRAM');
+  });
+
+  it('guesses the family from the line name until its type is known', () => {
+    expect(guessLineFamily('E2')).toBe('EXPRESS');
+    expect(guessLineFamily('m14')).toBe('METROPOLITAN');
+    expect(guessLineFamily('S3')).toBe('SCHOOL');
+    expect(guessLineFamily('Tv4')).toBe('TRAM');
+    expect(guessLineFamily('Tb15')).toBe('TROLLEYBUS');
+    expect(guessLineFamily('33')).toBe('BUS');
+    expect(lineFamily('E2')).toBe('EXPRESS');
+    expect(FAMILY_PALETTES.EXPRESS).toContain(lineColor('E2'));
+  });
+
+  it('picks readable text on line colours', () => {
+    expect(textOnColor('#FFD700')).toBe('#000814'); // ink on yellow
+    expect(textOnColor('#7B1FA2')).toBe('#fff'); // white on purple
+    expect(textOnColor('red')).toBe('#fff');
   });
 
   it('turns hex colours into rgba with an opacity', () => {
@@ -213,52 +267,115 @@ describe('mock /transit vehicles and shapes', () => {
     expect(all.vehicles.find((v: any) => v.route === '14')).toMatchObject({ routeName: '14', type: 'TROLLEYBUS', color: '#1e88e5' });
   });
 
-  it('answers one path per line through its stops, or one line on request', async () => {
+  it('answers Tur and Retur through each line\'s stops, with the stops only for one line', async () => {
     const shapes = await call('/transit/shapes');
     expect(shapes.map((s: any) => s.route)).toEqual(MOCK_ROUTES.map((r) => r.id));
     expect(decodePolyline(shapes[0].polylines[0])).toHaveLength(LINE_STOPS['1'].length);
-    expect(await call('/transit/shapes', { route: 'e4' })).toHaveLength(1);
+    expect(shapes[0].variants.map((v: any) => [v.direction, v.headsign, v.stops])).toEqual([
+      ['TUR', MOCK_ROUTES[0].to, null],
+      ['RETUR', MOCK_ROUTES[0].from, null],
+    ]);
+    const [one] = await call('/transit/shapes', { route: 'e4' });
+    expect(one.route).toBe('E4');
+    expect(one.variants[0].stops.map((st: any) => st.id)).toEqual(LINE_STOPS.E4);
+    expect(one.variants[1].stops.map((st: any) => st.id)).toEqual([...LINE_STOPS.E4].reverse());
     expect(await call('/transit/shapes', { route: 'nope' })).toEqual([]);
+  });
+
+  it('gives running vehicles a bearing towards their next stop', async () => {
+    const all = await call('/transit/vehicles');
+    expect(all.vehicles.some((v: any) => typeof v.bearing === 'number' && v.bearing >= 0 && v.bearing < 360)).toBe(true);
   });
 });
 
 describe('TransitLayer', () => {
   const shapes: TransitShape[] = [
-    { route: '1', routeName: '1', type: 'TRAM', color: '#e3a900', polylines: [encodePolyline([{ lat: 45.75, lon: 21.2 }, { lat: 45.76, lon: 21.21 }])] },
-    { route: 'E4', routeName: 'E4', type: 'EXPRESS', color: null, polylines: [encodePolyline([{ lat: 45.74, lon: 21.2 }, { lat: 45.75, lon: 21.23 }])] },
+    {
+      route: '1',
+      routeName: '1',
+      type: 'TRAM',
+      color: '#e3a900',
+      polylines: [],
+      variants: [
+        {
+          polyline: encodePolyline([{ lat: 45.75, lon: 21.2 }, { lat: 45.76, lon: 21.21 }]),
+          direction: 'TUR',
+          headsign: 'Gara de Nord',
+          stops: [
+            { id: 's1', name: 'A', lat: 45.75, lon: 21.2 },
+            { id: 's2', name: 'Gara de Nord', lat: 45.76, lon: 21.21 },
+          ],
+        },
+        {
+          polyline: encodePolyline([{ lat: 45.76, lon: 21.21 }, { lat: 45.75, lon: 21.2 }]),
+          direction: 'RETUR',
+          headsign: 'A',
+          stops: [
+            { id: 's2', name: 'Gara de Nord', lat: 45.76, lon: 21.21 },
+            { id: 's1', name: 'A', lat: 45.75, lon: 21.2 },
+          ],
+        },
+      ],
+    },
   ];
-  const vehicles = [vehicle({ id: 'a', route: '1' }), vehicle({ id: 'b', route: 'E4', routeName: 'E4', type: 'EXPRESS', color: null })];
-  const line1: TransitRoute = { id: '1', type: 'TRAM', name: '1', from: null, to: null, color: '#e3a900' };
+  const directions = lineDirections(shapes, '1', decodePolyline);
+  const vehicles = [
+    vehicle({ id: 'a', route: '1', headsign: 'Gara de Nord' }),
+    vehicle({ id: 'back', route: '1', headsign: 'A' }),
+    vehicle({ id: 'b', route: 'E4', routeName: 'E4', type: 'EXPRESS', color: null }),
+  ];
 
-  it('draws every line in its own palette colour and every vehicle', () => {
+  it('draws every live vehicle and no route lines while no line is chosen', () => {
     const onSelectVehicle = jest.fn();
-    render(<TransitLayer stops={undefined} line={null} vehicles={vehicles} shapes={shapes} onSelectStop={jest.fn()} onSelectVehicle={onSelectVehicle} />);
-    expect(screen.getByTestId('shape-line-1-0').props.strokeColor).toBe(withAlpha(lineColor('1'), 0.8));
-    expect(screen.getByTestId('shape-line-E4-0').props.strokeColor).toBe(withAlpha(lineColor('E4'), 0.8));
-    expect(screen.getByTestId('shape-line-1-0').props.strokeWidth).toBe(SHAPE_WIDTH.normal);
-    expect(vehicleMarkers()).toHaveLength(2);
+    render(<TransitLayer stops={undefined} lineId={null} vehicles={vehicles} onSelectStop={jest.fn()} onSelectVehicle={onSelectVehicle} />);
+    expect(routeLines()).toHaveLength(0);
+    expect(vehicleMarkers()).toHaveLength(3);
     expect(screen.getByLabelText('Express bus E4')).toBeTruthy();
-    expect(screen.getByLabelText('Tram 1')).toBeTruthy();
+    expect(screen.getAllByLabelText('Tram 1')).toHaveLength(2);
     fireEvent.press(screen.getByTestId('vehicle-marker-b'));
-    expect(onSelectVehicle).toHaveBeenCalledWith(vehicles[1]);
+    expect(onSelectVehicle).toHaveBeenCalledWith(vehicles[2]);
   });
 
-  it('highlights a chosen line, fades the others and shows only its vehicles', () => {
-    render(<TransitLayer stops={undefined} line={line1} vehicles={vehicles} shapes={shapes} selectedVehicleId="a" onSelectStop={jest.fn()} onSelectVehicle={jest.fn()} />);
-    const chosen = screen.getByTestId('shape-line-1-0');
-    expect(chosen.props.strokeWidth).toBe(SHAPE_WIDTH.chosen);
-    expect(chosen.props.strokeColor).toBe(lineColor('1'));
-    expect(screen.getByTestId('shape-line-E4-0').props.strokeWidth).toBe(SHAPE_WIDTH.faded);
-    // The chosen line is drawn last, above the others.
-    expect(shapeLines().map((l) => l.props.testID)).toEqual(['shape-line-E4-0', 'shape-line-1-0']);
+  it('draws the chosen line one direction at a time: thick line over a faint halo, its stops and its vehicles', () => {
+    const onSelectStop = jest.fn();
+    const { rerender } = render(
+      <TransitLayer stops={undefined} lineId="1" directions={directions} directionIndex={0} vehicles={vehicles} selectedVehicleId="a" onSelectStop={onSelectStop} onSelectVehicle={jest.fn()} />,
+    );
+    const line = screen.getByTestId('line-route-1');
+    const halo = screen.getByTestId('line-route-halo-1');
+    expect(line.props.strokeWidth).toBe(ROUTE_STYLE.width);
+    expect(line.props.strokeColor).toBe(lineColor('1'));
+    expect(halo.props.strokeWidth).toBeGreaterThan(line.props.strokeWidth);
+    expect(halo.props.strokeColor).toBe(withAlpha(lineColor('1'), ROUTE_STYLE.haloOpacity));
+    expect(line.props.coordinates[0]).toEqual({ latitude: 45.75, longitude: 21.2 });
+    // Only the vehicles of line 1 heading to Gara de Nord, and the stops of that direction.
     expect(vehicleMarkers().map((m) => m.props.testID)).toEqual(['vehicle-marker-a']);
     expect(screen.getByTestId('vehicle-marker-a').props.zIndex).toBe(30);
+    expect(screen.queryAllByTestId(/^stop-marker-/).map((m) => m.props.testID)).toEqual(['stop-marker-s1', 'stop-marker-s2']);
+    fireEvent.press(screen.getByTestId('stop-marker-s2'));
+    expect(onSelectStop).toHaveBeenCalledWith('s2');
+
+    // Retur: the reversed path and the other vehicle.
+    rerender(<TransitLayer stops={undefined} lineId="1" directions={directions} directionIndex={1} vehicles={vehicles} onSelectStop={onSelectStop} onSelectVehicle={jest.fn()} />);
+    expect(screen.getByTestId('line-route-1').props.coordinates[0]).toEqual({ latitude: 45.76, longitude: 21.21 });
+    expect(vehicleMarkers().map((m) => m.props.testID)).toEqual(['vehicle-marker-back']);
+  });
+
+  it('shows the visible stops of the chosen line and its vehicles while its shape loads', () => {
+    const stops = [
+      { id: 'x', name: 'X', lat: 45.75, lon: 21.22, routes: ['1'] },
+      { id: 'y', name: 'Y', lat: 45.75, lon: 21.22, routes: ['E4'] },
+    ];
+    render(<TransitLayer stops={stops} lineId="1" directions={[]} vehicles={vehicles} onSelectStop={jest.fn()} onSelectVehicle={jest.fn()} />);
+    expect(routeLines()).toHaveLength(0);
+    expect(screen.queryAllByTestId(/^stop-marker-/).map((m) => m.props.testID)).toEqual(['stop-marker-x']);
+    expect(vehicleMarkers()).toHaveLength(2);
   });
 
   it('redraws vehicle markers only briefly after they appear (Android snapshot)', () => {
     jest.useFakeTimers();
     try {
-      render(<TransitLayer stops={undefined} line={null} vehicles={vehicles} shapes={undefined} onSelectStop={jest.fn()} onSelectVehicle={jest.fn()} />);
+      render(<TransitLayer stops={undefined} lineId={null} vehicles={vehicles} onSelectStop={jest.fn()} onSelectVehicle={jest.fn()} />);
       expect(screen.getByTestId('vehicle-marker-a').props.tracksViewChanges).toBe(true);
       act(() => jest.advanceTimersByTime(1000));
       expect(screen.getByTestId('vehicle-marker-a').props.tracksViewChanges).toBe(false);
@@ -334,27 +451,25 @@ describe('VehiclePanel', () => {
 });
 
 describe('MapScreen live transit', () => {
-  it('Transport draws every line and every live vehicle at once; a tap opens the vehicle panel', async () => {
+  it('Transport draws only the live vehicles (no route lines); a tap opens the panel and shows that line', async () => {
     renderScreen(<MapScreen />);
-    await moveTo(0.2); // zoomed out: no stops, but lines and vehicles still show
-    expect(shapeLines()).toHaveLength(0);
+    await moveTo(0.2); // zoomed out: no stops, but vehicles still show
     fireEvent.press(screen.getByTestId('chip-transit'));
-    await waitFor(() => expect(shapeLines()).toHaveLength(MOCK_ROUTES.length));
     await waitFor(() => expect(vehicleMarkers()).toHaveLength(8));
-
-    // No line is picked, so every line is drawn the same way (none faded).
-    expect(screen.getByTestId('shape-line-14-0').props.strokeWidth).toBe(screen.getByTestId('shape-line-1-0').props.strokeWidth);
-    expect(screen.getByTestId('shape-line-1-0').props.strokeWidth).not.toBe(SHAPE_WIDTH.faded);
+    expect(routeLines()).toHaveLength(0);
 
     fireEvent.press(vehicleMarkers().find((m) => m.props.testID.startsWith('vehicle-marker-14-'))!);
     const panel = within(await screen.findByTestId('vehicle-panel'));
     expect(panel.getByText(/^Trolleybus 14/)).toBeTruthy();
+    // Its line is shown alone: its route, only its vehicles.
+    expect(await screen.findByTestId('line-route-14')).toBeTruthy();
+    await waitFor(() => expect(vehicleMarkers().every((m) => m.props.testID.startsWith('vehicle-marker-14-'))).toBe(true));
     fireEvent.press(screen.getByLabelText('Close panel'));
     await waitFor(() => expect(screen.queryByTestId('vehicle-panel')).toBeNull());
 
     fireEvent.press(screen.getByTestId('chip-transit')); // Transport off: everything goes
     await waitFor(() => expect(vehicleMarkers()).toHaveLength(0));
-    expect(shapeLines()).toHaveLength(0);
+    expect(routeLines()).toHaveLength(0);
   });
 
   it('closes a transport-layer vehicle panel when Transport is turned off', async () => {
@@ -368,7 +483,7 @@ describe('MapScreen live transit', () => {
     await waitFor(() => expect(screen.queryByTestId('vehicle-panel')).toBeNull());
   });
 
-  it('asks for every vehicle in one request and the shapes once', async () => {
+  it('asks for every vehicle in one request and no shapes until a line is picked', async () => {
     const spy = jest.spyOn(mocks, 'mockRequest');
     renderScreen(<MapScreen />);
     await moveTo(0.2);
@@ -377,7 +492,7 @@ describe('MapScreen live transit', () => {
     const vehicleCalls = spy.mock.calls.filter((c) => c[1] === '/transit/vehicles');
     expect(vehicleCalls.length).toBeGreaterThan(0);
     expect(vehicleCalls.every((c) => c[2] && (c[2] as any).route === undefined)).toBe(true);
-    expect(spy.mock.calls.filter((c) => c[1] === '/transit/shapes')).toHaveLength(1);
+    expect(spy.mock.calls.filter((c) => c[1] === '/transit/shapes')).toHaveLength(0); // not the whole network
   });
 
   it('shows the live vehicles of the route lines with directions, even with Transport off, and their panel', async () => {

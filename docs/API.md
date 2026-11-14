@@ -461,7 +461,7 @@ All public. `stale: true` means STPT did not answer and this is the last cached 
 
 ### `GET /transit/routes`
 
-`type` is `TRAM`, `TROLLEYBUS`, `BUS`, `EXPRESS`, `METROPOLITAN` or `BOAT`. Sorted by type (trams first), then by line number.
+`type` is `TRAM`, `TROLLEYBUS`, `BUS`, `EXPRESS`, `METROPOLITAN`, `SCHOOL` (STPT category `school`) or `BOAT`. Sorted by type (trams first), then by line number.
 `from` / `to` are the line's two end stations (either can be `null`). `color` is STPT's line colour for drawing on the map (`null` when STPT has none).
 
 ```json
@@ -482,9 +482,9 @@ All public. `stale: true` means STPT did not answer and this is the last cached 
 
 ### `GET /transit/vehicles?route=1`
 
-`route` is optional. With it: the vehicles of that one line. Without it: every live vehicle of every line in one answer, with `"route": null` at the top level (one STPT call, shared by all clients for 10 s, so polling every 10 s is fine).
+`route` is optional. With it: the vehicles of that one line. Without it: every live vehicle of every line in one answer, with `"route": null` at the top level (one STPT call, shared by all clients for 5 s — `stpt.ttl.vehicles`, default `5s` — so polling every 5 s is fine; when STPT does not answer the last cached value comes back with `stale: true`).
 Each vehicle carries its line: `route` is the line id (same as `GET /transit/routes` `id`), `routeName` the name to show (e.g. `"1"`, `"E2"`), `type` and `color` as in `GET /transit/routes`. `type` / `color` are `null` when the line is not in STPT's line list (or that list could not be loaded); `route` / `routeName` are then STPT's own line name, and both are `null` when STPT reports a vehicle without a line. If STPT's line list fails with nothing cached, it is not asked for again for 60 s (vehicles and shapes come back without STPT's type/colour meanwhile).
-Refresh every 10 s on the map.
+Refresh every 5 s on the map; the app animates each vehicle linearly from its previous to its new position over about 4.8 s (like live.stpt.ro), and snaps instead when the previous update is more than 12 s old, the jump is over about 1 km, or the map is being panned / zoomed.
 
 ```json
 {
@@ -515,8 +515,16 @@ Refresh every 10 s on the map.
 
 The drawn path of every line, for map overlays. `route` is optional (only that line; case-insensitive; unknown line gives `[]`).
 `polylines` are Google encoded polylines, precision 5 (decode with `frontend/src/lib/polyline.ts`), one per direction/variant of the line.
-Built from the STPT GTFS file (`shapes.txt`; trips without a shape are drawn through their stops in order). Each `shapes.txt` path is simplified with Douglas-Peucker at 5 m (the bundled feed: 41,729 points down to about 9,700) so the map stays smooth; stop-sequence paths are sent as they are. `type` / `color` come from STPT's line list, or from the GTFS file when that list is down (then express/metropolitan lines show as `BUS`; that GTFS-only answer is reused for 5 minutes, then rebuilt with STPT's line facts). The app draws each line in its own colour from a fixed palette (by line id), not STPT's `color`, since STPT gives every line of a vehicle type the same colour.
-Sorted like `GET /transit/routes`. Kept in memory: it only changes when the GTFS file does. `[]` when the backend has no GTFS file (`infra/otp/get-data.sh`). All lines are about 45 KB (simplified; about 130 KB before), so fetch it once per app session.
+`variants` has one item per polyline (same order, same `polyline` string), describing it:
+
+- `direction`: `"TUR"` (GTFS `direction_id` 0), `"RETUR"` (1), or `null` when the feed gives no direction.
+- `headsign`: where that direction is heading (its terminus): the GTFS `trip_headsign`, or the name of its last stop.
+- `stops`: that direction's stops in order (`{ id, name, lat, lon }`, `id` as in `GET /transit/stops`). Only with `route=`: in the all-lines answer `stops` is `null` to keep it small.
+
+Direction, headsign and stops come from one representative trip per path (the first trip that uses that GTFS shape).
+Built from the STPT GTFS file (`shapes.txt`; trips without a shape are drawn through their stops in order). Each `shapes.txt` path is simplified with Douglas-Peucker at 5 m (the bundled feed: 41,729 points down to about 9,700) so the map stays smooth; stop-sequence paths are sent as they are. `type` / `color` come from STPT's line list, or from the GTFS file when that list is down (then express/metropolitan lines show as `BUS`; that GTFS-only answer is reused for 5 minutes, then rebuilt with STPT's line facts). The app does not use STPT's `color` (STPT gives every line of a type the same colour): each line gets its own shade from its type's hue family (trams yellows, trolleybuses purples, buses teals, express oranges, school reds, metropolitan blues / greens), picked by line id.
+Sorted like `GET /transit/routes`. Kept in memory: it only changes when the GTFS file does. `[]` when the backend has no GTFS file (`infra/otp/get-data.sh`).
+The Map tab asks for one line at a time (`route=`) when the user picks it in the line picker, like live.stpt.ro: one direction is drawn (Tur / Retur toggle) with its stops and that line's vehicles.
 
 ```json
 [
@@ -525,7 +533,16 @@ Sorted like `GET /transit/routes`. Kept in memory: it only changes when the GTFS
     "routeName": "1",
     "type": "TRAM",
     "color": "#e3a900",
-    "polylines": ["_p~iF~ps|U_ulLnnqC", "..."]
+    "polylines": ["_p~iF~ps|U_ulLnnqC", "..."],
+    "variants": [
+      {
+        "polyline": "_p~iF~ps|U_ulLnnqC",
+        "direction": "TUR",
+        "headsign": "Gara de Nord",
+        "stops": [{ "id": "2", "name": "Gara de Nord", "lat": 45.7505, "lon": 21.2075 }]
+      },
+      { "polyline": "...", "direction": "RETUR", "headsign": "Piața Gh. Domășneanu (AEM)", "stops": [] }
+    ]
   }
 ]
 ```

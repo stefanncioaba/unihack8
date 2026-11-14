@@ -28,8 +28,12 @@ public interface TransitMapper {
     // which may be null when the line is unknown or STPT's line list is down.
     VehicleDto toVehicle(StptVehicle vehicle, TransitRouteDto line);
 
-    // Line path with encoded polylines; type/colour from STPT's line when known, else from the GTFS file.
+    // Line path with encoded polylines and per-path direction, headsign and stops; type/colour from STPT's line
+    // when known, else from the GTFS file.
     TransitShapeDto toShape(RouteShape shape, TransitRouteDto line);
+
+    // The same shape without the stop lists (the all-lines answer stays small).
+    TransitShapeDto withoutStops(TransitShapeDto shape);
 
     // One STPT arrival line becomes one item per time; "HH:mm" (Romanian time) is turned into UTC.
     List<ArrivalDto> toArrivals(StptArrival arrival, Instant now);

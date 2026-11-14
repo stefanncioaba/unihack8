@@ -1,5 +1,7 @@
-// Trip guidance markers on the map (directions preview and journey mode): where to board which line, where to get off,
-// and how long each walk is. The steps come from the pure tripSteps(); this file only draws them.
+// Trip guidance markers on the map (directions preview and journey mode): where to board which line and where to get
+// off. The steps come from the pure tripSteps(); this file only draws them. The walk steps ("Walk 4 min") are not drawn
+// on the map (the dashed line already shows the walk, and their text is in the directions panel), so the map keeps to
+// the essentials: you, the destination, the route, board / get-off and the live vehicles.
 import { memo, useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Marker } from 'react-native-maps';
@@ -73,6 +75,9 @@ export function tripStepSize(kind: TripStep['kind'], label: string): { width: nu
   return { width, height };
 }
 
+/** The step kinds drawn as map markers (walk labels stay in the panel only). */
+export const MAP_STEP_KINDS: ReadonlySet<TripStep['kind']> = new Set(['board', 'alight']);
+
 type Props = {
   legs: RouteLeg[] | undefined;
   /** Name for the final walk ("Walk 3 min to <destination>"). */
@@ -83,10 +88,11 @@ type Props = {
   routes?: TransitRoute[];
 };
 
-/** Every guidance marker of a plan. Goes inside <MapView>. Memoised: a pan or selection does not re-render it. */
+/** The board / get-off markers of a plan (see MAP_STEP_KINDS). Goes inside <MapView>. Memoised: a pan or selection
+ * does not re-render it. */
 export const TripMarkers = memo(function TripMarkers({ legs, destinationName, fromLeg = 0, routes }: Props) {
   const steps = useMemo(
-    () => tripSteps(legs, destinationName, routes).filter((s) => s.legIndex >= fromLeg),
+    () => tripSteps(legs, destinationName, routes).filter((s) => s.legIndex >= fromLeg && MAP_STEP_KINDS.has(s.kind)),
     [legs, destinationName, fromLeg, routes],
   );
   return (
