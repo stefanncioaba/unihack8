@@ -37,3 +37,13 @@ export function groupByNeighbourhood(requests: HelpRequestSummary[], areas: Name
   if (outside.length > 0) sections.push({ key: OUTSIDE_KEY, title: OUTSIDE_TITLE, isHere: false, data: outside });
   return sections;
 }
+
+/** Open requests per area id (requests outside every area, or without a pin, are not counted). */
+export function countByArea(requests: HelpRequestSummary[], areas: AreaCircle[]): Record<string, number> {
+  const counts: Record<string, number> = {};
+  for (const r of requests) {
+    const id = r.lat !== null && r.lon !== null ? areaIdOf({ lat: r.lat, lon: r.lon }, areas) : null;
+    if (id !== null) counts[id] = (counts[id] ?? 0) + 1;
+  }
+  return counts;
+}

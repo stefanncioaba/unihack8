@@ -7,7 +7,7 @@ import NeighbourhoodScreen from '@/app/pulse/[id]';
 import NeighbourhoodPulseScreen from '@/app/pulse/index';
 import { areaBbox, areaIdOf, inArea } from '@/features/neighbourhoods/areas';
 import { neighbourhoodPhoto, NEIGHBOURHOOD_PHOTOS } from '@/features/neighbourhoods/photos';
-import { eventsLine, eventWhen, peopleLine, placesLine, transitLine } from '@/features/neighbourhoods/pulseFormat';
+import { eventsLine, eventWhen, helpLine, peopleLine, placesLine, transitLine } from '@/features/neighbourhoods/pulseFormat';
 import * as mocks from '@test/mocks';
 import { mockPulseAreas } from '@test/mocks/routes/neighbourhoods';
 
@@ -53,6 +53,14 @@ describe('pulse text lines', () => {
   });
 });
 
+describe('pulse help line', () => {
+  it('says how many neighbours need help', () => {
+    expect(helpLine(0)).toBe('Nobody needs help right now');
+    expect(helpLine(1)).toBe('1 neighbour needs help');
+    expect(helpLine(4)).toBe('4 neighbours need help');
+  });
+});
+
 describe('neighbourhood photos', () => {
   it('has a photo with a credit for every area the backend knows', () => {
     for (const id of ['cetate', 'fabric', 'iosefin', 'elisabetin', 'mehala', 'complex', 'circumvalatiunii', 'fratelia', 'soarelui']) {
@@ -76,6 +84,27 @@ describe('NeighbourhoodPulseScreen', () => {
     expect(card.getByText('9 going out · 7 reliable')).toBeTruthy();
     expect(card.getByTestId('pulse-photo-cetate')).toBeTruthy();
     expect(screen.getByText(/^Live · updated \d{2}:\d{2}$/)).toBeTruthy();
+  });
+
+  it('counts each area’s open help requests and opens its Help tab', async () => {
+    renderScreen(<NeighbourhoodPulseScreen />);
+    // Cetate has the open requests pinned inside it; Fabric has none; outside or unpinned ones count nowhere.
+    const cetate = within(await screen.findByTestId('pulse-help-cetate'));
+    expect(cetate.getByText('3 neighbours need help')).toBeTruthy();
+    expect(within(screen.getByTestId('pulse-help-fabric')).getByText('Nobody needs help right now')).toBeTruthy();
+    fireEvent.press(screen.getByLabelText('3 neighbours need help in Cetate'));
+    expect(mockRouter.push).toHaveBeenCalledWith('/pulse/cetate?tab=help');
+  });
+
+  it('hides the help line when the help board cannot be loaded', async () => {
+    const real = mocks.mockRequest;
+    const spy = jest.spyOn(mocks, 'mockRequest').mockImplementation((method, path, ...rest) =>
+      path.startsWith('/help-requests') ? Promise.reject(new Error('boom')) : real(method, path, ...rest),
+    );
+    renderScreen(<NeighbourhoodPulseScreen />);
+    expect(await screen.findByTestId('pulse-people-cetate')).toBeTruthy();
+    expect(screen.queryByTestId('pulse-help-cetate')).toBeNull();
+    spy.mockRestore();
   });
 
   it('keeps the order from the backend (busiest first)', async () => {

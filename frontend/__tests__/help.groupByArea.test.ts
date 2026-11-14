@@ -1,6 +1,6 @@
-// Help Board "Nearby": requests grouped by neighbourhood, your area first, outside ones last.
+// Help Board "Nearby": requests grouped by neighbourhood, your area first, outside ones last; counts for Pulse cards.
 import type { HelpRequestSummary } from '@/api/types.help';
-import { groupByNeighbourhood, OUTSIDE_KEY, OUTSIDE_TITLE, type NamedArea } from '@/features/help/groupByArea';
+import { countByArea, groupByNeighbourhood, OUTSIDE_KEY, OUTSIDE_TITLE, type NamedArea } from '@/features/help/groupByArea';
 
 const AREAS: NamedArea[] = [
   { id: 'cetate', name: 'Cetate', lat: 45.7568, lon: 21.229, radiusMeters: 750 },
@@ -46,5 +46,12 @@ describe('groupByNeighbourhood', () => {
   it('leaves out empty areas and the outside section when nothing is outside', () => {
     expect(groupByNeighbourhood([inCetate], AREAS, null).map((s) => s.key)).toEqual(['cetate']);
     expect(groupByNeighbourhood([], AREAS, null)).toEqual([]);
+  });
+});
+
+describe('countByArea', () => {
+  it('counts open requests per area and skips the ones outside or without a pin', () => {
+    expect(countByArea([inCetate, inCetate2, inFabric, farAway, noPin], AREAS)).toEqual({ cetate: 2, fabric: 1 });
+    expect(countByArea([], AREAS)).toEqual({});
   });
 });

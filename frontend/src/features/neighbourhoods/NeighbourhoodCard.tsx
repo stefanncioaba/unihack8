@@ -1,4 +1,4 @@
-// One live area card on the Neighbourhood Pulse screen: photo header, then events, transit, places and people.
+// One live area card on the Neighbourhood Pulse screen: photo header, then events, transit, places, people and help.
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { ImageBackground, Pressable, StyleSheet, View } from 'react-native';
@@ -11,7 +11,7 @@ import { Text } from '@/ui/Text';
 import { colors, radius } from '@/ui/theme';
 
 import { neighbourhoodPhoto } from './photos';
-import { eventsLine, eventWhen, LEVEL_META, peopleLine, placesLine, transitLine } from './pulseFormat';
+import { eventsLine, eventWhen, helpLine, LEVEL_META, peopleLine, placesLine, transitLine } from './pulseFormat';
 
 const PHOTO_HEIGHT = 120;
 
@@ -59,8 +59,9 @@ function Header({ area }: { area: NeighbourhoodPulse }) {
   );
 }
 
-/** Full area card; tapping it opens the area's panel (Events | Help), event rows open the event, "Show on map" opens the Map tab there. */
-export function NeighbourhoodCard({ area }: { area: NeighbourhoodPulse }) {
+/** Full area card; tapping it opens the area's panel (Events | Help), event rows open the event, the help line opens
+ * the Help tab, "Show on map" opens the Map tab there. `helpCount` is the area's open help requests (hidden while unknown). */
+export function NeighbourhoodCard({ area, helpCount }: { area: NeighbourhoodPulse; helpCount?: number }) {
   const firstAlert = area.transit.alerts[0];
   return (
     <Pressable
@@ -101,6 +102,16 @@ export function NeighbourhoodCard({ area }: { area: NeighbourhoodPulse }) {
         ) : null}
         <Row icon="storefront-outline" text={placesLine(area)} testID={`pulse-places-${area.id}`} />
         <Row icon="people-outline" text={peopleLine(area)} testID={`pulse-people-${area.id}`} />
+        {helpCount !== undefined ? (
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel={`${helpLine(helpCount)} in ${area.name}`}
+            onPress={() => router.push(`/pulse/${area.id}?tab=help`)}
+            hitSlop={4}
+          >
+            <Row icon="hand-left-outline" text={helpLine(helpCount)} tone={helpCount > 0 ? 'primary' : 'muted'} testID={`pulse-help-${area.id}`} />
+          </Pressable>
+        ) : null}
         <Pressable accessibilityRole="link" accessibilityLabel={`Show ${area.name} on the map`} onPress={() => showOnMap(area)} style={styles.mapLink} hitSlop={6}>
           <Icon name="map-outline" size={14} color={colors.gold} />
           <Text variant="caption" tone="accent">

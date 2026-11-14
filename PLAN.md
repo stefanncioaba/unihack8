@@ -417,6 +417,7 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 - [x] **24.8 Area panel:** tapping a Pulse card opens `/pulse/<area>` with the photo and two tabs: **Events** (upcoming events inside the area, same nearest-centre rule as the backend) and **Help**.
 - [x] **24.9 Help tab:** the area's open help requests from the Neighbour Help Board (task 25), newest first: `GET /help-requests?bbox=` around the area, then the same nearest-centre rule; tap one to open it, "Ask for help" when there are none.
 - [x] **24.10 Map pin fix:** the "Show on map" pin opens the trip card when tapped and disappears once that card is closed (it comes back only when "Show on map" is pressed again).
+- [x] **24.11 Help count on cards (2026-11-14):** each Pulse card shows how many open help requests are pinned in the area ("3 neighbours need help"), counted on the phone from the Help Board with the same nearest-centre rule; tapping it opens the area's Help tab.
 
 ---
 

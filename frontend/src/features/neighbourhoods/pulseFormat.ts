@@ -56,3 +56,9 @@ export function peopleLine(area: NeighbourhoodPulse): string {
   if (going === 0) return 'Nobody has joined an event here yet';
   return `${going} going out · ${reliableGoing} reliable`;
 }
+
+/** "Nobody needs help right now", "1 neighbour needs help", "3 neighbours need help" (open Help Board requests). */
+export function helpLine(count: number): string {
+  if (count === 0) return 'Nobody needs help right now';
+  return count === 1 ? '1 neighbour needs help' : `${count} neighbours need help`;
+}
