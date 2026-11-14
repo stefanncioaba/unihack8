@@ -61,3 +61,10 @@ export function mapFiltersReducer(f: MapFilters, action: MapFilterAction): MapFi
       return f;
   }
 }
+
+/** The layers actually drawn. While directions are shown (a route preview or a journey) every filter layer is off, so the
+ * map shows only the user, the route, the live vehicles of its lines and the destination. The user's own choices are
+ * kept and come back when the directions close. */
+export function visibleLayers(f: MapFilters, showingDirections: boolean): MapFilters {
+  return showingDirections ? { ...f, placesOn: false, eventsOn: false, transitOn: false } : f;
+}

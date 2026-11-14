@@ -400,7 +400,7 @@ describe('MapScreen live transit', () => {
     expect(await screen.findByTestId('vehicle-panel')).toBeTruthy();
   });
 
-  it('does not draw a route vehicle twice when Transport already shows it', async () => {
+  it('with Transport on, directions hide the network and draw only the vehicles of the route lines (each once)', async () => {
     renderScreen(<MapScreen />);
     await moveTo(0.2);
     fireEvent.press(screen.getByTestId('chip-transit'));
@@ -408,8 +408,10 @@ describe('MapScreen live transit', () => {
     fireEvent(screen.getByTestId('main-map'), 'longPress', { nativeEvent: { coordinate: { latitude: 45.7275, longitude: 21.2355 } } });
     await screen.findByTestId('directions-panel');
     await waitFor(() => expect(screen.getAllByTestId(/^route-line-/)).toHaveLength(3));
-    await new Promise((r) => setTimeout(r, 50));
-    expect(legVehicleMarkers()).toHaveLength(0);
-    expect(vehicleMarkers()).toHaveLength(8);
+    // Directions mode turns the Transport layer off, so only the ride legs' live vehicles are drawn (no duplicates).
+    await waitFor(() => expect(vehicleMarkers()).toHaveLength(0));
+    await waitFor(() => expect(legVehicleMarkers().length).toBeGreaterThan(0));
+    const ids = legVehicleMarkers().map((m) => m.props.testID);
+    expect(new Set(ids).size).toBe(ids.length);
   });
 });

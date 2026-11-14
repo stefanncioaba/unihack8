@@ -14,6 +14,8 @@ type Props = {
   style?: StyleProp<ViewStyle>;
   /** Translucent navy fill with a stronger border, readable over the map. */
   overMap?: boolean;
+  /** Greyed out and not pressable (e.g. the map filters while directions are shown). */
+  disabled?: boolean;
   testID?: string;
 };
 
@@ -29,23 +31,24 @@ export const MAP_CHIP_BG = 'rgba(0,29,61,0.92)';
 
 /** Pressable style for a chip. State colours go last so a caller's style can never override the selected yellow;
  * pressed only dims and shrinks it. */
-export function chipStyle(selected: boolean, overMap: boolean, style?: StyleProp<ViewStyle>) {
+export function chipStyle(selected: boolean, overMap: boolean, style?: StyleProp<ViewStyle>, disabled = false) {
   const { backgroundColor, borderColor } = chipColors(selected, overMap);
-  return ({ pressed }: { pressed: boolean }): StyleProp<ViewStyle> => [styles.chip, style, { backgroundColor, borderColor }, pressed && styles.pressed];
+  return ({ pressed }: { pressed: boolean }): StyleProp<ViewStyle> => [styles.chip, style, { backgroundColor, borderColor }, pressed && styles.pressed, disabled && styles.disabled];
 }
 
 /** Filter chip: navy when idle, solid signal yellow with ink text when selected. Pressing only dims and shrinks it a
  * little, so a selected chip keeps its yellow while the finger is down. */
-export function Chip({ label, selected = false, onPress, icon, style, overMap = false, testID }: Props) {
+export function Chip({ label, selected = false, onPress, icon, style, overMap = false, disabled = false, testID }: Props) {
   const { fg } = chipColors(selected, overMap);
   return (
     <Pressable
       testID={testID}
       accessibilityRole="button"
       accessibilityLabel={label}
-      accessibilityState={{ selected }}
+      accessibilityState={{ selected, disabled }}
       onPress={onPress}
-      style={chipStyle(selected, overMap, style)}
+      disabled={disabled}
+      style={chipStyle(selected, overMap, style, disabled)}
     >
       {icon && <Icon name={icon} size={12} color={fg} />}
       <Text variant="chip" style={{ color: fg }}>
@@ -85,5 +88,6 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
   },
   pressed: { opacity: 0.8, transform: [{ scale: 0.96 }] },
+  disabled: { opacity: 0.4 },
   status: { paddingHorizontal: 9, height: 22, borderRadius: radius.chip, alignItems: 'center', justifyContent: 'center' },
 });

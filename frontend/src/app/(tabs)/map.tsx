@@ -20,7 +20,7 @@ import { MapFilterBar } from '@/features/map/MapFilterBar';
 import { MapPanel } from '@/features/map/MapPanel';
 import type { TransitVehicle } from '@/api/types.transit';
 import { MapProvider, isTransitLayerSelection, useMapContext } from '@/features/map/MapContext';
-import { INITIAL_MAP_FILTERS, mapFiltersReducer, type MapFilterAction } from '@/features/map/mapFilters';
+import { INITIAL_MAP_FILTERS, mapFiltersReducer, visibleLayers, type MapFilterAction } from '@/features/map/mapFilters';
 import { PlaceMarkers } from '@/features/map/PlaceMarkers';
 import { TransitLayer } from '@/features/transit/TransitLayer';
 import { useEventsInArea } from '@/hooks/useMapEvents';
@@ -50,7 +50,11 @@ function MapBody() {
   const [journeyTarget, setJourneyTarget] = useState<JourneyTarget | null>(null);
   const journey = useJourney(journeyTarget);
   const [filters, dispatchFilter] = useReducer(mapFiltersReducer, INITIAL_MAP_FILTERS);
-  const { placesOn, categories, eventsOn, transitOn } = filters;
+  // While directions are shown (preview or journey) the filters are off: only the user, the route, its live vehicles
+  // and the destination are on the map. The chosen filters come back when the directions close.
+  const showingDirections = !!destination || !!journeyTarget;
+  const layers = visibleLayers(filters, showingDirections);
+  const { placesOn, categories, eventsOn, transitOn } = layers;
 
   // Zoomed far out there would be too many pins: ask for places only below this span (about 6 km).
   const span = bbox ? bbox.maxLat - bbox.minLat : 0;
@@ -122,6 +126,18 @@ function MapBody() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [routeRequest]);
 
+  // Directions open: frame the whole trip (start and destination) so the route and its vehicles are in view.
+  const tripStart = destination?.origin?.coords ?? position;
+  useEffect(() => {
+    if (!destination || journeyTarget) return;
+    mapRef.current?.fitToCoordinates(
+      [tripStart, destination.coords].map((p) => ({ latitude: p.lat, longitude: p.lon })),
+      { edgePadding: { top: 160, right: 60, bottom: 320, left: 60 }, animated: true },
+    );
+    // Only when a new destination is chosen, not on every position update or vehicle panel toggle.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [destination?.coords.lat, destination?.coords.lon]);
+
   // Journey mode: the camera follows the user.
   useEffect(() => {
     if (journeyTarget && journey.position) mapRef.current?.animateToRegion(regionFor(journey.position, 0.006), 500);
@@ -165,7 +181,7 @@ function MapBody() {
         customMapStyle={darkMapStyle}
         testID="main-map"
       >
-        {focus && !params.placeId && !params.eventId && <Marker coordinate={{ latitude: focus.lat, longitude: focus.lon }} title={params.title} pinColor={colors.oxford} testID="focus-marker" />}
+        {focus && !showingDirections && !params.placeId && !params.eventId && <Marker coordinate={{ latitude: focus.lat, longitude: focus.lon }} title={params.title} pinColor={colors.oxford} testID="focus-marker" />}
         {placesVisible && places.data && (
           <PlaceMarkers
             places={places.data.items}
@@ -214,7 +230,14 @@ function MapBody() {
             <Icon name="locate-outline" size={18} />
           </Pressable>
         </View>
-        <MapFilterBar filters={filters} onChange={changeFilter} />
+        <MapFilterBar filters={layers} onChange={changeFilter} disabled={showingDirections} />
+        {showingDirections && (
+          <View style={styles.hint} testID="filters-off-hint">
+            <Text variant="caption" tone="muted">
+              Filters are off while directions are shown
+            </Text>
+          </View>
+        )}
         {placesOn && !zoomedIn && (
           <View style={styles.hint} testID="zoom-hint">
             <Text variant="caption" tone="muted">
