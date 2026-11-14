@@ -251,7 +251,6 @@ function MapBody() {
         showsIndoors={false}
         showsIndoorLevelPicker={false}
         showsTraffic={false}
-        toolbarEnabled={false}
         testID="main-map"
       >
         {focus && !showingDirections && !params.placeId && !params.eventId && <Marker coordinate={{ latitude: focus.lat, longitude: focus.lon }} title={params.title} pinColor={colors.oxford} testID="focus-marker" />}
