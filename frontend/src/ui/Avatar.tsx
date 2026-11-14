@@ -3,7 +3,7 @@ import Svg, { Circle, Defs, LinearGradient, Path, Stop } from 'react-native-svg'
 
 import { colors } from './theme';
 
-/** Neutral circular avatar: teal-to-violet disc with a soft head and shoulders silhouette. */
+/** Neutral circular avatar: navy disc with a soft head and shoulders silhouette. */
 export function Avatar({ size = 40 }: { size?: number }) {
   return (
     <Svg width={size} height={size} viewBox="0 0 48 48" accessibilityLabel="Profile picture" testID="default-avatar">

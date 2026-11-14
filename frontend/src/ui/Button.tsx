@@ -1,4 +1,4 @@
-// Buttons. Orange (primary) marks the main action of a screen; others stay quiet.
+// Buttons. Signal yellow (primary) marks the main action of a screen; others stay quiet.
 import { ActivityIndicator, Pressable, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 
 import { Icon, type IconName } from './Icon';

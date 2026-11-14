@@ -1,4 +1,4 @@
-// Abstract cyan/orange light motif for the empty chat's breathing zone (no logo, no mascot).
+// Abstract navy/gold light motif for the empty chat's breathing zone (no logo, no mascot).
 import Svg, { Circle, Defs, LinearGradient, Stop } from 'react-native-svg';
 
 import { colors } from '@/ui/theme';

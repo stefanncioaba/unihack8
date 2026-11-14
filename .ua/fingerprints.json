@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "e9aa0d4fd8bc9c9de881e7509de3c34285ac2e19",
-  "generatedAt": "2026-11-14T12:20:17.040Z",
+  "gitCommitHash": "0616da1b07814ba0fc1911dbf527ef6c9943707a",
+  "generatedAt": "2026-11-14T12:33:29.947Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,7 +25,7 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "4633bf0b0b6cf8731b559c449f0b3774e6e61a948a26b24bfbbbf80b8597b67f",
+      "contentHash": "08e5aa9acbb135678b1e158601fbeef41b9f66d83690fbc282c003bd4b137db6",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -28801,7 +28801,7 @@
     },
     "frontend/__tests__/lib.misc.test.ts": {
       "filePath": "frontend/__tests__/lib.misc.test.ts",
-      "contentHash": "2e805b407a7587226f24c8c2711bd751fa221d7211711d26a5b21f2514e168c2",
+      "contentHash": "ffb0dfc0b9f288470b84d61393fdb2189cf866ff61987e3e956874551d659819",
       "functions": [],
       "classes": [],
       "imports": [
@@ -28837,9 +28837,12 @@
           ]
         },
         {
-          "source": "@/features/users/ReliabilityGauge",
+          "source": "@/features/users/ReliabilityLine",
           "specifiers": [
-            "gaugeFraction"
+            "LINE_MAX",
+            "linePosition",
+            "lineStops",
+            "nextStopLabel"
           ]
         },
         {
@@ -28873,7 +28876,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 157,
+      "totalLines": 180,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/lib.polyline.test.ts": {
@@ -28902,7 +28905,7 @@
     },
     "frontend/__tests__/lib.time.test.ts": {
       "filePath": "frontend/__tests__/lib.time.test.ts",
-      "contentHash": "28b69e9c61ad507d712f8a827461f4d82684a06cc23606f2f9817a1d9f5a7403",
+      "contentHash": "ba6504d125f6147b281f58bd4c63420561d16072136927e067b99659241d0611",
       "functions": [],
       "classes": [],
       "imports": [
@@ -28917,12 +28920,13 @@
             "formatEventDate",
             "formatTime",
             "minutesUntil",
+            "monthDay",
             "toBucharest"
           ]
         }
       ],
       "exports": [],
-      "totalLines": 92,
+      "totalLines": 96,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/live.backend.test.ts": {
@@ -29611,7 +29615,7 @@
     },
     "frontend/__tests__/screens.home.test.tsx": {
       "filePath": "frontend/__tests__/screens.home.test.tsx",
-      "contentHash": "24fe416f1562234b093f72c4f0d0fa87984bc906bb6739da7481d798996bc711",
+      "contentHash": "c73755a4f0d0206be737d9140994e3d93f29ce120d6ea6d9681a3ebb447de47c",
       "functions": [],
       "classes": [],
       "imports": [
@@ -29647,12 +29651,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 126,
+      "totalLines": 134,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/screens.profile.test.tsx": {
       "filePath": "frontend/__tests__/screens.profile.test.tsx",
-      "contentHash": "03cded811ae58f0f5f1ac718b8dd821ba9656039b0761df90e046aa55bb7beb0",
+      "contentHash": "f650b8beb58c6f0cb33e7b242a15a7aec9c116d3f0158f08db0bdd0ac001c6f4",
       "functions": [
         {
           "name": "startEditing",
@@ -29733,12 +29737,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 241,
+      "totalLines": 240,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/screens.users.test.tsx": {
       "filePath": "frontend/__tests__/screens.users.test.tsx",
-      "contentHash": "08606517204ffb62b8198b12f5784ac07fae2ae530f5a64ffbfc46d94cd49eb4",
+      "contentHash": "7108c5f2031d6474cbddb80b3b70e8e24cfede9868f401694df9b5f76385f453",
       "functions": [],
       "classes": [],
       "imports": [
@@ -30678,7 +30682,7 @@
     },
     "frontend/src/app/(auth)/sign-up.tsx": {
       "filePath": "frontend/src/app/(auth)/sign-up.tsx",
-      "contentHash": "be311f7952e05d22d798d7195e3ef563c8b4d450a1a7e782e8d1f23000e664ea",
+      "contentHash": "91fe649473a69a88cc0993806b6cebfb3381351de21bab619fae57201c82969c",
       "functions": [
         {
           "name": "SignUpScreen",
@@ -30748,7 +30752,7 @@
     },
     "frontend/src/app/(tabs)/_layout.tsx": {
       "filePath": "frontend/src/app/(tabs)/_layout.tsx",
-      "contentHash": "0580cf5da0d9582bb1d5a2960f209171ea5aae8e4c438dbdd58f7fa7f6c39d95",
+      "contentHash": "9670016511f84220a09a02119d288552ea03223564f2e3a779ea2ad7bf91348f",
       "functions": [
         {
           "name": "tab",
@@ -30804,7 +30808,7 @@
     },
     "frontend/src/app/(tabs)/ai.tsx": {
       "filePath": "frontend/src/app/(tabs)/ai.tsx",
-      "contentHash": "f0541c18fec01f4cf4649af3d44710d90b3d6d2d46ff2ada2f03cc3a8994420a",
+      "contentHash": "e9e9fbd7dd77f137e1d109d4d9911dc800480a62a55e70c6465e62018db1364e",
       "functions": [
         {
           "name": "AiScreen",
@@ -30907,8 +30911,16 @@
     },
     "frontend/src/app/(tabs)/index.tsx": {
       "filePath": "frontend/src/app/(tabs)/index.tsx",
-      "contentHash": "f8663940bdfa1ed0888b33bd7b212e62f517e9c8a312c970915fd265284873e1",
+      "contentHash": "1474867a170f241ed3ab5b702c2088e4b877b933a60d4837c544b3cdd90f08d7",
       "functions": [
+        {
+          "name": "LivePill",
+          "params": [
+            "{ offline }"
+          ],
+          "exported": false,
+          "lineCount": 10
+        },
         {
           "name": "HomeScreen",
           "params": [],
@@ -30993,8 +31005,7 @@
         {
           "source": "@/ui/Chip",
           "specifiers": [
-            "Chip",
-            "StatusChip"
+            "Chip"
           ]
         },
         {
@@ -31040,12 +31051,12 @@
       "exports": [
         "HomeScreen"
       ],
-      "totalLines": 135,
+      "totalLines": 160,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/(tabs)/map.tsx": {
       "filePath": "frontend/src/app/(tabs)/map.tsx",
-      "contentHash": "f8c6aedf8cde09535d8717f426bbd5c0421bb4628ba81239cd087b89f3b159bb",
+      "contentHash": "c8cfcd83726e9201149659ea1744c0544b1c1b5c2608b77f404417c4226adbf1",
       "functions": [
         {
           "name": "MapBody",
@@ -31254,7 +31265,7 @@
     },
     "frontend/src/app/(tabs)/profile.tsx": {
       "filePath": "frontend/src/app/(tabs)/profile.tsx",
-      "contentHash": "d19e48c92e394cbdf2fafaef3d9462a0f0286a44e209cbfe18197fa4d39eba39",
+      "contentHash": "22e7336346fdbb14a4f79db8d442daea9cceb1588a0459459072d14cd75f784e",
       "functions": [
         {
           "name": "ProfileScreen",
@@ -31298,9 +31309,9 @@
           ]
         },
         {
-          "source": "@/features/users/ReliabilityGauge",
+          "source": "@/features/users/ReliabilityLine",
           "specifiers": [
-            "ReliabilityGauge"
+            "ReliabilityLine"
           ]
         },
         {
@@ -31380,7 +31391,7 @@
       "exports": [
         "ProfileScreen"
       ],
-      "totalLines": 107,
+      "totalLines": 108,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/_layout.tsx": {
@@ -31490,7 +31501,7 @@
     },
     "frontend/src/app/events/[id]/index.tsx": {
       "filePath": "frontend/src/app/events/[id]/index.tsx",
-      "contentHash": "1cb1fe7d54fd00eb4d4f51a84ff7606aaced6b16de304c1b59a68f548dcc9c4a",
+      "contentHash": "96fda1462804773a300596263a257d937808c9ceae077833881d31450d6f77f7",
       "functions": [
         {
           "name": "InfoRow",
@@ -31660,7 +31671,7 @@
     },
     "frontend/src/app/events/[id]/scan.tsx": {
       "filePath": "frontend/src/app/events/[id]/scan.tsx",
-      "contentHash": "08832113a3d983b98e4a9994003e8a534114b6fcfabea2925f81f693e5dddb6f",
+      "contentHash": "16ce807c58ef97926fab795ec2753b642ec6b7b25d3257822497fb631920669e",
       "functions": [
         {
           "name": "ScanScreen",
@@ -31777,7 +31788,7 @@
     },
     "frontend/src/app/events/[id]/ticket.tsx": {
       "filePath": "frontend/src/app/events/[id]/ticket.tsx",
-      "contentHash": "9aa328b666d23f5da246c11ea63ce6ece5fb3a5414d81ad42419a7ca87b9e14f",
+      "contentHash": "531ecbbc75cef72bf0e6d4a6d891b9d992dbd4c03e1b8c2b2a2d10607b80a77f",
       "functions": [
         {
           "name": "TicketScreen",
@@ -31898,7 +31909,7 @@
     },
     "frontend/src/app/events/index.tsx": {
       "filePath": "frontend/src/app/events/index.tsx",
-      "contentHash": "8aed0e8b5537ac0b4bf3b2b1d046c435087961dd1479e0c180c57e0b409dfea7",
+      "contentHash": "697100be996f87a0361fca544677f18728b17c78437a5114a394c6b647f60db2",
       "functions": [
         {
           "name": "AllEventsScreen",
@@ -32157,13 +32168,13 @@
     },
     "frontend/src/app/users/[id].tsx": {
       "filePath": "frontend/src/app/users/[id].tsx",
-      "contentHash": "f612372d3444af5b867de166aaeae6a1b737721c5a4fa3087bb6fada1ca108a9",
+      "contentHash": "dd0a684aa791180419b42e33f6f4e8b01be3b7b0ce39c0b57843630b008eecd5",
       "functions": [
         {
           "name": "PublicProfileScreen",
           "params": [],
           "exported": true,
-          "lineCount": 46
+          "lineCount": 44
         }
       ],
       "classes": [],
@@ -32188,9 +32199,9 @@
           ]
         },
         {
-          "source": "@/features/users/ReliabilityGauge",
+          "source": "@/features/users/ReliabilityLine",
           "specifiers": [
-            "ReliabilityGauge"
+            "ReliabilityLine"
           ]
         },
         {
@@ -32209,12 +32220,6 @@
           "source": "@/ui/Avatar",
           "specifiers": [
             "Avatar"
-          ]
-        },
-        {
-          "source": "@/ui/Card",
-          "specifiers": [
-            "Card"
           ]
         },
         {
@@ -32247,7 +32252,7 @@
       "exports": [
         "PublicProfileScreen"
       ],
-      "totalLines": 67,
+      "totalLines": 64,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/users/_layout.tsx": {
@@ -32408,7 +32413,7 @@
     },
     "frontend/src/features/ai/ChatBubble.tsx": {
       "filePath": "frontend/src/features/ai/ChatBubble.tsx",
-      "contentHash": "55c197ed8f45f3e5a558900f701417102b61122600c5a14b7e3374bae9098511",
+      "contentHash": "a0472b64d708dade1beb9f79d1d456907f346cf20e35762014686442187082c5",
       "functions": [
         {
           "name": "Sources",
@@ -32512,7 +32517,7 @@
     },
     "frontend/src/features/ai/ChatInput.tsx": {
       "filePath": "frontend/src/features/ai/ChatInput.tsx",
-      "contentHash": "e74fb3f1a8231861813face3ac4a608dbfdd871c1c342ed7d65ae547bb27c843",
+      "contentHash": "e10096d8690d8f9d514692dfef1cd024b1040adebdf50611ffde986ed25fde5c",
       "functions": [
         {
           "name": "ChatInput",
@@ -32568,7 +32573,7 @@
     },
     "frontend/src/features/ai/ChatMotif.tsx": {
       "filePath": "frontend/src/features/ai/ChatMotif.tsx",
-      "contentHash": "6d7d591a11321747bd963dcf717f21b1457aa87913b89e23a7025b50df8bf658",
+      "contentHash": "c6c6487edabbe75127d919b6c2d3c3b0898a84459493f52d5bc034ae14dba776",
       "functions": [
         {
           "name": "ChatMotif",
@@ -32606,7 +32611,7 @@
     },
     "frontend/src/features/ai/ResultCards.tsx": {
       "filePath": "frontend/src/features/ai/ResultCards.tsx",
-      "contentHash": "b058a5dab5c31d91928d6586babea85506a75a190c0893c1e2ba7e5f696030e3",
+      "contentHash": "9102894e218ac1908497e192cd745b4814752d545725fe2a35bf17a652ddb545",
       "functions": [
         {
           "name": "showOnMap",
@@ -32841,7 +32846,7 @@
     },
     "frontend/src/features/auth/AuthShell.tsx": {
       "filePath": "frontend/src/features/auth/AuthShell.tsx",
-      "contentHash": "a8c62649421d1ea457c792d39e63599042f078afb6c0d6551b2b4e64905dd2d7",
+      "contentHash": "cc94ba08b6353c603699450b1045703c72f61c9422b23e37ee1531b6dccb8c1d",
       "functions": [
         {
           "name": "Motif",
@@ -32969,7 +32974,7 @@
     },
     "frontend/src/features/directions/DirectionsLayer.tsx": {
       "filePath": "frontend/src/features/directions/DirectionsLayer.tsx",
-      "contentHash": "e3f898843d13bfbdd6732e349ebe540b0e98aeacca0861bc359d090b93f96753",
+      "contentHash": "44dab0f49cf18071c4a0f2c2f49a2b421e32027b04afe02911d1954805437db9",
       "functions": [
         {
           "name": "DirectionsLayer",
@@ -33026,7 +33031,7 @@
     },
     "frontend/src/features/directions/DirectionsPanel.tsx": {
       "filePath": "frontend/src/features/directions/DirectionsPanel.tsx",
-      "contentHash": "13f0ed7dfea0c2cb42f2ba6dfb6fdb1f4b6dcc1aecd2957869026e1e5359e7c4",
+      "contentHash": "8bf2eb5406dac9ac6386130d18b80dcaf8e8ca0742e693b290c365211122b3e2",
       "functions": [
         {
           "name": "legIcon",
@@ -33258,7 +33263,7 @@
     },
     "frontend/src/features/events/EventArt.tsx": {
       "filePath": "frontend/src/features/events/EventArt.tsx",
-      "contentHash": "aae27a893266f52cf3680f654f8b63bd23dc596ee8f6fa3ada47ad2eead57eb4",
+      "contentHash": "b912bad8a49219c73fa187ac25cdc5f970ac7fdf8dad9334a15de93c988ca813",
       "functions": [
         {
           "name": "EventArt",
@@ -33320,7 +33325,7 @@
     },
     "frontend/src/features/events/EventCards.tsx": {
       "filePath": "frontend/src/features/events/EventCards.tsx",
-      "contentHash": "c54babf16bb068e1cf5135b072ac9836cc9a761adfc43e0bfdd6dd184114fabf",
+      "contentHash": "748c96f9c953a9980b3fe023e5dd3d11dc347a38815ac1b5a17f2eca27f995d3",
       "functions": [
         {
           "name": "openEvent",
@@ -33339,12 +33344,20 @@
           "lineCount": 5
         },
         {
+          "name": "DateBadge",
+          "params": [
+            "{ iso }"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
           "name": "EventCard",
           "params": [
             "{ event, width = 264 }"
           ],
           "exported": true,
-          "lineCount": 35
+          "lineCount": 38
         },
         {
           "name": "EventListItem",
@@ -33380,7 +33393,8 @@
         {
           "source": "@/lib/time",
           "specifiers": [
-            "formatEventDate"
+            "formatEventDate",
+            "monthDay"
           ]
         },
         {
@@ -33430,15 +33444,16 @@
       ],
       "exports": [
         "openEvent",
+        "DateBadge",
         "EventCard",
         "EventListItem"
       ],
-      "totalLines": 127,
+      "totalLines": 145,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/events/LocationPickerModal.tsx": {
       "filePath": "frontend/src/features/events/LocationPickerModal.tsx",
-      "contentHash": "28ffad636191652f2922c816f64607963bd19f9c7c255fba08934e3ca7e16f71",
+      "contentHash": "2a3fd14047b1ac60aa0b7ee02b078946cb68943259e311f667df31851ca8d98f",
       "functions": [
         {
           "name": "LocationPickerModal",
@@ -33527,7 +33542,7 @@
     },
     "frontend/src/features/events/ParticipantList.tsx": {
       "filePath": "frontend/src/features/events/ParticipantList.tsx",
-      "contentHash": "e82dec764d408f55967abecaa31411ce3f83066248733c7c61882ba3192c3f74",
+      "contentHash": "bcca574df91ee5cb42bddd048ef1ba91d61f3200e4ce17743a93ac7a03cfb488",
       "functions": [
         {
           "name": "statusChip",
@@ -33625,7 +33640,7 @@
     },
     "frontend/src/features/events/categories.ts": {
       "filePath": "frontend/src/features/events/categories.ts",
-      "contentHash": "3026168ae888eac554905b180becd724b92be7ae4166f8a6936749a78020f0c9",
+      "contentHash": "34aed64c121c8f5faf1528d034e8bb7691aa0ed70c7ccc4a4dc6629eeaf23fe5",
       "functions": [
         {
           "name": "categoryMeta",
@@ -33885,7 +33900,7 @@
     },
     "frontend/src/features/map/ClusterMarker.tsx": {
       "filePath": "frontend/src/features/map/ClusterMarker.tsx",
-      "contentHash": "ae15327320b4602ee9ff9bdada310ab820b20e6b890673dc4e3457de2fd5566d",
+      "contentHash": "9f6f8422323ab51c924215a30da0c1e10f6c0dcdbef84898fb493bab80b363b3",
       "functions": [
         {
           "name": "ClusterMarker",
@@ -33932,7 +33947,7 @@
     },
     "frontend/src/features/map/EventMarkers.tsx": {
       "filePath": "frontend/src/features/map/EventMarkers.tsx",
-      "contentHash": "5e754404deea832043d446851861886167a1e327cd3f20035d44366d24c1d339",
+      "contentHash": "24366ece4fb402e8adc957f5c21d2cfb18c56b3da402db6e777ba38f851fec38",
       "functions": [
         {
           "name": "EventPin",
@@ -34162,7 +34177,7 @@
     },
     "frontend/src/features/map/MapFilterBar.tsx": {
       "filePath": "frontend/src/features/map/MapFilterBar.tsx",
-      "contentHash": "1479d5f81bc054709e56cf878736f805a395e96a848625b2788cb089575c5562",
+      "contentHash": "eb74f116ba040d59ad611e99d16072cfc838a1e123a7fd5643587269d890eb23",
       "functions": [
         {
           "name": "MapFilterBar",
@@ -34210,7 +34225,7 @@
     },
     "frontend/src/features/map/MapPanel.tsx": {
       "filePath": "frontend/src/features/map/MapPanel.tsx",
-      "contentHash": "5616227ab106d5abdd778a5d0d7dbbec52c439fc9453d8c30dd0750a9abb4e79",
+      "contentHash": "f44af6ff266793e2e4b99b34330f12caf78658d439449f8d3971f94521af0330",
       "functions": [
         {
           "name": "PanelContent",
@@ -34290,7 +34305,7 @@
     },
     "frontend/src/features/map/PlaceMarkers.tsx": {
       "filePath": "frontend/src/features/map/PlaceMarkers.tsx",
-      "contentHash": "cc15fe9081f0b512cdcc7860a6057f2f6663d215bfd77fb30a2a1034d73e119c",
+      "contentHash": "25619d4d940377d1bcaebc3419f94365afd2ff4b212705f23c12f06c6ea1f3dc",
       "functions": [
         {
           "name": "PlacePin",
@@ -34388,7 +34403,7 @@
     },
     "frontend/src/features/map/PlacePanel.tsx": {
       "filePath": "frontend/src/features/map/PlacePanel.tsx",
-      "contentHash": "6862d403daca43adfa498aa0123fc2d486d5ef6243d0abb2bacc26954aa847ca",
+      "contentHash": "b547d49cd4609769e1064f4129d243506ea90bcc7bf557f08cb4ae5b48e4aa77",
       "functions": [
         {
           "name": "Row",
@@ -34517,13 +34532,13 @@
     },
     "frontend/src/features/transit/CityInfoStrip.tsx": {
       "filePath": "frontend/src/features/transit/CityInfoStrip.tsx",
-      "contentHash": "871df8653014ec4a0f2e639c7fb4be80eae73a52aecd4a44c4e7b79ab6f30f3f",
+      "contentHash": "95f3c17ac4cae11cc74362f87a18049f8aa728af6753286c988529e7a3c26e86",
       "functions": [
         {
           "name": "CityInfoStrip",
           "params": [],
           "exported": true,
-          "lineCount": 66
+          "lineCount": 83
         }
       ],
       "classes": [],
@@ -34556,15 +34571,21 @@
           ]
         },
         {
-          "source": "@/ui/Card",
+          "source": "@/lib/time",
           "specifiers": [
-            "Card"
+            "formatTime"
           ]
         },
         {
           "source": "@/ui/Icon",
           "specifiers": [
             "Icon"
+          ]
+        },
+        {
+          "source": "@/ui/RoutePlate",
+          "specifiers": [
+            "RoutePlate"
           ]
         },
         {
@@ -34576,19 +34597,20 @@
         {
           "source": "@/ui/theme",
           "specifiers": [
-            "colors"
+            "colors",
+            "radius"
           ]
         }
       ],
       "exports": [
         "CityInfoStrip"
       ],
-      "totalLines": 106,
+      "totalLines": 126,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/transit/StopPanel.tsx": {
       "filePath": "frontend/src/features/transit/StopPanel.tsx",
-      "contentHash": "840fc3d00fab8a1269258d1ae393cd42839f6f9d27e9220e2aabf9697a3e7ff0",
+      "contentHash": "c763d75fa10d0f723a59976b0e30b07a6153f9952de6baae9852018bdc799930",
       "functions": [
         {
           "name": "arrivalLabel",
@@ -34605,7 +34627,7 @@
             "{ route, headsign, right, muted, testID }"
           ],
           "exported": false,
-          "lineCount": 15
+          "lineCount": 13
         },
         {
           "name": "Arrivals",
@@ -34669,15 +34691,15 @@
           ]
         },
         {
-          "source": "@/ui/Text",
+          "source": "@/ui/RoutePlate",
           "specifiers": [
-            "Text"
+            "RoutePlate"
           ]
         },
         {
-          "source": "@/ui/theme",
+          "source": "@/ui/Text",
           "specifiers": [
-            "colors"
+            "Text"
           ]
         },
         {
@@ -34692,12 +34714,12 @@
         "arrivalLabel",
         "StopPanel"
       ],
-      "totalLines": 132,
+      "totalLines": 121,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/transit/TransitControls.tsx": {
       "filePath": "frontend/src/features/transit/TransitControls.tsx",
-      "contentHash": "1f50d42c7991e30c933f3ddfb8aa16d46b841bbfe99570b45a9731ce290b21b3",
+      "contentHash": "7e0ae2cb718983380ae4459ab8bdbf1267240b9533864a7fd098b37e57c20eab",
       "functions": [
         {
           "name": "TransitControls",
@@ -34738,7 +34760,7 @@
     },
     "frontend/src/features/transit/TransitLayer.tsx": {
       "filePath": "frontend/src/features/transit/TransitLayer.tsx",
-      "contentHash": "40d8e0c01757e2ef51e70bb26889b41ebeed9496f98cfc3e4ae6ba651020cb03",
+      "contentHash": "c001e1bdfbeed72b0c68bbfd452abe7645f77a69f03d6792af5e34094ecc1606",
       "functions": [
         {
           "name": "StopDot",
@@ -34919,86 +34941,9 @@
       "totalLines": 70,
       "hasStructuralAnalysis": true
     },
-    "frontend/src/features/users/ReliabilityGauge.tsx": {
-      "filePath": "frontend/src/features/users/ReliabilityGauge.tsx",
-      "contentHash": "353c73361e4574f2b35fc7fc6953e1d28c3d1b502204a6bff52bdfa621b64673",
-      "functions": [
-        {
-          "name": "gaugeFraction",
-          "params": [
-            "score"
-          ],
-          "returnType": "number",
-          "exported": true,
-          "lineCount": 3
-        },
-        {
-          "name": "ReliabilityGauge",
-          "params": [
-            "{ score }"
-          ],
-          "exported": true,
-          "lineCount": 62
-        }
-      ],
-      "classes": [],
-      "imports": [
-        {
-          "source": "react",
-          "specifiers": [
-            "useState"
-          ]
-        },
-        {
-          "source": "react-native",
-          "specifiers": [
-            "Pressable",
-            "StyleSheet",
-            "View"
-          ]
-        },
-        {
-          "source": "react-native-svg",
-          "specifiers": [
-            "Svg",
-            "Defs",
-            "LinearGradient",
-            "Path",
-            "Stop"
-          ]
-        },
-        {
-          "source": "@/ui/Text",
-          "specifiers": [
-            "Text"
-          ]
-        },
-        {
-          "source": "@/ui/theme",
-          "specifiers": [
-            "colors"
-          ]
-        },
-        {
-          "source": "./reliability",
-          "specifiers": [
-            "formatPoints",
-            "RELIABILITY_RULES",
-            "START_SCORE"
-          ]
-        }
-      ],
-      "exports": [
-        "GAUGE_MAX",
-        "gaugeFraction",
-        "ReliabilityGauge"
-      ],
-      "totalLines": 95,
-      "hasStructuralAnalysis": true
-    },
     "frontend/src/features/users/ReliabilityLog.tsx": {
       "filePath": "frontend/src/features/users/ReliabilityLog.tsx",
-      "contentHash": "9e7b71603bff4862d125ac0d8ab04eccf1553ef5dbc4fe974ec56def8a3c26d0",
+      "contentHash": "9fbd100464c39bde8518e3435b963f34435f79a75ea87a2696ec2833cc8ecb24",
       "functions": [
         {
           "name": "ReliabilityLog",
@@ -36105,7 +36050,7 @@
     },
     "frontend/src/lib/time.ts": {
       "filePath": "frontend/src/lib/time.ts",
-      "contentHash": "e1aa115732037adacb994b493972ece2ee8b9fa2898fa36195d7cbc3c685593a",
+      "contentHash": "7e19620e0d9fa9cdf9509d84a730f51b8b72ccf2542bab0aadb2371b4b4c3fa7",
       "functions": [
         {
           "name": "lastSundayAt01Utc",
@@ -36190,6 +36135,15 @@
           "lineCount": 4
         },
         {
+          "name": "monthDay",
+          "params": [
+            "iso"
+          ],
+          "returnType": "{ month: string; day: number }",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
           "name": "formatEventDate",
           "params": [
             "iso"
@@ -36239,13 +36193,14 @@
         "formatTime",
         "formatDay",
         "formatDate",
+        "monthDay",
         "formatEventDate",
         "startOfBucharestDayIso",
         "DATE_PRESETS",
         "dateRangeFor",
         "minutesUntil"
       ],
-      "totalLines": 135,
+      "totalLines": 141,
       "hasStructuralAnalysis": true
     },
     "frontend/src/lib/validation.ts": {
@@ -36292,7 +36247,7 @@
     },
     "frontend/src/ui/Avatar.tsx": {
       "filePath": "frontend/src/ui/Avatar.tsx",
-      "contentHash": "47e1d607c5645660752768f634742e234495051b2aecf9614941a5b7a7770beb",
+      "contentHash": "f4b8c9a2a1685aeea20d7e7195c230350cd266ac183f7a21a66d634d8d06e4b3",
       "functions": [
         {
           "name": "Avatar",
@@ -36331,7 +36286,7 @@
     },
     "frontend/src/ui/Button.tsx": {
       "filePath": "frontend/src/ui/Button.tsx",
-      "contentHash": "4389638d76bbbc3f9266a89a6a6ec1102e5b1d398a198ec6544bd91b57e94bbd",
+      "contentHash": "a6cca32175b7a505b78bff31486cf06e9c09ca9c261637eb9ebe003e53a84e12",
       "functions": [
         {
           "name": "foreground",
@@ -36438,7 +36393,7 @@
     },
     "frontend/src/ui/Chip.tsx": {
       "filePath": "frontend/src/ui/Chip.tsx",
-      "contentHash": "6aeeccb43a2947bdf5340bb58ec150f22e91855eabf4da4b8c4f46b91e20daf8",
+      "contentHash": "13e30e2c89223d66bca1d89ae083e07743c62154368a2e3548b46484b09474bd",
       "functions": [
         {
           "name": "Chip",
@@ -36451,7 +36406,7 @@
         {
           "name": "StatusChip",
           "params": [
-            "{ label, tone = 'orange' }"
+            "{ label, tone = 'accent' }"
           ],
           "exported": true,
           "lineCount": 15
@@ -36499,7 +36454,7 @@
     },
     "frontend/src/ui/GlowBackground.tsx": {
       "filePath": "frontend/src/ui/GlowBackground.tsx",
-      "contentHash": "000423a4a7417f268b370fa1e8d222f23053eb312fd54d6e8d85717c093e3687",
+      "contentHash": "89a90efc9fe5b6a0d583269bda20638963564db6a478e4a6704a89c5fc76b6c5",
       "functions": [
         {
           "name": "Glow",
@@ -36512,10 +36467,10 @@
         {
           "name": "GlowBackground",
           "params": [
-            "{ kind = 'teal' }"
+            "{ kind = 'night' }"
           ],
           "exported": true,
-          "lineCount": 21
+          "lineCount": 12
         }
       ],
       "classes": [],
@@ -36547,17 +36502,17 @@
       "exports": [
         "GlowBackground"
       ],
-      "totalLines": 46,
+      "totalLines": 37,
       "hasStructuralAnalysis": true
     },
     "frontend/src/ui/Icon.tsx": {
       "filePath": "frontend/src/ui/Icon.tsx",
-      "contentHash": "1b5cd5f7f69a84bcc4135bded70b6aacc436aed25708846d80261d3ffa9b24b7",
+      "contentHash": "05821e833e9bda9bad5e8d516a02b272faf3e9a0262e176bd3605245c08f8bc2",
       "functions": [
         {
           "name": "Icon",
           "params": [
-            "{ name, size = 18, color = '#F6F3F2' }"
+            "{ name, size = 18, color = '#EEF3FA' }"
           ],
           "exported": true,
           "lineCount": 3
@@ -36586,7 +36541,7 @@
     },
     "frontend/src/ui/OfflineBanner.tsx": {
       "filePath": "frontend/src/ui/OfflineBanner.tsx",
-      "contentHash": "997ef4bb9cd2e52e413f36596d8cb888d792f874d629d36f1337fabd7c11fd9a",
+      "contentHash": "a66348a602dc88055f1d0e147dc13a71623980901ee989e6e69db2716795172b",
       "functions": [
         {
           "name": "useOnline",
@@ -36656,7 +36611,7 @@
     },
     "frontend/src/ui/ReliabilityBadge.tsx": {
       "filePath": "frontend/src/ui/ReliabilityBadge.tsx",
-      "contentHash": "42dc4fffa318ef3022f6e401684f2789a62c91463f65b2e9e831353aa18af59e",
+      "contentHash": "010b8a477d82f7bb0e386f3afb76c1dde6daadeb85ebc24aedb4e55e24507e2b",
       "functions": [
         {
           "name": "reliabilityColor",
@@ -36713,12 +36668,12 @@
     },
     "frontend/src/ui/Screen.tsx": {
       "filePath": "frontend/src/ui/Screen.tsx",
-      "contentHash": "976bd24cb923aed143ceb91b46121c11aa849e0f74ad76831dc7aab4691c44e2",
+      "contentHash": "dfcd666be907e7262191be1b07249647b59443266a9dfe25f053dc763d414e3b",
       "functions": [
         {
           "name": "Screen",
           "params": [
-            "{ children, scroll, glow = 'teal', edges = ['top'], padded = true, refreshControl, contentStyle, testID }"
+            "{ children, scroll, glow = 'night', edges = ['top'], padded = true, refreshControl, contentStyle, testID }"
           ],
           "exported": true,
           "lineCount": 24
@@ -36840,7 +36795,7 @@
     },
     "frontend/src/ui/States.tsx": {
       "filePath": "frontend/src/ui/States.tsx",
-      "contentHash": "6ea37ce4efcd9c9c50fb90853e210bd819b8a95291993047dd4f501ce64149a0",
+      "contentHash": "c65fe041e7818c2504e68de5c21d742a25d8274dd434fb78ecd612c445924e20",
       "functions": [
         {
           "name": "LoadingState",
@@ -36957,7 +36912,7 @@
     },
     "frontend/src/ui/TextField.tsx": {
       "filePath": "frontend/src/ui/TextField.tsx",
-      "contentHash": "db76e777108607734fab5adff3ad7c87803f15c9aae685510ca9a8bf04f72e45",
+      "contentHash": "ade1463b7d019d5432c8d281fac9024cdbec7b6c5dc46755372c759c8f00508e",
       "functions": [],
       "classes": [],
       "imports": [
@@ -37035,7 +36990,7 @@
     },
     "frontend/src/ui/mapStyle.ts": {
       "filePath": "frontend/src/ui/mapStyle.ts",
-      "contentHash": "826ccb2bb5e076c5e4fd13c8d8f5471c60eb780624a60768cc9f6b0a140c54ac",
+      "contentHash": "7cfe194b4aa4679dca9e7c82b2999688d896b3d544d11fb2c736df5e67cae049",
       "functions": [],
       "classes": [],
       "imports": [
@@ -37054,7 +37009,7 @@
     },
     "frontend/src/ui/theme.ts": {
       "filePath": "frontend/src/ui/theme.ts",
-      "contentHash": "2ac9db3c3ad8a19d0b5bfd5cd7c2485516f28a32e1e034fde5a4243aa2fe64a1",
+      "contentHash": "4d5b58741eaa2d02629fe9f504cfaf710138a0c96fab45217f4b5e520177fff6",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -37067,7 +37022,7 @@
         "type",
         "toneColor"
       ],
-      "totalLines": 55,
+      "totalLines": 57,
       "hasStructuralAnalysis": true
     },
     "frontend/testing/mocks/core.ts": {
@@ -38478,7 +38433,7 @@
     },
     "frontend/src/features/ai/RouteCards.tsx": {
       "filePath": "frontend/src/features/ai/RouteCards.tsx",
-      "contentHash": "dfb314fc39bd971527f7fd543d4ab6026bd6197ff5d576c70725846d963570d2",
+      "contentHash": "21792247d6224650c716f51ebe6a552897519bd9992b6cf42707e878053fac4e",
       "functions": [
         {
           "name": "ensureLocationPermission",
@@ -38595,7 +38550,7 @@
     },
     "frontend/src/features/journey/JourneyPanel.tsx": {
       "filePath": "frontend/src/features/journey/JourneyPanel.tsx",
-      "contentHash": "3a7e90cf1ad5eec54ebc3776321fb47504b9005fa0fc488655e6bbe8407b763c",
+      "contentHash": "3aaa256cc28ddb343ff6ef69344af37e6778d2828b3c8cd0e8620fb598606b41",
       "functions": [
         {
           "name": "JourneyLayer",
@@ -39287,6 +39242,160 @@
       ],
       "exports": [],
       "totalLines": 54,
+      "hasStructuralAnalysis": true
+    },
+    "docs/design/mockups.html": {
+      "filePath": "docs/design/mockups.html",
+      "contentHash": "c932e93a14cdce2b0baaa905fcc44d7875855032bfbe7e9333540ab177f3f024",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 498,
+      "hasStructuralAnalysis": false
+    },
+    "frontend/src/features/users/ReliabilityLine.tsx": {
+      "filePath": "frontend/src/features/users/ReliabilityLine.tsx",
+      "contentHash": "3107c67a486ac53f1b40bbb723553ab5d6211bc6e316d869244a83dadfdefde4",
+      "functions": [
+        {
+          "name": "linePosition",
+          "params": [
+            "score"
+          ],
+          "returnType": "number",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "lineStops",
+          "params": [
+            "score"
+          ],
+          "returnType": "LineStop[]",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "nextStopLabel",
+          "params": [
+            "score"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "ReliabilityLine",
+          "params": [
+            "{ score }"
+          ],
+          "exported": true,
+          "lineCount": 52
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "useState"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "@/ui/RoutePlate",
+          "specifiers": [
+            "RoutePlate"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors",
+            "radius"
+          ]
+        },
+        {
+          "source": "./reliability",
+          "specifiers": [
+            "formatPoints",
+            "RELIABILITY_RULES",
+            "START_SCORE"
+          ]
+        }
+      ],
+      "exports": [
+        "LINE_MAX",
+        "LINE_STEP",
+        "linePosition",
+        "lineStops",
+        "nextStopLabel",
+        "ReliabilityLine"
+      ],
+      "totalLines": 126,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/ui/RoutePlate.tsx": {
+      "filePath": "frontend/src/ui/RoutePlate.tsx",
+      "contentHash": "973fff9341e181077675dcb9b48b41668a5fb1ada1bdc0f137d5360c0e0e6be4",
+      "functions": [
+        {
+          "name": "RoutePlate",
+          "params": [
+            "{ label, icon, size = 'md', style, accessibilityLabel, testID }"
+          ],
+          "exported": true,
+          "lineCount": 18
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react-native",
+          "specifiers": [
+            "StyleSheet",
+            "View",
+            "StyleProp",
+            "ViewStyle"
+          ]
+        },
+        {
+          "source": "./Icon",
+          "specifiers": [
+            "Icon",
+            "IconName"
+          ]
+        },
+        {
+          "source": "./Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "./theme",
+          "specifiers": [
+            "colors"
+          ]
+        }
+      ],
+      "exports": [
+        "RoutePlate"
+      ],
+      "totalLines": 60,
       "hasStructuralAnalysis": true
     }
   }

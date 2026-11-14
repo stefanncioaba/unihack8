@@ -1,4 +1,4 @@
-// Chat bubbles: deep teal on the right for the user, charcoal on the left for the assistant, plus the
+// Chat bubbles: Oxford Navy on the right for the user, Prussian Blue on the left for the assistant, plus the
 // "thinking" and error bubbles (PLAN 15.1).
 import type { ReactNode } from 'react';
 import { ActivityIndicator, Linking, Pressable, StyleSheet, View } from 'react-native';

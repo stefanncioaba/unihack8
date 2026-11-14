@@ -10,7 +10,7 @@ import { colors } from '@/ui/theme';
 
 import { useAuth } from './AuthProvider';
 
-/** Minimal geometric cyan/orange light motif for the breathing zone above the title. */
+/** Minimal geometric navy/gold light motif for the breathing zone above the title. */
 function Motif() {
   return (
     <Svg width={120} height={120} viewBox="0 0 120 120" accessibilityElementsHidden>

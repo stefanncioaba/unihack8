@@ -7,6 +7,7 @@
       "config",
       "example",
       "gradle",
+      "html",
       "java",
       "javascript",
       "json",
@@ -33,8 +34,8 @@
       "Jest"
     ],
     "description": "Hackathon mobile app for Timișoara (Connected Communities): Spring Boot API + Supabase + Expo app with events and QR reliability points, places map, live STPT transit, routing and an AI guide.",
-    "analyzedAt": "2026-11-14T12:20:16.619Z",
-    "gitCommitHash": "e9aa0d4fd8bc9c9de881e7509de3c34285ac2e19"
+    "analyzedAt": "2026-11-14T12:33:28.802Z",
+    "gitCommitHash": "0616da1b07814ba0fc1911dbf527ef6c9943707a"
   },
   "nodes": [
     {
@@ -712,106 +713,6 @@
       "complexity": "moderate"
     },
     {
-      "id": "file:frontend/src/features/transit/StopPanel.tsx",
-      "type": "file",
-      "name": "StopPanel.tsx",
-      "filePath": "frontend/src/features/transit/StopPanel.tsx",
-      "summary": "Bottom panel for a tapped transit stop showing upcoming arrivals (live or timetable) and today's last departures per line.",
-      "tags": [
-        "component",
-        "transit",
-        "map",
-        "real-time",
-        "tested"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:frontend/src/features/transit/StopPanel.tsx:arrivalLabel",
-      "type": "function",
-      "name": "arrivalLabel",
-      "filePath": "frontend/src/features/transit/StopPanel.tsx",
-      "lineRange": [
-        16,
-        18
-      ],
-      "summary": "Formats minutes until arrival as \"now\" or \"N min\".",
-      "tags": [
-        "utility",
-        "formatting",
-        "transit"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/transit/StopPanel.tsx:LineRow",
-      "type": "function",
-      "name": "LineRow",
-      "filePath": "frontend/src/features/transit/StopPanel.tsx",
-      "lineRange": [
-        21,
-        35
-      ],
-      "summary": "Renders one line-badge, headsign and time row, optionally muted.",
-      "tags": [
-        "component",
-        "ui",
-        "transit"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/transit/StopPanel.tsx:Arrivals",
-      "type": "function",
-      "name": "Arrivals",
-      "filePath": "frontend/src/features/transit/StopPanel.tsx",
-      "lineRange": [
-        38,
-        50
-      ],
-      "summary": "Shows the next stop arrivals with loading/error states using useStopArrivals.",
-      "tags": [
-        "component",
-        "transit",
-        "real-time"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/transit/StopPanel.tsx:LastDepartureRows",
-      "type": "function",
-      "name": "LastDepartureRows",
-      "filePath": "frontend/src/features/transit/StopPanel.tsx",
-      "lineRange": [
-        53,
-        73
-      ],
-      "summary": "Lists the last departure of the day per line for the stop via useLastDepartures.",
-      "tags": [
-        "component",
-        "transit",
-        "schedule"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/transit/StopPanel.tsx:StopPanel",
-      "type": "function",
-      "name": "StopPanel",
-      "filePath": "frontend/src/features/transit/StopPanel.tsx",
-      "lineRange": [
-        76,
-        117
-      ],
-      "summary": "Exported panel composing the stop header, arrivals and last departures sections.",
-      "tags": [
-        "component",
-        "transit",
-        "panel"
-      ],
-      "complexity": "moderate"
-    },
-    {
       "id": "file:frontend/src/lib/network.ts",
       "type": "file",
       "name": "network.ts",
@@ -857,210 +758,6 @@
         "network",
         "offline",
         "initialization"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "file:frontend/src/lib/time.ts",
-      "type": "file",
-      "name": "time.ts",
-      "filePath": "frontend/src/lib/time.ts",
-      "summary": "Hand-rolled Europe/Bucharest date helpers: converts UTC API times to Romanian wall time (EET/EEST), formats times and dates, parses Postgres ISO strings and maps date filter presets to from/to query ranges.",
-      "tags": [
-        "utility",
-        "date",
-        "timezone",
-        "formatting",
-        "tested"
-      ],
-      "complexity": "moderate",
-      "languageNotes": "Implements DST rules manually instead of Intl so results are identical across JS engines on every phone."
-    },
-    {
-      "id": "function:frontend/src/lib/time.ts:bucharestOffsetMs",
-      "type": "function",
-      "name": "bucharestOffsetMs",
-      "filePath": "frontend/src/lib/time.ts",
-      "lineRange": [
-        20,
-        25
-      ],
-      "summary": "Returns the Bucharest UTC offset (+2h winter, +3h summer) for a UTC instant using last-Sunday DST rules.",
-      "tags": [
-        "utility",
-        "timezone",
-        "date"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/lib/time.ts:parseIso",
-      "type": "function",
-      "name": "parseIso",
-      "filePath": "frontend/src/lib/time.ts",
-      "lineRange": [
-        31,
-        33
-      ],
-      "summary": "Parses API ISO timestamps, truncating Postgres microsecond fractions to milliseconds for engine compatibility.",
-      "tags": [
-        "utility",
-        "date",
-        "parsing"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/lib/time.ts:toBucharest",
-      "type": "function",
-      "name": "toBucharest",
-      "filePath": "frontend/src/lib/time.ts",
-      "lineRange": [
-        36,
-        47
-      ],
-      "summary": "Converts a UTC instant to a Bucharest wall-time object (year, month, day, hour, minute, weekday).",
-      "tags": [
-        "utility",
-        "timezone",
-        "date"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/lib/time.ts:bucharestToUtcIso",
-      "type": "function",
-      "name": "bucharestToUtcIso",
-      "filePath": "frontend/src/lib/time.ts",
-      "lineRange": [
-        50,
-        55
-      ],
-      "summary": "Converts a Bucharest wall time back to a UTC ISO string for sending to the API.",
-      "tags": [
-        "utility",
-        "timezone",
-        "serialization"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/lib/time.ts:formatTime",
-      "type": "function",
-      "name": "formatTime",
-      "filePath": "frontend/src/lib/time.ts",
-      "lineRange": [
-        63,
-        66
-      ],
-      "summary": "Formats an ISO time as HH:MM in Bucharest time.",
-      "tags": [
-        "utility",
-        "formatting",
-        "date"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/lib/time.ts:formatDay",
-      "type": "function",
-      "name": "formatDay",
-      "filePath": "frontend/src/lib/time.ts",
-      "lineRange": [
-        69,
-        72
-      ],
-      "summary": "Formats an ISO time as a short weekday/day label in Bucharest time.",
-      "tags": [
-        "utility",
-        "formatting",
-        "date"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/lib/time.ts:formatDate",
-      "type": "function",
-      "name": "formatDate",
-      "filePath": "frontend/src/lib/time.ts",
-      "lineRange": [
-        75,
-        78
-      ],
-      "summary": "Formats an ISO time as a short day-month date label in Bucharest time.",
-      "tags": [
-        "utility",
-        "formatting",
-        "date"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/lib/time.ts:formatEventDate",
-      "type": "function",
-      "name": "formatEventDate",
-      "filePath": "frontend/src/lib/time.ts",
-      "lineRange": [
-        81,
-        83
-      ],
-      "summary": "Formats an event start as a combined day and time label for event cards.",
-      "tags": [
-        "utility",
-        "formatting",
-        "events"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/lib/time.ts:startOfBucharestDayIso",
-      "type": "function",
-      "name": "startOfBucharestDayIso",
-      "filePath": "frontend/src/lib/time.ts",
-      "lineRange": [
-        86,
-        96
-      ],
-      "summary": "Returns the UTC ISO instant of Bucharest midnight a given number of days from now.",
-      "tags": [
-        "utility",
-        "timezone",
-        "date"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/lib/time.ts:dateRangeFor",
-      "type": "function",
-      "name": "dateRangeFor",
-      "filePath": "frontend/src/lib/time.ts",
-      "lineRange": [
-        109,
-        129
-      ],
-      "summary": "Maps an event date filter chip (today, tomorrow, weekend, next 7 days) to from/to API query parameters.",
-      "tags": [
-        "utility",
-        "filter",
-        "events",
-        "date"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:frontend/src/lib/time.ts:minutesUntil",
-      "type": "function",
-      "name": "minutesUntil",
-      "filePath": "frontend/src/lib/time.ts",
-      "lineRange": [
-        132,
-        134
-      ],
-      "summary": "Returns whole minutes from now until an ISO time, negative when in the past.",
-      "tags": [
-        "utility",
-        "date",
-        "transit"
       ],
       "complexity": "simple"
     },
@@ -1256,71 +953,6 @@
       "complexity": "simple"
     },
     {
-      "id": "file:frontend/src/app/(tabs)/index.tsx",
-      "type": "file",
-      "name": "index.tsx",
-      "filePath": "frontend/src/app/(tabs)/index.tsx",
-      "summary": "Home tab screen showing a search field, city transit info strip, category chips and a feed of upcoming events near the user.",
-      "tags": [
-        "entry-point",
-        "screen",
-        "home",
-        "events",
-        "component"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
-      "type": "function",
-      "name": "HomeScreen",
-      "filePath": "frontend/src/app/(tabs)/index.tsx",
-      "lineRange": [
-        25,
-        113
-      ],
-      "summary": "Home screen component rendering search, transit summary strip, category filters and nearby upcoming events.",
-      "tags": [
-        "component",
-        "ui",
-        "react"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "file:frontend/src/app/(tabs)/profile.tsx",
-      "type": "file",
-      "name": "profile.tsx",
-      "filePath": "frontend/src/app/(tabs)/profile.tsx",
-      "summary": "Profile tab screen for the signed-in user showing avatar, editable username, reliability gauge and log, and the user's events, with sign-out.",
-      "tags": [
-        "entry-point",
-        "screen",
-        "profile",
-        "reliability",
-        "component",
-        "tested"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:frontend/src/app/(tabs)/profile.tsx:ProfileScreen",
-      "type": "function",
-      "name": "ProfileScreen",
-      "filePath": "frontend/src/app/(tabs)/profile.tsx",
-      "lineRange": [
-        24,
-        99
-      ],
-      "summary": "Profile screen showing the signed-in user's info, reliability gauge/log, events and sign-out.",
-      "tags": [
-        "component",
-        "ui",
-        "react"
-      ],
-      "complexity": "moderate"
-    },
-    {
       "id": "file:frontend/src/features/ai/ChatBubble.tsx",
       "type": "file",
       "name": "ChatBubble.tsx",
@@ -1406,7 +1038,7 @@
       "type": "file",
       "name": "ChatMotif.tsx",
       "filePath": "frontend/src/features/ai/ChatMotif.tsx",
-      "summary": "Decorative abstract cyan/orange light motif rendered in the empty AI chat screen, with no logo or mascot.",
+      "summary": "Decorative abstract navy/gold light motif rendered in the empty AI chat screen, with no logo or mascot.",
       "tags": [
         "component",
         "ui",
@@ -1759,7 +1391,7 @@
       "type": "file",
       "name": "EventMarkers.tsx",
       "filePath": "frontend/src/features/map/EventMarkers.tsx",
-      "summary": "Renders orange event pins for the visible map area with category icons and optional title labels, clustering nearby events when zoomed out.",
+      "summary": "Renders yellow event pins for the visible map area with category icons and optional title labels, clustering nearby events when zoomed out.",
       "tags": [
         "component",
         "map",
@@ -1977,7 +1609,7 @@
       "type": "file",
       "name": "PlaceMarkers.tsx",
       "filePath": "frontend/src/features/map/PlaceMarkers.tsx",
-      "summary": "Renders violet place pins for the visible map area with category icons and labels when zoomed in, clustering nearby places when zoomed out.",
+      "summary": "Renders Oxford Navy place pins for the visible map area with category icons and labels when zoomed in, clustering nearby places when zoomed out.",
       "tags": [
         "component",
         "map",
@@ -2106,38 +1738,6 @@
       "complexity": "simple"
     },
     {
-      "id": "file:frontend/src/features/transit/CityInfoStrip.tsx",
-      "type": "file",
-      "name": "CityInfoStrip.tsx",
-      "filePath": "frontend/src/features/transit/CityInfoStrip.tsx",
-      "summary": "Home screen \"city info\" card showing the last tram/bus message near the user and an expandable list of active STPT transit alerts.",
-      "tags": [
-        "component",
-        "transit",
-        "home",
-        "alerts"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
-      "type": "function",
-      "name": "CityInfoStrip",
-      "filePath": "frontend/src/features/transit/CityInfoStrip.tsx",
-      "lineRange": [
-        13,
-        78
-      ],
-      "summary": "Shows the nearby transit summary message with retry and an expandable alert count pill and alert list.",
-      "tags": [
-        "exported",
-        "component",
-        "transit",
-        "home"
-      ],
-      "complexity": "moderate"
-    },
-    {
       "id": "file:frontend/src/features/transit/TransitControls.tsx",
       "type": "file",
       "name": "TransitControls.tsx",
@@ -2217,54 +1817,6 @@
         "component",
         "map-layer",
         "transit"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "file:frontend/src/features/users/ReliabilityGauge.tsx",
-      "type": "file",
-      "name": "ReliabilityGauge.tsx",
-      "filePath": "frontend/src/features/users/ReliabilityGauge.tsx",
-      "summary": "Semi-circular gauge component visualizing a user's reliability score with tone-based coloring and score label.",
-      "tags": [
-        "component",
-        "reliability",
-        "visualization",
-        "ui"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:frontend/src/features/users/ReliabilityGauge.tsx:gaugeFraction",
-      "type": "function",
-      "name": "gaugeFraction",
-      "filePath": "frontend/src/features/users/ReliabilityGauge.tsx",
-      "lineRange": [
-        17,
-        19
-      ],
-      "summary": "Maps a reliability score onto the 0..1 fill fraction of the gauge.",
-      "tags": [
-        "utility",
-        "pure-function",
-        "helper"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/users/ReliabilityGauge.tsx:ReliabilityGauge",
-      "type": "function",
-      "name": "ReliabilityGauge",
-      "filePath": "frontend/src/features/users/ReliabilityGauge.tsx",
-      "lineRange": [
-        22,
-        83
-      ],
-      "summary": "Semi-circular gauge component rendering the reliability score with tone color.",
-      "tags": [
-        "component",
-        "ui",
-        "react"
       ],
       "complexity": "moderate"
     },
@@ -17136,32 +16688,6 @@
       "complexity": "simple"
     },
     {
-      "id": "file:frontend/__tests__/lib.misc.test.ts",
-      "type": "file",
-      "name": "lib.misc.test.ts",
-      "filePath": "frontend/__tests__/lib.misc.test.ts",
-      "summary": "Small pure helpers: validation, geo, formatting, new-event form, check-in outcomes, gauge.",
-      "tags": [
-        "frontend",
-        "tests",
-        "code"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "file:frontend/__tests__/lib.time.test.ts",
-      "type": "file",
-      "name": "lib.time.test.ts",
-      "filePath": "frontend/__tests__/lib.time.test.ts",
-      "summary": "Date helpers: Bucharest time, DST, filter ranges.",
-      "tags": [
-        "frontend",
-        "tests",
-        "code"
-      ],
-      "complexity": "simple"
-    },
-    {
       "id": "file:frontend/__tests__/location.test.tsx",
       "type": "file",
       "name": "location.test.tsx",
@@ -17393,7 +16919,8 @@
       "tags": [
         "frontend",
         "api",
-        "code"
+        "code",
+        "tested"
       ],
       "complexity": "simple"
     },
@@ -17556,7 +17083,7 @@
       "type": "file",
       "name": "_layout.tsx",
       "filePath": "frontend/src/app/(tabs)/_layout.tsx",
-      "summary": "Four bottom tabs: Home, Map, AI, Profile. Same blue-black bar on every page; orange marks the selected tab.",
+      "summary": "Four bottom tabs: Home, Map, AI, Profile. Same ink-navy bar on every page; signal yellow marks the selected tab.",
       "tags": [
         "frontend",
         "tabs",
@@ -17967,36 +17494,6 @@
       "complexity": "simple"
     },
     {
-      "id": "file:frontend/src/app/users/[id].tsx",
-      "type": "file",
-      "name": "[id].tsx",
-      "filePath": "frontend/src/app/users/[id].tsx",
-      "summary": "Public profile of another user: username, reliability score, attended events (PLAN 16.4, opened from 13.4 and 13.8).",
-      "tags": [
-        "frontend",
-        "users",
-        "code"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/app/users/[id].tsx:PublicProfileScreen",
-      "type": "function",
-      "name": "PublicProfileScreen",
-      "filePath": "frontend/src/app/users/[id].tsx",
-      "lineRange": [
-        17,
-        17
-      ],
-      "summary": "PublicProfileScreen in the users module.",
-      "tags": [
-        "frontend",
-        "users",
-        "function"
-      ],
-      "complexity": "simple"
-    },
-    {
       "id": "file:frontend/src/app/users/_layout.tsx",
       "type": "file",
       "name": "_layout.tsx",
@@ -18246,87 +17743,6 @@
       "complexity": "simple"
     },
     {
-      "id": "file:frontend/src/features/events/EventCards.tsx",
-      "type": "file",
-      "name": "EventCards.tsx",
-      "filePath": "frontend/src/features/events/EventCards.tsx",
-      "summary": "Event cards: a large one for horizontal rows (Home) and a compact row for lists.",
-      "tags": [
-        "frontend",
-        "events",
-        "code"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:frontend/src/features/events/EventCards.tsx:openEvent",
-      "type": "function",
-      "name": "openEvent",
-      "filePath": "frontend/src/features/events/EventCards.tsx",
-      "lineRange": [
-        17,
-        17
-      ],
-      "summary": "openEvent in the events module.",
-      "tags": [
-        "frontend",
-        "events",
-        "function"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/events/EventCards.tsx:AvailabilityChip",
-      "type": "function",
-      "name": "AvailabilityChip",
-      "filePath": "frontend/src/features/events/EventCards.tsx",
-      "lineRange": [
-        22,
-        22
-      ],
-      "summary": "AvailabilityChip in the events module.",
-      "tags": [
-        "frontend",
-        "events",
-        "function"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/events/EventCards.tsx:EventCard",
-      "type": "function",
-      "name": "EventCard",
-      "filePath": "frontend/src/features/events/EventCards.tsx",
-      "lineRange": [
-        29,
-        29
-      ],
-      "summary": "EventCard in the events module.",
-      "tags": [
-        "frontend",
-        "events",
-        "function"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/features/events/EventCards.tsx:EventListItem",
-      "type": "function",
-      "name": "EventListItem",
-      "filePath": "frontend/src/features/events/EventCards.tsx",
-      "lineRange": [
-        66,
-        66
-      ],
-      "summary": "EventListItem in the events module.",
-      "tags": [
-        "frontend",
-        "events",
-        "function"
-      ],
-      "complexity": "simple"
-    },
-    {
       "id": "file:frontend/src/features/events/LocationPickerModal.tsx",
       "type": "file",
       "name": "LocationPickerModal.tsx",
@@ -18442,7 +17858,7 @@
       "type": "file",
       "name": "categories.ts",
       "filePath": "frontend/src/features/events/categories.ts",
-      "summary": "Display data for event categories: label, icon and the gradient used when an event has no image.",
+      "summary": "Display metadata per event category: label, icon and the navy/gold gradient used as artwork when an event has no image.",
       "tags": [
         "frontend",
         "events",
@@ -18476,7 +17892,8 @@
       "tags": [
         "frontend",
         "events",
-        "code"
+        "code",
+        "tested"
       ],
       "complexity": "simple"
     },
@@ -18523,7 +17940,8 @@
       "tags": [
         "frontend",
         "events",
-        "code"
+        "code",
+        "tested"
       ],
       "complexity": "simple"
     },
@@ -18604,7 +18022,8 @@
       "tags": [
         "frontend",
         "events",
-        "code"
+        "code",
+        "tested"
       ],
       "complexity": "simple"
     },
@@ -18771,7 +18190,8 @@
       "tags": [
         "frontend",
         "frontend",
-        "code"
+        "code",
+        "tested"
       ],
       "complexity": "simple"
     },
@@ -18861,7 +18281,7 @@
       "type": "file",
       "name": "Button.tsx",
       "filePath": "frontend/src/ui/Button.tsx",
-      "summary": "Buttons. Orange (primary) marks the main action of a screen; others stay quiet.",
+      "summary": "Buttons. Signal yellow (primary) marks the main action of a screen; others stay quiet.",
       "tags": [
         "frontend",
         "ui",
@@ -18934,130 +18354,6 @@
       "complexity": "simple"
     },
     {
-      "id": "file:frontend/src/ui/Chip.tsx",
-      "type": "file",
-      "name": "Chip.tsx",
-      "filePath": "frontend/src/ui/Chip.tsx",
-      "summary": "Small rounded filter / status chips.",
-      "tags": [
-        "frontend",
-        "ui",
-        "code"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/ui/Chip.tsx:Chip",
-      "type": "function",
-      "name": "Chip",
-      "filePath": "frontend/src/ui/Chip.tsx",
-      "lineRange": [
-        18,
-        18
-      ],
-      "summary": "Chip in the ui module.",
-      "tags": [
-        "frontend",
-        "ui",
-        "function"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/ui/Chip.tsx:StatusChip",
-      "type": "function",
-      "name": "StatusChip",
-      "filePath": "frontend/src/ui/Chip.tsx",
-      "lineRange": [
-        38,
-        38
-      ],
-      "summary": "StatusChip in the ui module.",
-      "tags": [
-        "frontend",
-        "ui",
-        "function"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "file:frontend/src/ui/GlowBackground.tsx",
-      "type": "file",
-      "name": "GlowBackground.tsx",
-      "filePath": "frontend/src/ui/GlowBackground.tsx",
-      "summary": "Full-screen dark background with soft, low-opacity colour glows near the top corners.",
-      "tags": [
-        "frontend",
-        "ui",
-        "code"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/ui/GlowBackground.tsx:Glow",
-      "type": "function",
-      "name": "Glow",
-      "filePath": "frontend/src/ui/GlowBackground.tsx",
-      "lineRange": [
-        10,
-        10
-      ],
-      "summary": "Glow in the ui module.",
-      "tags": [
-        "frontend",
-        "ui",
-        "function"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/ui/GlowBackground.tsx:GlowBackground",
-      "type": "function",
-      "name": "GlowBackground",
-      "filePath": "frontend/src/ui/GlowBackground.tsx",
-      "lineRange": [
-        25,
-        25
-      ],
-      "summary": "GlowBackground in the ui module.",
-      "tags": [
-        "frontend",
-        "ui",
-        "function"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "file:frontend/src/ui/Icon.tsx",
-      "type": "file",
-      "name": "Icon.tsx",
-      "filePath": "frontend/src/ui/Icon.tsx",
-      "summary": "Thin-line icons (Ionicons ship with Expo Go).",
-      "tags": [
-        "frontend",
-        "ui",
-        "code"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/ui/Icon.tsx:Icon",
-      "type": "function",
-      "name": "Icon",
-      "filePath": "frontend/src/ui/Icon.tsx",
-      "lineRange": [
-        10,
-        10
-      ],
-      "summary": "Icon in the ui module.",
-      "tags": [
-        "frontend",
-        "ui",
-        "function"
-      ],
-      "complexity": "simple"
-    },
-    {
       "id": "file:frontend/src/ui/ReliabilityBadge.tsx",
       "type": "file",
       "name": "ReliabilityBadge.tsx",
@@ -19066,7 +18362,8 @@
       "tags": [
         "frontend",
         "ui",
-        "code"
+        "code",
+        "tested"
       ],
       "complexity": "simple"
     },
@@ -19097,36 +18394,6 @@
         16
       ],
       "summary": "ReliabilityBadge in the ui module.",
-      "tags": [
-        "frontend",
-        "ui",
-        "function"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "file:frontend/src/ui/Screen.tsx",
-      "type": "file",
-      "name": "Screen.tsx",
-      "filePath": "frontend/src/ui/Screen.tsx",
-      "summary": "Standard screen shell: dark background, safe area, 16 px page margin, optional scrolling.",
-      "tags": [
-        "frontend",
-        "ui",
-        "code"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:frontend/src/ui/Screen.tsx:Screen",
-      "type": "function",
-      "name": "Screen",
-      "filePath": "frontend/src/ui/Screen.tsx",
-      "lineRange": [
-        24,
-        24
-      ],
-      "summary": "Screen in the ui module.",
       "tags": [
         "frontend",
         "ui",
@@ -19340,7 +18607,7 @@
       "type": "file",
       "name": "mapStyle.ts",
       "filePath": "frontend/src/ui/mapStyle.ts",
-      "summary": "Dark, desaturated Google-Maps style (navy land, charcoal roads, dark teal water). Applies on Android; iOS uses `userInterfaceStyle=\"dark\"` on the MapView instead.",
+      "summary": "Night-navy Google Maps style for Android: Prussian land, Oxford Navy roads, ink water and muted blue labels.",
       "tags": [
         "frontend",
         "ui",
@@ -19353,7 +18620,7 @@
       "type": "file",
       "name": "theme.ts",
       "filePath": "frontend/src/ui/theme.ts",
-      "summary": "Design tokens from the dark-neon design reference (colours, spacing, radii, type scale). Design only: no feature decisions live here.",
+      "summary": "Design tokens for the blue/gold \"Timișoara after dark\" theme: Ink Black/Prussian/Oxford navy surfaces, School Bus Yellow for actions, Gold for accent text, pale signal blue for status and trust, plus spacing, radii, type scale and text tones.",
       "tags": [
         "frontend",
         "ui",
@@ -21842,21 +21109,6 @@
       "complexity": "simple"
     },
     {
-      "id": "document:DOCS.md",
-      "type": "document",
-      "name": "DOCS.md",
-      "filePath": "DOCS.md",
-      "summary": "Living project documentation covering architecture, configuration, database, external data sources (STPT, LiveTickets, OSM, Gemini), reliability rules and per-feature notes for every PLAN task, now including task 18 AI navigation (route cards with Go, journey mode on the map) and task 19 scope guard (SystemPrompt.SCOPE, refusal as a normal 200 with empty lists, SystemPromptTest and the opt-in ScopeLiveCheckTest results table).",
-      "tags": [
-        "documentation",
-        "architecture",
-        "feature-notes",
-        "ai-assistant",
-        "scope-guard"
-      ],
-      "complexity": "complex"
-    },
-    {
       "id": "document:PLAN.md",
       "type": "document",
       "name": "PLAN.md",
@@ -21884,6 +21136,920 @@
         "ai-assistant"
       ],
       "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/__tests__/lib.misc.test.ts",
+      "type": "file",
+      "name": "lib.misc.test.ts",
+      "filePath": "frontend/__tests__/lib.misc.test.ts",
+      "summary": "Jest unit tests for small pure frontend helpers: username/email/password validation, geo defaults and region math, event spot/price labels, create-event form validation, QR check-in outcome mapping, friendly API error messages, and reliability line/badge visuals.",
+      "tags": [
+        "test",
+        "validation",
+        "utility",
+        "reliability",
+        "jest"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/__tests__/lib.time.test.ts",
+      "type": "file",
+      "name": "lib.time.test.ts",
+      "filePath": "frontend/__tests__/lib.time.test.ts",
+      "summary": "Jest unit tests for the Bucharest time helpers, covering UTC+2/UTC+3 DST offsets, local-to-UTC conversion, time/day/date formatting, date filter preset ranges and minutesUntil countdowns.",
+      "tags": [
+        "test",
+        "time",
+        "timezone",
+        "formatting",
+        "jest"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/src/app/(tabs)/index.tsx",
+      "type": "file",
+      "name": "index.tsx",
+      "filePath": "frontend/src/app/(tabs)/index.tsx",
+      "summary": "Expo Router Home tab screen showing the Timișoara header with a live transit pill, search field, event category chips, city transit info strip, a horizontal list of upcoming events and a create-event call to action.",
+      "tags": [
+        "component",
+        "screen",
+        "entry-point",
+        "events",
+        "transit",
+        "tested"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Expo Router file-based routing: the (tabs) group folder makes index.tsx the default tab route."
+    },
+    {
+      "id": "file:frontend/src/app/(tabs)/profile.tsx",
+      "type": "file",
+      "name": "profile.tsx",
+      "filePath": "frontend/src/app/(tabs)/profile.tsx",
+      "summary": "Profile tab screen for the signed-in user: identity with inline username editing, reliability line score, my events, reliability history log, find-people and sign-out actions.",
+      "tags": [
+        "component",
+        "screen",
+        "profile",
+        "reliability",
+        "auth",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/src/app/users/[id].tsx",
+      "type": "file",
+      "name": "[id].tsx",
+      "filePath": "frontend/src/app/users/[id].tsx",
+      "summary": "Dynamic Expo Router screen showing another user's read-only public profile with username, member-since date, reliability line and attended events list.",
+      "tags": [
+        "component",
+        "screen",
+        "profile",
+        "reliability",
+        "dynamic-route",
+        "tested"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Bracketed filename [id].tsx defines a dynamic route segment read via useLocalSearchParams."
+    },
+    {
+      "id": "function:frontend/src/app/(tabs)/index.tsx:LivePill",
+      "type": "function",
+      "name": "LivePill",
+      "filePath": "frontend/src/app/(tabs)/index.tsx",
+      "lineRange": [
+        25,
+        34
+      ],
+      "summary": "Small pill showing a glowing gold 'Live' dot while transit data flows, or a grey 'Offline' label when the transit summary errors.",
+      "tags": [
+        "component",
+        "transit",
+        "status-indicator"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "type": "function",
+      "name": "HomeScreen",
+      "filePath": "frontend/src/app/(tabs)/index.tsx",
+      "lineRange": [
+        37,
+        125
+      ],
+      "summary": "Default-exported Home screen that loads the user's position, transit summary and a category-filtered page of upcoming events, supports pull-to-refresh, and renders loading/error/empty states plus navigation to events, people search and event creation.",
+      "tags": [
+        "component",
+        "screen",
+        "events",
+        "transit",
+        "navigation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/app/(tabs)/profile.tsx:ProfileScreen",
+      "type": "function",
+      "name": "ProfileScreen",
+      "filePath": "frontend/src/app/(tabs)/profile.tsx",
+      "lineRange": [
+        24,
+        99
+      ],
+      "summary": "Default-exported profile screen that fetches the current user, toggles the username editor, shows reliability score, events and history, and handles sign-out with error reporting.",
+      "tags": [
+        "component",
+        "screen",
+        "profile",
+        "auth",
+        "reliability"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/app/users/[id].tsx:PublicProfileScreen",
+      "type": "function",
+      "name": "PublicProfileScreen",
+      "filePath": "frontend/src/app/users/[id].tsx",
+      "lineRange": [
+        16,
+        59
+      ],
+      "summary": "Default-exported read-only profile screen that loads a user by route id and displays their reliability line and attended events or an empty state.",
+      "tags": [
+        "component",
+        "screen",
+        "profile",
+        "reliability"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/src/features/transit/CityInfoStrip.tsx",
+      "type": "file",
+      "name": "CityInfoStrip.tsx",
+      "filePath": "frontend/src/features/transit/CityInfoStrip.tsx",
+      "summary": "Home-screen 'city info' departure board showing the last-tram message, last departure time in large gold numerals and an expandable transit alerts pill.",
+      "tags": [
+        "component",
+        "transit",
+        "real-time",
+        "ui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
+      "type": "function",
+      "name": "CityInfoStrip",
+      "filePath": "frontend/src/features/transit/CityInfoStrip.tsx",
+      "lineRange": [
+        15,
+        97
+      ],
+      "summary": "Renders the departure board using the user's position for the transit summary, with loading/error messaging, retry, and a toggleable list of active STPT alerts.",
+      "tags": [
+        "component",
+        "transit",
+        "alerts",
+        "hook-consumer"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/src/features/transit/StopPanel.tsx",
+      "type": "file",
+      "name": "StopPanel.tsx",
+      "filePath": "frontend/src/features/transit/StopPanel.tsx",
+      "summary": "Bottom panel for a tapped transit stop that lists the next live or timetable arrivals and today's last departures per line.",
+      "tags": [
+        "component",
+        "transit",
+        "map",
+        "real-time",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/features/transit/StopPanel.tsx:arrivalLabel",
+      "type": "function",
+      "name": "arrivalLabel",
+      "filePath": "frontend/src/features/transit/StopPanel.tsx",
+      "lineRange": [
+        16,
+        18
+      ],
+      "summary": "Formats minutes-until-arrival as 'now' or 'N min'.",
+      "tags": [
+        "utility",
+        "formatting",
+        "transit"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/transit/StopPanel.tsx:LineRow",
+      "type": "function",
+      "name": "LineRow",
+      "filePath": "frontend/src/features/transit/StopPanel.tsx",
+      "lineRange": [
+        21,
+        33
+      ],
+      "summary": "Single row rendering a route plate, headsign and right-aligned time label.",
+      "tags": [
+        "component",
+        "transit",
+        "ui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/transit/StopPanel.tsx:Arrivals",
+      "type": "function",
+      "name": "Arrivals",
+      "filePath": "frontend/src/features/transit/StopPanel.tsx",
+      "lineRange": [
+        36,
+        48
+      ],
+      "summary": "Renders up to six upcoming arrivals as line rows with relative-time labels.",
+      "tags": [
+        "component",
+        "transit",
+        "arrivals"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/transit/StopPanel.tsx:LastDepartureRows",
+      "type": "function",
+      "name": "LastDepartureRows",
+      "filePath": "frontend/src/features/transit/StopPanel.tsx",
+      "lineRange": [
+        51,
+        71
+      ],
+      "summary": "Sorts today's last departures by time and renders them, muting departures that have already passed.",
+      "tags": [
+        "component",
+        "transit",
+        "departures"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/transit/StopPanel.tsx:StopPanel",
+      "type": "function",
+      "name": "StopPanel",
+      "filePath": "frontend/src/features/transit/StopPanel.tsx",
+      "lineRange": [
+        74,
+        115
+      ],
+      "summary": "Stop detail panel combining useStopArrivals and useLastDepartures queries with loading, error/retry and live status states.",
+      "tags": [
+        "component",
+        "transit",
+        "data-fetching"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/src/features/users/ReliabilityLine.tsx",
+      "type": "file",
+      "name": "ReliabilityLine.tsx",
+      "filePath": "frontend/src/features/users/ReliabilityLine.tsx",
+      "summary": "Renders the reliability score as a 0-200 transit line with stops every 50 points and a yellow route plate marking the score, followed by the scoring rules as a fare table; also exports pure helpers for plate position, visible stops and next-stop label.",
+      "tags": [
+        "component",
+        "reliability",
+        "transit-metaphor",
+        "utility",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/features/users/ReliabilityLine.tsx:linePosition",
+      "type": "function",
+      "name": "linePosition",
+      "filePath": "frontend/src/features/users/ReliabilityLine.tsx",
+      "lineRange": [
+        20,
+        22
+      ],
+      "summary": "Maps a score to a clamped 0-100 percent position along the 0-200 line.",
+      "tags": [
+        "utility",
+        "math",
+        "reliability"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/users/ReliabilityLine.tsx:lineStops",
+      "type": "function",
+      "name": "lineStops",
+      "filePath": "frontend/src/features/users/ReliabilityLine.tsx",
+      "lineRange": [
+        27,
+        35
+      ],
+      "summary": "Builds the list of stops to draw, marking passed and next stops and hiding those under the score plate.",
+      "tags": [
+        "utility",
+        "reliability",
+        "layout"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/users/ReliabilityLine.tsx:nextStopLabel",
+      "type": "function",
+      "name": "nextStopLabel",
+      "filePath": "frontend/src/features/users/ReliabilityLine.tsx",
+      "lineRange": [
+        38,
+        42
+      ],
+      "summary": "Returns the corner label describing points remaining to the next stop or end of line.",
+      "tags": [
+        "utility",
+        "reliability",
+        "formatting"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/users/ReliabilityLine.tsx:ReliabilityLine",
+      "type": "function",
+      "name": "ReliabilityLine",
+      "filePath": "frontend/src/features/users/ReliabilityLine.tsx",
+      "lineRange": [
+        45,
+        96
+      ],
+      "summary": "Card component measuring its width to position stops and the score RoutePlate on the line, then listing reliability rules with formatted points.",
+      "tags": [
+        "component",
+        "reliability",
+        "react-native"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/src/lib/time.ts",
+      "type": "file",
+      "name": "time.ts",
+      "filePath": "frontend/src/lib/time.ts",
+      "summary": "Hand-rolled date helpers converting API UTC times to Europe/Bucharest wall time (EET/EEST rules) for formatting, plus date filter presets mapped to from/to query ranges and minutes-until calculations.",
+      "tags": [
+        "utility",
+        "date",
+        "timezone",
+        "formatting",
+        "filter",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/lib/time.ts:bucharestOffsetMs",
+      "type": "function",
+      "name": "bucharestOffsetMs",
+      "filePath": "frontend/src/lib/time.ts",
+      "lineRange": [
+        20,
+        25
+      ],
+      "summary": "Returns the Bucharest UTC offset (+2h winter, +3h summer) for a UTC instant using last-Sunday DST rules.",
+      "tags": [
+        "utility",
+        "timezone",
+        "dst"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/lib/time.ts:parseIso",
+      "type": "function",
+      "name": "parseIso",
+      "filePath": "frontend/src/lib/time.ts",
+      "lineRange": [
+        31,
+        33
+      ],
+      "summary": "Parses API ISO times, truncating microsecond fractions to milliseconds for engine compatibility.",
+      "tags": [
+        "utility",
+        "parsing",
+        "date"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/lib/time.ts:toBucharest",
+      "type": "function",
+      "name": "toBucharest",
+      "filePath": "frontend/src/lib/time.ts",
+      "lineRange": [
+        36,
+        47
+      ],
+      "summary": "Converts a UTC instant to Bucharest wall-time components including weekday.",
+      "tags": [
+        "utility",
+        "timezone",
+        "date"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/lib/time.ts:bucharestToUtcIso",
+      "type": "function",
+      "name": "bucharestToUtcIso",
+      "filePath": "frontend/src/lib/time.ts",
+      "lineRange": [
+        50,
+        55
+      ],
+      "summary": "Converts Bucharest wall-time components back to a UTC ISO string.",
+      "tags": [
+        "utility",
+        "timezone",
+        "date"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/lib/time.ts:formatTime",
+      "type": "function",
+      "name": "formatTime",
+      "filePath": "frontend/src/lib/time.ts",
+      "lineRange": [
+        63,
+        66
+      ],
+      "summary": "Formats an ISO time as HH:MM Bucharest time.",
+      "tags": [
+        "utility",
+        "formatting",
+        "date"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/lib/time.ts:formatDay",
+      "type": "function",
+      "name": "formatDay",
+      "filePath": "frontend/src/lib/time.ts",
+      "lineRange": [
+        69,
+        72
+      ],
+      "summary": "Formats an ISO time as a short weekday label.",
+      "tags": [
+        "utility",
+        "formatting",
+        "date"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/lib/time.ts:formatDate",
+      "type": "function",
+      "name": "formatDate",
+      "filePath": "frontend/src/lib/time.ts",
+      "lineRange": [
+        75,
+        78
+      ],
+      "summary": "Formats an ISO time as a short date string.",
+      "tags": [
+        "utility",
+        "formatting",
+        "date"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/lib/time.ts:monthDay",
+      "type": "function",
+      "name": "monthDay",
+      "filePath": "frontend/src/lib/time.ts",
+      "lineRange": [
+        81,
+        84
+      ],
+      "summary": "Returns month and day parts for date badges.",
+      "tags": [
+        "utility",
+        "formatting",
+        "date"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/lib/time.ts:formatEventDate",
+      "type": "function",
+      "name": "formatEventDate",
+      "filePath": "frontend/src/lib/time.ts",
+      "lineRange": [
+        87,
+        89
+      ],
+      "summary": "Formats an event start as combined date and time text.",
+      "tags": [
+        "utility",
+        "formatting",
+        "events"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/lib/time.ts:startOfBucharestDayIso",
+      "type": "function",
+      "name": "startOfBucharestDayIso",
+      "filePath": "frontend/src/lib/time.ts",
+      "lineRange": [
+        92,
+        102
+      ],
+      "summary": "Returns the UTC ISO instant of Bucharest midnight offset by a number of days.",
+      "tags": [
+        "utility",
+        "timezone",
+        "date"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/lib/time.ts:dateRangeFor",
+      "type": "function",
+      "name": "dateRangeFor",
+      "filePath": "frontend/src/lib/time.ts",
+      "lineRange": [
+        115,
+        135
+      ],
+      "summary": "Turns a date filter preset (today, tomorrow, weekend, week) into from/to query parameters.",
+      "tags": [
+        "utility",
+        "filter",
+        "date"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/lib/time.ts:minutesUntil",
+      "type": "function",
+      "name": "minutesUntil",
+      "filePath": "frontend/src/lib/time.ts",
+      "lineRange": [
+        138,
+        140
+      ],
+      "summary": "Returns whole minutes from now until an ISO time.",
+      "tags": [
+        "utility",
+        "date",
+        "transit"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/ui/Chip.tsx",
+      "type": "file",
+      "name": "Chip.tsx",
+      "filePath": "frontend/src/ui/Chip.tsx",
+      "summary": "Small rounded UI chips: a selectable filter chip (navy idle, signal yellow when selected) and a coloured status chip.",
+      "tags": [
+        "component",
+        "ui-kit",
+        "filter",
+        "design-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/ui/Chip.tsx:Chip",
+      "type": "function",
+      "name": "Chip",
+      "filePath": "frontend/src/ui/Chip.tsx",
+      "lineRange": [
+        18,
+        35
+      ],
+      "summary": "Pressable filter chip with optional icon and selected styling and accessibility state.",
+      "tags": [
+        "component",
+        "ui-kit",
+        "filter"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/ui/Chip.tsx:StatusChip",
+      "type": "function",
+      "name": "StatusChip",
+      "filePath": "frontend/src/ui/Chip.tsx",
+      "lineRange": [
+        38,
+        52
+      ],
+      "summary": "Non-interactive chip showing a status label in a tone colour.",
+      "tags": [
+        "component",
+        "ui-kit",
+        "status"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/ui/GlowBackground.tsx",
+      "type": "file",
+      "name": "GlowBackground.tsx",
+      "filePath": "frontend/src/ui/GlowBackground.tsx",
+      "summary": "Full-screen ink background drawing a navy night-sky radial glow at the top and an optional faint gold street-lamp glow using react-native-svg.",
+      "tags": [
+        "component",
+        "ui-kit",
+        "background",
+        "design-system"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/ui/GlowBackground.tsx:Glow",
+      "type": "function",
+      "name": "Glow",
+      "filePath": "frontend/src/ui/GlowBackground.tsx",
+      "lineRange": [
+        10,
+        22
+      ],
+      "summary": "Internal SVG radial-gradient glow anchored at a point of the screen.",
+      "tags": [
+        "component",
+        "svg",
+        "background"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/ui/GlowBackground.tsx:GlowBackground",
+      "type": "function",
+      "name": "GlowBackground",
+      "filePath": "frontend/src/ui/GlowBackground.tsx",
+      "lineRange": [
+        25,
+        36
+      ],
+      "summary": "Absolute-fill background view rendering night or lamp glow variants.",
+      "tags": [
+        "component",
+        "ui-kit",
+        "background"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/ui/Icon.tsx",
+      "type": "file",
+      "name": "Icon.tsx",
+      "filePath": "frontend/src/ui/Icon.tsx",
+      "summary": "Thin wrapper around Expo Ionicons exposing a typed IconName and a default 18px light icon.",
+      "tags": [
+        "component",
+        "ui-kit",
+        "icon",
+        "type-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/ui/Icon.tsx:Icon",
+      "type": "function",
+      "name": "Icon",
+      "filePath": "frontend/src/ui/Icon.tsx",
+      "lineRange": [
+        10,
+        12
+      ],
+      "summary": "Renders an Ionicons icon with default size 18 and light colour.",
+      "tags": [
+        "component",
+        "icon",
+        "ui-kit"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/ui/RoutePlate.tsx",
+      "type": "file",
+      "name": "RoutePlate.tsx",
+      "filePath": "frontend/src/ui/RoutePlate.tsx",
+      "summary": "Yellow transit-signage style route-number plate in three sizes that shows a label or icon; used for line numbers and the reliability score.",
+      "tags": [
+        "component",
+        "ui-kit",
+        "transit",
+        "design-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/ui/RoutePlate.tsx:RoutePlate",
+      "type": "function",
+      "name": "RoutePlate",
+      "filePath": "frontend/src/ui/RoutePlate.tsx",
+      "lineRange": [
+        29,
+        46
+      ],
+      "summary": "Renders the sized yellow plate with a label or icon, growing sideways for long labels.",
+      "tags": [
+        "component",
+        "ui-kit",
+        "transit"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/ui/Screen.tsx",
+      "type": "file",
+      "name": "Screen.tsx",
+      "filePath": "frontend/src/ui/Screen.tsx",
+      "summary": "Standard screen shell wrapping content with the glow background, safe-area edges, keyboard avoidance, page margin and optional scroll with refresh control.",
+      "tags": [
+        "component",
+        "ui-kit",
+        "layout",
+        "screen-shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/ui/Screen.tsx:Screen",
+      "type": "function",
+      "name": "Screen",
+      "filePath": "frontend/src/ui/Screen.tsx",
+      "lineRange": [
+        24,
+        47
+      ],
+      "summary": "Screen wrapper composing GlowBackground, SafeAreaView, KeyboardAvoidingView and optional ScrollView.",
+      "tags": [
+        "component",
+        "layout",
+        "ui-kit"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:DOCS.md",
+      "type": "document",
+      "name": "DOCS.md",
+      "filePath": "DOCS.md",
+      "summary": "Living project documentation covering architecture, configuration, Supabase database, external data sources (STPT, LiveTickets, OpenStreetMap, Gemini), reliability rules, and per-feature backend and frontend notes keyed to PLAN tasks, including the blue/gold frontend redesign and current test counts.",
+      "tags": [
+        "documentation",
+        "architecture",
+        "entry-point",
+        "development",
+        "configuration"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:docs/design/mockups.html",
+      "type": "file",
+      "name": "mockups.html",
+      "filePath": "docs/design/mockups.html",
+      "summary": "Static HTML/CSS mockups of every app screen (home, map, AI, profile, event, find people, reliability scores) in the 'Timisoara after dark' blue/gold palette, with an inline script that draws reliability lines on a 0-200 scale and a ?s=<id> mode for exporting single phone-sized PNGs.",
+      "tags": [
+        "design",
+        "mockup",
+        "markup",
+        "ui-prototype",
+        "documentation"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Uses an inline SVG icon sprite and a query-string switch so headless Chrome can screenshot one screen at a time."
+    },
+    {
+      "id": "file:frontend/src/features/events/EventCards.tsx",
+      "type": "file",
+      "name": "EventCards.tsx",
+      "filePath": "frontend/src/features/events/EventCards.tsx",
+      "summary": "React Native event card components: a large 16:9 card for horizontal Home rows and a compact list row, both showing date, venue and an availability/price chip and navigating to event details on press.",
+      "tags": [
+        "component",
+        "ui",
+        "events",
+        "react-native",
+        "navigation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/features/events/EventCards.tsx:openEvent",
+      "type": "function",
+      "name": "openEvent",
+      "filePath": "frontend/src/features/events/EventCards.tsx",
+      "lineRange": [
+        17,
+        19
+      ],
+      "summary": "Navigates to the event details screen for the given event id via expo-router.",
+      "tags": [
+        "navigation",
+        "utility",
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/events/EventCards.tsx:AvailabilityChip",
+      "type": "function",
+      "name": "AvailabilityChip",
+      "filePath": "frontend/src/features/events/EventCards.tsx",
+      "lineRange": [
+        22,
+        26
+      ],
+      "summary": "Private component rendering a StatusChip with spots left (user events) or ticket price (external events), toned danger when full; renders nothing when no label.",
+      "tags": [
+        "component",
+        "ui",
+        "status-chip",
+        "helper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/events/EventCards.tsx:DateBadge",
+      "type": "function",
+      "name": "DateBadge",
+      "filePath": "frontend/src/features/events/EventCards.tsx",
+      "lineRange": [
+        29,
+        37
+      ],
+      "summary": "Small calendar-page badge showing a yellow month strip over the day number, overlaid on event art.",
+      "tags": [
+        "component",
+        "ui",
+        "date",
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/features/events/EventCards.tsx:EventCard",
+      "type": "function",
+      "name": "EventCard",
+      "filePath": "frontend/src/features/events/EventCards.tsx",
+      "lineRange": [
+        40,
+        77
+      ],
+      "summary": "Large pressable event card with category art, date badge, category icon, title/date overlay and a venue plus availability footer, used in horizontally scrolling rows.",
+      "tags": [
+        "component",
+        "ui",
+        "events",
+        "card",
+        "exported"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/features/events/EventCards.tsx:EventListItem",
+      "type": "function",
+      "name": "EventListItem",
+      "filePath": "frontend/src/features/events/EventCards.tsx",
+      "lineRange": [
+        80,
+        104
+      ],
+      "summary": "Compact pressable list row with a square event thumbnail, title, date, venue and availability chip.",
+      "tags": [
+        "component",
+        "ui",
+        "events",
+        "list-item",
+        "exported"
+      ],
+      "complexity": "simple"
     }
   ],
   "edges": [
@@ -21939,13 +22105,6 @@
     {
       "source": "file:frontend/__tests__/map.directions.test.tsx",
       "target": "function:frontend/src/lib/polyline.ts:decodePolyline",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/__tests__/map.transit.test.tsx",
-      "target": "function:frontend/src/features/transit/StopPanel.tsx:arrivalLabel",
       "type": "calls",
       "direction": "forward",
       "weight": 0.8
@@ -22035,13 +22194,6 @@
       "weight": 0.5
     },
     {
-      "source": "file:frontend/src/features/transit/StopPanel.tsx",
-      "target": "file:frontend/__tests__/map.transit.test.tsx",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "file:frontend/testing/mocks/index.ts",
       "target": "file:frontend/__tests__/mocks.backend.test.ts",
       "type": "tested_by",
@@ -22051,13 +22203,6 @@
     {
       "source": "file:frontend/testing/mocks/index.ts",
       "target": "file:frontend/__tests__/mocks.users.test.ts",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:frontend/src/app/(tabs)/profile.tsx",
-      "target": "file:frontend/__tests__/screens.profile.test.tsx",
       "type": "tested_by",
       "direction": "forward",
       "weight": 0.5
@@ -22119,13 +22264,6 @@
       "weight": 0.8
     },
     {
-      "source": "function:frontend/src/features/users/MyEvents.tsx:Section",
-      "target": "function:frontend/src/features/events/EventCards.tsx:EventListItem",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
       "source": "function:frontend/src/features/users/MyEvents.tsx:MyEvents",
       "target": "function:frontend/src/ui/States.tsx:LoadingState",
       "type": "calls",
@@ -22135,13 +22273,6 @@
     {
       "source": "function:frontend/src/features/users/MyEvents.tsx:MyEvents",
       "target": "function:frontend/src/ui/States.tsx:ErrorState",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/users/MyEvents.tsx:groupMyEvents",
-      "target": "function:frontend/src/lib/time.ts:parseIso",
       "type": "calls",
       "direction": "forward",
       "weight": 0.8
@@ -22350,83 +22481,6 @@
       "weight": 0.8
     },
     {
-      "source": "function:frontend/src/features/ai/ChatInput.tsx:ChatInput",
-      "target": "function:frontend/src/ui/Icon.tsx:Icon",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/transit/StopPanel.tsx",
-      "target": "function:frontend/src/features/transit/StopPanel.tsx:arrivalLabel",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/transit/StopPanel.tsx",
-      "target": "function:frontend/src/features/transit/StopPanel.tsx:arrivalLabel",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/transit/StopPanel.tsx",
-      "target": "function:frontend/src/features/transit/StopPanel.tsx:LineRow",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/transit/StopPanel.tsx",
-      "target": "function:frontend/src/features/transit/StopPanel.tsx:Arrivals",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/transit/StopPanel.tsx",
-      "target": "function:frontend/src/features/transit/StopPanel.tsx:LastDepartureRows",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/transit/StopPanel.tsx",
-      "target": "function:frontend/src/features/transit/StopPanel.tsx:StopPanel",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/transit/StopPanel.tsx",
-      "target": "function:frontend/src/features/transit/StopPanel.tsx:StopPanel",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/transit/StopPanel.tsx:Arrivals",
-      "target": "function:frontend/src/hooks/useTransit.ts:useStopArrivals",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/transit/StopPanel.tsx:LastDepartureRows",
-      "target": "function:frontend/src/hooks/useTransit.ts:useLastDepartures",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/transit/StopPanel.tsx:LastDepartureRows",
-      "target": "function:frontend/src/lib/time.ts:formatTime",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
       "source": "file:frontend/src/lib/network.ts",
       "target": "function:frontend/src/lib/network.ts:isOnline",
       "type": "contains",
@@ -22450,160 +22504,6 @@
     {
       "source": "file:frontend/src/lib/network.ts",
       "target": "function:frontend/src/lib/network.ts:startNetworkSync",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:bucharestOffsetMs",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:bucharestOffsetMs",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:parseIso",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:parseIso",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:toBucharest",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:toBucharest",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:bucharestToUtcIso",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:bucharestToUtcIso",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:formatTime",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:formatTime",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:formatDay",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:formatDay",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:formatDate",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:formatDate",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:formatEventDate",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:formatEventDate",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:startOfBucharestDayIso",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:startOfBucharestDayIso",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:dateRangeFor",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:dateRangeFor",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:minutesUntil",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "function:frontend/src/lib/time.ts:minutesUntil",
       "type": "exports",
       "direction": "forward",
       "weight": 0.8
@@ -22645,45 +22545,10 @@
     },
     {
       "source": "function:frontend/src/ui/OfflineBanner.tsx:OfflineBanner",
-      "target": "function:frontend/src/ui/Icon.tsx:Icon",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/ui/OfflineBanner.tsx:OfflineBanner",
       "target": "function:frontend/src/ui/Text.tsx:Text",
       "type": "calls",
       "direction": "forward",
       "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/lib/time.ts:dateRangeFor",
-      "target": "function:frontend/src/lib/time.ts:toBucharest",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/lib/time.ts:dateRangeFor",
-      "target": "function:frontend/src/lib/time.ts:startOfBucharestDayIso",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/lib/time.ts:toBucharest",
-      "target": "function:frontend/src/lib/time.ts:bucharestOffsetMs",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/lib/time.ts",
-      "target": "file:frontend/__tests__/lib.time.test.ts",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
     },
     {
       "source": "document:README.md",
@@ -22959,34 +22824,6 @@
       "weight": 0.8
     },
     {
-      "source": "file:frontend/src/app/(tabs)/index.tsx",
-      "target": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/app/(tabs)/index.tsx",
-      "target": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/app/(tabs)/profile.tsx",
-      "target": "function:frontend/src/app/(tabs)/profile.tsx:ProfileScreen",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/app/(tabs)/profile.tsx",
-      "target": "function:frontend/src/app/(tabs)/profile.tsx:ProfileScreen",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
       "source": "file:frontend/src/features/ai/ChatBubble.tsx",
       "target": "function:frontend/src/features/ai/ChatBubble.tsx:Sources",
       "type": "contains",
@@ -23032,34 +22869,6 @@
       "source": "file:frontend/src/features/ai/ChatBubble.tsx",
       "target": "function:frontend/src/features/ai/ChatBubble.tsx:ErrorBubble",
       "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
-      "target": "function:frontend/src/features/location/LocationProvider.tsx:useCurrentPosition",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
-      "target": "function:frontend/src/hooks/useTransit.ts:useTransitSummary",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
-      "target": "function:frontend/src/hooks/queries.ts:useEventsPage",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/app/(tabs)/profile.tsx:ProfileScreen",
-      "target": "function:frontend/src/hooks/queries.ts:useMe",
-      "type": "calls",
       "direction": "forward",
       "weight": 0.8
     },
@@ -23400,13 +23209,6 @@
       "weight": 0.8
     },
     {
-      "source": "function:frontend/src/features/ai/ResultCards.tsx:EventResult",
-      "target": "function:frontend/src/features/events/EventCards.tsx:EventListItem",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
       "source": "function:frontend/src/features/ai/ResultCards.tsx:PlaceResult",
       "target": "function:frontend/src/features/map/placeCategories.ts:placeMeta",
       "type": "calls",
@@ -23507,20 +23309,6 @@
     {
       "source": "file:frontend/src/features/map/placeCategories.ts",
       "target": "function:frontend/src/features/map/placeCategories.ts:placeMeta",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/transit/CityInfoStrip.tsx",
-      "target": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/transit/CityInfoStrip.tsx",
-      "target": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
       "type": "exports",
       "direction": "forward",
       "weight": 0.8
@@ -23638,58 +23426,9 @@
       "weight": 0.8
     },
     {
-      "source": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
-      "target": "function:frontend/src/features/location/LocationProvider.tsx:useCurrentPosition",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
-      "target": "function:frontend/src/hooks/useTransit.ts:useTransitSummary",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
-      "target": "function:frontend/src/hooks/useTransit.ts:useTransitAlerts",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
       "source": "function:frontend/src/features/transit/TransitControls.tsx:TransitControls",
       "target": "function:frontend/src/hooks/useTransit.ts:useTransitRoutes",
       "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/users/ReliabilityGauge.tsx",
-      "target": "function:frontend/src/features/users/ReliabilityGauge.tsx:gaugeFraction",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/users/ReliabilityGauge.tsx",
-      "target": "function:frontend/src/features/users/ReliabilityGauge.tsx:gaugeFraction",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:frontend/src/features/users/ReliabilityGauge.tsx",
-      "target": "function:frontend/src/features/users/ReliabilityGauge.tsx:ReliabilityGauge",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/users/ReliabilityGauge.tsx",
-      "target": "function:frontend/src/features/users/ReliabilityGauge.tsx:ReliabilityGauge",
-      "type": "exports",
       "direction": "forward",
       "weight": 0.8
     },
@@ -24067,13 +23806,6 @@
     {
       "source": "function:frontend/src/features/users/UsernameEditor.tsx:UsernameEditor",
       "target": "function:frontend/src/lib/validation.ts:validateUsername",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:frontend/src/features/users/ReliabilityGauge.tsx:ReliabilityGauge",
-      "target": "function:frontend/src/features/users/ReliabilityGauge.tsx:gaugeFraction",
       "type": "calls",
       "direction": "forward",
       "weight": 0.8
@@ -32822,13 +32554,6 @@
       "weight": 1
     },
     {
-      "source": "file:frontend/src/app/users/[id].tsx",
-      "target": "function:frontend/src/app/users/[id].tsx:PublicProfileScreen",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
       "source": "file:frontend/src/app/users/_layout.tsx",
       "target": "function:frontend/src/app/users/_layout.tsx:UsersLayout",
       "type": "contains",
@@ -32894,34 +32619,6 @@
     {
       "source": "file:frontend/src/features/events/EventArt.tsx",
       "target": "function:frontend/src/features/events/EventArt.tsx:EventArt",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/events/EventCards.tsx",
-      "target": "function:frontend/src/features/events/EventCards.tsx:openEvent",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/events/EventCards.tsx",
-      "target": "function:frontend/src/features/events/EventCards.tsx:AvailabilityChip",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/events/EventCards.tsx",
-      "target": "function:frontend/src/features/events/EventCards.tsx:EventCard",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/features/events/EventCards.tsx",
-      "target": "function:frontend/src/features/events/EventCards.tsx:EventListItem",
       "type": "contains",
       "direction": "forward",
       "weight": 1
@@ -33102,41 +32799,6 @@
       "weight": 1
     },
     {
-      "source": "file:frontend/src/ui/Chip.tsx",
-      "target": "function:frontend/src/ui/Chip.tsx:Chip",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/ui/Chip.tsx",
-      "target": "function:frontend/src/ui/Chip.tsx:StatusChip",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/ui/GlowBackground.tsx",
-      "target": "function:frontend/src/ui/GlowBackground.tsx:Glow",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/ui/GlowBackground.tsx",
-      "target": "function:frontend/src/ui/GlowBackground.tsx:GlowBackground",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/ui/Icon.tsx",
-      "target": "function:frontend/src/ui/Icon.tsx:Icon",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
       "source": "file:frontend/src/ui/ReliabilityBadge.tsx",
       "target": "function:frontend/src/ui/ReliabilityBadge.tsx:reliabilityColor",
       "type": "contains",
@@ -33146,13 +32808,6 @@
     {
       "source": "file:frontend/src/ui/ReliabilityBadge.tsx",
       "target": "function:frontend/src/ui/ReliabilityBadge.tsx:ReliabilityBadge",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:frontend/src/ui/Screen.tsx",
-      "target": "function:frontend/src/ui/Screen.tsx:Screen",
       "type": "contains",
       "direction": "forward",
       "weight": 1
@@ -35307,300 +34962,6 @@
       "weight": 0.8
     },
     {
-      "source": "document:DOCS.md",
-      "target": "document:PLAN.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "document:AGENTS.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "document:docs/API.md",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "document:docs/DEMO.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "document:infra/otp/README.md",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:supabase/migrations/20261114000001_place_prices.sql",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/ai/controller/AiController.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/AiChatServiceImpl.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/ai/client/impl/GeminiRestClient.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/ai/tool/impl/SearchPlacesTool.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/places/domain/OpeningHours.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/places/controller/PlaceController.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/transit/controller/TransitController.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/routing/controller/RoutingController.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/reliability/controller/CheckInController.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/events/controller/EventController.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/users/controller/UserController.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/resources/application-local.properties.example",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/api/client.ts",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/lib/network.ts",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/ui/OfflineBanner.tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/lib/time.ts",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/testing/mocks/data.ts",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/ai/domain/ToolContext.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/ai/tool/impl/PlanRouteTool.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/ai/mapper/impl/ChatResultMapperImpl.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/ai/domain/dto/ChatRouteDto.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/ai/domain/dto/RoutePointDto.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/features/ai/RouteCards.tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/features/journey/navigation.ts",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/features/journey/useJourney.ts",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/features/journey/JourneyPanel.tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/features/journey/progress.ts",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/app/(tabs)/map.tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/features/map/MapContext.tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/SystemPromptTest.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/src/api/types.ai.ts",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:DOCS.md",
-      "target": "file:frontend/__tests__/map.journey.test.tsx",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:PLAN.md",
-      "target": "document:DOCS.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "document:PLAN.md",
       "target": "document:AGENTS.md",
       "type": "related",
@@ -35826,13 +35187,6 @@
     },
     {
       "source": "document:docs/API.md",
-      "target": "document:DOCS.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/API.md",
       "target": "document:PLAN.md",
       "type": "related",
       "direction": "forward",
@@ -35900,6 +35254,972 @@
       "type": "documents",
       "direction": "forward",
       "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/index.tsx",
+      "target": "function:frontend/src/app/(tabs)/index.tsx:LivePill",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/index.tsx",
+      "target": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/index.tsx",
+      "target": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/profile.tsx",
+      "target": "function:frontend/src/app/(tabs)/profile.tsx:ProfileScreen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/profile.tsx",
+      "target": "function:frontend/src/app/(tabs)/profile.tsx:ProfileScreen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/app/users/[id].tsx",
+      "target": "function:frontend/src/app/users/[id].tsx:PublicProfileScreen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/app/users/[id].tsx",
+      "target": "function:frontend/src/app/users/[id].tsx:PublicProfileScreen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "target": "function:frontend/src/features/location/LocationProvider.tsx:useCurrentPosition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "target": "function:frontend/src/hooks/useTransit.ts:useTransitSummary",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/index.tsx:HomeScreen",
+      "target": "function:frontend/src/hooks/queries.ts:useEventsPage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/profile.tsx:ProfileScreen",
+      "target": "function:frontend/src/hooks/queries.ts:useMe",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/profile.tsx:ProfileScreen",
+      "target": "function:frontend/src/features/auth/AuthProvider.tsx:useAuth",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/(tabs)/profile.tsx:ProfileScreen",
+      "target": "function:frontend/src/lib/time.ts:formatDate",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/users/[id].tsx:PublicProfileScreen",
+      "target": "function:frontend/src/hooks/queries.ts:useUser",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/app/users/[id].tsx:PublicProfileScreen",
+      "target": "function:frontend/src/lib/time.ts:formatDate",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/errors.ts",
+      "target": "file:frontend/__tests__/lib.misc.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/features/events/checkInResult.ts",
+      "target": "file:frontend/__tests__/lib.misc.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/features/events/format.ts",
+      "target": "file:frontend/__tests__/lib.misc.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/features/events/newEventForm.ts",
+      "target": "file:frontend/__tests__/lib.misc.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/features/users/ReliabilityLine.tsx",
+      "target": "file:frontend/__tests__/lib.misc.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/lib/geo.ts",
+      "target": "file:frontend/__tests__/lib.misc.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/lib/validation.ts",
+      "target": "file:frontend/__tests__/lib.misc.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/ui/ReliabilityBadge.tsx",
+      "target": "file:frontend/__tests__/lib.misc.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "file:frontend/__tests__/lib.time.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/index.tsx",
+      "target": "file:frontend/__tests__/screens.home.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/profile.tsx",
+      "target": "file:frontend/__tests__/screens.profile.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/app/(tabs)/profile.tsx",
+      "target": "file:frontend/__tests__/screens.users.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/app/users/[id].tsx",
+      "target": "file:frontend/__tests__/screens.users.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/features/transit/CityInfoStrip.tsx",
+      "target": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/transit/CityInfoStrip.tsx",
+      "target": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/transit/StopPanel.tsx",
+      "target": "function:frontend/src/features/transit/StopPanel.tsx:arrivalLabel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/transit/StopPanel.tsx",
+      "target": "function:frontend/src/features/transit/StopPanel.tsx:arrivalLabel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/transit/StopPanel.tsx",
+      "target": "function:frontend/src/features/transit/StopPanel.tsx:LineRow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/transit/StopPanel.tsx",
+      "target": "function:frontend/src/features/transit/StopPanel.tsx:Arrivals",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/transit/StopPanel.tsx",
+      "target": "function:frontend/src/features/transit/StopPanel.tsx:LastDepartureRows",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/transit/StopPanel.tsx",
+      "target": "function:frontend/src/features/transit/StopPanel.tsx:StopPanel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/transit/StopPanel.tsx",
+      "target": "function:frontend/src/features/transit/StopPanel.tsx:StopPanel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
+      "target": "function:frontend/src/features/location/LocationProvider.tsx:useCurrentPosition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
+      "target": "function:frontend/src/hooks/useTransit.ts:useTransitSummary",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
+      "target": "function:frontend/src/hooks/useTransit.ts:useTransitAlerts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/transit/CityInfoStrip.tsx:CityInfoStrip",
+      "target": "function:frontend/src/lib/time.ts:formatTime",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/transit/StopPanel.tsx:Arrivals",
+      "target": "function:frontend/src/features/transit/StopPanel.tsx:arrivalLabel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/transit/StopPanel.tsx:LastDepartureRows",
+      "target": "function:frontend/src/lib/time.ts:parseIso",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/transit/StopPanel.tsx:LastDepartureRows",
+      "target": "function:frontend/src/lib/time.ts:formatTime",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/transit/StopPanel.tsx:StopPanel",
+      "target": "function:frontend/src/hooks/useTransit.ts:useStopArrivals",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/transit/StopPanel.tsx:StopPanel",
+      "target": "function:frontend/src/hooks/useTransit.ts:useLastDepartures",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/transit/StopPanel.tsx",
+      "target": "file:frontend/__tests__/map.transit.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/features/users/ReliabilityLine.tsx",
+      "target": "function:frontend/src/features/users/ReliabilityLine.tsx:linePosition",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/users/ReliabilityLine.tsx",
+      "target": "function:frontend/src/features/users/ReliabilityLine.tsx:linePosition",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/users/ReliabilityLine.tsx",
+      "target": "function:frontend/src/features/users/ReliabilityLine.tsx:lineStops",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/users/ReliabilityLine.tsx",
+      "target": "function:frontend/src/features/users/ReliabilityLine.tsx:lineStops",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/users/ReliabilityLine.tsx",
+      "target": "function:frontend/src/features/users/ReliabilityLine.tsx:nextStopLabel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/users/ReliabilityLine.tsx",
+      "target": "function:frontend/src/features/users/ReliabilityLine.tsx:nextStopLabel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/users/ReliabilityLine.tsx",
+      "target": "function:frontend/src/features/users/ReliabilityLine.tsx:ReliabilityLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/users/ReliabilityLine.tsx",
+      "target": "function:frontend/src/features/users/ReliabilityLine.tsx:ReliabilityLine",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:bucharestOffsetMs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:bucharestOffsetMs",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:parseIso",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:parseIso",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:toBucharest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:toBucharest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:bucharestToUtcIso",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:bucharestToUtcIso",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:formatTime",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:formatTime",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:formatDay",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:formatDay",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:formatDate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:formatDate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:monthDay",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:monthDay",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:formatEventDate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:formatEventDate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:startOfBucharestDayIso",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:startOfBucharestDayIso",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:dateRangeFor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:dateRangeFor",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:minutesUntil",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/lib/time.ts",
+      "target": "function:frontend/src/lib/time.ts:minutesUntil",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/ui/Chip.tsx",
+      "target": "function:frontend/src/ui/Chip.tsx:Chip",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/ui/Chip.tsx",
+      "target": "function:frontend/src/ui/Chip.tsx:Chip",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/ui/Chip.tsx",
+      "target": "function:frontend/src/ui/Chip.tsx:StatusChip",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/ui/Chip.tsx",
+      "target": "function:frontend/src/ui/Chip.tsx:StatusChip",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/ui/GlowBackground.tsx",
+      "target": "function:frontend/src/ui/GlowBackground.tsx:Glow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/ui/GlowBackground.tsx",
+      "target": "function:frontend/src/ui/GlowBackground.tsx:GlowBackground",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/ui/GlowBackground.tsx",
+      "target": "function:frontend/src/ui/GlowBackground.tsx:GlowBackground",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/ui/Icon.tsx",
+      "target": "function:frontend/src/ui/Icon.tsx:Icon",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/ui/Icon.tsx",
+      "target": "function:frontend/src/ui/Icon.tsx:Icon",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/ui/RoutePlate.tsx",
+      "target": "function:frontend/src/ui/RoutePlate.tsx:RoutePlate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/ui/RoutePlate.tsx",
+      "target": "function:frontend/src/ui/RoutePlate.tsx:RoutePlate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/ui/Screen.tsx",
+      "target": "function:frontend/src/ui/Screen.tsx:Screen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/ui/Screen.tsx",
+      "target": "function:frontend/src/ui/Screen.tsx:Screen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/users/ReliabilityLine.tsx:ReliabilityLine",
+      "target": "function:frontend/src/ui/RoutePlate.tsx:RoutePlate",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/users/ReliabilityLine.tsx:ReliabilityLine",
+      "target": "function:frontend/src/features/users/ReliabilityLine.tsx:linePosition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/users/ReliabilityLine.tsx:ReliabilityLine",
+      "target": "function:frontend/src/features/users/ReliabilityLine.tsx:lineStops",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/users/ReliabilityLine.tsx:ReliabilityLine",
+      "target": "function:frontend/src/features/users/ReliabilityLine.tsx:nextStopLabel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/users/ReliabilityLine.tsx:ReliabilityLine",
+      "target": "function:frontend/src/features/users/reliability.ts:formatPoints",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/users/ReliabilityLine.tsx:lineStops",
+      "target": "function:frontend/src/features/users/ReliabilityLine.tsx:linePosition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/ui/Chip.tsx:Chip",
+      "target": "function:frontend/src/ui/Icon.tsx:Icon",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/ui/RoutePlate.tsx:RoutePlate",
+      "target": "function:frontend/src/ui/Icon.tsx:Icon",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/ui/Screen.tsx:Screen",
+      "target": "function:frontend/src/ui/GlowBackground.tsx:GlowBackground",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/ui/GlowBackground.tsx:GlowBackground",
+      "target": "function:frontend/src/ui/GlowBackground.tsx:Glow",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/lib/time.ts:dateRangeFor",
+      "target": "function:frontend/src/lib/time.ts:startOfBucharestDayIso",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/lib/time.ts:dateRangeFor",
+      "target": "function:frontend/src/lib/time.ts:toBucharest",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/lib/time.ts:toBucharest",
+      "target": "function:frontend/src/lib/time.ts:bucharestOffsetMs",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "document:docs/API.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "document:PLAN.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:docs/design/mockups.html",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/api/client.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/config.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/hooks/useAi.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DOCS.md",
+      "target": "file:frontend/src/features/users/ReliabilityLine.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:docs/design/mockups.html",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:docs/design/mockups.html",
+      "target": "file:frontend/src/features/users/ReliabilityLine.tsx",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frontend/src/features/events/EventCards.tsx",
+      "target": "function:frontend/src/features/events/EventCards.tsx:openEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/events/EventCards.tsx",
+      "target": "function:frontend/src/features/events/EventCards.tsx:AvailabilityChip",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/events/EventCards.tsx",
+      "target": "function:frontend/src/features/events/EventCards.tsx:DateBadge",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/events/EventCards.tsx",
+      "target": "function:frontend/src/features/events/EventCards.tsx:EventCard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/events/EventCards.tsx",
+      "target": "function:frontend/src/features/events/EventCards.tsx:EventListItem",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:frontend/src/features/events/EventCards.tsx",
+      "target": "function:frontend/src/features/events/EventCards.tsx:openEvent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/events/EventCards.tsx",
+      "target": "function:frontend/src/features/events/EventCards.tsx:DateBadge",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/events/EventCards.tsx",
+      "target": "function:frontend/src/features/events/EventCards.tsx:EventCard",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/features/events/EventCards.tsx",
+      "target": "function:frontend/src/features/events/EventCards.tsx:EventListItem",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/events/EventCards.tsx:AvailabilityChip",
+      "target": "function:frontend/src/features/events/format.ts:availabilityLabel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/events/EventCards.tsx:AvailabilityChip",
+      "target": "function:frontend/src/features/events/format.ts:isFull",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/events/EventCards.tsx:AvailabilityChip",
+      "target": "function:frontend/src/ui/Chip.tsx:StatusChip",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/events/EventCards.tsx:DateBadge",
+      "target": "function:frontend/src/lib/time.ts:monthDay",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/events/EventCards.tsx:EventCard",
+      "target": "function:frontend/src/features/events/categories.ts:categoryMeta",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/events/EventCards.tsx:EventCard",
+      "target": "function:frontend/src/lib/time.ts:formatEventDate",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/events/EventCards.tsx:EventCard",
+      "target": "function:frontend/src/features/events/EventCards.tsx:openEvent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/events/EventCards.tsx:EventCard",
+      "target": "function:frontend/src/features/events/EventCards.tsx:DateBadge",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/events/EventCards.tsx:EventCard",
+      "target": "function:frontend/src/features/events/EventCards.tsx:AvailabilityChip",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/events/EventCards.tsx:EventCard",
+      "target": "function:frontend/src/features/events/EventArt.tsx:EventArt",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/events/EventCards.tsx:EventListItem",
+      "target": "function:frontend/src/lib/time.ts:formatEventDate",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/events/EventCards.tsx:EventListItem",
+      "target": "function:frontend/src/features/events/EventCards.tsx:openEvent",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/events/EventCards.tsx:EventListItem",
+      "target": "function:frontend/src/features/events/EventCards.tsx:AvailabilityChip",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frontend/src/features/events/EventCards.tsx:EventListItem",
+      "target": "function:frontend/src/features/events/EventArt.tsx:EventArt",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
     },
     {
       "source": "file:backend/src/main/java/com/unihack8/backend/ai/client/GeminiClient.java",
@@ -42471,7 +42791,7 @@
     },
     {
       "source": "file:frontend/__tests__/lib.misc.test.ts",
-      "target": "file:frontend/src/features/users/ReliabilityGauge.tsx",
+      "target": "file:frontend/src/features/users/ReliabilityLine.tsx",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -43831,7 +44151,7 @@
     },
     {
       "source": "file:frontend/src/app/(tabs)/profile.tsx",
-      "target": "file:frontend/src/features/users/ReliabilityGauge.tsx",
+      "target": "file:frontend/src/features/users/ReliabilityLine.tsx",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -44519,7 +44839,7 @@
     },
     {
       "source": "file:frontend/src/app/users/[id].tsx",
-      "target": "file:frontend/src/features/users/ReliabilityGauge.tsx",
+      "target": "file:frontend/src/features/users/ReliabilityLine.tsx",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -44544,14 +44864,6 @@
     {
       "source": "file:frontend/src/app/users/[id].tsx",
       "target": "file:frontend/src/ui/Avatar.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/app/users/[id].tsx",
-      "target": "file:frontend/src/ui/Card.tsx",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -45999,7 +46311,7 @@
     },
     {
       "source": "file:frontend/src/features/transit/CityInfoStrip.tsx",
-      "target": "file:frontend/src/ui/Card.tsx",
+      "target": "file:frontend/src/lib/time.ts",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -46008,6 +46320,14 @@
     {
       "source": "file:frontend/src/features/transit/CityInfoStrip.tsx",
       "target": "file:frontend/src/ui/Icon.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/transit/CityInfoStrip.tsx",
+      "target": "file:frontend/src/ui/RoutePlate.tsx",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -46063,6 +46383,14 @@
     },
     {
       "source": "file:frontend/src/features/transit/StopPanel.tsx",
+      "target": "file:frontend/src/ui/RoutePlate.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/transit/StopPanel.tsx",
       "target": "file:frontend/src/ui/States.tsx",
       "type": "imports",
       "direction": "forward",
@@ -46072,14 +46400,6 @@
     {
       "source": "file:frontend/src/features/transit/StopPanel.tsx",
       "target": "file:frontend/src/ui/Text.tsx",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7,
-      "recoveredFromImportMap": true
-    },
-    {
-      "source": "file:frontend/src/features/transit/StopPanel.tsx",
-      "target": "file:frontend/src/ui/theme.ts",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7,
@@ -46190,7 +46510,7 @@
       "recoveredFromImportMap": true
     },
     {
-      "source": "file:frontend/src/features/users/ReliabilityGauge.tsx",
+      "source": "file:frontend/src/features/users/ReliabilityLine.tsx",
       "target": "file:frontend/src/features/users/reliability.ts",
       "type": "imports",
       "direction": "forward",
@@ -46198,7 +46518,15 @@
       "recoveredFromImportMap": true
     },
     {
-      "source": "file:frontend/src/features/users/ReliabilityGauge.tsx",
+      "source": "file:frontend/src/features/users/ReliabilityLine.tsx",
+      "target": "file:frontend/src/ui/RoutePlate.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/features/users/ReliabilityLine.tsx",
       "target": "file:frontend/src/ui/Text.tsx",
       "type": "imports",
       "direction": "forward",
@@ -46206,7 +46534,7 @@
       "recoveredFromImportMap": true
     },
     {
-      "source": "file:frontend/src/features/users/ReliabilityGauge.tsx",
+      "source": "file:frontend/src/features/users/ReliabilityLine.tsx",
       "target": "file:frontend/src/ui/theme.ts",
       "type": "imports",
       "direction": "forward",
@@ -46623,6 +46951,30 @@
     },
     {
       "source": "file:frontend/src/ui/ReliabilityBadge.tsx",
+      "target": "file:frontend/src/ui/theme.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/ui/RoutePlate.tsx",
+      "target": "file:frontend/src/ui/Icon.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/ui/RoutePlate.tsx",
+      "target": "file:frontend/src/ui/Text.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:frontend/src/ui/RoutePlate.tsx",
       "target": "file:frontend/src/ui/theme.ts",
       "type": "imports",
       "direction": "forward",
@@ -47152,7 +47504,8 @@
         "document:PLAN.md",
         "document:README.md",
         "document:AGENTS.md",
-        "document:docs/DEMO.md"
+        "document:docs/DEMO.md",
+        "file:docs/design/mockups.html"
       ]
     },
     {
@@ -47457,7 +47810,6 @@
         "file:frontend/src/features/transit/TransitControls.tsx",
         "file:frontend/src/features/transit/TransitLayer.tsx",
         "file:frontend/src/features/users/MyEvents.tsx",
-        "file:frontend/src/features/users/ReliabilityGauge.tsx",
         "file:frontend/src/features/users/ReliabilityLog.tsx",
         "file:frontend/src/features/users/UsernameEditor.tsx",
         "file:frontend/src/features/users/reliability.ts",
@@ -47507,7 +47859,9 @@
         "file:frontend/src/features/journey/JourneyPanel.tsx",
         "file:frontend/src/features/journey/navigation.ts",
         "file:frontend/src/features/journey/progress.ts",
-        "file:frontend/src/features/journey/useJourney.ts"
+        "file:frontend/src/features/journey/useJourney.ts",
+        "file:frontend/src/features/users/ReliabilityLine.tsx",
+        "file:frontend/src/ui/RoutePlate.tsx"
       ]
     },
     {
@@ -48046,18 +48400,28 @@
     },
     {
       "order": 26,
-      "title": "Tabs, Design Tokens and the Home Screen",
-      "description": "The tab layout defines four bottom tabs: Home, Map, AI and Profile. theme.ts holds the dark-neon design tokens and is the most depended-on file in the whole graph. The Home screen shows a search field, the city info strip with the last-tram message, category chips and nearby upcoming events, and the events list adds search and filters.",
+      "title": "Blue/Gold Design System",
+      "description": "Before reading the screens, meet the visual language they share. theme.ts holds the design tokens (colours, spacing, radii, type scale) for the \"Timisoara after dark\" palette: night-navy surfaces with gold accents, and it is the most depended-on file in the whole graph. RoutePlate is a yellow transit-signage route-number plate in three sizes, reused for line numbers and the reliability score, and docs/design/mockups.html shows every screen in this palette as static HTML/CSS mockups.",
+      "nodeIds": [
+        "file:frontend/src/ui/theme.ts",
+        "file:frontend/src/ui/RoutePlate.tsx",
+        "file:docs/design/mockups.html"
+      ],
+      "languageLesson": "Centralising colours and spacing in one token module means a full redesign, like this blue/gold palette, changes values in one file while components keep referring to the same token names."
+    },
+    {
+      "order": 27,
+      "title": "Tabs and the Home Screen",
+      "description": "The tab layout defines four bottom tabs: Home, Map, AI and Profile. The Home screen shows a search field, category chips, nearby upcoming events and the city info strip, which is now a departure board: the last-tram message, the last departure time in large gold numerals and an expandable transit alerts pill, styled with the tokens and route plates from the previous step. The events list adds search and filters.",
       "nodeIds": [
         "file:frontend/src/app/(tabs)/_layout.tsx",
-        "file:frontend/src/ui/theme.ts",
         "file:frontend/src/app/(tabs)/index.tsx",
         "file:frontend/src/features/transit/CityInfoStrip.tsx",
         "file:frontend/src/app/events/index.tsx"
       ]
     },
     {
-      "order": 27,
+      "order": 28,
       "title": "The Map Tab: Places and Events",
       "description": "map.tsx combines react-native-maps with place and event markers, filter chips, the transit layer, directions and a bottom panel, and can switch into journey mode when opened from an AI route card. MapContext is the shared state contract: a debounced visible bounding box, the user position, a single panel selection and the directions destination. Markers cluster when zoomed out and load data for the visible area through hooks such as usePlaces.",
       "nodeIds": [
@@ -48070,7 +48434,7 @@
       "languageLesson": "React context shares state with deeply nested components without passing props through every level; here markers, panels and layers all read the same selection."
     },
     {
-      "order": 28,
+      "order": 29,
       "title": "Live Transit on the Map",
       "description": "The transit layer brings the backend transit endpoints from Step 14 onto the map. TransitControls toggles the layer and picks a line, TransitLayer draws stop dots and live vehicle badges, and StopPanel lists the next arrivals and each line's last departure today. useTransit wraps the transit endpoints in TanStack Query hooks with refresh intervals.",
       "nodeIds": [
@@ -48083,7 +48447,7 @@
       "languageLesson": "TanStack Query caches server data by query key and can refetch on an interval, which suits live vehicle positions without hand-written polling code."
     },
     {
-      "order": 29,
+      "order": 30,
       "title": "Directions on the Map",
       "description": "Tapping Directions on a place or event sets a destination in MapContext. DirectionsPanel compares walking and walking plus public transport times and shows per-leg steps, DirectionsLayer decodes and draws the route polylines (dashed for walking, solid for rides), and useRouting calls the OpenTripPlanner-backed endpoint from Step 15.",
       "nodeIds": [
@@ -48094,7 +48458,7 @@
       ]
     },
     {
-      "order": 30,
+      "order": 31,
       "title": "The AI Chat Screen",
       "description": "The AI tab is the frontend for Steps 19-23. useAi keeps the message history, trims it to the maximum window and sends it with the user location through endpoints.ai. ChatBubble shows replies with cited price sources, and ResultCards renders the place and event cards with a Show on map shortcut that deep-links into the Map tab; route answers get their own cards, covered next.",
       "nodeIds": [
@@ -48106,9 +48470,9 @@
       ]
     },
     {
-      "order": 31,
+      "order": 32,
       "title": "AI Navigation and Journey Mode",
-      "description": "Building on the route cards from Step 23, RouteCards shows each AI-planned walk or walk + transit route with its duration and distance, a Show route on map preview and a Go button that checks location permission. navigation.ts encodes the route into Map tab params and parses it back into a validated request, so the Map tab from Step 27 opens in journey mode. There useJourney watches GPS, re-plans from the live position when the user goes off-route and detects arrival, using the pure maths in progress.ts, while JourneyPanel draws the legs and the current step with time and distance left.",
+      "description": "Building on the route cards from Step 23, RouteCards shows each AI-planned walk or walk + transit route with its duration and distance, a Show route on map preview and a Go button that checks location permission. navigation.ts encodes the route into Map tab params and parses it back into a validated request, so the Map tab from Step 28 opens in journey mode. There useJourney watches GPS, re-plans from the live position when the user goes off-route and detects arrival, using the pure maths in progress.ts, while JourneyPanel draws the legs and the current step with time and distance left.",
       "nodeIds": [
         "file:frontend/src/features/ai/RouteCards.tsx",
         "file:frontend/src/features/journey/navigation.ts",
@@ -48119,19 +48483,20 @@
       "languageLesson": "Keeping geometry and progress logic in a pure module (progress.ts) separate from the hook that owns side effects (useJourney) makes the navigation maths easy to unit test without GPS or a device."
     },
     {
-      "order": 32,
+      "order": 33,
       "title": "Events, Tickets and Profiles",
-      "description": "The event details screen lets users join or leave and shows participants with their reliability. The ticket screen displays the participant's QR code (holding only the qrToken), the organiser's scanner checks people in, and user search plus public profiles show reliability scores and attended events.",
+      "description": "The event details screen lets users join or leave and shows participants with their reliability. The ticket screen displays the participant's QR code (holding only the qrToken) and the organiser's scanner checks people in, awarding the points from Step 17. Public profiles show attended events and the reliability score drawn by ReliabilityLine as a 0-200 transit line with stops every 50 points and a yellow route plate marking the score, followed by the scoring rules as a fare table.",
       "nodeIds": [
         "file:frontend/src/app/events/[id]/index.tsx",
         "file:frontend/src/app/events/[id]/ticket.tsx",
         "file:frontend/src/app/events/[id]/scan.tsx",
-        "file:frontend/src/app/users/search.tsx",
-        "file:frontend/src/app/users/[id].tsx"
-      ]
+        "file:frontend/src/app/users/[id].tsx",
+        "file:frontend/src/features/users/ReliabilityLine.tsx"
+      ],
+      "languageLesson": "ReliabilityLine exports its plate-position and next-stop calculations as pure helpers next to the component, so the maths can be unit tested without rendering."
     },
     {
-      "order": 33,
+      "order": 34,
       "title": "Frontend Verification",
       "description": "Frontend tests use Jest and React Native Testing Library against mock backend routes, so screens are tested without a server. The map tests cover the layers, transit, directions and journey flows, and the AI chat test covers sending, thinking, sources, errors and rate limits.",
       "nodeIds": [

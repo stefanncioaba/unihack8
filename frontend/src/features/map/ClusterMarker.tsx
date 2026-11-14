@@ -7,7 +7,7 @@ import { colors } from '@/ui/theme';
 
 type Props = { id: string; lat: number; lon: number; count: number; color: string; onPress: () => void };
 
-/** Violet for places, orange for events (pass the colour in). */
+/** Oxford Navy for places, yellow for events (pass the colour in). */
 export function ClusterMarker({ id, lat, lon, count, color, onPress }: Props) {
   return (
     <Marker testID={`cluster-${id}`} coordinate={{ latitude: lat, longitude: lon }} onPress={onPress} tracksViewChanges={false} anchor={{ x: 0.5, y: 0.5 }}>

@@ -18,7 +18,7 @@ type Props = {
   onSelectStop: (id: string) => void;
 };
 
-/** Small teal dot for a stop; bigger and ringed when selected. */
+/** Small signal-blue dot for a stop; bigger and ringed when selected. */
 function StopDot({ selected }: { selected: boolean }) {
   return <View style={[styles.stop, selected && styles.stopSelected]} />;
 }

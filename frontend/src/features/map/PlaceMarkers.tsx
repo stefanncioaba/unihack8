@@ -1,4 +1,4 @@
-// Violet pins for places in the visible area, with a short dark label when zoomed in (PLAN 14.2).
+// Oxford Navy pins for places in the visible area, with a short dark label when zoomed in (PLAN 14.2).
 import { useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Marker } from 'react-native-maps';
@@ -25,7 +25,7 @@ type Props = {
   onZoomTo: (lat: number, lon: number) => void;
 };
 
-/** One pin: round violet badge with the category icon and an optional name pill. */
+/** One pin: round Oxford Navy badge with the category icon and an optional name pill. */
 function PlacePin({ place, selected, showLabel }: { place: PlaceSummary; selected: boolean; showLabel: boolean }) {
   return (
     <View style={styles.pin}>

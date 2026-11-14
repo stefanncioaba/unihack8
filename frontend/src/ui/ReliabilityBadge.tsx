@@ -5,7 +5,7 @@ import { Icon } from './Icon';
 import { Text } from './Text';
 import { colors } from './theme';
 
-/** Teal for 90+, orange for 60–89, red below 60. */
+/** Signal blue for 90+, gold for 60–89, red below 60. */
 export function reliabilityColor(score: number): string {
   if (score >= 90) return colors.signal;
   if (score >= 60) return colors.gold;

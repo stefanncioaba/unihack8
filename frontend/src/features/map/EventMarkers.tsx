@@ -1,4 +1,4 @@
-// Orange pins for events in the visible area (PLAN 14.3). A tap opens the event panel.
+// Yellow pins for events in the visible area (PLAN 14.3). A tap opens the event panel.
 import { useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Marker } from 'react-native-maps';
@@ -24,7 +24,7 @@ type Props = {
   onZoomTo: (lat: number, lon: number) => void;
 };
 
-/** One event pin: orange badge with the category icon, optional title pill. */
+/** One event pin: yellow badge with the category icon, optional title pill. */
 function EventPin({ event, selected, showLabel }: { event: EventSummary; selected: boolean; showLabel: boolean }) {
   return (
     <View style={styles.pin}>

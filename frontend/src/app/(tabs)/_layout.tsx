@@ -1,4 +1,4 @@
-// Four bottom tabs: Home, Map, AI, Profile. Same blue-black bar on every page; orange marks the selected tab.
+// Four bottom tabs: Home, Map, AI, Profile. Same ink-navy bar on every page; signal yellow marks the selected tab.
 import { Tabs } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
