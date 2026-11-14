@@ -3,7 +3,7 @@
 import { act, fireEvent, screen, waitFor } from '@testing-library/react-native';
 
 import MapScreen from '@/app/(tabs)/map';
-import { INITIAL_MAP_FILTERS, visibleLayers } from '@/features/map/mapFilters';
+import { INITIAL_MAP_FILTERS, mapFiltersReducer, visibleLayers } from '@/features/map/mapFilters';
 
 import { renderScreen } from './testUtils';
 
@@ -30,9 +30,15 @@ describe('visibleLayers', () => {
   });
 
   it('turns every layer off while directions are shown, keeping the chosen categories for later', () => {
-    const f = { placesOn: true, categories: ['cafe' as const], eventsOn: true, transitOn: true };
+    const f = { placesOn: true, categories: ['cafe' as const], eventsOn: true, transitOn: false };
     expect(visibleLayers(f, true)).toEqual({ placesOn: false, categories: ['cafe'], eventsOn: false, transitOn: false });
-    expect(f.transitOn).toBe(true); // the user's own choice is untouched
+    expect(f.placesOn).toBe(true); // the user's own choice is untouched
+  });
+
+  it('turns Transport off too while directions are shown (Transport on is exclusive: nothing else is on)', () => {
+    const f = mapFiltersReducer(INITIAL_MAP_FILTERS, { type: 'transport' });
+    expect(visibleLayers(f, true)).toMatchObject({ placesOn: false, eventsOn: false, transitOn: false });
+    expect(f.transitOn).toBe(true);
   });
 });
 
@@ -40,9 +46,12 @@ describe('MapScreen while directions are shown', () => {
   it('hides places, events and the transport network, greys out the filters, and restores them on close', async () => {
     renderScreen(<MapScreen />);
     await moveTo(0.02);
+    await waitFor(() => expect(eventMarkers().length).toBeGreaterThan(0));
+    // Transport is exclusive: places and events go, the network comes.
     fireEvent.press(screen.getByTestId('chip-transit'));
     await waitFor(() => expect(transportLayerMarkers().length).toBeGreaterThan(0));
-    await waitFor(() => expect(eventMarkers().length).toBeGreaterThan(0));
+    await waitFor(() => expect(eventMarkers()).toHaveLength(0));
+    expect(screen.queryAllByTestId(/^place-marker-/)).toHaveLength(0);
 
     longPress(45.7275, 21.2355);
     expect(await screen.findByTestId('destination-marker')).toBeTruthy();
@@ -64,6 +73,14 @@ describe('MapScreen while directions are shown', () => {
     expect(screen.queryByTestId('filters-off-hint')).toBeNull();
     await waitFor(() => expect(transportLayerMarkers().length).toBeGreaterThan(0));
     expect(screen.getByTestId('chip-transit').props.accessibilityState).toMatchObject({ disabled: false, selected: true });
+    expect(eventMarkers()).toHaveLength(0); // still Transport alone
+    expect(screen.queryAllByTestId(/^place-marker-/)).toHaveLength(0);
+
+    // Turning Transport off brings the filters from before it back (places and events).
+    fireEvent.press(screen.getByTestId('chip-transit'));
+    await waitFor(() => expect(transportLayerMarkers()).toHaveLength(0));
+    await waitFor(() => expect(eventMarkers().length).toBeGreaterThan(0));
+    await waitFor(() => expect(screen.queryAllByTestId(/^place-marker-/).length).toBeGreaterThan(0));
   });
 
   it('still draws the route and the live vehicles of its ride lines', async () => {

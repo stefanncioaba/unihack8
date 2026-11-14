@@ -46,7 +46,10 @@ const StopMarker = memo(function StopMarker({ stop, selected, onPress }: { stop:
   const press = useCallback(() => onPress(stop.id), [onPress, stop.id]);
   return (
     <Marker testID={`stop-marker-${stop.id}`} coordinate={coordinate} onPress={press} tracksViewChanges={tracking} anchor={CENTER} zIndex={10}>
-      <View collapsable={false} style={[styles.stop, selected && styles.stopSelected]} />
+      {/* Fixed-size root that holds the dot in both sizes, so the snapshot never cuts it. */}
+      <View testID={`marker-root-stop-${stop.id}`} collapsable={false} style={styles.stopRoot}>
+        <View collapsable={false} style={[styles.stop, selected && styles.stopSelected]} />
+      </View>
     </Marker>
   );
 });
@@ -117,7 +120,11 @@ function TransitLayerBase({ stops, line, vehicles, shapes, bbox, selectedStopId,
 /** The layer is memoised too: the map screen re-renders on every pan and panel change. */
 export const TransitLayer = memo(TransitLayerBase);
 
+/** Side of a stop marker's root (larger than the selected dot). */
+export const STOP_ROOT_SIZE = 22;
+
 const styles = StyleSheet.create({
+  stopRoot: { width: STOP_ROOT_SIZE, height: STOP_ROOT_SIZE, alignItems: 'center', justifyContent: 'center' },
   stop: { width: 12, height: 12, borderRadius: 6, backgroundColor: colors.signal, borderWidth: 2, borderColor: colors.bg },
   stopSelected: { width: 18, height: 18, borderRadius: 9, borderColor: '#fff' },
 });

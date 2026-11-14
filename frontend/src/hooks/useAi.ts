@@ -4,7 +4,7 @@ import { useCallback, useRef, useState } from 'react';
 
 import { sendChat } from '@/api/endpoints.ai';
 import type { EventSummary } from '@/api/types';
-import { MAX_CHAT_MESSAGE_CHARS, MAX_CHAT_MESSAGES, type ChatRole, type ChatRoute, type ChatSource } from '@/api/types.ai';
+import { MAX_CHAT_MESSAGE_CHARS, MAX_CHAT_MESSAGES, type ChatCost, type ChatRole, type ChatRoute, type ChatSource } from '@/api/types.ai';
 import type { PlaceSummary } from '@/api/types.places';
 
 /** A message as the chat screen shows it (assistant messages can carry result cards, route cards and sources). */
@@ -16,6 +16,8 @@ export type UiMessage = {
   events?: EventSummary[];
   sources?: ChatSource[];
   routes?: ChatRoute[];
+  /** Average cost box of an assistant answer (null when no stored price applies). */
+  cost?: ChatCost | null;
 };
 
 type Location = { lat: number; lon: number } | null;
@@ -53,7 +55,7 @@ export function useAiChat(location: Location) {
         if (mine !== generation.current) return;
         commit([
           ...messagesRef.current,
-          { id: newId(), role: 'assistant', content: answer.reply, places: answer.places, events: answer.events, sources: answer.sources, routes: answer.routes ?? [] },
+          { id: newId(), role: 'assistant', content: answer.reply, places: answer.places, events: answer.events, sources: answer.sources, routes: answer.routes ?? [], cost: answer.cost ?? null },
         ]);
       } catch (e) {
         if (mine === generation.current) setError(e);

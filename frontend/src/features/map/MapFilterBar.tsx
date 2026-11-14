@@ -1,5 +1,5 @@
 // Top chip row of the Map tab (PLAN 14.2-14.4): "All places", "Events", "Transport", then the place categories.
-// The rules for what each press does live in mapFilters.ts.
+// The rules for what each press does live in mapFilters.ts. While Transport is on every other chip is greyed out.
 import { memo } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 
@@ -17,16 +17,18 @@ type Props = {
 
 /** Horizontal chips: the three layer chips first, then one chip per place category (multi-select). */
 function MapFilterBarBase({ filters, onChange, disabled = false }: Props) {
+  // Transport is exclusive: the other chips are off and not pressable until it is turned off again.
+  const othersDisabled = disabled || filters.transitOn;
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row} style={styles.scroll} keyboardShouldPersistTaps="handled" testID="map-filter-bar">
-      <Chip overMap disabled={disabled} label="All places" icon="location-outline" selected={allPlacesSelected(filters)} onPress={() => onChange({ type: 'allPlaces' })} testID="chip-places" />
-      <Chip overMap disabled={disabled} label="Events" icon="calendar-outline" selected={filters.eventsOn} onPress={() => onChange({ type: 'events' })} testID="chip-events" />
+      <Chip overMap disabled={othersDisabled} label="All places" icon="location-outline" selected={allPlacesSelected(filters)} onPress={() => onChange({ type: 'allPlaces' })} testID="chip-places" />
+      <Chip overMap disabled={othersDisabled} label="Events" icon="calendar-outline" selected={filters.eventsOn} onPress={() => onChange({ type: 'events' })} testID="chip-events" />
       <Chip overMap disabled={disabled} label="Transport" icon="bus-outline" selected={filters.transitOn} onPress={() => onChange({ type: 'transport' })} testID="chip-transit" />
       {PLACE_CATEGORIES.map((c) => (
         <Chip
           key={c}
           overMap
-          disabled={disabled}
+          disabled={othersDisabled}
           label={PLACE_META[c].label}
           icon={PLACE_META[c].icon}
           selected={categorySelected(filters, c)}

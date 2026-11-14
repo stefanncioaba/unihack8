@@ -1,4 +1,4 @@
-// AI tab: chat with the city guide (PLAN 15.1–15.3), with result and route cards under answers (15.4, 18.4). The conversation lives in memory only; "New chat" clears it.
+// AI tab: chat with the city guide (PLAN 15.1–15.3), with the cost box, result and route cards under answers (15.4, 18.4). The conversation lives in memory only; "New chat" clears it.
 // `/ai?ask=…&at=…` (a Home shortcut, PLAN 13.10) starts a new chat with that question; each question can be saved as a shortcut.
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useRef } from 'react';
@@ -7,6 +7,7 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import { ChatBubble, ErrorBubble, ThinkingBubble } from '@/features/ai/ChatBubble';
 import { ChatInput } from '@/features/ai/ChatInput';
 import { ChatMotif } from '@/features/ai/ChatMotif';
+import { CostCard } from '@/features/ai/CostCard';
 import { SaveShortcut } from '@/features/ai/SaveShortcut';
 import { ResultCards } from '@/features/ai/ResultCards';
 import { RouteCards } from '@/features/ai/RouteCards';
@@ -67,6 +68,7 @@ export default function AiScreen() {
             keyExtractor={(m) => m.id}
             renderItem={({ item }) => (
               <ChatBubble message={item} userAction={<SaveShortcut question={item.content} />}>
+                <CostCard cost={item.cost} />
                 <ResultCards message={item} />
                 <RouteCards routes={item.routes} />
               </ChatBubble>

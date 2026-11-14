@@ -80,12 +80,16 @@ function MapBody() {
     latest.current = { transitOn, selection, span };
   });
 
-  /** Applies a filter chip press; turning transport off closes a stop or vehicle panel opened from the transport
-   * layer (its marker is gone). */
+  /** Applies a filter chip press. Turning transport off closes a stop or vehicle panel opened from the transport
+   * layer, and turning it on closes a place or event panel (places and events are hidden): its marker is gone. */
   const changeFilter = useCallback(
     (action: MapFilterAction) => {
       const now = latest.current;
-      if (action.type === 'transport' && now.transitOn && isTransitLayerSelection(now.selection)) select(null);
+      if (action.type === 'transport') {
+        const sel = now.selection;
+        if (now.transitOn && isTransitLayerSelection(sel)) select(null);
+        else if (!now.transitOn && (sel?.type === 'place' || sel?.type === 'event')) select(null);
+      }
       dispatchFilter(action);
     },
     [select],
@@ -109,6 +113,8 @@ function MapBody() {
   // `at` is a timestamp so pressing the same button twice still counts as a new request.
   useEffect(() => {
     if (focus) mapRef.current?.animateToRegion(regionFor(focus, 0.012), 400);
+    // Places and events are hidden while Transport is on: turn it off so the requested pin is drawn with its panel.
+    if ((params.placeId || params.eventId) && filters.transitOn) dispatchFilter({ type: 'transport' });
     if (params.placeId) select({ type: 'place', id: params.placeId });
     else if (params.eventId) select({ type: 'event', id: params.eventId });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -201,6 +207,14 @@ function MapBody() {
         showsMyLocationButton={false}
         userInterfaceStyle="dark"
         customMapStyle={darkMapStyle}
+        // Only our own data on the map: no base-map shops / museums / stations (Apple Maps; Google uses the style),
+        // no 3D buildings, indoor maps, traffic or the Android "open in Google Maps" toolbar.
+        showsPointsOfInterest={false}
+        showsBuildings={false}
+        showsIndoors={false}
+        showsIndoorLevelPicker={false}
+        showsTraffic={false}
+        toolbarEnabled={false}
         testID="main-map"
       >
         {focus && !showingDirections && !params.placeId && !params.eventId && <Marker coordinate={{ latitude: focus.lat, longitude: focus.lon }} title={params.title} pinColor={colors.oxford} testID="focus-marker" />}

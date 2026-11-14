@@ -29,11 +29,22 @@ function VehicleBadgeBase({ vehicle, selected = false }: { vehicle: TransitVehic
       accessibilityLabel={`${typeLabel(vehicle.type)} ${vehicleLineName(vehicle)}`}
     >
       <Icon name={vehicleIcon(vehicle.type)} size={selected ? 14 : 12} color="#fff" />
-      <Text variant="chip" style={styles.text}>
+      <Text variant="chip" allowFontScaling={false} numberOfLines={1} style={styles.text}>
         {vehicleLineName(vehicle)}
       </Text>
     </View>
   );
+}
+
+/** Generous width of one line-name character in the badge (11 px bold). */
+const CHAR_WIDTH = 8;
+
+/** Explicit size of a vehicle marker's root: the badge's widest possible size for its line name (borders, padding,
+ * icon, gap, text) plus a little slack, so the native snapshot never cuts the badge off. */
+export function vehicleMarkerSize(name: string, selected: boolean): { width: number; height: number } {
+  const chars = Math.max(1, name.length);
+  const width = selected ? 2 * 2.5 + 2 * 8 + 14 + 3 + chars * CHAR_WIDTH : 2 * 1.5 + 2 * 6 + 12 + 3 + chars * CHAR_WIDTH;
+  return { width: Math.ceil(width) + 6, height: selected ? 32 : 26 };
 }
 
 /** True when two vehicles draw the same badge (line, name, type), whatever their position or report time. */
@@ -55,6 +66,8 @@ function VehicleMarkerBase({ vehicle, selected = false, idPrefix = 'vehicle-mark
   // Same coordinate object while the vehicle has not moved, so the native marker is not updated.
   const coordinate = useMemo(() => ({ latitude: vehicle.lat, longitude: vehicle.lon }), [vehicle.lat, vehicle.lon]);
   const press = useCallback(() => onPress(vehicle), [onPress, vehicle]);
+  const name = vehicleLineName(vehicle);
+  const size = useMemo(() => vehicleMarkerSize(name, selected), [name, selected]);
   return (
     <Marker
       testID={`${idPrefix}-${vehicle.id}`}
@@ -64,7 +77,10 @@ function VehicleMarkerBase({ vehicle, selected = false, idPrefix = 'vehicle-mark
       anchor={CENTER}
       zIndex={selected ? 30 : 20}
     >
-      <VehicleBadge vehicle={vehicle} selected={selected} />
+      {/* A root with an explicit size that fully holds the badge, the badge centred in it. */}
+      <View testID={`marker-root-${idPrefix}-${vehicle.id}`} collapsable={false} style={[styles.root, size]}>
+        <VehicleBadge vehicle={vehicle} selected={selected} />
+      </View>
     </Marker>
   );
 }
@@ -90,6 +106,7 @@ export const VehicleMarker = memo(VehicleMarkerBase, sameVehicleMarker);
 const CENTER = { x: 0.5, y: 0.5 };
 
 const styles = StyleSheet.create({
+  root: { alignItems: 'center', justifyContent: 'center' },
   badge: {
     flexDirection: 'row',
     alignItems: 'center',

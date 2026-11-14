@@ -3,7 +3,12 @@ package com.unihack8.backend.ai.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.unihack8.backend.common.geo.GeoPoint;
+import com.unihack8.backend.places.domain.dto.PlaceSummaryDto;
+import com.unihack8.backend.places.domain.dto.PriceDto;
+import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.List;
+import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 /** When a route counts as starting from the user (PLAN 18.3). */
@@ -51,5 +56,25 @@ class ToolContextTest {
         context.rememberRoute(new ToolContext.PlannedRoute(USER, ToolContext.CITY_CENTRE, "WALK", 12, 900, true));
         context.rememberRoute(new ToolContext.PlannedRoute(USER, new GeoPoint(45.75, 21.20), "TRANSIT", 18, 3400, true));
         assertThat(context.routes()).extracting(ToolContext.PlannedRoute::mode).containsExactly("WALK", "TRANSIT");
+    }
+
+    // The same place returned by two searches (COFFEE, then PIZZA) keeps every distinct price the model saw.
+    @Test
+    void mergesPricesOfAPlaceReturnedTwice() {
+        ToolContext context = new ToolContext(USER, NOW);
+        PlaceSummaryDto place = new PlaceSummaryDto(UUID.randomUUID(), "node/1", "Bistro", "restaurant", 45.75, 21.22,
+                null, 100);
+        PriceDto espresso = price("Espresso", "COFFEE", "6.00");
+        PriceDto margherita = price("Margherita", "PIZZA", "32.00");
+        context.rememberPlace(place, List.of(espresso));
+        context.rememberPlace(place, List.of(margherita, espresso));
+
+        assertThat(context.places()).hasSize(1);
+        assertThat(context.places().getFirst().prices()).containsExactly(espresso, margherita);
+    }
+
+    // A stored menu price.
+    private static PriceDto price(String item, String type, String lei) {
+        return new PriceDto(item, type, new BigDecimal(lei), null, "delivery_app", null, "2026-11", null);
     }
 }

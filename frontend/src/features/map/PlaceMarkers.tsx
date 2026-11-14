@@ -10,7 +10,7 @@ import { Icon } from '@/ui/Icon';
 import { Text } from '@/ui/Text';
 import { colors } from '@/ui/theme';
 
-import { ClusterMarker } from './ClusterMarker';
+import { ClusterMarker, PIN_LABEL_GAP, PIN_LABEL_HEIGHT, pinBox, useBriefViewTracking } from './ClusterMarker';
 import { placeMeta } from './placeCategories';
 
 type Props = {
@@ -25,16 +25,22 @@ type Props = {
   onZoomTo: (lat: number, lon: number) => void;
 };
 
-/** One pin: round Oxford Navy badge with the category icon and an optional name pill. */
-function PlacePin({ place, selected, showLabel }: { place: PlaceSummary; selected: boolean; showLabel: boolean }) {
+/** Badge sizes (normal / selected), the square slot that holds either, and the widest name pill. */
+export const PLACE_PIN = { badge: 28, selected: 32, slot: 34, labelText: 120, label: 136 } as const;
+
+/** One pin: round Oxford Navy badge with the category icon and an optional name pill. The root has an explicit size
+ * that holds the badge (also when selected: a bigger badge, not a scale transform that would overflow) and the pill. */
+function PlacePin({ place, selected, showLabel, box }: { place: PlaceSummary; selected: boolean; showLabel: boolean; box: { width: number; height: number } }) {
   return (
-    <View style={styles.pin}>
-      <View style={[styles.badge, selected && styles.badgeSelected]}>
-        <Icon name={placeMeta(place.category).icon} size={14} color="#fff" />
+    <View testID={`marker-root-place-${place.id}`} collapsable={false} style={[styles.pin, { width: box.width, height: box.height }]}>
+      <View collapsable={false} style={styles.slot}>
+        <View collapsable={false} style={[styles.badge, selected && styles.badgeSelected]}>
+          <Icon name={placeMeta(place.category).icon} size={selected ? 16 : 14} color="#fff" />
+        </View>
       </View>
-      {(showLabel || selected) && (
-        <View style={styles.label}>
-          <Text variant="chip" numberOfLines={1} style={{ maxWidth: 120 }}>
+      {showLabel && (
+        <View collapsable={false} style={styles.label}>
+          <Text variant="chip" allowFontScaling={false} numberOfLines={1} style={styles.labelText}>
             {place.name}
           </Text>
         </View>
@@ -43,21 +49,23 @@ function PlacePin({ place, selected, showLabel }: { place: PlaceSummary; selecte
   );
 }
 
-/** Pin anchor (one shared object). */
-const CENTER = { x: 0.5, y: 0.5 };
-
-/** One place marker, memoised so a pan or a panel change does not re-render every pin. */
+/** One place marker, memoised so a pan or a panel change does not re-render every pin. It redraws briefly after it
+ * appears, its look changes or the icon font loads (see useBriefViewTracking): with tracking off from the start
+ * Android snapshots the pin before its icon is drawn and shows it cut off. */
 const PlaceMarker = memo(function PlaceMarker({ place, selected, showLabel, onSelect }: { place: PlaceSummary; selected: boolean; showLabel: boolean; onSelect: (id: string) => void }) {
+  const labelled = showLabel || selected;
+  const tracking = useBriefViewTracking(`${selected}:${labelled}`);
+  const box = useMemo(() => pinBox(PLACE_PIN.slot, labelled ? PLACE_PIN.label : null), [labelled]);
   const coordinate = useMemo(() => ({ latitude: place.lat, longitude: place.lon }), [place.lat, place.lon]);
   const press = useCallback(() => onSelect(place.id), [onSelect, place.id]);
   return (
-    <Marker testID={`place-marker-${place.id}`} coordinate={coordinate} onPress={press} tracksViewChanges={false} anchor={CENTER}>
-      <PlacePin place={place} selected={selected} showLabel={showLabel} />
+    <Marker testID={`place-marker-${place.id}`} coordinate={coordinate} onPress={press} tracksViewChanges={tracking} anchor={box.anchor}>
+      <PlacePin place={place} selected={selected} showLabel={labelled} box={box} />
     </Marker>
   );
 });
 
-/** All place pins. `tracksViewChanges` is off so hundreds of custom pins stay smooth. */
+/** All place pins. Each one redraws only briefly (shared timer), so hundreds of custom pins stay smooth. */
 function PlaceMarkersBase({ places, selectedId, showLabels, onSelect, bbox, onZoomTo }: Props) {
   const { singles, clusters } = useMemo(() => clusterPoints(places, bbox, shouldCluster(bbox)), [places, bbox]);
   return (
@@ -76,26 +84,28 @@ function PlaceMarkersBase({ places, selectedId, showLabels, onSelect, bbox, onZo
 export const PlaceMarkers = memo(PlaceMarkersBase);
 
 const styles = StyleSheet.create({
-  pin: { alignItems: 'center', gap: 3 },
+  pin: { alignItems: 'center', overflow: 'hidden' },
+  slot: { width: PLACE_PIN.slot, height: PLACE_PIN.slot, alignItems: 'center', justifyContent: 'center' },
   badge: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
+    width: PLACE_PIN.badge,
+    height: PLACE_PIN.badge,
+    borderRadius: PLACE_PIN.badge / 2,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.oxford,
     borderWidth: 2,
     borderColor: 'rgba(255,255,255,0.85)',
   },
-  badgeSelected: { backgroundColor: colors.accent, transform: [{ scale: 1.15 }] },
+  badgeSelected: { width: PLACE_PIN.selected, height: PLACE_PIN.selected, borderRadius: PLACE_PIN.selected / 2, backgroundColor: colors.accent },
+  // No shadow: it is drawn outside the pill's box and would be cut off by the marker snapshot.
   label: {
+    marginTop: PIN_LABEL_GAP,
+    maxWidth: PLACE_PIN.label,
     paddingHorizontal: 8,
-    height: 20,
-    borderRadius: 10,
+    height: PIN_LABEL_HEIGHT,
+    borderRadius: PIN_LABEL_HEIGHT / 2,
     justifyContent: 'center',
     backgroundColor: 'rgba(0,8,20,0.88)',
-    shadowColor: '#000',
-    shadowOpacity: 0.4,
-    shadowRadius: 3,
   },
+  labelText: { maxWidth: PLACE_PIN.labelText },
 });

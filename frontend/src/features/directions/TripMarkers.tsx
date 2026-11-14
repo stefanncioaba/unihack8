@@ -21,7 +21,8 @@ const STEP_Z = { board: 16, alight: 15, walk: 12 } as const;
 function TripStepMarkerBase({ step }: { step: TripStep }) {
   const tracking = useBriefViewTracking(`${step.label}:${step.color}`);
   const ride = step.kind !== 'walk';
-  const anchor = step.kind === 'board' ? { x: 0.5, y: 1 } : step.kind === 'alight' ? { x: 0.5, y: 0 } : { x: 0.5, y: 0.5 };
+  const anchor = ANCHORS[step.kind];
+  const box = useMemo(() => tripStepSize(step.kind, step.label), [step.kind, step.label]);
   return (
     <Marker
       testID={`trip-step-${step.key}`}
@@ -30,18 +31,22 @@ function TripStepMarkerBase({ step }: { step: TripStep }) {
       tracksViewChanges={tracking}
       zIndex={STEP_Z[step.kind]}
     >
-      {/* The gap below a get-off stop is padding on a plain wrapper, not a margin on the marker's root view: Android
-          sizes the marker snapshot from the root's own box and would cut a margin off. */}
-      <View collapsable={false} style={step.kind === 'alight' ? styles.alightGap : undefined}>
+      {/* The root has an explicit size that holds the whole pill; the gap below a get-off stop is padding inside it,
+          not a margin: Android sizes the marker snapshot from the root's own box and would cut a margin off. */}
+      <View
+        testID={`marker-root-step-${step.key}`}
+        collapsable={false}
+        style={[styles.root, box, step.kind === 'alight' ? styles.alightGap : undefined]}
+      >
         <View
           collapsable={false}
           accessibilityLabel={step.label}
-          style={[styles.pill, ride ? { borderColor: step.color ?? colors.gold } : styles.walkPill]}
+          style={[styles.pill, { maxWidth: box.width }, ride ? { borderColor: step.color ?? colors.gold } : styles.walkPill]}
         >
           <View style={[styles.icon, { backgroundColor: ride ? (step.color ?? colors.gold) : colors.surfaceAlt }]}>
             <Icon name={step.icon} size={ride ? 13 : 11} color={ride ? '#fff' : colors.signal} />
           </View>
-          <Text variant="chip" style={ride ? styles.rideText : styles.walkText} numberOfLines={1}>
+          <Text variant="chip" allowFontScaling={false} style={[styles.label, ride ? styles.rideText : styles.walkText]} numberOfLines={1}>
             {step.label}
           </Text>
         </View>
@@ -51,6 +56,22 @@ function TripStepMarkerBase({ step }: { step: TripStep }) {
 }
 
 export const TripStepMarker = memo(TripStepMarkerBase);
+
+/** Board labels hang above the stop, get-off labels below it, walks are centred (shared objects). */
+const ANCHORS = { board: { x: 0.5, y: 1 }, alight: { x: 0.5, y: 0 }, walk: { x: 0.5, y: 0.5 } } as const;
+
+/** Pill heights, the gap below a get-off stop, the widest pill and a generous width per label character. */
+export const TRIP_PILL = { ride: 26, walk: 22, alightGap: 4, maxWidth: 240, charWidth: 7.5 } as const;
+
+/** Explicit size of a step marker's root: the pill's width for its label (icon, gaps, padding, borders), capped at the
+ * widest pill (the label is cut with "..." beyond that), and its height plus the get-off gap. */
+export function tripStepSize(kind: TripStep['kind'], label: string): { width: number; height: number } {
+  const ride = kind !== 'walk';
+  const chrome = 3 + 18 + 5 + 8 + (ride ? 4 : 2) + 4;
+  const width = Math.min(TRIP_PILL.maxWidth, Math.ceil(chrome + label.length * TRIP_PILL.charWidth));
+  const height = (ride ? TRIP_PILL.ride : TRIP_PILL.walk) + (kind === 'alight' ? TRIP_PILL.alightGap : 0);
+  return { width, height };
+}
 
 type Props = {
   legs: RouteLeg[] | undefined;
@@ -78,20 +99,21 @@ export const TripMarkers = memo(function TripMarkers({ legs, destinationName, fr
 });
 
 const styles = StyleSheet.create({
+  root: { alignItems: 'center', justifyContent: 'flex-end' },
   pill: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 5,
-    maxWidth: 240,
     paddingLeft: 3,
     paddingRight: 8,
-    height: 26,
+    height: TRIP_PILL.ride,
     borderRadius: radius.chip,
     borderWidth: 2,
     backgroundColor: colors.bg,
   },
-  alightGap: { paddingTop: 4 },
-  walkPill: { height: 22, borderWidth: 1, borderColor: colors.borderStrong, backgroundColor: colors.overlay },
+  alightGap: { paddingTop: TRIP_PILL.alightGap },
+  label: { flexShrink: 1 },
+  walkPill: { height: TRIP_PILL.walk, borderWidth: 1, borderColor: colors.borderStrong, backgroundColor: colors.overlay },
   icon: { width: 18, height: 18, borderRadius: 9, alignItems: 'center', justifyContent: 'center' },
   rideText: { color: colors.text },
   walkText: { color: colors.signal },

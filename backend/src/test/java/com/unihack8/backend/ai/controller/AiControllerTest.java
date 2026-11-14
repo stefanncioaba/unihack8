@@ -7,7 +7,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.unihack8.backend.ai.domain.dto.ChatCostDto;
 import com.unihack8.backend.ai.domain.dto.ChatResponse;
+import com.unihack8.backend.ai.domain.dto.CostItemDto;
 import com.unihack8.backend.ai.domain.dto.ChatRouteDto;
 import com.unihack8.backend.ai.domain.dto.RoutePointDto;
 import com.unihack8.backend.ai.domain.dto.SourceDto;
@@ -50,7 +52,7 @@ class AiControllerTest {
                 .andExpect(jsonPath("$.code").value("UNAUTHORIZED"));
     }
 
-    // Documented answer shape (docs/API.md): reply, places, events, sources, routes.
+    // Documented answer shape (docs/API.md): reply, places, events, sources, routes, cost.
     @Test
     void answerShape() throws Exception {
         UUID placeId = UUID.randomUUID();
@@ -58,7 +60,9 @@ class AiControllerTest {
                 List.of(new PlaceSummaryDto(placeId, "node/1", "5 to go", "cafe", 45.75, 21.22, null, 127)),
                 List.of(), List.of(new SourceDto("5 to go prices (playtech.ro)", "https://playtech.ro/x")),
                 List.of(new ChatRouteDto(new RoutePointDto(45.7537, 21.2257, "Your location"),
-                        new RoutePointDto(45.75, 21.22, "5 to go"), "WALK", 2, 127, true))));
+                        new RoutePointDto(45.75, 21.22, "5 to go"), "WALK", 2, 127, true)),
+                new ChatCostDto("RON", "TOTAL", List.of(new CostItemDto("5 to go", "Espresso", "MENU", 5.0, 5.0, 5.0)),
+                        5.0, 5.0, 5.0, "Saved menu prices; they may have changed.")));
 
         mvc.perform(post("/ai/chat").header("Authorization", BEARER).contentType(MediaType.APPLICATION_JSON).content(BODY))
                 .andExpect(status().isOk())
@@ -73,16 +77,27 @@ class AiControllerTest {
                 .andExpect(jsonPath("$.routes[0].mode").value("WALK"))
                 .andExpect(jsonPath("$.routes[0].durationMinutes").value(2))
                 .andExpect(jsonPath("$.routes[0].distanceMeters").value(127))
-                .andExpect(jsonPath("$.routes[0].startsFromUser").value(true));
+                .andExpect(jsonPath("$.routes[0].startsFromUser").value(true))
+                .andExpect(jsonPath("$.cost.currency").value("RON"))
+                .andExpect(jsonPath("$.cost.basis").value("TOTAL"))
+                .andExpect(jsonPath("$.cost.averageTotalLei").value(5.0))
+                .andExpect(jsonPath("$.cost.minTotalLei").value(5.0))
+                .andExpect(jsonPath("$.cost.maxTotalLei").value(5.0))
+                .andExpect(jsonPath("$.cost.note").value("Saved menu prices; they may have changed."))
+                .andExpect(jsonPath("$.cost.items[0].label").value("5 to go"))
+                .andExpect(jsonPath("$.cost.items[0].detail").value("Espresso"))
+                .andExpect(jsonPath("$.cost.items[0].kind").value("MENU"))
+                .andExpect(jsonPath("$.cost.items[0].averageLei").value(5.0));
     }
 
     // Location is optional (permission denied).
     @Test
     void locationOptional() throws Exception {
-        when(chatService.chat(eq(USER), any())).thenReturn(new ChatResponse("ok", List.of(), List.of(), List.of(), List.of()));
+        when(chatService.chat(eq(USER), any())).thenReturn(new ChatResponse("ok", List.of(), List.of(), List.of(), List.of(), null));
         mvc.perform(post("/ai/chat").header("Authorization", BEARER).contentType(MediaType.APPLICATION_JSON)
                         .content("{\"messages\":[{\"role\":\"user\",\"content\":\"hi\"}],\"location\":null}"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.cost").isEmpty());
     }
 
     // Empty conversation, a bad role or an over-long message: 400.

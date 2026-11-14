@@ -68,6 +68,8 @@ class AiChatServiceImplTest {
 
         assertThat(response.reply()).isEqualTo("Go to Cafe Test, espresso about 5 lei.");
         assertThat(response.places()).extracting(PlaceSummaryDto::id).containsExactly(PLACE_ID);
+        // "5 lei" is only in the model text (the tool stored no price): no cost box, never a guess.
+        assertThat(response.cost()).isNull();
         assertThat(tool.lastArgs).containsEntry("keyword", "coffee");
         assertThat(rateLimitCalls).hasValue(1);
 

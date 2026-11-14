@@ -11,7 +11,7 @@ import { Icon } from '@/ui/Icon';
 import { Text } from '@/ui/Text';
 import { colors } from '@/ui/theme';
 
-import { ClusterMarker, useBriefViewTracking } from './ClusterMarker';
+import { ClusterMarker, PIN_LABEL_GAP, PIN_LABEL_HEIGHT, pinBox, useBriefViewTracking } from './ClusterMarker';
 
 type Props = {
   events: EventSummary[];
@@ -24,16 +24,22 @@ type Props = {
   onZoomTo: (lat: number, lon: number, span?: number) => void;
 };
 
-/** One event pin: yellow badge with the category icon, optional title pill. */
-function EventPin({ event, selected, showLabel }: { event: EventSummary; selected: boolean; showLabel: boolean }) {
+/** Badge sizes (normal / selected), the square slot that holds either, and the widest title pill. */
+export const EVENT_PIN = { badge: 32, selected: 36, slot: 38, labelText: 130, label: 146 } as const;
+
+/** One event pin: yellow badge with the category icon, optional title pill. The root has an explicit size that holds
+ * the badge (also when selected: a bigger badge, not a scale transform that would overflow) and the pill. */
+function EventPin({ event, selected, showLabel, box }: { event: EventSummary; selected: boolean; showLabel: boolean; box: { width: number; height: number } }) {
   return (
-    <View style={styles.pin}>
-      <View style={[styles.badge, selected && styles.badgeSelected]}>
-        <Icon name={categoryMeta(event.category).icon} size={15} color={colors.onAccent} />
+    <View testID={`marker-root-event-${event.id}`} collapsable={false} style={[styles.pin, { width: box.width, height: box.height }]}>
+      <View collapsable={false} style={styles.slot}>
+        <View collapsable={false} style={[styles.badge, selected && styles.badgeSelected]}>
+          <Icon name={categoryMeta(event.category).icon} size={selected ? 17 : 15} color={colors.onAccent} />
+        </View>
       </View>
-      {(showLabel || selected) && (
-        <View style={styles.label}>
-          <Text variant="chip" numberOfLines={1} style={{ maxWidth: 130 }}>
+      {showLabel && (
+        <View collapsable={false} style={styles.label}>
+          <Text variant="chip" allowFontScaling={false} numberOfLines={1} style={styles.labelText}>
             {event.title}
           </Text>
         </View>
@@ -42,18 +48,17 @@ function EventPin({ event, selected, showLabel }: { event: EventSummary; selecte
   );
 }
 
-/** Pin anchor (one shared object). */
-const CENTER = { x: 0.5, y: 0.5 };
-
-/** One event marker; redraws briefly when it appears or its look changes (see useBriefViewTracking). Memoised, so a
- * pan or a panel change does not re-render every pin. */
+/** One event marker; redraws briefly when it appears, its look changes or the icon font loads (see
+ * useBriefViewTracking). Memoised, so a pan or a panel change does not re-render every pin. */
 const EventMarker = memo(function EventMarker({ event, selected, showLabel, onSelect }: { event: LocatedEvent; selected: boolean; showLabel: boolean; onSelect: (id: string) => void }) {
-  const tracking = useBriefViewTracking(`${selected}:${showLabel}`);
+  const labelled = showLabel || selected;
+  const tracking = useBriefViewTracking(`${selected}:${labelled}`);
+  const box = useMemo(() => pinBox(EVENT_PIN.slot, labelled ? EVENT_PIN.label : null), [labelled]);
   const coordinate = useMemo(() => ({ latitude: event.lat, longitude: event.lon }), [event.lat, event.lon]);
   const press = useCallback(() => onSelect(event.id), [onSelect, event.id]);
   return (
-    <Marker testID={`event-marker-${event.id}`} coordinate={coordinate} onPress={press} tracksViewChanges={tracking} anchor={CENTER}>
-      <EventPin event={event} selected={selected} showLabel={showLabel} />
+    <Marker testID={`event-marker-${event.id}`} coordinate={coordinate} onPress={press} tracksViewChanges={tracking} anchor={box.anchor}>
+      <EventPin event={event} selected={selected} showLabel={labelled} box={box} />
     </Marker>
   );
 });
@@ -98,17 +103,27 @@ function EventMarkersBase({ events, selectedId, showLabels, onSelect, bbox, onZo
 export const EventMarkers = memo(EventMarkersBase);
 
 const styles = StyleSheet.create({
-  pin: { alignItems: 'center', gap: 3 },
+  pin: { alignItems: 'center', overflow: 'hidden' },
+  slot: { width: EVENT_PIN.slot, height: EVENT_PIN.slot, alignItems: 'center', justifyContent: 'center' },
   badge: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
+    width: EVENT_PIN.badge,
+    height: EVENT_PIN.badge,
+    borderRadius: EVENT_PIN.badge / 2,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.gold,
     borderWidth: 2,
     borderColor: 'rgba(255,255,255,0.9)',
   },
-  badgeSelected: { backgroundColor: colors.signal, transform: [{ scale: 1.15 }] },
-  label: { paddingHorizontal: 8, height: 20, borderRadius: 10, justifyContent: 'center', backgroundColor: 'rgba(0,8,20,0.88)' },
+  badgeSelected: { width: EVENT_PIN.selected, height: EVENT_PIN.selected, borderRadius: EVENT_PIN.selected / 2, backgroundColor: colors.signal },
+  label: {
+    marginTop: PIN_LABEL_GAP,
+    maxWidth: EVENT_PIN.label,
+    paddingHorizontal: 8,
+    height: PIN_LABEL_HEIGHT,
+    borderRadius: PIN_LABEL_HEIGHT / 2,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,8,20,0.88)',
+  },
+  labelText: { maxWidth: EVENT_PIN.labelText },
 });

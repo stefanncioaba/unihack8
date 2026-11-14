@@ -168,7 +168,11 @@ describe('TripStepMarker', () => {
     expect(rootStyle.marginTop).toBeUndefined();
     const pill = StyleSheet.flatten(screen.getByLabelText('Get off at Piața Victoriei').props.style);
     expect(pill.marginTop).toBeUndefined();
-    expect(StyleSheet.flatten(screen.getByTestId('trip-step-walk-0').props.children.props.style)).toBeUndefined();
+    // A walk's root only has its explicit size (no gap, no margin).
+    const walkRoot = StyleSheet.flatten(screen.getByTestId('trip-step-walk-0').props.children.props.style) ?? {};
+    expect(walkRoot.paddingTop).toBeUndefined();
+    expect(walkRoot.marginTop).toBeUndefined();
+    expect(typeof walkRoot.width).toBe('number');
   });
 });
 

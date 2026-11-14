@@ -660,6 +660,14 @@ Request:
 
 Answer — `reply` is plain text (no markdown) in the user's language (Romanian or English). `places` and `events` are the ones named in `reply`, in the order they appear, for cards and "show on map" (`places[].distanceMeters` is from the user, or from Piața Victoriei when `location` is `null`). `sources` are the pages the quoted prices come from (stored price list, PLAN 11.3). `routes` are the routes the assistant planned for this answer (PLAN 18), one per route, for route cards: `from` / `to` (`lat`, `lon`, `name` — `"Your location"` for the user, otherwise the place or event the tools returned within ~75 m, or `null`), `mode` (`WALK` | `TRANSIT`, what the route really uses), `durationMinutes`, `distanceMeters`, and `startsFromUser`. `startsFromUser` is `true` only when the request carried `location` **and** the route starts there (no start given, or one within ~50 m of the user); it is `false` for a route from another place and always `false` when `location` is `null`. The app shows the **Go** button only when it is `true`. The same route planned twice is listed once. Lists are empty, never `null`.
 
+`cost` is the "about how much" box the app shows under the answer, or `null` when nothing the answer recommends has a stored price. It is built by the backend, never by the model: only stored prices the tools returned for this answer (menu prices from `search_places`, event `price_min` / `price_max` from `search_events`), and only for the places/events in `places` / `events` (the recommended ones). A price that appears only in the model text never makes a box.
+
+- `currency`: always `"RON"` (amounts in lei, rounded to 0.1).
+- `items[]`: one line per recommended place/event with a stored price, in reply order: `label` (place or event name), `detail` (the item, e.g. `"Espresso"`; `"N stored prices"`; or `"Ticket"`), `kind` (`MENU` | `EVENT`; `TICKET` is reserved for stored STPT fares, PLAN 20, and not sent yet), `minLei`, `maxLei`, `averageLei` = (`minLei` + `maxLei`) / 2. A place line uses the stored prices whose item the reply names in that place's part of the reply (from its name to the next recommended name; the whole reply when it is the only recommendation). When it names none, every stored price the tools returned for that place, but only if they are all of one item type (e.g. a PIZZA search); a mixed menu (e.g. water and steak) gives no line, and the place is listed in `note` as unpriced. A place returned by several searches keeps every price the tools returned for it. An event line uses `price_min`..`price_max` (one alone counts as both).
+- Totals: the lines are grouped by kind (places, events). Within a group the user picks one, so it counts with the **mean of its line averages**, its cheapest `minLei` and its dearest `maxLei`; `averageTotalLei`, `minTotalLei`, `maxTotalLei` are the **sums over the groups**. Alternatives of one kind are never summed, and a meal is never averaged with a ticket. Example: two pizzerias (36 and 44 lei) and a concert (100 lei) give ≈ 140 lei, range 136–144.
+- `basis`: `TOTAL` when the answer is one plan (at most one place and at most one event, e.g. "concert, then pizza"; the totals are plain sums of the lines). `OPTIONS` when it offers alternatives (two or more places, or two or more events — the user picks one of each kind). The app labels it "Average total", "Average per option" (one kind) or "Average per plan" (alternatives plus another kind).
+- `note`: short remark (saved prices may have changed; recommendations without a stored price: "Not included (price unknown): …" for `TOTAL`, "No stored price for …" for `OPTIONS`).
+
 ```json
 {
   "reply": "- 5 to go: 127 m away (2 min walk). Espresso about 5 lei. Open until 19:00.\nPrices may have changed.",
@@ -675,10 +683,19 @@ Answer — `reply` is plain text (no markdown) in the user's language (Romanian 
       "distanceMeters": 127,
       "startsFromUser": true
     }
-  ]
+  ],
+  "cost": {
+    "currency": "RON",
+    "basis": "TOTAL",
+    "items": [ { "label": "5 to go", "detail": "Espresso", "kind": "MENU", "minLei": 5.0, "maxLei": 5.0, "averageLei": 5.0 } ],
+    "averageTotalLei": 5.0,
+    "minTotalLei": 5.0,
+    "maxTotalLei": 5.0,
+    "note": "Saved menu prices (often from delivery apps); they may have changed."
+  }
 }
 ```
 
-**Off-topic requests (PLAN 19):** the assistant answers only about Timișoara (places, food and drinks, events, public transport, the city) and directions. Anything else (code, maths/homework, essays, translations, general knowledge, general chat) gets a normal `200` answer whose `reply` is one short sentence, in the user's language, saying what it can help with; `places`, `events` and `sources` (and `routes`, once PLAN 18 adds it) are empty. There is no special error code, so the app shows it like any other answer. A mixed message gets the city part answered and the rest declined in one sentence.
+**Off-topic requests (PLAN 19):** the assistant answers only about Timișoara (places, food and drinks, events, public transport, the city) and directions. Anything else (code, maths/homework, essays, translations, general knowledge, general chat) gets a normal `200` answer whose `reply` is one short sentence, in the user's language, saying what it can help with; `places`, `events`, `sources` and `routes` are empty and `cost` is `null`. There is no special error code, so the app shows it like any other answer. A mixed message gets the city part answered and the rest declined in one sentence.
 
 Takes 2–10 s (the model may call several tools). Errors: `400 VALIDATION_FAILED` (empty `messages`, a `role` other than `user`/`assistant`, a message over 2000 characters, or the last message not from the user), `429 RATE_LIMITED` (more than 10 requests per minute per user), `503 AI_UNAVAILABLE` (Gemini down or busy; the message says to try again in a minute).
