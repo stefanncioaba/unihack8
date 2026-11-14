@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "078b1dce6eaec808aad6c687bd48580d110018e2",
-  "generatedAt": "2026-11-14T18:15:33.383Z",
+  "gitCommitHash": "210c993255cc92c733bb283c5b9d62015ea167f0",
+  "generatedAt": "2026-11-14T19:02:07.056Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,22 +25,22 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "9e2d91d6e4c95a4307f9e7473b36df10c41ebd14e32279d7442c8f061b9a6a58",
+      "contentHash": "3674124d4850fa09dd6950766cfa8a1aa76c9807f79cfce8d3bcc20058b0f2d4",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 750,
+      "totalLines": 751,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "d23af29e037ad605178d7b5afd449d636a9ddfe68fcde5f288c3406e91e434ed",
+      "contentHash": "72c887293841b515f3b82bc1147fee941cc9479f95cb78bda110438f3c392fb8",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 481,
+      "totalLines": 482,
       "hasStructuralAnalysis": false
     },
     "README.md": {
@@ -44483,7 +44483,7 @@
     },
     "frontend/__tests__/screens.pulse.test.tsx": {
       "filePath": "frontend/__tests__/screens.pulse.test.tsx",
-      "contentHash": "ae29143f57048cbd09d75baef595f9ef706faf951e0726c4986a040bb9ad6470",
+      "contentHash": "cbaf038df865f2a6c7210f127691df7a74571a45c31ba1959f1750c8e8732c1a",
       "functions": [
         {
           "name": "area",
@@ -44550,6 +44550,7 @@
           "specifiers": [
             "eventsLine",
             "eventWhen",
+            "helpLine",
             "peopleLine",
             "placesLine",
             "transitLine"
@@ -44578,7 +44579,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 180,
+      "totalLines": 209,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/screens.users.test.tsx": {
@@ -48373,17 +48374,23 @@
     },
     "frontend/src/app/pulse/index.tsx": {
       "filePath": "frontend/src/app/pulse/index.tsx",
-      "contentHash": "db93422d4d7e4088789430a9f68549d9905fd3ff031cb73b82fc9c51f886766f",
+      "contentHash": "f60e4c3b00e9d2c2b06ceb87c611c0da45a6ee8dd26a7ffc2f74044270ea8dc0",
       "functions": [
         {
           "name": "NeighbourhoodPulseScreen",
           "params": [],
           "exported": true,
-          "lineCount": 28
+          "lineCount": 33
         }
       ],
       "classes": [],
       "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "useMemo"
+          ]
+        },
         {
           "source": "react-native",
           "specifiers": [
@@ -48394,9 +48401,21 @@
           ]
         },
         {
+          "source": "@/features/help/groupByArea",
+          "specifiers": [
+            "countByArea"
+          ]
+        },
+        {
           "source": "@/features/neighbourhoods/NeighbourhoodCard",
           "specifiers": [
             "NeighbourhoodCard"
+          ]
+        },
+        {
+          "source": "@/hooks/useHelp",
+          "specifiers": [
+            "useHelpBoard"
           ]
         },
         {
@@ -48442,7 +48461,7 @@
       "exports": [
         "NeighbourhoodPulseScreen"
       ],
-      "totalLines": 46,
+      "totalLines": 55,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/users/[id].tsx": {
@@ -53189,7 +53208,7 @@
     },
     "frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx": {
       "filePath": "frontend/src/features/neighbourhoods/NeighbourhoodCard.tsx",
-      "contentHash": "3250733f885bbb985bbb62d42a826dd1eeb3bc108d24a64e5bf474e6e294c2f7",
+      "contentHash": "ca626228fde5482e230ab672186f7b5c45a853cd3797d5e55ccdd4182ada5c95",
       "functions": [
         {
           "name": "showOnMap",
@@ -53218,10 +53237,10 @@
         {
           "name": "NeighbourhoodCard",
           "params": [
-            "{ area }"
+            "{ area, helpCount }"
           ],
           "exported": true,
-          "lineCount": 51
+          "lineCount": 61
         }
       ],
       "classes": [],
@@ -53296,6 +53315,7 @@
           "specifiers": [
             "eventsLine",
             "eventWhen",
+            "helpLine",
             "LEVEL_META",
             "peopleLine",
             "placesLine",
@@ -53306,7 +53326,7 @@
       "exports": [
         "NeighbourhoodCard"
       ],
-      "totalLines": 147,
+      "totalLines": 158,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/neighbourhoods/areas.ts": {
@@ -53399,7 +53419,7 @@
     },
     "frontend/src/features/neighbourhoods/pulseFormat.ts": {
       "filePath": "frontend/src/features/neighbourhoods/pulseFormat.ts",
-      "contentHash": "a35a3d24d0c3ca3cfcf6ce29b27a2a65746b84b3b6693367390c9343861c4453",
+      "contentHash": "a3258eb7f7e77a20abf68643a435b417f7a5e4076ed82bbad37ac2b8c1ac611c",
       "functions": [
         {
           "name": "plural",
@@ -53456,6 +53476,15 @@
           "returnType": "string",
           "exported": true,
           "lineCount": 5
+        },
+        {
+          "name": "helpLine",
+          "params": [
+            "count"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 4
         }
       ],
       "classes": [],
@@ -53488,9 +53517,10 @@
         "eventWhen",
         "transitLine",
         "placesLine",
-        "peopleLine"
+        "peopleLine",
+        "helpLine"
       ],
-      "totalLines": 59,
+      "totalLines": 65,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/news/NewsCard.tsx": {
@@ -59723,7 +59753,7 @@
     },
     "frontend/__tests__/help.groupByArea.test.ts": {
       "filePath": "frontend/__tests__/help.groupByArea.test.ts",
-      "contentHash": "f1ce4c9caf80bbe9a45fec740c03dc9c286578eaf75887e1ee7565e9ce08fe05",
+      "contentHash": "3e435dd5e2f22e6bd9781d9a47dd2abec24ce04cf3cf7afb8c0ae078adab2dc4",
       "functions": [
         {
           "name": "req",
@@ -59748,6 +59778,7 @@
         {
           "source": "@/features/help/groupByArea",
           "specifiers": [
+            "countByArea",
             "groupByNeighbourhood",
             "OUTSIDE_KEY",
             "OUTSIDE_TITLE",
@@ -59756,12 +59787,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 51,
+      "totalLines": 58,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/help/groupByArea.ts": {
       "filePath": "frontend/src/features/help/groupByArea.ts",
-      "contentHash": "ee3a9f5f661e76c23a34174acb707ba9411515b353e37e42a8b9e82adc2f7021",
+      "contentHash": "151e09653d31b51ad06bea48dcfb8d4a925f7d4956408aa14ee331283a6cea7b",
       "functions": [
         {
           "name": "groupByNeighbourhood",
@@ -59773,6 +59804,16 @@
           "returnType": "HelpAreaSection[]",
           "exported": true,
           "lineCount": 19
+        },
+        {
+          "name": "countByArea",
+          "params": [
+            "requests",
+            "areas"
+          ],
+          "returnType": "Record<string, number>",
+          "exported": true,
+          "lineCount": 8
         }
       ],
       "classes": [],
@@ -59801,9 +59842,10 @@
       "exports": [
         "OUTSIDE_KEY",
         "OUTSIDE_TITLE",
-        "groupByNeighbourhood"
+        "groupByNeighbourhood",
+        "countByArea"
       ],
-      "totalLines": 40,
+      "totalLines": 50,
       "hasStructuralAnalysis": true
     }
   }
