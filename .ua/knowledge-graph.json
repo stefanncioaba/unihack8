@@ -37,7 +37,7 @@
     ],
     "description": "Hackathon mobile app for Timișoara (Connected Communities): Spring Boot API + Supabase + Expo app with events and QR reliability points, places map, live STPT transit, routing and an AI guide.",
     "analyzedAt": "2026-11-14T22:05:25.239Z",
-    "gitCommitHash": "bb44f38b8867ce46e584af19768632702c47095d"
+    "gitCommitHash": "da8bc3f874a596c9d7ab538c0e1ab0206091092d"
   },
   "nodes": [
     {

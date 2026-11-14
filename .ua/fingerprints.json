@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "bb44f38b8867ce46e584af19768632702c47095d",
-  "generatedAt": "2026-11-14T22:05:27.221Z",
+  "gitCommitHash": "da8bc3f874a596c9d7ab538c0e1ab0206091092d",
+  "generatedAt": "2026-11-14T22:06:13.858Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,17 +25,17 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "0d66ab2b9c25e2caf0047cd50288b672036128dde177f15e7c50f897af0a81de",
+      "contentHash": "2bdae0bd352faf31ccb612ece18cc31a51d4d2092426b182b690eefb29638fb4",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 792,
+      "totalLines": 793,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "b85e3d68e434c67f585642cb106e3987e843e945f400db138e5260d332cb5b95",
+      "contentHash": "f62899947f0d8a7aa1e731a8ec17ae7aa5819b1a6ed7abe527a72e6492e4133a",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -11813,7 +11813,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/controller/NeighbourhoodController.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/controller/NeighbourhoodController.java",
-      "contentHash": "d72dcb5b2c0f4762848925aecf87749f647a95ed3036c87afab250329d2f9817",
+      "contentHash": "57528d8d530bbbbc7010310a9cab67ad6b2160b6b716bfb919fef247e7d757bd",
       "functions": [
         {
           "name": "NeighbourhoodController",
@@ -11887,7 +11887,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/NeighbourhoodPulseDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/NeighbourhoodPulseDto.java",
-      "contentHash": "515f7768d96425ee2f1a64fa86b600b610066d7dba91ce4be5ead8aaad321335",
+      "contentHash": "a0a7056c14c3f4cf84eda91b74c0925bd000f37fafda2d0629d70827bb004d4a",
       "functions": [],
       "classes": [
         {
@@ -11907,7 +11907,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/NeighbourhoodPulseResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/NeighbourhoodPulseResponse.java",
-      "contentHash": "cf85f8922d04826a89af45991df7358072f0a28527cd5b4dbab56c02a433199a",
+      "contentHash": "5f082217decfc538307703bf38e0942c2f4da6bf35687a01d094e79a5a930f75",
       "functions": [],
       "classes": [
         {
@@ -11940,7 +11940,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulseEventDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulseEventDto.java",
-      "contentHash": "24eaffbf87ec7e1e89102fc44326ec1f1b7d0b55f614a2e0c9ac4360c056d358",
+      "contentHash": "2477ba7124bd14f16462bd75c5c6d09aafdf26b68cd84a149d8ae2e57195ea35",
       "functions": [],
       "classes": [
         {
@@ -11973,7 +11973,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulseEventsDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulseEventsDto.java",
-      "contentHash": "2d0f64d8f8b500bbe72c0020b98138a883a5e8710586d32289f9b6c7f2cb768e",
+      "contentHash": "79a5e62bc6cd43bdfef842b9cda82e970228fa969a2798c003ce53ed1f27daa0",
       "functions": [],
       "classes": [
         {
@@ -12000,7 +12000,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulsePeopleDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulsePeopleDto.java",
-      "contentHash": "374411c4df8cc57a650e5c179cf4c2514478b2c394e4a085b1fdb9948a2904c8",
+      "contentHash": "4c105c76fab131781631a9e9fa65f9e07e7ea307af6a558626014bd85109116e",
       "functions": [],
       "classes": [
         {
@@ -12020,7 +12020,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulsePlacesDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulsePlacesDto.java",
-      "contentHash": "5b1c32568640c05b73203c1b36c758be4c13d278715131218cc55618d09c5e17",
+      "contentHash": "b7c9f64e8687c4171967b658251a057258b6ebd07b720853f0c07392d743642a",
       "functions": [],
       "classes": [
         {
@@ -12047,7 +12047,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulseTransitDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/dto/PulseTransitDto.java",
-      "contentHash": "9393cae55398f9cf1c77b58144c42cf91e11086d7dd367b7fd5b56bcffb31463",
+      "contentHash": "2b65a88596488dd1588888645aa42e696d5088c5f289ed9d9bbd15f10cd467d6",
       "functions": [
         {
           "name": "unavailable",
@@ -12091,7 +12091,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/model/Neighbourhood.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/model/Neighbourhood.java",
-      "contentHash": "98677a3eb7115b5099ced507c8058f13ad574d4d544d69024e164d047c627a38",
+      "contentHash": "7f3834a8778ed522768efcf8a8a70bbd71b2b7cb513e55657ba35433ff699360",
       "functions": [],
       "classes": [
         {
@@ -12118,7 +12118,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/model/NeighbourhoodAreas.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/domain/model/NeighbourhoodAreas.java",
-      "contentHash": "3557b27e15939f5820f1f5dcf18fb14ddc84f2504dd47ad45861a3ef6a03e611",
+      "contentHash": "c89ae7a87d08c2cfc4c5cd4872a9897a2dd98f812dfc8705c94c749055d07a58",
       "functions": [
         {
           "name": "NeighbourhoodAreas",
@@ -12211,7 +12211,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/mapper/NeighbourhoodPulseMapper.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/mapper/NeighbourhoodPulseMapper.java",
-      "contentHash": "93ec9fadcee34df8bb71f10705cbd1d1dc35041e6c2c52a3940a7fe1df6bb202",
+      "contentHash": "178f3892a4a7abff52e51b3e4f625fe3ad18c5b763dde5c329ea587231153a0c",
       "functions": [],
       "classes": [
         {
@@ -12283,7 +12283,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/mapper/impl/NeighbourhoodPulseMapperImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/mapper/impl/NeighbourhoodPulseMapperImpl.java",
-      "contentHash": "a0a8cc4d72aabb11a3d7b2aa2b91ec2ff005a2bcf928cb57440c686c0b0220a4",
+      "contentHash": "894924e9922c84f9a561eaa02af9c1ca136d00888679c21cd5e6d37b42f4a15a",
       "functions": [
         {
           "name": "toEvent",
@@ -12395,7 +12395,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/service/NeighbourhoodPulseService.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/service/NeighbourhoodPulseService.java",
-      "contentHash": "974f090c7616d14bbf8c3bb06e35dac79351d225c39cb7b6af89d2876bd7ab6d",
+      "contentHash": "c7a56203b09522bc00cbf3d26ebca0490c92a6bb14248b6477dc43a81da86897",
       "functions": [],
       "classes": [
         {
@@ -12424,7 +12424,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/service/impl/AlertMatcher.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/service/impl/AlertMatcher.java",
-      "contentHash": "bdf5a9df7eca1e51b488aca34ba0096066771623b4a6e614cb95e6c04533de6b",
+      "contentHash": "8d465ff4875a351fc399cba4ff7fbb1e820860a3d453a703260b0e3a1fd94871",
       "functions": [
         {
           "name": "AlertMatcher",
@@ -12526,7 +12526,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/neighbourhoods/service/impl/NeighbourhoodPulseServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/neighbourhoods/service/impl/NeighbourhoodPulseServiceImpl.java",
-      "contentHash": "d2ac5ed0258389f8ed359b71f0d6a35cf00c810b5fcdf3831b037fd0c40e4631",
+      "contentHash": "3d89b5f94f3c1d33ac3ff0f7f98b5cd793a1e9f9f474dc4bb9f1e03ac474cd01",
       "functions": [
         {
           "name": "NeighbourhoodPulseServiceImpl",
@@ -32821,7 +32821,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/neighbourhoods/controller/NeighbourhoodControllerTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/neighbourhoods/controller/NeighbourhoodControllerTest.java",
-      "contentHash": "8e74c62bb40e9f0f7fc89b6a53f14cf9276045d476f4281f2ff868c7261f5ae7",
+      "contentHash": "c08309a4870a1d59222468e87e7f2e1320a8b83ae6f191b15c1925bf6738a677",
       "functions": [
         {
           "name": "pulseWithoutToken",
@@ -32986,7 +32986,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/neighbourhoods/domain/model/NeighbourhoodAreasTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/neighbourhoods/domain/model/NeighbourhoodAreasTest.java",
-      "contentHash": "f235929f98e2efd1ab57f00e6f12ec35e74b3aeeeef3f49dff6930dc1c8187d9",
+      "contentHash": "052dfcfa66eb3d2377f20f5ee8efd9d94b60c3279610022ef30b147ef202765e",
       "functions": [
         {
           "name": "knownLandmarksLandInTheirArea",
@@ -33077,7 +33077,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/neighbourhoods/service/impl/AlertMatcherTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/neighbourhoods/service/impl/AlertMatcherTest.java",
-      "contentHash": "8fef1611f92e50a3563e23f0039eb1b81e6ac9b20dfe88fb9319fef22e21b66b",
+      "contentHash": "ff46abbcd30dc2825812a1d981ba9420719501ad00f27255a41bb7c0dd416c43",
       "functions": [
         {
           "name": "alert",
@@ -33172,7 +33172,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/neighbourhoods/service/impl/NeighbourhoodPulseServiceImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/neighbourhoods/service/impl/NeighbourhoodPulseServiceImplTest.java",
-      "contentHash": "022ae72d2f13dbf0e2dbc072859337fcd3221095377ada6439e4dc026d47b79b",
+      "contentHash": "1d94ecf0b75ed04f6b165d99c29113829f648a78b3325b10c2a9b28bcb2a657c",
       "functions": [
         {
           "name": "event",
@@ -44734,7 +44734,7 @@
     },
     "frontend/__tests__/screens.pulse.test.tsx": {
       "filePath": "frontend/__tests__/screens.pulse.test.tsx",
-      "contentHash": "cbaf038df865f2a6c7210f127691df7a74571a45c31ba1959f1750c8e8732c1a",
+      "contentHash": "b7d13acdc79c2a11f1c2a44e556788356cf6c15b1e1b58566a90a688e4dcb1f6",
       "functions": [
         {
           "name": "area",
@@ -45535,7 +45535,7 @@
     },
     "frontend/src/api/endpoints.neighbourhoods.ts": {
       "filePath": "frontend/src/api/endpoints.neighbourhoods.ts",
-      "contentHash": "748a2d513d36a5bdbe676c10a755f25b89beec6ae7bee41b7a59408fcc1a8d42",
+      "contentHash": "869cd42bef5e4e8235cd979d99087f928c440f9f29d312058fb048982400ab38",
       "functions": [
         {
           "name": "getNeighbourhoodPulse",
@@ -46187,7 +46187,7 @@
     },
     "frontend/src/api/types.neighbourhoods.ts": {
       "filePath": "frontend/src/api/types.neighbourhoods.ts",
-      "contentHash": "9d5bc905eb9c33ed448e2e2712e02b5d40a8900aa45c2a0bac638e0f5628c266",
+      "contentHash": "0ef60d83bd3a848154a855be549e9a2b2311d211d95ed06486f75beff1856d62",
       "functions": [],
       "classes": [],
       "imports": [
@@ -48914,7 +48914,7 @@
     },
     "frontend/src/app/pulse/_layout.tsx": {
       "filePath": "frontend/src/app/pulse/_layout.tsx",
-      "contentHash": "a21e4428f52a42ec7687209deab3dd2691c23ce21bf5180dcd565a7362a468d5",
+      "contentHash": "3b2304ee6fedc5b8a38454136b8419d8093b386473b9a109c14dccc17fee57f9",
       "functions": [
         {
           "name": "PulseLayout",
@@ -53893,7 +53893,7 @@
     },
     "frontend/src/features/neighbourhoods/areas.ts": {
       "filePath": "frontend/src/features/neighbourhoods/areas.ts",
-      "contentHash": "4f4fa60f1215b6283adcf5b4c79a8ca571de2926fe74173d91e5125e4ee1200f",
+      "contentHash": "7f54c2fd9c5cf295b85046ef884d61a4ce6bcdce717144e9c7ed6b823d373a2b",
       "functions": [
         {
           "name": "areaIdOf",
@@ -53952,7 +53952,7 @@
     },
     "frontend/src/features/neighbourhoods/photos.ts": {
       "filePath": "frontend/src/features/neighbourhoods/photos.ts",
-      "contentHash": "3236b8d335a0e6812b55c73196b81cca014853a1eb96ccd90e232e2546ca9268",
+      "contentHash": "c66ad7bd5a1786e7ea730ba27992cd5d5b9335c7e1e5fca9ca2cbd83ee009129",
       "functions": [
         {
           "name": "neighbourhoodPhoto",
@@ -56778,7 +56778,7 @@
     },
     "frontend/src/hooks/useNeighbourhoods.ts": {
       "filePath": "frontend/src/hooks/useNeighbourhoods.ts",
-      "contentHash": "50fd0c69a1599f1ce448ff5d80fc18ffdb417b2cf5154384600892fc72acb067",
+      "contentHash": "9a91490eb8acd171c2090fbc73a3ddf459090a02bdf4165357dde8c09f51d27d",
       "functions": [
         {
           "name": "useNeighbourhoodPulse",
@@ -59758,7 +59758,7 @@
     },
     "frontend/testing/mocks/routes/neighbourhoods.ts": {
       "filePath": "frontend/testing/mocks/routes/neighbourhoods.ts",
-      "contentHash": "782d32f689fee513e9d29dca0a605afc56e3c9a203997adc75486bb1b8b58616",
+      "contentHash": "47edbf30fb8c16d015bba5bb18b4ef52c42f6a75b95bb1fb79b174c1e1811dba",
       "functions": [
         {
           "name": "mockPulseAreas",
