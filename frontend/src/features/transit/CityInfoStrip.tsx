@@ -1,5 +1,6 @@
-// "City info" on Home, drawn as a departure board: yellow route plate, the last-tram message, the
-// last departure time in big gold numerals and the alerts pill underneath (PLAN 13.1).
+// "City info" on Home, drawn as a departure board: route plate of the next arrival at the nearest stop,
+// the server's sentence, the arrival time in big gold numerals ("in N min" or "last one" under it)
+// and the alerts pill underneath (PLAN 13.1).
 import { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
@@ -19,7 +20,8 @@ export function CityInfoStrip() {
   const [open, setOpen] = useState(false);
 
   const count = alerts.data?.length ?? summary.data?.activeAlerts ?? 0;
-  const departure = summary.data?.lastDepartures[0] ?? null;
+  const next = summary.isError ? null : (summary.data?.nextArrival ?? null);
+  const stop = summary.data?.nearestStop ?? null;
 
   /** The line of text next to the plate. */
   function message() {
@@ -32,27 +34,33 @@ export function CityInfoStrip() {
   return (
     <View testID="city-info-strip" style={styles.board}>
       <View style={styles.top}>
-        {departure ? (
-          <RoutePlate label={departure.route} size="lg" accessibilityLabel={`Line ${departure.route}`} />
+        {next ? (
+          <RoutePlate label={next.route} size="lg" accessibilityLabel={`Line ${next.route}`} />
         ) : (
           <RoutePlate icon="train-outline" size="lg" />
         )}
         <Text numberOfLines={3} tone={line.tone} style={styles.message}>
           {line.text}
         </Text>
-        {departure && !summary.isError ? (
+        {next ? (
           <View style={styles.time}>
-            <Text style={styles.clock}>{formatTime(departure.lastDepartureAt)}</Text>
-            <Text variant="caption" tone="muted">
-              last one
-            </Text>
+            <Text style={styles.clock}>{formatTime(next.arrivesAt)}</Text>
+            {next.last ? (
+              <Text variant="chip" style={styles.lastOne}>
+                last one
+              </Text>
+            ) : (
+              <Text variant="caption" tone="muted">
+                {arrivalIn(next.minutes)}
+              </Text>
+            )}
           </View>
         ) : null}
       </View>
 
       <View style={styles.foot}>
-        <Text variant="caption" tone="muted">
-          Public transport near you
+        <Text variant="caption" tone="muted" numberOfLines={1} style={styles.stop}>
+          {stop && !summary.isError ? `Nearest stop · ${stop.name} · ${stop.distanceMeters} m` : 'Public transport near you'}
         </Text>
         {summary.isError ? (
           <Pressable accessibilityRole="button" accessibilityLabel="Retry transit info" onPress={() => summary.refetch()} hitSlop={8} style={styles.pill}>
@@ -96,6 +104,11 @@ export function CityInfoStrip() {
   );
 }
 
+/** Caption under the arrival time: "now" or "in N min". */
+export function arrivalIn(minutes: number): string {
+  return minutes <= 0 ? 'now' : `in ${minutes} min`;
+}
+
 const styles = StyleSheet.create({
   board: {
     borderRadius: radius.card,
@@ -120,6 +133,8 @@ const styles = StyleSheet.create({
     borderStyle: 'dashed',
   },
   pill: { flexDirection: 'row', alignItems: 'center', gap: 4 },
+  stop: { flex: 1, marginRight: 8 },
+  lastOne: { color: colors.gold, textTransform: 'uppercase' },
   alerts: { gap: 10, padding: 14, borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: colors.border },
   alert: { gap: 2 },
 });

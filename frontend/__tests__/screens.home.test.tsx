@@ -1,15 +1,18 @@
 // Home tab and the All events screen.
 import { fireEvent, screen, waitFor, within } from '@testing-library/react-native';
 
+import type { TransitSummary } from '@/api/types.transit';
 import HomeScreen from '@/app/(tabs)/index';
 import AllEventsScreen from '@/app/events/index';
+import { arrivalIn } from '@/features/transit/CityInfoStrip';
+import * as mocks from '@test/mocks';
 
 import { IDS, mockRouter, renderScreen, setParams } from './testUtils';
 
 describe('HomeScreen', () => {
   it('shows the city info strip and the upcoming events', async () => {
     renderScreen(<HomeScreen />);
-    expect(await screen.findByText(/Last tram 2 from/)).toBeTruthy();
+    expect(await screen.findByText(/Next tram 2 at/)).toBeTruthy();
     expect(await screen.findByText('Board games night')).toBeTruthy();
     expect(screen.getByText('Upcoming events')).toBeTruthy();
     expect(screen.getByText('Live')).toBeTruthy();
@@ -24,12 +27,39 @@ describe('HomeScreen', () => {
     expect(card.getByText('4 spots left')).toBeTruthy();
   });
 
-  it('shows the last departure as a departure board: line plate and time', async () => {
+  it('shows the next arrival at the nearest stop as a departure board', async () => {
     renderScreen(<HomeScreen />);
     const board = within(await screen.findByTestId('city-info-strip'));
     expect(await board.findByLabelText('Line 2')).toBeTruthy();
-    expect(board.getByText('23:41')).toBeTruthy(); // 21:41 UTC in Bucharest winter time
-    expect(board.getByText('Public transport near you')).toBeTruthy();
+    expect(board.getByText('21:45')).toBeTruthy(); // 19:45 UTC in Bucharest winter time
+    expect(board.getByText('in 4 min')).toBeTruthy();
+    expect(board.getByText('Nearest stop · Dâmbovița (Ion Barac) · 230 m')).toBeTruthy();
+  });
+
+  it('says when the next arrival is the last one today', async () => {
+    const real = mocks.mockRequest;
+    const spy = jest.spyOn(mocks, 'mockRequest').mockImplementation(async (method, path, query, body) => {
+      const res = await real(method, path, query, body);
+      if (path !== '/transit/summary') return res;
+      const s = res as TransitSummary;
+      return {
+        ...s,
+        nextArrival: { ...s.nextArrival!, arrivesAt: '2026-11-14T21:41:00Z', minutes: 2, last: true },
+        message: "Last tram 2 at Dâmbovița (Ion Barac) arrives at 23:41 (in 2 min). It's the last one today.",
+      };
+    });
+    renderScreen(<HomeScreen />);
+    const board = within(await screen.findByTestId('city-info-strip'));
+    expect(await board.findByText(/It's the last one today/)).toBeTruthy();
+    expect(board.getByText('23:41')).toBeTruthy();
+    expect(board.getByText('last one')).toBeTruthy();
+    expect(board.queryByText(/^in \d+ min$/)).toBeNull();
+    spy.mockRestore();
+  });
+
+  it('formats the time until arrival', () => {
+    expect(arrivalIn(0)).toBe('now');
+    expect(arrivalIn(7)).toBe('in 7 min');
   });
 
   it('expands the transit alerts', async () => {

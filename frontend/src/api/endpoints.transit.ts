@@ -2,7 +2,7 @@
 import { api } from './client';
 import type { LastDepartures, StopArrivals, TransitAlert, TransitRoute, TransitStop, TransitSummary, TransitVehicles } from './types.transit';
 
-/** Home page line: nearest stop and the last departures. */
+/** Home page line: nearest stop, its next arrival and the last departures. */
 export const getTransitSummary = (near: string) => api<TransitSummary>('GET', '/transit/summary', { query: { near } });
 
 /** Current service alerts. */

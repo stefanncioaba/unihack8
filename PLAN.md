@@ -255,6 +255,7 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 - [x] **13.6 My ticket:** the participant's QR code for an event.
 - [x] **13.7 Organiser scanner:** camera QR scan → check-in result (success, already scanned, wrong event); ban button in the participant list.
 - [x] **13.8 User search:** search by username → opens the public profile (16.4).
+- [x] **13.9 Next arrival on Home:** the city info strip shows the next arrival at the nearest stop ("Next tram 2 at … arrives at 21:45 (in 4 min)"), and says when that trip is the last one today (`nextArrival` in `GET /transit/summary`).
 
 ---
 

@@ -2,8 +2,13 @@
 
 export type TransitDeparture = { route: string; headsign: string; lastDepartureAt: string };
 
+/** Soonest arrival at the nearest stop; `last` = no later trip of this line today (timetable). */
+export type NextArrival = { route: string; headsign: string; arrivesAt: string; minutes: number; live: boolean; last: boolean };
+
 export type TransitSummary = {
   nearestStop: { id: string; name: string; distanceMeters: number } | null;
+  /** null when no arrival is known (then `message` falls back to the last departure). */
+  nextArrival: NextArrival | null;
   lastDepartures: TransitDeparture[];
   activeAlerts: number;
   message: string;

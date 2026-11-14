@@ -18,6 +18,7 @@ import com.unihack8.backend.transit.domain.dto.ArrivalsResponse;
 import com.unihack8.backend.transit.domain.dto.LastDepartureDto;
 import com.unihack8.backend.transit.domain.dto.LastDeparturesResponse;
 import com.unihack8.backend.transit.domain.dto.NearestStopDto;
+import com.unihack8.backend.transit.domain.dto.NextArrivalDto;
 import com.unihack8.backend.transit.domain.dto.TransitRouteDto;
 import com.unihack8.backend.transit.domain.dto.TransitStopDto;
 import com.unihack8.backend.transit.domain.dto.TransitSummaryResponse;
@@ -143,13 +144,18 @@ class TransitControllerTest {
     @Test
     void summary() throws Exception {
         TransitSummaryResponse body = new TransitSummaryResponse(
-                new NearestStopDto("1", "Dâmbovița (Ion Barac)", 230), List.of(), 1, "msg");
+                new NearestStopDto("1", "Dâmbovița (Ion Barac)", 230),
+                new NextArrivalDto("9", "Piața Gh. Domășneanu", java.time.Instant.parse("2026-11-13T18:40:00Z"), 5, true, true),
+                List.of(), 1, "msg");
         when(transit.summary(any(), any())).thenReturn(body);
 
         mvc.perform(get("/transit/summary").param("near", "45.7537,21.2257").header("Accept-Language", "ro-RO,ro;q=0.9"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.nearestStop.distanceMeters").value(230))
                 .andExpect(jsonPath("$.activeAlerts").value(1))
+                .andExpect(jsonPath("$.nextArrival.route").value("9"))
+                .andExpect(jsonPath("$.nextArrival.minutes").value(5))
+                .andExpect(jsonPath("$.nextArrival.last").value(true))
                 .andExpect(jsonPath("$.message").value("msg"));
         verify(transit).summary(eq(new GeoPoint(45.7537, 21.2257)), eq(Locale.of("ro")));
 

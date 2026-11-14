@@ -68,8 +68,8 @@ describeLive('live backend (no mocks)', () => {
 
   it('transit: summary in English, routes, stops, vehicles, arrivals, last departures, alerts', async () => {
     const summary = await getTransitSummary(CENTRE);
-    expectKeys(summary, ['nearestStop', 'lastDepartures', 'activeAlerts', 'message']);
-    expect(summary.message).toMatch(/Last|No more|No departures/); // English, not Romanian
+    expectKeys(summary, ['nearestStop', 'nextArrival', 'lastDepartures', 'activeAlerts', 'message']);
+    expect(summary.message).toMatch(/Next|Last|No more|No departures/); // English, not Romanian
     expect((await getTransitRoutes()).length).toBeGreaterThan(0);
     const stops = await getTransitStops('21.22,45.75,21.23,45.76');
     expect(stops.length).toBeGreaterThan(0);

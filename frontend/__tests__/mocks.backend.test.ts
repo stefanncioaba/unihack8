@@ -133,7 +133,8 @@ describe('mock backend: users and transit', () => {
 
   it('answers the transit summary and alerts', async () => {
     const summary = await call('GET', '/transit/summary', { near: '45.7,21.2' });
-    expect(summary.message).toMatch(/Last tram/);
+    expect(summary.message).toMatch(/Next tram/);
+    expect(summary.nextArrival?.last).toBe(false);
     expect(summary.activeAlerts).toBe(1);
     expect(await call('GET', '/transit/alerts')).toHaveLength(1);
   });
