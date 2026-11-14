@@ -366,6 +366,12 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 - [x] **21.9 Directions focus mode:** while directions are shown, the filters are off and greyed out; only the user, the route, its live vehicles and the destination are on the map.
 - [x] **21.10 Trip guidance on the map:** which tram/bus to board (line, direction, time), where to get off, and "Walk N min" labels.
 - [x] **21.11 Map lag fixed:** simplified shapes, memoised markers and lines, only in-view vehicles, one shared marker timer.
+- [x] **21.12 Only our data on the map:** the base map's own points of interest and transit stations are hidden. Map icons no longer show cut in half (icon font + fixed-size marker roots).
+- [x] **21.13 Transport is exclusive:** turning it on switches the other filters off and greys them out; turning it off restores the previous filters.
+- [x] **21.14 STPT-style line view:** vehicles only until a line is picked; then one line, one direction (Tur/Retur), its stops and its vehicles; colours by type family; bearing arrows.
+- [x] **21.15 Smooth vehicles:** 5 s refresh and a native glide between positions (like live.stpt.ro).
+- [x] **21.16 Directions show only the essentials:** you, the destination, the route, board/get-off markers and the live vehicles of the route's lines anywhere on the line.
+- [x] **21.17 AI price box:** an average total from stored prices only, shown as a highlighted box under the answer (`cost` in `POST /ai/chat`).
 - [x] **21.8a Tests and `DOCS.md` updated.**
 - [x] **21.8b Knowledge graph updated** (full rebuild, then an incremental update after the line chips were removed).
 
@@ -385,17 +391,29 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 ---
 
-## 23. Neighbourhood Pulse — Tracks B + C
+## 23. Volunteer actions — Tracks A + C
+
+**Needs:** 5, 6 (done). Added 2026-11-14. **Goal:** events tagged "volunteer" (park cleanups, food drives) on the existing event system; reliability is shown as a civic trust score and volunteering gives bonus points.
+
+- [x] **23.1 Category:** `VOLUNTEER` accepted by the events API, filters, AI `search_events` and the LiveTickets category guess. No database change.
+- [x] **23.2 Bonus:** check-in at a `VOLUNTEER` event adds +5 more, logged as `VOLUNTEER_BONUS` (total +10, once per ticket).
+- [x] **23.3 App:** Volunteer category chip/icon, bonus line on the event page, bonus rule in the profile, "Volunteer bonus" in the history, "civic trust" wording; mock backend has the same rule and two demo actions.
+- [x] **23.4 Tests:** backend and frontend (see `DOCS.md` → Volunteer actions).
+- [x] **23.5** `DOCS.md`, `docs/API.md` and the knowledge graph updated.
+
+---
+
+## 24. Neighbourhood Pulse — Tracks B + C
 
 **Needs:** 5, 6, 8, 9 (done). Added 2026-11-14. **Goal:** "See what your neighbourhood is doing right now." One screen with a live card per Timișoara area (Cetate, Fabric, Iosefin, Elisabetin, Mehala, Complexul Studențesc, Circumvalațiunii, Fratelia, Soarelui): events now and tonight with free spots, STPT lines, live vehicles and service alerts, places open now, and how many reliable community members are going out there. No new tables.
 
-- [x] **23.1 Areas:** hard-coded centres and radii; a point-in-radius check (nearest centre wins on overlap) assigns events, places, stops and vehicles to an area.
-- [x] **23.2 API:** `GET /neighbourhoods/pulse` (public) combines the existing event, place, transit and participant services; cached 30 s; a source that is down only empties its own section. Contract in `docs/API.md`.
-- [x] **23.3 Busy / quiet:** a `QUIET` / `STEADY` / `BUSY` level from an activity score (events, people going, open places, vehicles). *There are no user "quiet / busy" check-ins in the app — that would need a table — so the level is computed from live data instead.*
-- [x] **23.4 App:** Pulse screen (`/pulse`, opened from the **Pulse** button on Home) with a photo per area, the four sections, tap an event to open it, "Show on map", pull to refresh, refresh every minute, loading / error / empty states.
-- [x] **23.5 Photos:** one Wikimedia Commons photo per area (free licences), bundled in `frontend/assets/neighbourhoods/` with credits in `CREDITS.md` and a credit line on each card.
-- [x] **23.6 Tests:** backend (areas, alert matching, the pulse service with sources down, cache, controller) and app (text lines, screen, Home button).
-- [x] **23.7** `DOCS.md`, `docs/API.md` and the knowledge graph updated.
+- [x] **24.1 Areas:** hard-coded centres and radii; a point-in-radius check (nearest centre wins on overlap) assigns events, places, stops and vehicles to an area.
+- [x] **24.2 API:** `GET /neighbourhoods/pulse` (public) combines the existing event, place, transit and participant services; cached 30 s; a source that is down only empties its own section. Contract in `docs/API.md`.
+- [x] **24.3 Busy / quiet:** a `QUIET` / `STEADY` / `BUSY` level from an activity score (events, people going, open places, vehicles). *There are no user "quiet / busy" check-ins in the app — that would need a table — so the level is computed from live data instead.*
+- [x] **24.4 App:** Pulse screen (`/pulse`, opened from the **Pulse** button on Home) with a photo per area, the four sections, tap an event to open it, "Show on map", pull to refresh, refresh every minute, loading / error / empty states.
+- [x] **24.5 Photos:** one Wikimedia Commons photo per area (free licences), bundled in `frontend/assets/neighbourhoods/` with credits in `CREDITS.md` and a credit line on each card.
+- [x] **24.6 Tests:** backend (areas, alert matching, the pulse service with sources down, cache, controller) and app (text lines, screen, Home button).
+- [x] **24.7** `DOCS.md`, `docs/API.md` and the knowledge graph updated.
 
 ---
 

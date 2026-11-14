@@ -28,7 +28,8 @@ public interface TransitService {
     // Live vehicles of one line, or of every line when route is null/blank.
     VehiclesResponse vehicles(String route);
 
-    // Drawn path of every line (or only one when route is given), from the GTFS file; empty without it.
+    // Drawn path of every line (no stop lists), or of one line with route (with each direction's stops), from the
+    // GTFS file; empty without it.
     List<TransitShapeDto> shapes(String route);
 
     // Next arrivals at a stop; 404 for an unknown stop.

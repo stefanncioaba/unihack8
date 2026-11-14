@@ -65,6 +65,34 @@ class ChatResultMapperImplTest {
         assertThat(response.events()).isEmpty();
         assertThat(response.sources()).isEmpty();
         assertThat(response.routes()).isEmpty();
+        assertThat(response.cost()).isNull();
+    }
+
+    // The cost box covers only the recommended (card) places, with stored prices; two cafes are alternatives.
+    @Test
+    void costFromRecommendedPlacesOnly() {
+        ChatResponse response = mapper.toResponse("Try **Starbucks** or **5 to go** for an espresso.", context());
+        assertThat(response.cost()).isNotNull();
+        assertThat(response.cost().basis()).isEqualTo("OPTIONS");
+        assertThat(response.cost().items()).extracting(i -> i.label()).containsExactly("Starbucks", "5 to go");
+        assertThat(response.cost().averageTotalLei()).isEqualTo(5.0);
+
+        // A price only in the model text (Cafea has none stored) never makes a cost box.
+        assertThat(mapper.toResponse("**Cafea**: espresso about 6 lei.", context()).cost()).isNull();
+    }
+
+    // The cost box gets each place's position, so an item is matched only in what is said about that place.
+    @Test
+    void costMatchesItemsPerPlace() {
+        ToolContext context = new ToolContext(null, Instant.parse("2026-11-14T10:00:00Z"));
+        PriceDto espresso = new PriceDto("Espresso", "COFFEE", new BigDecimal("5.00"), null, "official", null, null, null);
+        PriceDto cappuccino = new PriceDto("Cappuccino", "COFFEE", new BigDecimal("9.00"), null, "official", null, null, null);
+        context.rememberPlace(place("Cafe Alpha"), List.of(espresso, cappuccino));
+        context.rememberPlace(place("Cafe Beta"), List.of(espresso, cappuccino));
+
+        ChatResponse response = mapper.toResponse("**Cafe Alpha**: espresso 5 lei. **Cafe Beta**: cappuccino 9 lei.", context);
+        assertThat(response.cost().items()).extracting(i -> i.detail()).containsExactly("Espresso", "Cappuccino");
+        assertThat(response.cost().averageTotalLei()).isEqualTo(7.0);
     }
 
     // Routes take the names of the closest place/event; the user start is "Your location" (PLAN 18.2).

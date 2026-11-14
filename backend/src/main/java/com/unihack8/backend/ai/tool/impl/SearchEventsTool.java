@@ -21,7 +21,8 @@ import org.springframework.stereotype.Component;
 public class SearchEventsTool implements AiTool {
 
     static final List<String> CATEGORIES =
-            List.of("PARTY", "CONCERT", "THEATRE", "SPORT", "GAMES", "FOOD", "ART", "MEETUP", "OTHER");
+            List.of("PARTY", "CONCERT", "THEATRE", "SPORT", "GAMES", "FOOD", "ART", "MEETUP", "VOLUNTEER",
+                    "OTHER");
     static final int DEFAULT_LIMIT = 8;
     static final int MAX_LIMIT = 15;
 
@@ -45,7 +46,8 @@ public class SearchEventsTool implements AiTool {
         properties.put("query", Map.of("type", "string",
                 "description", "Optional words to find in the event title, e.g. \"jazz\" or \"stand-up\"."));
         properties.put("categories", Map.of("type", "array", "items", Map.of("type", "string", "enum", CATEGORIES),
-                "description", "Event types; empty = all. Going out / party -> PARTY, CONCERT."));
+                "description", "Event types; empty = all. Going out / party -> PARTY, CONCERT; "
+                        + "helping out, cleanups, food drives -> VOLUNTEER."));
         properties.put("from", Map.of("type", "string",
                 "description", "Start of the window, Romanian local time: 2026-11-14 or 2026-11-14T18:00. Default now."));
         properties.put("to", Map.of("type", "string",

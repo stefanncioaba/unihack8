@@ -8,6 +8,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -57,9 +58,17 @@ public class ToolContext {
         return now;
     }
 
-    // Remembers a place a tool returned, with the prices shown for it.
+    // Remembers a place a tool returned, with the prices shown for it. A place returned again (e.g. a COFFEE
+    // search, then a PIZZA one) keeps every distinct price the model saw for it, in the order seen.
     public synchronized void rememberPlace(PlaceSummaryDto place, List<PriceDto> prices) {
-        places.putIfAbsent(place.id(), new FoundPlace(place, List.copyOf(prices)));
+        FoundPlace known = places.get(place.id());
+        if (known == null) {
+            places.put(place.id(), new FoundPlace(place, List.copyOf(prices)));
+            return;
+        }
+        LinkedHashSet<PriceDto> merged = new LinkedHashSet<>(known.prices());
+        merged.addAll(prices);
+        places.put(place.id(), new FoundPlace(known.place(), List.copyOf(merged)));
     }
 
     // Remembers an event a tool returned.

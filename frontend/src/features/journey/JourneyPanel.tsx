@@ -52,9 +52,9 @@ export const JourneyLines = memo(function JourneyLines({ legs, stepIndex, routes
   );
 });
 
-/** Route line (walking dashed, rides solid in the line colour, finished legs greyed), the guidance markers of the legs
- * still ahead (board / get off / walk), the destination pin and the live vehicles of the ride legs' lines (tap one
- * for its panel; closing it brings the journey panel back). Goes inside <MapView>. */
+/** Only the essentials: route line (walking dashed, rides solid in the line colour, finished legs greyed), the board /
+ * get-off markers of the legs still ahead, the destination pin and every live vehicle of the ride legs' lines wherever
+ * it is (tap one for its panel; closing it brings the journey panel back). Goes inside <MapView>. */
 export function JourneyLayer({ target, journey, hiddenVehicleIds }: { target: JourneyTarget; journey: Journey; hiddenVehicleIds?: ReadonlySet<string> }) {
   const { selection, select } = useMapContext();
   const legs = journey.plan.data?.legs;

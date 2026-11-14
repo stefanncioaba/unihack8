@@ -185,6 +185,29 @@ class ReliabilityIntegrationTest {
         assertThat(logRow).containsEntry("points_change", 5).containsEntry("reason", "ATTENDED").containsEntry("event_id", event);
     }
 
+    // A VOLUNTEER event gives +5 for attending and a separately logged +5 volunteer bonus.
+    @Test
+    void volunteerCheckInAddsBonus() throws Exception {
+        UUID event = runningEvent();
+        jdbc.update("UPDATE events SET category='VOLUNTEER' WHERE id=?", event);
+        UUID token = participant(event, GUEST, "JOINED");
+
+        scan(event, HOST, token.toString())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.user.reliabilityScore").value(110))
+                .andExpect(jsonPath("$.pointsChange").value(10));
+
+        List<Map<String, Object>> rows = jdbc.queryForList(
+                "SELECT points_change, reason FROM reliability_log WHERE user_id=? ORDER BY reason", GUEST);
+        assertThat(rows).hasSize(2);
+        assertThat(rows.get(0)).containsEntry("points_change", 5).containsEntry("reason", "ATTENDED");
+        assertThat(rows.get(1)).containsEntry("points_change", 5).containsEntry("reason", "VOLUNTEER_BONUS");
+
+        // A second scan still gives nothing.
+        scan(event, HOST, token.toString()).andExpect(status().isConflict());
+        assertThat(score(GUEST)).isEqualTo(110);
+    }
+
     // Scanning the same ticket twice gives points only once.
     @Test
     void secondScanIsRejected() throws Exception {

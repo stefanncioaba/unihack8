@@ -1,6 +1,7 @@
-// Directions on the map (PLAN 14.5): the destination pin and the chosen route, walking legs dashed and rides solid in
-// their line's colour, trip guidance markers (board / get off / walk) and the live vehicles of the route's tram /
-// trolleybus / bus lines (tap one for its vehicle panel).
+// Directions on the map (PLAN 14.5): only the essentials. The destination pin (and the origin pin when the route does
+// not start at the user), the chosen route (walking legs dashed, rides solid in their line's colour), the board / get
+// off markers and every live vehicle of the route's tram / trolleybus / bus lines wherever it is (tap one for its
+// vehicle panel). The user's own dot is MapView's; every other layer is switched off by map.tsx (visibleLayers).
 import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import { Marker, Polyline } from 'react-native-maps';
 

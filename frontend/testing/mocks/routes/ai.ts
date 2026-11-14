@@ -3,7 +3,7 @@
 // "ratelimit" -> 429 RATE_LIMITED, "unavailable" -> 503 AI_UNAVAILABLE.
 import { ApiError } from '@/api/errors';
 import type { EventSummary } from '@/api/types';
-import type { ChatAnswer, ChatRequest, ChatRoute } from '@/api/types.ai';
+import type { ChatAnswer, ChatCost, ChatCostItem, ChatRequest, ChatRoute } from '@/api/types.ai';
 import type { PlaceDetail, PlaceSummary } from '@/api/types.places';
 
 import { getState, toSummary, type Route } from '../core';
@@ -69,6 +69,49 @@ function routeTo(place: PlaceSummary, request: ChatRequest, fromUniversity: bool
   };
 }
 
+/** Rounded to 0.1 lei, like the backend. */
+const round1 = (lei: number) => Math.round(lei * 10) / 10;
+
+/** A priced cost line; the average is (min + max) / 2 as the backend computes it. */
+function costItem(label: string, detail: string, kind: ChatCostItem['kind'], minLei: number, maxLei: number): ChatCostItem {
+  return { label, detail, kind, minLei, maxLei, averageLei: round1((minLei + maxLei) / 2) };
+}
+
+/**
+ * The cost box with the backend's rule (docs/API.md -> AI assistant, `cost`): lines are grouped by kind; within a kind
+ * the user picks one (mean of the line averages, cheapest min, dearest max) and the kinds are added up. `options` sets
+ * the basis (OPTIONS when the answer offers alternatives). Null when no line has a price.
+ */
+export function mockCost(items: ChatCostItem[], options: boolean, note = 'Saved menu prices (often from delivery apps); they may have changed.'): ChatCost | null {
+  if (items.length === 0) return null;
+  const groups = new Map<ChatCostItem['kind'], ChatCostItem[]>();
+  for (const item of items) groups.set(item.kind, [...(groups.get(item.kind) ?? []), item]);
+  let average = 0;
+  let min = 0;
+  let max = 0;
+  for (const group of groups.values()) {
+    average += group.reduce((a, i) => a + i.averageLei, 0) / group.length;
+    min += Math.min(...group.map((i) => i.minLei));
+    max += Math.max(...group.map((i) => i.maxLei));
+  }
+  return {
+    currency: 'RON',
+    basis: options ? 'OPTIONS' : 'TOTAL',
+    items,
+    averageTotalLei: round1(average),
+    minTotalLei: round1(min),
+    maxTotalLei: round1(max),
+    note,
+  };
+}
+
+/** Canned stored menu prices for the mock pizza answer (the seed places carry no prices). */
+const MOCK_MAINS: [number, number][] = [
+  [30, 45],
+  [28, 40],
+  [32, 48],
+];
+
 /** Builds a canned answer from the last user message. */
 function answer(request: ChatRequest): ChatAnswer {
   const last = [...request.messages].reverse().find((m) => m.role === 'user')?.content.toLowerCase() ?? '';
@@ -80,11 +123,12 @@ function answer(request: ChatRequest): ChatAnswer {
     const places = closest('cafe', 1, request.location);
     const route = routeTo(places[0], request, fromUniversity);
     return {
-      reply: `${places[0].name} is about ${route.durationMinutes} min on foot${fromUniversity ? ' from the university' : ''}.`,
+      reply: `${places[0].name} is about ${route.durationMinutes} min on foot${fromUniversity ? ' from the university' : ''}. An espresso there is about 7 lei.`,
       places,
       events: [],
       sources: [],
       routes: [route],
+      cost: mockCost([costItem(places[0].name, 'Espresso', 'MENU', 7, 7)], false),
     };
   }
   if (/pizza|eat|food|restaurant|hungry/.test(last)) {
@@ -95,11 +139,15 @@ function answer(request: ChatRequest): ChatAnswer {
       events: [],
       sources: [{ title: `${places[0].name} – menu and reviews`, url: 'https://example.ro/meniu' }],
       routes: [],
+      cost: mockCost(
+        places.map((p, i) => costItem(p.name, '3 stored prices', 'MENU', ...MOCK_MAINS[i % MOCK_MAINS.length])),
+        places.length > 1,
+      ),
     };
   }
   if (/coffee|cafe|café/.test(last)) {
     const places = closest('cafe', 3, request.location);
-    return { reply: `Here are the cafés closest to you. ${places[0].name} is the nearest and has outdoor seating.`, places, events: [], sources: [], routes: [] };
+    return { reply: `Here are the cafés closest to you. ${places[0].name} is the nearest and has outdoor seating.`, places, events: [], sources: [], routes: [], cost: null };
   }
   if (/weekend|event|party|go out|tonight|do /.test(last)) {
     const events = upcomingEvents(3);
@@ -109,6 +157,13 @@ function answer(request: ChatRequest): ChatAnswer {
       events,
       sources: [],
       routes: [],
+      cost: mockCost(
+        events
+          .filter((e) => e.priceMin !== null || e.priceMax !== null)
+          .map((e) => costItem(e.title, 'Ticket', 'EVENT', e.priceMin ?? e.priceMax ?? 0, e.priceMax ?? e.priceMin ?? 0)),
+        events.length > 1,
+        'Saved ticket prices; they may have changed.',
+      ),
     };
   }
   return {
@@ -117,6 +172,7 @@ function answer(request: ChatRequest): ChatAnswer {
     events: [],
     sources: [],
     routes: [],
+    cost: null,
   };
 }
 

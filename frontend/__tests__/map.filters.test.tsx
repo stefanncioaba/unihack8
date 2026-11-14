@@ -15,7 +15,9 @@ import {
 import { Chip, MAP_CHIP_BG, chipColors, chipStyle as chipPressableStyle } from '@/ui/Chip';
 import { colors } from '@/ui/theme';
 
-import { renderScreen } from './testUtils';
+import { placeId } from '@test/mocks/placesSeed';
+
+import { renderScreen, setParams } from './testUtils';
 
 const run = (start: MapFilters, ...actions: MapFilterAction[]) => actions.reduce(mapFiltersReducer, start);
 const ALL: MapFilterAction = { type: 'allPlaces' };
@@ -34,7 +36,6 @@ describe('mapFiltersReducer', () => {
     const f = run(INITIAL_MAP_FILTERS, ALL);
     expect(f.placesOn).toBe(false);
     expect(allPlacesSelected(f)).toBe(false);
-    expect(run(INITIAL_MAP_FILTERS, EVENTS, TRANSPORT, ALL).placesOn).toBe(false); // transport alone is enough
   });
 
   it('does nothing when "All places" would leave the map empty', () => {
@@ -62,16 +63,62 @@ describe('mapFiltersReducer', () => {
     expect(run(off, bar)).toMatchObject({ placesOn: true, categories: ['bar'] });
   });
 
-  it('toggles events and transport independently', () => {
-    expect(run(INITIAL_MAP_FILTERS, TRANSPORT)).toMatchObject({ eventsOn: true, transitOn: true, placesOn: true });
-    expect(run(INITIAL_MAP_FILTERS, TRANSPORT, EVENTS)).toMatchObject({ eventsOn: false, transitOn: true });
-    expect(run(INITIAL_MAP_FILTERS, TRANSPORT, TRANSPORT).transitOn).toBe(false);
+  it('toggles events on its own', () => {
+    expect(run(INITIAL_MAP_FILTERS, EVENTS)).toMatchObject({ eventsOn: false, placesOn: true, transitOn: false });
+    expect(run(INITIAL_MAP_FILTERS, EVENTS, EVENTS)).toEqual(INITIAL_MAP_FILTERS);
   });
 
   it('brings places back if turning off the last other layer would leave nothing visible', () => {
     const placesOff = run(INITIAL_MAP_FILTERS, cafe, ALL, ALL); // cafe, back to all places, then places off
     expect(placesOff).toMatchObject({ placesOn: false, eventsOn: true });
     expect(run(placesOff, EVENTS)).toEqual({ placesOn: true, categories: [], eventsOn: false, transitOn: false });
+  });
+});
+
+describe('mapFiltersReducer: Transport is exclusive', () => {
+  it('turns every other layer off and remembers it, then clears the memory when turned off', () => {
+    const on = run(INITIAL_MAP_FILTERS, TRANSPORT);
+    expect(on).toEqual({
+      placesOn: false,
+      categories: [],
+      eventsOn: false,
+      transitOn: true,
+      beforeTransport: { placesOn: true, categories: [], eventsOn: true },
+    });
+    const off = run(on, TRANSPORT);
+    expect(off).toEqual(INITIAL_MAP_FILTERS);
+    expect(off).not.toHaveProperty('beforeTransport');
+  });
+
+  it('restores categories and events exactly', () => {
+    const start = run(INITIAL_MAP_FILTERS, cafe, bar);
+    expect(start).toMatchObject({ placesOn: true, categories: ['cafe', 'bar'], eventsOn: true });
+    expect(run(start, TRANSPORT, TRANSPORT)).toEqual(start);
+  });
+
+  it('restores an events-only state', () => {
+    const eventsOnly = run(INITIAL_MAP_FILTERS, ALL);
+    expect(eventsOnly).toMatchObject({ placesOn: false, eventsOn: true });
+    expect(run(eventsOnly, TRANSPORT, TRANSPORT)).toEqual(eventsOnly);
+  });
+
+  it('restores a places-only state (events off)', () => {
+    const placesOnly = run(INITIAL_MAP_FILTERS, cafe, EVENTS);
+    expect(run(placesOnly, TRANSPORT, TRANSPORT)).toEqual(placesOnly);
+  });
+
+  it('falls back to all places if nothing would be visible after Transport', () => {
+    const odd: MapFilters = { placesOn: false, categories: [], eventsOn: false, transitOn: true };
+    const allPlacesOnly = { placesOn: true, categories: [], eventsOn: false, transitOn: false };
+    expect(run(odd, TRANSPORT)).toEqual(allPlacesOnly);
+    const emptyMemory: MapFilters = { ...odd, beforeTransport: { placesOn: false, categories: ['cafe'], eventsOn: false } };
+    expect(run(emptyMemory, TRANSPORT)).toEqual(allPlacesOnly);
+  });
+
+  it('ignores the other chips while Transport is on', () => {
+    const on = run(INITIAL_MAP_FILTERS, cafe, TRANSPORT);
+    for (const a of [ALL, EVENTS, bar, cafe]) expect(mapFiltersReducer(on, a)).toBe(on);
+    expect(run(on, ALL, EVENTS, bar, TRANSPORT)).toMatchObject({ placesOn: true, categories: ['cafe'], eventsOn: true, transitOn: false });
   });
 });
 
@@ -92,6 +139,18 @@ describe('MapFilterBar', () => {
     fireEvent.press(screen.getByText('Transport'));
     fireEvent.press(screen.getByText('Cafés'));
     expect(onChange.mock.calls.map((c) => c[0])).toEqual([ALL, EVENTS, TRANSPORT, cafe]);
+  });
+
+  it('greys out every chip but Transport while Transport is on', () => {
+    const onChange = jest.fn();
+    render(<MapFilterBar filters={run(INITIAL_MAP_FILTERS, TRANSPORT)} onChange={onChange} />);
+    for (const id of ['chip-places', 'chip-events', 'chip-category-cafe']) {
+      expect(screen.getByTestId(id).props.accessibilityState).toMatchObject({ disabled: true, selected: false });
+      fireEvent.press(screen.getByTestId(id));
+    }
+    expect(screen.getByTestId('chip-transit').props.accessibilityState).toMatchObject({ disabled: false, selected: true });
+    fireEvent.press(screen.getByTestId('chip-transit'));
+    expect(onChange.mock.calls.map((c) => c[0])).toEqual([TRANSPORT]);
   });
 });
 
@@ -170,6 +229,56 @@ describe('MapScreen filters', () => {
     expect(screen.getByTestId('zoom-hint')).toBeTruthy();
     fireEvent.press(screen.getByTestId('chip-places'));
     expect(screen.queryByTestId('zoom-hint')).toBeNull();
+  });
+
+  it('Transport hides places and events and greys the chips; turning it off brings the same filters back', async () => {
+    renderScreen(<MapScreen />);
+    await zoomIn();
+    fireEvent.press(screen.getByTestId('chip-category-cafe'));
+    fireEvent.press(screen.getByTestId('chip-events')); // events off
+    fireEvent.press(screen.getByTestId('chip-events')); // and on again
+    await waitFor(() => expect(markers('place').length).toBeGreaterThan(0));
+    await waitFor(() => expect(markers('event').length).toBeGreaterThan(0));
+    const before = markers('place').length;
+
+    fireEvent.press(screen.getByTestId('chip-transit'));
+    await waitFor(() => expect(markers('place')).toHaveLength(0));
+    expect(markers('event')).toHaveLength(0);
+    for (const id of ['chip-places', 'chip-events', 'chip-category-cafe']) {
+      expect(screen.getByTestId(id).props.accessibilityState).toMatchObject({ disabled: true, selected: false });
+    }
+    fireEvent.press(screen.getByTestId('chip-category-bar')); // ignored
+    expect(screen.getByTestId('chip-category-bar').props.accessibilityState).toMatchObject({ selected: false });
+
+    fireEvent.press(screen.getByTestId('chip-transit'));
+    await waitFor(() => expect(markers('place')).toHaveLength(before));
+    await waitFor(() => expect(markers('event').length).toBeGreaterThan(0));
+    expect(screen.getByTestId('chip-category-cafe').props.accessibilityState).toMatchObject({ selected: true, disabled: false });
+    expect(screen.getByTestId('chip-events').props.accessibilityState).toMatchObject({ selected: true, disabled: false });
+    expect(screen.getByTestId('chip-places').props.accessibilityState).toMatchObject({ selected: false });
+    expect(screen.getByTestId('chip-category-bar').props.accessibilityState).toMatchObject({ selected: false });
+  });
+
+  it('closes an open place panel when Transport is turned on (its pin is hidden)', async () => {
+    renderScreen(<MapScreen />);
+    await zoomIn();
+    await waitFor(() => expect(markers('place').length).toBeGreaterThan(0));
+    fireEvent.press(markers('place')[0]);
+    expect(await screen.findByTestId('place-panel')).toBeTruthy();
+    fireEvent.press(screen.getByTestId('chip-transit'));
+    await waitFor(() => expect(screen.queryByTestId('place-panel')).toBeNull());
+    expect(markers('place')).toHaveLength(0);
+  });
+
+  it('turns Transport off when a place is shown on the map from elsewhere, so its pin and panel appear', async () => {
+    renderScreen(<MapScreen />);
+    fireEvent.press(screen.getByTestId('chip-transit'));
+    expect(screen.getByTestId('chip-transit').props.accessibilityState).toMatchObject({ selected: true });
+    setParams({ lat: '45.7537', lon: '21.2257', placeId: placeId(0), at: '2' });
+    await zoomIn(); // any re-render picks the new params up
+    expect(await screen.findByTestId('place-panel')).toBeTruthy();
+    expect(screen.getByTestId('chip-transit').props.accessibilityState).toMatchObject({ selected: false });
+    await waitFor(() => expect(markers('place').length).toBeGreaterThan(0));
   });
 
   it('never shows line chips: Transport shows the whole network at once', async () => {

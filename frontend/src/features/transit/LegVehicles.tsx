@@ -1,6 +1,8 @@
 // Live vehicles of a route plan's ride legs (tram / trolleybus / bus), drawn by the directions and journey layers
-// whether or not the Transport filter is on, so the user sees their tram coming along the drawn road. The vehicle
-// nearest each boarding stop (heading the right way when known) is drawn larger: that is most likely the one to catch.
+// whether or not the Transport filter is on, so the user sees their tram coming along the drawn road. Every vehicle of
+// those lines is drawn wherever it is on the line (not only near the route or in view, up to MAX_LEG_VEHICLES_PER_LINE
+// per line), so the user can watch theirs come from far away. The vehicle nearest each boarding stop (heading the right
+// way when known) is drawn larger: that is most likely the one to catch.
 import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 
 import type { RouteLeg } from '@/api/types.routing';
@@ -30,6 +32,31 @@ export function approachingVehicleIds(legs: RouteLeg[] | undefined, vehicles: Tr
   return out;
 }
 
+/** Most vehicles drawn per line of a plan: a sane cap so a bad feed cannot flood the map. */
+export const MAX_LEG_VEHICLES_PER_LINE = 30;
+
+/** At most `max` vehicles per line, in feed order, never dropping one in `keep` (the approaching vehicles). Position is
+ * not considered: a vehicle far from the route or off screen is kept like any other. */
+export function capVehiclesPerLine(vehicles: TransitVehicle[], max = MAX_LEG_VEHICLES_PER_LINE, keep?: ReadonlySet<string>): TransitVehicle[] {
+  const count = new Map<string, number>();
+  const kept = new Map<string, number>();
+  // Reserve room for the kept vehicles of each line first, so the cap never pushes them out.
+  for (const v of vehicles) if (keep?.has(v.id)) kept.set(lineKey(v), (kept.get(lineKey(v)) ?? 0) + 1);
+  return vehicles.filter((v) => {
+    const key = lineKey(v);
+    if (keep?.has(v.id)) return true;
+    const n = count.get(key) ?? 0;
+    if (n + (kept.get(key) ?? 0) >= max) return false;
+    count.set(key, n + 1);
+    return true;
+  });
+}
+
+/** Grouping key of a vehicle's line (ids compared like sameLine: trimmed, case-insensitive). */
+function lineKey(v: TransitVehicle): string {
+  return (v.route ?? '').trim().toUpperCase();
+}
+
 type Props = {
   legs: RouteLeg[] | undefined;
   selectedId?: string;
@@ -43,8 +70,12 @@ type Props = {
  * Memoised: with stable props a pan or selection elsewhere does not re-render it. */
 export const LegVehicles = memo(function LegVehicles({ legs, selectedId, hiddenIds, onSelect }: Props) {
   const { vehicles, routes } = useLegVehicles(legs);
-  const shown = useMemo(() => (hiddenIds?.size ? vehicles.filter((v) => !hiddenIds.has(v.id)) : vehicles), [vehicles, hiddenIds]);
   const approaching = useMemo(() => approachingVehicleIds(legs, vehicles, routes), [legs, vehicles, routes]);
+  // No distance or in-view filter on purpose: the whole line is shown, only capped per line.
+  const shown = useMemo(() => {
+    const capped = capVehiclesPerLine(vehicles, MAX_LEG_VEHICLES_PER_LINE, approaching);
+    return hiddenIds?.size ? capped.filter((v) => !hiddenIds.has(v.id)) : capped;
+  }, [vehicles, hiddenIds, approaching]);
   // One stable handler for every marker (so the memoised markers skip refreshes where nothing moved), always handing
   // over the latest report of the tapped vehicle, even when its marker was not re-rendered since (as TransitLayer does).
   const latest = useRef(new Map<string, TransitVehicle>());

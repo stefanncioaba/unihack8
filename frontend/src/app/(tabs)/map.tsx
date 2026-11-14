@@ -1,6 +1,7 @@
 // Map tab: dark map with the user's position and the Map joints (context + bottom panel).
-// Layers: places (14.2), events (14.3), transit (14.4: every line's path, every live vehicle, stops) and directions
-// (14.5, with the live vehicles of the route's lines). Tapping a vehicle opens its live panel.
+// Layers: places (14.2), events (14.3), transit (14.4, like live.stpt.ro: every live vehicle gliding between polls;
+// pick a line, or tap one of its vehicles, to see its route one direction at a time with its stops and vehicles) and
+// directions (14.5, with the live vehicles of the route's lines). Tapping a vehicle opens its live panel.
 // Long-press anywhere to get directions to that spot. An AI route card opens it with a route preview, or with "Go" in
 // journey mode (PLAN 18.5): the route from the live position, the camera following the user and the current step.
 import { useLocalSearchParams } from 'expo-router';
@@ -22,11 +23,16 @@ import type { TransitVehicle } from '@/api/types.transit';
 import { MapProvider, isTransitLayerSelection, useMapContext } from '@/features/map/MapContext';
 import { INITIAL_MAP_FILTERS, mapFiltersReducer, visibleLayers, type MapFilterAction } from '@/features/map/mapFilters';
 import { PlaceMarkers } from '@/features/map/PlaceMarkers';
+import { LinePicker } from '@/features/transit/LinePicker';
+import { directionOfVehicle, lineDirections } from '@/features/transit/lineView';
+import { sameLine } from '@/features/transit/lines';
 import { TransitLayer } from '@/features/transit/TransitLayer';
+import { setMapMoving } from '@/features/transit/vehicleAnimation';
 import { useEventsInArea } from '@/hooks/useMapEvents';
 import { usePlacesInArea } from '@/hooks/usePlaces';
-import { useAllVehicles, useStopsInArea, useTransitShapes } from '@/hooks/useTransit';
+import { useAllVehicles, useLineShape, useStopsInArea, useTransitRoutes } from '@/hooks/useTransit';
 import { regionToBbox } from '@/lib/bbox';
+import { decodePolyline } from '@/lib/polyline';
 import { isValidCoordinate, regionFor } from '@/lib/geo';
 import { MAP_CHIP_BG } from '@/ui/Chip';
 import { Icon } from '@/ui/Icon';
@@ -39,6 +45,10 @@ const ZOOM_PLACES_MAX_SPAN = 0.06;
 const ZOOM_LABELS_MAX_SPAN = 0.015;
 /** Visible span below which transit stops are shown (about 3 km). */
 const ZOOM_STOPS_MAX_SPAN = 0.03;
+
+/** The line shown alone on the Transport layer: its id, the direction picked with the toggle (null = not picked yet)
+ * and the headsign of the vehicle it was opened from (shows that vehicle's direction first). */
+type LineView = { id: string; dir: number | null; headsign: string | null };
 
 /** The map and its overlays. Must be inside <MapProvider>. */
 function MapBody() {
@@ -65,12 +75,29 @@ function MapBody() {
   const labelsVisible = span > 0 && span <= ZOOM_LABELS_MAX_SPAN;
   const stopsVisible = transitOn && span > 0 && span <= ZOOM_STOPS_MAX_SPAN;
   const stops = useStopsInArea(bbox, stopsVisible);
-  // Transport shows the whole network at once: every line's path and every live vehicle (one request each).
-  const shapes = useTransitShapes(transitOn);
+  // Transport shows every live vehicle (one request); no route lines until a line is picked. The picked line's shape
+  // (one direction at a time, with its stops) is fetched only then.
   const vehicles = useAllVehicles(transitOn);
-  /** Opens a vehicle's live panel; a route being previewed stays drawn behind it. */
+  const routes = useTransitRoutes(transitOn);
+  const [lineView, setLineView] = useState<LineView | null>(null);
+  const lineId = transitOn ? lineView?.id ?? null : null;
+  const lineShape = useLineShape(lineId);
+  const directions = useMemo(() => lineDirections(lineShape.data, lineId, decodePolyline), [lineShape.data, lineId]);
+  const directionIndex = lineView?.dir ?? directionOfVehicle(directions, lineView?.headsign);
+  // Transport off: the next time it is on, every vehicle shows again.
+  useEffect(() => {
+    if (!filters.transitOn) setLineView(null);
+  }, [filters.transitOn]);
+  /** Picks a line in the picker (null clears it, back to every vehicle). */
+  const pickLine = useCallback((id: string | null) => setLineView(id ? { id, dir: null, headsign: null } : null), []);
+  /** Shows the other direction of the picked line. */
+  const pickDirection = useCallback((dir: number) => setLineView((cur) => (cur ? { ...cur, dir } : cur)), []);
+  /** Opens a vehicle's live panel and shows its line (in its direction); a route being previewed stays drawn. */
   const selectVehicle = useCallback(
-    (v: TransitVehicle) => select({ type: 'vehicle', id: v.id, route: v.route, vehicle: v, returnTo: destination ?? undefined }),
+    (v: TransitVehicle) => {
+      if (v.route) setLineView((cur) => (cur && sameLine(cur.id, v.route) ? cur : { id: v.route!, dir: null, headsign: v.headsign }));
+      select({ type: 'vehicle', id: v.id, route: v.route, vehicle: v, returnTo: destination ?? undefined });
+    },
     [select, destination],
   );
 
@@ -80,12 +107,16 @@ function MapBody() {
     latest.current = { transitOn, selection, span };
   });
 
-  /** Applies a filter chip press; turning transport off closes a stop or vehicle panel opened from the transport
-   * layer (its marker is gone). */
+  /** Applies a filter chip press. Turning transport off closes a stop or vehicle panel opened from the transport
+   * layer, and turning it on closes a place or event panel (places and events are hidden): its marker is gone. */
   const changeFilter = useCallback(
     (action: MapFilterAction) => {
       const now = latest.current;
-      if (action.type === 'transport' && now.transitOn && isTransitLayerSelection(now.selection)) select(null);
+      if (action.type === 'transport') {
+        const sel = now.selection;
+        if (now.transitOn && isTransitLayerSelection(sel)) select(null);
+        else if (!now.transitOn && (sel?.type === 'place' || sel?.type === 'event')) select(null);
+      }
       dispatchFilter(action);
     },
     [select],
@@ -109,6 +140,8 @@ function MapBody() {
   // `at` is a timestamp so pressing the same button twice still counts as a new request.
   useEffect(() => {
     if (focus) mapRef.current?.animateToRegion(regionFor(focus, 0.012), 400);
+    // Places and events are hidden while Transport is on: turn it off so the requested pin is drawn with its panel.
+    if ((params.placeId || params.eventId) && filters.transitOn) dispatchFilter({ type: 'transport' });
     if (params.placeId) select({ type: 'place', id: params.placeId });
     else if (params.eventId) select({ type: 'event', id: params.eventId });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -179,8 +212,16 @@ function MapBody() {
     [setDestination],
   );
 
+  /** The camera moves (pan / zoom): vehicles stop gliding and jump until it settles. */
+  const onRegionChange = useCallback(() => setMapMoving(true), []);
   /** Remembers the visible area so layers can load only what is on screen. */
-  const onRegionChangeComplete = useCallback((region: Region) => setVisibleBbox(regionToBbox(region)), [setVisibleBbox]);
+  const onRegionChangeComplete = useCallback(
+    (region: Region) => {
+      setMapMoving(false);
+      setVisibleBbox(regionToBbox(region));
+    },
+    [setVisibleBbox],
+  );
 
   // The camera only uses the first region; one object, so re-renders do not hand the native map a new one.
   const [initialRegion] = useState(() => regionFor(focus ?? position, focus ? 0.012 : 0.035));
@@ -194,6 +235,7 @@ function MapBody() {
         ref={mapRef}
         style={StyleSheet.absoluteFill}
         initialRegion={initialRegion}
+        onRegionChange={onRegionChange}
         onRegionChangeComplete={onRegionChangeComplete}
         onPress={onMapPress}
         onLongPress={onLongPress}
@@ -202,6 +244,13 @@ function MapBody() {
         toolbarEnabled={false}
         userInterfaceStyle="dark"
         customMapStyle={darkMapStyle}
+        // Only our own data on the map: no base-map shops / museums / stations (Apple Maps; Google uses the style),
+        // no 3D buildings, indoor maps, traffic or the Android "open in Google Maps" toolbar.
+        showsPointsOfInterest={false}
+        showsBuildings={false}
+        showsIndoors={false}
+        showsIndoorLevelPicker={false}
+        showsTraffic={false}
         testID="main-map"
       >
         {focus && !showingDirections && !params.placeId && !params.eventId && <Marker coordinate={{ latitude: focus.lat, longitude: focus.lon }} title={params.title} pinColor={colors.oxford} testID="focus-marker" />}
@@ -228,9 +277,10 @@ function MapBody() {
         {transitOn && (
           <TransitLayer
             stops={stopsVisible ? stops.data : undefined}
-            line={null}
+            lineId={lineId}
+            directions={directions}
+            directionIndex={directionIndex}
             vehicles={vehicles.data?.vehicles}
-            shapes={shapes.data}
             bbox={bbox}
             selectedStopId={selection?.type === 'stop' ? selection.id : undefined}
             selectedVehicleId={selection?.type === 'vehicle' ? selection.id : undefined}
@@ -252,6 +302,9 @@ function MapBody() {
           </Pressable>
         </View>
         <MapFilterBar filters={layers} onChange={changeFilter} disabled={showingDirections} />
+        {transitOn && (
+          <LinePicker routes={routes.data} lineId={lineId} directions={directions} directionIndex={directionIndex} onPick={pickLine} onDirection={pickDirection} />
+        )}
         {showingDirections && (
           <View style={styles.hint} testID="filters-off-hint">
             <Text variant="caption" tone="muted">
@@ -266,7 +319,7 @@ function MapBody() {
             </Text>
           </View>
         )}
-        {transitOn && span > ZOOM_STOPS_MAX_SPAN && (
+        {transitOn && !lineId && span > ZOOM_STOPS_MAX_SPAN && (
           <View style={styles.hint} testID="stops-hint">
             <Text variant="caption" tone="muted">
               Zoom in to see stops

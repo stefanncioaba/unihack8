@@ -17,7 +17,7 @@ export type TransitSummary = {
 export type TransitAlert = { id: string; title: string; description: string | null };
 
 /** Line type as STPT reports it (docs/API.md -> GET /transit/routes). */
-export type TransitRouteType = 'TRAM' | 'TROLLEYBUS' | 'BUS' | 'EXPRESS' | 'METROPOLITAN' | 'BOAT';
+export type TransitRouteType = 'TRAM' | 'TROLLEYBUS' | 'BUS' | 'EXPRESS' | 'METROPOLITAN' | 'SCHOOL' | 'BOAT';
 
 /** One line. `color` is STPT's line colour (null when STPT has none). */
 export type TransitRoute = { id: string; type: TransitRouteType; name: string; from: string | null; to: string | null; color: string | null };
@@ -46,8 +46,28 @@ export type TransitVehicle = {
 /** Live vehicles of one line, or of every line when `route` is null (`stale` = STPT did not answer, last cached value). */
 export type TransitVehicles = { route: string | null; updatedAt: string; stale: boolean; vehicles: TransitVehicle[] };
 
-/** The drawn path of one line: one Google encoded polyline (precision 5) per direction / variant. */
-export type TransitShape = { route: string; routeName: string; type: TransitRouteType; color: string | null; polylines: string[] };
+/** A stop along one direction of a line (GET /transit/shapes?route=). `id` is the GET /transit/stops id. */
+export type TransitShapeStop = { id: string; name: string | null; lat: number; lon: number };
+
+/** One direction / variant of a line: its polyline, `TUR` / `RETUR` (GTFS direction_id 0 / 1, null when unknown),
+ * where it is heading, and its stops in order (null in the all-lines answer). */
+export type TransitShapeVariant = {
+  polyline: string;
+  direction: 'TUR' | 'RETUR' | null;
+  headsign: string | null;
+  stops: TransitShapeStop[] | null;
+};
+
+/** The drawn path of one line: one Google encoded polyline (precision 5) per direction / variant, and the same
+ * polylines described in `variants` (optional: older answers have no variants). */
+export type TransitShape = {
+  route: string;
+  routeName: string;
+  type: TransitRouteType;
+  color: string | null;
+  polylines: string[];
+  variants?: TransitShapeVariant[];
+};
 
 /** One upcoming arrival at a stop (`live: false` = from the timetable). */
 export type TransitArrival = { route: string; headsign: string; arrivesAt: string; minutes: number; live: boolean };

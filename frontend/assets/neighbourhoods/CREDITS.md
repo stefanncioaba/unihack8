@@ -1,6 +1,6 @@
 # Neighbourhood photos
 
-Photos for the Neighbourhood Pulse screen (PLAN 23), from Wikimedia Commons, downloaded as 800 px wide versions on 2026-11-14. Each is used under its licence; the author and licence are also shown on the card.
+Photos for the Neighbourhood Pulse screen (PLAN 24), from Wikimedia Commons, downloaded as 800 px wide versions on 2026-11-14. Each is used under its licence; the author and licence are also shown on the card.
 
 | File | Original | Author | Licence |
 | --- | --- | --- | --- |

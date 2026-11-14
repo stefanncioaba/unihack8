@@ -1,6 +1,6 @@
 // Response and request shapes of the Spring API. Source of truth: docs/API.md.
 
-export type EventCategory = 'PARTY' | 'CONCERT' | 'THEATRE' | 'SPORT' | 'GAMES' | 'FOOD' | 'ART' | 'MEETUP' | 'OTHER';
+export type EventCategory = 'PARTY' | 'CONCERT' | 'THEATRE' | 'SPORT' | 'GAMES' | 'FOOD' | 'ART' | 'MEETUP' | 'VOLUNTEER' | 'OTHER';
 
 export const EVENT_CATEGORIES: EventCategory[] = [
   'PARTY',
@@ -11,6 +11,7 @@ export const EVENT_CATEGORIES: EventCategory[] = [
   'FOOD',
   'ART',
   'MEETUP',
+  'VOLUNTEER',
   'OTHER',
 ];
 

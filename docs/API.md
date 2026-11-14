@@ -117,7 +117,8 @@ Used in lists, on the map and inside other answers. `spotsLeft` is `null` when t
 `averageRating` is the review average with one decimal (`null` without reviews); `reviewCount` is the number of reviews (see `GET /events/{id}/reviews`).
 
 `source` is `USER` or `EXTERNAL`. Event `category` is one of (filtering by `OTHER` also returns imported events stored without a category):
-`PARTY`, `CONCERT`, `THEATRE`, `SPORT`, `GAMES`, `FOOD`, `ART`, `MEETUP`, `OTHER`.
+`PARTY`, `CONCERT`, `THEATRE`, `SPORT`, `GAMES`, `FOOD`, `ART`, `MEETUP`, `VOLUNTEER`, `OTHER`.
+`VOLUNTEER` marks volunteer actions (park cleanups, food drives): checking in at one gives a +5 bonus (see check-in).
 Imported events that cannot be classified get `OTHER`.
 
 ### PlaceSummary
@@ -235,7 +236,7 @@ Score and the 20 most recent changes.
 }
 ```
 
-`reason` is `ATTENDED`, `NO_SHOW`, `LATE_CANCEL` or `EVENT_RATING` (the organiser's points from the event's average rating, from -5 to +5). `eventId` / `eventTitle` are `null` if the event was deleted.
+`reason` is `ATTENDED`, `NO_SHOW`, `LATE_CANCEL`, `EVENT_RATING` (the organiser's points from the event's average rating, from -5 to +5) or `VOLUNTEER_BONUS` (+5 extra for checking in at a `VOLUNTEER` event). `eventId` / `eventTitle` are `null` if the event was deleted.
 
 ---
 
@@ -384,6 +385,7 @@ Answer:
 
 Errors: `403 NOT_ORGANIZER`, `403 EXTERNAL_EVENT`, `404 TICKET_NOT_FOUND` (unknown token, or scanned text that is not a ticket), `409 WRONG_EVENT`, `409 ALREADY_CHECKED_IN`, `403 BANNED`, `409 NOT_JOINED` (the participant left), `409 EVENT_ENDED` (after the event's end, or start + 3 h without an end time), `400 VALIDATION_FAILED` (blank token).
 Scanning the same ticket twice never adds points twice.
+At a `VOLUNTEER` event `pointsChange` is `10`: +5 `ATTENDED` and +5 `VOLUNTEER_BONUS`, written as two reliability log rows.
 
 ### `GET /events/{id}/reviews` — public (token optional)
 
@@ -461,7 +463,7 @@ All public. `stale: true` means STPT did not answer and this is the last cached 
 
 ### `GET /transit/routes`
 
-`type` is `TRAM`, `TROLLEYBUS`, `BUS`, `EXPRESS`, `METROPOLITAN` or `BOAT`. Sorted by type (trams first), then by line number.
+`type` is `TRAM`, `TROLLEYBUS`, `BUS`, `EXPRESS`, `METROPOLITAN`, `SCHOOL` (STPT category `school`) or `BOAT`. Sorted by type (trams first), then by line number.
 `from` / `to` are the line's two end stations (either can be `null`). `color` is STPT's line colour for drawing on the map (`null` when STPT has none).
 
 ```json
@@ -482,9 +484,9 @@ All public. `stale: true` means STPT did not answer and this is the last cached 
 
 ### `GET /transit/vehicles?route=1`
 
-`route` is optional. With it: the vehicles of that one line. Without it: every live vehicle of every line in one answer, with `"route": null` at the top level (one STPT call, shared by all clients for 10 s, so polling every 10 s is fine).
+`route` is optional. With it: the vehicles of that one line. Without it: every live vehicle of every line in one answer, with `"route": null` at the top level (one STPT call, shared by all clients for 5 s — `stpt.ttl.vehicles`, default `5s` — so polling every 5 s is fine; when STPT does not answer the last cached value comes back with `stale: true`).
 Each vehicle carries its line: `route` is the line id (same as `GET /transit/routes` `id`), `routeName` the name to show (e.g. `"1"`, `"E2"`), `type` and `color` as in `GET /transit/routes`. `type` / `color` are `null` when the line is not in STPT's line list (or that list could not be loaded); `route` / `routeName` are then STPT's own line name, and both are `null` when STPT reports a vehicle without a line. If STPT's line list fails with nothing cached, it is not asked for again for 60 s (vehicles and shapes come back without STPT's type/colour meanwhile).
-Refresh every 10 s on the map.
+Refresh every 5 s on the map; the app animates each vehicle linearly from its previous to its new position over about 4.8 s (like live.stpt.ro), and snaps instead when the previous update is more than 12 s old, the jump is over about 1 km, or the map is being panned / zoomed.
 
 ```json
 {
@@ -515,8 +517,16 @@ Refresh every 10 s on the map.
 
 The drawn path of every line, for map overlays. `route` is optional (only that line; case-insensitive; unknown line gives `[]`).
 `polylines` are Google encoded polylines, precision 5 (decode with `frontend/src/lib/polyline.ts`), one per direction/variant of the line.
-Built from the STPT GTFS file (`shapes.txt`; trips without a shape are drawn through their stops in order). Each `shapes.txt` path is simplified with Douglas-Peucker at 5 m (the bundled feed: 41,729 points down to about 9,700) so the map stays smooth; stop-sequence paths are sent as they are. `type` / `color` come from STPT's line list, or from the GTFS file when that list is down (then express/metropolitan lines show as `BUS`; that GTFS-only answer is reused for 5 minutes, then rebuilt with STPT's line facts). The app draws each line in its own colour from a fixed palette (by line id), not STPT's `color`, since STPT gives every line of a vehicle type the same colour.
-Sorted like `GET /transit/routes`. Kept in memory: it only changes when the GTFS file does. `[]` when the backend has no GTFS file (`infra/otp/get-data.sh`). All lines are about 45 KB (simplified; about 130 KB before), so fetch it once per app session.
+`variants` has one item per polyline (same order, same `polyline` string), describing it:
+
+- `direction`: `"TUR"` (GTFS `direction_id` 0), `"RETUR"` (1), or `null` when the feed gives no direction.
+- `headsign`: where that direction is heading (its terminus): the GTFS `trip_headsign`, or the name of its last stop.
+- `stops`: that direction's stops in order (`{ id, name, lat, lon }`, `id` as in `GET /transit/stops`). Only with `route=`: in the all-lines answer `stops` is `null` to keep it small.
+
+Direction, headsign and stops come from one representative trip per path (the first trip that uses that GTFS shape).
+Built from the STPT GTFS file (`shapes.txt`; trips without a shape are drawn through their stops in order). Each `shapes.txt` path is simplified with Douglas-Peucker at 5 m (the bundled feed: 41,729 points down to about 9,700) so the map stays smooth; stop-sequence paths are sent as they are. `type` / `color` come from STPT's line list, or from the GTFS file when that list is down (then express/metropolitan lines show as `BUS`; that GTFS-only answer is reused for 5 minutes, then rebuilt with STPT's line facts). The app does not use STPT's `color` (STPT gives every line of a type the same colour): each line gets its own shade from its type's hue family (trams yellows, trolleybuses purples, buses teals, express oranges, school reds, metropolitan blues / greens), picked by line id.
+Sorted like `GET /transit/routes`. Kept in memory: it only changes when the GTFS file does. `[]` when the backend has no GTFS file (`infra/otp/get-data.sh`).
+The Map tab asks for one line at a time (`route=`) when the user picks it in the line picker, like live.stpt.ro: one direction is drawn (Tur / Retur toggle) with its stops and that line's vehicles.
 
 ```json
 [
@@ -525,7 +535,16 @@ Sorted like `GET /transit/routes`. Kept in memory: it only changes when the GTFS
     "routeName": "1",
     "type": "TRAM",
     "color": "#e3a900",
-    "polylines": ["_p~iF~ps|U_ulLnnqC", "..."]
+    "polylines": ["_p~iF~ps|U_ulLnnqC", "..."],
+    "variants": [
+      {
+        "polyline": "_p~iF~ps|U_ulLnnqC",
+        "direction": "TUR",
+        "headsign": "Gara de Nord",
+        "stops": [{ "id": "2", "name": "Gara de Nord", "lat": 45.7505, "lon": 21.2075 }]
+      },
+      { "polyline": "...", "direction": "RETUR", "headsign": "Piața Gh. Domășneanu (AEM)", "stops": [] }
+    ]
   }
 ]
 ```
@@ -591,7 +610,7 @@ When no arrival is known (or STPT's arrivals are down) `nextArrival` is `null` a
 
 ---
 
-## Neighbourhoods — PLAN task 23
+## Neighbourhoods — PLAN task 24
 
 ### `GET /neighbourhoods/pulse` — public
 
@@ -698,6 +717,14 @@ Request:
 
 Answer — `reply` is plain text (no markdown) in the user's language (Romanian or English). `places` and `events` are the ones named in `reply`, in the order they appear, for cards and "show on map" (`places[].distanceMeters` is from the user, or from Piața Victoriei when `location` is `null`). `sources` are the pages the quoted prices come from (stored price list, PLAN 11.3). `routes` are the routes the assistant planned for this answer (PLAN 18), one per route, for route cards: `from` / `to` (`lat`, `lon`, `name` — `"Your location"` for the user, otherwise the place or event the tools returned within ~75 m, or `null`), `mode` (`WALK` | `TRANSIT`, what the route really uses), `durationMinutes`, `distanceMeters`, and `startsFromUser`. `startsFromUser` is `true` only when the request carried `location` **and** the route starts there (no start given, or one within ~50 m of the user); it is `false` for a route from another place and always `false` when `location` is `null`. The app shows the **Go** button only when it is `true`. The same route planned twice is listed once. Lists are empty, never `null`.
 
+`cost` is the "about how much" box the app shows under the answer, or `null` when nothing the answer recommends has a stored price. It is built by the backend, never by the model: only stored prices the tools returned for this answer (menu prices from `search_places`, event `price_min` / `price_max` from `search_events`), and only for the places/events in `places` / `events` (the recommended ones). A price that appears only in the model text never makes a box.
+
+- `currency`: always `"RON"` (amounts in lei, rounded to 0.1).
+- `items[]`: one line per recommended place/event with a stored price, in reply order: `label` (place or event name), `detail` (the item, e.g. `"Espresso"`; `"N stored prices"`; or `"Ticket"`), `kind` (`MENU` | `EVENT`; `TICKET` is reserved for stored STPT fares, PLAN 20, and not sent yet), `minLei`, `maxLei`, `averageLei` = (`minLei` + `maxLei`) / 2. A place line uses the stored prices whose item the reply names in that place's part of the reply (from its name to the next recommended name; the whole reply when it is the only recommendation). When it names none, every stored price the tools returned for that place, but only if they are all of one item type (e.g. a PIZZA search); a mixed menu (e.g. water and steak) gives no line, and the place is listed in `note` as unpriced. A place returned by several searches keeps every price the tools returned for it. An event line uses `price_min`..`price_max` (one alone counts as both).
+- Totals: the lines are grouped by kind (places, events). Within a group the user picks one, so it counts with the **mean of its line averages**, its cheapest `minLei` and its dearest `maxLei`; `averageTotalLei`, `minTotalLei`, `maxTotalLei` are the **sums over the groups**. Alternatives of one kind are never summed, and a meal is never averaged with a ticket. Example: two pizzerias (36 and 44 lei) and a concert (100 lei) give ≈ 140 lei, range 136–144.
+- `basis`: `TOTAL` when the answer is one plan (at most one place and at most one event, e.g. "concert, then pizza"; the totals are plain sums of the lines). `OPTIONS` when it offers alternatives (two or more places, or two or more events — the user picks one of each kind). The app labels it "Average total", "Average per option" (one kind) or "Average per plan" (alternatives plus another kind).
+- `note`: short remark (saved prices may have changed; recommendations without a stored price: "Not included (price unknown): …" for `TOTAL`, "No stored price for …" for `OPTIONS`).
+
 ```json
 {
   "reply": "- 5 to go: 127 m away (2 min walk). Espresso about 5 lei. Open until 19:00.\nPrices may have changed.",
@@ -713,10 +740,19 @@ Answer — `reply` is plain text (no markdown) in the user's language (Romanian 
       "distanceMeters": 127,
       "startsFromUser": true
     }
-  ]
+  ],
+  "cost": {
+    "currency": "RON",
+    "basis": "TOTAL",
+    "items": [ { "label": "5 to go", "detail": "Espresso", "kind": "MENU", "minLei": 5.0, "maxLei": 5.0, "averageLei": 5.0 } ],
+    "averageTotalLei": 5.0,
+    "minTotalLei": 5.0,
+    "maxTotalLei": 5.0,
+    "note": "Saved menu prices (often from delivery apps); they may have changed."
+  }
 }
 ```
 
-**Off-topic requests (PLAN 19):** the assistant answers only about Timișoara (places, food and drinks, events, public transport, the city) and directions. Anything else (code, maths/homework, essays, translations, general knowledge, general chat) gets a normal `200` answer whose `reply` is one short sentence, in the user's language, saying what it can help with; `places`, `events` and `sources` (and `routes`, once PLAN 18 adds it) are empty. There is no special error code, so the app shows it like any other answer. A mixed message gets the city part answered and the rest declined in one sentence.
+**Off-topic requests (PLAN 19):** the assistant answers only about Timișoara (places, food and drinks, events, public transport, the city) and directions. Anything else (code, maths/homework, essays, translations, general knowledge, general chat) gets a normal `200` answer whose `reply` is one short sentence, in the user's language, saying what it can help with; `places`, `events`, `sources` and `routes` are empty and `cost` is `null`. There is no special error code, so the app shows it like any other answer. A mixed message gets the city part answered and the rest declined in one sentence.
 
 Takes 2–10 s (the model may call several tools). Errors: `400 VALIDATION_FAILED` (empty `messages`, a `role` other than `user`/`assistant`, a message over 2000 characters, or the last message not from the user) (there is no per-user request limit), `503 AI_UNAVAILABLE` (Gemini down or busy; the message says to try again in a minute).

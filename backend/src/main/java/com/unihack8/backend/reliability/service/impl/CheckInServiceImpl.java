@@ -59,7 +59,8 @@ public class CheckInServiceImpl implements CheckInService {
         return new TicketResponse(eventId, ticket.qrToken(), ticket.status());
     }
 
-    // Validates event, organiser, time and ticket, then marks ATTENDED and adds +5 exactly once.
+    // Validates event, organiser, time and ticket, then marks ATTENDED and adds +5 exactly once
+    // (plus a separately logged +5 volunteer bonus for VOLUNTEER events).
     @Override
     @Transactional
     public CheckInResponse checkIn(UUID eventId, UUID organizer, String token) {
@@ -93,9 +94,14 @@ public class CheckInServiceImpl implements CheckInService {
         }
         int score = participations.changeReliability(ticket.userId(), eventId, ReliabilityRules.ATTENDED_POINTS,
                 ReliabilityRules.ATTENDED_REASON, now);
+        int bonus = ReliabilityRules.checkInBonus(event.category());
+        if (bonus != 0) {
+            score = participations.changeReliability(ticket.userId(), eventId, bonus,
+                    ReliabilityRules.VOLUNTEER_BONUS_REASON, now);
+        }
         Profile profile = profiles.findById(ticket.userId()).orElseThrow(() -> ApiException.notFound("User"));
         return new CheckInResponse(new UserSummary(profile.getId(), profile.getUsername(), score),
-                "ATTENDED", ReliabilityRules.ATTENDED_POINTS);
+                "ATTENDED", ReliabilityRules.ATTENDED_POINTS + bonus);
     }
 
     // The scanned text must be a UUID; anything else is simply not one of our tickets.

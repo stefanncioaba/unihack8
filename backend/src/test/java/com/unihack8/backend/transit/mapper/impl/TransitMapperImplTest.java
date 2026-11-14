@@ -5,12 +5,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.unihack8.backend.common.geo.GeoPoint;
 import com.unihack8.backend.transit.domain.dto.ArrivalDto;
 import com.unihack8.backend.transit.domain.dto.TransitRouteDto;
+import com.unihack8.backend.transit.domain.dto.ShapeStopDto;
+import com.unihack8.backend.transit.domain.dto.ShapeVariantDto;
 import com.unihack8.backend.transit.domain.dto.TransitShapeDto;
 import com.unihack8.backend.transit.domain.dto.VehicleDto;
 import com.unihack8.backend.transit.domain.dto.stpt.StptArrival;
 import com.unihack8.backend.transit.domain.dto.stpt.StptRoute;
 import com.unihack8.backend.transit.domain.dto.stpt.StptVehicle;
 import com.unihack8.backend.transit.domain.model.RouteShape;
+import com.unihack8.backend.transit.domain.model.ShapePath;
+import com.unihack8.backend.transit.domain.model.ShapeStop;
 import java.time.Instant;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -46,6 +50,7 @@ class TransitMapperImplTest {
         assertThat(type("express", "3")).isEqualTo("EXPRESS");
         assertThat(type("metropolitan", "3")).isEqualTo("METROPOLITAN");
         assertThat(type("vaporetto", "4")).isEqualTo("BOAT");
+        assertThat(type("school", "3")).isEqualTo("SCHOOL");
         assertThat(type("urban", "3")).isEqualTo("BUS");
         assertThat(type(null, "0")).isEqualTo("TRAM");
         assertThat(type("other", "11")).isEqualTo("TROLLEYBUS");
@@ -90,7 +95,7 @@ class TransitMapperImplTest {
     @Test
     void shapeWithLine() {
         RouteShape shape = new RouteShape("E2", "3", "ff0000",
-                List.of(List.of(new GeoPoint(38.5, -120.2), new GeoPoint(40.7, -120.95))));
+                List.of(path(List.of(new GeoPoint(38.5, -120.2), new GeoPoint(40.7, -120.95)))));
         TransitShapeDto s = mapper.toShape(shape, new TransitRouteDto("E2", "EXPRESS", "E2", null, null, null));
         assertThat(s.route()).isEqualTo("E2");
         assertThat(s.type()).isEqualTo("EXPRESS");
@@ -102,13 +107,44 @@ class TransitMapperImplTest {
     @Test
     void shapeWithoutLine() {
         RouteShape shape = new RouteShape("1", "0", "e3a900",
-                List.of(List.of(new GeoPoint(45.7, 21.2), new GeoPoint(45.71, 21.21))));
+                List.of(path(List.of(new GeoPoint(45.7, 21.2), new GeoPoint(45.71, 21.21)))));
         TransitShapeDto s = mapper.toShape(shape, null);
         assertThat(s.route()).isEqualTo("1");
         assertThat(s.routeName()).isEqualTo("1");
         assertThat(s.type()).isEqualTo("TRAM");
         assertThat(s.color()).isEqualTo("#e3a900");
         assertThat(s.polylines()).hasSize(1);
+    }
+
+    // Each path becomes a variant with its polyline, TUR/RETUR direction, headsign and ordered stops.
+    @Test
+    void shapeVariants() {
+        List<GeoPoint> there = List.of(new GeoPoint(45.7, 21.2), new GeoPoint(45.71, 21.21));
+        List<GeoPoint> back = List.of(new GeoPoint(45.71, 21.21), new GeoPoint(45.7, 21.2));
+        RouteShape shape = new RouteShape("1", "0", null, List.of(
+                new ShapePath(there, 0, "Gara de Nord", List.of(new ShapeStop("1", "A", 45.7, 21.2),
+                        new ShapeStop("2", "Gara de Nord", 45.71, 21.21))),
+                new ShapePath(back, 1, "A", List.of()),
+                new ShapePath(there, null, null, null)));
+        TransitShapeDto s = mapper.toShape(shape, null);
+        assertThat(s.variants()).hasSize(3);
+        assertThat(s.variants()).extracting(ShapeVariantDto::polyline).containsExactlyElementsOf(s.polylines());
+        assertThat(s.variants()).extracting(ShapeVariantDto::direction).containsExactly("TUR", "RETUR", null);
+        assertThat(s.variants().get(0).headsign()).isEqualTo("Gara de Nord");
+        assertThat(s.variants().get(0).stops()).containsExactly(new ShapeStopDto("1", "A", 45.7, 21.2),
+                new ShapeStopDto("2", "Gara de Nord", 45.71, 21.21));
+        assertThat(s.variants().get(2).stops()).isEmpty();
+
+        TransitShapeDto light = mapper.withoutStops(s);
+        assertThat(light.polylines()).isEqualTo(s.polylines());
+        assertThat(light.variants()).allSatisfy(v -> assertThat(v.stops()).isNull());
+        assertThat(light.variants()).extracting(ShapeVariantDto::headsign).containsExactly("Gara de Nord", "A", null);
+        assertThat(TransitMapperImpl.direction(2)).isNull();
+    }
+
+    // A path with no direction, headsign or stops.
+    private static ShapePath path(List<GeoPoint> points) {
+        return new ShapePath(points, null, null, List.of());
     }
 
     // Times are Romanian local time (UTC+2 in November), duplicates removed, only the first is live.

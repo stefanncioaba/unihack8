@@ -77,7 +77,7 @@ export default function ProfileScreen() {
           <MyEvents />
 
           <Text variant="heading" accessibilityRole="header">
-            Reliability history
+            Civic trust history
           </Text>
           <ReliabilityLog userId={me.data.id} />
         </View>

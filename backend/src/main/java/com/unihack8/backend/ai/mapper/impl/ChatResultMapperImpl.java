@@ -5,6 +5,7 @@ import com.unihack8.backend.ai.domain.dto.ChatResponse;
 import com.unihack8.backend.ai.domain.dto.ChatRouteDto;
 import com.unihack8.backend.ai.domain.dto.RoutePointDto;
 import com.unihack8.backend.ai.domain.dto.SourceDto;
+import com.unihack8.backend.ai.mapper.ChatCostMapper;
 import com.unihack8.backend.ai.mapper.ChatResultMapper;
 import com.unihack8.backend.common.geo.GeoPoint;
 import com.unihack8.backend.common.text.TextMatch;
@@ -21,6 +22,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -40,7 +42,20 @@ public class ChatResultMapperImpl implements ChatResultMapper {
     // Names shorter than this are too likely to be ordinary words ("Opera", "Cafea" are 5, so allowed).
     private static final int MIN_PLAIN_NAME_LENGTH = 4;
 
-    // Picks the mentioned items in reply order and collects their price sources.
+    private final ChatCostMapper costMapper;
+
+    // Uses the default cost mapper (for tests and code outside Spring).
+    public ChatResultMapperImpl() {
+        this(new ChatCostMapperImpl());
+    }
+
+    // Spring constructor: the cost box builder.
+    @Autowired
+    public ChatResultMapperImpl(ChatCostMapper costMapper) {
+        this.costMapper = costMapper;
+    }
+
+    // Picks the mentioned items in reply order, collects their price sources and builds the cost box.
     @Override
     public ChatResponse toResponse(String modelReply, ToolContext context) {
         String reply = modelReply == null ? "" : modelReply.trim();
@@ -70,10 +85,14 @@ public class ChatResultMapperImpl implements ChatResultMapper {
             }
         }
 
-        List<ToolContext.FoundPlace> mentionedPlaces = sorted(places.values());
+        List<Mention<ToolContext.FoundPlace>> placeMentions = sorted(places.values());
+        List<Mention<EventSummary>> eventMentions = sorted(events.values());
+        List<ToolContext.FoundPlace> mentionedPlaces = placeMentions.stream().map(Mention::item).toList();
         List<PlaceSummaryDto> placeCards = mentionedPlaces.stream().map(ToolContext.FoundPlace::place).toList();
-        List<EventSummary> eventCards = sorted(events.values());
-        return new ChatResponse(plainReply, placeCards, eventCards, sources(mentionedPlaces), routes(context));
+        List<EventSummary> eventCards = eventMentions.stream().map(Mention::item).toList();
+        return new ChatResponse(plainReply, placeCards, eventCards, sources(mentionedPlaces), routes(context),
+                costMapper.toCost(plainReply, mentionedPlaces, positions(placeMentions), eventCards,
+                        positions(eventMentions)));
     }
 
     /**
@@ -162,9 +181,14 @@ public class ChatResultMapperImpl implements ChatResultMapper {
         return Integer.MAX_VALUE;
     }
 
-    // Items in the order they appear in the reply.
-    private static <T> List<T> sorted(java.util.Collection<Mention<T>> mentions) {
-        return mentions.stream().sorted(Comparator.comparingInt(Mention::position)).map(Mention::item).toList();
+    // Mentions in the order they appear in the reply.
+    private static <T> List<Mention<T>> sorted(java.util.Collection<Mention<T>> mentions) {
+        return mentions.stream().sorted(Comparator.comparingInt(Mention::position)).toList();
+    }
+
+    // Where each mention is in the normalized reply (same order as the list).
+    private static <T> List<Integer> positions(List<Mention<T>> mentions) {
+        return mentions.stream().map(Mention::position).toList();
     }
 
     // Distinct price source pages of the mentioned places (max 5).

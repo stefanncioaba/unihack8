@@ -48,7 +48,7 @@ export function ReliabilityLine({ score }: { score: number }) {
   return (
     <View testID="reliability-line" style={styles.card}>
       <View style={styles.head}>
-        <Text variant="cardTitle">Reliability</Text>
+        <Text variant="cardTitle">Civic trust score</Text>
         <Text variant="caption" tone="muted">
           {nextStopLabel(score)}
         </Text>
@@ -71,7 +71,7 @@ export function ReliabilityLine({ score }: { score: number }) {
             <RoutePlate label={score.toLocaleString('en')} size="md" style={styles.plate} />
           </View>
         )}
-        <Text style={styles.hidden} accessibilityLabel={`Reliability score ${score}`}>
+        <Text style={styles.hidden} accessibilityLabel={`Civic trust score ${score}`}>
           {score}
         </Text>
       </View>

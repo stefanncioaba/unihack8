@@ -51,7 +51,7 @@ export default function TicketScreen() {
             </View>
           )}
           <Text variant="caption" tone="muted" style={styles.center}>
-            Show this code to the organiser when you arrive. Attending earns reliability points; missing the event costs them.
+            Show this code to the organiser when you arrive. Attending earns civic trust points; missing the event costs them.
           </Text>
         </View>
       )}

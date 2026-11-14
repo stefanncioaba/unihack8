@@ -1,14 +1,20 @@
 // Map tab layer filters as a small pure reducer: places (with optional categories), events and transport.
 // Rule: at least one layer stays visible, so the map is never empty by accident.
+// Transport is exclusive (the live network is heavy): turning it on hides places and events and remembers them,
+// turning it off brings exactly those filters back.
 import type { PlaceCategory } from '@/api/types.places';
 
-export type MapFilters = {
-  /** Place pins are loaded and drawn. */
+/** The non-transport part of the filters, remembered while Transport is on. */
+export type NonTransportFilters = {
   placesOn: boolean;
-  /** Chosen place categories; empty means every category ("All places"). */
   categories: PlaceCategory[];
   eventsOn: boolean;
+};
+
+export type MapFilters = NonTransportFilters & {
   transitOn: boolean;
+  /** What places / categories / events were before Transport was turned on; restored when it turns off. */
+  beforeTransport?: NonTransportFilters;
 };
 
 export type MapFilterAction =
@@ -40,13 +46,27 @@ function keepOneLayer(f: MapFilters): MapFilters {
   return anyLayerOn(f) ? f : { ...f, placesOn: true, categories: [] };
 }
 
-/** Applies one chip press to the filters. */
+/** Transport on: remember the other filters and turn them all off. */
+function transportOn(f: MapFilters): MapFilters {
+  const beforeTransport = { placesOn: f.placesOn, categories: f.categories, eventsOn: f.eventsOn };
+  return { placesOn: false, categories: [], eventsOn: false, transitOn: true, beforeTransport };
+}
+
+/** Transport off: restore the remembered filters exactly (all places if nothing would be visible). */
+function transportOff(f: MapFilters): MapFilters {
+  const prev = f.beforeTransport ?? { placesOn: f.placesOn, categories: f.categories, eventsOn: f.eventsOn };
+  return keepOneLayer({ placesOn: prev.placesOn, categories: prev.categories, eventsOn: prev.eventsOn, transitOn: false });
+}
+
+/** Applies one chip press to the filters. While Transport is on, only the Transport chip does anything. */
 export function mapFiltersReducer(f: MapFilters, action: MapFilterAction): MapFilters {
+  if (action.type === 'transport') return f.transitOn ? transportOff(f) : transportOn(f);
+  if (f.transitOn) return f; // the other chips are disabled while Transport is on
   switch (action.type) {
     case 'allPlaces':
       if (!allPlacesSelected(f)) return { ...f, placesOn: true, categories: [] };
       // Turning places off is only allowed while another layer is still visible.
-      return f.eventsOn || f.transitOn ? { ...f, placesOn: false } : f;
+      return f.eventsOn ? { ...f, placesOn: false } : f;
     case 'category': {
       const c = action.category;
       if (!f.placesOn) return { ...f, placesOn: true, categories: [c] };
@@ -55,8 +75,6 @@ export function mapFiltersReducer(f: MapFilters, action: MapFilterAction): MapFi
     }
     case 'events':
       return keepOneLayer({ ...f, eventsOn: !f.eventsOn });
-    case 'transport':
-      return keepOneLayer({ ...f, transitOn: !f.transitOn });
     default:
       return f;
   }

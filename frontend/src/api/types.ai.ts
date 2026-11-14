@@ -31,6 +31,33 @@ export type ChatRoute = {
   startsFromUser: boolean;
 };
 
+/** One priced line of the cost box: a recommended place (stored menu prices) or event (ticket price range). */
+export type ChatCostItem = {
+  label: string;
+  /** What the price is for: the item ("Espresso"), "N stored prices", or "Ticket". */
+  detail: string;
+  /** TICKET is reserved for stored STPT fares (PLAN 20) and not sent yet. */
+  kind: 'MENU' | 'EVENT' | 'TICKET';
+  minLei: number;
+  maxLei: number;
+  /** (minLei + maxLei) / 2. */
+  averageLei: number;
+};
+
+/**
+ * Average cost of what the answer recommends, from stored prices only (never the model's text).
+ * TOTAL: one plan, totals are sums. OPTIONS: alternatives, the average is across the options.
+ */
+export type ChatCost = {
+  currency: 'RON';
+  basis: 'TOTAL' | 'OPTIONS';
+  items: ChatCostItem[];
+  averageTotalLei: number;
+  minTotalLei: number;
+  maxTotalLei: number;
+  note: string;
+};
+
 export type ChatAnswer = {
   reply: string;
   /** Places and events mentioned in `reply`, for result cards and "show on map". */
@@ -39,6 +66,8 @@ export type ChatAnswer = {
   sources: ChatSource[];
   /** Routes planned for the answer, for route cards (empty, never null). */
   routes: ChatRoute[];
+  /** The cost box; null when nothing recommended has a stored price. Optional for older backends. */
+  cost?: ChatCost | null;
 };
 
 /** The backend accepts at most this many messages per request. */

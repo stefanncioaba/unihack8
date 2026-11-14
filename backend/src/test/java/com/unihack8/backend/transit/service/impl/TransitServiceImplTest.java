@@ -20,6 +20,7 @@ import com.unihack8.backend.transit.domain.dto.ArrivalsResponse;
 import com.unihack8.backend.transit.domain.dto.LastDepartureDto;
 import com.unihack8.backend.transit.domain.dto.LastDeparturesResponse;
 import com.unihack8.backend.transit.domain.dto.TransitRouteDto;
+import com.unihack8.backend.transit.domain.dto.ShapeStopDto;
 import com.unihack8.backend.transit.domain.dto.TransitShapeDto;
 import com.unihack8.backend.transit.domain.dto.VehicleDto;
 import com.unihack8.backend.transit.domain.dto.TransitSummaryResponse;
@@ -30,6 +31,8 @@ import com.unihack8.backend.transit.domain.dto.stpt.StptRoute;
 import com.unihack8.backend.transit.domain.dto.stpt.StptStop;
 import com.unihack8.backend.transit.domain.dto.stpt.StptVehicle;
 import com.unihack8.backend.transit.domain.model.RouteShape;
+import com.unihack8.backend.transit.domain.model.ShapePath;
+import com.unihack8.backend.transit.domain.model.ShapeStop;
 import com.unihack8.backend.transit.domain.model.ScheduledDeparture;
 import com.unihack8.backend.transit.mapper.impl.TransitMapperImpl;
 import com.unihack8.backend.transit.repository.ShapeRepository;
@@ -225,6 +228,22 @@ class TransitServiceImplTest {
         assertThat(service.shapes("nope")).isEmpty();
     }
 
+    // The all-lines answer leaves the stops out (small); one line comes with each direction's stops.
+    @Test
+    void shapeStopsOnlyForOneLine() {
+        when(shapeRepository.shapes()).thenReturn(List.of(shape("2", "0", "e3a900"), shape("13", "3", null)));
+
+        List<TransitShapeDto> all = service.shapes(null);
+        assertThat(all).allSatisfy(s -> assertThat(s.variants()).singleElement().satisfies(v -> {
+            assertThat(v.stops()).isNull();
+            assertThat(v.direction()).isEqualTo("TUR");
+            assertThat(v.headsign()).isEqualTo("B");
+        }));
+        assertThat(service.shapes(null)).isSameAs(all); // stripped once per build
+        assertThat(service.shapes("2")).singleElement().satisfies(s -> assertThat(s.variants()).singleElement()
+                .satisfies(v -> assertThat(v.stops()).extracting(ShapeStopDto::name).containsExactly("A", "B")));
+    }
+
     // Shapes are built once and kept in memory.
     @Test
     void shapesCached() {
@@ -313,8 +332,9 @@ class TransitServiceImplTest {
 
     // A two-point shape for a line.
     private static RouteShape shape(String name, String type, String color) {
-        return new RouteShape(name, type, color,
-                List.of(List.of(new GeoPoint(45.70, 21.20), new GeoPoint(45.71, 21.21))));
+        return new RouteShape(name, type, color, List.of(new ShapePath(
+                List.of(new GeoPoint(45.70, 21.20), new GeoPoint(45.71, 21.21)), 0, "B",
+                List.of(new ShapeStop("1", "A", 45.70, 21.20), new ShapeStop("2", "B", 45.71, 21.21)))));
     }
 
     // Arrivals from all lines are merged and sorted, duplicates dropped, stop name filled in.

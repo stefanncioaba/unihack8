@@ -13,8 +13,12 @@ export const CATEGORY_META: Record<EventCategory, CategoryMeta> = {
   FOOD: { label: 'Food', icon: 'restaurant-outline', colors: ['#6B5200', '#000814'] },
   ART: { label: 'Art', icon: 'color-palette-outline', colors: ['#0B467F', '#5C4400'] },
   MEETUP: { label: 'Meetup', icon: 'people-outline', colors: ['#003566', '#00284D'] },
+  VOLUNTEER: { label: 'Volunteer', icon: 'leaf-outline', colors: ['#1B5E20', '#001D3D'] },
   OTHER: { label: 'Other', icon: 'calendar-outline', colors: ['#00284D', '#000814'] },
 };
+
+/** Extra civic trust points for checking in at a volunteer action (backend ReliabilityRules). */
+export const VOLUNTEER_BONUS = 5;
 
 /** Meta for a category, tolerating unknown values from newer backends. */
 export function categoryMeta(category: string): CategoryMeta {

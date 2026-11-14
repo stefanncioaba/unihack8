@@ -23,9 +23,10 @@ public record StptProperties(
         @DefaultValue Ttl ttl,
         @DefaultValue("../infra/otp/stpt-gtfs.zip") String gtfsPath) {
 
-    /** Cache lifetimes from PLAN 9.1: vehicles 10 s, arrivals 20 s, alerts 5 min, stops/routes 24 h. */
+    /** Cache lifetimes: vehicles 5 s (the map polls every 5 s and animates between positions, like live.stpt.ro),
+     * arrivals 20 s, alerts 5 min, stops/routes 24 h. */
     public record Ttl(
-            @DefaultValue("10s") Duration vehicles,
+            @DefaultValue("5s") Duration vehicles,
             @DefaultValue("20s") Duration arrivals,
             @DefaultValue("5m") Duration alerts,
             @DefaultValue("24h") Duration staticData) {

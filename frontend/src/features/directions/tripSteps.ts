@@ -1,6 +1,6 @@
 // Trip guidance on the map: turns a route plan's legs into the markers drawn along it ("Board Tram 1 → … · 18:08" at
 // the boarding stop, "Get off at …" at the last stop of a ride, "Walk 4 min" halfway along each walk). Pure, so it is
-// unit-tested directly; TripMarkers draws the result.
+// unit-tested directly; TripMarkers draws the board / get-off steps (walk steps are kept for callers but not drawn).
 import type { LegMode, RouteLeg } from '@/api/types.routing';
 import type { TransitRoute } from '@/api/types.transit';
 import { legPoints } from '@/features/journey/progress';

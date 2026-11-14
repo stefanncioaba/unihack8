@@ -12,7 +12,8 @@ import java.util.List;
  * @param events  events named in the reply, in the order they appear
  * @param sources pages the quoted prices came from
  * @param routes  routes plan_route planned for this answer, for route cards and the "Go" button
+ * @param cost    average cost of what the answer recommends, from stored prices only; null when none applies
  */
 public record ChatResponse(String reply, List<PlaceSummaryDto> places, List<EventSummary> events,
-                           List<SourceDto> sources, List<ChatRouteDto> routes) {
+                           List<SourceDto> sources, List<ChatRouteDto> routes, ChatCostDto cost) {
 }

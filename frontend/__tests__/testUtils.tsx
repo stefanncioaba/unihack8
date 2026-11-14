@@ -45,6 +45,7 @@ export function renderScreen(ui: ReactElement, auth: AuthState = fakeAuth()) {
 export const IDS = {
   boardGames: 'e0000000-0000-4000-8000-000000000001', // organised by stefan, 4 spots left
   sunsetRun: 'e0000000-0000-4000-8000-000000000002', // organised by the mock user
+  riverCleanup: 'e0000000-0000-4000-8000-000000000015', // VOLUNTEER event
   picnic: 'e0000000-0000-4000-8000-000000000003', // full
   indieRock: 'e0000000-0000-4000-8000-000000000004', // external
   artWalk: 'e0000000-0000-4000-8000-000000000007', // the mock user already joined

@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.unihack8.backend.common.geo.GeoPoint;
 import com.unihack8.backend.transit.domain.model.RouteShape;
+import com.unihack8.backend.transit.domain.model.ShapePath;
+import com.unihack8.backend.transit.domain.model.ShapeStop;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
@@ -98,7 +100,7 @@ class GtfsShapeRepositoryTest {
             assertThat(s.routeName()).isEqualTo("1");
             assertThat(s.routeType()).isEqualTo("0");
             assertThat(s.color()).isEqualTo("e3a900");
-            assertThat(s.paths()).containsExactly(
+            assertThat(s.points()).containsExactly(
                     List.of(new GeoPoint(45.70, 21.20), new GeoPoint(45.705, 21.21), new GeoPoint(45.72, 21.22)),
                     List.of(new GeoPoint(45.72, 21.22), new GeoPoint(45.71, 21.21)));
         });
@@ -120,9 +122,9 @@ class GtfsShapeRepositoryTest {
 
         List<RouteShape> shapes = new GtfsShapeRepository(zip).shapes();
 
-        assertThat(shapes.get(0).paths()).singleElement().satisfies(p -> assertThat(p).hasSize(2));
+        assertThat(shapes.get(0).points()).singleElement().satisfies(p -> assertThat(p).hasSize(2));
         // 5b falls back to its 3 collinear stops: all kept.
-        assertThat(shapes.get(1).paths()).singleElement().satisfies(p -> assertThat(p).hasSize(3));
+        assertThat(shapes.get(1).points()).singleElement().satisfies(p -> assertThat(p).hasSize(3));
     }
 
     // Without shapes.txt every line is drawn through its trips' stops in stop_sequence order.
@@ -138,10 +140,10 @@ class GtfsShapeRepositoryTest {
         List<RouteShape> shapes = new GtfsShapeRepository(zip).shapes();
 
         assertThat(shapes).extracting(RouteShape::routeName).containsExactly("1", "5b");
-        assertThat(shapes.get(0).paths()).containsExactly(
+        assertThat(shapes.get(0).points()).containsExactly(
                 List.of(new GeoPoint(45.70, 21.20), new GeoPoint(45.71, 21.21), new GeoPoint(45.72, 21.22)));
         // t3 and t4 follow the same stops: one path; no colour in routes.txt stays null.
-        assertThat(shapes.get(1).paths()).containsExactly(
+        assertThat(shapes.get(1).points()).containsExactly(
                 List.of(new GeoPoint(45.72, 21.22), new GeoPoint(45.71, 21.21), new GeoPoint(45.70, 21.20)));
         assertThat(shapes.get(1).color()).isNull();
     }
@@ -162,8 +164,46 @@ class GtfsShapeRepositoryTest {
         List<RouteShape> shapes = new GtfsShapeRepository(zip).shapes();
 
         assertThat(shapes).extracting(RouteShape::routeName).containsExactly("1", "5b");
-        assertThat(shapes.get(0).paths()).singleElement().satisfies(p -> assertThat(p).hasSize(2));
-        assertThat(shapes.get(1).paths()).singleElement().satisfies(p -> assertThat(p).hasSize(3));
+        assertThat(shapes.get(0).points()).singleElement().satisfies(p -> assertThat(p).hasSize(2));
+        assertThat(shapes.get(1).points()).singleElement().satisfies(p -> assertThat(p).hasSize(3));
+    }
+
+    // Each path carries its representative trip's direction_id, headsign and ordered stops (from stop_times).
+    @Test
+    void directionsHeadsignsAndStops() throws IOException {
+        Path zip = zip(files("""
+                route_id,service_id,trip_id,trip_headsign,direction_id,shape_id
+                R_TV_1,WD,t1,C,0,1_T
+                R_TV_1,WD,t2,Other,0,1_T
+                R_TV_1,WD,t3,,1,1_R
+                R_AB_5B,WD,t4,,,
+                """, """
+                shape_id,shape_pt_lat,shape_pt_lon,shape_pt_sequence
+                1_T,45.70,21.20,1
+                1_T,45.72,21.22,2
+                1_R,45.72,21.22,1
+                1_R,45.70,21.20,2
+                """));
+
+        List<RouteShape> shapes = new GtfsShapeRepository(zip).shapes();
+
+        RouteShape one = shapes.get(0);
+        assertThat(one.paths()).hasSize(2);
+        ShapePath tur = one.paths().get(0);
+        assertThat(tur.directionId()).isEqualTo(0);
+        assertThat(tur.headsign()).isEqualTo("C"); // first trip of the shape (t1), not t2
+        assertThat(tur.stops()).extracting(ShapeStop::id).containsExactly("1", "2", "3");
+        assertThat(tur.stops().get(1)).isEqualTo(new ShapeStop("2", "B", 45.71, 21.21));
+        ShapePath retur = one.paths().get(1);
+        assertThat(retur.directionId()).isEqualTo(1);
+        assertThat(retur.headsign()).isEqualTo("A"); // no trip_headsign: the last stop's name (t3 ends at stop 1)
+        assertThat(retur.stops()).extracting(ShapeStop::id).containsExactly("3", "2", "1");
+        // A stop-sequence path: no direction in the feed, headsign from its last stop.
+        assertThat(shapes.get(1).paths()).singleElement().satisfies(p -> {
+            assertThat(p.directionId()).isNull();
+            assertThat(p.headsign()).isEqualTo("A");
+            assertThat(p.stops()).hasSize(3);
+        });
     }
 
     // No file: empty list, nothing thrown, and the answer is remembered.
@@ -183,10 +223,10 @@ class GtfsShapeRepositoryTest {
         assertThat(shapes).isNotEmpty();
         assertThat(shapes).anySatisfy(s -> {
             assertThat(s.routeName()).isEqualTo("1");
-            assertThat(s.paths()).isNotEmpty();
+            assertThat(s.points()).isNotEmpty();
         });
         // shapes.txt has 41,729 points; simplified, the app draws well under a third of them (about 9,700).
-        int points = shapes.stream().flatMap(s -> s.paths().stream()).mapToInt(List::size).sum();
+        int points = shapes.stream().flatMap(s -> s.points().stream()).mapToInt(List::size).sum();
         assertThat(points).isLessThan(14_000);
     }
 }
