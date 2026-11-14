@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "a8e1a2ef9825693ec7f405d98e4a0d2e8c73a769",
-  "generatedAt": "2026-11-14T16:28:50.513Z",
+  "gitCommitHash": "b18a60d12be1446577bf63c8135e7eef8a014294",
+  "generatedAt": "2026-11-14T16:33:11.969Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,17 +25,17 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "bc853e221d80a09b80f20592add121314d7bdd5784e5337220e10750dd24536f",
+      "contentHash": "15c317d51b94ef18b0cab236ed4c2be8af871e16286c2d79e67cf5181c9837e6",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 629,
+      "totalLines": 643,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "9cf29c6bb8be8c23321942611a755db771a97025e2fa19fac80cf400e07987aa",
+      "contentHash": "c9dd5f9b5099f5388b94d0cb2a9be93e05f87d856cf99f0ea02a763809490d31",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -433,7 +433,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/config/AiProperties.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/config/AiProperties.java",
-      "contentHash": "1395083429e6f85838a5811b6e437c5256d79552cb834568522d29e2820d47b1",
+      "contentHash": "434dd8931ed5520bc74b255567358251bfca62a3ba0b471640fc7a15d7272688",
       "functions": [],
       "classes": [
         {
@@ -441,7 +441,7 @@
           "methods": [],
           "properties": [],
           "exported": true,
-          "lineCount": 8
+          "lineCount": 7
         }
       ],
       "imports": [
@@ -467,7 +467,7 @@
       "exports": [
         "AiProperties"
       ],
-      "totalLines": 24,
+      "totalLines": 22,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/ai/config/GeminiClientConfig.java": {
@@ -2038,7 +2038,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/service/AiChatService.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/service/AiChatService.java",
-      "contentHash": "ddb848b41a0159a6baa290fd3172ef7b48607099e74a182861a22ab0e148e31a",
+      "contentHash": "78bdd03d2e3b8aa4632ebe96aecfb1b01a79346df75202f9276b2ccc2c05410b",
       "functions": [],
       "classes": [
         {
@@ -2077,38 +2077,9 @@
       "totalLines": 13,
       "hasStructuralAnalysis": true
     },
-    "backend/src/main/java/com/unihack8/backend/ai/service/ChatRateLimiter.java": {
-      "filePath": "backend/src/main/java/com/unihack8/backend/ai/service/ChatRateLimiter.java",
-      "contentHash": "803c3509932d02f144027086d26226397f26c747c6cb9325de6e9f2356fcbf96",
-      "functions": [],
-      "classes": [
-        {
-          "name": "ChatRateLimiter",
-          "methods": [
-            "acquire"
-          ],
-          "properties": [],
-          "exported": true,
-          "lineCount": 5
-        }
-      ],
-      "imports": [
-        {
-          "source": "java.util.UUID",
-          "specifiers": [
-            "UUID"
-          ]
-        }
-      ],
-      "exports": [
-        "ChatRateLimiter"
-      ],
-      "totalLines": 11,
-      "hasStructuralAnalysis": true
-    },
     "backend/src/main/java/com/unihack8/backend/ai/service/impl/AiChatServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/service/impl/AiChatServiceImpl.java",
-      "contentHash": "d2a7ed15678614453692c84106a4f249d38873402e2c017507335e1374dd5ea1",
+      "contentHash": "db7420b7404cc6be287356edd3d0e57c15310614ac99bae51b59dda86c7f31e1",
       "functions": [
         {
           "name": "AiChatServiceImpl",
@@ -2116,13 +2087,12 @@
             "gemini",
             "geminiProperties",
             "aiProperties",
-            "rateLimiter",
             "resultMapper",
             "tools",
             "clock"
           ],
           "exported": true,
-          "lineCount": 6
+          "lineCount": 5
         },
         {
           "name": "AiChatServiceImpl",
@@ -2130,14 +2100,13 @@
             "gemini",
             "geminiProperties",
             "aiProperties",
-            "rateLimiter",
             "resultMapper",
             "tools",
             "clock",
             "sleeper"
           ],
           "exported": true,
-          "lineCount": 13
+          "lineCount": 11
         },
         {
           "name": "chat",
@@ -2147,7 +2116,7 @@
           ],
           "returnType": "ChatResponse",
           "exported": true,
-          "lineCount": 33
+          "lineCount": 32
         },
         {
           "name": "toContents",
@@ -2196,14 +2165,13 @@
             "gemini",
             "geminiProperties",
             "aiProperties",
-            "rateLimiter",
             "resultMapper",
             "tools",
             "clock",
             "sleeper"
           ],
           "exported": true,
-          "lineCount": 207
+          "lineCount": 202
         }
       ],
       "imports": [
@@ -2301,12 +2269,6 @@
           "source": "com.unihack8.backend.ai.service.AiChatService",
           "specifiers": [
             "AiChatService"
-          ]
-        },
-        {
-          "source": "com.unihack8.backend.ai.service.ChatRateLimiter",
-          "specifiers": [
-            "ChatRateLimiter"
           ]
         },
         {
@@ -2465,135 +2427,7 @@
         "chat",
         "AiChatServiceImpl"
       ],
-      "totalLines": 258,
-      "hasStructuralAnalysis": true
-    },
-    "backend/src/main/java/com/unihack8/backend/ai/service/impl/InMemoryChatRateLimiter.java": {
-      "filePath": "backend/src/main/java/com/unihack8/backend/ai/service/impl/InMemoryChatRateLimiter.java",
-      "contentHash": "3261863d60c9c43b18f70955423b40fffb22f07e09303bd1ce7cbe22ec1b6f0b",
-      "functions": [
-        {
-          "name": "InMemoryChatRateLimiter",
-          "params": [
-            "properties",
-            "clock"
-          ],
-          "exported": true,
-          "lineCount": 4
-        },
-        {
-          "name": "acquire",
-          "params": [
-            "userId"
-          ],
-          "returnType": "void",
-          "exported": true,
-          "lineCount": 14
-        }
-      ],
-      "classes": [
-        {
-          "name": "InMemoryChatRateLimiter",
-          "methods": [
-            "InMemoryChatRateLimiter",
-            "acquire"
-          ],
-          "properties": [
-            "WINDOW",
-            "requests",
-            "properties",
-            "clock"
-          ],
-          "exported": true,
-          "lineCount": 31
-        }
-      ],
-      "imports": [
-        {
-          "source": "com.unihack8.backend.ai.config.AiProperties",
-          "specifiers": [
-            "AiProperties"
-          ]
-        },
-        {
-          "source": "com.unihack8.backend.ai.service.ChatRateLimiter",
-          "specifiers": [
-            "ChatRateLimiter"
-          ]
-        },
-        {
-          "source": "com.unihack8.backend.common.exception.ApiException",
-          "specifiers": [
-            "ApiException"
-          ]
-        },
-        {
-          "source": "com.unihack8.backend.common.exception.ErrorCode",
-          "specifiers": [
-            "ErrorCode"
-          ]
-        },
-        {
-          "source": "java.time.Clock",
-          "specifiers": [
-            "Clock"
-          ]
-        },
-        {
-          "source": "java.time.Duration",
-          "specifiers": [
-            "Duration"
-          ]
-        },
-        {
-          "source": "java.time.Instant",
-          "specifiers": [
-            "Instant"
-          ]
-        },
-        {
-          "source": "java.util.ArrayDeque",
-          "specifiers": [
-            "ArrayDeque"
-          ]
-        },
-        {
-          "source": "java.util.Deque",
-          "specifiers": [
-            "Deque"
-          ]
-        },
-        {
-          "source": "java.util.Map",
-          "specifiers": [
-            "Map"
-          ]
-        },
-        {
-          "source": "java.util.UUID",
-          "specifiers": [
-            "UUID"
-          ]
-        },
-        {
-          "source": "java.util.concurrent.ConcurrentHashMap",
-          "specifiers": [
-            "ConcurrentHashMap"
-          ]
-        },
-        {
-          "source": "org.springframework.stereotype.Component",
-          "specifiers": [
-            "Component"
-          ]
-        }
-      ],
-      "exports": [
-        "InMemoryChatRateLimiter",
-        "acquire",
-        "InMemoryChatRateLimiter"
-      ],
-      "totalLines": 52,
+      "totalLines": 252,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java": {
@@ -20868,12 +20702,12 @@
     },
     "backend/src/main/resources/application-local.properties.example": {
       "filePath": "backend/src/main/resources/application-local.properties.example",
-      "contentHash": "77a049664de1608a5dd1382815a4a41513f7bc14728c794f3836fc5e9b91b82e",
+      "contentHash": "3a3159df514e793ba468822c30de77d6b7451e63b19ea0c101c91145d46e2f1a",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 34,
+      "totalLines": 33,
       "hasStructuralAnalysis": false
     },
     "backend/src/main/resources/application.properties": {
@@ -21951,14 +21785,14 @@
     },
     "backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
-      "contentHash": "645d322f125ffe6e92a72b39a61ece1febba4edae4c3fee35d416022252784ec",
+      "contentHash": "eb044f86dbf6a6393978fcd6b26978847c8653180a3cb26229b986e287287b73",
       "functions": [
         {
           "name": "toolCallLoop",
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 30
+          "lineCount": 29
         },
         {
           "name": "plannedRoutesInTheAnswer",
@@ -22068,7 +21902,7 @@
           ],
           "returnType": "AiChatServiceImpl",
           "exported": false,
-          "lineCount": 8
+          "lineCount": 7
         },
         {
           "name": "request",
@@ -22126,11 +21960,10 @@
             "PLACE_ID",
             "gemini",
             "sleeps",
-            "rateLimitCalls",
             "tool"
           ],
           "exported": false,
-          "lineCount": 322
+          "lineCount": 319
         }
       ],
       "imports": [
@@ -22255,12 +22088,6 @@
           ]
         },
         {
-          "source": "com.unihack8.backend.ai.service.ChatRateLimiter",
-          "specifiers": [
-            "ChatRateLimiter"
-          ]
-        },
-        {
           "source": "com.unihack8.backend.ai.tool.AiTool",
           "specifiers": [
             "AiTool"
@@ -22369,12 +22196,6 @@
           ]
         },
         {
-          "source": "java.util.concurrent.atomic.AtomicInteger",
-          "specifiers": [
-            "AtomicInteger"
-          ]
-        },
-        {
           "source": "java.util.function.Supplier",
           "specifiers": [
             "Supplier"
@@ -22388,112 +22209,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 370,
-      "hasStructuralAnalysis": true
-    },
-    "backend/src/test/java/com/unihack8/backend/ai/service/impl/InMemoryChatRateLimiterTest.java": {
-      "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/InMemoryChatRateLimiterTest.java",
-      "contentHash": "65b6c86bf197ff9609ea345277956160d796d2ecdfce8af551a58e2de23b0490",
-      "functions": [
-        {
-          "name": "slidingMinuteWindow",
-          "params": [],
-          "returnType": "void",
-          "exported": false,
-          "lineCount": 13
-        },
-        {
-          "name": "perUser",
-          "params": [],
-          "returnType": "void",
-          "exported": false,
-          "lineCount": 8
-        }
-      ],
-      "classes": [
-        {
-          "name": "InMemoryChatRateLimiterTest",
-          "methods": [
-            "slidingMinuteWindow",
-            "perUser"
-          ],
-          "properties": [
-            "clock",
-            "limiter"
-          ],
-          "exported": false,
-          "lineCount": 31
-        }
-      ],
-      "imports": [
-        {
-          "source": "org.assertj.core.api.Assertions.assertThatCode",
-          "specifiers": [
-            "assertThatCode"
-          ]
-        },
-        {
-          "source": "org.assertj.core.api.Assertions.assertThatThrownBy",
-          "specifiers": [
-            "assertThatThrownBy"
-          ]
-        },
-        {
-          "source": "com.unihack8.backend.ai.config.AiProperties",
-          "specifiers": [
-            "AiProperties"
-          ]
-        },
-        {
-          "source": "com.unihack8.backend.common.exception.ApiException",
-          "specifiers": [
-            "ApiException"
-          ]
-        },
-        {
-          "source": "com.unihack8.backend.common.exception.ErrorCode",
-          "specifiers": [
-            "ErrorCode"
-          ]
-        },
-        {
-          "source": "com.unihack8.backend.support.MutableClock",
-          "specifiers": [
-            "MutableClock"
-          ]
-        },
-        {
-          "source": "java.time.Duration",
-          "specifiers": [
-            "Duration"
-          ]
-        },
-        {
-          "source": "java.time.Instant",
-          "specifiers": [
-            "Instant"
-          ]
-        },
-        {
-          "source": "java.util.UUID",
-          "specifiers": [
-            "UUID"
-          ]
-        },
-        {
-          "source": "org.junit.jupiter.api.Test",
-          "specifiers": [
-            "Test"
-          ]
-        }
-      ],
-      "exports": [],
-      "totalLines": 47,
+      "totalLines": 365,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/ScopeLiveCheckTest.java",
-      "contentHash": "17708bb31a507cd6961f7fa72e34e8c0e45722ebe9beaf28a3ed4448d0751d80",
+      "contentHash": "74af0323b9a6a6af60f56e12b7ca809aef5a5df0df169b7e9229a2a47b29f7e9",
       "functions": [
         {
           "name": "cases",
@@ -33561,7 +33282,7 @@
     },
     "docs/API.md": {
       "filePath": "docs/API.md",
-      "contentHash": "ccf4221e195009f4c7cd6751b7d32c50d750d8569433ee2cab8f27b348facbf3",
+      "contentHash": "9861d6988bfbaa3bb9a3f5197c3f52b90dd5dac2f0b74d3d8a796fad081ffb03",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -36355,7 +36076,7 @@
     },
     "frontend/__tests__/screens.home.test.tsx": {
       "filePath": "frontend/__tests__/screens.home.test.tsx",
-      "contentHash": "e0102ac19e59825022fa7fc769f01c30637d63046d4307d05bfcc433c5d5445e",
+      "contentHash": "752a6b4e5a2273ea01c8703736423d3b0cd0480dd1f399e1a6c71977ed8ef87c",
       "functions": [],
       "classes": [],
       "imports": [
@@ -36377,7 +36098,8 @@
         {
           "source": "@/app/(tabs)/index",
           "specifiers": [
-            "HomeScreen"
+            "HomeScreen",
+            "eventCardWidth"
           ]
         },
         {
@@ -36409,7 +36131,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 164,
+      "totalLines": 182,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/screens.profile.test.tsx": {
@@ -36500,7 +36222,7 @@
     },
     "frontend/__tests__/screens.users.test.tsx": {
       "filePath": "frontend/__tests__/screens.users.test.tsx",
-      "contentHash": "1cb8f0dfb7995b56a2d7eb5eedc0e053ea7da30381e0b0d71307b216aee94b2d",
+      "contentHash": "eec7f297e48a75c18d085ca6a0b250136f6921bddcd1691049455e110a8af719",
       "functions": [],
       "classes": [],
       "imports": [
@@ -36561,7 +36283,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 156,
+      "totalLines": 157,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/testUtils.tsx": {
@@ -37645,21 +37367,33 @@
     },
     "frontend/src/app/(tabs)/ai.tsx": {
       "filePath": "frontend/src/app/(tabs)/ai.tsx",
-      "contentHash": "b58da8adb13610a2829d8329439eab4f30198a29b82f1fdb5c8a4ab8bf21a9cb",
+      "contentHash": "515408c15497605a1d908da8d89100a5483b8c3c2033898e3c038348e3c5fe63",
       "functions": [
         {
           "name": "AiScreen",
           "params": [],
           "exported": true,
-          "lineCount": 73
+          "lineCount": 81
         }
       ],
       "classes": [],
       "imports": [
         {
+          "source": "@/features/ai/Suggestions",
+          "specifiers": [
+            "Suggestions"
+          ]
+        },
+        {
           "source": "expo-router",
           "specifiers": [
             "useLocalSearchParams"
+          ]
+        },
+        {
+          "source": "expo-linear-gradient",
+          "specifiers": [
+            "LinearGradient"
           ]
         },
         {
@@ -37722,12 +37456,6 @@
           ]
         },
         {
-          "source": "@/features/ai/Suggestions",
-          "specifiers": [
-            "Suggestions"
-          ]
-        },
-        {
           "source": "@/features/location/LocationProvider",
           "specifiers": [
             "useCurrentPosition"
@@ -37757,31 +37485,38 @@
           "specifiers": [
             "Text"
           ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors"
+          ]
         }
       ],
       "exports": [
         "AiScreen"
       ],
-      "totalLines": 103,
+      "totalLines": 114,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/(tabs)/index.tsx": {
       "filePath": "frontend/src/app/(tabs)/index.tsx",
-      "contentHash": "f02199b147de3a5ff31b9e81fba715faa5835f8f32096923e085aeb15afd98c4",
+      "contentHash": "fa1fb53719351de641750b7d50b96b34d9c4fc94e34453d80970d8e41e5ee994",
       "functions": [
         {
-          "name": "LivePill",
+          "name": "eventCardWidth",
           "params": [
-            "{ offline }"
+            "sectionHeight"
           ],
-          "exported": false,
-          "lineCount": 10
+          "returnType": "number",
+          "exported": true,
+          "lineCount": 5
         },
         {
           "name": "HomeScreen",
           "params": [],
           "exported": true,
-          "lineCount": 91
+          "lineCount": 86
         }
       ],
       "classes": [],
@@ -37803,7 +37538,6 @@
           "specifiers": [
             "FlatList",
             "Pressable",
-            "RefreshControl",
             "ScrollView",
             "StyleSheet",
             "View"
@@ -37835,12 +37569,6 @@
           ]
         },
         {
-          "source": "@/features/location/LocationProvider",
-          "specifiers": [
-            "useCurrentPosition"
-          ]
-        },
-        {
           "source": "@/features/transit/CityInfoStrip",
           "specifiers": [
             "CityInfoStrip"
@@ -37850,12 +37578,6 @@
           "source": "@/hooks/queries",
           "specifiers": [
             "useEventsPage"
-          ]
-        },
-        {
-          "source": "@/hooks/useTransit",
-          "specifiers": [
-            "useTransitSummary"
           ]
         },
         {
@@ -37911,20 +37633,21 @@
         }
       ],
       "exports": [
+        "eventCardWidth",
         "HomeScreen"
       ],
-      "totalLines": 163,
+      "totalLines": 148,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/(tabs)/map.tsx": {
       "filePath": "frontend/src/app/(tabs)/map.tsx",
-      "contentHash": "0820d58640a1c408cfc239956ea9d2421fd1fc9575827cf88a98ac4ff1285298",
+      "contentHash": "c3d937a851c57a6d9ad4b83b1d091f2834dcd7b967489ef43704226c0d5c326a",
       "functions": [
         {
           "name": "MapBody",
           "params": [],
           "exported": false,
-          "lineCount": 296
+          "lineCount": 293
         },
         {
           "name": "MapScreen",
@@ -38166,7 +37889,7 @@
       "exports": [
         "MapScreen"
       ],
-      "totalLines": 395,
+      "totalLines": 383,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/(tabs)/profile.tsx": {
@@ -38821,7 +38544,7 @@
     },
     "frontend/src/app/events/index.tsx": {
       "filePath": "frontend/src/app/events/index.tsx",
-      "contentHash": "697100be996f87a0361fca544677f18728b17c78437a5114a394c6b647f60db2",
+      "contentHash": "a463a6ca1e864bc3d1efd6f04ca8173c6a03852d0dceccb6e3ab4c9f43c8ad09",
       "functions": [
         {
           "name": "AllEventsScreen",
@@ -38948,12 +38671,12 @@
       "exports": [
         "AllEventsScreen"
       ],
-      "totalLines": 103,
+      "totalLines": 104,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/events/new.tsx": {
       "filePath": "frontend/src/app/events/new.tsx",
-      "contentHash": "58d5410e70b68c6b67afb1aa27791fc8fd86fa83be6f1a55e87f7f98a842883e",
+      "contentHash": "edb9f524361c2a04a3aae56b050d0ae878074edf34e91bd24d59b69e6f58b50a",
       "functions": [
         {
           "name": "NewEventScreen",
@@ -39429,7 +39152,7 @@
     },
     "frontend/src/features/ai/ChatInput.tsx": {
       "filePath": "frontend/src/features/ai/ChatInput.tsx",
-      "contentHash": "e10096d8690d8f9d514692dfef1cd024b1040adebdf50611ffde986ed25fde5c",
+      "contentHash": "2656831eec9b1b9750a663dcbd241977cc1c47abd0f000eefff12559fd96fda5",
       "functions": [
         {
           "name": "ChatInput",
@@ -39472,15 +39195,14 @@
         {
           "source": "@/ui/theme",
           "specifiers": [
-            "colors",
-            "radius"
+            "colors"
           ]
         }
       ],
       "exports": [
         "ChatInput"
       ],
-      "totalLines": 70,
+      "totalLines": 75,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/ai/ChatMotif.tsx": {
@@ -39924,7 +39646,7 @@
     },
     "frontend/src/features/ai/ShortcutBar.tsx": {
       "filePath": "frontend/src/features/ai/ShortcutBar.tsx",
-      "contentHash": "0e27cfefbd88bb6ca39ad5b07ceed2b4ff714f129eb7821d555a9a8b254dd2e0",
+      "contentHash": "829e1324bb65b48c7485574f9b36e903657406cbadd96bd6e2dc59e7a657e1a1",
       "functions": [
         {
           "name": "ShortcutButton",
@@ -39932,7 +39654,7 @@
             "{ text, editing, onLongPress, onRemove }"
           ],
           "exported": false,
-          "lineCount": 27
+          "lineCount": 26
         },
         {
           "name": "ShortcutBar",
@@ -40002,7 +39724,7 @@
       "exports": [
         "ShortcutBar"
       ],
-      "totalLines": 167,
+      "totalLines": 166,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/ai/Suggestions.tsx": {
@@ -41257,7 +40979,7 @@
     },
     "frontend/src/features/events/LocationPickerModal.tsx": {
       "filePath": "frontend/src/features/events/LocationPickerModal.tsx",
-      "contentHash": "2a3fd14047b1ac60aa0b7ee02b078946cb68943259e311f667df31851ca8d98f",
+      "contentHash": "95d920b4355300447dd43fe86bcf11cdc7393796951e67360435c9a47fecb4cf",
       "functions": [
         {
           "name": "LocationPickerModal",
@@ -41265,7 +40987,7 @@
             "{ visible, center, value, onConfirm, onClose }"
           ],
           "exported": true,
-          "lineCount": 42
+          "lineCount": 43
         }
       ],
       "classes": [],
@@ -41341,7 +41063,7 @@
       "exports": [
         "LocationPickerModal"
       ],
-      "totalLines": 83,
+      "totalLines": 84,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/events/ParticipantList.tsx": {
@@ -42845,7 +42567,7 @@
     },
     "frontend/src/features/map/MapPanel.tsx": {
       "filePath": "frontend/src/features/map/MapPanel.tsx",
-      "contentHash": "5d061b7cea2f6773af35e379cb2790659d148e067440d5bd4795ec203c885d8a",
+      "contentHash": "69ce3c268a2ab57701af2bcc1732f80e2422a54e89cfd4cd7f83be08b80596b0",
       "functions": [
         {
           "name": "PanelContent",
@@ -42932,7 +42654,7 @@
       "exports": [
         "MapPanel"
       ],
-      "totalLines": 67,
+      "totalLines": 69,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/PlaceMarkers.tsx": {
@@ -46955,15 +46677,15 @@
     },
     "frontend/src/ui/Screen.tsx": {
       "filePath": "frontend/src/ui/Screen.tsx",
-      "contentHash": "dfcd666be907e7262191be1b07249647b59443266a9dfe25f053dc763d414e3b",
+      "contentHash": "2627a9ac0f0b8ce67e6790fea02dc8f4aedefe5ccdcf55c2817158abee91b5f6",
       "functions": [
         {
           "name": "Screen",
           "params": [
-            "{ children, scroll, glow = 'night', edges = ['top'], padded = true, refreshControl, contentStyle, testID }"
+            "{ children, scroll, glow = 'night', edges = ['top'], padded = true, refreshControl, contentStyle, fit, testID }"
           ],
           "exported": true,
-          "lineCount": 24
+          "lineCount": 35
         }
       ],
       "classes": [],
@@ -46971,6 +46693,7 @@
         {
           "source": "react",
           "specifiers": [
+            "useState",
             "ReactNode"
           ]
         },
@@ -46978,7 +46701,6 @@
           "source": "react-native",
           "specifiers": [
             "KeyboardAvoidingView",
-            "Platform",
             "RefreshControlProps",
             "ScrollView",
             "StyleSheet",
@@ -47011,7 +46733,7 @@
       "exports": [
         "Screen"
       ],
-      "totalLines": 53,
+      "totalLines": 67,
       "hasStructuralAnalysis": true
     },
     "frontend/src/ui/ScreenHeader.tsx": {

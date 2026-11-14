@@ -626,7 +626,7 @@ Built on `stefan_dev` after merging `frontend/tibi`, in the spots Tibi's map she
 One graph for the whole repo, made with the **Understand-Anything** plugin (rule from AGENTS.md: keep it updated with every change).
 
 - **Files:** `.ua/knowledge-graph.json` (the graph), `.ua/meta.json` and `.ua/fingerprints.json` (let the next run update only changed files), `.ua/.understandignore` (what is left out: secrets such as `application-local.properties` and `.env`, build output, `.claude/`). Scratch folders under `.ua/` are git-ignored.
-- **Current version (2026-11-14, after PLAN 21.12–21.17):** 540 files, 1667 nodes, 4565 edges, 20 layers, 36-step tour.
+- **Current version (2026-11-14, after PLAN 21.12–21.17 and merging `main`):** 1664 nodes, 4554 edges, 20 layers, 36-step tour. An incremental update was made after merging `main` (Home and AI chat polish, AI request limit removed: the 3 `ChatRateLimiter` files are gone). Before that merge: 540 files, 1667 nodes, 4565 edges.
   - The plugin asked for a full rebuild because 59 files had changed. It was run as an incremental update instead, like the event-reviews merge: only the 59 changed files were re-analysed, on top of the rest of the graph.
   - A hand check showed that the only functions that disappeared are really gone from the code (`stopSequencePaths`, `ShapeLines`).
   - The 18 new files were placed by folder.
