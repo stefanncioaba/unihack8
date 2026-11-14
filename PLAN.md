@@ -17,6 +17,8 @@ Mobile app for the "Connected Communities" theme: events, places, live public tr
 | **B** | City data: places, STPT live transit, routing, AI | 8, 9, 10, 11 |
 | **C** | Mobile app (React Native + Expo Go) | 12, 13, 14, 15, 16 |
 | All | Foundation and final integration | 1, 17 |
+| B + C | AI navigation ("Go" button) — added 2026-11-14 | 18 |
+| B | AI stays on topic; trip cost in AI answers — added 2026-11-14 | 19, 20 |
 
 Track C has the most screens. Whoever finishes their backend tasks first takes screens from C, in this order: QR screens (13.6, 13.7), create-event form (13.5), route panel (14.5).
 
@@ -47,6 +49,9 @@ Track C has the most screens. Whoever finishes their backend tasks first takes s
                │                                 └─> 10 Routing ───┘
                └─> 12 Mobile base ─> 13 Home, 14 Map, 15 AI chat, 16 Profile (all on mocks)
                                                          everything ─> 17 Integration + demo
+                                   10 Routing + 11 AI + 14 Map + 15 AI chat ─> 18 AI navigation ("Go")
+                                   11 AI ─> 19 AI stays on topic
+                                   10 Routing + 11 AI ─> 20 Trip cost in AI answers
 ```
 
 Tasks 8, 9 and 10 do not need the database to start: B can build and test them against the external sources while A is still on tasks 2 and 3.
@@ -300,6 +305,50 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 - [x] **17.4** Handle offline / slow network and empty states on every screen. *Offline banner + queries pause/refetch with NetInfo; 15 s timeout message; loading/error/empty states checked on every screen.*
 - [x] **17.5** Final `DOCS.md`, knowledge graph and README (how to run everything).
 - [ ] **17.6** Pitch: 3-minute demo script and a backup screen recording. *Script written in `docs/DEMO.md`; the recording is still to do (needs the phones).*
+
+---
+
+## 18. AI navigation — "Go" button — Tracks B + C
+
+**Needs:** 10, 11, 14.5, 15.4 (all done). Added 2026-11-14. **Goal:** when the AI gives directions that start **where the user is**, the answer has a "Go" button that starts the journey on the map, like Google Maps or Waze. When the route starts somewhere else (e.g. "from the university to a coffee shop"), there is **no** "Go" button — you cannot start a journey from a place you are not at.
+
+- [ ] **18.1 Contract first** (`docs/API.md`): `POST /ai/chat` answers gain `routes[]` (empty, never `null`) — one entry per route the AI planned for the answer: `from` and `to` (`lat`, `lon`, `name`), `mode` (`WALK` | `TRANSIT`), `durationMinutes`, `distanceMeters`, and `startsFromUser` (boolean).
+- [ ] **18.2 Backend — return the planned routes:** `plan_route` records every route it plans during the request; the chat service puts them in `routes[]`, with the destination name matched to the place/event from the tool results.
+- [ ] **18.3 Backend — decide `startsFromUser`:** `true` only when the request carried the user's real `location` **and** the route starts there (the model gave no start point, or gave one within ~50 m of the user). `false` when the start is another place, and `false` when `location` is `null` (the city-centre default is not the user's position).
+- [ ] **18.4 Mobile — route card** under the AI answer (next to the cards from 15.4): destination, walking / public transport, time estimate. The **"Go"** button is shown only when `startsFromUser` is `true`; otherwise the card has only "Show route on map" (preview, no journey).
+- [ ] **18.5 Mobile — journey mode on the Map tab:** "Go" opens the map and plans a fresh route from the live GPS position to the destination (`GET /routes/plan`, same mode as the AI's route). Shows the route line, the camera following the user, the current step ("Walk to stop X", "Take tram 1 towards Y, get off at Z"), remaining time and distance, and an "End" button. Foreground only (`expo-location` position watching) so it runs in Expo Go.
+- [ ] **18.6 Mobile — during the journey:** move to the next step as the user advances, re-plan when the user is more than ~50 m off the route, and show "You have arrived" within ~30 m of the destination.
+- [ ] **18.7 Guards:** "Go" asks for location permission if it was denied (no journey without it); if the user has moved more than ~200 m since the AI answered, the route is simply re-planned from the new position; network errors show the usual error + retry.
+- [ ] **18.8 Tests:** backend — `startsFromUser` for user start / other start / start near the user / no location, and `routes[]` in the chat answer; mobile — button shown and hidden, "Go" opens journey mode, step advance, arrival, off-route re-plan (mocked positions).
+- [ ] **18.9** `DOCS.md` (AI assistant + Map sections) and the knowledge graph updated.
+
+---
+
+## 19. AI stays on topic — Track B
+
+**Needs:** 11 (done). Added 2026-11-14. **Goal:** the assistant answers only questions about Timișoara (places, food and drinks, events, public transport, the city itself) and directions to a place. Anything else — "code me something", homework, essays, translations, general knowledge — is declined. Today the system prompt has one soft line about this (rule 10); this task makes it strict and tested.
+
+- [ ] **19.1 Strict scope rule in the system prompt:** list what is in scope and what is not, with examples of requests to refuse (code, maths/homework, essays, translations, general chat). A refusal is one short sentence saying what the assistant can help with, in the user's language, with **no tool calls**.
+- [ ] **19.2 Cannot be talked out of it:** "ignore your instructions", role-play ("pretend you are a programmer") and requests wrapped in a city excuse ("write Python code about Timișoara trams") are still refused.
+- [ ] **19.3 Do not over-refuse:** short follow-ups ("and the second one?", "is it open now?") are judged with the whole conversation, not alone; a mixed message gets the city part answered and the rest declined in one sentence.
+- [ ] **19.4 Answer shape:** a refusal is a normal `200` answer with `reply` and empty `places` / `events` / `sources` (and `routes`) — no new error code, so the app needs no change. Add the sentence to `docs/API.md`.
+- [ ] **19.5 Tests:** unit tests that the prompt carries the scope rule and that a refusal returns empty lists; a live check against real Gemini with a fixed list of about 12 prompts (off-topic, trick prompts, mixed, normal follow-ups), results noted in `DOCS.md`.
+- [ ] **19.6** `DOCS.md` (AI assistant section) and the knowledge graph updated.
+
+---
+
+## 20. Trip cost in AI answers — Track B
+
+**Needs:** 10, 11 (done). Added 2026-11-14. **Goal:** when the user asks to go to a place, the answer includes what the trip costs, as a sum — e.g. "tram 1: X lei + bus E2: Y lei + espresso about Z lei = about N lei".
+
+- [ ] **20.1 STPT ticket prices:** research the current fares on STPT's official page (single ride, and whether one ticket covers a change of line within a time limit) and store them with the source link and the date checked — same idea as the stored menu prices (11.3). First check whether the GTFS zip from task 10 already has fare files. **Never a fare from memory or a guess.**
+- [ ] **20.2 `plan_route` returns the ticket cost:** for each public transport ride in the route, the line and its ticket price, plus the ticket total, using the fare rules from 20.1. Walking is free. When the fare is not stored, the tool says "ticket price unknown".
+- [ ] **20.3 Cost of the place itself:** from the stored menu prices — the item the user asked about (coffee, pizza, beer…), or the cheapest typical item when they named none. For an event, its ticket price (`price_min`). No stored price → "price unknown", never a guess.
+- [ ] **20.4 System prompt rule:** whenever the answer sends the user to a place, end with one cost line: each ride with its price + the item at the place, and the total. The total says "about" when a menu price is in it; when a part is unknown, the line gives the known sum "plus <item> (price unknown)".
+- [ ] **20.5 Sources:** the STPT fare page is added to `sources[]` when a ticket price is quoted. Note the cost line in `docs/API.md`.
+- [ ] **20.6 Route card:** if task 18 is done, the route card (18.4) also shows the ticket total (`routes[].ticketCostLei`, `null` when unknown) — contract in `docs/API.md` first.
+- [ ] **20.7 Tests:** fare calculation (walk only, one ride, a change of line, unknown fare), the cost fields in the `plan_route` result, the prompt rule, and a live check with real routes noted in `DOCS.md`.
+- [ ] **20.8** `DOCS.md` (AI assistant section) and the knowledge graph updated.
 
 ---
 
