@@ -21,7 +21,6 @@ import com.unihack8.backend.ai.domain.gemini.GeminiPart;
 import com.unihack8.backend.ai.domain.gemini.GeminiRequest;
 import com.unihack8.backend.ai.domain.gemini.GeminiResponse;
 import com.unihack8.backend.ai.mapper.impl.ChatResultMapperImpl;
-import com.unihack8.backend.ai.service.ChatRateLimiter;
 import com.unihack8.backend.ai.tool.AiTool;
 import com.unihack8.backend.ai.tool.ToolException;
 import com.unihack8.backend.ai.tool.impl.PlanRouteTool;
@@ -40,7 +39,6 @@ import java.util.Deque;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
 import org.junit.jupiter.api.Test;
 
@@ -53,7 +51,6 @@ class AiChatServiceImplTest {
 
     private final FakeGemini gemini = new FakeGemini();
     private final List<Duration> sleeps = new ArrayList<>();
-    private final AtomicInteger rateLimitCalls = new AtomicInteger();
     private final FakeTool tool = new FakeTool();
 
     // Model asks for a tool, gets its result (same call id, signature echoed), then answers in text.
@@ -71,7 +68,6 @@ class AiChatServiceImplTest {
         // "5 lei" is only in the model text (the tool stored no price): no cost box, never a guess.
         assertThat(response.cost()).isNull();
         assertThat(tool.lastArgs).containsEntry("keyword", "coffee");
-        assertThat(rateLimitCalls).hasValue(1);
 
         GeminiRequest second = gemini.requests.get(1);
         assertThat(second.contents()).hasSize(3);
@@ -283,12 +279,11 @@ class AiChatServiceImplTest {
 
     // Same, with the given tools.
     private AiChatServiceImpl service(int maxToolRounds, List<AiTool> tools) {
-        ChatRateLimiter limiter = user -> rateLimitCalls.incrementAndGet();
         return new AiChatServiceImpl(gemini,
                 new GeminiProperties("key", "http://unused", List.of("model-a", "model-b"),
                         Duration.ofSeconds(1), Duration.ofSeconds(1)),
-                new AiProperties(maxToolRounds, 10, 20, 5, Duration.ofSeconds(12)),
-                limiter, new ChatResultMapperImpl(), tools, Clock.fixed(NOW, ZoneOffset.UTC), sleeps::add);
+                new AiProperties(maxToolRounds, 20, 5, Duration.ofSeconds(12)),
+                new ChatResultMapperImpl(), tools, Clock.fixed(NOW, ZoneOffset.UTC), sleeps::add);
     }
 
     // One user message at Piața Victoriei.

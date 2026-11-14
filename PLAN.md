@@ -221,7 +221,7 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 **Needs:** 8 and 5 for real answers (start with stubbed tools). Uses the **Gemini API** (free tier). No chat history is stored: the mobile app sends the whole conversation each time and "New chat" just clears it.
 
-- [x] **11.1** `POST /ai/chat` with `{ messages, location }` → `{ reply, places[], events[], sources[] }`. Needs a token; rate-limited per user (10/min).
+- [x] **11.1** `POST /ai/chat` with `{ messages, location }` → `{ reply, places[], events[], sources[] }`. Needs a token; no per-user request limit (removed).
 - [x] **11.2 Database tools the model can call:** `search_places` (task 8, with stored prices and open-now), `search_events` (task 5), `transit_info` (task 9), `plan_route` (task 10). The model answers from tool results, so it cannot invent venues.
 - [x] **11.3 Prices** — *changed 2026-11-13 (team decision):* Gemini's Google Search is not in the free tier any more and `gemini-2.5-flash` is retired for our key, so instead of a `web_lookup` tool, prices come from a **stored, researched price list** (table `place_prices`, 232 prices for 79 places, each with its source link). `search_places` returns them; places without a stored price are answered as "price unknown". See `DOCS.md` → AI assistant.
 - [x] **11.4 System prompt:** Timișoara guide, current date/time and user location included, short answers, reply in the user's language (Romanian or English).

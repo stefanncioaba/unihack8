@@ -74,7 +74,7 @@ For `VALIDATION_FAILED`, `fields` lists per-field errors when available (for exa
 | 409 | `ALREADY_CHECKED_IN` | This ticket was already scanned. |
 | 403 | `NOT_ATTENDED` | Only participants the organiser checked in can review the event. |
 | 409 | `REVIEWS_CLOSED` | Reviews closed (24 h after the event ended, or the rating was settled). |
-| 429 | `RATE_LIMITED` | Too many AI requests; try again in a minute. |
+| 429 | `RATE_LIMITED` | Reserved. The AI chat no longer has a per-user limit, so nothing returns it today. |
 | 500 | `INTERNAL_ERROR` | Unexpected server error (details are only in the backend log). |
 | 503 | `AI_UNAVAILABLE` | Gemini did not answer. |
 | 503 | `SOURCE_UNAVAILABLE` | STPT or OpenTripPlanner is down and nothing is cached. |
@@ -715,4 +715,4 @@ Answer — `reply` is plain text (no markdown) in the user's language (Romanian 
 
 **Off-topic requests (PLAN 19):** the assistant answers only about Timișoara (places, food and drinks, events, public transport, the city) and directions. Anything else (code, maths/homework, essays, translations, general knowledge, general chat) gets a normal `200` answer whose `reply` is one short sentence, in the user's language, saying what it can help with; `places`, `events`, `sources` and `routes` are empty and `cost` is `null`. There is no special error code, so the app shows it like any other answer. A mixed message gets the city part answered and the rest declined in one sentence.
 
-Takes 2–10 s (the model may call several tools). Errors: `400 VALIDATION_FAILED` (empty `messages`, a `role` other than `user`/`assistant`, a message over 2000 characters, or the last message not from the user), `429 RATE_LIMITED` (more than 10 requests per minute per user), `503 AI_UNAVAILABLE` (Gemini down or busy; the message says to try again in a minute).
+Takes 2–10 s (the model may call several tools). Errors: `400 VALIDATION_FAILED` (empty `messages`, a `role` other than `user`/`assistant`, a message over 2000 characters, or the last message not from the user) (there is no per-user request limit), `503 AI_UNAVAILABLE` (Gemini down or busy; the message says to try again in a minute).

@@ -1,6 +1,8 @@
 // AI tab: chat with the city guide (PLAN 15.1–15.3), with the cost box, result and route cards under answers (15.4, 18.4). The conversation lives in memory only; "New chat" clears it.
 // `/ai?ask=…&at=…` (a Home shortcut, PLAN 13.10) starts a new chat with that question; each question can be saved as a shortcut.
+import { Suggestions } from '@/features/ai/Suggestions';
 import { useLocalSearchParams } from 'expo-router';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect, useRef } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 
@@ -11,12 +13,12 @@ import { CostCard } from '@/features/ai/CostCard';
 import { SaveShortcut } from '@/features/ai/SaveShortcut';
 import { ResultCards } from '@/features/ai/ResultCards';
 import { RouteCards } from '@/features/ai/RouteCards';
-import { Suggestions } from '@/features/ai/Suggestions';
 import { useCurrentPosition } from '@/features/location/LocationProvider';
 import { useAiChat, type UiMessage } from '@/hooks/useAi';
 import { Button } from '@/ui/Button';
 import { Screen } from '@/ui/Screen';
 import { Text } from '@/ui/Text';
+import { colors } from '@/ui/theme';
 
 /** Chat screen. */
 export default function AiScreen() {
@@ -80,13 +82,21 @@ export default function AiScreen() {
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
             style={{ flex: 1 }}
-            contentContainerStyle={{ paddingTop: 8 }}
+            contentContainerStyle={{ paddingTop: 8, paddingBottom: 16 }}
           />
         </>
       )}
 
       {empty && <Suggestions onPick={chat.send} />}
       <View style={styles.input}>
+        {/* Soft fade so messages dissolve into the background above the input instead of being cut off. */}
+        {!empty && (
+          <LinearGradient
+            pointerEvents="none"
+            colors={['rgba(0,8,20,0)', colors.bg]}
+            style={styles.fade}
+          />
+        )}
         <ChatInput onSend={chat.send} disabled={chat.thinking} />
       </View>
     </Screen>
@@ -98,5 +108,6 @@ const styles = StyleSheet.create({
   motif: { marginBottom: 18 },
   center: { textAlign: 'center' },
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingTop: 10, paddingBottom: 6 },
-  input: { paddingBottom: 12 },
+  input: { paddingTop: 6, paddingBottom: 12 },
+  fade: { position: 'absolute', left: 0, right: 0, top: -22, height: 28 },
 });

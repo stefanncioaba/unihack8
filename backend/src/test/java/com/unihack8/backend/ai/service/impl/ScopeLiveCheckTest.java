@@ -89,7 +89,7 @@ class ScopeLiveCheckTest {
                 new RecordingTool(new TransitInfoTool(null), calls),
                 new RecordingTool(new PlanRouteTool(null), calls));
         AiChatServiceImpl service = new AiChatServiceImpl(client, properties,
-                new AiProperties(5, 100, 20, 15, Duration.ofSeconds(30)), user -> { },
+                new AiProperties(5, 20, 15, Duration.ofSeconds(30)),
                 new ChatResultMapperImpl(), tools, Clock.systemUTC());
 
         List<String> rows = new ArrayList<>();

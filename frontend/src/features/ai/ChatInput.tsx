@@ -4,7 +4,7 @@ import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 
 import { Icon } from '@/ui/Icon';
 import { MAX_CHAT_MESSAGE_CHARS } from '@/api/types.ai';
-import { colors, radius } from '@/ui/theme';
+import { colors } from '@/ui/theme';
 
 type Props = { onSend: (text: string) => void; disabled?: boolean };
 
@@ -58,10 +58,15 @@ const styles = StyleSheet.create({
     paddingLeft: 14,
     paddingRight: 6,
     paddingVertical: 6,
-    borderRadius: radius.field + 4,
+    borderRadius: 26,
     backgroundColor: colors.surface,
-    borderWidth: StyleSheet.hairlineWidth,
+    borderWidth: 1,
     borderColor: colors.borderStrong,
+    shadowColor: '#000',
+    shadowOpacity: 0.35,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: -2 },
+    elevation: 6,
   },
   input: { flex: 1, maxHeight: 110, minHeight: 36, color: colors.text, fontSize: 14, paddingVertical: 8 },
   send: { width: 36, height: 36, borderRadius: 18, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.surfaceAlt },

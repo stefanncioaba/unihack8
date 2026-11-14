@@ -42,6 +42,7 @@ export function LocationPickerModal({ visible, center, value, onConfirm, onClose
           style={StyleSheet.absoluteFill}
           initialRegion={regionFor(value ?? center)}
           onPress={onPress}
+          toolbarEnabled={false}
           userInterfaceStyle="dark"
           customMapStyle={darkMapStyle}
           testID="picker-map"

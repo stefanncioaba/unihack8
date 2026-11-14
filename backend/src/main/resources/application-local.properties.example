@@ -24,7 +24,6 @@ gemini.api-key=
 gemini.chat-models=gemini-3.5-flash-lite,gemini-3.5-flash
 # Optional AI limits (defaults shown):
 #ai.max-tool-rounds=5
-#ai.requests-per-minute=10
 
 # --- OpenTripPlanner (PLAN task 10) -----------------------------------------
 otp.base-url=http://localhost:8081

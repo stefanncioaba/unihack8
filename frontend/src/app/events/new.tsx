@@ -53,7 +53,7 @@ export default function NewEventScreen() {
           </Text>
           <View style={styles.wrap}>
             {EVENT_CATEGORIES.map((c) => (
-              <Chip key={c} label={CATEGORY_META[c].label} icon={CATEGORY_META[c].icon} selected={form.category === c} onPress={() => set('category', c)} />
+              <Chip key={c} label={CATEGORY_META[c].label} selected={form.category === c} onPress={() => set('category', c)} />
             ))}
           </View>
           {errors.category ? (

@@ -16,7 +16,6 @@ import com.unihack8.backend.ai.domain.gemini.GeminiRequest;
 import com.unihack8.backend.ai.domain.gemini.GeminiResponse;
 import com.unihack8.backend.ai.mapper.ChatResultMapper;
 import com.unihack8.backend.ai.service.AiChatService;
-import com.unihack8.backend.ai.service.ChatRateLimiter;
 import com.unihack8.backend.ai.tool.AiTool;
 import com.unihack8.backend.ai.tool.ToolException;
 import com.unihack8.backend.common.exception.ApiException;
@@ -59,40 +58,35 @@ public class AiChatServiceImpl implements AiChatService {
     private final GeminiClient gemini;
     private final GeminiProperties geminiProperties;
     private final AiProperties aiProperties;
-    private final ChatRateLimiter rateLimiter;
     private final ChatResultMapper resultMapper;
     private final Map<String, AiTool> tools;
     private final Clock clock;
     private final Sleeper sleeper;
 
-    // Wires Gemini, settings, the rate limiter, the result mapper, every AiTool bean and the clock.
+    // Wires Gemini, settings, the result mapper, every AiTool bean and the clock.
     @Autowired
     public AiChatServiceImpl(GeminiClient gemini, GeminiProperties geminiProperties, AiProperties aiProperties,
-                             ChatRateLimiter rateLimiter, ChatResultMapper resultMapper, List<AiTool> tools,
-                             Clock clock) {
-        this(gemini, geminiProperties, aiProperties, rateLimiter, resultMapper, tools, clock, Sleeper.REAL);
+                             ChatResultMapper resultMapper, List<AiTool> tools, Clock clock) {
+        this(gemini, geminiProperties, aiProperties, resultMapper, tools, clock, Sleeper.REAL);
     }
 
     // Same, with a replaceable sleep (tests do not wait for real).
     AiChatServiceImpl(GeminiClient gemini, GeminiProperties geminiProperties, AiProperties aiProperties,
-                      ChatRateLimiter rateLimiter, ChatResultMapper resultMapper, List<AiTool> tools,
-                      Clock clock, Sleeper sleeper) {
+                      ChatResultMapper resultMapper, List<AiTool> tools, Clock clock, Sleeper sleeper) {
         this.sleeper = sleeper;
         this.gemini = gemini;
         this.geminiProperties = geminiProperties;
         this.aiProperties = aiProperties;
-        this.rateLimiter = rateLimiter;
         this.resultMapper = resultMapper;
         this.tools = tools.stream().collect(Collectors.toMap(AiTool::name, Function.identity(),
                 (a, b) -> a, LinkedHashMap::new));
         this.clock = clock;
     }
 
-    // Validates, rate-limits, runs the tool loop and builds the answer.
+    // Validates, runs the tool loop and builds the answer (no per-user request limit).
     @Override
     public ChatResponse chat(UUID userId, ChatRequest request) {
         List<GeminiContent> contents = toContents(request.messages());
-        rateLimiter.acquire(userId);
         GeoPoint location = request.location() == null ? null
                 : new GeoPoint(request.location().lat(), request.location().lon());
         ToolContext context = new ToolContext(location, clock.instant());
