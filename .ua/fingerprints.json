@@ -25,7 +25,7 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "d7825fd0709f50150dd6f92b4e294aad90d1fde3aa07e7ae6e2dad3c58c1c465",
+      "contentHash": "79cb201d4434f61495803fa48b420e4ad85f12f1a25b68f9dab052e76e885e4e",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -35,12 +35,12 @@
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "614908eee9ae2752f79ec287d5dc14b89d1218aca2e5bf2f3ac7235ed3f41b17",
+      "contentHash": "e1bdac76a7772628edebdc9c8b11f780bad8b641dff0e31c5a216f7afe256c97",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 320,
+      "totalLines": 368,
       "hasStructuralAnalysis": false
     },
     "README.md": {
@@ -2130,7 +2130,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/service/impl/SystemPrompt.java",
-      "contentHash": "6b3ae2cb2c718cc396a17058bafefe907c7c7a3d7fe69712fed01bf1c2f3f59c",
+      "contentHash": "a73d889fca507f8939a2f1da32b6cfba0d496ad69fb5ab8368d388497a654cba",
       "functions": [
         {
           "name": "SystemPrompt",
@@ -18551,7 +18551,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/AiChatServiceImplTest.java",
-      "contentHash": "f4cfaeb1d1a73e7207dd9e09b0010febb102b039573f6099449ed6174c9f3e14",
+      "contentHash": "9e5cdabd26486efdacdde9a9d5ed03bdb6a3ea2a08c96cf3bc85d14a3b7fec56",
       "functions": [
         {
           "name": "toolCallLoop",
@@ -28190,12 +28190,12 @@
     },
     "docs/API.md": {
       "filePath": "docs/API.md",
-      "contentHash": "6a4bc540454368db3166d0669f4fe36e4417d0bdf49424562ac49a546555edb3",
+      "contentHash": "da387d0fbcbb6faec793eb014558864d31f6f896a91791773c58147962158f2a",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 597,
+      "totalLines": 598,
       "hasStructuralAnalysis": false
     },
     "docs/DEMO.md": {
@@ -29670,7 +29670,7 @@
     },
     "frontend/jest.setup.ts": {
       "filePath": "frontend/jest.setup.ts",
-      "contentHash": "2b575d5102318bfcd0cc479fe77faa0bacf964c936b87b5b28282e7f0daafaf1",
+      "contentHash": "c1abeb9f62b25a77e5bad223ad76d8d2019864559758f8e9d9b2232043eb6c44",
       "functions": [],
       "classes": [],
       "imports": [
