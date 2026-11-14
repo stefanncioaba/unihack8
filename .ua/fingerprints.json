@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "5248fef33b47ba51537078073294103c919da911",
-  "generatedAt": "2026-11-14T13:42:43.368Z",
+  "gitCommitHash": "233e06df91041cb7b154d5d67ad82dbf6ac8e80b",
+  "generatedAt": "2026-11-14T14:32:48.001Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,22 +25,22 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "9b06f72f5ff0b97ebd6ba09c8b92686d8cba2d1a77cf4b6a6014e12ce4a4999e",
+      "contentHash": "31ae4beaabc0aa16e4adeda3676cdcba30e7f59d550c390fb11740e1c926878a",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 565,
+      "totalLines": 579,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "605444af70c103e7cea3b084e41dd571f3198895fc5bff954378e3ad3794a6ea",
+      "contentHash": "164624cd75e3305e0b060111578a51f6962df031feaced8f213ec1a8d113620a",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 385,
+      "totalLines": 388,
       "hasStructuralAnalysis": false
     },
     "README.md": {
@@ -15391,6 +15391,33 @@
       "totalLines": 6,
       "hasStructuralAnalysis": true
     },
+    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/NextArrivalDto.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/NextArrivalDto.java",
+      "contentHash": "28d3a7dba49420fa044c2f619a5f0a4bcddca49a24eedbb3687a2dba28ea784e",
+      "functions": [],
+      "classes": [
+        {
+          "name": "NextArrivalDto",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        }
+      ],
+      "exports": [
+        "NextArrivalDto"
+      ],
+      "totalLines": 12,
+      "hasStructuralAnalysis": true
+    },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitRouteDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitRouteDto.java",
       "contentHash": "4fff6e1416d28de686470c9d5a3d5c123ca341faa5d951c5c5279a60e176087c",
@@ -16362,7 +16389,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/repository/impl/GtfsShapeRepository.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/repository/impl/GtfsShapeRepository.java",
-      "contentHash": "50e3327225a8b4091ae0cb6eb264e0368e39171844bd12cca1fac8804b9cb317",
+      "contentHash": "32838410f695d76e3ce503c4c22cf2d20a3a90c6ed4ef95440bf745e483519ff",
       "functions": [
         {
           "name": "GtfsShapeRepository",
@@ -16394,7 +16421,7 @@
           ],
           "returnType": "List<RouteShape>",
           "exported": false,
-          "lineCount": 67
+          "lineCount": 71
         },
         {
           "name": "stopSequencePaths",
@@ -16480,7 +16507,7 @@
             "loadAttempted"
           ],
           "exported": true,
-          "lineCount": 205
+          "lineCount": 209
         }
       ],
       "imports": [
@@ -16647,7 +16674,7 @@
         "shapes",
         "GtfsShapeRepository"
       ],
-      "totalLines": 240,
+      "totalLines": 245,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/transit/repository/impl/GtfsTimetableRepository.java": {
@@ -16922,6 +16949,97 @@
         "GtfsTimetableRepository"
       ],
       "totalLines": 244,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/repository/impl/PathSimplifier.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/repository/impl/PathSimplifier.java",
+      "contentHash": "8afcb86591a1637f499190077620cc3d6d5695c3b75c9ce5171a5a28fc77dafe",
+      "functions": [
+        {
+          "name": "PathSimplifier",
+          "params": [],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "simplify",
+          "params": [
+            "points",
+            "toleranceMeters"
+          ],
+          "returnType": "List<GeoPoint>",
+          "exported": true,
+          "lineCount": 46
+        },
+        {
+          "name": "distanceToSegment",
+          "params": [
+            "px",
+            "py",
+            "ax",
+            "ay",
+            "bx",
+            "by"
+          ],
+          "returnType": "double",
+          "exported": false,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "PathSimplifier",
+          "methods": [
+            "PathSimplifier",
+            "simplify",
+            "distanceToSegment"
+          ],
+          "properties": [
+            "SHAPE_TOLERANCE_METERS",
+            "METERS_PER_DEGREE"
+          ],
+          "exported": true,
+          "lineCount": 69
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "java.util.ArrayDeque",
+          "specifiers": [
+            "ArrayDeque"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.Deque",
+          "specifiers": [
+            "Deque"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "SHAPE_TOLERANCE_METERS",
+        "simplify",
+        "PathSimplifier"
+      ],
+      "totalLines": 83,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/transit/service/TransitService.java": {
@@ -28108,7 +28226,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/transit/repository/impl/GtfsShapeRepositoryTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/transit/repository/impl/GtfsShapeRepositoryTest.java",
-      "contentHash": "b01c42069707c17bc6d6a4200d999254041709e4cd62c2b2b811bf54c99bac54",
+      "contentHash": "0f02a6780c148dfde6963f996abf9f2ea1b49e80b374ac521ee3fd2afaee0565",
       "functions": [
         {
           "name": "zip",
@@ -28137,6 +28255,13 @@
           "lineCount": 28
         },
         {
+          "name": "shapesAreSimplified",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 19
+        },
+        {
           "name": "stopSequenceFallback",
           "params": [],
           "returnType": "void",
@@ -28162,7 +28287,7 @@
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 11
+          "lineCount": 14
         }
       ],
       "classes": [
@@ -28172,6 +28297,7 @@
             "zip",
             "files",
             "shapesFromShapesTxt",
+            "shapesAreSimplified",
             "stopSequenceFallback",
             "mixedShapesAndFallback",
             "missingFile",
@@ -28184,7 +28310,7 @@
             "dir"
           ],
           "exported": false,
-          "lineCount": 147
+          "lineCount": 172
         }
       ],
       "imports": [
@@ -28280,7 +28406,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 168,
+      "totalLines": 193,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/transit/repository/impl/GtfsTimetableRepositoryTest.java": {
@@ -28484,6 +28610,91 @@
       ],
       "exports": [],
       "totalLines": 156,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/transit/repository/impl/PathSimplifierTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/repository/impl/PathSimplifierTest.java",
+      "contentHash": "4f72c7a453fedb0847b84f97e20382ddadd2307fac6e0ff8055639ec75886964",
+      "functions": [
+        {
+          "name": "straightLineKeepsOnlyItsEnds",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "keepsCornersAndDropsWiggles",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "droppedPointsStayWithinTolerance",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 23
+        },
+        {
+          "name": "shortPathsUnchanged",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "PathSimplifierTest",
+          "methods": [
+            "straightLineKeepsOnlyItsEnds",
+            "keepsCornersAndDropsWiggles",
+            "droppedPointsStayWithinTolerance",
+            "shortPathsUnchanged"
+          ],
+          "properties": [
+            "ONE_METER_LAT"
+          ],
+          "exported": false,
+          "lineCount": 59
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 70,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java": {
@@ -30024,7 +30235,7 @@
     },
     "docs/API.md": {
       "filePath": "docs/API.md",
-      "contentHash": "8d79842a7dcac61272d55dae8b43d7f09f7c43bf3f6487b5b34103b5fcd1779d",
+      "contentHash": "834e124a777b2f8947bbd92634ca953179c627c5b095fb37113c61b3478fcad3",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -30224,6 +30435,100 @@
       ],
       "exports": [],
       "totalLines": 126,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/__tests__/ai.shortcuts.test.tsx": {
+      "filePath": "frontend/__tests__/ai.shortcuts.test.tsx",
+      "contentHash": "2c5d7a88581c34653383c986bb9b425311c7513fa2d1c3fcee1dfcca11f449f6",
+      "functions": [
+        {
+          "name": "aiAgain",
+          "params": [
+            "client"
+          ],
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "seed",
+          "params": [
+            "list"
+          ],
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@react-native-async-storage/async-storage",
+          "specifiers": [
+            "AsyncStorage"
+          ]
+        },
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "QueryClientProvider",
+            "QueryClient"
+          ]
+        },
+        {
+          "source": "@testing-library/react-native",
+          "specifiers": [
+            "act",
+            "fireEvent",
+            "screen",
+            "waitFor",
+            "within"
+          ]
+        },
+        {
+          "source": "@/app/(tabs)/ai",
+          "specifiers": [
+            "AiScreen"
+          ]
+        },
+        {
+          "source": "@/app/(tabs)/index",
+          "specifiers": [
+            "HomeScreen"
+          ]
+        },
+        {
+          "source": "@/features/ai/shortcuts",
+          "specifiers": [
+            "hasShortcut",
+            "loadShortcuts",
+            "MAX_SHORTCUTS",
+            "normalizeShortcut",
+            "SHORTCUTS_STORAGE_KEY"
+          ]
+        },
+        {
+          "source": "@test/mocks",
+          "specifiers": [
+            "setMockLatency"
+          ]
+        },
+        {
+          "source": "@/features/auth/AuthProvider",
+          "specifiers": [
+            "AuthContext"
+          ]
+        },
+        {
+          "source": "./testUtils",
+          "specifiers": [
+            "fakeAuth",
+            "mockRouter",
+            "renderScreen",
+            "setParams"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 152,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/api.client.test.ts": {
@@ -30826,6 +31131,75 @@
       "totalLines": 118,
       "hasStructuralAnalysis": true
     },
+    "frontend/__tests__/map.directionsFocus.test.tsx": {
+      "filePath": "frontend/__tests__/map.directionsFocus.test.tsx",
+      "contentHash": "3b1bf61c30094be7f15ab4e6ff3a79dd76f3442299ebb22a3cfef37f9072c0df",
+      "functions": [
+        {
+          "name": "moveTo",
+          "params": [
+            "span"
+          ],
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "longPress",
+          "params": [
+            "lat",
+            "lon"
+          ],
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "transportLayerMarkers",
+          "params": [],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "eventMarkers",
+          "params": [],
+          "exported": false,
+          "lineCount": 1
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@testing-library/react-native",
+          "specifiers": [
+            "act",
+            "fireEvent",
+            "screen",
+            "waitFor"
+          ]
+        },
+        {
+          "source": "@/app/(tabs)/map",
+          "specifiers": [
+            "MapScreen"
+          ]
+        },
+        {
+          "source": "@/features/map/mapFilters",
+          "specifiers": [
+            "INITIAL_MAP_FILTERS",
+            "visibleLayers"
+          ]
+        },
+        {
+          "source": "./testUtils",
+          "specifiers": [
+            "renderScreen"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 77,
+      "hasStructuralAnalysis": true
+    },
     "frontend/__tests__/map.filters.test.tsx": {
       "filePath": "frontend/__tests__/map.filters.test.tsx",
       "contentHash": "5f08c692edd18b7fed058b4fd7f1f87acfe219ea11d7c76cc558374394b526aa",
@@ -31122,7 +31496,7 @@
     },
     "frontend/__tests__/map.liveTransit.test.tsx": {
       "filePath": "frontend/__tests__/map.liveTransit.test.tsx",
-      "contentHash": "7d2aaff6126f52fe7fb57aca038fff10f4364e8ba9e052200fb2f93095f90a25",
+      "contentHash": "85f980f9080897b2060e815afa3e5057b11f2866ade33b2009e328e73ce3ab7a",
       "functions": [
         {
           "name": "call",
@@ -31305,7 +31679,138 @@
         }
       ],
       "exports": [],
-      "totalLines": 416,
+      "totalLines": 418,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/__tests__/map.performance.test.tsx": {
+      "filePath": "frontend/__tests__/map.performance.test.tsx",
+      "contentHash": "4b63973bd1292bab7b235d01b4792d89a68fa24d3dd5782354d3f7cc085e1d09",
+      "functions": [
+        {
+          "name": "vehicle",
+          "params": [
+            "over"
+          ],
+          "returnType": "TransitVehicle",
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "vehicleMarkers",
+          "params": [],
+          "exported": false,
+          "lineCount": 1
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "QueryClientProvider"
+          ]
+        },
+        {
+          "source": "@testing-library/react-native",
+          "specifiers": [
+            "act",
+            "fireEvent",
+            "render",
+            "screen",
+            "waitFor"
+          ]
+        },
+        {
+          "source": "react",
+          "specifiers": [
+            "Profiler",
+            "useEffect"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/api/types.transit",
+          "specifiers": [
+            "TransitShape",
+            "TransitVehicle"
+          ]
+        },
+        {
+          "source": "@/features/directions/DirectionsLayer",
+          "specifiers": [
+            "DirectionsLayer"
+          ]
+        },
+        {
+          "source": "@/features/map/ClusterMarker",
+          "specifiers": [
+            "MARKER_TRACK_MS",
+            "pendingTrackingCount",
+            "scheduleTrackingOff",
+            "trackingTimerArmed",
+            "trackingTimerArms",
+            "useBriefViewTracking"
+          ]
+        },
+        {
+          "source": "@/features/map/MapContext",
+          "specifiers": [
+            "MapProvider",
+            "useMapContext",
+            "MapContextValue"
+          ]
+        },
+        {
+          "source": "@/features/transit/lines",
+          "specifiers": [
+            "* as lines"
+          ]
+        },
+        {
+          "source": "@/features/transit/TransitLayer",
+          "specifiers": [
+            "TransitLayer"
+          ]
+        },
+        {
+          "source": "@/features/transit/VehicleMarker",
+          "specifiers": [
+            "sameVehicleMarker",
+            "VehicleMarker"
+          ]
+        },
+        {
+          "source": "@/lib/bbox",
+          "specifiers": [
+            "Bbox"
+          ]
+        },
+        {
+          "source": "@/lib/queryClient",
+          "specifiers": [
+            "createQueryClient"
+          ]
+        },
+        {
+          "source": "@/lib/polyline",
+          "specifiers": [
+            "* as polyline"
+          ]
+        },
+        {
+          "source": "./testUtils",
+          "specifiers": [
+            "renderScreen"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 311,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/map.shell.test.tsx": {
@@ -31463,6 +31968,171 @@
       ],
       "exports": [],
       "totalLines": 113,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/__tests__/map.tripGuidance.test.tsx": {
+      "filePath": "frontend/__tests__/map.tripGuidance.test.tsx",
+      "contentHash": "c77d6cac9dc49014128661de88e1fa785270d017a20e9c875f73def03a0ff468",
+      "functions": [
+        {
+          "name": "leg",
+          "params": [
+            "mode",
+            "from",
+            "to",
+            "minutes",
+            "extra"
+          ],
+          "returnType": "RouteLeg",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "labels",
+          "params": [
+            "legs",
+            "dest"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "longPress",
+          "params": [
+            "lat",
+            "lon"
+          ],
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "stepLabel",
+          "params": [
+            "testID"
+          ],
+          "exported": false,
+          "lineCount": 1
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "QueryClientProvider"
+          ]
+        },
+        {
+          "source": "@testing-library/react-native",
+          "specifiers": [
+            "act",
+            "fireEvent",
+            "render",
+            "screen",
+            "waitFor",
+            "within"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "StyleSheet"
+          ]
+        },
+        {
+          "source": "@/api/types.routing",
+          "specifiers": [
+            "RouteLeg"
+          ]
+        },
+        {
+          "source": "@/api/types.routing",
+          "specifiers": [
+            "RoutePlan"
+          ]
+        },
+        {
+          "source": "@/api/types.transit",
+          "specifiers": [
+            "TransitRoute",
+            "TransitVehicle"
+          ]
+        },
+        {
+          "source": "@/app/(tabs)/map",
+          "specifiers": [
+            "MapScreen"
+          ]
+        },
+        {
+          "source": "@/features/directions/TripMarkers",
+          "specifiers": [
+            "TripStepMarker"
+          ]
+        },
+        {
+          "source": "@/features/directions/tripSteps",
+          "specifiers": [
+            "boardLabel",
+            "legLineColor",
+            "legStrokeColor",
+            "pathMidpoint",
+            "tripSteps"
+          ]
+        },
+        {
+          "source": "@/features/journey/navigation",
+          "specifiers": [
+            "routeParams"
+          ]
+        },
+        {
+          "source": "@/features/map/ClusterMarker",
+          "specifiers": [
+            "MARKER_TRACK_MS"
+          ]
+        },
+        {
+          "source": "@/features/transit/LegVehicles",
+          "specifiers": [
+            "approachingVehicleIds",
+            "LegVehicles"
+          ]
+        },
+        {
+          "source": "@/features/transit/lines",
+          "specifiers": [
+            "lineColor"
+          ]
+        },
+        {
+          "source": "@/features/transit/VehicleMarker",
+          "specifiers": [
+            "VehicleBadge"
+          ]
+        },
+        {
+          "source": "@/lib/polyline",
+          "specifiers": [
+            "encodePolyline"
+          ]
+        },
+        {
+          "source": "@test/mocks",
+          "specifiers": [
+            "* as mocks"
+          ]
+        },
+        {
+          "source": "./testUtils",
+          "specifiers": [
+            "renderScreen",
+            "setParams"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 278,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/map.viewTracking.test.tsx": {
@@ -33281,13 +33951,13 @@
     },
     "frontend/src/app/(tabs)/map.tsx": {
       "filePath": "frontend/src/app/(tabs)/map.tsx",
-      "contentHash": "547718d0c43a1f82424effa4cbc3e60e97db30103ab6ae008b21b4b35373344a",
+      "contentHash": "17fe70dd3b16d278789b31073fb328cb9d6defe0890372267613c1db0f63fbc7",
       "functions": [
         {
           "name": "MapBody",
           "params": [],
           "exported": false,
-          "lineCount": 206
+          "lineCount": 252
         },
         {
           "name": "MapScreen",
@@ -33414,6 +34084,7 @@
           "specifiers": [
             "INITIAL_MAP_FILTERS",
             "mapFiltersReducer",
+            "visibleLayers",
             "MapFilterAction"
           ]
         },
@@ -33496,7 +34167,7 @@
       "exports": [
         "MapScreen"
       ],
-      "totalLines": 295,
+      "totalLines": 341,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/(tabs)/profile.tsx": {
@@ -35087,6 +35758,142 @@
       "totalLines": 105,
       "hasStructuralAnalysis": true
     },
+    "frontend/src/features/ai/SaveShortcut.tsx": {
+      "filePath": "frontend/src/features/ai/SaveShortcut.tsx",
+      "contentHash": "7e19fd41b1343eca25ae6c2c0fc1d77e8ff1594fb3daa54e653b4e82ce076ccf",
+      "functions": [
+        {
+          "name": "SaveShortcut",
+          "params": [
+            "{ question }"
+          ],
+          "exported": true,
+          "lineCount": 19
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react-native",
+          "specifiers": [
+            "Pressable",
+            "StyleSheet"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "Icon"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors"
+          ]
+        },
+        {
+          "source": "./shortcuts",
+          "specifiers": [
+            "useShortcuts"
+          ]
+        }
+      ],
+      "exports": [
+        "SaveShortcut"
+      ],
+      "totalLines": 35,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/ai/ShortcutBar.tsx": {
+      "filePath": "frontend/src/features/ai/ShortcutBar.tsx",
+      "contentHash": "0e27cfefbd88bb6ca39ad5b07ceed2b4ff714f129eb7821d555a9a8b254dd2e0",
+      "functions": [
+        {
+          "name": "ShortcutButton",
+          "params": [
+            "{ text, editing, onLongPress, onRemove }"
+          ],
+          "exported": false,
+          "lineCount": 27
+        },
+        {
+          "name": "ShortcutBar",
+          "params": [],
+          "exported": true,
+          "lineCount": 88
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "useState"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "Pressable",
+            "ScrollView",
+            "StyleSheet",
+            "TextInput",
+            "View"
+          ]
+        },
+        {
+          "source": "@/api/types.ai",
+          "specifiers": [
+            "MAX_CHAT_MESSAGE_CHARS"
+          ]
+        },
+        {
+          "source": "@/ui/Button",
+          "specifiers": [
+            "Button"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "Icon"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors",
+            "PAGE_MARGIN",
+            "radius"
+          ]
+        },
+        {
+          "source": "./shortcuts",
+          "specifiers": [
+            "askOnAiTab",
+            "useShortcuts"
+          ]
+        }
+      ],
+      "exports": [
+        "ShortcutBar"
+      ],
+      "totalLines": 167,
+      "hasStructuralAnalysis": true
+    },
     "frontend/src/features/ai/Suggestions.tsx": {
       "filePath": "frontend/src/features/ai/Suggestions.tsx",
       "contentHash": "091eae7ac0ba521395236bea57cea460a15d6c062ef89c37635d8dbdfb9bcfa1",
@@ -35121,6 +35928,102 @@
         "Suggestions"
       ],
       "totalLines": 27,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/ai/shortcuts.ts": {
+      "filePath": "frontend/src/features/ai/shortcuts.ts",
+      "contentHash": "2abab98f2dfe69922ecdecd735b70451348d7e6066aca9d4b5de3bae458b3f86",
+      "functions": [
+        {
+          "name": "normalizeShortcut",
+          "params": [
+            "text"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "hasShortcut",
+          "params": [
+            "list",
+            "text"
+          ],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "loadShortcuts",
+          "params": [],
+          "returnType": "Promise<string[]>",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "saveShortcuts",
+          "params": [
+            "list"
+          ],
+          "returnType": "Promise<void>",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "askOnAiTab",
+          "params": [
+            "question"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "useShortcuts",
+          "params": [],
+          "exported": true,
+          "lineCount": 30
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@react-native-async-storage/async-storage",
+          "specifiers": [
+            "AsyncStorage"
+          ]
+        },
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "useMutation",
+            "useQuery",
+            "useQueryClient"
+          ]
+        },
+        {
+          "source": "expo-router",
+          "specifiers": [
+            "router"
+          ]
+        },
+        {
+          "source": "@/api/types.ai",
+          "specifiers": [
+            "MAX_CHAT_MESSAGE_CHARS"
+          ]
+        }
+      ],
+      "exports": [
+        "SHORTCUTS_STORAGE_KEY",
+        "MAX_SHORTCUTS",
+        "normalizeShortcut",
+        "hasShortcut",
+        "loadShortcuts",
+        "askOnAiTab",
+        "useShortcuts"
+      ],
+      "totalLines": 76,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/auth/AuthProvider.tsx": {
@@ -35327,7 +36230,7 @@
     },
     "frontend/src/features/directions/DirectionsLayer.tsx": {
       "filePath": "frontend/src/features/directions/DirectionsLayer.tsx",
-      "contentHash": "f23b4f31279ce3ab9adde9470a7d3ff89a4b9d05477c4a333b3a7a0759870f17",
+      "contentHash": "16ed21ad3ab70dfa9d064dec3ed1dade47d09682cf3aadd7b4570c71f5b58bf0",
       "functions": [
         {
           "name": "DirectionsLayer",
@@ -35335,11 +36238,21 @@
             "{ hiddenVehicleIds }"
           ],
           "exported": true,
-          "lineCount": 47
+          "lineCount": 46
         }
       ],
       "classes": [],
       "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "memo",
+            "useCallback",
+            "useEffect",
+            "useMemo",
+            "useRef"
+          ]
+        },
         {
           "source": "react-native-maps",
           "specifiers": [
@@ -35348,8 +36261,15 @@
           ]
         },
         {
+          "source": "@/api/types.routing",
+          "specifiers": [
+            "RouteLeg"
+          ]
+        },
+        {
           "source": "@/api/types.transit",
           "specifiers": [
+            "TransitRoute",
             "TransitVehicle"
           ]
         },
@@ -35372,6 +36292,12 @@
           ]
         },
         {
+          "source": "@/hooks/useTransit",
+          "specifiers": [
+            "useTransitRoutes"
+          ]
+        },
+        {
           "source": "@/lib/polyline",
           "specifiers": [
             "decodePolyline"
@@ -35388,12 +36314,26 @@
           "specifiers": [
             "useDirectionsMode"
           ]
+        },
+        {
+          "source": "./TripMarkers",
+          "specifiers": [
+            "TripMarkers"
+          ]
+        },
+        {
+          "source": "./tripSteps",
+          "specifiers": [
+            "legStrokeColor"
+          ]
         }
       ],
       "exports": [
+        "WALK_DASH",
+        "RouteLines",
         "DirectionsLayer"
       ],
-      "totalLines": 64,
+      "totalLines": 96,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/directions/DirectionsPanel.tsx": {
@@ -35574,6 +36514,258 @@
         "DirectionsPanel"
       ],
       "totalLines": 195,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/directions/TripMarkers.tsx": {
+      "filePath": "frontend/src/features/directions/TripMarkers.tsx",
+      "contentHash": "ac1b61b6f13141ec5f1e64cb520e36553cff809c1a17988c1b7682eb3ed74f64",
+      "functions": [
+        {
+          "name": "TripStepMarkerBase",
+          "params": [
+            "{ step }"
+          ],
+          "exported": false,
+          "lineCount": 31
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "memo",
+            "useMemo"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "react-native-maps",
+          "specifiers": [
+            "Marker"
+          ]
+        },
+        {
+          "source": "@/api/types.routing",
+          "specifiers": [
+            "RouteLeg"
+          ]
+        },
+        {
+          "source": "@/api/types.transit",
+          "specifiers": [
+            "TransitRoute"
+          ]
+        },
+        {
+          "source": "@/features/map/ClusterMarker",
+          "specifiers": [
+            "useBriefViewTracking"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "Icon"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors",
+            "radius"
+          ]
+        },
+        {
+          "source": "./tripSteps",
+          "specifiers": [
+            "tripSteps",
+            "TripStep"
+          ]
+        }
+      ],
+      "exports": [
+        "TripStepMarker",
+        "TripMarkers"
+      ],
+      "totalLines": 99,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/directions/tripSteps.ts": {
+      "filePath": "frontend/src/features/directions/tripSteps.ts",
+      "contentHash": "412131ec372fc84edb1463a27b68242ecad845268944c0d464396c9e62aeb22c",
+      "functions": [
+        {
+          "name": "modeName",
+          "params": [
+            "mode"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "modeIcon",
+          "params": [
+            "mode"
+          ],
+          "returnType": "IconName",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "pathMidpoint",
+          "params": [
+            "path"
+          ],
+          "returnType": "Coordinates | null",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "boardLabel",
+          "params": [
+            "leg"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "alightLabel",
+          "params": [
+            "leg"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "walkLabel",
+          "params": [
+            "leg",
+            "destinationName"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "legEnd",
+          "params": [
+            "leg",
+            "end"
+          ],
+          "returnType": "Coordinates | null",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "legLineColor",
+          "params": [
+            "leg",
+            "routes"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "tripSteps",
+          "params": [
+            "legs",
+            "destinationName",
+            "routes"
+          ],
+          "returnType": "TripStep[]",
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "legStrokeColor",
+          "params": [
+            "leg",
+            "walkColor",
+            "routes"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/types.routing",
+          "specifiers": [
+            "LegMode",
+            "RouteLeg"
+          ]
+        },
+        {
+          "source": "@/api/types.transit",
+          "specifiers": [
+            "TransitRoute"
+          ]
+        },
+        {
+          "source": "@/features/journey/progress",
+          "specifiers": [
+            "legPoints"
+          ]
+        },
+        {
+          "source": "@/features/transit/lines",
+          "specifiers": [
+            "lineColor",
+            "resolveLineId"
+          ]
+        },
+        {
+          "source": "@/lib/geo",
+          "specifiers": [
+            "distanceMeters",
+            "Coordinates"
+          ]
+        },
+        {
+          "source": "@/lib/time",
+          "specifiers": [
+            "formatTime",
+            "parseIso"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "IconName"
+          ]
+        }
+      ],
+      "exports": [
+        "modeName",
+        "modeIcon",
+        "pathMidpoint",
+        "boardLabel",
+        "alightLabel",
+        "walkLabel",
+        "legLineColor",
+        "tripSteps",
+        "legStrokeColor"
+      ],
+      "totalLines": 121,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/events/DateTimeField.tsx": {
@@ -36237,7 +37429,7 @@
     },
     "frontend/src/features/journey/JourneyPanel.tsx": {
       "filePath": "frontend/src/features/journey/JourneyPanel.tsx",
-      "contentHash": "5266bd194a0647fc01fc6fdaca0097c66493537054b724dfc3c2292131534ba5",
+      "contentHash": "28338df92b38b72454fb5ef43f3777f95b32fc9a4593231874a647c377b7fbca",
       "functions": [
         {
           "name": "JourneyLayer",
@@ -36245,7 +37437,7 @@
             "{ target, journey, hiddenVehicleIds }"
           ],
           "exported": true,
-          "lineCount": 40
+          "lineCount": 25
         },
         {
           "name": "JourneyBody",
@@ -36269,6 +37461,8 @@
         {
           "source": "react",
           "specifiers": [
+            "memo",
+            "useCallback",
             "useMemo"
           ]
         },
@@ -36287,8 +37481,15 @@
           ]
         },
         {
+          "source": "@/api/types.routing",
+          "specifiers": [
+            "RouteLeg"
+          ]
+        },
+        {
           "source": "@/api/types.transit",
           "specifiers": [
+            "TransitRoute",
             "TransitVehicle"
           ]
         },
@@ -36296,6 +37497,18 @@
           "source": "@/features/directions/DirectionsPanel",
           "specifiers": [
             "legIcon"
+          ]
+        },
+        {
+          "source": "@/features/directions/TripMarkers",
+          "specifiers": [
+            "TripMarkers"
+          ]
+        },
+        {
+          "source": "@/features/directions/tripSteps",
+          "specifiers": [
+            "legStrokeColor"
           ]
         },
         {
@@ -36308,6 +37521,12 @@
           "source": "@/features/transit/LegVehicles",
           "specifiers": [
             "LegVehicles"
+          ]
+        },
+        {
+          "source": "@/hooks/useTransit",
+          "specifiers": [
+            "useTransitRoutes"
           ]
         },
         {
@@ -36364,10 +37583,11 @@
         }
       ],
       "exports": [
+        "JourneyLines",
         "JourneyLayer",
         "JourneyPanel"
       ],
-      "totalLines": 166,
+      "totalLines": 184,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/journey/navigation.ts": {
@@ -36668,8 +37888,53 @@
     },
     "frontend/src/features/map/ClusterMarker.tsx": {
       "filePath": "frontend/src/features/map/ClusterMarker.tsx",
-      "contentHash": "8ba31c605a7b4af18d985f2f588420dafddca3efa30ecf23d5ac50f0d654dc94",
+      "contentHash": "86b8f7c6089ced2f8fbe755608f6d68bbca26ce17a16237da52b3101782a321f",
       "functions": [
+        {
+          "name": "armAt",
+          "params": [
+            "due"
+          ],
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "flushTrackingOff",
+          "params": [],
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "scheduleTrackingOff",
+          "params": [
+            "cb",
+            "ms"
+          ],
+          "returnType": "() => void",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "trackingTimerArms",
+          "params": [],
+          "returnType": "number",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "trackingTimerArmed",
+          "params": [],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "pendingTrackingCount",
+          "params": [],
+          "returnType": "number",
+          "exported": true,
+          "lineCount": 3
+        },
         {
           "name": "useBriefViewTracking",
           "params": [
@@ -36677,7 +37942,7 @@
           ],
           "returnType": "boolean",
           "exported": true,
-          "lineCount": 9
+          "lineCount": 8
         },
         {
           "name": "ClusterMarker",
@@ -36725,15 +37990,20 @@
       ],
       "exports": [
         "MARKER_TRACK_MS",
+        "TRACK_BATCH_SLACK_MS",
+        "scheduleTrackingOff",
+        "trackingTimerArms",
+        "trackingTimerArmed",
+        "pendingTrackingCount",
         "useBriefViewTracking",
         "ClusterMarker"
       ],
-      "totalLines": 53,
+      "totalLines": 114,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/EventMarkers.tsx": {
       "filePath": "frontend/src/features/map/EventMarkers.tsx",
-      "contentHash": "298daf9970ddac19a0ff19ef99ae51d59e666bb0ec110593aa4ed359e536f1d5",
+      "contentHash": "394f74c037b784034cd398becc0899cdf5fd39d6932ac5e3ce7587a8b5699d29",
       "functions": [
         {
           "name": "EventPin",
@@ -36744,19 +38014,11 @@
           "lineCount": 16
         },
         {
-          "name": "EventMarker",
-          "params": [
-            "{ event, selected, showLabel, onSelect }"
-          ],
-          "exported": false,
-          "lineCount": 14
-        },
-        {
-          "name": "EventMarkers",
+          "name": "EventMarkersBase",
           "params": [
             "{ events, selectedId, showLabels, onSelect, bbox, onZoomTo }"
           ],
-          "exported": true,
+          "exported": false,
           "lineCount": 29
         }
       ],
@@ -36765,6 +38027,8 @@
         {
           "source": "react",
           "specifiers": [
+            "memo",
+            "useCallback",
             "useMemo"
           ]
         },
@@ -36837,7 +38101,7 @@
       "exports": [
         "EventMarkers"
       ],
-      "totalLines": 112,
+      "totalLines": 115,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/EventPanel.tsx": {
@@ -36908,7 +38172,7 @@
     },
     "frontend/src/features/map/MapContext.tsx": {
       "filePath": "frontend/src/features/map/MapContext.tsx",
-      "contentHash": "059ffcac755c40870fb40a5ccc73e2e75fc69a5bc73d6897e4375dc00cccc238",
+      "contentHash": "a3ea7bf6518960771ac04dc613db6a14c75a52c88463a68933344a3d6e91b08c",
       "functions": [
         {
           "name": "isTransitLayerSelection",
@@ -36933,7 +38197,7 @@
             "{ userPosition, initialBbox, children }"
           ],
           "exported": true,
-          "lineCount": 31
+          "lineCount": 36
         },
         {
           "name": "useMapContext",
@@ -36994,24 +38258,30 @@
         "MapProvider",
         "useMapContext"
       ],
-      "totalLines": 102,
+      "totalLines": 107,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/MapFilterBar.tsx": {
       "filePath": "frontend/src/features/map/MapFilterBar.tsx",
-      "contentHash": "bede52386fd0b3b3e4e5c24410c09ce8e3fe49678ba2a77df25230eb1f58582d",
+      "contentHash": "976aadeb01ad93d4a8a0621d920c27073e94125a315c710dddf09976ff0e806c",
       "functions": [
         {
-          "name": "MapFilterBar",
+          "name": "MapFilterBarBase",
           "params": [
-            "{ filters, onChange }"
+            "{ filters, onChange, disabled = false }"
           ],
-          "exported": true,
-          "lineCount": 20
+          "exported": false,
+          "lineCount": 21
         }
       ],
       "classes": [],
       "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "memo"
+          ]
+        },
         {
           "source": "react-native",
           "specifiers": [
@@ -37050,12 +38320,12 @@
       "exports": [
         "MapFilterBar"
       ],
-      "totalLines": 41,
+      "totalLines": 48,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/MapPanel.tsx": {
       "filePath": "frontend/src/features/map/MapPanel.tsx",
-      "contentHash": "feb2c13b346fe567699beaaed24e4d773ab04fd425a1f17697e3e6ee7dc60925",
+      "contentHash": "5d061b7cea2f6773af35e379cb2790659d148e067440d5bd4795ec203c885d8a",
       "functions": [
         {
           "name": "PanelContent",
@@ -37066,14 +38336,20 @@
           "lineCount": 14
         },
         {
-          "name": "MapPanel",
+          "name": "MapPanelBase",
           "params": [],
-          "exported": true,
+          "exported": false,
           "lineCount": 14
         }
       ],
       "classes": [],
       "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "memo"
+          ]
+        },
         {
           "source": "react-native",
           "specifiers": [
@@ -37136,12 +38412,12 @@
       "exports": [
         "MapPanel"
       ],
-      "totalLines": 63,
+      "totalLines": 67,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/PlaceMarkers.tsx": {
       "filePath": "frontend/src/features/map/PlaceMarkers.tsx",
-      "contentHash": "35bd1c70c55daeb3a9f975882d7b0259ec19f857fe981fdac55102068305717b",
+      "contentHash": "6b46cccd238dddef0a789276aea70ddbdc37e2349d6f962b9d56a627c4c7a95a",
       "functions": [
         {
           "name": "PlacePin",
@@ -37152,12 +38428,12 @@
           "lineCount": 16
         },
         {
-          "name": "PlaceMarkers",
+          "name": "PlaceMarkersBase",
           "params": [
             "{ places, selectedId, showLabels, onSelect, bbox, onZoomTo }"
           ],
-          "exported": true,
-          "lineCount": 22
+          "exported": false,
+          "lineCount": 13
         }
       ],
       "classes": [],
@@ -37165,6 +38441,8 @@
         {
           "source": "react",
           "specifiers": [
+            "memo",
+            "useCallback",
             "useMemo"
           ]
         },
@@ -37234,7 +38512,7 @@
       "exports": [
         "PlaceMarkers"
       ],
-      "totalLines": 94,
+      "totalLines": 102,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/PlacePanel.tsx": {
@@ -37332,7 +38610,7 @@
     },
     "frontend/src/features/map/mapFilters.ts": {
       "filePath": "frontend/src/features/map/mapFilters.ts",
-      "contentHash": "03d028d6d9dc946c0154cdd230318132fd43caaac34685992a721584ac415b68",
+      "contentHash": "e9c8e3e35a54132c4559d1f6000d7be15d69a7e47dd74aa5e3929ac5de497c4b",
       "functions": [
         {
           "name": "allPlacesSelected",
@@ -37380,6 +38658,16 @@
           "returnType": "MapFilters",
           "exported": true,
           "lineCount": 20
+        },
+        {
+          "name": "visibleLayers",
+          "params": [
+            "f",
+            "showingDirections"
+          ],
+          "returnType": "MapFilters",
+          "exported": true,
+          "lineCount": 3
         }
       ],
       "classes": [],
@@ -37395,9 +38683,10 @@
         "INITIAL_MAP_FILTERS",
         "allPlacesSelected",
         "categorySelected",
-        "mapFiltersReducer"
+        "mapFiltersReducer",
+        "visibleLayers"
       ],
-      "totalLines": 64,
+      "totalLines": 71,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/placeCategories.ts": {
@@ -37526,7 +38815,7 @@
     },
     "frontend/src/features/transit/LegVehicles.tsx": {
       "filePath": "frontend/src/features/transit/LegVehicles.tsx",
-      "contentHash": "09188500e1d4a64c112e53012c5ab41d956b7dec3c0ba3daf5ddf526443f9a38",
+      "contentHash": "3c4158489711eec1010dd27a67622f98d53939c7759f739d303b88b9eba54084",
       "functions": [
         {
           "name": "useLegVehicles",
@@ -37537,12 +38826,15 @@
           "lineCount": 6
         },
         {
-          "name": "LegVehicles",
+          "name": "approachingVehicleIds",
           "params": [
-            "{ legs, selectedId, hiddenIds, onSelect }"
+            "legs",
+            "vehicles",
+            "routes"
           ],
+          "returnType": "Set<string>",
           "exported": true,
-          "lineCount": 11
+          "lineCount": 10
         }
       ],
       "classes": [],
@@ -37550,7 +38842,11 @@
         {
           "source": "react",
           "specifiers": [
-            "useMemo"
+            "memo",
+            "useCallback",
+            "useEffect",
+            "useMemo",
+            "useRef"
           ]
         },
         {
@@ -37562,6 +38858,7 @@
         {
           "source": "@/api/types.transit",
           "specifiers": [
+            "TransitRoute",
             "TransitVehicle"
           ]
         },
@@ -37575,7 +38872,10 @@
         {
           "source": "./lines",
           "specifiers": [
-            "rideLegLines"
+            "nearestVehicle",
+            "resolveLineId",
+            "rideLegLines",
+            "vehiclesOfLine"
           ]
         },
         {
@@ -37587,9 +38887,10 @@
       ],
       "exports": [
         "useLegVehicles",
+        "approachingVehicleIds",
         "LegVehicles"
       ],
-      "totalLines": 40,
+      "totalLines": 73,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/transit/StopPanel.tsx": {
@@ -37703,23 +39004,15 @@
     },
     "frontend/src/features/transit/TransitLayer.tsx": {
       "filePath": "frontend/src/features/transit/TransitLayer.tsx",
-      "contentHash": "8c4a27d9c251e0ddd06177e2c18dcbe2e00c0212899cd8b8356740fd7ae0616d",
+      "contentHash": "33302816a93219c861130be53561e15e97b6c0b3e6b6dc29b597d89da950c8d8",
       "functions": [
         {
-          "name": "StopMarker",
+          "name": "TransitLayerBase",
           "params": [
-            "{ stop, selected, onPress }"
+            "{ stops, line, vehicles, shapes, bbox, selectedStopId, selectedVehicleId, onSelectStop, onSelectVehicle }"
           ],
           "exported": false,
-          "lineCount": 15
-        },
-        {
-          "name": "TransitLayer",
-          "params": [
-            "{ stops, line, vehicles, shapes, selectedStopId, selectedVehicleId, onSelectStop, onSelectVehicle }"
-          ],
-          "exported": true,
-          "lineCount": 36
+          "lineCount": 35
         }
       ],
       "classes": [],
@@ -37727,7 +39020,11 @@
         {
           "source": "react",
           "specifiers": [
-            "useMemo"
+            "memo",
+            "useCallback",
+            "useEffect",
+            "useMemo",
+            "useRef"
           ]
         },
         {
@@ -37760,6 +39057,12 @@
           ]
         },
         {
+          "source": "@/lib/bbox",
+          "specifiers": [
+            "Bbox"
+          ]
+        },
+        {
           "source": "@/lib/polyline",
           "specifiers": [
             "decodePolyline"
@@ -37776,8 +39079,10 @@
           "specifiers": [
             "decodeShapes",
             "sameLine",
+            "vehiclesInView",
             "vehiclesOfLine",
-            "withAlpha"
+            "withAlpha",
+            "DrawnShape"
           ]
         },
         {
@@ -37789,22 +39094,33 @@
       ],
       "exports": [
         "SHAPE_WIDTH",
+        "ShapeLines",
         "TransitLayer"
       ],
-      "totalLines": 94,
+      "totalLines": 124,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/transit/VehicleMarker.tsx": {
       "filePath": "frontend/src/features/transit/VehicleMarker.tsx",
-      "contentHash": "5187b7bbd57639adecbe087ba689800855c4464cf14e9ae2d640609fef7b1c47",
+      "contentHash": "5f9ae81e61b8bac585a39b0a38878497369e2e7b080d61b8f13c2bece834601e",
       "functions": [
         {
-          "name": "VehicleBadge",
+          "name": "VehicleBadgeBase",
           "params": [
             "{ vehicle, selected = false }"
           ],
-          "exported": true,
+          "exported": false,
           "lineCount": 15
+        },
+        {
+          "name": "sameBadge",
+          "params": [
+            "a",
+            "b"
+          ],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 3
         },
         {
           "name": "VehicleMarkerBase",
@@ -37812,7 +39128,17 @@
             "{ vehicle, selected = false, idPrefix = 'vehicle-marker', onPress }"
           ],
           "exported": false,
-          "lineCount": 15
+          "lineCount": 18
+        },
+        {
+          "name": "sameVehicleMarker",
+          "params": [
+            "prev",
+            "next"
+          ],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 11
         }
       ],
       "classes": [],
@@ -37820,7 +39146,9 @@
         {
           "source": "react",
           "specifiers": [
-            "memo"
+            "memo",
+            "useCallback",
+            "useMemo"
           ]
         },
         {
@@ -37871,10 +39199,12 @@
         }
       ],
       "exports": [
+        "sameBadge",
         "VehicleBadge",
+        "sameVehicleMarker",
         "VehicleMarker"
       ],
-      "totalLines": 73,
+      "totalLines": 106,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/transit/VehiclePanel.tsx": {
@@ -38007,7 +39337,7 @@
     },
     "frontend/src/features/transit/lines.ts": {
       "filePath": "frontend/src/features/transit/lines.ts",
-      "contentHash": "b7addd3568c5be8cd41922729258778acec1fec94d265650d957eb83e7583839",
+      "contentHash": "33242565c5d486e22abe03d881dab0615cb9a665d374b8775b8bdf60e38eac99",
       "functions": [
         {
           "name": "hash",
@@ -38096,6 +39426,17 @@
           "lineCount": 4
         },
         {
+          "name": "vehiclesInView",
+          "params": [
+            "vehicles",
+            "bbox",
+            "margin"
+          ],
+          "returnType": "TransitVehicle[]",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
           "name": "vehicleLineName",
           "params": [
             "v"
@@ -38164,6 +39505,12 @@
           ]
         },
         {
+          "source": "@/lib/bbox",
+          "specifiers": [
+            "Bbox"
+          ]
+        },
+        {
           "source": "@/lib/geo",
           "specifiers": [
             "distanceMeters",
@@ -38194,13 +39541,15 @@
         "resolveLineId",
         "rideLegLines",
         "vehiclesOfLine",
+        "VEHICLE_VIEW_MARGIN",
+        "vehiclesInView",
         "vehicleLineName",
         "relativeAge",
         "isReportOld",
         "nearestVehicle",
         "decodeShapes"
       ],
-      "totalLines": 185,
+      "totalLines": 200,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/users/MyEvents.tsx": {
@@ -39925,7 +41274,7 @@
     },
     "frontend/src/ui/Chip.tsx": {
       "filePath": "frontend/src/ui/Chip.tsx",
-      "contentHash": "6a1903c24200ee95f31e0e30dd0af736f91a9d8d56e9b8dfee3590fd099060e4",
+      "contentHash": "f483e6efca39e62a42c1583b13e5ad115e034c7906d6b9c288a950b7f49c4dae",
       "functions": [
         {
           "name": "chipColors",
@@ -39941,7 +41290,8 @@
           "params": [
             "selected",
             "overMap",
-            "style"
+            "style",
+            "disabled"
           ],
           "exported": true,
           "lineCount": 4
@@ -39949,10 +41299,10 @@
         {
           "name": "Chip",
           "params": [
-            "{ label, selected = false, onPress, icon, style, overMap = false, testID }"
+            "{ label, selected = false, onPress, icon, style, overMap = false, disabled = false, testID }"
           ],
           "exported": true,
-          "lineCount": 18
+          "lineCount": 19
         },
         {
           "name": "StatusChip",
@@ -40003,7 +41353,7 @@
         "Chip",
         "StatusChip"
       ],
-      "totalLines": 90,
+      "totalLines": 94,
       "hasStructuralAnalysis": true
     },
     "frontend/src/ui/GlowBackground.tsx": {
@@ -41727,359 +43077,6 @@
       "exports": [],
       "totalLines": 186,
       "hasStructuralAnalysis": false
-    },
-    "backend/src/main/java/com/unihack8/backend/transit/domain/dto/NextArrivalDto.java": {
-      "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/NextArrivalDto.java",
-      "contentHash": "28d3a7dba49420fa044c2f619a5f0a4bcddca49a24eedbb3687a2dba28ea784e",
-      "functions": [],
-      "classes": [
-        {
-          "name": "NextArrivalDto",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 3
-        }
-      ],
-      "imports": [
-        {
-          "source": "java.time.Instant",
-          "specifiers": [
-            "Instant"
-          ]
-        }
-      ],
-      "exports": [
-        "NextArrivalDto"
-      ],
-      "totalLines": 12,
-      "hasStructuralAnalysis": true
-    },
-    "frontend/__tests__/ai.shortcuts.test.tsx": {
-      "filePath": "frontend/__tests__/ai.shortcuts.test.tsx",
-      "contentHash": "2c5d7a88581c34653383c986bb9b425311c7513fa2d1c3fcee1dfcca11f449f6",
-      "functions": [
-        {
-          "name": "aiAgain",
-          "params": [
-            "client"
-          ],
-          "exported": false,
-          "lineCount": 9
-        },
-        {
-          "name": "seed",
-          "params": [
-            "list"
-          ],
-          "exported": false,
-          "lineCount": 3
-        }
-      ],
-      "classes": [],
-      "imports": [
-        {
-          "source": "@react-native-async-storage/async-storage",
-          "specifiers": [
-            "AsyncStorage"
-          ]
-        },
-        {
-          "source": "@tanstack/react-query",
-          "specifiers": [
-            "QueryClientProvider",
-            "QueryClient"
-          ]
-        },
-        {
-          "source": "@testing-library/react-native",
-          "specifiers": [
-            "act",
-            "fireEvent",
-            "screen",
-            "waitFor",
-            "within"
-          ]
-        },
-        {
-          "source": "@/app/(tabs)/ai",
-          "specifiers": [
-            "AiScreen"
-          ]
-        },
-        {
-          "source": "@/app/(tabs)/index",
-          "specifiers": [
-            "HomeScreen"
-          ]
-        },
-        {
-          "source": "@/features/ai/shortcuts",
-          "specifiers": [
-            "hasShortcut",
-            "loadShortcuts",
-            "MAX_SHORTCUTS",
-            "normalizeShortcut",
-            "SHORTCUTS_STORAGE_KEY"
-          ]
-        },
-        {
-          "source": "@test/mocks",
-          "specifiers": [
-            "setMockLatency"
-          ]
-        },
-        {
-          "source": "@/features/auth/AuthProvider",
-          "specifiers": [
-            "AuthContext"
-          ]
-        },
-        {
-          "source": "./testUtils",
-          "specifiers": [
-            "fakeAuth",
-            "mockRouter",
-            "renderScreen",
-            "setParams"
-          ]
-        }
-      ],
-      "exports": [],
-      "totalLines": 152,
-      "hasStructuralAnalysis": true
-    },
-    "frontend/src/features/ai/SaveShortcut.tsx": {
-      "filePath": "frontend/src/features/ai/SaveShortcut.tsx",
-      "contentHash": "7e19fd41b1343eca25ae6c2c0fc1d77e8ff1594fb3daa54e653b4e82ce076ccf",
-      "functions": [
-        {
-          "name": "SaveShortcut",
-          "params": [
-            "{ question }"
-          ],
-          "exported": true,
-          "lineCount": 19
-        }
-      ],
-      "classes": [],
-      "imports": [
-        {
-          "source": "react-native",
-          "specifiers": [
-            "Pressable",
-            "StyleSheet"
-          ]
-        },
-        {
-          "source": "@/ui/Icon",
-          "specifiers": [
-            "Icon"
-          ]
-        },
-        {
-          "source": "@/ui/Text",
-          "specifiers": [
-            "Text"
-          ]
-        },
-        {
-          "source": "@/ui/theme",
-          "specifiers": [
-            "colors"
-          ]
-        },
-        {
-          "source": "./shortcuts",
-          "specifiers": [
-            "useShortcuts"
-          ]
-        }
-      ],
-      "exports": [
-        "SaveShortcut"
-      ],
-      "totalLines": 35,
-      "hasStructuralAnalysis": true
-    },
-    "frontend/src/features/ai/ShortcutBar.tsx": {
-      "filePath": "frontend/src/features/ai/ShortcutBar.tsx",
-      "contentHash": "0e27cfefbd88bb6ca39ad5b07ceed2b4ff714f129eb7821d555a9a8b254dd2e0",
-      "functions": [
-        {
-          "name": "ShortcutButton",
-          "params": [
-            "{ text, editing, onLongPress, onRemove }"
-          ],
-          "exported": false,
-          "lineCount": 27
-        },
-        {
-          "name": "ShortcutBar",
-          "params": [],
-          "exported": true,
-          "lineCount": 88
-        }
-      ],
-      "classes": [],
-      "imports": [
-        {
-          "source": "react",
-          "specifiers": [
-            "useState"
-          ]
-        },
-        {
-          "source": "react-native",
-          "specifiers": [
-            "Pressable",
-            "ScrollView",
-            "StyleSheet",
-            "TextInput",
-            "View"
-          ]
-        },
-        {
-          "source": "@/api/types.ai",
-          "specifiers": [
-            "MAX_CHAT_MESSAGE_CHARS"
-          ]
-        },
-        {
-          "source": "@/ui/Button",
-          "specifiers": [
-            "Button"
-          ]
-        },
-        {
-          "source": "@/ui/Icon",
-          "specifiers": [
-            "Icon"
-          ]
-        },
-        {
-          "source": "@/ui/Text",
-          "specifiers": [
-            "Text"
-          ]
-        },
-        {
-          "source": "@/ui/theme",
-          "specifiers": [
-            "colors",
-            "PAGE_MARGIN",
-            "radius"
-          ]
-        },
-        {
-          "source": "./shortcuts",
-          "specifiers": [
-            "askOnAiTab",
-            "useShortcuts"
-          ]
-        }
-      ],
-      "exports": [
-        "ShortcutBar"
-      ],
-      "totalLines": 167,
-      "hasStructuralAnalysis": true
-    },
-    "frontend/src/features/ai/shortcuts.ts": {
-      "filePath": "frontend/src/features/ai/shortcuts.ts",
-      "contentHash": "2abab98f2dfe69922ecdecd735b70451348d7e6066aca9d4b5de3bae458b3f86",
-      "functions": [
-        {
-          "name": "normalizeShortcut",
-          "params": [
-            "text"
-          ],
-          "returnType": "string",
-          "exported": true,
-          "lineCount": 3
-        },
-        {
-          "name": "hasShortcut",
-          "params": [
-            "list",
-            "text"
-          ],
-          "returnType": "boolean",
-          "exported": true,
-          "lineCount": 4
-        },
-        {
-          "name": "loadShortcuts",
-          "params": [],
-          "returnType": "Promise<string[]>",
-          "exported": true,
-          "lineCount": 9
-        },
-        {
-          "name": "saveShortcuts",
-          "params": [
-            "list"
-          ],
-          "returnType": "Promise<void>",
-          "exported": false,
-          "lineCount": 3
-        },
-        {
-          "name": "askOnAiTab",
-          "params": [
-            "question"
-          ],
-          "returnType": "void",
-          "exported": true,
-          "lineCount": 3
-        },
-        {
-          "name": "useShortcuts",
-          "params": [],
-          "exported": true,
-          "lineCount": 30
-        }
-      ],
-      "classes": [],
-      "imports": [
-        {
-          "source": "@react-native-async-storage/async-storage",
-          "specifiers": [
-            "AsyncStorage"
-          ]
-        },
-        {
-          "source": "@tanstack/react-query",
-          "specifiers": [
-            "useMutation",
-            "useQuery",
-            "useQueryClient"
-          ]
-        },
-        {
-          "source": "expo-router",
-          "specifiers": [
-            "router"
-          ]
-        },
-        {
-          "source": "@/api/types.ai",
-          "specifiers": [
-            "MAX_CHAT_MESSAGE_CHARS"
-          ]
-        }
-      ],
-      "exports": [
-        "SHORTCUTS_STORAGE_KEY",
-        "MAX_SHORTCUTS",
-        "normalizeShortcut",
-        "hasShortcut",
-        "loadShortcuts",
-        "askOnAiTab",
-        "useShortcuts"
-      ],
-      "totalLines": 76,
-      "hasStructuralAnalysis": true
     }
   }
 }
