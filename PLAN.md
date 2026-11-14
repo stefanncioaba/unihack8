@@ -358,10 +358,11 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 - [x] **21.2 Chip colours:** selected chips keep their colour when pressed (map style no longer overrides the selected fill).
 - [x] **21.3 Events zoomed out:** count bubbles at any zoom level, tap to zoom in; Android custom markers render.
 - [x] **21.4 Backend:** `GET /transit/vehicles` without `route` gives all vehicles; new `GET /transit/shapes` (GTFS shapes) — `docs/API.md`.
-- [x] **21.5 Transport layer:** every line drawn in its own colour, all vehicles live, tap a vehicle for its info panel.
+- [x] **21.5 Transport layer:** every line drawn in its own colour, all vehicles live (no line picking: the whole network shows at once), tap a vehicle for its info panel.
 - [x] **21.6 Directions:** live vehicles of the route's lines drawn along the route (preview and journey mode).
 - [x] **21.7 Profile:** reliability score no longer shows ".." instead of the number.
-- [x] **21.8 Tests, `DOCS.md` and the knowledge graph updated.**
+- [x] **21.8a Tests and `DOCS.md` updated.**
+- [ ] **21.8b Knowledge graph updated** — skipped for now (48 changed files force a full rebuild of 474 files).
 
 ---
 

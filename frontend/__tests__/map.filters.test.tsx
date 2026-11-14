@@ -172,12 +172,11 @@ describe('MapScreen filters', () => {
     expect(screen.queryByTestId('zoom-hint')).toBeNull();
   });
 
-  it('shows the line chips only while Transport is on', async () => {
+  it('never shows line chips: Transport shows the whole network at once', async () => {
     renderScreen(<MapScreen />);
+    fireEvent.press(screen.getByTestId('chip-transit'));
+    await waitFor(() => expect(screen.getAllByTestId(/^vehicle-marker-/).length).toBeGreaterThan(0));
     expect(screen.queryByTestId('transit-lines')).toBeNull();
-    fireEvent.press(screen.getByTestId('chip-transit'));
-    expect(await screen.findByTestId('chip-line-1')).toBeTruthy();
-    fireEvent.press(screen.getByTestId('chip-transit'));
-    await waitFor(() => expect(screen.queryByTestId('transit-lines')).toBeNull());
+    expect(screen.queryByTestId(/^chip-line-/)).toBeNull();
   });
 });

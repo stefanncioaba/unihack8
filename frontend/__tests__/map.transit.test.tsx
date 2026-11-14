@@ -85,27 +85,16 @@ describe('MapScreen transit layer', () => {
     expect(stopMarkers()).toHaveLength(0);
   });
 
-  it('shows only the live vehicles and stops of a chosen line', async () => {
+  it('shows the live vehicles of every running line and the stops of every line, with no line to pick', async () => {
     renderScreen(<MapScreen />);
     await moveTo(0.02);
     fireEvent.press(screen.getByTestId('chip-transit'));
-    fireEvent.press(await screen.findByTestId('chip-line-1'));
-    await waitFor(() => expect(vehicleMarkers()).toHaveLength(2));
-    expect(vehicleMarkers().every((m) => m.props.testID.startsWith('vehicle-marker-1-'))).toBe(true);
-    const ids = stopMarkers().map((m) => m.props.testID.replace('stop-marker-', ''));
-    expect(ids.length).toBeGreaterThan(0);
-    expect(ids.every((id) => LINE_STOPS['1'].includes(id))).toBe(true);
-
-    fireEvent.press(screen.getByTestId('chip-line-1')); // tap again = no line: every running line's vehicles again
     await waitFor(() => expect(vehicleMarkers()).toHaveLength(8));
-  });
-
-  it('says when a line has no vehicles out', async () => {
-    renderScreen(<MapScreen />);
-    await moveTo(0.02);
-    fireEvent.press(screen.getByTestId('chip-transit'));
-    fireEvent.press(await screen.findByTestId('chip-line-E4'));
-    expect(await screen.findByText('No vehicles on line E4 right now')).toBeTruthy();
+    expect(vehicleMarkers().some((m) => m.props.testID.startsWith('vehicle-marker-1-'))).toBe(true);
+    expect(vehicleMarkers().some((m) => m.props.testID.startsWith('vehicle-marker-14-'))).toBe(true);
+    const ids = stopMarkers().map((m) => m.props.testID.replace('stop-marker-', ''));
+    expect(ids.some((id) => !LINE_STOPS['1'].includes(id))).toBe(true);
+    expect(screen.queryByTestId(/^chip-line-/)).toBeNull();
   });
 
   it('opens a stop panel with next arrivals and last departures', async () => {

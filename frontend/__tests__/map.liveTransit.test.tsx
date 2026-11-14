@@ -334,7 +334,7 @@ describe('VehiclePanel', () => {
 });
 
 describe('MapScreen live transit', () => {
-  it('Transport draws every line and every live vehicle; a line chip narrows them; a tap opens the vehicle panel', async () => {
+  it('Transport draws every line and every live vehicle at once; a tap opens the vehicle panel', async () => {
     renderScreen(<MapScreen />);
     await moveTo(0.2); // zoomed out: no stops, but lines and vehicles still show
     expect(shapeLines()).toHaveLength(0);
@@ -342,12 +342,11 @@ describe('MapScreen live transit', () => {
     await waitFor(() => expect(shapeLines()).toHaveLength(MOCK_ROUTES.length));
     await waitFor(() => expect(vehicleMarkers()).toHaveLength(8));
 
-    fireEvent.press(await screen.findByTestId('chip-line-14'));
-    await waitFor(() => expect(vehicleMarkers()).toHaveLength(2));
-    expect(screen.getByTestId('shape-line-14-0').props.strokeWidth).toBe(SHAPE_WIDTH.chosen);
-    expect(screen.getByTestId('shape-line-1-0').props.strokeWidth).toBe(SHAPE_WIDTH.faded);
+    // No line is picked, so every line is drawn the same way (none faded).
+    expect(screen.getByTestId('shape-line-14-0').props.strokeWidth).toBe(screen.getByTestId('shape-line-1-0').props.strokeWidth);
+    expect(screen.getByTestId('shape-line-1-0').props.strokeWidth).not.toBe(SHAPE_WIDTH.faded);
 
-    fireEvent.press(vehicleMarkers()[0]);
+    fireEvent.press(vehicleMarkers().find((m) => m.props.testID.startsWith('vehicle-marker-14-'))!);
     const panel = within(await screen.findByTestId('vehicle-panel'));
     expect(panel.getByText(/^Trolleybus 14/)).toBeTruthy();
     fireEvent.press(screen.getByLabelText('Close panel'));
@@ -358,21 +357,10 @@ describe('MapScreen live transit', () => {
     expect(shapeLines()).toHaveLength(0);
   });
 
-  it('closes a transport-layer vehicle panel when another line is chosen or Transport is turned off', async () => {
+  it('closes a transport-layer vehicle panel when Transport is turned off', async () => {
     renderScreen(<MapScreen />);
     await moveTo(0.2);
     fireEvent.press(screen.getByTestId('chip-transit'));
-    fireEvent.press(await screen.findByTestId('chip-line-14'));
-    await waitFor(() => expect(vehicleMarkers()).toHaveLength(2));
-    fireEvent.press(vehicleMarkers()[0]);
-    await screen.findByTestId('vehicle-panel');
-
-    fireEvent.press(screen.getByTestId('chip-line-14')); // same line again (or all lines): its vehicle stays drawn
-    expect(screen.getByTestId('vehicle-panel')).toBeTruthy();
-    fireEvent.press(await screen.findByTestId('chip-line-14'));
-    fireEvent.press(screen.getByTestId('chip-line-1')); // another line: the vehicle is gone, so is its panel
-    await waitFor(() => expect(screen.queryByTestId('vehicle-panel')).toBeNull());
-
     await waitFor(() => expect(vehicleMarkers().length).toBeGreaterThan(0));
     fireEvent.press(vehicleMarkers()[0]);
     await screen.findByTestId('vehicle-panel');

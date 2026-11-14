@@ -22,12 +22,10 @@ import type { TransitVehicle } from '@/api/types.transit';
 import { MapProvider, isTransitLayerSelection, useMapContext } from '@/features/map/MapContext';
 import { INITIAL_MAP_FILTERS, mapFiltersReducer, type MapFilterAction } from '@/features/map/mapFilters';
 import { PlaceMarkers } from '@/features/map/PlaceMarkers';
-import { TransitControls } from '@/features/transit/TransitControls';
-import { sameLine, vehiclesOfLine } from '@/features/transit/lines';
 import { TransitLayer } from '@/features/transit/TransitLayer';
 import { useEventsInArea } from '@/hooks/useMapEvents';
 import { usePlacesInArea } from '@/hooks/usePlaces';
-import { useAllVehicles, useStopsInArea, useTransitRoutes, useTransitShapes } from '@/hooks/useTransit';
+import { useAllVehicles, useStopsInArea, useTransitShapes } from '@/hooks/useTransit';
 import { regionToBbox } from '@/lib/bbox';
 import { isValidCoordinate, regionFor } from '@/lib/geo';
 import { MAP_CHIP_BG } from '@/ui/Chip';
@@ -53,7 +51,6 @@ function MapBody() {
   const journey = useJourney(journeyTarget);
   const [filters, dispatchFilter] = useReducer(mapFiltersReducer, INITIAL_MAP_FILTERS);
   const { placesOn, categories, eventsOn, transitOn } = filters;
-  const [lineId, setLineId] = useState<string | null>(null);
 
   // Zoomed far out there would be too many pins: ask for places only below this span (about 6 km).
   const span = bbox ? bbox.maxLat - bbox.minLat : 0;
@@ -64,14 +61,11 @@ function MapBody() {
   const labelsVisible = span > 0 && span <= ZOOM_LABELS_MAX_SPAN;
   const stopsVisible = transitOn && span > 0 && span <= ZOOM_STOPS_MAX_SPAN;
   const stops = useStopsInArea(bbox, stopsVisible);
-  const lines = useTransitRoutes(transitOn);
-  const line = (transitOn && lines.data?.find((r) => r.id === lineId)) || null;
-  // Every line's path and every live vehicle (one request each, shared by all lines); a chosen line filters them.
+  // Transport shows the whole network at once: every line's path and every live vehicle (one request each).
   const shapes = useTransitShapes(transitOn);
   const vehicles = useAllVehicles(transitOn);
-  const lineVehicles = useMemo(() => vehiclesOfLine(vehicles.data?.vehicles, line ? line.id : null), [vehicles.data, line]);
   // Vehicles the transport layer draws; the directions / journey layers skip them so none is drawn twice.
-  const shownVehicleIds = useMemo(() => new Set(transitOn ? lineVehicles.map((v) => v.id) : []), [transitOn, lineVehicles]);
+  const shownVehicleIds = useMemo(() => new Set(transitOn ? (vehicles.data?.vehicles ?? []).map((v) => v.id) : []), [transitOn, vehicles.data]);
 
   /** Opens a vehicle's live panel; a route being previewed stays drawn behind it. */
   const selectVehicle = useCallback(
@@ -79,25 +73,11 @@ function MapBody() {
     [select, destination],
   );
 
-  /** Applies a filter chip press; switching transport (on or off) also forgets the chosen line, and turning it off
-   * closes a stop or vehicle panel opened from the transport layer (its marker is gone). */
+  /** Applies a filter chip press; turning transport off closes a stop or vehicle panel opened from the transport
+   * layer (its marker is gone). */
   function changeFilter(action: MapFilterAction) {
-    if (action.type === 'transport') {
-      setLineId(null);
-      if (transitOn && isTransitLayerSelection(selection)) select(null);
-    }
+    if (action.type === 'transport' && transitOn && isTransitLayerSelection(selection)) select(null);
     dispatchFilter(action);
-  }
-
-  /** Chooses a line (or all lines); a vehicle or stop panel from the transport layer that is not on it is closed. */
-  function chooseLine(id: string | null) {
-    setLineId(id);
-    if (!id || !isTransitLayerSelection(selection)) return;
-    if (selection.type === 'vehicle' && !sameLine(selection.route, id)) select(null);
-    if (selection.type === 'stop') {
-      const stop = stops.data?.find((s) => s.id === selection.id);
-      if (stop && !stop.routes.some((r) => sameLine(r, id))) select(null);
-    }
   }
 
   /** Tapping a cluster zooms in on it: to the given span, or half the current view. */
@@ -209,7 +189,7 @@ function MapBody() {
         {transitOn && (
           <TransitLayer
             stops={stopsVisible ? stops.data : undefined}
-            line={line}
+            line={null}
             vehicles={vehicles.data?.vehicles}
             shapes={shapes.data}
             selectedStopId={selection?.type === 'stop' ? selection.id : undefined}
@@ -235,7 +215,6 @@ function MapBody() {
           </Pressable>
         </View>
         <MapFilterBar filters={filters} onChange={changeFilter} />
-        {transitOn && <TransitControls line={lineId} onSelectLine={chooseLine} />}
         {placesOn && !zoomedIn && (
           <View style={styles.hint} testID="zoom-hint">
             <Text variant="caption" tone="muted">
@@ -243,17 +222,17 @@ function MapBody() {
             </Text>
           </View>
         )}
-        {transitOn && span > ZOOM_STOPS_MAX_SPAN && !line && (
+        {transitOn && span > ZOOM_STOPS_MAX_SPAN && (
           <View style={styles.hint} testID="stops-hint">
             <Text variant="caption" tone="muted">
-              Zoom in to see stops, or pick a line
+              Zoom in to see stops
             </Text>
           </View>
         )}
-        {transitOn && vehicles.data && ((line && lineVehicles.length === 0) || vehicles.data.stale) && (
+        {transitOn && vehicles.data && (vehicles.data.vehicles.length === 0 || vehicles.data.stale) && (
           <View style={styles.hint} testID="vehicles-hint">
             <Text variant="caption" tone="muted">
-              {line && lineVehicles.length === 0 ? `No vehicles on line ${line.name} right now` : 'Live positions are delayed'}
+              {vehicles.data.vehicles.length === 0 ? 'No vehicles running right now' : 'Live positions are delayed'}
             </Text>
           </View>
         )}
