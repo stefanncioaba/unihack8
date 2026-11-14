@@ -79,11 +79,23 @@ jest.mock('react-native-maps', () => {
   return { __esModule: true, default: MapView, Marker: plain, Polyline: plain, Circle: plain, Callout: plain, PROVIDER_GOOGLE: 'google' };
 });
 
-jest.mock('expo-location', () => ({
-  Accuracy: { Balanced: 3 },
-  requestForegroundPermissionsAsync: jest.fn(async () => ({ status: 'granted' })),
-  getCurrentPositionAsync: jest.fn(async () => ({ coords: { latitude: 45.76, longitude: 21.23 } })),
-}));
+// Location: tests move the phone with `globalThis.__moveTo(lat, lon)`, which feeds every watchPositionAsync listener.
+jest.mock('expo-location', () => {
+  // Untyped on purpose: babel-jest rejects named parameters in types inside a mock factory.
+  const listeners = new Set<Function>(); // eslint-disable-line @typescript-eslint/no-unsafe-function-type
+  (globalThis as { __moveTo?: (lat: number, lon: number) => void }).__moveTo = (lat: number, lon: number) =>
+    listeners.forEach((l) => l({ coords: { latitude: lat, longitude: lon } }));
+  return {
+    Accuracy: { Balanced: 3, High: 4 },
+    getForegroundPermissionsAsync: jest.fn(async () => ({ status: 'granted' })),
+    requestForegroundPermissionsAsync: jest.fn(async () => ({ status: 'granted' })),
+    getCurrentPositionAsync: jest.fn(async () => ({ coords: { latitude: 45.76, longitude: 21.23 } })),
+    watchPositionAsync: jest.fn(async (_options: unknown, listener: Function) => { // eslint-disable-line @typescript-eslint/no-unsafe-function-type
+      listeners.add(listener);
+      return { remove: () => listeners.delete(listener) };
+    }),
+  };
+});
 
 // Camera: tests trigger scans through `globalThis.__scan(token)`.
 jest.mock('expo-camera', () => {

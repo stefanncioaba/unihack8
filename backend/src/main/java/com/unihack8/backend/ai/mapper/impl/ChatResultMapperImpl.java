@@ -2,8 +2,11 @@ package com.unihack8.backend.ai.mapper.impl;
 
 import com.unihack8.backend.ai.domain.ToolContext;
 import com.unihack8.backend.ai.domain.dto.ChatResponse;
+import com.unihack8.backend.ai.domain.dto.ChatRouteDto;
+import com.unihack8.backend.ai.domain.dto.RoutePointDto;
 import com.unihack8.backend.ai.domain.dto.SourceDto;
 import com.unihack8.backend.ai.mapper.ChatResultMapper;
+import com.unihack8.backend.common.geo.GeoPoint;
 import com.unihack8.backend.common.text.TextMatch;
 import com.unihack8.backend.events.domain.dto.EventSummary;
 import com.unihack8.backend.places.domain.dto.PlaceSummaryDto;
@@ -30,6 +33,9 @@ import org.springframework.stereotype.Component;
 public class ChatResultMapperImpl implements ChatResultMapper {
 
     static final int MAX_SOURCES = 5;
+    /** A route end this close to a place/event the tools returned takes that name (PLAN 18.2). */
+    static final double NAME_MATCH_METERS = 75;
+    static final String USER_LOCATION_NAME = "Your location";
     private static final Pattern BOLD = Pattern.compile("\\*\\*(.+?)\\*\\*");
     // Names shorter than this are too likely to be ordinary words ("Opera", "Cafea" are 5, so allowed).
     private static final int MIN_PLAIN_NAME_LENGTH = 4;
@@ -67,7 +73,55 @@ public class ChatResultMapperImpl implements ChatResultMapper {
         List<ToolContext.FoundPlace> mentionedPlaces = sorted(places.values());
         List<PlaceSummaryDto> placeCards = mentionedPlaces.stream().map(ToolContext.FoundPlace::place).toList();
         List<EventSummary> eventCards = sorted(events.values());
-        return new ChatResponse(plainReply, placeCards, eventCards, sources(mentionedPlaces));
+        return new ChatResponse(plainReply, placeCards, eventCards, sources(mentionedPlaces), routes(context));
+    }
+
+    /**
+     * The routes plan_route planned (PLAN 18.2), once each (the same ends and mode planned twice count
+     * once, the last plan wins), with the ends named after the closest place/event the tools returned.
+     */
+    static List<ChatRouteDto> routes(ToolContext context) {
+        Map<String, ChatRouteDto> unique = new LinkedHashMap<>();
+        for (ToolContext.PlannedRoute route : context.routes()) {
+            String fromName = route.startsFromUser() ? USER_LOCATION_NAME : nameNear(route.from(), context);
+            ChatRouteDto dto = new ChatRouteDto(
+                    new RoutePointDto(route.from().lat(), route.from().lon(), fromName),
+                    new RoutePointDto(route.to().lat(), route.to().lon(), nameNear(route.to(), context)),
+                    route.mode(), route.durationMinutes(), route.distanceMeters(), route.startsFromUser());
+            String key = round(route.from()) + ">" + round(route.to()) + ":" + route.mode();
+            unique.remove(key);
+            unique.put(key, dto);
+        }
+        return List.copyOf(unique.values());
+    }
+
+    // Name of the closest place/event within NAME_MATCH_METERS of the point, or null.
+    private static String nameNear(GeoPoint point, ToolContext context) {
+        String best = null;
+        double bestMeters = NAME_MATCH_METERS;
+        for (ToolContext.FoundPlace found : context.places()) {
+            double meters = point.distanceMetersTo(new GeoPoint(found.place().lat(), found.place().lon()));
+            if (meters <= bestMeters) {
+                best = found.place().name();
+                bestMeters = meters;
+            }
+        }
+        for (EventSummary event : context.events()) {
+            if (event.lat() == null || event.lon() == null) {
+                continue;
+            }
+            double meters = point.distanceMetersTo(new GeoPoint(event.lat(), event.lon()));
+            if (meters <= bestMeters) {
+                best = event.title();
+                bestMeters = meters;
+            }
+        }
+        return best;
+    }
+
+    // A point rounded to about 1 m, for spotting the same route planned twice.
+    private static String round(GeoPoint point) {
+        return String.format(java.util.Locale.ROOT, "%.5f,%.5f", point.lat(), point.lon());
     }
 
     /**

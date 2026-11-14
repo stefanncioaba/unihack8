@@ -153,7 +153,7 @@ describe('result cards (15.4)', () => {
 
 describe('useAiChat', () => {
   it('sends only the newest 20 messages and the location', async () => {
-    const send = jest.spyOn(endpoints, 'sendChat').mockResolvedValue({ reply: 'ok', places: [], events: [], sources: [] });
+    const send = jest.spyOn(endpoints, 'sendChat').mockResolvedValue({ reply: 'ok', places: [], events: [], sources: [], routes: [] });
     const { result } = renderHook(() => useAiChat({ lat: 45.7, lon: 21.2 }));
     for (let i = 1; i <= 12; i++) await act(() => result.current.send(`question ${i}`));
     expect(result.current.messages).toHaveLength(24);
@@ -164,7 +164,7 @@ describe('useAiChat', () => {
   });
 
   it('ignores blank text and sends nothing while thinking', async () => {
-    const send = jest.spyOn(endpoints, 'sendChat').mockResolvedValue({ reply: 'ok', places: [], events: [], sources: [] });
+    const send = jest.spyOn(endpoints, 'sendChat').mockResolvedValue({ reply: 'ok', places: [], events: [], sources: [], routes: [] });
     const { result } = renderHook(() => useAiChat(null));
     await act(() => result.current.send('   '));
     expect(send).not.toHaveBeenCalled();

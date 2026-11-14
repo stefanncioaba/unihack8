@@ -582,14 +582,24 @@ Request:
 }
 ```
 
-Answer — `reply` is plain text (no markdown) in the user's language (Romanian or English). `places` and `events` are the ones named in `reply`, in the order they appear, for cards and "show on map" (`places[].distanceMeters` is from the user, or from Piața Victoriei when `location` is `null`). `sources` are the pages the quoted prices come from (stored price list, PLAN 11.3). Lists are empty, never `null`.
+Answer — `reply` is plain text (no markdown) in the user's language (Romanian or English). `places` and `events` are the ones named in `reply`, in the order they appear, for cards and "show on map" (`places[].distanceMeters` is from the user, or from Piața Victoriei when `location` is `null`). `sources` are the pages the quoted prices come from (stored price list, PLAN 11.3). `routes` are the routes the assistant planned for this answer (PLAN 18), one per route, for route cards: `from` / `to` (`lat`, `lon`, `name` — `"Your location"` for the user, otherwise the place or event the tools returned within ~75 m, or `null`), `mode` (`WALK` | `TRANSIT`, what the route really uses), `durationMinutes`, `distanceMeters`, and `startsFromUser`. `startsFromUser` is `true` only when the request carried `location` **and** the route starts there (no start given, or one within ~50 m of the user); it is `false` for a route from another place and always `false` when `location` is `null`. The app shows the **Go** button only when it is `true`. The same route planned twice is listed once. Lists are empty, never `null`.
 
 ```json
 {
   "reply": "- 5 to go: 127 m away (2 min walk). Espresso about 5 lei. Open until 19:00.\nPrices may have changed.",
   "places": [ { "...": "PlaceSummary" } ],
   "events": [],
-  "sources": [ { "title": "5 to go prices (playtech.ro)", "url": "https://playtech.ro/..." } ]
+  "sources": [ { "title": "5 to go prices (playtech.ro)", "url": "https://playtech.ro/..." } ],
+  "routes": [
+    {
+      "from": { "lat": 45.7537, "lon": 21.2257, "name": "Your location" },
+      "to": { "lat": 45.7546, "lon": 21.2266, "name": "5 to go" },
+      "mode": "WALK",
+      "durationMinutes": 2,
+      "distanceMeters": 127,
+      "startsFromUser": true
+    }
+  ]
 }
 ```
 

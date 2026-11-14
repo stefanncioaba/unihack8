@@ -106,12 +106,13 @@ function PlanDetails({ plan, requested }: { plan: RoutePlan; requested: PlanMode
   );
 }
 
-/** Directions from the user's position to a destination. */
+/** Directions from the user's position (or the destination's `origin`, for an AI route preview) to a destination. */
 export function DirectionsPanel({ destination }: { destination: Destination }) {
   const { userPosition } = useMapContext();
   const { mode, setMode } = useDirectionsMode();
-  const walk = useRoutePlan(userPosition, destination.coords, 'WALK');
-  const transit = useRoutePlan(userPosition, destination.coords, 'TRANSIT');
+  const from = destination.origin?.coords ?? userPosition;
+  const walk = useRoutePlan(from, destination.coords, 'WALK');
+  const transit = useRoutePlan(from, destination.coords, 'TRANSIT');
   const current = mode === 'WALK' ? walk : transit;
 
   return (
@@ -119,6 +120,11 @@ export function DirectionsPanel({ destination }: { destination: Destination }) {
       <Text variant="heading" numberOfLines={2} style={{ paddingRight: 24 }}>
         Directions to {destination.title ?? 'this spot'}
       </Text>
+      {destination.origin ? (
+        <Text variant="caption" tone="muted" testID="directions-origin">
+          From {destination.origin.title ?? 'the chosen start'}
+        </Text>
+      ) : null}
       <View style={styles.tabs} accessibilityRole="tablist">
         <ModeTab label="Walk" icon="walk-outline" active={mode === 'WALK'} status={tabStatus(walk)} onPress={() => setMode('WALK')} />
         <ModeTab label="Walk + transit" icon="bus-outline" active={mode === 'TRANSIT'} status={tabStatus(transit)} onPress={() => setMode('TRANSIT')} />

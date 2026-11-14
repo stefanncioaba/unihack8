@@ -8,11 +8,12 @@ import { colors } from '@/ui/theme';
 
 import { useDirectionsMode } from './DirectionsContext';
 
-/** Renders nothing until a destination is chosen. Shares the panel's cached route, so it costs no extra request. */
+/** Renders nothing until a destination is chosen. Shares the panel's cached route, so it costs no extra request. Starts at
+ * the destination's `origin` when it has one (AI route preview), otherwise at the user. */
 export function DirectionsLayer() {
   const { destination, userPosition } = useMapContext();
   const { mode } = useDirectionsMode();
-  const plan = useRoutePlan(userPosition, destination?.coords ?? null, mode);
+  const plan = useRoutePlan(destination?.origin?.coords ?? userPosition, destination?.coords ?? null, mode);
   if (!destination) return null;
 
   return (
@@ -23,6 +24,14 @@ export function DirectionsLayer() {
         title={destination.title}
         pinColor={colors.orange}
       />
+      {destination.origin && (
+        <Marker
+          testID="origin-marker"
+          coordinate={{ latitude: destination.origin.coords.lat, longitude: destination.origin.coords.lon }}
+          title={destination.origin.title}
+          pinColor={colors.teal}
+        />
+      )}
       {plan.data?.legs.map((leg, i) => {
         const walk = leg.mode === 'WALK';
         return (

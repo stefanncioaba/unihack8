@@ -4,6 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.unihack8.backend.ai.domain.ToolContext;
 import com.unihack8.backend.ai.domain.dto.ChatResponse;
+import com.unihack8.backend.ai.domain.dto.ChatRouteDto;
+import com.unihack8.backend.ai.domain.dto.RoutePointDto;
+import com.unihack8.backend.common.geo.GeoPoint;
 import com.unihack8.backend.events.domain.dto.EventSummary;
 import com.unihack8.backend.places.domain.dto.PlaceSummaryDto;
 import com.unihack8.backend.places.domain.dto.PriceDto;
@@ -61,6 +64,50 @@ class ChatResultMapperImplTest {
         assertThat(response.places()).isEmpty();
         assertThat(response.events()).isEmpty();
         assertThat(response.sources()).isEmpty();
+        assertThat(response.routes()).isEmpty();
+    }
+
+    // Routes take the names of the closest place/event; the user start is "Your location" (PLAN 18.2).
+    @Test
+    void routesNamedAfterToolResults() {
+        GeoPoint user = new GeoPoint(45.7560, 21.2290);
+        ToolContext context = new ToolContext(user, Instant.parse("2026-11-14T10:00:00Z"));
+        context.rememberPlace(place("Starbucks"), List.of()); // at 45.75, 21.22
+        EventSummary event = new EventSummary(UUID.randomUUID(), "USER", "Board games", "OTHER", "Club",
+                45.7400, 21.2400, Instant.parse("2026-11-14T18:00:00Z"), null, null, null, null, null, null);
+        context.rememberEvent(event);
+        GeoPoint nearStarbucks = new GeoPoint(45.7502, 21.2201); // about 25 m away
+        context.rememberRoute(new ToolContext.PlannedRoute(user, nearStarbucks, "WALK", 14, 1100, true));
+        context.rememberRoute(new ToolContext.PlannedRoute(nearStarbucks, new GeoPoint(45.7400, 21.2400), "TRANSIT", 20, 2600, false));
+        context.rememberRoute(new ToolContext.PlannedRoute(user, new GeoPoint(45.70, 21.30), "WALK", 90, 8000, true));
+
+        List<ChatRouteDto> routes = mapper.toResponse("Walk to **Starbucks**.", context).routes();
+
+        assertThat(routes).hasSize(3);
+        assertThat(routes.get(0).from()).isEqualTo(new RoutePointDto(45.7560, 21.2290, "Your location"));
+        assertThat(routes.get(0).to().name()).isEqualTo("Starbucks");
+        assertThat(routes.get(0).startsFromUser()).isTrue();
+        assertThat(routes.get(1).from().name()).isEqualTo("Starbucks");
+        assertThat(routes.get(1).to().name()).isEqualTo("Board games");
+        assertThat(routes.get(1).startsFromUser()).isFalse();
+        assertThat(routes.get(1).mode()).isEqualTo("TRANSIT");
+        // Nothing the tools returned is near this point: no name.
+        assertThat(routes.get(2).to().name()).isNull();
+    }
+
+    // The same route planned twice is listed once (the last plan wins); other modes stay separate.
+    @Test
+    void sameRouteListedOnce() {
+        GeoPoint user = new GeoPoint(45.7560, 21.2290);
+        GeoPoint to = new GeoPoint(45.7400, 21.2400);
+        ToolContext context = new ToolContext(user, Instant.parse("2026-11-14T10:00:00Z"));
+        context.rememberRoute(new ToolContext.PlannedRoute(user, to, "TRANSIT", 20, 2600, true));
+        context.rememberRoute(new ToolContext.PlannedRoute(user, to, "WALK", 30, 2200, true));
+        context.rememberRoute(new ToolContext.PlannedRoute(user, to, "TRANSIT", 19, 2600, true));
+
+        List<ChatRouteDto> routes = mapper.toResponse("ok", context).routes();
+        assertThat(routes).extracting(ChatRouteDto::mode).containsExactly("WALK", "TRANSIT");
+        assertThat(routes.get(1).durationMinutes()).isEqualTo(19);
     }
 
     // Three remembered places, two with prices.

@@ -64,6 +64,50 @@ class PlanRouteAndEventsToolTest {
         assertThat(answer).containsEntry("mode", "WALK").containsKey("note");
     }
 
+    // Every planned route is remembered for routes[]: from the user when no start is given (PLAN 18.2, 18.3).
+    @Test
+    void remembersRouteFromTheUser() {
+        when(routing.plan(eq(USER), any(), eq(TravelMode.TRANSIT), eq(NOW))).thenReturn(plan("TRANSIT"));
+        ToolContext context = new ToolContext(USER, NOW);
+        Map<String, Object> answer = new PlanRouteTool(routing).execute(Map.of("to_lat", 45.7505, "to_lon", 21.2075), context);
+
+        assertThat(answer).containsEntry("from", "user location");
+        assertThat(context.routes()).singleElement().satisfies(route -> {
+            assertThat(route.startsFromUser()).isTrue();
+            assertThat(route.from()).isEqualTo(USER);
+            assertThat(route.to()).isEqualTo(new GeoPoint(45.7505, 21.2075));
+            assertThat(route.mode()).isEqualTo("TRANSIT");
+            assertThat(route.durationMinutes()).isEqualTo(18);
+            assertThat(route.distanceMeters()).isEqualTo(3400);
+        });
+    }
+
+    // A route from another place (the university) is remembered with startsFromUser = false.
+    @Test
+    void remembersRouteFromAnotherPlace() {
+        GeoPoint university = new GeoPoint(45.7472, 21.2310);
+        when(routing.plan(eq(university), any(), eq(TravelMode.WALK), eq(NOW))).thenReturn(plan("WALK"));
+        ToolContext context = new ToolContext(USER, NOW);
+        Map<String, Object> answer = new PlanRouteTool(routing).execute(Map.of("from_lat", 45.7472, "from_lon", 21.2310,
+                "to_lat", 45.7505, "to_lon", 21.2075, "mode", "WALK"), context);
+
+        assertThat(answer).containsEntry("from", "given point");
+        assertThat(context.routes()).singleElement().satisfies(route -> {
+            assertThat(route.startsFromUser()).isFalse();
+            assertThat(route.from()).isEqualTo(university);
+        });
+    }
+
+    // Without the user's location the route starts at the city centre and never counts as "from the user".
+    @Test
+    void noLocationIsNotFromTheUser() {
+        when(routing.plan(eq(ToolContext.CITY_CENTRE), any(), any(), any())).thenReturn(plan("WALK"));
+        ToolContext context = new ToolContext(null, NOW);
+        Map<String, Object> answer = new PlanRouteTool(routing).execute(Map.of("to_lat", 45.7505, "to_lon", 21.2075), context);
+        assertThat(answer.get("from").toString()).startsWith("city centre");
+        assertThat(context.routes()).singleElement().satisfies(route -> assertThat(route.startsFromUser()).isFalse());
+    }
+
     // The destination is required.
     @Test
     void destinationRequired() {

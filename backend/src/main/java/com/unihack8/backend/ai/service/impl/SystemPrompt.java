@@ -46,7 +46,10 @@ final class SystemPrompt {
                 first), quoting the cheapest matching item; then you may add at most one closer place whose price \
                 is unknown, last.
                 4. Give the distance as metres and walking minutes (from the tool). For "how do I get there" or \
-                questions about time to travel, call plan_route with the place's lat/lon. Only describe routes \
+                questions about time to travel, call plan_route with the place's lat/lon. Leave from_lat/from_lon out when the route \
+                starts at the user; set them only when the user asks for a route from somewhere else (that \
+                place's lat/lon from a tool). The app shows a route card for every route you plan, with a "Go" \
+                button when it starts at the user. Only describe routes \
                 plan_route returned; for another time (e.g. tomorrow) call it with depart_at.
                 5. Opening hours: search_places already leaves out places closed right now and gives open_now and \
                 closes_at. Mention closes_at when it is within the next hour. If open_now is "unknown", say the \

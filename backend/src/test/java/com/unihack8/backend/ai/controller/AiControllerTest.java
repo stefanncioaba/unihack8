@@ -8,6 +8,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.unihack8.backend.ai.domain.dto.ChatResponse;
+import com.unihack8.backend.ai.domain.dto.ChatRouteDto;
+import com.unihack8.backend.ai.domain.dto.RoutePointDto;
 import com.unihack8.backend.ai.domain.dto.SourceDto;
 import com.unihack8.backend.ai.service.AiChatService;
 import com.unihack8.backend.common.exception.ApiException;
@@ -48,13 +50,15 @@ class AiControllerTest {
                 .andExpect(jsonPath("$.code").value("UNAUTHORIZED"));
     }
 
-    // Documented answer shape (docs/API.md): reply, places, events, sources.
+    // Documented answer shape (docs/API.md): reply, places, events, sources, routes.
     @Test
     void answerShape() throws Exception {
         UUID placeId = UUID.randomUUID();
         when(chatService.chat(eq(USER), any())).thenReturn(new ChatResponse("5 to go: espresso about 5 lei.",
                 List.of(new PlaceSummaryDto(placeId, "node/1", "5 to go", "cafe", 45.75, 21.22, null, 127)),
-                List.of(), List.of(new SourceDto("5 to go prices (playtech.ro)", "https://playtech.ro/x"))));
+                List.of(), List.of(new SourceDto("5 to go prices (playtech.ro)", "https://playtech.ro/x")),
+                List.of(new ChatRouteDto(new RoutePointDto(45.7537, 21.2257, "Your location"),
+                        new RoutePointDto(45.75, 21.22, "5 to go"), "WALK", 2, 127, true))));
 
         mvc.perform(post("/ai/chat").header("Authorization", BEARER).contentType(MediaType.APPLICATION_JSON).content(BODY))
                 .andExpect(status().isOk())
@@ -62,13 +66,20 @@ class AiControllerTest {
                 .andExpect(jsonPath("$.places[0].id").value(placeId.toString()))
                 .andExpect(jsonPath("$.places[0].distanceMeters").value(127))
                 .andExpect(jsonPath("$.events").isEmpty())
-                .andExpect(jsonPath("$.sources[0].url").value("https://playtech.ro/x"));
+                .andExpect(jsonPath("$.sources[0].url").value("https://playtech.ro/x"))
+                .andExpect(jsonPath("$.routes[0].from.name").value("Your location"))
+                .andExpect(jsonPath("$.routes[0].to.lat").value(45.75))
+                .andExpect(jsonPath("$.routes[0].to.name").value("5 to go"))
+                .andExpect(jsonPath("$.routes[0].mode").value("WALK"))
+                .andExpect(jsonPath("$.routes[0].durationMinutes").value(2))
+                .andExpect(jsonPath("$.routes[0].distanceMeters").value(127))
+                .andExpect(jsonPath("$.routes[0].startsFromUser").value(true));
     }
 
     // Location is optional (permission denied).
     @Test
     void locationOptional() throws Exception {
-        when(chatService.chat(eq(USER), any())).thenReturn(new ChatResponse("ok", List.of(), List.of(), List.of()));
+        when(chatService.chat(eq(USER), any())).thenReturn(new ChatResponse("ok", List.of(), List.of(), List.of(), List.of()));
         mvc.perform(post("/ai/chat").header("Authorization", BEARER).contentType(MediaType.APPLICATION_JSON)
                         .content("{\"messages\":[{\"role\":\"user\",\"content\":\"hi\"}],\"location\":null}"))
                 .andExpect(status().isOk());

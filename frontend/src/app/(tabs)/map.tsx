@@ -1,14 +1,19 @@
 // Map tab: dark map with the user's position and the Map joints (context + bottom panel).
 // Layers: places (14.2), events (14.3), transit stops and live vehicles (14.4) and directions (14.5).
-// Long-press anywhere to get directions to that spot.
+// Long-press anywhere to get directions to that spot. An AI route card opens it with a route preview, or with "Go" in
+// journey mode (PLAN 18.5): the route from the live position, the camera following the user and the current step.
 import { useLocalSearchParams } from 'expo-router';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import MapView, { Marker, type LongPressEvent, type MapPressEvent, type Region } from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import type { PlaceCategory } from '@/api/types.places';
+import { useDirectionsMode } from '@/features/directions/DirectionsContext';
 import { DirectionsLayer } from '@/features/directions/DirectionsLayer';
+import { JourneyLayer, JourneyPanel } from '@/features/journey/JourneyPanel';
+import { parseRouteParams } from '@/features/journey/navigation';
+import { useJourney, type JourneyTarget } from '@/features/journey/useJourney';
 import { useCurrentPosition } from '@/features/location/LocationProvider';
 import { EventMarkers } from '@/features/map/EventMarkers';
 import { MapFilterBar } from '@/features/map/MapFilterBar';
@@ -35,10 +40,13 @@ const ZOOM_STOPS_MAX_SPAN = 0.03;
 
 /** The map and its overlays. Must be inside <MapProvider>. */
 function MapBody() {
-  const params = useLocalSearchParams<{ lat?: string; lon?: string; title?: string; placeId?: string; eventId?: string; at?: string }>();
+  const params = useLocalSearchParams<{ lat?: string; lon?: string; title?: string; placeId?: string; eventId?: string; at?: string; route?: string }>();
   const { position, status, refresh } = useCurrentPosition();
   const { bbox, selection, setVisibleBbox, select, setDestination } = useMapContext();
+  const { setMode } = useDirectionsMode();
   const mapRef = useRef<MapView>(null);
+  const [journeyTarget, setJourneyTarget] = useState<JourneyTarget | null>(null);
+  const journey = useJourney(journeyTarget);
   const [categories, setCategories] = useState<PlaceCategory[]>([]);
   const [eventsOn, setEventsOn] = useState(true);
   const [transitOn, setTransitOn] = useState(false);
@@ -85,6 +93,35 @@ function MapBody() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.lat, params.lon, params.placeId, params.eventId, params.at]);
 
+  // A route from an AI answer (PLAN 18.4, 18.5): "Go" starts journey mode, otherwise the route is previewed.
+  const routeRequest = useMemo(() => parseRouteParams(params), [params.route, params.at]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (!routeRequest) return;
+    setMode(routeRequest.mode);
+    if (routeRequest.go) {
+      select(null);
+      setJourneyTarget({ to: routeRequest.to, name: routeRequest.toName, mode: routeRequest.mode, answeredFrom: routeRequest.from });
+    } else {
+      setJourneyTarget(null);
+      const fromUser = routeRequest.fromName === 'Your location';
+      setDestination({
+        coords: routeRequest.to,
+        title: routeRequest.toName ?? undefined,
+        origin: fromUser ? undefined : { coords: routeRequest.from, title: routeRequest.fromName ?? undefined },
+      });
+      mapRef.current?.fitToCoordinates(
+        [routeRequest.from, routeRequest.to].map((p) => ({ latitude: p.lat, longitude: p.lon })),
+        { edgePadding: { top: 160, right: 60, bottom: 320, left: 60 }, animated: true },
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [routeRequest]);
+
+  // Journey mode: the camera follows the user.
+  useEffect(() => {
+    if (journeyTarget && journey.position) mapRef.current?.animateToRegion(regionFor(journey.position, 0.006), 500);
+  }, [journeyTarget, journey.position]);
+
   /** Re-centres the map on the phone's position (asks for permission again if needed). */
   async function locate() {
     await refresh();
@@ -117,7 +154,7 @@ function MapBody() {
         onRegionChangeComplete={onRegionChangeComplete}
         onPress={onMapPress}
         onLongPress={onLongPress}
-        showsUserLocation={status === 'granted'}
+        showsUserLocation={status === 'granted' || (!!journeyTarget && journey.permission === 'granted')}
         showsMyLocationButton={false}
         userInterfaceStyle="dark"
         customMapStyle={darkMapStyle}
@@ -153,7 +190,7 @@ function MapBody() {
             onSelectStop={(id) => select({ type: 'stop', id })}
           />
         )}
-        <DirectionsLayer />
+        {journeyTarget ? <JourneyLayer target={journeyTarget} journey={journey} /> : <DirectionsLayer />}
       </MapView>
 
       <SafeAreaView style={styles.overlay} edges={['top']} pointerEvents="box-none">
@@ -196,7 +233,7 @@ function MapBody() {
         )}
       </SafeAreaView>
 
-      <MapPanel />
+      {journeyTarget ? <JourneyPanel target={journeyTarget} journey={journey} onEnd={() => setJourneyTarget(null)} /> : <MapPanel />}
     </View>
   );
 }

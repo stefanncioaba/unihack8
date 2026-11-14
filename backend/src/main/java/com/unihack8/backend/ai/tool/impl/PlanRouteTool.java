@@ -40,7 +40,7 @@ public class PlanRouteTool implements AiTool {
         Map<String, Object> properties = new LinkedHashMap<>();
         properties.put("to_lat", Map.of("type", "number", "description", "Destination latitude (e.g. from search_places)."));
         properties.put("to_lon", Map.of("type", "number", "description", "Destination longitude."));
-        properties.put("from_lat", Map.of("type", "number", "description", "Start latitude; default = the user."));
+        properties.put("from_lat", Map.of("type", "number", "description", "Start latitude. Leave out when the route starts at the user; give it only when the user asks for a route from somewhere else."));
         properties.put("from_lon", Map.of("type", "number", "description", "Start longitude; default = the user."));
         properties.put("mode", Map.of("type", "string", "enum", java.util.List.of("WALK", "TRANSIT"),
                 "description", "WALK = walking only; TRANSIT = walking + tram/trolleybus/bus (default)."));
@@ -53,7 +53,7 @@ public class PlanRouteTool implements AiTool {
                 "parameters", Map.of("type", "object", "properties", properties, "required", java.util.List.of("to_lat", "to_lon")));
     }
 
-    // Plans the route; a TRANSIT request falls back to walking when the route planner is down.
+    // Plans the route (remembered for the answer's routes[], PLAN 18.2); TRANSIT falls back to walking when the planner is down.
     @Override
     public Map<String, Object> execute(Map<String, Object> args, ToolContext context) {
         GeoPoint to = ToolArgs.point(args, "to");
@@ -78,7 +78,11 @@ public class PlanRouteTool implements AiTool {
             plan = routingService.plan(from, to, TravelMode.WALK, when);
             answer.put("note", "Public transport planning is unavailable right now; this is the walking route.");
         }
-        answer.put("from", start == null ? (context.locationKnown() ? "user location" : "city centre") : "given point");
+        boolean fromUser = context.startsFromUser(start);
+        context.rememberRoute(new ToolContext.PlannedRoute(from, to, plan.mode(), plan.durationMinutes(),
+                plan.distanceMeters(), fromUser));
+        answer.put("from", fromUser ? "user location"
+                : start == null ? "city centre (user location unknown)" : "given point");
         answer.put("mode", plan.mode());
         answer.put("total_minutes", plan.durationMinutes());
         answer.put("distance_meters", plan.distanceMeters());

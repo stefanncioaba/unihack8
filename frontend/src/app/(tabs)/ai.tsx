@@ -1,4 +1,4 @@
-// AI tab: chat with the city guide (PLAN 15.1–15.3). The conversation lives in memory only; "New chat" clears it.
+// AI tab: chat with the city guide (PLAN 15.1–15.3), with result and route cards under answers (15.4, 18.4). The conversation lives in memory only; "New chat" clears it.
 import { useRef } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 
@@ -6,6 +6,7 @@ import { ChatBubble, ErrorBubble, ThinkingBubble } from '@/features/ai/ChatBubbl
 import { ChatInput } from '@/features/ai/ChatInput';
 import { ChatMotif } from '@/features/ai/ChatMotif';
 import { ResultCards } from '@/features/ai/ResultCards';
+import { RouteCards } from '@/features/ai/RouteCards';
 import { Suggestions } from '@/features/ai/Suggestions';
 import { useCurrentPosition } from '@/features/location/LocationProvider';
 import { useAiChat, type UiMessage } from '@/hooks/useAi';
@@ -51,6 +52,7 @@ export default function AiScreen() {
             renderItem={({ item }) => (
               <ChatBubble message={item}>
                 <ResultCards message={item} />
+                <RouteCards routes={item.routes} />
               </ChatBubble>
             )}
             ListFooterComponent={

@@ -15,8 +15,11 @@ export type MapSelection =
   | { type: 'stop'; id: string }
   | { type: 'destination'; destination: Destination };
 
-/** A point the user wants directions to. */
-export type Destination = { coords: Coordinates; title?: string };
+/**
+ * A point the user wants directions to. `origin` is set only when the route starts somewhere other than the user
+ * (an AI route "from the university", PLAN 18.4); without it directions start at the user's position.
+ */
+export type Destination = { coords: Coordinates; title?: string; origin?: { coords: Coordinates; title?: string } };
 
 export type MapContextValue = {
   /** The visible area, debounced (300 ms) and rounded, ready to use as a query key. Null until the map is ready. */

@@ -4,10 +4,10 @@ import { useCallback, useRef, useState } from 'react';
 
 import { sendChat } from '@/api/endpoints.ai';
 import type { EventSummary } from '@/api/types';
-import { MAX_CHAT_MESSAGE_CHARS, MAX_CHAT_MESSAGES, type ChatRole, type ChatSource } from '@/api/types.ai';
+import { MAX_CHAT_MESSAGE_CHARS, MAX_CHAT_MESSAGES, type ChatRole, type ChatRoute, type ChatSource } from '@/api/types.ai';
 import type { PlaceSummary } from '@/api/types.places';
 
-/** A message as the chat screen shows it (assistant messages can carry result cards and sources). */
+/** A message as the chat screen shows it (assistant messages can carry result cards, route cards and sources). */
 export type UiMessage = {
   id: string;
   role: ChatRole;
@@ -15,6 +15,7 @@ export type UiMessage = {
   places?: PlaceSummary[];
   events?: EventSummary[];
   sources?: ChatSource[];
+  routes?: ChatRoute[];
 };
 
 type Location = { lat: number; lon: number } | null;
@@ -52,7 +53,7 @@ export function useAiChat(location: Location) {
         if (mine !== generation.current) return;
         commit([
           ...messagesRef.current,
-          { id: newId(), role: 'assistant', content: answer.reply, places: answer.places, events: answer.events, sources: answer.sources },
+          { id: newId(), role: 'assistant', content: answer.reply, places: answer.places, events: answer.events, sources: answer.sources, routes: answer.routes ?? [] },
         ]);
       } catch (e) {
         if (mine === generation.current) setError(e);

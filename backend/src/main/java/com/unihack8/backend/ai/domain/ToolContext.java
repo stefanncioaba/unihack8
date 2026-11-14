@@ -25,11 +25,15 @@ public class ToolContext {
     /** All times shown to the model are Romanian local time. */
     public static final ZoneId ZONE = ZoneId.of("Europe/Bucharest");
 
+    /** A start point this close to the user still counts as "from the user" (PLAN 18.3). */
+    public static final double USER_START_RADIUS_METERS = 50;
+
     private final GeoPoint origin;
     private final boolean locationKnown;
     private final Instant now;
     private final Map<UUID, FoundPlace> places = new LinkedHashMap<>();
     private final Map<UUID, EventSummary> events = new LinkedHashMap<>();
+    private final List<PlannedRoute> routes = new ArrayList<>();
 
     // Context for one request; origin null means the location is unknown (city centre is used).
     public ToolContext(GeoPoint origin, Instant now) {
@@ -63,6 +67,28 @@ public class ToolContext {
         events.putIfAbsent(event.id(), event);
     }
 
+    /**
+     * True only when the app sent the user's real position and the route starts there: no start
+     * given, or one within USER_START_RADIUS_METERS of the user (PLAN 18.3). The city-centre
+     * default is never the user's position.
+     */
+    public boolean startsFromUser(GeoPoint start) {
+        if (!locationKnown) {
+            return false;
+        }
+        return start == null || start.distanceMetersTo(origin) <= USER_START_RADIUS_METERS;
+    }
+
+    // Remembers a route plan_route planned (PLAN 18.2).
+    public synchronized void rememberRoute(PlannedRoute route) {
+        routes.add(route);
+    }
+
+    // Every route planned so far, in the order planned.
+    public synchronized List<PlannedRoute> routes() {
+        return new ArrayList<>(routes);
+    }
+
     // Every place returned so far, in the order found.
     public synchronized List<FoundPlace> places() {
         return new ArrayList<>(places.values());
@@ -71,6 +97,11 @@ public class ToolContext {
     // Every event returned so far, in the order found.
     public synchronized List<EventSummary> events() {
         return new ArrayList<>(events.values());
+    }
+
+    /** A route plan_route planned: its ends, the mode it really uses, and whether it starts at the user. */
+    public record PlannedRoute(GeoPoint from, GeoPoint to, String mode, long durationMinutes, long distanceMeters,
+                               boolean startsFromUser) {
     }
 
     /** A place returned by a tool and the prices the model saw for it. */

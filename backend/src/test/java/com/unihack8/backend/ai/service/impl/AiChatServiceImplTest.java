@@ -2,6 +2,9 @@ package com.unihack8.backend.ai.service.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import com.unihack8.backend.ai.client.GeminiClient;
 import com.unihack8.backend.ai.client.GeminiException;
@@ -21,6 +24,9 @@ import com.unihack8.backend.ai.mapper.impl.ChatResultMapperImpl;
 import com.unihack8.backend.ai.service.ChatRateLimiter;
 import com.unihack8.backend.ai.tool.AiTool;
 import com.unihack8.backend.ai.tool.ToolException;
+import com.unihack8.backend.ai.tool.impl.PlanRouteTool;
+import com.unihack8.backend.routing.domain.dto.RoutePlanResponse;
+import com.unihack8.backend.routing.service.RoutingService;
 import com.unihack8.backend.common.exception.ApiException;
 import com.unihack8.backend.common.exception.ErrorCode;
 import com.unihack8.backend.places.domain.dto.PlaceSummaryDto;
@@ -78,6 +84,35 @@ class AiChatServiceImplTest {
         String system = second.systemInstruction().parts().getFirst().text();
         assertThat(system).contains("Saturday 14 November 2026, 18:00").contains("lat 45.75");
         assertThat(gemini.models).containsExactly("model-a", "model-a");
+    }
+
+    // Routes plan_route planned during the request come back in routes[], from the user (PLAN 18.2).
+    @Test
+    void plannedRoutesInTheAnswer() {
+        RoutingService routing = mock(RoutingService.class);
+        when(routing.plan(any(), any(), any(), any()))
+                .thenReturn(new RoutePlanResponse("WALK", 6, 450, NOW, NOW.plusSeconds(360), false, List.of()));
+        gemini.answer(content(GeminiPart.functionCall(new GeminiFunctionCall("a", "fake_places", Map.of()))));
+        gemini.answer(content(GeminiPart.functionCall(new GeminiFunctionCall("b", "plan_route",
+                Map.of("to_lat", 45.75, "to_lon", 21.22, "mode", "WALK")))));
+        gemini.answer(content(GeminiPart.text("Walk to **Cafe Test**, 6 minutes.")));
+
+        ChatResponse response = service(3, List.of(tool, new PlanRouteTool(routing))).chat(USER, request("how do I get to a cafe?"));
+
+        assertThat(response.routes()).singleElement().satisfies(route -> {
+            assertThat(route.startsFromUser()).isTrue();
+            assertThat(route.from().name()).isEqualTo("Your location");
+            assertThat(route.to().name()).isEqualTo("Cafe Test");
+            assertThat(route.mode()).isEqualTo("WALK");
+            assertThat(route.durationMinutes()).isEqualTo(6);
+        });
+    }
+
+    // An answer without plan_route has an empty routes list, never null.
+    @Test
+    void noRoutesIsEmpty() {
+        gemini.answer(content(GeminiPart.text("Hello!")));
+        assertThat(service(2).chat(USER, request("hi")).routes()).isEmpty();
     }
 
     // A tool that finds nothing still lets the model answer.
@@ -205,12 +240,17 @@ class AiChatServiceImplTest {
 
     // Service with two models, the fake tool, a fixed clock and a recording sleeper.
     private AiChatServiceImpl service(int maxToolRounds) {
+        return service(maxToolRounds, List.of(tool));
+    }
+
+    // Same, with the given tools.
+    private AiChatServiceImpl service(int maxToolRounds, List<AiTool> tools) {
         ChatRateLimiter limiter = user -> rateLimitCalls.incrementAndGet();
         return new AiChatServiceImpl(gemini,
                 new GeminiProperties("key", "http://unused", List.of("model-a", "model-b"),
                         Duration.ofSeconds(1), Duration.ofSeconds(1)),
                 new AiProperties(maxToolRounds, 10, 20, 5, Duration.ofSeconds(12)),
-                limiter, new ChatResultMapperImpl(), List.of(tool), Clock.fixed(NOW, ZoneOffset.UTC), sleeps::add);
+                limiter, new ChatResultMapperImpl(), tools, Clock.fixed(NOW, ZoneOffset.UTC), sleeps::add);
     }
 
     // One user message at Piața Victoriei.

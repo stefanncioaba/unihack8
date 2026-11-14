@@ -1,6 +1,7 @@
 // AI assistant shapes. Source of truth: docs/API.md -> AI assistant.
 import type { EventSummary } from './types';
 import type { PlaceSummary } from './types.places';
+import type { PlanMode } from './types.routing';
 
 export type ChatRole = 'user' | 'assistant';
 
@@ -17,12 +18,27 @@ export type ChatRequest = {
 /** A web page the assistant used for prices, menus or reviews. */
 export type ChatSource = { title: string; url: string };
 
+/** One end of a route the assistant planned; `name` is "Your location", a place/event name, or null. */
+export type ChatRoutePoint = { lat: number; lon: number; name: string | null };
+
+/** A route the assistant planned for its answer (PLAN 18.1). "Go" is offered only when `startsFromUser`. */
+export type ChatRoute = {
+  from: ChatRoutePoint;
+  to: ChatRoutePoint;
+  mode: PlanMode;
+  durationMinutes: number;
+  distanceMeters: number;
+  startsFromUser: boolean;
+};
+
 export type ChatAnswer = {
   reply: string;
   /** Places and events mentioned in `reply`, for result cards and "show on map". */
   places: PlaceSummary[];
   events: EventSummary[];
   sources: ChatSource[];
+  /** Routes planned for the answer, for route cards (empty, never null). */
+  routes: ChatRoute[];
 };
 
 /** The backend accepts at most this many messages per request. */
