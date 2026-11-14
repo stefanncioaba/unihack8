@@ -9,10 +9,14 @@ import { AuthProvider, useAuth } from '@/features/auth/AuthProvider';
 import { LocationProvider } from '@/features/location/LocationProvider';
 import { startNetworkSync } from '@/lib/network';
 import { queryClient } from '@/lib/queryClient';
+import { loadIconFont } from '@/ui/Icon';
 import { OfflineBanner } from '@/ui/OfflineBanner';
 import { LoadingState } from '@/ui/States';
 import { Screen } from '@/ui/Screen';
 import { colors } from '@/ui/theme';
+
+// Start loading the icon font at launch (not when the first map pin mounts), so pins draw complete right away.
+void loadIconFont();
 
 /** Shows the right set of screens for the current session. */
 function Gate() {

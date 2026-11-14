@@ -150,31 +150,20 @@ describe('TripStepMarker', () => {
 
   const [walk, board, alight] = tripSteps([leg('WALK', START, STOP_A, 4), leg('TRAM', STOP_A, STOP_B, 5, { route: '1' })]);
 
-  it('snapshots its view briefly after appearing, then freezes it (Android)', () => {
-    render(<TripStepMarker step={board} />);
-    expect(screen.getByTestId('trip-step-board-1').props.tracksViewChanges).toBe(true);
-    act(() => jest.advanceTimersByTime(MARKER_TRACK_MS));
-    expect(screen.getByTestId('trip-step-board-1').props.tracksViewChanges).toBe(false);
-  });
-
-  it('puts the gap below a get-off stop in a wrapper padding, never a margin on the marker root', () => {
+  it('is an image badge with the text as its callout, and board and get-off badges differ', () => {
     render(
       <>
+        <TripStepMarker step={board} />
         <TripStepMarker step={alight} />
-        <TripStepMarker step={walk} />
       </>,
     );
-    const root = screen.getByTestId('trip-step-alight-1').props.children;
-    const rootStyle = StyleSheet.flatten(root.props.style) ?? {};
-    expect(rootStyle.paddingTop).toBe(4);
-    expect(rootStyle.marginTop).toBeUndefined();
-    const pill = StyleSheet.flatten(screen.getByLabelText('Get off at Piața Victoriei').props.style);
-    expect(pill.marginTop).toBeUndefined();
-    // A walk's root only has its explicit size (no gap, no margin).
-    const walkRoot = StyleSheet.flatten(screen.getByTestId('trip-step-walk-0').props.children.props.style) ?? {};
-    expect(walkRoot.paddingTop).toBeUndefined();
-    expect(walkRoot.marginTop).toBeUndefined();
-    expect(typeof walkRoot.width).toBe('number');
+    expect(screen.getByTestId('trip-step-board-1').props.tracksViewChanges).toBe(false);
+    expect(screen.getByTestId('trip-step-board-1').props.image).toBeDefined();
+    expect(screen.getByTestId('trip-step-board-1').props.image).not.toBe(screen.getByTestId('trip-step-alight-1').props.image);
+    expect(screen.getByTestId('trip-step-alight-1').props.title).toBe('Get off at Piața Victoriei');
+    // Board hangs above its stop, get off below it.
+    expect(screen.getByTestId('trip-step-board-1').props.anchor).toEqual({ x: 0.5, y: 1 });
+    expect(screen.getByTestId('trip-step-alight-1').props.anchor).toEqual({ x: 0.5, y: 0 });
   });
 });
 
@@ -248,7 +237,7 @@ function longPress(lat: number, lon: number) {
 }
 
 /** The label of a step marker found by its testID. */
-const stepLabel = (testID: string) => String(within(screen.getByTestId(testID)).getByText(/./).props.children);
+const stepLabel = (testID: string) => String(screen.getByTestId(testID).props.title);
 
 /** Every map marker on screen, by testID (the mock draws Marker and Polyline alike: markers are the ones with a
  * single `coordinate`). */
@@ -276,7 +265,7 @@ describe('MapScreen trip guidance', () => {
     expect(screen.queryByText(/^Walk \d+ min/)).toBeNull();
     const panel = within(screen.getByTestId('directions-panel'));
     expect((await panel.findAllByText(/^Walk to /)).length).toBeGreaterThan(0);
-    expect(screen.getByText(/^Board Tram \d+ →/)).toBeTruthy();
+    expect(stepLabel('trip-step-board-1')).toMatch(/^Board Tram \d+ →/); // the callout text
     // Rides are drawn in their line colour, walks dashed.
     const ride = screen.getByTestId('route-line-1');
     expect(ride.props.strokeColor).not.toBe('#FFD60A');

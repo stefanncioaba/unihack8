@@ -186,14 +186,14 @@ describe('MapScreen layers', () => {
     });
     await waitFor(() => expect(clusters().length).toBeGreaterThan(0));
     expect(markers('place')).toHaveLength(0);
-    const total = clusters().reduce((n, c) => n + Number(within(c).getByText(/^\d+$/).props.children), 0) + markers('event').length;
+    const total = clusters().reduce((n, c) => n + Number(/^(\d+) results/.exec(c.props.accessibilityLabel)![1]), 0) + markers('event').length;
     expect(total).toBeGreaterThan(3);
   });
 
-  it('draws custom pins live for a moment, then stops tracking view changes', async () => {
+  it('draws cluster bubbles from ready-made images, with no view tracking', async () => {
     renderScreen(<MapScreen />);
     const first = await screen.findAllByTestId(/^cluster-/);
-    expect(first[0].props.tracksViewChanges).toBe(true);
-    await waitFor(() => expect(screen.getAllByTestId(/^cluster-/)[0].props.tracksViewChanges).toBe(false), { timeout: 2000 });
+    expect(first[0].props.image).toBeDefined();
+    expect(first[0].props.tracksViewChanges).toBe(false);
   });
 });

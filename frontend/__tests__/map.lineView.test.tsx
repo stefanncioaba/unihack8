@@ -139,11 +139,15 @@ describe('LinePicker', () => {
 
   it('shows type groups with a tile per line and picks one', () => {
     const onPick = jest.fn();
-    render(<LinePicker routes={routes} lineId={null} directions={[]} directionIndex={0} onPick={onPick} onDirection={jest.fn()} />);
-    expect(screen.getByTestId('line-group-TRAM')).toBeTruthy();
-    expect(within(screen.getByTestId('line-group-TROLLEYBUS')).getByTestId('line-tile-14')).toBeTruthy();
-    fireEvent.press(screen.getByLabelText('Show line E4'));
-    expect(onPick).toHaveBeenCalledWith('E4');
+    render(<LinePicker routes={routes} mode="TRAM" onMode={jest.fn()} lineId={null} directions={[]} directionIndex={0} onPick={onPick} onDirection={jest.fn()} />);
+    expect(screen.getByTestId('line-group-TRAM')).toBeTruthy(); // a button per vehicle type, with its legend name
+    expect(screen.getByText('Tram')).toBeTruthy();
+    expect(screen.getByText('Trolley')).toBeTruthy();
+    // Only the chosen type's lines are listed.
+    expect(within(screen.getByTestId('line-tiles')).getByTestId('line-tile-1')).toBeTruthy();
+    expect(screen.queryByTestId('line-tile-14')).toBeNull();
+    fireEvent.press(screen.getByLabelText('Show line 1'));
+    expect(onPick).toHaveBeenCalledWith('1');
   });
 
   it('shows the chosen line with its direction toggle and a clear button', () => {
@@ -157,7 +161,7 @@ describe('LinePicker', () => {
       '1',
       decodePolyline,
     );
-    render(<LinePicker routes={routes} lineId="1" directions={dirs} directionIndex={1} onPick={onPick} onDirection={onDirection} />);
+    render(<LinePicker routes={routes} mode="TRAM" onMode={jest.fn()} lineId="1" directions={dirs} directionIndex={1} onPick={onPick} onDirection={onDirection} />);
     const bar = within(screen.getByTestId('line-view'));
     expect(bar.getByText('Tram')).toBeTruthy();
     expect(bar.getByText('→ Gara de Nord')).toBeTruthy();
@@ -177,10 +181,16 @@ describe('MapScreen line view', () => {
     await moveTo(0.2);
     expect(screen.queryByTestId('line-picker')).toBeNull(); // only with Transport on
     fireEvent.press(screen.getByTestId('chip-transit'));
+    // Trams are chosen to start with: only the trams are drawn; pressing the chosen type again shows every type.
+    await waitFor(() => expect(vehicleMarkers().length).toBeGreaterThan(0));
+    const trams = vehicleMarkers().length;
+    fireEvent.press(screen.getByTestId('line-group-TRAM'));
     await waitFor(() => expect(vehicleMarkers()).toHaveLength(8));
+    expect(trams).toBeLessThan(8);
     expect(screen.queryAllByTestId(/^line-route-/)).toHaveLength(0);
     expect(spy.mock.calls.filter((c) => c[1] === '/transit/shapes')).toHaveLength(0);
 
+    fireEvent.press(screen.getByTestId('line-group-TRAM'));
     fireEvent.press(await screen.findByTestId('line-tile-1'));
     expect(await screen.findByTestId('line-route-1')).toBeTruthy();
     expect(screen.getByTestId('line-route-halo-1')).toBeTruthy();
@@ -207,7 +217,7 @@ describe('MapScreen line view', () => {
 
     // Clear: every vehicle again, no route.
     fireEvent.press(screen.getByTestId('line-clear'));
-    await waitFor(() => expect(vehicleMarkers()).toHaveLength(8));
+    await waitFor(() => expect(vehicleMarkers().length).toBeGreaterThan(0));
     expect(screen.queryAllByTestId(/^line-route-/)).toHaveLength(0);
     expect(screen.getByTestId('line-picker')).toBeTruthy();
   });
@@ -216,12 +226,14 @@ describe('MapScreen line view', () => {
     renderScreen(<MapScreen />);
     await moveTo(0.2);
     fireEvent.press(screen.getByTestId('chip-transit'));
+    fireEvent.press(await screen.findByTestId('line-group-TROLLEYBUS'));
     fireEvent.press(await screen.findByTestId('line-tile-14'));
     expect(await screen.findByTestId('line-route-14')).toBeTruthy();
     fireEvent.press(screen.getByTestId('chip-transit')); // off
     await waitFor(() => expect(screen.queryByTestId('line-route-14')).toBeNull());
-    fireEvent.press(screen.getByTestId('chip-transit')); // on again: every vehicle
-    await waitFor(() => expect(vehicleMarkers()).toHaveLength(8));
+    fireEvent.press(screen.getByTestId('chip-transit')); // on again: fresh panel, trams chosen
+    await waitFor(() => expect(vehicleMarkers().length).toBeGreaterThan(0));
+    expect(vehicleMarkers().length).toBeLessThan(8);
     expect(screen.queryByTestId('line-view')).toBeNull();
   });
 

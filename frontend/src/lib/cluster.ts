@@ -9,16 +9,24 @@ export type Cluster<T extends Point> = { id: string; lat: number; lon: number; i
 /** Cells across the visible area (per axis). More cells = smaller clusters. */
 export const CLUSTER_CELLS = 6;
 
-/** Splits points into lone pins and clusters. With `enabled` false every point stays a lone pin. */
+/** Size (degrees) of one cluster cell for a view: span / cells, snapped to a power of two. Snapping means a small zoom
+ * or pan jitter gives the same size, so the groups do not reshuffle while the camera is still. */
+export function clusterCellSize(span: number, cells = CLUSTER_CELLS): number {
+  return 2 ** Math.round(Math.log2(span / cells));
+}
+
+/** Splits points into lone pins and clusters. With `enabled` false every point stays a lone pin. The grid is fixed to
+ * the world (cell edges at multiples of the cell size), not to the screen edge, so the same places stay grouped the
+ * same way however the view is panned, and clusters are stable between the small region updates a map sends. */
 export function clusterPoints<T extends Point>(points: T[], bbox: Bbox | null, enabled: boolean, cells = CLUSTER_CELLS): { singles: T[]; clusters: Cluster<T>[] } {
   if (!enabled || !bbox || points.length < 2) return { singles: points, clusters: [] };
-  const width = (bbox.maxLon - bbox.minLon) / cells;
-  const height = (bbox.maxLat - bbox.minLat) / cells;
-  if (!(width > 0) || !(height > 0)) return { singles: points, clusters: [] };
+  const span = Math.max(bbox.maxLon - bbox.minLon, bbox.maxLat - bbox.minLat);
+  if (!(span > 0)) return { singles: points, clusters: [] };
+  const size = clusterCellSize(span, cells);
 
   const grid = new Map<string, T[]>();
   for (const p of points) {
-    const key = `${Math.floor((p.lon - bbox.minLon) / width)}:${Math.floor((p.lat - bbox.minLat) / height)}`;
+    const key = `${size}:${Math.floor(p.lon / size)}:${Math.floor(p.lat / size)}`;
     const bucket = grid.get(key);
     if (bucket) bucket.push(p);
     else grid.set(key, [p]);

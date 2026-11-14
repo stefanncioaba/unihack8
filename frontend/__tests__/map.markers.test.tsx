@@ -8,13 +8,14 @@ import type { PlaceSummary } from '@/api/types.places';
 import type { EventSummary } from '@/api/types';
 import type { TransitStop, TransitVehicle } from '@/api/types.transit';
 import MapScreen from '@/app/(tabs)/map';
-import { TRIP_PILL, TripStepMarker, tripStepSize } from '@/features/directions/TripMarkers';
+import { TripStepMarker, tripStepImage } from '@/features/directions/TripMarkers';
 import type { TripStep } from '@/features/directions/tripSteps';
-import { ClusterMarker, MARKER_TRACK_MS, clusterSize, pinBox, useBriefViewTracking } from '@/features/map/ClusterMarker';
-import { EVENT_PIN, EventMarkers } from '@/features/map/EventMarkers';
-import { PLACE_PIN, PlaceMarkers } from '@/features/map/PlaceMarkers';
-import { STOP_ROOT_SIZE, TransitLayer } from '@/features/transit/TransitLayer';
-import { VehicleMarker, badgeSize, vehicleMarkerSize } from '@/features/transit/VehicleMarker';
+import { ClusterMarker, MARKER_TRACK_MS, useBriefViewTracking } from '@/features/map/ClusterMarker';
+import { EventMarkers } from '@/features/map/EventMarkers';
+import { clusterImage } from '@/features/map/markerImages';
+import { PlaceMarkers } from '@/features/map/PlaceMarkers';
+import { TransitLayer } from '@/features/transit/TransitLayer';
+import { VehicleMarker, badgeSize, vehicleImages } from '@/features/transit/VehicleMarker';
 import { iconFontLoaded } from '@/ui/Icon';
 import { HIDDEN_POI_TYPES, HIDDEN_TRANSIT_TYPES, darkMapStyle } from '@/ui/mapStyle';
 
@@ -160,11 +161,10 @@ describe('icon font and marker tracking', () => {
     expect(screen.getByTestId('tracking').props.children).toBe('false');
   });
 
-  it('place pins track briefly too (no longer frozen from the start), then stop', () => {
-    render(<PlaceMarkers places={[place]} showLabels={false} onSelect={noop} bbox={null} onZoomTo={noop} />);
-    expect(screen.getByTestId('place-marker-p1').props.tracksViewChanges).toBe(true);
-    act(() => jest.advanceTimersByTime(MARKER_TRACK_MS));
+  it('place pins are image markers: nothing to snapshot, so tracking is never on', () => {
+    render(<PlaceMarkers places={[place]} onSelect={noop} bbox={null} onZoomTo={noop} />);
     expect(screen.getByTestId('place-marker-p1').props.tracksViewChanges).toBe(false);
+    expect(screen.getByTestId('place-marker-p1').props.image).toBeDefined();
   });
 });
 
@@ -202,70 +202,73 @@ describe('base map shows only our data', () => {
   });
 });
 
+describe('place and event pins are ready-made images', () => {
+  it('place pin: image per category, another image when selected, centred on the position', () => {
+    const { rerender } = render(<PlaceMarkers places={[place]} onSelect={noop} bbox={null} onZoomTo={noop} />);
+    const normal = screen.getByTestId('place-marker-p1').props.image;
+    expect(normal).toBeDefined();
+    expect(screen.getByTestId('place-marker-p1').props.anchor).toEqual({ x: 0.5, y: 0.5 });
+    rerender(<PlaceMarkers places={[place]} selectedId="p1" onSelect={noop} bbox={null} onZoomTo={noop} />);
+    expect(screen.getByTestId('place-marker-p1').props.image).not.toEqual(normal);
+  });
+
+  it('an unknown place category still gets a pin (the generic one)', () => {
+    render(<PlaceMarkers places={[{ ...place, category: 'brand_new' as never }]} onSelect={noop} bbox={null} onZoomTo={noop} />);
+    expect(screen.getByTestId('place-marker-p1').props.image).toBeDefined();
+  });
+
+  it('event pin: image per category, another image when selected', () => {
+    const { rerender } = render(<EventMarkers events={[event]} onSelect={noop} bbox={null} onZoomTo={noop} />);
+    const normal = screen.getByTestId('event-marker-e1').props.image;
+    expect(normal).toBeDefined();
+    rerender(<EventMarkers events={[event]} selectedId="e1" onSelect={noop} bbox={null} onZoomTo={noop} />);
+    expect(screen.getByTestId('event-marker-e1').props.image).not.toEqual(normal);
+  });
+
+  it('cluster bubble: an image for its count (places and events differ, big counts share the "99+" image)', () => {
+    render(<ClusterMarker id="c1" lat={45.75} lon={21.22} count={7} kind="place" onPress={noop} />);
+    const m = screen.getByTestId('cluster-c1');
+    expect(m.props.image).toEqual(clusterImage('place', 7));
+    expect(m.props.tracksViewChanges).toBe(false);
+    expect(clusterImage('place', 7)).not.toEqual(clusterImage('event', 7));
+    expect(clusterImage('place', 7)).not.toEqual(clusterImage('place', 8));
+    expect(clusterImage('place', 500)).toEqual(clusterImage('place', 100));
+    expect(clusterImage('place', 1)).toEqual(clusterImage('place', 2));
+  });
+});
+
 describe('marker roots hold their whole content', () => {
-  it('place pin, with and without the name pill and when selected', () => {
-    const { rerender } = render(<PlaceMarkers places={[place]} showLabels={false} onSelect={noop} bbox={null} onZoomTo={noop} />);
-    expectContained(screen.getByTestId('marker-root-place-p1'));
-    expect(flat(screen.getByTestId('marker-root-place-p1'))).toMatchObject({ width: PLACE_PIN.slot, height: PLACE_PIN.slot });
-    rerender(<PlaceMarkers places={[place]} selectedId="p1" showLabels={false} onSelect={noop} bbox={null} onZoomTo={noop} />);
-    expectContained(screen.getByTestId('marker-root-place-p1'));
-    const box = pinBox(PLACE_PIN.slot, PLACE_PIN.label);
-    expect(flat(screen.getByTestId('marker-root-place-p1'))).toMatchObject({ width: box.width, height: box.height });
-    // The badge's centre stays on the coordinate when the pill is shown.
-    expect(screen.getByTestId('place-marker-p1').props.anchor).toEqual({ x: 0.5, y: PLACE_PIN.slot / 2 / box.height });
-    expect(PLACE_PIN.selected).toBeLessThanOrEqual(PLACE_PIN.slot);
-  });
-
-  it('event pin, with and without the title pill', () => {
-    const { rerender } = render(<EventMarkers events={[event]} showLabels={false} onSelect={noop} bbox={null} onZoomTo={noop} />);
-    expectContained(screen.getByTestId('marker-root-event-e1'));
-    rerender(<EventMarkers events={[event]} selectedId="e1" showLabels onSelect={noop} bbox={null} onZoomTo={noop} />);
-    expectContained(screen.getByTestId('marker-root-event-e1'));
-    expect(EVENT_PIN.selected).toBeLessThanOrEqual(EVENT_PIN.slot);
-  });
-
-  it('cluster bubble is exactly sized for its digits', () => {
-    render(<ClusterMarker id="c1" lat={45.75} lon={21.22} count={1234} color="#003566" onPress={noop} />);
-    expectContained(screen.getByTestId('marker-root-cluster-c1'));
-    expect(flat(screen.getByTestId('marker-root-cluster-c1'))).toMatchObject(clusterSize(1234));
-    expect(clusterSize(5).width).toBe(36);
-    expect(clusterSize(1234).width).toBeGreaterThan(clusterSize(12).width);
-  });
-
-  it('vehicle badge, halo and bearing arrow sit in a square root that holds them, selected or not', () => {
+  it('vehicle marker is an image per line (selected one differs); an unknown line gets its type badge', () => {
     const { rerender } = render(<VehicleMarker vehicle={vehicle} onPress={noop} />);
-    expectContained(screen.getByTestId('marker-root-vehicle-marker-v1'));
-    expect(flat(screen.getByTestId('marker-root-vehicle-marker-v1'))).toMatchObject(vehicleMarkerSize('Tv14', false));
-    expect(screen.queryByTestId('marker-root-vehicle-marker-v1-arrow')).toBeNull(); // no bearing, no arrow
-    rerender(<VehicleMarker vehicle={{ ...vehicle, bearing: 133 }} selected onPress={noop} />);
-    expectContained(screen.getByTestId('marker-root-vehicle-marker-v1'));
-    expect(flat(screen.getByTestId('marker-root-vehicle-marker-v1'))).toMatchObject(vehicleMarkerSize('Tv14', true));
-    expect(screen.getByTestId('marker-root-vehicle-marker-v1-arrow')).toBeTruthy();
-    // The square holds the badge's longer side plus room for the halo and arrow all around.
-    const size = vehicleMarkerSize('Tv14', true);
-    expect(size.width).toBe(size.height);
-    expect(size.width).toBeGreaterThanOrEqual(badgeSize('Tv14', true).width + 16);
-    expect(vehicleMarkerSize('Tv14', true).height).toBeGreaterThanOrEqual(28);
-    expect(vehicleMarkerSize('M14', false).width).toBeLessThan(vehicleMarkerSize('M14', true).width);
-    expect(badgeSize('7', false)).toEqual({ width: 28, height: 28 }); // short names are round
+    const m = () => screen.getByTestId('vehicle-marker-v1');
+    expect(m().props.image).toBe(vehicleImages(vehicle).normal);
+    expect(m().props.tracksViewChanges).toBe(false);
+    rerender(<VehicleMarker vehicle={vehicle} selected onPress={noop} />);
+    expect(m().props.image).toBe(vehicleImages(vehicle).selected);
+    expect(vehicleImages(vehicle).selected).not.toBe(vehicleImages(vehicle).normal);
+    const unknown = { ...vehicle, route: 'ZZ99', routeName: 'ZZ99' };
+    expect(vehicleImages(unknown).normal).toBeDefined();
+    expect(vehicleImages({ ...vehicle, route: '1', routeName: '1' }).normal).not.toEqual(vehicleImages(unknown).normal); // a listed line has its own badge
+    expect(badgeSize('7', false)).toEqual({ width: 28, height: 28 }); // short names are round (panel badge)
   });
 
-  it('stop dot root holds the selected dot', () => {
-    render(<TransitLayer stops={[stop]} lineId={null} vehicles={[]} selectedStopId="s1" onSelectStop={noop} onSelectVehicle={noop} />);
-    expectContained(screen.getByTestId('marker-root-stop-s1'));
-    expect(flat(screen.getByTestId('marker-root-stop-s1'))).toMatchObject({ width: STOP_ROOT_SIZE, height: STOP_ROOT_SIZE });
+  it('stop dot is an image, bigger and ringed when selected', () => {
+    const { rerender } = render(<TransitLayer stops={[stop]} lineId={null} vehicles={[]} onSelectStop={noop} onSelectVehicle={noop} />);
+    const normal = screen.getByTestId('stop-marker-s1').props.image;
+    expect(normal).toBeDefined();
+    rerender(<TransitLayer stops={[stop]} lineId={null} vehicles={[]} selectedStopId="s1" onSelectStop={noop} onSelectVehicle={noop} />);
+    expect(screen.getByTestId('stop-marker-s1').props.image).not.toBe(normal);
   });
 
-  it('trip step pills (board, get off, walk) fit their roots, the get-off gap included', () => {
-    for (const kind of ['board', 'alight', 'walk'] as const) {
-      const label = kind === 'walk' ? 'Walk 4 min' : 'Board Tram 1 → Gara de Nord · 18:08';
-      const { unmount } = render(<TripStepMarker step={step(kind, label)} />);
-      const root = screen.getByTestId(`marker-root-step-${kind}-0`);
-      expectContained(root);
-      expect(flat(root)).toMatchObject(tripStepSize(kind, label));
-      unmount();
-    }
-    expect(tripStepSize('alight', 'Get off').height).toBe(TRIP_PILL.ride + TRIP_PILL.alightGap);
-    expect(tripStepSize('board', 'x'.repeat(200)).width).toBe(TRIP_PILL.maxWidth);
+  it('trip step markers are ready-made badges (board and get-off differ); the text is the tap callout', () => {
+    const label = 'Board Tram 1 → Gara de Nord · 18:08';
+    const { unmount } = render(<TripStepMarker step={step('board', label)} />);
+    const m = screen.getByTestId('trip-step-board-0');
+    expect(m.props.image).toBe(tripStepImage({ kind: 'board', color: step('board', label).color }));
+    expect(m.props.title).toBe(label);
+    expect(m.props.tracksViewChanges).toBe(false);
+    expect(tripStepImage({ kind: 'board', color: '#FFD700' })).not.toBe(tripStepImage({ kind: 'alight', color: '#FFD700' }));
+    expect(tripStepImage({ kind: 'board', color: '#123456' })).toBeDefined(); // a colour that is no line colour
+    unmount();
   });
 });

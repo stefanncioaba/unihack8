@@ -105,17 +105,13 @@ describe('TransitLayer re-renders', () => {
     expect(alpha.mock.calls.length).toBe(drawn); // the route was not re-rendered
   });
 
-  it('does not re-render a badge when the refresh only changed its report time or position', () => {
-    const color = jest.spyOn(lines, 'lineColor');
+  it('a refresh that only changed report time or position moves the marker, nothing else', () => {
     const { rerender } = render(layer(fleet('2026-11-14T10:00:00Z')));
-    const afterMount = color.mock.calls.length;
-    expect(afterMount).toBeGreaterThanOrEqual(2); // one badge each
-
+    const image = screen.getByTestId('vehicle-marker-a').props.image;
     rerender(layer(fleet('2026-11-14T10:00:10Z'))); // new objects, same look and place
-    expect(color.mock.calls.length).toBe(afterMount);
-
-    rerender(layer(fleet('2026-11-14T10:00:20Z', 45.752))); // "a" moved: the marker moves, its badge stays
-    expect(color.mock.calls.length).toBe(afterMount);
+    expect(screen.getByTestId('vehicle-marker-a').props.image).toBe(image);
+    rerender(layer(fleet('2026-11-14T10:00:20Z', 45.752))); // "a" moved
+    expect(screen.getByTestId('vehicle-marker-a').props.image).toBe(image);
     expect(screen.getByTestId('vehicle-marker-a').props.coordinate).toEqual({ latitude: 45.752, longitude: 21.22 });
   });
 
@@ -260,7 +256,7 @@ describe('MapContext bbox', () => {
       const first = ctx.bbox;
       act(() => ctx.select({ type: 'place', id: 'p1' }));
       expect(ctx.bbox).toBe(first);
-      act(() => ctx.setVisibleBbox({ minLat: 45.74001, minLon: 21.21001, maxLat: 45.76001, maxLon: 21.23001 }));
+      act(() => ctx.setVisibleBbox({ minLat: 45.74001, minLon: 21.21001, maxLat: 45.75999, maxLon: 21.22999 }));
       act(() => jest.advanceTimersByTime(400));
       expect(ctx.bbox).toBe(first);
       act(() => ctx.setVisibleBbox({ minLat: 45.75, minLon: 21.22, maxLat: 45.77, maxLon: 21.24 }));

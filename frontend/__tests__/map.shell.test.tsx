@@ -5,7 +5,7 @@ import { Text } from 'react-native';
 
 import { MapPanel } from '@/features/map/MapPanel';
 import { MapProvider, useMapContext, type MapContextValue } from '@/features/map/MapContext';
-import { bboxContains, bboxParam, regionToBbox, roundBbox } from '@/lib/bbox';
+import { bboxContains, bboxCovers, bboxParam, expandBbox, regionToBbox, roundBbox } from '@/lib/bbox';
 import { createQueryClient } from '@/lib/queryClient';
 
 import { renderScreen } from './testUtils';
@@ -21,10 +21,16 @@ describe('bbox helpers', () => {
     expect(b.maxLon).toBeCloseTo(21.25);
   });
 
-  it('rounds to ~100 m, formats the query value and tests containment', () => {
-    const b = roundBbox({ minLon: 21.18049, minLat: 45.73051, maxLon: 21.26049, maxLat: 45.77049 });
-    expect(b).toEqual({ minLon: 21.18, minLat: 45.731, maxLon: 21.26, maxLat: 45.77 });
-    expect(bboxParam(b)).toBe('21.18,45.731,21.26,45.77');
+  it('rounds outward to ~100 m (never smaller than the view), formats the query value and tests containment', () => {
+    const view = { minLon: 21.18049, minLat: 45.73051, maxLon: 21.26049, maxLat: 45.77049 };
+    const b = roundBbox(view);
+    expect(b).toEqual({ minLon: 21.18, minLat: 45.73, maxLon: 21.261, maxLat: 45.771 });
+    expect(bboxCovers(b, view)).toBe(true);
+    // A view far smaller than the grid still keeps a non-empty box that holds it.
+    const tiny = { minLon: 21.22501, minLat: 45.75001, maxLon: 21.22503, maxLat: 45.75003 };
+    expect(bboxCovers(roundBbox(tiny), tiny)).toBe(true);
+    expect(bboxParam(b)).toBe('21.18,45.73,21.261,45.771');
+    expect(expandBbox({ minLon: 0, minLat: 0, maxLon: 2, maxLat: 4 }, 0.5)).toEqual({ minLon: -1, minLat: -2, maxLon: 3, maxLat: 6 });
     expect(bboxContains(b, { lat: 45.75, lon: 21.2 })).toBe(true);
     expect(bboxContains(b, { lat: 46, lon: 21.2 })).toBe(false);
   });
@@ -65,7 +71,7 @@ describe('MapContext', () => {
     act(() => box.current!.setVisibleBbox({ minLon: 21.1111, minLat: 45.1111, maxLon: 21.2222, maxLat: 45.2222 }));
     act(() => box.current!.setVisibleBbox({ minLon: 21.3333, minLat: 45.3333, maxLon: 21.4444, maxLat: 45.4444 }));
     expect(box.current!.bbox).toEqual(START); // nothing yet
-    await waitFor(() => expect(box.current!.bbox).toEqual({ minLon: 21.333, minLat: 45.333, maxLon: 21.444, maxLat: 45.444 }));
+    await waitFor(() => expect(box.current!.bbox).toEqual({ minLon: 21.333, minLat: 45.333, maxLon: 21.445, maxLat: 45.445 }));
   });
 
   it('keeps one selection at a time; a destination is a selection', () => {

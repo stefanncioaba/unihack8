@@ -1,14 +1,13 @@
 // A cluster pin: a round badge with the number of pins it stands for. Tapping it zooms in.
-import { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { memo, useEffect, useMemo, useState } from 'react';
 import { Marker } from 'react-native-maps';
 
 import { useIconFontLoaded } from '@/ui/Icon';
-import { Text } from '@/ui/Text';
-import { colors } from '@/ui/theme';
+
+import { clusterImage } from './markerImages';
 
 /** How long a custom marker keeps redrawing after it appears or changes, so Android can snapshot the finished view. */
-export const MARKER_TRACK_MS = 800;
+export const MARKER_TRACK_MS = 300;
 
 /** Markers whose tracking ends within this many ms of the earliest one are switched off in the same pass. */
 export const TRACK_BATCH_SLACK_MS = 32;
@@ -87,37 +86,24 @@ export function useBriefViewTracking(signature: string | number | boolean): bool
   return tracking || !fontReady;
 }
 
-/** Cluster bubble height (and minimum width). */
-const CLUSTER_HEIGHT = 36;
+type Props = { id: string; lat: number; lon: number; count: number; kind: 'place' | 'event'; onPress: () => void };
 
-/** Exact size of a cluster bubble for a count: wide enough for every digit plus the ring, so nothing is cut off. */
-export function clusterSize(count: number): { width: number; height: number } {
-  const digits = String(Math.max(0, Math.floor(count))).length;
-  return { width: Math.max(CLUSTER_HEIGHT, 20 + digits * 9), height: CLUSTER_HEIGHT };
-}
-
-type Props = { id: string; lat: number; lon: number; count: number; color: string; onPress: () => void };
-
-/** Oxford Navy for places, yellow for events (pass the colour in). The root view has the bubble's exact size, so the
- * native snapshot always holds the whole bubble. */
-export function ClusterMarker({ id, lat, lon, count, color, onPress }: Props) {
-  const tracking = useBriefViewTracking(`${count}:${color}`);
-  const size = clusterSize(count);
+/** A count bubble drawn from a ready-made image (navy for places, gold for events), so it appears complete at once and
+ * never flickers or gets cut off. Memoised: only a change of count or position redraws it. */
+export const ClusterMarker = memo(function ClusterMarker({ id, lat, lon, count, kind, onPress }: Props) {
+  const coordinate = useMemo(() => ({ latitude: lat, longitude: lon }), [lat, lon]);
   return (
-    <Marker testID={`cluster-${id}`} coordinate={{ latitude: lat, longitude: lon }} onPress={onPress} tracksViewChanges={tracking} anchor={CENTER}>
-      <View
-        testID={`marker-root-cluster-${id}`}
-        style={[styles.badge, size, { borderRadius: size.height / 2, backgroundColor: color }]}
-        accessibilityLabel={`${count} results, tap to zoom in`}
-        collapsable={false}
-      >
-        <Text variant="cardTitle" allowFontScaling={false} numberOfLines={1} style={{ color: color === colors.gold ? colors.onAccent : '#fff' }}>
-          {count}
-        </Text>
-      </View>
-    </Marker>
+    <Marker
+      testID={`cluster-${id}`}
+      coordinate={coordinate}
+      onPress={onPress}
+      image={clusterImage(kind, count)}
+      anchor={CENTER}
+      tracksViewChanges={false}
+      accessibilityLabel={`${count} results, tap to zoom in`}
+    />
   );
-}
+});
 
 /** Bubble anchor: its middle sits on the cluster's position (one shared object). */
 const CENTER = { x: 0.5, y: 0.5 };
@@ -125,6 +111,8 @@ const CENTER = { x: 0.5, y: 0.5 };
 /** Space between a round pin and its name pill, and the pill's height. */
 export const PIN_LABEL_GAP = 3;
 export const PIN_LABEL_HEIGHT = 20;
+/** Extra width of a labelled pin's box, so the name pill is never cut at the right. */
+export const PIN_SIDE_SLACK = 6;
 
 /** Box of a round pin's marker root: a square slot for the badge (sized for its larger, selected look) and, when a name
  * pill is shown, room for the pill under it at its widest. The anchor keeps the badge's centre on the coordinate. Every
@@ -132,14 +120,7 @@ export const PIN_LABEL_HEIGHT = 20;
 export function pinBox(slot: number, labelWidth: number | null): { width: number; height: number; anchor: { x: number; y: number } } {
   if (labelWidth === null) return { width: slot, height: slot, anchor: CENTER };
   const height = slot + PIN_LABEL_GAP + PIN_LABEL_HEIGHT;
-  return { width: Math.max(slot, labelWidth), height, anchor: { x: 0.5, y: slot / 2 / height } };
+  // A few px of slack on the sides: the pill's right edge is never flush with the snapshot edge.
+  return { width: Math.max(slot, labelWidth + PIN_SIDE_SLACK), height, anchor: { x: 0.5, y: slot / 2 / height } };
 }
 
-const styles = StyleSheet.create({
-  badge: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 3,
-    borderColor: 'rgba(255,255,255,0.35)',
-  },
-});

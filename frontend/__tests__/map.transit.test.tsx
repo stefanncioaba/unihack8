@@ -89,6 +89,7 @@ describe('MapScreen transit layer', () => {
     renderScreen(<MapScreen />);
     await moveTo(0.02);
     fireEvent.press(screen.getByTestId('chip-transit'));
+    fireEvent.press(await screen.findByTestId('line-group-TRAM')); // trams are chosen to start with: press again for every type
     await waitFor(() => expect(vehicleMarkers()).toHaveLength(8));
     expect(vehicleMarkers().some((m) => m.props.testID.startsWith('vehicle-marker-1-'))).toBe(true);
     expect(vehicleMarkers().some((m) => m.props.testID.startsWith('vehicle-marker-14-'))).toBe(true);
