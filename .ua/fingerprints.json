@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "3f9aba219455e8af756af593d4cf9caab90922e5",
-  "generatedAt": "2026-11-14T13:19:32.855Z",
+  "gitCommitHash": "a06c6575aa3614caf51079862b9912466252e305",
+  "generatedAt": "2026-11-14T14:05:39.895Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,22 +25,22 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "96ee714619b8235585155efd471d55a254a0fa2b822c07619f836a765d59115e",
+      "contentHash": "5c0eb825bc954bc8c6e0a11fbb35fee2277b31ee11b1a4a6ea183fedbbdbedb1",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 548,
+      "totalLines": 568,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "eea6840e808b444deb9be843a187e96bcc75a28b39b048828e546fd86ae7d901",
+      "contentHash": "866a5c1e17d16e99a0e0f97dbefb624cf4099dba62ce9e796354296a0e8227f6",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 370,
+      "totalLines": 384,
       "hasStructuralAnalysis": false
     },
     "README.md": {
@@ -3796,7 +3796,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
-      "contentHash": "adfcebfe9cab34ec6783cadb9e1c388c75c7f72875468aa9aad252eabec617d4",
+      "contentHash": "b9986644f29e7f43ce6ac480bffeb6c8940ed515351ae2ad11bf265885d563c2",
       "functions": [
         {
           "name": "ErrorCode",
@@ -3835,7 +3835,7 @@
             "defaultMessage"
           ],
           "exported": true,
-          "lineCount": 44
+          "lineCount": 46
         }
       ],
       "imports": [
@@ -3851,7 +3851,7 @@
         "defaultMessage",
         "ErrorCode"
       ],
-      "totalLines": 53,
+      "totalLines": 55,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/common/exception/ErrorResponseFactory.java": {
@@ -4808,7 +4808,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java",
-      "contentHash": "e3dcdc6b95b676a2f99d0fdc02f451e900d2d3929f17c9aec8f9a72af2115d56",
+      "contentHash": "338b23ab283c9a3672ff430ef03e8f62d9e804ad995720efbc80ee613914aeda",
       "functions": [
         {
           "name": "securityFilterChain",
@@ -7294,7 +7294,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/events/domain/dto/EventDetail.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/EventDetail.java",
-      "contentHash": "ff62adf6695c4ab2d9e61c6b2925680020a55cb9431f5d0d465c1b80fcc089e2",
+      "contentHash": "45d58b78057f287ebcdd7d388a66050112bcea049b1fefec31ae3621cad28af6",
       "functions": [],
       "classes": [
         {
@@ -7302,7 +7302,7 @@
           "methods": [],
           "properties": [],
           "exported": true,
-          "lineCount": 5
+          "lineCount": 6
         }
       ],
       "imports": [
@@ -7328,7 +7328,7 @@
       "exports": [
         "EventDetail"
       ],
-      "totalLines": 13,
+      "totalLines": 14,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSearchCriteria.java": {
@@ -7372,7 +7372,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSummary.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSummary.java",
-      "contentHash": "786b2cccf158d25e5bc8e16c40f9fc0aa273c050b28751c3dd7736a2ed21e775",
+      "contentHash": "1e7cb27bc16571861c35939a49b16d2ac588d03e266f9d3671e07358e5689125",
       "functions": [],
       "classes": [
         {
@@ -7380,7 +7380,7 @@
           "methods": [],
           "properties": [],
           "exported": true,
-          "lineCount": 4
+          "lineCount": 5
         }
       ],
       "imports": [
@@ -7406,7 +7406,7 @@
       "exports": [
         "EventSummary"
       ],
-      "totalLines": 12,
+      "totalLines": 13,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/events/domain/dto/JoinResponse.java": {
@@ -7662,7 +7662,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/events/mapper/EventMapper.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/events/mapper/EventMapper.java",
-      "contentHash": "23ae922c00bc0e4c7d720c348671da2455bda7fa676f2813ae0f269c492adc75",
+      "contentHash": "809e94d5022a69265f7b2fd2ecb2575ea9cd175201e29e1ff44a66287d8df99e",
       "functions": [],
       "classes": [
         {
@@ -7703,6 +7703,12 @@
           ]
         },
         {
+          "source": "com.unihack8.backend.reviews.domain.dto.RatingStats",
+          "specifiers": [
+            "RatingStats"
+          ]
+        },
+        {
           "source": "com.unihack8.backend.users.domain.entity.Profile",
           "specifiers": [
             "Profile"
@@ -7712,18 +7718,19 @@
       "exports": [
         "EventMapper"
       ],
-      "totalLines": 20,
+      "totalLines": 21,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java",
-      "contentHash": "b012e7769adc434aabbc48c509394adff18251320d8e60caf7676a01f862fb9d",
+      "contentHash": "f019ecbb87df4dfc153f25f54f22defc3fb164bcb6876f8e57c0e14390c60d83",
       "functions": [
         {
           "name": "summary",
           "params": [
             "e",
-            "count"
+            "count",
+            "rating"
           ],
           "returnType": "EventSummary",
           "exported": true,
@@ -7735,7 +7742,8 @@
             "e",
             "count",
             "organizer",
-            "myStatus"
+            "myStatus",
+            "rating"
           ],
           "returnType": "EventDetail",
           "exported": true,
@@ -7817,6 +7825,12 @@
           ]
         },
         {
+          "source": "com.unihack8.backend.reviews.domain.dto.RatingStats",
+          "specifiers": [
+            "RatingStats"
+          ]
+        },
+        {
           "source": "com.unihack8.backend.users.domain.entity.Profile",
           "specifiers": [
             "Profile"
@@ -7835,7 +7849,7 @@
         "user",
         "EventMapperImpl"
       ],
-      "totalLines": 49,
+      "totalLines": 50,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/events/repository/EventRepository.java": {
@@ -8548,7 +8562,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
-      "contentHash": "2c2a7b500bb62f5a43c169d0d46893f773d98f3e4ae4ecfb0284621f61e68077",
+      "contentHash": "fd01c4bddd69f706cacd55437df558d91dae2100221c543e83a61d9d8dc3b5d2",
       "functions": [
         {
           "name": "EventServiceImpl",
@@ -8556,11 +8570,12 @@
             "events",
             "participants",
             "profiles",
+            "reviews",
             "mapper",
             "clock"
           ],
           "exported": true,
-          "lineCount": 8
+          "lineCount": 9
         },
         {
           "name": "search",
@@ -8576,7 +8591,7 @@
           ],
           "returnType": "PageResponse<EventSummary>",
           "exported": true,
-          "lineCount": 22
+          "lineCount": 25
         },
         {
           "name": "detail",
@@ -8707,6 +8722,15 @@
           "lineCount": 7
         },
         {
+          "name": "summaryOf",
+          "params": [
+            "event"
+          ],
+          "returnType": "EventSummary",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
           "name": "profile",
           "params": [
             "userId"
@@ -8827,6 +8851,7 @@
             "editable",
             "requireUserEvent",
             "detailOf",
+            "summaryOf",
             "profile",
             "validate",
             "validCategory",
@@ -8843,11 +8868,12 @@
             "events",
             "participants",
             "profiles",
+            "reviews",
             "mapper",
             "clock"
           ],
           "exported": true,
-          "lineCount": 295
+          "lineCount": 305
         }
       ],
       "imports": [
@@ -8921,6 +8947,18 @@
           "source": "com.unihack8.backend.events.service.EventService",
           "specifiers": [
             "EventService"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.dto.RatingStats",
+          "specifiers": [
+            "RatingStats"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.repository.ReviewRepository",
+          "specifiers": [
+            "ReviewRepository"
           ]
         },
         {
@@ -9028,7 +9066,7 @@
         "mine",
         "EventServiceImpl"
       ],
-      "totalLines": 327,
+      "totalLines": 339,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/places/client/OverpassClient.java": {
@@ -17188,7 +17226,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java",
-      "contentHash": "eab29c5be1574d451b85fabe6c3163da664c4a208ef764ca2998c7116eded28b",
+      "contentHash": "0cfb683d5ca56b6bf5b7b9218416603d800724fe8cbb2fc9eb66e9d95d88f7b4",
       "functions": [],
       "classes": [
         {
@@ -17196,7 +17234,7 @@
           "methods": [],
           "properties": [],
           "exported": true,
-          "lineCount": 16
+          "lineCount": 18
         }
       ],
       "imports": [
@@ -17222,12 +17260,12 @@
       "exports": [
         "AttendedEventResponse"
       ],
-      "totalLines": 29,
+      "totalLines": 33,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java",
-      "contentHash": "510f24680ec9af507798eb20d9854934db4a0c2b8682dfcf99efaa4845f88c70",
+      "contentHash": "242a2287ac67b0af66100ae55da50f9065e3e23ecb8ebe8ddc6dfb62f9d25abd",
       "functions": [],
       "classes": [
         {
@@ -17235,7 +17273,7 @@
           "methods": [],
           "properties": [],
           "exported": true,
-          "lineCount": 3
+          "lineCount": 4
         }
       ],
       "imports": [
@@ -17261,7 +17299,7 @@
       "exports": [
         "ProfileResponse"
       ],
-      "totalLines": 10,
+      "totalLines": 12,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileSearchResult.java": {
@@ -17464,7 +17502,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java",
-      "contentHash": "184156d5ca0bcb636d15522ac955e4024b64c1ff523d3b2ea77706afc454dda4",
+      "contentHash": "9c9e11961f735c6c4cc4ffd1f9aeb93d47b59b7ff8caf3b62c72e526a4a75965",
       "functions": [],
       "classes": [
         {
@@ -17475,7 +17513,7 @@
           ],
           "properties": [],
           "exported": true,
-          "lineCount": 7
+          "lineCount": 8
         }
       ],
       "imports": [
@@ -17513,22 +17551,23 @@
       "exports": [
         "ProfileMapper"
       ],
-      "totalLines": 17,
+      "totalLines": 18,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java",
-      "contentHash": "bcda8171d5040516ca12ef96fdcf3441bbb1f8994ad3d5658e3761cbc5be4b2c",
+      "contentHash": "bffd2b3fdb2d569343802be11408766b59f7a9f7cfd601507025f381e83bc470",
       "functions": [
         {
           "name": "toResponse",
           "params": [
             "profile",
-            "attendedEvents"
+            "attendedEvents",
+            "organizedEvents"
           ],
           "returnType": "ProfileResponse",
           "exported": true,
-          "lineCount": 5
+          "lineCount": 6
         },
         {
           "name": "toSearchResult",
@@ -17549,7 +17588,7 @@
           ],
           "properties": [],
           "exported": true,
-          "lineCount": 16
+          "lineCount": 17
         }
       ],
       "imports": [
@@ -17601,22 +17640,23 @@
         "toSearchResult",
         "ProfileMapperImpl"
       ],
-      "totalLines": 28,
+      "totalLines": 29,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/users/repository/AttendedEventRepository.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/users/repository/AttendedEventRepository.java",
-      "contentHash": "d0e653c46777de6beb61dcb9650fcd628f1334fcd011d1ae46fff729252ba788",
+      "contentHash": "29556cd4407c0daa65fb533d7d8c7c62a750f94a2dfa98dd057332d765c8694f",
       "functions": [],
       "classes": [
         {
           "name": "AttendedEventRepository",
           "methods": [
-            "findAttendedByUserId"
+            "findAttendedByUserId",
+            "findPastOrganizedByUserId"
           ],
           "properties": [],
           "exported": true,
-          "lineCount": 4
+          "lineCount": 7
         }
       ],
       "imports": [
@@ -17624,6 +17664,12 @@
           "source": "com.unihack8.backend.users.domain.dto.AttendedEventResponse",
           "specifiers": [
             "AttendedEventResponse"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
           ]
         },
         {
@@ -17642,7 +17688,7 @@
       "exports": [
         "AttendedEventRepository"
       ],
-      "totalLines": 12,
+      "totalLines": 16,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/users/repository/ProfileRepository.java": {
@@ -17702,7 +17748,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java",
-      "contentHash": "40b588a9892785d015b3024e5bdfdbdb231f02efa33eb7b9e212f6600a991255",
+      "contentHash": "5e0bfc5425046a037b846f02f8e6a3ecfefb99b9bcbbb320918379f0b6f5c71b",
       "functions": [
         {
           "name": "AttendedEventRepositoryImpl",
@@ -17719,7 +17765,26 @@
           ],
           "returnType": "List<AttendedEventResponse>",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 4
+        },
+        {
+          "name": "findPastOrganizedByUserId",
+          "params": [
+            "userId",
+            "now"
+          ],
+          "returnType": "List<AttendedEventResponse>",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "row",
+          "params": [
+            "rs"
+          ],
+          "returnType": "AttendedEventResponse",
+          "exported": false,
+          "lineCount": 21
         }
       ],
       "classes": [
@@ -17727,14 +17792,19 @@
           "name": "AttendedEventRepositoryImpl",
           "methods": [
             "AttendedEventRepositoryImpl",
-            "findAttendedByUserId"
+            "findAttendedByUserId",
+            "findPastOrganizedByUserId",
+            "row"
           ],
           "properties": [
+            "EVENT_COLUMNS",
             "ATTENDED_EVENTS_SQL",
+            "ORGANIZED_STARTED_SQL",
+            "PROFILE_LIST_LIMIT",
             "jdbcTemplate"
           ],
           "exported": true,
-          "lineCount": 52
+          "lineCount": 82
         }
       ],
       "imports": [
@@ -17763,15 +17833,33 @@
           ]
         },
         {
-          "source": "java.math.BigDecimal",
+          "source": "com.unihack8.backend.reliability.domain.ReliabilityRules",
           "specifiers": [
-            "BigDecimal"
+            "ReliabilityRules"
+          ]
+        },
+        {
+          "source": "java.sql.ResultSet",
+          "specifiers": [
+            "ResultSet"
+          ]
+        },
+        {
+          "source": "java.sql.SQLException",
+          "specifiers": [
+            "SQLException"
           ]
         },
         {
           "source": "java.sql.Timestamp",
           "specifiers": [
             "Timestamp"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
           ]
         },
         {
@@ -17790,9 +17878,10 @@
       "exports": [
         "AttendedEventRepositoryImpl",
         "findAttendedByUserId",
+        "findPastOrganizedByUserId",
         "AttendedEventRepositoryImpl"
       ],
-      "totalLines": 65,
+      "totalLines": 98,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/users/service/UserService.java": {
@@ -17853,17 +17942,18 @@
     },
     "backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
-      "contentHash": "7f796f573f951561bb82dc038432ee3ccd0740fc00e98603e4282404ca9f493f",
+      "contentHash": "d6d861886b061edfd7f8126a4258f8ed28e5277a94a9e5ae22ffae06d59c835b",
       "functions": [
         {
           "name": "UserServiceImpl",
           "params": [
             "profiles",
             "attendedEvents",
-            "mapper"
+            "mapper",
+            "clock"
           ],
           "exported": true,
-          "lineCount": 5
+          "lineCount": 7
         },
         {
           "name": "getProfile",
@@ -17910,6 +18000,15 @@
           "returnType": "void",
           "exported": false,
           "lineCount": 5
+        },
+        {
+          "name": "toResponse",
+          "params": [
+            "profile"
+          ],
+          "returnType": "ProfileResponse",
+          "exported": false,
+          "lineCount": 4
         }
       ],
       "classes": [
@@ -17921,17 +18020,19 @@
             "updateUsername",
             "search",
             "checkUsername",
-            "requireValidUsername"
+            "requireValidUsername",
+            "toResponse"
           ],
           "properties": [
             "USERNAME",
             "SEARCH_LIMIT",
             "profiles",
             "attendedEvents",
-            "mapper"
+            "mapper",
+            "clock"
           ],
           "exported": true,
-          "lineCount": 71
+          "lineCount": 81
         }
       ],
       "imports": [
@@ -18026,6 +18127,12 @@
           ]
         },
         {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
           "source": "java.util.List",
           "specifiers": [
             "List"
@@ -18052,7 +18159,7 @@
         "checkUsername",
         "UserServiceImpl"
       ],
-      "totalLines": 94,
+      "totalLines": 105,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/resources/application-local.properties.example": {
@@ -18547,7 +18654,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/ai/mapper/impl/ChatResultMapperImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/mapper/impl/ChatResultMapperImplTest.java",
-      "contentHash": "9ebd90bdca91bf4b6b15cc3ec98d7841cda459ae5f3fc397a12a8de3bf9d5c70",
+      "contentHash": "cb3a30f2507971f2fadef02cc55200946b8a3f5f34b7d8785a328914e49df2f5",
       "functions": [
         {
           "name": "boldNamesInReplyOrder",
@@ -19272,7 +19379,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/ai/tool/impl/PlanRouteAndEventsToolTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/tool/impl/PlanRouteAndEventsToolTest.java",
-      "contentHash": "98b01e8ff53ea0a4a856a4997179d7f6a6705db247285cc6381134403dd8b0e1",
+      "contentHash": "3332cbda3bd5fbc42189665b4fc7a126b81083145dfa3e2b0918b9a8cb0e38a9",
       "functions": [
         {
           "name": "transitRoute",
@@ -22091,7 +22198,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/events/controller/EventControllerTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/events/controller/EventControllerTest.java",
-      "contentHash": "3ad1db7e9ee7be5f6556cbcdad0e4555adf943a3501e339cc1faf549692c1f74",
+      "contentHash": "cef3f1daa4f59b6fcd9175e3146be7e829bf90c6ef87ffe1a1b89bffa97514e8",
       "functions": [
         {
           "name": "publicList",
@@ -22383,7 +22490,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/events/mapper/EventMapperImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/events/mapper/EventMapperImplTest.java",
-      "contentHash": "5d28168d057aad27672acb07c196ac7676369eb60a055bad8d3daffabe512c5e",
+      "contentHash": "b918d0a8b41018e1191a3662cacca7d743c30587fee548aba4ca9da61ba1faaa",
       "functions": [
         {
           "name": "externalEventHasNoCapacityOrSpots",
@@ -22391,19 +22498,27 @@
           "returnType": "void",
           "exported": false,
           "lineCount": 13
+        },
+        {
+          "name": "ratingIsRoundedToOneDecimal",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
         }
       ],
       "classes": [
         {
           "name": "EventMapperImplTest",
           "methods": [
-            "externalEventHasNoCapacityOrSpots"
+            "externalEventHasNoCapacityOrSpots",
+            "ratingIsRoundedToOneDecimal"
           ],
           "properties": [
             "mapper"
           ],
           "exported": false,
-          "lineCount": 18
+          "lineCount": 31
         }
       ],
       "imports": [
@@ -22411,6 +22526,12 @@
           "source": "com.unihack8.backend.events.domain.entity.Event",
           "specifiers": [
             "Event"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.dto.RatingStats",
+          "specifiers": [
+            "RatingStats"
           ]
         },
         {
@@ -22445,19 +22566,19 @@
         }
       ],
       "exports": [],
-      "totalLines": 30,
+      "totalLines": 44,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/events/service/EventDatabaseIntegrationTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/events/service/EventDatabaseIntegrationTest.java",
-      "contentHash": "26fbd9400552d8fd520aea3d79f22adbe13ae4fb76834a3ea1305d73ab905d28",
+      "contentHash": "78d18f7afd1c5f8725371d1eec9d46ac498665c61ae9e014ca07c677b88d23de",
       "functions": [
         {
           "name": "setUp",
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 25
+          "lineCount": 26
         },
         {
           "name": "concurrentJoinNeverOverbooks",
@@ -22544,7 +22665,7 @@
             "service"
           ],
           "exported": false,
-          "lineCount": 168
+          "lineCount": 169
         }
       ],
       "imports": [
@@ -22570,6 +22691,12 @@
           "source": "com.unihack8.backend.events.domain.dto.UpdateEventRequest",
           "specifiers": [
             "UpdateEventRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.support.ReviewTestSchema",
+          "specifiers": [
+            "ReviewTestSchema"
           ]
         },
         {
@@ -22664,12 +22791,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 193,
+      "totalLines": 195,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java",
-      "contentHash": "2aa4dc44f402e66ef3b9315f1687b9b7dc822cfc6f146a1dfadbc4c3c8745290",
+      "contentHash": "4e3f72915837bf4397b4e2aa7794b73adbb1d19bebc37f4ef4d9382741f2bc24",
       "functions": [
         {
           "name": "setUp",
@@ -22872,11 +22999,12 @@
             "events",
             "participants",
             "profiles",
+            "reviews",
             "mapper",
             "service"
           ],
           "exported": false,
-          "lineCount": 200
+          "lineCount": 201
         }
       ],
       "imports": [
@@ -22938,6 +23066,12 @@
           "source": "com.unihack8.backend.events.service.impl.EventServiceImpl",
           "specifiers": [
             "EventServiceImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.repository.ReviewRepository",
+          "specifiers": [
+            "ReviewRepository"
           ]
         },
         {
@@ -23038,7 +23172,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 232,
+      "totalLines": 234,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/places/client/OverpassClientImplTest.java": {
@@ -24398,14 +24532,14 @@
     },
     "backend/src/test/java/com/unihack8/backend/reliability/ReliabilityIntegrationTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/reliability/ReliabilityIntegrationTest.java",
-      "contentHash": "f177e12b5c4c37b280c9950a12b66a5a446feb591767bfc69ee0ca0894cfaecc",
+      "contentHash": "d0c2aa0ed3f822ad9e05c096cc5a4d5dbc341655981036e0966b5182d79dbf47",
       "functions": [
         {
           "name": "setUp",
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 25
+          "lineCount": 26
         },
         {
           "name": "event",
@@ -24616,7 +24750,7 @@
             "now"
           ],
           "exported": false,
-          "lineCount": 324
+          "lineCount": 325
         }
       ],
       "imports": [
@@ -24678,6 +24812,12 @@
           "source": "com.unihack8.backend.support.JwtTestTokens",
           "specifiers": [
             "JwtTestTokens"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.support.ReviewTestSchema",
+          "specifiers": [
+            "ReviewTestSchema"
           ]
         },
         {
@@ -24784,7 +24924,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 360,
+      "totalLines": 362,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/reliability/config/NoShowJobTest.java": {
@@ -27524,7 +27664,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
-      "contentHash": "860cfc9aa739dfb2803eb03942d759bce7a63164da4319bb17160b8714ad33c0",
+      "contentHash": "72d6b08387ad583f442e53e56f762c51cfb83bc9124546ec76f62cd972df2687",
       "functions": [
         {
           "name": "readsOwnProfile",
@@ -27633,7 +27773,7 @@
           ],
           "returnType": "ProfileResponse",
           "exported": false,
-          "lineCount": 6
+          "lineCount": 7
         }
       ],
       "classes": [
@@ -27663,7 +27803,7 @@
             "users"
           ],
           "exported": false,
-          "lineCount": 163
+          "lineCount": 164
         }
       ],
       "imports": [
@@ -27807,19 +27947,19 @@
         }
       ],
       "exports": [],
-      "totalLines": 193,
+      "totalLines": 194,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java",
-      "contentHash": "827b3261d8c3dd02d248612666ac8313e6926b23976341925e917f15d042d441",
+      "contentHash": "83295005bbac16af9cadf87a24b88a6e7cf4f70e2334f949d74f2d8b21026792",
       "functions": [
         {
           "name": "setUp",
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 19
+          "lineCount": 20
         },
         {
           "name": "returnsOnlyAttendedEventsNewestFirst",
@@ -27885,7 +28025,7 @@
             "repository"
           ],
           "exported": false,
-          "lineCount": 97
+          "lineCount": 98
         }
       ],
       "imports": [
@@ -27899,6 +28039,12 @@
           "source": "com.unihack8.backend.users.repository.impl.AttendedEventRepositoryImpl",
           "specifiers": [
             "AttendedEventRepositoryImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.support.ReviewTestSchema",
+          "specifiers": [
+            "ReviewTestSchema"
           ]
         },
         {
@@ -27975,7 +28121,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 121,
+      "totalLines": 123,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/users/repository/ProfileRepositoryTest.java": {
@@ -28097,7 +28243,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
-      "contentHash": "4ff1ff51c2ffac139c9c0da57520ff5aa5839967a16efabc57b31cbcc228dba0",
+      "contentHash": "8eef8b655d2b8349b2a44550e2ebd46921f6352bf4de9c49aecde1c4739341c2",
       "functions": [
         {
           "name": "setUp",
@@ -28214,12 +28360,13 @@
           "properties": [
             "USER_ID",
             "EVENT_ID",
+            "NOW",
             "profiles",
             "attendedEvents",
             "service"
           ],
           "exported": false,
-          "lineCount": 127
+          "lineCount": 128
         }
       ],
       "imports": [
@@ -28320,9 +28467,21 @@
           ]
         },
         {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
           "source": "java.time.Instant",
           "specifiers": [
             "Instant"
+          ]
+        },
+        {
+          "source": "java.time.ZoneOffset",
+          "specifiers": [
+            "ZoneOffset"
           ]
         },
         {
@@ -28399,17 +28558,17 @@
         }
       ],
       "exports": [],
-      "totalLines": 163,
+      "totalLines": 166,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/resources/application.properties": {
       "filePath": "backend/src/test/resources/application.properties",
-      "contentHash": "6aad87d5505b6e171f82d09f6a249b9327d94fdcc8a4eaaab2f93a7134c40103",
+      "contentHash": "bd13ef844592a8c42636d75af761a1da0b78e8158daecf117483592e0417f234",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 20,
+      "totalLines": 23,
       "hasStructuralAnalysis": false
     },
     "backend/src/test/resources/livetickets/event-search-sample.json": {
@@ -28494,12 +28653,12 @@
     },
     "docs/API.md": {
       "filePath": "docs/API.md",
-      "contentHash": "d1b02994cde0e0f1bd4b0f6aceb6188134e9bfc91940ea1a4c4a094b09adf03e",
+      "contentHash": "21192ecb812bb427d92332dfa4e15d7dccd07c0a608cc8221c1682a2258994dc",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 611,
+      "totalLines": 660,
       "hasStructuralAnalysis": false
     },
     "docs/DEMO.md": {
@@ -29482,7 +29641,7 @@
     },
     "frontend/__tests__/mocks.users.test.ts": {
       "filePath": "frontend/__tests__/mocks.users.test.ts",
-      "contentHash": "79cb1ba4a09cbf78655ce4ba0007cdf349383346455a162d31ba73e30e4e7d21",
+      "contentHash": "42bab14a18245b91dd80bfae2acea459c949a6f36365f6cb13b4ceab60eefd57",
       "functions": [
         {
           "name": "call",
@@ -29613,7 +29772,7 @@
     },
     "frontend/__tests__/screens.event.test.tsx": {
       "filePath": "frontend/__tests__/screens.event.test.tsx",
-      "contentHash": "edcf987a2b873fa4294ab83a8c66dd8cb9abff1054de2357ec31d99e986611a1",
+      "contentHash": "230064f6482a28a7e901dcd96e982134f516034d6dcbfe6a7d2406d510299a17",
       "functions": [
         {
           "name": "confirmAlert",
@@ -29679,7 +29838,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 269,
+      "totalLines": 324,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/screens.home.test.tsx": {
@@ -29743,7 +29902,7 @@
     },
     "frontend/__tests__/screens.profile.test.tsx": {
       "filePath": "frontend/__tests__/screens.profile.test.tsx",
-      "contentHash": "f650b8beb58c6f0cb33e7b242a15a7aec9c116d3f0158f08db0bdd0ac001c6f4",
+      "contentHash": "0de896955b2a897367c14d06b3db8ee75caa9deead953685f95aa690151abb42",
       "functions": [
         {
           "name": "startEditing",
@@ -29824,12 +29983,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 240,
+      "totalLines": 273,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/screens.users.test.tsx": {
       "filePath": "frontend/__tests__/screens.users.test.tsx",
-      "contentHash": "7108c5f2031d6474cbddb80b3b70e8e24cfede9868f401694df9b5f76385f453",
+      "contentHash": "e8b65dd578db474d9eeae84cd6c6ff6a790eded26c534baebbbd21e517ff46fa",
       "functions": [],
       "classes": [],
       "imports": [
@@ -29838,7 +29997,8 @@
           "specifiers": [
             "fireEvent",
             "screen",
-            "waitFor"
+            "waitFor",
+            "within"
           ]
         },
         {
@@ -29889,12 +30049,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 132,
+      "totalLines": 156,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/testUtils.tsx": {
       "filePath": "frontend/__tests__/testUtils.tsx",
-      "contentHash": "92d2a98b31f77a3c618d2896ebd2ad1ae7b1d899a8e547ef33aa8781032adf3f",
+      "contentHash": "714ac12cb59179cb09a14a550795c36beaa29a9b22b25b6bcaffa202ba1b032b",
       "functions": [
         {
           "name": "setParams",
@@ -29971,7 +30131,7 @@
         "renderScreen",
         "IDS"
       ],
-      "totalLines": 53,
+      "totalLines": 57,
       "hasStructuralAnalysis": true
     },
     "frontend/app.json": {
@@ -30030,7 +30190,7 @@
     },
     "frontend/src/api/client.ts": {
       "filePath": "frontend/src/api/client.ts",
-      "contentHash": "f1e15aa3e45230d489d1276aa66580ef76eccc8fcb2e12447aba10810f0d04c1",
+      "contentHash": "18af7315ceddcfafe71b9d085fde6e5e3736b7f8fb8e506e379f1a361ea4d56f",
       "functions": [
         {
           "name": "buildQuery",
@@ -30323,7 +30483,7 @@
     },
     "frontend/src/api/endpoints.ts": {
       "filePath": "frontend/src/api/endpoints.ts",
-      "contentHash": "6b53d23c2129db521cf10aae62869db42a7a87ff26b4ec03b467d2b681e937ae",
+      "contentHash": "c442a7b87b5d7ecf316fe50f747757681aeaf0b959390852622e4365d843e427",
       "functions": [
         {
           "name": "checkUsername",
@@ -30430,6 +30590,23 @@
           ],
           "exported": true,
           "lineCount": 2
+        },
+        {
+          "name": "getEventReviews",
+          "params": [
+            "id"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "saveMyReview",
+          "params": [
+            "id",
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 1
         }
       ],
       "classes": [],
@@ -30446,6 +30623,7 @@
             "BanResult",
             "CheckInResult",
             "EventDetail",
+            "EventReviews",
             "EventQuery",
             "EventSummary",
             "JoinResult",
@@ -30455,6 +30633,8 @@
             "Paged",
             "Participant",
             "PublicProfile",
+            "Review",
+            "ReviewInput",
             "Ticket",
             "UsernameAvailability",
             "UserSummary"
@@ -30474,9 +30654,11 @@
         "getParticipants",
         "banParticipant",
         "getMyTicket",
-        "checkIn"
+        "checkIn",
+        "getEventReviews",
+        "saveMyReview"
       ],
-      "totalLines": 68,
+      "totalLines": 77,
       "hasStructuralAnalysis": true
     },
     "frontend/src/api/endpoints.users.ts": {
@@ -30538,7 +30720,7 @@
     },
     "frontend/src/api/errors.ts": {
       "filePath": "frontend/src/api/errors.ts",
-      "contentHash": "174fc80660790a4b95a40a7159a30c0df6704b7bbb273595f131521db3f51348",
+      "contentHash": "696e1ebdc565a4bddb3ad5e9c35f75987be9c10855298ebfdc9990f2495da63a",
       "functions": [
         {
           "name": "friendlyError",
@@ -30570,7 +30752,7 @@
         "ApiError",
         "friendlyError"
       ],
-      "totalLines": 55,
+      "totalLines": 57,
       "hasStructuralAnalysis": true
     },
     "frontend/src/api/types.ai.ts": {
@@ -30639,19 +30821,20 @@
     },
     "frontend/src/api/types.ts": {
       "filePath": "frontend/src/api/types.ts",
-      "contentHash": "2c3aad8325f7395d0493a4d1fc1bab6c920009d865c6bd5b3a6242dc00006b60",
+      "contentHash": "42ae39be0ec1a62ae51c1503cfaae98aa08bc91bb442da66181599393edab7d0",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [
-        "EVENT_CATEGORIES"
+        "EVENT_CATEGORIES",
+        "REVIEW_COMMENT_MAX"
       ],
-      "totalLines": 93,
+      "totalLines": 120,
       "hasStructuralAnalysis": true
     },
     "frontend/src/api/types.users.ts": {
       "filePath": "frontend/src/api/types.users.ts",
-      "contentHash": "aa61fbdcfa6783d8debd24483e026ddc29738ec387724df1f6c07657d5c4c19a",
+      "contentHash": "492b040eb8477e7b42f2b8f98c2b8d0a6de12212faec3d5d1451a9aec32910b0",
       "functions": [],
       "classes": [],
       "imports": [
@@ -31588,7 +31771,7 @@
     },
     "frontend/src/app/events/[id]/index.tsx": {
       "filePath": "frontend/src/app/events/[id]/index.tsx",
-      "contentHash": "96fda1462804773a300596263a257d937808c9ceae077833881d31450d6f77f7",
+      "contentHash": "94a98f4381da475de92f82d0e3506d245069b8c405417b921dfa6201f92574c9",
       "functions": [
         {
           "name": "InfoRow",
@@ -31602,7 +31785,7 @@
           "name": "EventDetailsScreen",
           "params": [],
           "exported": true,
-          "lineCount": 133
+          "lineCount": 135
         },
         {
           "name": "Shell",
@@ -31648,6 +31831,12 @@
           "source": "@/features/events/EventArt",
           "specifiers": [
             "EventArt"
+          ]
+        },
+        {
+          "source": "@/features/events/EventReviews",
+          "specifiers": [
+            "EventReviews"
           ]
         },
         {
@@ -31753,7 +31942,7 @@
       "exports": [
         "EventDetailsScreen"
       ],
-      "totalLines": 195,
+      "totalLines": 198,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/events/[id]/scan.tsx": {
@@ -32255,13 +32444,13 @@
     },
     "frontend/src/app/users/[id].tsx": {
       "filePath": "frontend/src/app/users/[id].tsx",
-      "contentHash": "dd0a684aa791180419b42e33f6f4e8b01be3b7b0ce39c0b57843630b008eecd5",
+      "contentHash": "80bce801d4b119e8785796504237440b2102aaa4456a39b5f2af4e4abcd14aaa",
       "functions": [
         {
           "name": "PublicProfileScreen",
           "params": [],
           "exported": true,
-          "lineCount": 44
+          "lineCount": 57
         }
       ],
       "classes": [],
@@ -32339,7 +32528,7 @@
       "exports": [
         "PublicProfileScreen"
       ],
-      "totalLines": 64,
+      "totalLines": 77,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/users/_layout.tsx": {
@@ -33412,7 +33601,7 @@
     },
     "frontend/src/features/events/EventCards.tsx": {
       "filePath": "frontend/src/features/events/EventCards.tsx",
-      "contentHash": "748c96f9c953a9980b3fe023e5dd3d11dc347a38815ac1b5a17f2eca27f995d3",
+      "contentHash": "2fa5f6dd8e214849c0c489815db672c37881746ea131a7465ad6bb2963315257",
       "functions": [
         {
           "name": "openEvent",
@@ -33431,6 +33620,14 @@
           "lineCount": 5
         },
         {
+          "name": "RatingPill",
+          "params": [
+            "{ event }"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
           "name": "DateBadge",
           "params": [
             "{ iso }"
@@ -33444,7 +33641,7 @@
             "{ event, width = 264 }"
           ],
           "exported": true,
-          "lineCount": 38
+          "lineCount": 39
         },
         {
           "name": "EventListItem",
@@ -33452,7 +33649,7 @@
             "{ event }"
           ],
           "exported": true,
-          "lineCount": 25
+          "lineCount": 26
         }
       ],
       "classes": [],
@@ -33527,15 +33724,23 @@
             "availabilityLabel",
             "isFull"
           ]
+        },
+        {
+          "source": "./reviews",
+          "specifiers": [
+            "compactRating",
+            "ratingSummary"
+          ]
         }
       ],
       "exports": [
         "openEvent",
+        "RatingPill",
         "DateBadge",
         "EventCard",
         "EventListItem"
       ],
-      "totalLines": 145,
+      "totalLines": 163,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/events/LocationPickerModal.tsx": {
@@ -34940,7 +35145,7 @@
     },
     "frontend/src/features/users/MyEvents.tsx": {
       "filePath": "frontend/src/features/users/MyEvents.tsx",
-      "contentHash": "4a5e5b688425317d4ba17eb2718678d799b26e97245b3edafd89649721cab54b",
+      "contentHash": "5d826186eab77b207669e3ae924c4904f9909665cb8df7d4fcfa31d151e8d3ce",
       "functions": [
         {
           "name": "endOf",
@@ -34960,7 +35165,7 @@
           ],
           "returnType": "MyEventGroups",
           "exported": true,
-          "lineCount": 10
+          "lineCount": 11
         },
         {
           "name": "Section",
@@ -34974,7 +35179,7 @@
           "name": "MyEvents",
           "params": [],
           "exported": true,
-          "lineCount": 17
+          "lineCount": 18
         }
       ],
       "classes": [],
@@ -35035,7 +35240,7 @@
         "groupMyEvents",
         "MyEvents"
       ],
-      "totalLines": 70,
+      "totalLines": 72,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/users/ReliabilityLog.tsx": {
@@ -35185,7 +35390,7 @@
     },
     "frontend/src/features/users/reliability.ts": {
       "filePath": "frontend/src/features/users/reliability.ts",
-      "contentHash": "701b5b2215a65cc875de4a3bbc59dcc93d2b5ea566834beefd9678a8b07b326d",
+      "contentHash": "1c9a7aa15f997666635b964e5727d0dce35d39eee0603c45180f759f38dc3338",
       "functions": [
         {
           "name": "formatPoints",
@@ -35203,7 +35408,7 @@
           ],
           "returnType": "string",
           "exported": true,
-          "lineCount": 10
+          "lineCount": 12
         }
       ],
       "classes": [],
@@ -35221,12 +35426,12 @@
         "formatPoints",
         "reasonLabel"
       ],
-      "totalLines": 30,
+      "totalLines": 32,
       "hasStructuralAnalysis": true
     },
     "frontend/src/hooks/queries.ts": {
       "filePath": "frontend/src/hooks/queries.ts",
-      "contentHash": "d95c35c9b24b8cbb26b4985946c40025b7b5a6c02f998afccacba870078a4894",
+      "contentHash": "696e3e936132e7511fb8260dc7fc611a02c4f0ecb685b8e83b2e4ca97cc59229",
       "functions": [
         {
           "name": "useMe",
@@ -35336,6 +35541,23 @@
           "params": [],
           "exported": true,
           "lineCount": 7
+        },
+        {
+          "name": "useEventReviews",
+          "params": [
+            "id",
+            "enabled"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "useSaveReview",
+          "params": [
+            "id"
+          ],
+          "exported": true,
+          "lineCount": 16
         }
       ],
       "classes": [],
@@ -35357,6 +35579,7 @@
             "checkIn",
             "createEvent",
             "getEvent",
+            "getEventReviews",
             "getMe",
             "getMyTicket",
             "getParticipants",
@@ -35364,6 +35587,7 @@
             "joinEvent",
             "leaveEvent",
             "listEvents",
+            "saveMyReview",
             "searchUsers"
           ]
         },
@@ -35371,13 +35595,15 @@
           "source": "@/api/types",
           "specifiers": [
             "EventQuery",
-            "NewEvent"
+            "NewEvent",
+            "ReviewInput"
           ]
         }
       ],
       "exports": [
         "EVENTS_PAGE_SIZE",
         "keys",
+        "REVIEWS_REFRESH_MS",
         "useMe",
         "useUser",
         "useUserSearch",
@@ -35390,9 +35616,11 @@
         "useLeaveEvent",
         "useBanParticipant",
         "useCheckIn",
-        "useCreateEvent"
+        "useCreateEvent",
+        "useEventReviews",
+        "useSaveReview"
       ],
-      "totalLines": 131,
+      "totalLines": 165,
       "hasStructuralAnalysis": true
     },
     "frontend/src/hooks/useAi.ts": {
@@ -37124,7 +37352,7 @@
     },
     "frontend/testing/mocks/core.ts": {
       "filePath": "frontend/testing/mocks/core.ts",
-      "contentHash": "e8d54adf7dbf642080e8c20ce4fe3a4e27258acbe7e9d672b9ac1ce4ed011a26",
+      "contentHash": "bf88d05b550f8b7719399145422e0149159834c7c075aa7bafca8c84212370ae",
       "functions": [
         {
           "name": "getState",
@@ -37197,7 +37425,44 @@
           ],
           "returnType": "EventSummary",
           "exported": true,
-          "lineCount": 18
+          "lineCount": 19
+        },
+        {
+          "name": "ratingOf",
+          "params": [
+            "e"
+          ],
+          "returnType": "{ averageRating: number | null; reviewCount: number }",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "reviewsCloseAt",
+          "params": [
+            "e"
+          ],
+          "returnType": "number | null",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "ratingPoints",
+          "params": [
+            "avg"
+          ],
+          "returnType": "number",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "settleIfDue",
+          "params": [
+            "e",
+            "now"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 12
         },
         {
           "name": "toDetail",
@@ -37311,6 +37576,10 @@
         "eventById",
         "taken",
         "toSummary",
+        "ratingOf",
+        "reviewsCloseAt",
+        "ratingPoints",
+        "settleIfDue",
         "toDetail",
         "asList",
         "asNumber",
@@ -37319,12 +37588,12 @@
         "endOf",
         "logReliability"
       ],
-      "totalLines": 139,
+      "totalLines": 175,
       "hasStructuralAnalysis": true
     },
     "frontend/testing/mocks/data.ts": {
       "filePath": "frontend/testing/mocks/data.ts",
-      "contentHash": "a493ad84917cea435089b5bb11e83d2f09f47424df7200bced80af47bfa88b7a",
+      "contentHash": "e878c0eb5aa739e8b3953605229801f1870e6dc8ddac77fdf65f7a79670e397a",
       "functions": [
         {
           "name": "at",
@@ -37336,6 +37605,15 @@
           "returnType": "string",
           "exported": false,
           "lineCount": 5
+        },
+        {
+          "name": "hoursAgo",
+          "params": [
+            "hours"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 3
         },
         {
           "name": "eventId",
@@ -37358,7 +37636,7 @@
           "params": [],
           "returnType": "MockState",
           "exported": true,
-          "lineCount": 164
+          "lineCount": 200
         }
       ],
       "classes": [],
@@ -37397,7 +37675,7 @@
         "USER_IDS",
         "seed"
       ],
-      "totalLines": 225,
+      "totalLines": 273,
       "hasStructuralAnalysis": true
     },
     "frontend/testing/mocks/index.ts": {
@@ -37646,8 +37924,27 @@
     },
     "frontend/testing/mocks/routes/events.ts": {
       "filePath": "frontend/testing/mocks/routes/events.ts",
-      "contentHash": "dd6f7299e10c4368a549168b80728184a9c7718a44125902ee669f3bb627a305",
-      "functions": [],
+      "contentHash": "adae8e49659a7eb12d99af8ad0161888a0e88f634ba39d84ed236efffdcde743",
+      "functions": [
+        {
+          "name": "toReview",
+          "params": [
+            "r"
+          ],
+          "returnType": "Review",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "canReview",
+          "params": [
+            "e"
+          ],
+          "returnType": "boolean",
+          "exported": false,
+          "lineCount": 5
+        }
+      ],
       "classes": [],
       "imports": [
         {
@@ -37662,10 +37959,18 @@
             "CheckInResult",
             "EventCategory",
             "EventDetail",
+            "EventReviews",
             "EventSummary",
             "NewEvent",
             "Paged",
-            "Participant"
+            "Participant",
+            "Review"
+          ]
+        },
+        {
+          "source": "@/api/types",
+          "specifiers": [
+            "REVIEW_COMMENT_MAX"
           ]
         },
         {
@@ -37684,7 +37989,10 @@
             "logReliability",
             "me",
             "paginate",
+            "ratingOf",
             "requireOrganizer",
+            "reviewsCloseAt",
+            "settleIfDue",
             "taken",
             "toDetail",
             "toSummary",
@@ -37696,14 +38004,15 @@
           "source": "../data",
           "specifiers": [
             "MOCK_ME_ID",
-            "MockEvent"
+            "MockEvent",
+            "MockReview"
           ]
         }
       ],
       "exports": [
         "eventsRoutes"
       ],
-      "totalLines": 169,
+      "totalLines": 251,
       "hasStructuralAnalysis": true
     },
     "frontend/testing/mocks/routes/places.ts": {
@@ -38021,7 +38330,7 @@
     },
     "frontend/testing/mocks/routes/users.ts": {
       "filePath": "frontend/testing/mocks/routes/users.ts",
-      "contentHash": "7d615fe7a795a39b10ebd7bd2b0e157db42e1054b6a035c9be809076964ac9e0",
+      "contentHash": "51412ab72a3a9a7e27bd3ad14de75a70c061f12e1ca80f2dfac61798264e4298",
       "functions": [],
       "classes": [],
       "imports": [
@@ -38049,6 +38358,7 @@
         {
           "source": "../core",
           "specifiers": [
+            "endOf",
             "eventById",
             "getState",
             "me",
@@ -38068,7 +38378,7 @@
       "exports": [
         "usersRoutes"
       ],
-      "totalLines": 88,
+      "totalLines": 94,
       "hasStructuralAnalysis": true
     },
     "frontend/testing/mocks/transitSeed.ts": {
@@ -39521,6 +39831,2647 @@
       ],
       "totalLines": 12,
       "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reviews/config/ReviewSettlementJob.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reviews/config/ReviewSettlementJob.java",
+      "contentHash": "33cef5a11d9a8af77c5034938f0a2e9a15fbe3d86ea663cf8df5f3f58b6023f7",
+      "functions": [
+        {
+          "name": "ReviewSettlementJob",
+          "params": [
+            "settlements"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "run",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [
+        {
+          "name": "ReviewSettlementJob",
+          "methods": [
+            "ReviewSettlementJob",
+            "run"
+          ],
+          "properties": [
+            "log",
+            "settlements"
+          ],
+          "exported": true,
+          "lineCount": 24
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.reviews.service.ReviewSettlementService",
+          "specifiers": [
+            "ReviewSettlementService"
+          ]
+        },
+        {
+          "source": "org.slf4j.Logger",
+          "specifiers": [
+            "Logger"
+          ]
+        },
+        {
+          "source": "org.slf4j.LoggerFactory",
+          "specifiers": [
+            "LoggerFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.autoconfigure.condition.ConditionalOnProperty",
+          "specifiers": [
+            "ConditionalOnProperty"
+          ]
+        },
+        {
+          "source": "org.springframework.context.annotation.Configuration",
+          "specifiers": [
+            "Configuration"
+          ]
+        },
+        {
+          "source": "org.springframework.scheduling.annotation.EnableScheduling",
+          "specifiers": [
+            "EnableScheduling"
+          ]
+        },
+        {
+          "source": "org.springframework.scheduling.annotation.Scheduled",
+          "specifiers": [
+            "Scheduled"
+          ]
+        }
+      ],
+      "exports": [
+        "ReviewSettlementJob",
+        "run",
+        "ReviewSettlementJob"
+      ],
+      "totalLines": 39,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reviews/controller/ReviewController.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reviews/controller/ReviewController.java",
+      "contentHash": "b74b6179d43dbc012251710f7d700a39945a76803a70698dc7842c2d448cfdff",
+      "functions": [
+        {
+          "name": "ReviewController",
+          "params": [
+            "reviews",
+            "currentUser"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "list",
+          "params": [
+            "id"
+          ],
+          "returnType": "EventReviewsResponse",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "save",
+          "params": [
+            "id",
+            "request"
+          ],
+          "returnType": "ReviewResponse",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "ReviewController",
+          "methods": [
+            "ReviewController",
+            "list",
+            "save"
+          ],
+          "properties": [
+            "reviews",
+            "currentUser"
+          ],
+          "exported": true,
+          "lineCount": 23
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.security.CurrentUser",
+          "specifiers": [
+            "CurrentUser"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.dto.EventReviewsResponse",
+          "specifiers": [
+            "EventReviewsResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.dto.ReviewRequest",
+          "specifiers": [
+            "ReviewRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.dto.ReviewResponse",
+          "specifiers": [
+            "ReviewResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.service.ReviewService",
+          "specifiers": [
+            "ReviewService"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.GetMapping",
+          "specifiers": [
+            "GetMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.PathVariable",
+          "specifiers": [
+            "PathVariable"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.PutMapping",
+          "specifiers": [
+            "PutMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RequestBody",
+          "specifiers": [
+            "RequestBody"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RestController",
+          "specifiers": [
+            "RestController"
+          ]
+        }
+      ],
+      "exports": [
+        "ReviewController",
+        "list",
+        "save",
+        "ReviewController"
+      ],
+      "totalLines": 39,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reviews/domain/ReviewRules.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reviews/domain/ReviewRules.java",
+      "contentHash": "27a25a216c4ec4665547286ae1e687fa0b5ad132f78b4a9709353c48b7cf1973",
+      "functions": [
+        {
+          "name": "ReviewRules",
+          "params": [],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "closesAt",
+          "params": [
+            "startsAt",
+            "endsAt"
+          ],
+          "returnType": "Instant",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "ratingPoints",
+          "params": [
+            "average"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [
+        {
+          "name": "ReviewRules",
+          "methods": [
+            "ReviewRules",
+            "closesAt",
+            "ratingPoints"
+          ],
+          "properties": [
+            "MIN_RATING",
+            "MAX_RATING",
+            "MAX_COMMENT_LENGTH",
+            "REVIEW_WINDOW",
+            "NEUTRAL_RATING",
+            "POINTS_PER_STAR",
+            "RATING_REASON"
+          ],
+          "exported": true,
+          "lineCount": 29
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.reliability.domain.ReliabilityRules",
+          "specifiers": [
+            "ReliabilityRules"
+          ]
+        },
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        }
+      ],
+      "exports": [
+        "MIN_RATING",
+        "MAX_RATING",
+        "MAX_COMMENT_LENGTH",
+        "REVIEW_WINDOW",
+        "NEUTRAL_RATING",
+        "POINTS_PER_STAR",
+        "RATING_REASON",
+        "closesAt",
+        "ratingPoints",
+        "ReviewRules"
+      ],
+      "totalLines": 37,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reviews/domain/dto/EventReviewsResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reviews/domain/dto/EventReviewsResponse.java",
+      "contentHash": "36331c8e0b1b5743b5a73c345a39244bd8a810faff2be584592d4370c2cdabaa",
+      "functions": [],
+      "classes": [
+        {
+          "name": "EventReviewsResponse",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "EventReviewsResponse"
+      ],
+      "totalLines": 18,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reviews/domain/dto/RatingStats.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reviews/domain/dto/RatingStats.java",
+      "contentHash": "6f88a1deefb0a58ff7f1551ef306e492c7cd4ea2d781bee9d2ac9041d3d9c505",
+      "functions": [
+        {
+          "name": "rounded",
+          "params": [],
+          "returnType": "Double",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "RatingStats",
+          "methods": [
+            "rounded"
+          ],
+          "properties": [
+            "NONE"
+          ],
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "NONE",
+        "rounded",
+        "RatingStats"
+      ],
+      "totalLines": 17,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reviews/domain/dto/ReviewRequest.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reviews/domain/dto/ReviewRequest.java",
+      "contentHash": "82b1f18df2608d4715de2cce2ae81f9d2981e721f103993476cf63061594e4e7",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ReviewRequest",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "ReviewRequest"
+      ],
+      "totalLines": 11,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reviews/domain/dto/ReviewResponse.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reviews/domain/dto/ReviewResponse.java",
+      "contentHash": "6d5f47f919dfff89b73ad8061b38c9a061ee75dc0fbab87b6b27c68fef9e8e68",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ReviewResponse",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.events.domain.dto.UserSummary",
+          "specifiers": [
+            "UserSummary"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        }
+      ],
+      "exports": [
+        "ReviewResponse"
+      ],
+      "totalLines": 9,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reviews/domain/entity/EventReview.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reviews/domain/entity/EventReview.java",
+      "contentHash": "b5ba1af1b497f5ee4a5fe5c4e0e398cd65da338262417b00ae404bb0cb3b9f8f",
+      "functions": [],
+      "classes": [
+        {
+          "name": "EventReview",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "EventReview"
+      ],
+      "totalLines": 10,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reviews/domain/entity/SettlementCandidate.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reviews/domain/entity/SettlementCandidate.java",
+      "contentHash": "f8a8d9128a928fe14acdfb35e9feea978b4307ae29198900ac3a5636a23f70db",
+      "functions": [],
+      "classes": [
+        {
+          "name": "SettlementCandidate",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "SettlementCandidate"
+      ],
+      "totalLines": 9,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reviews/mapper/ReviewMapper.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reviews/mapper/ReviewMapper.java",
+      "contentHash": "3debbd110845cd56d6ee6f9e05a876c34666f4d05a2595b479571826176b7857",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ReviewMapper",
+          "methods": [
+            "toResponse"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.events.domain.dto.UserSummary",
+          "specifiers": [
+            "UserSummary"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.dto.ReviewResponse",
+          "specifiers": [
+            "ReviewResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.entity.EventReview",
+          "specifiers": [
+            "EventReview"
+          ]
+        }
+      ],
+      "exports": [
+        "ReviewMapper"
+      ],
+      "totalLines": 12,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reviews/mapper/impl/ReviewMapperImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reviews/mapper/impl/ReviewMapperImpl.java",
+      "contentHash": "15422ebabaee3420675e61d7b8df9b8002b98a133e6fb5f51c2e6b0683e16d27",
+      "functions": [
+        {
+          "name": "toResponse",
+          "params": [
+            "review",
+            "reviewer"
+          ],
+          "returnType": "ReviewResponse",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "ReviewMapperImpl",
+          "methods": [
+            "toResponse"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.events.domain.dto.UserSummary",
+          "specifiers": [
+            "UserSummary"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.dto.ReviewResponse",
+          "specifiers": [
+            "ReviewResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.entity.EventReview",
+          "specifiers": [
+            "EventReview"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.mapper.ReviewMapper",
+          "specifiers": [
+            "ReviewMapper"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        }
+      ],
+      "exports": [
+        "toResponse",
+        "ReviewMapperImpl"
+      ],
+      "totalLines": 18,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reviews/repository/ReviewRepository.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reviews/repository/ReviewRepository.java",
+      "contentHash": "4f275445dcca82f2c7b3682f226f14b217edc49cd549eacba057a4f3d3ee65e2",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ReviewRepository",
+          "methods": [
+            "find",
+            "insert",
+            "update",
+            "forEvent",
+            "stats",
+            "stats",
+            "isSettled",
+            "unsettledStartedBefore",
+            "markSettled"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 28
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.reviews.domain.dto.RatingStats",
+          "specifiers": [
+            "RatingStats"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.entity.EventReview",
+          "specifiers": [
+            "EventReview"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.entity.SettlementCandidate",
+          "specifiers": [
+            "SettlementCandidate"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "ReviewRepository"
+      ],
+      "totalLines": 41,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reviews/repository/impl/ReviewRepositoryImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reviews/repository/impl/ReviewRepositoryImpl.java",
+      "contentHash": "d47a6c19883656bc16e05ad982e6646d0457d95728eacf74dce1dd91f482f404",
+      "functions": [
+        {
+          "name": "ReviewRepositoryImpl",
+          "params": [
+            "jdbc",
+            "named"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "find",
+          "params": [
+            "eventId",
+            "reviewerId"
+          ],
+          "returnType": "Optional<EventReview>",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "insert",
+          "params": [
+            "r"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "update",
+          "params": [
+            "r"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "forEvent",
+          "params": [
+            "eventId"
+          ],
+          "returnType": "List<EventReview>",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "stats",
+          "params": [
+            "eventId"
+          ],
+          "returnType": "RatingStats",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "stats",
+          "params": [
+            "eventIds"
+          ],
+          "returnType": "Map<UUID, RatingStats>",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "isSettled",
+          "params": [
+            "eventId"
+          ],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "unsettledStartedBefore",
+          "params": [
+            "time"
+          ],
+          "returnType": "List<SettlementCandidate>",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "markSettled",
+          "params": [
+            "eventId",
+            "settledAt"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "mapper",
+          "params": [],
+          "returnType": "RowMapper<EventReview>",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "instant",
+          "params": [
+            "rs",
+            "column"
+          ],
+          "returnType": "Instant",
+          "exported": false,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "ReviewRepositoryImpl",
+          "methods": [
+            "ReviewRepositoryImpl",
+            "find",
+            "insert",
+            "update",
+            "forEvent",
+            "stats",
+            "stats",
+            "isSettled",
+            "unsettledStartedBefore",
+            "markSettled",
+            "mapper",
+            "instant"
+          ],
+          "properties": [
+            "COLUMNS",
+            "jdbc",
+            "named"
+          ],
+          "exported": true,
+          "lineCount": 96
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.reviews.domain.dto.RatingStats",
+          "specifiers": [
+            "RatingStats"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.entity.EventReview",
+          "specifiers": [
+            "EventReview"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.entity.SettlementCandidate",
+          "specifiers": [
+            "SettlementCandidate"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.repository.ReviewRepository",
+          "specifiers": [
+            "ReviewRepository"
+          ]
+        },
+        {
+          "source": "java.sql.ResultSet",
+          "specifiers": [
+            "ResultSet"
+          ]
+        },
+        {
+          "source": "java.sql.SQLException",
+          "specifiers": [
+            "SQLException"
+          ]
+        },
+        {
+          "source": "java.sql.Timestamp",
+          "specifiers": [
+            "Timestamp"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.HashMap",
+          "specifiers": [
+            "HashMap"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.springframework.jdbc.core.JdbcTemplate",
+          "specifiers": [
+            "JdbcTemplate"
+          ]
+        },
+        {
+          "source": "org.springframework.jdbc.core.RowMapper",
+          "specifiers": [
+            "RowMapper"
+          ]
+        },
+        {
+          "source": "org.springframework.jdbc.core.namedparam.MapSqlParameterSource",
+          "specifiers": [
+            "MapSqlParameterSource"
+          ]
+        },
+        {
+          "source": "org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate",
+          "specifiers": [
+            "NamedParameterJdbcTemplate"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Repository",
+          "specifiers": [
+            "Repository"
+          ]
+        }
+      ],
+      "exports": [
+        "ReviewRepositoryImpl",
+        "find",
+        "insert",
+        "update",
+        "forEvent",
+        "stats",
+        "stats",
+        "isSettled",
+        "unsettledStartedBefore",
+        "markSettled",
+        "ReviewRepositoryImpl"
+      ],
+      "totalLines": 119,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reviews/service/ReviewService.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reviews/service/ReviewService.java",
+      "contentHash": "1e96820501979ec99a833a2d1cd9b4b41f38bdda4d1102260cfbac611ffe01a6",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ReviewService",
+          "methods": [
+            "reviews",
+            "save"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.reviews.domain.dto.EventReviewsResponse",
+          "specifiers": [
+            "EventReviewsResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.dto.ReviewRequest",
+          "specifiers": [
+            "ReviewRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.dto.ReviewResponse",
+          "specifiers": [
+            "ReviewResponse"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        }
+      ],
+      "exports": [
+        "ReviewService"
+      ],
+      "totalLines": 17,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reviews/service/ReviewSettlementService.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reviews/service/ReviewSettlementService.java",
+      "contentHash": "46bbf4d70723f414211ec6c9f3f2fad2b39334b66e2235194307aa32059c072f",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ReviewSettlementService",
+          "methods": [
+            "settleDueEvents"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "ReviewSettlementService"
+      ],
+      "totalLines": 8,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reviews/service/impl/ReviewServiceImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reviews/service/impl/ReviewServiceImpl.java",
+      "contentHash": "b41bae03df4f5e275742d54d0d984ffc017642e979b8f54fbd187e34b06854f9",
+      "functions": [
+        {
+          "name": "ReviewServiceImpl",
+          "params": [
+            "events",
+            "participations",
+            "reviews",
+            "profiles",
+            "eventMapper",
+            "mapper",
+            "clock"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "reviews",
+          "params": [
+            "eventId",
+            "caller"
+          ],
+          "returnType": "EventReviewsResponse",
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "save",
+          "params": [
+            "eventId",
+            "caller",
+            "request"
+          ],
+          "returnType": "ReviewResponse",
+          "exported": true,
+          "lineCount": 33
+        },
+        {
+          "name": "authors",
+          "params": [
+            "all"
+          ],
+          "returnType": "Map<UUID, UserSummary>",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "invalid",
+          "params": [
+            "message"
+          ],
+          "returnType": "ApiException",
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "ReviewServiceImpl",
+          "methods": [
+            "ReviewServiceImpl",
+            "reviews",
+            "save",
+            "authors",
+            "invalid"
+          ],
+          "properties": [
+            "events",
+            "participations",
+            "reviews",
+            "profiles",
+            "eventMapper",
+            "mapper",
+            "clock"
+          ],
+          "exported": true,
+          "lineCount": 95
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.domain.dto.UserSummary",
+          "specifiers": [
+            "UserSummary"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.domain.entity.Event",
+          "specifiers": [
+            "Event"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.mapper.EventMapper",
+          "specifiers": [
+            "EventMapper"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.repository.EventRepository",
+          "specifiers": [
+            "EventRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.repository.ParticipationRepository",
+          "specifiers": [
+            "ParticipationRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.ReviewRules",
+          "specifiers": [
+            "ReviewRules"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.dto.EventReviewsResponse",
+          "specifiers": [
+            "EventReviewsResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.dto.RatingStats",
+          "specifiers": [
+            "RatingStats"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.dto.ReviewRequest",
+          "specifiers": [
+            "ReviewRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.dto.ReviewResponse",
+          "specifiers": [
+            "ReviewResponse"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.entity.EventReview",
+          "specifiers": [
+            "EventReview"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.mapper.ReviewMapper",
+          "specifiers": [
+            "ReviewMapper"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.repository.ReviewRepository",
+          "specifiers": [
+            "ReviewRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.service.ReviewService",
+          "specifiers": [
+            "ReviewService"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.entity.Profile",
+          "specifiers": [
+            "Profile"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.repository.ProfileRepository",
+          "specifiers": [
+            "ProfileRepository"
+          ]
+        },
+        {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.util.HashMap",
+          "specifiers": [
+            "HashMap"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Service",
+          "specifiers": [
+            "Service"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.annotation.Transactional",
+          "specifiers": [
+            "Transactional"
+          ]
+        }
+      ],
+      "exports": [
+        "ReviewServiceImpl",
+        "reviews",
+        "save",
+        "ReviewServiceImpl"
+      ],
+      "totalLines": 131,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/reviews/service/impl/ReviewSettlementServiceImpl.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/reviews/service/impl/ReviewSettlementServiceImpl.java",
+      "contentHash": "64543eacc6e88840206aa7ddb0d8338bdb2137b41eb0721a07682ed43e9ea845",
+      "functions": [
+        {
+          "name": "ReviewSettlementServiceImpl",
+          "params": [
+            "reviews",
+            "participations",
+            "transactionManager",
+            "clock"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "settleDueEvents",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 29
+        }
+      ],
+      "classes": [
+        {
+          "name": "ReviewSettlementServiceImpl",
+          "methods": [
+            "ReviewSettlementServiceImpl",
+            "settleDueEvents"
+          ],
+          "properties": [
+            "log",
+            "reviews",
+            "participations",
+            "transaction",
+            "clock"
+          ],
+          "exported": true,
+          "lineCount": 49
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.events.repository.ParticipationRepository",
+          "specifiers": [
+            "ParticipationRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.ReviewRules",
+          "specifiers": [
+            "ReviewRules"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.dto.RatingStats",
+          "specifiers": [
+            "RatingStats"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.entity.SettlementCandidate",
+          "specifiers": [
+            "SettlementCandidate"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.repository.ReviewRepository",
+          "specifiers": [
+            "ReviewRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.service.ReviewSettlementService",
+          "specifiers": [
+            "ReviewSettlementService"
+          ]
+        },
+        {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "org.slf4j.Logger",
+          "specifiers": [
+            "Logger"
+          ]
+        },
+        {
+          "source": "org.slf4j.LoggerFactory",
+          "specifiers": [
+            "LoggerFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Service",
+          "specifiers": [
+            "Service"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.PlatformTransactionManager",
+          "specifiers": [
+            "PlatformTransactionManager"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.support.TransactionTemplate",
+          "specifiers": [
+            "TransactionTemplate"
+          ]
+        }
+      ],
+      "exports": [
+        "ReviewSettlementServiceImpl",
+        "settleDueEvents",
+        "ReviewSettlementServiceImpl"
+      ],
+      "totalLines": 72,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/reviews/ReviewIntegrationTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/reviews/ReviewIntegrationTest.java",
+      "contentHash": "d7181269320d720fc43fdf1188efc9a52e33672d66477da23af6da65787870bc",
+      "functions": [
+        {
+          "name": "setUp",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 26
+        },
+        {
+          "name": "checkedInGuestReviewsAndRatingShowsEverywhere",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 35
+        },
+        {
+          "name": "onlyAttendeesMayReview",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "settlementMovesOrganiserScoreOnceAfterWindow",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 21
+        },
+        {
+          "name": "lowRatingLosesPointsAndNoReviewsChangesNothing",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "profileListsPastOrganisedEventsWithRating",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "review",
+          "params": [
+            "eventId",
+            "user",
+            "rating",
+            "comment"
+          ],
+          "returnType": "ResultActions",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "event",
+          "params": [
+            "startsAt",
+            "endsAt"
+          ],
+          "returnType": "UUID",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "participant",
+          "params": [
+            "eventId",
+            "userId",
+            "status"
+          ],
+          "returnType": "UUID",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "settlementAt",
+          "params": [
+            "at"
+          ],
+          "returnType": "ReviewSettlementService",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "score",
+          "params": [
+            "user"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "auth",
+          "params": [
+            "user"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "ReviewIntegrationTest",
+          "methods": [
+            "setUp",
+            "checkedInGuestReviewsAndRatingShowsEverywhere",
+            "onlyAttendeesMayReview",
+            "settlementMovesOrganiserScoreOnceAfterWindow",
+            "lowRatingLosesPointsAndNoReviewsChangesNothing",
+            "profileListsPastOrganisedEventsWithRating",
+            "review",
+            "event",
+            "participant",
+            "settlementAt",
+            "score",
+            "auth"
+          ],
+          "properties": [
+            "HOST",
+            "GUEST",
+            "OTHER",
+            "mvc",
+            "jdbc",
+            "reviews",
+            "participations",
+            "transactionManager",
+            "now"
+          ],
+          "exported": false,
+          "lineCount": 188
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get",
+          "specifiers": [
+            "get"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post",
+          "specifiers": [
+            "post"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put",
+          "specifiers": [
+            "put"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath",
+          "specifiers": [
+            "jsonPath"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.result.MockMvcResultMatchers.status",
+          "specifiers": [
+            "status"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.repository.ParticipationRepository",
+          "specifiers": [
+            "ParticipationRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.repository.ReviewRepository",
+          "specifiers": [
+            "ReviewRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.service.ReviewSettlementService",
+          "specifiers": [
+            "ReviewSettlementService"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.service.impl.ReviewSettlementServiceImpl",
+          "specifiers": [
+            "ReviewSettlementServiceImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.support.ReviewTestSchema",
+          "specifiers": [
+            "ReviewTestSchema"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.support.JwtTestTokens",
+          "specifiers": [
+            "JwtTestTokens"
+          ]
+        },
+        {
+          "source": "java.sql.Timestamp",
+          "specifiers": [
+            "Timestamp"
+          ]
+        },
+        {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.time.ZoneOffset",
+          "specifiers": [
+            "ZoneOffset"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.BeforeEach",
+          "specifiers": [
+            "BeforeEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Autowired",
+          "specifiers": [
+            "Autowired"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.test.context.SpringBootTest",
+          "specifiers": [
+            "SpringBootTest"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc",
+          "specifiers": [
+            "AutoConfigureMockMvc"
+          ]
+        },
+        {
+          "source": "org.springframework.http.MediaType",
+          "specifiers": [
+            "MediaType"
+          ]
+        },
+        {
+          "source": "org.springframework.jdbc.core.JdbcTemplate",
+          "specifiers": [
+            "JdbcTemplate"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.MockMvc",
+          "specifiers": [
+            "MockMvc"
+          ]
+        },
+        {
+          "source": "org.springframework.test.web.servlet.ResultActions",
+          "specifiers": [
+            "ResultActions"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.PlatformTransactionManager",
+          "specifiers": [
+            "PlatformTransactionManager"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 226,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/reviews/domain/ReviewRulesTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/reviews/domain/ReviewRulesTest.java",
+      "contentHash": "c2293af82182fef591a90847004ef18c040ab68acbd13a136c077a5bf94fe700",
+      "functions": [
+        {
+          "name": "ratingPointsFollowTheAverage",
+          "params": [
+            "average",
+            "points"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "reviewsCloseADayAfterTheEnd",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "ReviewRulesTest",
+          "methods": [
+            "ratingPointsFollowTheAverage",
+            "reviewsCloseADayAfterTheEnd"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 18
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.junit.jupiter.api.Assertions.assertEquals",
+          "specifiers": [
+            "assertEquals"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.params.ParameterizedTest",
+          "specifiers": [
+            "ParameterizedTest"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.params.provider.CsvSource",
+          "specifiers": [
+            "CsvSource"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 29,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/reviews/service/ReviewServiceImplTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/reviews/service/ReviewServiceImplTest.java",
+      "contentHash": "43e49c61cad9718a4c527a40c792783c918228d2febccc3fbacdab97c44997ed",
+      "functions": [
+        {
+          "name": "setUp",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "attendeeCreatesReview",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "secondSaveUpdates",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "notCheckedInIsRejected",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "organiserAndExternalAreRejected",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "closedWindowIsRejected",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "invalidInputIsRejected",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "listShowsAverageAndCallerState",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 19
+        },
+        {
+          "name": "attendedOpenEvent",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "event",
+          "params": [
+            "starts",
+            "ends",
+            "source"
+          ],
+          "returnType": "Event",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "participant",
+          "params": [
+            "status"
+          ],
+          "returnType": "EventParticipant",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "assertCode",
+          "params": [
+            "code",
+            "call"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "ReviewServiceImplTest",
+          "methods": [
+            "setUp",
+            "attendeeCreatesReview",
+            "secondSaveUpdates",
+            "notCheckedInIsRejected",
+            "organiserAndExternalAreRejected",
+            "closedWindowIsRejected",
+            "invalidInputIsRejected",
+            "listShowsAverageAndCallerState",
+            "attendedOpenEvent",
+            "event",
+            "participant",
+            "assertCode"
+          ],
+          "properties": [
+            "EVENT",
+            "HOST",
+            "GUEST",
+            "NOW",
+            "events",
+            "participations",
+            "reviews",
+            "profiles",
+            "service"
+          ],
+          "exported": false,
+          "lineCount": 126
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.junit.jupiter.api.Assertions.assertEquals",
+          "specifiers": [
+            "assertEquals"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Assertions.assertFalse",
+          "specifiers": [
+            "assertFalse"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Assertions.assertNull",
+          "specifiers": [
+            "assertNull"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Assertions.assertThrows",
+          "specifiers": [
+            "assertThrows"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Assertions.assertTrue",
+          "specifiers": [
+            "assertTrue"
+          ]
+        },
+        {
+          "source": "org.mockito.ArgumentMatchers.any",
+          "specifiers": [
+            "any"
+          ]
+        },
+        {
+          "source": "org.mockito.ArgumentMatchers.argThat",
+          "specifiers": [
+            "argThat"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.never",
+          "specifiers": [
+            "never"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.verify",
+          "specifiers": [
+            "verify"
+          ]
+        },
+        {
+          "source": "org.mockito.Mockito.when",
+          "specifiers": [
+            "when"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ApiException",
+          "specifiers": [
+            "ApiException"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.domain.entity.Event",
+          "specifiers": [
+            "Event"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.domain.entity.EventParticipant",
+          "specifiers": [
+            "EventParticipant"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.mapper.impl.EventMapperImpl",
+          "specifiers": [
+            "EventMapperImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.repository.EventRepository",
+          "specifiers": [
+            "EventRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.events.repository.ParticipationRepository",
+          "specifiers": [
+            "ParticipationRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.dto.RatingStats",
+          "specifiers": [
+            "RatingStats"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.dto.ReviewRequest",
+          "specifiers": [
+            "ReviewRequest"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.domain.entity.EventReview",
+          "specifiers": [
+            "EventReview"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.mapper.impl.ReviewMapperImpl",
+          "specifiers": [
+            "ReviewMapperImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.repository.ReviewRepository",
+          "specifiers": [
+            "ReviewRepository"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.reviews.service.impl.ReviewServiceImpl",
+          "specifiers": [
+            "ReviewServiceImpl"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.domain.entity.Profile",
+          "specifiers": [
+            "Profile"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.users.repository.ProfileRepository",
+          "specifiers": [
+            "ProfileRepository"
+          ]
+        },
+        {
+          "source": "java.time.Clock",
+          "specifiers": [
+            "Clock"
+          ]
+        },
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "java.time.Instant",
+          "specifiers": [
+            "Instant"
+          ]
+        },
+        {
+          "source": "java.time.ZoneOffset",
+          "specifiers": [
+            "ZoneOffset"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        },
+        {
+          "source": "java.util.UUID",
+          "specifiers": [
+            "UUID"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.BeforeEach",
+          "specifiers": [
+            "BeforeEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.extension.ExtendWith",
+          "specifiers": [
+            "ExtendWith"
+          ]
+        },
+        {
+          "source": "org.mockito.Mock",
+          "specifiers": [
+            "Mock"
+          ]
+        },
+        {
+          "source": "org.mockito.junit.jupiter.MockitoExtension",
+          "specifiers": [
+            "MockitoExtension"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 169,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/reviews/support/ReviewTestSchema.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/reviews/support/ReviewTestSchema.java",
+      "contentHash": "3255fb08a114a1803dc497d9a0dd97764fdc594992a9907ccd5282048c1f0d3b",
+      "functions": [
+        {
+          "name": "ReviewTestSchema",
+          "params": [],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "create",
+          "params": [
+            "jdbc"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [
+        {
+          "name": "ReviewTestSchema",
+          "methods": [
+            "ReviewTestSchema",
+            "create"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 17
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.springframework.jdbc.core.JdbcTemplate",
+          "specifiers": [
+            "JdbcTemplate"
+          ]
+        }
+      ],
+      "exports": [
+        "create",
+        "ReviewTestSchema"
+      ],
+      "totalLines": 26,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/__tests__/events.reviews.test.tsx": {
+      "filePath": "frontend/__tests__/events.reviews.test.tsx",
+      "contentHash": "8c0df6bb050a0176baf351d077fa0b364f472c8372a90adfd550d8ae419932be",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@testing-library/react-native",
+          "specifiers": [
+            "fireEvent",
+            "render",
+            "screen"
+          ]
+        },
+        {
+          "source": "@/api/types",
+          "specifiers": [
+            "EventSummary"
+          ]
+        },
+        {
+          "source": "@/api/errors",
+          "specifiers": [
+            "friendlyError",
+            "ApiError"
+          ]
+        },
+        {
+          "source": "@/features/events/EventCards",
+          "specifiers": [
+            "EventListItem"
+          ]
+        },
+        {
+          "source": "@/features/events/reviews",
+          "specifiers": [
+            "compactRating",
+            "ratingSummary",
+            "reviewsHint"
+          ]
+        },
+        {
+          "source": "@/features/events/StarRating",
+          "specifiers": [
+            "StarRating"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 82,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/__tests__/mocks.reviews.test.ts": {
+      "filePath": "frontend/__tests__/mocks.reviews.test.ts",
+      "contentHash": "91561a0ed31b6d0146241ef048941d1dba416aef3762c8fbab4bc1051ab0b734",
+      "functions": [
+        {
+          "name": "call",
+          "params": [
+            "method",
+            "path",
+            "query",
+            "body"
+          ],
+          "exported": false,
+          "lineCount": 1
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@test/mocks",
+          "specifiers": [
+            "getMockState",
+            "mockRequest"
+          ]
+        },
+        {
+          "source": "@test/mocks/core",
+          "specifiers": [
+            "ratingPoints",
+            "settleIfDue"
+          ]
+        },
+        {
+          "source": "./testUtils",
+          "specifiers": [
+            "IDS"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 105,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/events/EventReviews.tsx": {
+      "filePath": "frontend/src/features/events/EventReviews.tsx",
+      "contentHash": "40cc917dbf59d33baa4b9dd03aec57a0741eff8b87accc9305406ca8aea7573b",
+      "functions": [
+        {
+          "name": "EventReviews",
+          "params": [
+            "{ eventId }"
+          ],
+          "exported": true,
+          "lineCount": 40
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react-native",
+          "specifiers": [
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "@/api/errors",
+          "specifiers": [
+            "friendlyError"
+          ]
+        },
+        {
+          "source": "@/hooks/queries",
+          "specifiers": [
+            "useEventReviews",
+            "useSaveReview"
+          ]
+        },
+        {
+          "source": "@/ui/States",
+          "specifiers": [
+            "ErrorState",
+            "LoadingState"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "./ReviewForm",
+          "specifiers": [
+            "ReviewForm"
+          ]
+        },
+        {
+          "source": "./ReviewList",
+          "specifiers": [
+            "ReviewList"
+          ]
+        },
+        {
+          "source": "./reviews",
+          "specifiers": [
+            "ratingSummary",
+            "reviewsHint"
+          ]
+        },
+        {
+          "source": "./StarRating",
+          "specifiers": [
+            "StarRating"
+          ]
+        }
+      ],
+      "exports": [
+        "EventReviews"
+      ],
+      "totalLines": 61,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/events/ReviewForm.tsx": {
+      "filePath": "frontend/src/features/events/ReviewForm.tsx",
+      "contentHash": "d7990780ab8ffe8cf68f0803f1cd8386354aeecf212cd8b198e1daeaf81ddac2",
+      "functions": [
+        {
+          "name": "ReviewForm",
+          "params": [
+            "{ initial, saving, error, saved, onSave }"
+          ],
+          "exported": true,
+          "lineCount": 53
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "useState"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "StyleSheet"
+          ]
+        },
+        {
+          "source": "@/api/types",
+          "specifiers": [
+            "REVIEW_COMMENT_MAX",
+            "Review",
+            "ReviewInput"
+          ]
+        },
+        {
+          "source": "@/ui/Button",
+          "specifiers": [
+            "Button"
+          ]
+        },
+        {
+          "source": "@/ui/Card",
+          "specifiers": [
+            "Card"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/TextField",
+          "specifiers": [
+            "TextField"
+          ]
+        },
+        {
+          "source": "./StarRating",
+          "specifiers": [
+            "StarRating"
+          ]
+        }
+      ],
+      "exports": [
+        "ReviewForm"
+      ],
+      "totalLines": 82,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/events/ReviewList.tsx": {
+      "filePath": "frontend/src/features/events/ReviewList.tsx",
+      "contentHash": "8014665d155fd2b688abc1c93507082c29d1d9ead588503f4b198e1c5c4c6df1",
+      "functions": [
+        {
+          "name": "ReviewList",
+          "params": [
+            "{ reviews }"
+          ],
+          "exported": true,
+          "lineCount": 28
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "expo-router",
+          "specifiers": [
+            "router"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "Pressable",
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "@/api/types",
+          "specifiers": [
+            "Review"
+          ]
+        },
+        {
+          "source": "@/lib/time",
+          "specifiers": [
+            "formatDate"
+          ]
+        },
+        {
+          "source": "@/ui/Avatar",
+          "specifiers": [
+            "Avatar"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors",
+            "radius"
+          ]
+        },
+        {
+          "source": "./StarRating",
+          "specifiers": [
+            "StarRating"
+          ]
+        }
+      ],
+      "exports": [
+        "ReviewList"
+      ],
+      "totalLines": 55,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/events/StarRating.tsx": {
+      "filePath": "frontend/src/features/events/StarRating.tsx",
+      "contentHash": "aa06b3cbc303fd1a43791f9ff10afdddfcc836e883733e8fc2297092a91771be",
+      "functions": [
+        {
+          "name": "starIcon",
+          "params": [
+            "n",
+            "value"
+          ],
+          "returnType": "IconName",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "StarRating",
+          "params": [
+            "{ value, size = 16, onChange, testID }"
+          ],
+          "exported": true,
+          "lineCount": 28
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react-native",
+          "specifiers": [
+            "Pressable",
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "Icon",
+            "IconName"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors"
+          ]
+        }
+      ],
+      "exports": [
+        "StarRating"
+      ],
+      "totalLines": 59,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/events/reviews.ts": {
+      "filePath": "frontend/src/features/events/reviews.ts",
+      "contentHash": "139ebeb7a50b29d64b3932ed5e51f9899d033d9075416a3aad81bc92fe5a965e",
+      "functions": [
+        {
+          "name": "formatRating",
+          "params": [
+            "avg"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "ratingSummary",
+          "params": [
+            "averageRating",
+            "reviewCount"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "compactRating",
+          "params": [
+            "e"
+          ],
+          "returnType": "string | null",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "reviewsHint",
+          "params": [
+            "r",
+            "now"
+          ],
+          "returnType": "string | null",
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/types",
+          "specifiers": [
+            "EventReviews",
+            "EventSummary"
+          ]
+        },
+        {
+          "source": "@/lib/time",
+          "specifiers": [
+            "formatEventDate",
+            "parseIso"
+          ]
+        }
+      ],
+      "exports": [
+        "formatRating",
+        "ratingSummary",
+        "compactRating",
+        "reviewsHint"
+      ],
+      "totalLines": 29,
+      "hasStructuralAnalysis": true
+    },
+    "supabase/migrations/20261114000004_event_reviews.sql": {
+      "filePath": "supabase/migrations/20261114000004_event_reviews.sql",
+      "contentHash": "e45439db265fc6a1160fdf3d009e4cf17b02cb7dc30a476619977dc5ecbc575b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 23,
+      "hasStructuralAnalysis": false
     }
   }
 }
