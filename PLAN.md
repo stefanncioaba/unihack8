@@ -469,7 +469,7 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 
 - [x] **28.1 Categories:** 18 Help Board categories (added `CARPENTRY`, `PLUMBING`, `ELECTRICAL`, `PAINTING`, `GARDENING`, `CLEANING`, `TECH`, `TUTORING`, `COOKING`, `BIKES`, `CARS`, `ELDERLY`); skills use the same list.
 - [x] **28.2 Database:** `user_skills` and the wider `help_requests` category check — migration `20261114000006_user_skills.sql`.
-- [ ] **28.3 Apply** the migration to Supabase (needed before the real backend starts again).
+- [x] **28.3 Apply** the migration to Supabase. *Applied 2026-11-14 (Supabase migration `user_skills`) and checked (7/7).*
 - [x] **28.4 API:** `GET` / `POST /users/me/skills`, `PATCH` / `DELETE /users/me/skills/{id}` (max 10, 2–40 characters, no duplicate names; `SKILL_EXISTS`, `SKILL_LIMIT`); `skills` on profiles and on help offers. Contract in `docs/API.md`.
 - [x] **28.5 App:** "My skills" on the Profile tab (add, edit, delete), skills on public profiles, helpers' skills on a help request (matching first), "Fits your skills" on the board and the Pulse Help tab, new category chips.
 - [x] **28.6 Tests:** backend and frontend (see `DOCS.md` → Profile skills).
