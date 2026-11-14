@@ -25,12 +25,12 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "fd60aeefe68be15b64cdf6ebf3dc057c571e6790580e21d8f55c2a5f04af0db8",
+      "contentHash": "d7825fd0709f50150dd6f92b4e294aad90d1fde3aa07e7ae6e2dad3c58c1c465",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 507,
+      "totalLines": 527,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
@@ -29670,7 +29670,7 @@
     },
     "frontend/jest.setup.ts": {
       "filePath": "frontend/jest.setup.ts",
-      "contentHash": "b5dc1f0b00b24cf2fe25332ea33d37adfbdf748383fa6ed51fe6fca0437f2eec",
+      "contentHash": "2b575d5102318bfcd0cc479fe77faa0bacf964c936b87b5b28282e7f0daafaf1",
       "functions": [],
       "classes": [],
       "imports": [

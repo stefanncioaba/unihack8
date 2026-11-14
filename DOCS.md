@@ -424,7 +424,7 @@ Expo SDK 54 app in `frontend/`, TypeScript (strict), Expo Router, runs in **Expo
 | `EXPO_PUBLIC_API_URL` | `http://<laptop Wi-Fi IPv4>:8080` — the Spring API. **Required**: the app has no mock mode (PLAN 17.1); without it every call fails with "The app has no backend address". |
 
 3. `npx expo start`, scan the QR code with Expo Go (phone and laptop on the same Wi-Fi). Restart Expo after changing `.env`.
-4. Checks: `npm test` (Jest), `npm run typecheck`, `npm run lint`.
+4. Checks: `npm test` (Jest), `npm run typecheck`, `npm run lint`. `npx eslint .` (which also checks `jest.setup.ts` and other root files) has 0 errors since 2026-11-14 (the `react-native-maps` mock's `MapView` got a `displayName`); only warnings remain. If `expo lint` reports a module as missing right after `npm install`, run it once with `--no-cache`.
 
 **Layout** (`frontend/src/`)
 
