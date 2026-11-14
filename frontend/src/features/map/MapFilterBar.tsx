@@ -1,5 +1,6 @@
 // Top chip row of the Map tab (PLAN 14.2-14.4): "All places", "Events", "Transport", then the place categories.
 // The rules for what each press does live in mapFilters.ts.
+import { memo } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 
 import { PLACE_CATEGORIES } from '@/api/types.places';
@@ -15,7 +16,7 @@ type Props = {
 };
 
 /** Horizontal chips: the three layer chips first, then one chip per place category (multi-select). */
-export function MapFilterBar({ filters, onChange, disabled = false }: Props) {
+function MapFilterBarBase({ filters, onChange, disabled = false }: Props) {
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row} style={styles.scroll} keyboardShouldPersistTaps="handled" testID="map-filter-bar">
       <Chip overMap disabled={disabled} label="All places" icon="location-outline" selected={allPlacesSelected(filters)} onPress={() => onChange({ type: 'allPlaces' })} testID="chip-places" />
@@ -36,6 +37,9 @@ export function MapFilterBar({ filters, onChange, disabled = false }: Props) {
     </ScrollView>
   );
 }
+
+/** Memoised: a pan or a vehicle refresh does not re-render the ~20 chips (pass a stable onChange). */
+export const MapFilterBar = memo(MapFilterBarBase);
 
 const styles = StyleSheet.create({
   scroll: { flexGrow: 0, flexShrink: 0, height: 34, marginHorizontal: -16 },

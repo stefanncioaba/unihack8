@@ -30,7 +30,8 @@ import org.springframework.stereotype.Repository;
 /**
  * Builds each line's paths from the STPT GTFS zip: one path per distinct shape_id its trips use
  * (shapes.txt). Trips without a usable shape fall back to their ordered stops (stop_times.txt)
- * joined into a line. Identical paths are kept once.
+ * joined into a line. Identical paths are kept once. Shapes are simplified (Douglas-Peucker, 5 m, see
+ * PathSimplifier) so the app draws a fraction of the points; the sparse stop-sequence paths are kept as they are.
  */
 @Repository
 public class GtfsShapeRepository implements ShapeRepository {
@@ -134,7 +135,8 @@ public class GtfsShapeRepository implements ShapeRepository {
                 for (String shapeId : routeShapeIds.getOrDefault(route.getKey(), Set.of())) {
                     TreeMap<Integer, GeoPoint> points = shapePoints.get(shapeId);
                     if (points != null) {
-                        addPath(paths, new ArrayList<>(points.values()));
+                        addPath(paths, PathSimplifier.simplify(new ArrayList<>(points.values()),
+                                PathSimplifier.SHAPE_TOLERANCE_METERS));
                     }
                 }
                 for (List<GeoPoint> p : fallbackPaths.getOrDefault(route.getKey(), List.of())) {
@@ -145,8 +147,11 @@ public class GtfsShapeRepository implements ShapeRepository {
                     result.add(new RouteShape(info.name(), info.type(), info.color(), List.copyOf(paths)));
                 }
             }
-            log.info("Line shapes loaded from {}: {} lines, {} trips drawn from stop sequences ({} ms)", path,
-                    result.size(), fallbackTrips.size(), System.currentTimeMillis() - started);
+            int rawPoints = shapePoints.values().stream().mapToInt(Map::size).sum();
+            int drawnPoints = result.stream().flatMap(r -> r.paths().stream()).mapToInt(List::size).sum();
+            log.info("Line shapes loaded from {}: {} lines, {} trips drawn from stop sequences, {} shape points"
+                            + " simplified to {} drawn points ({} ms)", path, result.size(), fallbackTrips.size(),
+                    rawPoints, drawnPoints, System.currentTimeMillis() - started);
             return List.copyOf(result);
         }
     }

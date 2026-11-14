@@ -74,6 +74,7 @@ class GtfsShapeRepositoryTest {
     }
 
     // Line 1 uses shapes.txt (two directions; the repeated shape id is kept once, points sorted by sequence).
+    // The middle point is a real bend (about 400 m off the straight line), so simplification keeps it.
     @Test
     void shapesFromShapesTxt() throws IOException {
         Path zip = zip(files("""
@@ -84,8 +85,8 @@ class GtfsShapeRepositoryTest {
                 """, """
                 shape_id,shape_pt_lat,shape_pt_lon,shape_pt_sequence
                 1_T,45.70,21.20,1
-                1_T,45.705,21.205,2
-                1_T,45.705,21.205,3
+                1_T,45.705,21.21,2
+                1_T,45.705,21.21,3
                 1_T,45.72,21.22,4
                 1_R,45.71,21.21,2
                 1_R,45.72,21.22,1
@@ -98,9 +99,30 @@ class GtfsShapeRepositoryTest {
             assertThat(s.routeType()).isEqualTo("0");
             assertThat(s.color()).isEqualTo("e3a900");
             assertThat(s.paths()).containsExactly(
-                    List.of(new GeoPoint(45.70, 21.20), new GeoPoint(45.705, 21.205), new GeoPoint(45.72, 21.22)),
+                    List.of(new GeoPoint(45.70, 21.20), new GeoPoint(45.705, 21.21), new GeoPoint(45.72, 21.22)),
                     List.of(new GeoPoint(45.72, 21.22), new GeoPoint(45.71, 21.21)));
         });
+    }
+
+    // A dense, straight shape is simplified to its ends (Douglas-Peucker, 5 m); stop-sequence paths are not.
+    @Test
+    void shapesAreSimplified() throws IOException {
+        String nl = "\n";
+        StringBuilder shape = new StringBuilder("shape_id,shape_pt_lat,shape_pt_lon,shape_pt_sequence" + nl);
+        for (int i = 0; i <= 100; i++) {
+            shape.append("1_T,").append(45.70 + i * 0.0001).append(",21.20,").append(i + 1).append(nl);
+        }
+        Path zip = zip(files("""
+                route_id,service_id,trip_id,trip_headsign,direction_id,shape_id
+                R_TV_1,WD,t1,C,0,1_T
+                R_AB_5B,WD,t3,A,1,
+                """, shape.toString()));
+
+        List<RouteShape> shapes = new GtfsShapeRepository(zip).shapes();
+
+        assertThat(shapes.get(0).paths()).singleElement().satisfies(p -> assertThat(p).hasSize(2));
+        // 5b falls back to its 3 collinear stops: all kept.
+        assertThat(shapes.get(1).paths()).singleElement().satisfies(p -> assertThat(p).hasSize(3));
     }
 
     // Without shapes.txt every line is drawn through its trips' stops in stop_sequence order.
@@ -163,5 +185,8 @@ class GtfsShapeRepositoryTest {
             assertThat(s.routeName()).isEqualTo("1");
             assertThat(s.paths()).isNotEmpty();
         });
+        // shapes.txt has 41,729 points; simplified, the app draws well under a third of them (about 9,700).
+        int points = shapes.stream().flatMap(s -> s.paths().stream()).mapToInt(List::size).sum();
+        assertThat(points).isLessThan(14_000);
     }
 }

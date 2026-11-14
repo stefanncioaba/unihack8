@@ -534,7 +534,21 @@ Built on `stefan_dev` after merging `frontend/tibi`, in the spots Tibi's map she
 - **Profile score showed "..":** the score plate sat in a zero-width anchor, so its text was cut to an ellipsis. The anchor is now 90 px wide and centred (`ReliabilityLine.tsx`).
 - **Backend:** see the Transit section. `/transit/vehicles` without `route` returns all vehicles from one STPT call, cached 10 s. If STPT's line list fails, it is not asked again for 60 s. `/transit/shapes` is built from GTFS `shapes.txt` and falls back to stop sequences. Code: `ShapeRepository`/`GtfsShapeRepository`, `PolylineEncoder`, `TransitShapeDto`.
 - **Tests:** frontend `map.filters`, `map.liveTransit`, `map.viewTracking`, `users.reliabilityLine` plus updated `map.transit`, `map.layers` and `lib.cluster`. The whole suite: 331 passing, 7 skipped, `tsc` clean. Backend: `PolylineEncoderTest`, `GtfsShapeRepositoryTest` and extended transit service, controller, client and mapper tests. `./gradlew test` passes.
-- **Not verified yet:** not run on a phone (Android marker rendering, polyline performance with 181 shapes).
+- **Directions focus mode:** while directions are shown (a route preview, a vehicle opened from it, or journey mode) every filter layer is off. `visibleLayers` in `mapFilters.ts` does this, and the user's own choices come back when directions close. The filter chips are greyed out and can't be pressed (`Chip` has a `disabled` prop), and a hint says "Filters are off while directions are shown". The map shows only the user, the route, the live vehicles of its ride lines and the destination, and the camera frames the trip.
+- **Trip guidance on the map:** `features/directions/tripSteps.ts` is a pure function that turns the plan's legs into steps. `TripMarkers.tsx` draws them in both the directions preview and journey mode:
+  - a **board** marker at each ride's first stop, e.g. "Board Tram 1 → Gara de Nord · 18:08" (Romanian time), with the vehicle icon in the line colour;
+  - a **get off** marker at the last stop ("Get off at <stop>");
+  - a **"Walk N min"** label halfway along each walk (the last one says "… to <destination>").
+
+  Ride legs are drawn in their line colour, the same colour as the vehicles; walks stay dashed. Vehicles sit above the route, and the one nearest the boarding stop is drawn larger. In journey mode, only the legs still ahead get markers.
+- **Map lag fixes:**
+  - Shapes are simplified on the backend (`PathSimplifier`, Douglas–Peucker, 5 m): 41,729 → 9,668 points, and the `/transit/shapes` payload went from about 130 KB to about 45 KB.
+  - Each vehicle marker re-renders only when its position, look or selection changes, not on every 10 s refresh. Only vehicles in or near the view are drawn (`vehiclesInView`).
+  - The line paths are a memoised `ShapeLines` component and don't re-render on pan or refresh.
+  - One shared timer switches `tracksViewChanges` off for all markers, instead of one timer each.
+  - The context `bbox` is memoised. The handlers in `map.tsx` are stable. Marker, panel and filter components are memoised.
+  - Tests: `map.performance`, `map.tripGuidance`, `map.directionsFocus`, `PathSimplifierTest`.
+- **Not verified yet:** not run on a phone (Android marker rendering, how smooth it really feels, long board labels in the 240 px pill).
 
 #### Frontend — profile, transit and directions (Track C, Person 2)
 

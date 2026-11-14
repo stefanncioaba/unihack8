@@ -363,6 +363,9 @@ Restaurants, cafés and the other places are stored in our database from OpenStr
 - [x] **21.5 Transport layer:** every line drawn in its own colour, all vehicles live (no line picking: the whole network shows at once), tap a vehicle for its info panel.
 - [x] **21.6 Directions:** live vehicles of the route's lines drawn along the route (preview and journey mode).
 - [x] **21.7 Profile:** reliability score no longer shows ".." instead of the number.
+- [x] **21.9 Directions focus mode:** while directions are shown, the filters are off and greyed out; only the user, the route, its live vehicles and the destination are on the map.
+- [x] **21.10 Trip guidance on the map:** which tram/bus to board (line, direction, time), where to get off, and "Walk N min" labels.
+- [x] **21.11 Map lag fixed:** simplified shapes, memoised markers and lines, only in-view vehicles, one shared marker timer.
 - [x] **21.8a Tests and `DOCS.md` updated.**
 - [x] **21.8b Knowledge graph updated** (full rebuild, then an incremental update after the line chips were removed).
 

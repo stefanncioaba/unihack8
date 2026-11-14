@@ -1,13 +1,17 @@
 // Journey mode on the Map tab (PLAN 18.5–18.7): the route line and destination pin on the map, and a panel with the
 // current step, the time and distance left and an "End" button. Replaces the normal bottom panel while it runs.
-import { useMemo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Marker, Polyline } from 'react-native-maps';
 
-import type { TransitVehicle } from '@/api/types.transit';
+import type { RouteLeg } from '@/api/types.routing';
+import type { TransitRoute, TransitVehicle } from '@/api/types.transit';
 import { legIcon } from '@/features/directions/DirectionsPanel';
+import { TripMarkers } from '@/features/directions/TripMarkers';
+import { legStrokeColor } from '@/features/directions/tripSteps';
 import { useMapContext } from '@/features/map/MapContext';
 import { LegVehicles } from '@/features/transit/LegVehicles';
+import { useTransitRoutes } from '@/hooks/useTransit';
 import { formatDistance } from '@/lib/format';
 import { Button } from '@/ui/Button';
 import { Icon } from '@/ui/Icon';
@@ -20,37 +24,51 @@ import type { JourneyTarget, useJourney } from './useJourney';
 
 type Journey = ReturnType<typeof useJourney>;
 
-/** Route line (walking dashed, rides solid), the destination pin and the live vehicles of the ride legs' lines (tap one
+/** Dash pattern of walking legs (one shared array). */
+const WALK_DASH = [8, 8];
+
+/** The journey's leg lines, finished legs greyed. Memoised and decoded once per plan answer, so a GPS tick or a pan
+ * that leaves the step unchanged does not re-send the polylines to the map. */
+export const JourneyLines = memo(function JourneyLines({ legs, stepIndex, routes }: { legs: RouteLeg[] | undefined; stepIndex: number; routes: TransitRoute[] | undefined }) {
+  const paths = useMemo(() => (legs ?? []).map((leg) => legPoints(leg).map((p) => ({ latitude: p.lat, longitude: p.lon }))), [legs]);
+  return (
+    <>
+      {(legs ?? []).map((leg, i) => {
+        const walk = leg.mode === 'WALK';
+        const done = i < stepIndex;
+        return (
+          <Polyline
+            key={i}
+            testID={`journey-line-${i}`}
+            coordinates={paths[i]}
+            strokeColor={done ? colors.textMuted : legStrokeColor(leg, colors.signal, routes)}
+            strokeWidth={walk ? 5 : 7}
+            lineDashPattern={walk ? WALK_DASH : undefined}
+            zIndex={done ? 0 : walk ? 1 : 2}
+          />
+        );
+      })}
+    </>
+  );
+});
+
+/** Route line (walking dashed, rides solid in the line colour, finished legs greyed), the guidance markers of the legs
+ * still ahead (board / get off / walk), the destination pin and the live vehicles of the ride legs' lines (tap one
  * for its panel; closing it brings the journey panel back). Goes inside <MapView>. */
 export function JourneyLayer({ target, journey, hiddenVehicleIds }: { target: JourneyTarget; journey: Journey; hiddenVehicleIds?: ReadonlySet<string> }) {
   const { selection, select } = useMapContext();
-  /** Opens the vehicle panel over the journey. */
-  const openVehicle = (v: TransitVehicle) => select({ type: 'vehicle', id: v.id, route: v.route, vehicle: v });
+  const legs = journey.plan.data?.legs;
+  const routes = useTransitRoutes(!!legs?.some((l) => l.mode !== 'WALK')).data;
+  /** Opens the vehicle panel over the journey (stable, so the leg vehicle markers are not redrawn). */
+  const openVehicle = useCallback((v: TransitVehicle) => select({ type: 'vehicle', id: v.id, route: v.route, vehicle: v }), [select]);
   // Only the legs still ahead: once off the tram, its line's vehicles are no longer interesting.
-  const legsAhead = useMemo(() => journey.plan.data?.legs.slice(journey.stepIndex), [journey.plan.data, journey.stepIndex]);
+  const legsAhead = useMemo(() => legs?.slice(journey.stepIndex), [legs, journey.stepIndex]);
+  const destCoordinate = useMemo(() => ({ latitude: target.to.lat, longitude: target.to.lon }), [target.to.lat, target.to.lon]);
   return (
     <>
-      <Marker
-        testID="journey-destination"
-        coordinate={{ latitude: target.to.lat, longitude: target.to.lon }}
-        title={target.name ?? undefined}
-        pinColor={colors.accent}
-      />
-      {!journey.arrived &&
-        journey.plan.data?.legs.map((leg, i) => {
-          const walk = leg.mode === 'WALK';
-          const done = i < journey.stepIndex;
-          return (
-            <Polyline
-              key={i}
-              testID={`journey-line-${i}`}
-              coordinates={legPoints(leg).map((p) => ({ latitude: p.lat, longitude: p.lon }))}
-              strokeColor={done ? colors.textMuted : walk ? colors.signal : colors.gold}
-              strokeWidth={walk ? 5 : 7}
-              lineDashPattern={walk ? [8, 8] : undefined}
-            />
-          );
-        })}
+      <Marker testID="journey-destination" coordinate={destCoordinate} title={target.name ?? undefined} pinColor={colors.accent} />
+      {!journey.arrived && <JourneyLines legs={legs} stepIndex={journey.stepIndex} routes={routes} />}
+      {!journey.arrived && <TripMarkers legs={legs} destinationName={target.name} fromLeg={journey.stepIndex} routes={routes} />}
       {!journey.arrived && (
         <LegVehicles
           legs={legsAhead}

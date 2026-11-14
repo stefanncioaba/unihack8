@@ -3,6 +3,7 @@
 // unit-tested directly.
 import type { RouteLeg } from '@/api/types.routing';
 import type { TransitRoute, TransitRouteType, TransitShape, TransitVehicle } from '@/api/types.transit';
+import type { Bbox } from '@/lib/bbox';
 import { distanceMeters, type Coordinates } from '@/lib/geo';
 import { parseIso } from '@/lib/time';
 import type { IconName } from '@/ui/Icon';
@@ -122,6 +123,20 @@ export function rideLegLines(legs: RouteLeg[] | undefined, routes: TransitRoute[
 export function vehiclesOfLine(vehicles: TransitVehicle[] | undefined, lineId: string | null): TransitVehicle[] {
   if (!vehicles) return [];
   return lineId ? vehicles.filter((v) => sameLine(v.route, lineId)) : vehicles;
+}
+
+/** Extra area around the visible map (as a share of its width / height, per side; 1 = one more view on each side)
+ * whose vehicles are still drawn, so a short pan does not leave the edges empty until the next region update. */
+export const VEHICLE_VIEW_MARGIN = 1;
+
+/** The vehicles inside the visible area plus a margin (VEHICLE_VIEW_MARGIN). Without a bbox every vehicle is kept.
+ * Hundreds of custom markers off screen still cost the map work on every frame, so they are not drawn. */
+export function vehiclesInView(vehicles: TransitVehicle[], bbox: Bbox | null | undefined, margin = VEHICLE_VIEW_MARGIN): TransitVehicle[] {
+  if (!bbox) return vehicles;
+  const dLat = (bbox.maxLat - bbox.minLat) * margin;
+  const dLon = (bbox.maxLon - bbox.minLon) * margin;
+  const [minLat, maxLat, minLon, maxLon] = [bbox.minLat - dLat, bbox.maxLat + dLat, bbox.minLon - dLon, bbox.maxLon + dLon];
+  return vehicles.filter((v) => v.lat >= minLat && v.lat <= maxLat && v.lon >= minLon && v.lon <= maxLon);
 }
 
 /** The name to print on a vehicle badge. */

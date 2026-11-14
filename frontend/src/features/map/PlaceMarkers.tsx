@@ -1,5 +1,5 @@
 // Oxford Navy pins for places in the visible area, with a short dark label when zoomed in (PLAN 14.2).
-import { useMemo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Marker } from 'react-native-maps';
 
@@ -43,8 +43,22 @@ function PlacePin({ place, selected, showLabel }: { place: PlaceSummary; selecte
   );
 }
 
+/** Pin anchor (one shared object). */
+const CENTER = { x: 0.5, y: 0.5 };
+
+/** One place marker, memoised so a pan or a panel change does not re-render every pin. */
+const PlaceMarker = memo(function PlaceMarker({ place, selected, showLabel, onSelect }: { place: PlaceSummary; selected: boolean; showLabel: boolean; onSelect: (id: string) => void }) {
+  const coordinate = useMemo(() => ({ latitude: place.lat, longitude: place.lon }), [place.lat, place.lon]);
+  const press = useCallback(() => onSelect(place.id), [onSelect, place.id]);
+  return (
+    <Marker testID={`place-marker-${place.id}`} coordinate={coordinate} onPress={press} tracksViewChanges={false} anchor={CENTER}>
+      <PlacePin place={place} selected={selected} showLabel={showLabel} />
+    </Marker>
+  );
+});
+
 /** All place pins. `tracksViewChanges` is off so hundreds of custom pins stay smooth. */
-export function PlaceMarkers({ places, selectedId, showLabels, onSelect, bbox, onZoomTo }: Props) {
+function PlaceMarkersBase({ places, selectedId, showLabels, onSelect, bbox, onZoomTo }: Props) {
   const { singles, clusters } = useMemo(() => clusterPoints(places, bbox, shouldCluster(bbox)), [places, bbox]);
   return (
     <>
@@ -52,20 +66,14 @@ export function PlaceMarkers({ places, selectedId, showLabels, onSelect, bbox, o
         <ClusterMarker key={c.id} id={c.id} lat={c.lat} lon={c.lon} count={c.items.length} color={colors.oxford} onPress={() => onZoomTo(c.lat, c.lon)} />
       ))}
       {singles.map((p) => (
-        <Marker
-          key={p.id}
-          testID={`place-marker-${p.id}`}
-          coordinate={{ latitude: p.lat, longitude: p.lon }}
-          onPress={() => onSelect(p.id)}
-          tracksViewChanges={false}
-          anchor={{ x: 0.5, y: 0.5 }}
-        >
-          <PlacePin place={p} selected={p.id === selectedId} showLabel={showLabels} />
-        </Marker>
+        <PlaceMarker key={p.id} place={p} selected={p.id === selectedId} showLabel={showLabels} onSelect={onSelect} />
       ))}
     </>
   );
 }
+
+/** Memoised: re-renders only when its places, view, selection or labels change. */
+export const PlaceMarkers = memo(PlaceMarkersBase);
 
 const styles = StyleSheet.create({
   pin: { alignItems: 'center', gap: 3 },

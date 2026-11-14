@@ -1,6 +1,6 @@
 // One live vehicle on the map: a badge in the line's colour with a tram / trolleybus / bus icon and the line number.
 // Used by the transit layer and by the directions / journey layers for the vehicles of a route's ride legs.
-import { memo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Marker } from 'react-native-maps';
 
@@ -20,7 +20,7 @@ type Props = {
 };
 
 /** The badge itself (also used in the vehicle panel header). */
-export function VehicleBadge({ vehicle, selected = false }: { vehicle: TransitVehicle; selected?: boolean }) {
+function VehicleBadgeBase({ vehicle, selected = false }: { vehicle: TransitVehicle; selected?: boolean }) {
   const color = lineColor(vehicle.route);
   return (
     <View
@@ -36,17 +36,32 @@ export function VehicleBadge({ vehicle, selected = false }: { vehicle: TransitVe
   );
 }
 
+/** True when two vehicles draw the same badge (line, name, type), whatever their position or report time. */
+export function sameBadge(a: TransitVehicle, b: TransitVehicle): boolean {
+  return a.route === b.route && a.routeName === b.routeName && a.type === b.type;
+}
+
+/** The badge only re-renders when its look changes: a moved vehicle keeps its badge (no child update in the marker,
+ * so Android does not re-snapshot it). */
+export const VehicleBadge = memo(
+  VehicleBadgeBase,
+  (prev, next) => prev.selected === next.selected && sameBadge(prev.vehicle, next.vehicle),
+);
+
 /** The marker. Positions change every 10 s without a redraw of the badge; the view is redrawn briefly only when its look
  * changes (line, colour, selected), so Android snapshots a finished badge and the map stays smooth. */
 function VehicleMarkerBase({ vehicle, selected = false, idPrefix = 'vehicle-marker', onPress }: Props) {
   const tracking = useBriefViewTracking(`${vehicle.route}:${selected}`);
+  // Same coordinate object while the vehicle has not moved, so the native marker is not updated.
+  const coordinate = useMemo(() => ({ latitude: vehicle.lat, longitude: vehicle.lon }), [vehicle.lat, vehicle.lon]);
+  const press = useCallback(() => onPress(vehicle), [onPress, vehicle]);
   return (
     <Marker
       testID={`${idPrefix}-${vehicle.id}`}
-      coordinate={{ latitude: vehicle.lat, longitude: vehicle.lon }}
-      onPress={() => onPress(vehicle)}
+      coordinate={coordinate}
+      onPress={press}
       tracksViewChanges={tracking}
-      anchor={{ x: 0.5, y: 0.5 }}
+      anchor={CENTER}
       zIndex={selected ? 30 : 20}
     >
       <VehicleBadge vehicle={vehicle} selected={selected} />
@@ -54,7 +69,25 @@ function VehicleMarkerBase({ vehicle, selected = false, idPrefix = 'vehicle-mark
   );
 }
 
-export const VehicleMarker = memo(VehicleMarkerBase);
+/** Marker props compare: a refresh hands every vehicle over as a new object (its report time changes every 10 s), so
+ * only what the marker shows counts: id, position, badge look, selection and the handler. A vehicle that did not move
+ * is skipped entirely. */
+export function sameVehicleMarker(prev: Props, next: Props): boolean {
+  return (
+    prev.vehicle.id === next.vehicle.id &&
+    prev.vehicle.lat === next.vehicle.lat &&
+    prev.vehicle.lon === next.vehicle.lon &&
+    sameBadge(prev.vehicle, next.vehicle) &&
+    (prev.selected ?? false) === (next.selected ?? false) &&
+    prev.idPrefix === next.idPrefix &&
+    prev.onPress === next.onPress
+  );
+}
+
+export const VehicleMarker = memo(VehicleMarkerBase, sameVehicleMarker);
+
+/** Badge anchor: its middle sits on the vehicle's position (one shared object, not a new one per render). */
+const CENTER = { x: 0.5, y: 0.5 };
 
 const styles = StyleSheet.create({
   badge: {

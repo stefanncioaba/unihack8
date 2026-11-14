@@ -466,8 +466,8 @@ Refresh every 10 s on the map.
 
 The drawn path of every line, for map overlays. `route` is optional (only that line; case-insensitive; unknown line gives `[]`).
 `polylines` are Google encoded polylines, precision 5 (decode with `frontend/src/lib/polyline.ts`), one per direction/variant of the line.
-Built from the STPT GTFS file (`shapes.txt`; trips without a shape are drawn through their stops in order). `type` / `color` come from STPT's line list, or from the GTFS file when that list is down (then express/metropolitan lines show as `BUS`; that GTFS-only answer is reused for 5 minutes, then rebuilt with STPT's line facts). The app draws each line in its own colour from a fixed palette (by line id), not STPT's `color`, since STPT gives every line of a vehicle type the same colour.
-Sorted like `GET /transit/routes`. Kept in memory: it only changes when the GTFS file does. `[]` when the backend has no GTFS file (`infra/otp/get-data.sh`). All lines are about 130 KB, so fetch it once per app session.
+Built from the STPT GTFS file (`shapes.txt`; trips without a shape are drawn through their stops in order). Each `shapes.txt` path is simplified with Douglas-Peucker at 5 m (the bundled feed: 41,729 points down to about 9,700) so the map stays smooth; stop-sequence paths are sent as they are. `type` / `color` come from STPT's line list, or from the GTFS file when that list is down (then express/metropolitan lines show as `BUS`; that GTFS-only answer is reused for 5 minutes, then rebuilt with STPT's line facts). The app draws each line in its own colour from a fixed palette (by line id), not STPT's `color`, since STPT gives every line of a vehicle type the same colour.
+Sorted like `GET /transit/routes`. Kept in memory: it only changes when the GTFS file does. `[]` when the backend has no GTFS file (`infra/otp/get-data.sh`). All lines are about 45 KB (simplified; about 130 KB before), so fetch it once per app session.
 
 ```json
 [

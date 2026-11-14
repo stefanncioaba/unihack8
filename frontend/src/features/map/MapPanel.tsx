@@ -1,6 +1,7 @@
 // The one bottom panel of the Map tab. Shows whatever `selection` says: a place, an event, a transit stop, a live
 // vehicle or directions. Person 1 owns the container and the place / event panels; the stop (14.4) and directions (14.5) panels
 // live in features/transit and features/directions.
+import { memo } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { DirectionsPanel } from '@/features/directions/DirectionsPanel';
@@ -30,7 +31,7 @@ function PanelContent({ selection }: { selection: MapSelection }) {
 }
 
 /** Card above the tab bar with a close button; renders nothing when nothing is selected. */
-export function MapPanel() {
+function MapPanelBase() {
   const { selection, select } = useMapContext();
   if (!selection) return null;
   return (
@@ -44,6 +45,9 @@ export function MapPanel() {
     </View>
   );
 }
+
+/** Memoised (no props): it follows the map context, not the map screen's re-renders on every pan or refresh. */
+export const MapPanel = memo(MapPanelBase);
 
 const styles = StyleSheet.create({
   wrap: { position: 'absolute', left: 16, right: 16, bottom: 14 },

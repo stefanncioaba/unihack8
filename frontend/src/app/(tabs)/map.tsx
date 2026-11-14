@@ -53,7 +53,7 @@ function MapBody() {
   // While directions are shown (preview or journey) the filters are off: only the user, the route, its live vehicles
   // and the destination are on the map. The chosen filters come back when the directions close.
   const showingDirections = !!destination || !!journeyTarget;
-  const layers = visibleLayers(filters, showingDirections);
+  const layers = useMemo(() => visibleLayers(filters, showingDirections), [filters, showingDirections]);
   const { placesOn, categories, eventsOn, transitOn } = layers;
 
   // Zoomed far out there would be too many pins: ask for places only below this span (about 6 km).
@@ -68,26 +68,38 @@ function MapBody() {
   // Transport shows the whole network at once: every line's path and every live vehicle (one request each).
   const shapes = useTransitShapes(transitOn);
   const vehicles = useAllVehicles(transitOn);
-  // Vehicles the transport layer draws; the directions / journey layers skip them so none is drawn twice.
-  const shownVehicleIds = useMemo(() => new Set(transitOn ? (vehicles.data?.vehicles ?? []).map((v) => v.id) : []), [transitOn, vehicles.data]);
-
   /** Opens a vehicle's live panel; a route being previewed stays drawn behind it. */
   const selectVehicle = useCallback(
     (v: TransitVehicle) => select({ type: 'vehicle', id: v.id, route: v.route, vehicle: v, returnTo: destination ?? undefined }),
     [select, destination],
   );
 
+  // Latest values for the stable handlers below (so memoised layers and the chip bar are not re-rendered for them).
+  const latest = useRef({ transitOn, selection, span });
+  useEffect(() => {
+    latest.current = { transitOn, selection, span };
+  });
+
   /** Applies a filter chip press; turning transport off closes a stop or vehicle panel opened from the transport
    * layer (its marker is gone). */
-  function changeFilter(action: MapFilterAction) {
-    if (action.type === 'transport' && transitOn && isTransitLayerSelection(selection)) select(null);
-    dispatchFilter(action);
-  }
+  const changeFilter = useCallback(
+    (action: MapFilterAction) => {
+      const now = latest.current;
+      if (action.type === 'transport' && now.transitOn && isTransitLayerSelection(now.selection)) select(null);
+      dispatchFilter(action);
+    },
+    [select],
+  );
 
   /** Tapping a cluster zooms in on it: to the given span, or half the current view. */
-  function zoomTo(lat: number, lon: number, targetSpan?: number) {
-    mapRef.current?.animateToRegion(regionFor({ lat, lon }, targetSpan ?? Math.max(span / 2, 0.004)), 350);
-  }
+  const zoomTo = useCallback((lat: number, lon: number, targetSpan?: number) => {
+    mapRef.current?.animateToRegion(regionFor({ lat, lon }, targetSpan ?? Math.max(latest.current.span / 2, 0.004)), 350);
+  }, []);
+
+  /** Opens a place / event / stop panel (stable, so the memoised markers keep their handler). */
+  const selectPlace = useCallback((id: string) => select({ type: 'place', id }), [select]);
+  const selectEvent = useCallback((id: string) => select({ type: 'event', id }), [select]);
+  const selectStop = useCallback((id: string) => select({ type: 'stop', id }), [select]);
 
   const lat = Number(params.lat);
   const lon = Number(params.lon);
@@ -150,28 +162,38 @@ function MapBody() {
   }
 
   /** A tap on empty map closes the panel (Android also reports marker taps here, so ignore those). */
-  function onMapPress(e: MapPressEvent) {
-    if ((e.nativeEvent as { action?: string }).action === 'marker-press') return;
-    select(null);
-  }
+  const onMapPress = useCallback(
+    (e: MapPressEvent) => {
+      if ((e.nativeEvent as { action?: string }).action === 'marker-press') return;
+      select(null);
+    },
+    [select],
+  );
 
   /** A long press drops a destination there and opens the directions panel. */
-  function onLongPress(e: LongPressEvent) {
-    const { latitude, longitude } = e.nativeEvent.coordinate;
-    setDestination({ coords: { lat: latitude, lon: longitude }, title: 'Dropped pin' });
-  }
+  const onLongPress = useCallback(
+    (e: LongPressEvent) => {
+      const { latitude, longitude } = e.nativeEvent.coordinate;
+      setDestination({ coords: { lat: latitude, lon: longitude }, title: 'Dropped pin' });
+    },
+    [setDestination],
+  );
 
   /** Remembers the visible area so layers can load only what is on screen. */
-  function onRegionChangeComplete(region: Region) {
-    setVisibleBbox(regionToBbox(region));
-  }
+  const onRegionChangeComplete = useCallback((region: Region) => setVisibleBbox(regionToBbox(region)), [setVisibleBbox]);
+
+  // The camera only uses the first region; one object, so re-renders do not hand the native map a new one.
+  const [initialRegion] = useState(() => regionFor(focus ?? position, focus ? 0.012 : 0.035));
+  // The directions layer as one memoised element: it re-renders on its own context changes, not on every pan or refresh.
+  // No vehicles to hide in it: while directions are shown the Transport layer is off, so no vehicle is drawn twice.
+  const directionsLayer = useMemo(() => <DirectionsLayer />, []);
 
   return (
     <View style={styles.root}>
       <MapView
         ref={mapRef}
         style={StyleSheet.absoluteFill}
-        initialRegion={regionFor(focus ?? position, focus ? 0.012 : 0.035)}
+        initialRegion={initialRegion}
         onRegionChangeComplete={onRegionChangeComplete}
         onPress={onMapPress}
         onLongPress={onLongPress}
@@ -189,7 +211,7 @@ function MapBody() {
             showLabels={labelsVisible}
             bbox={bbox}
             onZoomTo={zoomTo}
-            onSelect={(id) => select({ type: 'place', id })}
+            onSelect={selectPlace}
           />
         )}
         {eventsOn && events.data && (
@@ -199,7 +221,7 @@ function MapBody() {
             showLabels={labelsVisible}
             bbox={bbox}
             onZoomTo={zoomTo}
-            onSelect={(id) => select({ type: 'event', id })}
+            onSelect={selectEvent}
           />
         )}
         {transitOn && (
@@ -208,16 +230,17 @@ function MapBody() {
             line={null}
             vehicles={vehicles.data?.vehicles}
             shapes={shapes.data}
+            bbox={bbox}
             selectedStopId={selection?.type === 'stop' ? selection.id : undefined}
             selectedVehicleId={selection?.type === 'vehicle' ? selection.id : undefined}
-            onSelectStop={(id) => select({ type: 'stop', id })}
+            onSelectStop={selectStop}
             onSelectVehicle={selectVehicle}
           />
         )}
         {journeyTarget ? (
-          <JourneyLayer target={journeyTarget} journey={journey} hiddenVehicleIds={shownVehicleIds} />
+          <JourneyLayer target={journeyTarget} journey={journey} />
         ) : (
-          <DirectionsLayer hiddenVehicleIds={shownVehicleIds} />
+          directionsLayer
         )}
       </MapView>
 

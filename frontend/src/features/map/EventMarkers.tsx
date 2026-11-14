@@ -1,5 +1,5 @@
 // Yellow pins for events in the visible area (PLAN 14.3). A tap opens the event panel.
-import { useMemo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Marker } from 'react-native-maps';
 
@@ -42,21 +42,21 @@ function EventPin({ event, selected, showLabel }: { event: EventSummary; selecte
   );
 }
 
-/** One event marker; redraws briefly when it appears or its look changes (see useBriefViewTracking). */
-function EventMarker({ event, selected, showLabel, onSelect }: { event: LocatedEvent; selected: boolean; showLabel: boolean; onSelect: (id: string) => void }) {
+/** Pin anchor (one shared object). */
+const CENTER = { x: 0.5, y: 0.5 };
+
+/** One event marker; redraws briefly when it appears or its look changes (see useBriefViewTracking). Memoised, so a
+ * pan or a panel change does not re-render every pin. */
+const EventMarker = memo(function EventMarker({ event, selected, showLabel, onSelect }: { event: LocatedEvent; selected: boolean; showLabel: boolean; onSelect: (id: string) => void }) {
   const tracking = useBriefViewTracking(`${selected}:${showLabel}`);
+  const coordinate = useMemo(() => ({ latitude: event.lat, longitude: event.lon }), [event.lat, event.lon]);
+  const press = useCallback(() => onSelect(event.id), [onSelect, event.id]);
   return (
-    <Marker
-      testID={`event-marker-${event.id}`}
-      coordinate={{ latitude: event.lat, longitude: event.lon }}
-      onPress={() => onSelect(event.id)}
-      tracksViewChanges={tracking}
-      anchor={{ x: 0.5, y: 0.5 }}
-    >
+    <Marker testID={`event-marker-${event.id}`} coordinate={coordinate} onPress={press} tracksViewChanges={tracking} anchor={CENTER}>
       <EventPin event={event} selected={selected} showLabel={showLabel} />
     </Marker>
   );
-}
+});
 
 /** An event that has coordinates (the shape the clustering needs). */
 type LocatedEvent = EventSummary & { lat: number; lon: number };
@@ -64,7 +64,7 @@ type LocatedEvent = EventSummary & { lat: number; lon: number };
 /** All event pins (events without coordinates are skipped); nearby ones are grouped into count bubbles when zoomed
  * out, at any zoom level, so events stay visible city-wide. Tapping a bubble zooms in to fit its events; events at the
  * very same spot are then fanned out slightly so each one can be tapped. */
-export function EventMarkers({ events, selectedId, showLabels, onSelect, bbox, onZoomTo }: Props) {
+function EventMarkersBase({ events, selectedId, showLabels, onSelect, bbox, onZoomTo }: Props) {
   const located = useMemo(() => events.filter((e): e is LocatedEvent => e.lat !== null && e.lon !== null), [events]);
   const { singles, clusters } = useMemo(() => {
     const grouped = clusterPoints(located, bbox, shouldCluster(bbox));
@@ -93,6 +93,9 @@ export function EventMarkers({ events, selectedId, showLabels, onSelect, bbox, o
     </>
   );
 }
+
+/** Memoised: re-renders only when its events, view, selection or labels change. */
+export const EventMarkers = memo(EventMarkersBase);
 
 const styles = StyleSheet.create({
   pin: { alignItems: 'center', gap: 3 },

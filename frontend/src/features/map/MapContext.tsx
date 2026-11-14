@@ -65,6 +65,11 @@ export function MapProvider({ userPosition, initialBbox, children }: ProviderPro
   const [rawBbox, setRawBbox] = useState<Bbox>(initialBbox);
   const [selection, setSelection] = useState<MapSelection | null>(null);
   const debounced = useDebounced(rawBbox, 300);
+  // The rounded box is the same object until its rounded values change: every map layer memoises on it, so a tiny pan
+  // (or a selection change) must not hand them a "new" box and redo their clustering and markers.
+  const rounded = roundBbox(debounced);
+  const bboxKey = `${rounded.minLon},${rounded.minLat},${rounded.maxLon},${rounded.maxLat}`;
+  const bbox = useMemo(() => rounded, [bboxKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const setVisibleBbox = useCallback((b: Bbox) => setRawBbox(b), []);
   const select = useCallback((s: MapSelection | null) => setSelection(s), []);
@@ -75,7 +80,7 @@ export function MapProvider({ userPosition, initialBbox, children }: ProviderPro
 
   const value = useMemo<MapContextValue>(
     () => ({
-      bbox: roundBbox(debounced),
+      bbox,
       userPosition,
       selection,
       select,
@@ -83,7 +88,7 @@ export function MapProvider({ userPosition, initialBbox, children }: ProviderPro
       setDestination,
       setVisibleBbox,
     }),
-    [debounced, userPosition, selection, select, setDestination, setVisibleBbox],
+    [bbox, userPosition, selection, select, setDestination, setVisibleBbox],
   );
   // The directions mode (14.5) lives in its own small context; providing it here keeps every map child working.
   return (
