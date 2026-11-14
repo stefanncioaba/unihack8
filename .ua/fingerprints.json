@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "785b5e530d035a4fcbb836b82121b4331707acae",
-  "generatedAt": "2026-11-14T14:15:46.217Z",
+  "gitCommitHash": "a10642cfcfe0c72a757591c49e9cee815b8d9340",
+  "generatedAt": "2026-11-14T14:34:53.039Z",
   "files": {
     ".mcp.json": {
       "filePath": ".mcp.json",
@@ -25,27 +25,27 @@
     },
     "DOCS.md": {
       "filePath": "DOCS.md",
-      "contentHash": "0ccae1c643dbca312b6f663b5aa55c418df6192148801b6b6df5f29fa4e241ed",
+      "contentHash": "5c8afe1a74aa71cb3b2cbbeca7a6d6e85f45e8ce0790b6a4743509a9c938dadb",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 586,
+      "totalLines": 602,
       "hasStructuralAnalysis": false
     },
     "PLAN.md": {
       "filePath": "PLAN.md",
-      "contentHash": "c0e63cacf2eae1e48a71f1b492c06edd8c381f5da00ff8c36ca07b625f410942",
+      "contentHash": "c58bebc24af8080e25dcb4307009025062662688e31d44c14b6013cd6ce4c681",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 399,
+      "totalLines": 402,
       "hasStructuralAnalysis": false
     },
     "README.md": {
       "filePath": "README.md",
-      "contentHash": "61ac865a763746f0fd1d676276defe229851908d4bd4b09bbb30d9e2f974819a",
+      "contentHash": "709e46827e62ae5228299f24d80ad31061a403df8f8a6088723bb7efe260b4e1",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -161,7 +161,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/client/GeminiClient.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/client/GeminiClient.java",
-      "contentHash": "b4da849febfe579ce93732c1fdf48d5d10d805310ba6d32cafac880825702aff",
+      "contentHash": "60ec0d3fd7d8e26b344c78f2c68f9d39529b71e6cce9ba20b7dd9e99bf8d2c2d",
       "functions": [],
       "classes": [
         {
@@ -196,7 +196,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/client/GeminiException.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/client/GeminiException.java",
-      "contentHash": "bce857a1a74d7e60ab3d6fa57e5a7bc438cf0cc2b63d27f57c76d62a34cb93d0",
+      "contentHash": "fa3894029de183d2327b4f39ad2ffa187a5ee884f7273d7a516a2d61543013f3",
       "functions": [
         {
           "name": "GeminiException",
@@ -271,7 +271,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/client/impl/GeminiRestClient.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/client/impl/GeminiRestClient.java",
-      "contentHash": "c1d4e8c960f287942d4e5efa0c4536283862e37daa6f00830b26578dc5e3ed11",
+      "contentHash": "ce234d4b9b2b89e55cb5fd52fc5e352b1b77088d4b42e598472abb93eeaf7147",
       "functions": [
         {
           "name": "GeminiRestClient",
@@ -433,7 +433,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/config/AiProperties.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/config/AiProperties.java",
-      "contentHash": "5c039a9e17afd78387ec1ceae43cf5e540299f1264ce52bf814c856395b89df1",
+      "contentHash": "1395083429e6f85838a5811b6e437c5256d79552cb834568522d29e2820d47b1",
       "functions": [],
       "classes": [
         {
@@ -472,7 +472,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/config/GeminiClientConfig.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/config/GeminiClientConfig.java",
-      "contentHash": "7983e03b1b83a3a3724ebdc942fa6265c6798a9f9317d7bcb1ce276d0119ff7e",
+      "contentHash": "d69bd275bc7f194a96261e3e6bb1c6626ce60a90ce8e2cd3783a1131f00314d5",
       "functions": [
         {
           "name": "geminiHttpClient",
@@ -536,7 +536,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/config/GeminiProperties.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/config/GeminiProperties.java",
-      "contentHash": "a466a9b87344f7ba43d807d27f23ff71f874af7eea93ebc6f6ed0966a9be1bb4",
+      "contentHash": "baf56635cae50d4554f562a646652f793ae3908fa4b4497524714be73e3b60d8",
       "functions": [],
       "classes": [
         {
@@ -581,7 +581,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/controller/AiController.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/controller/AiController.java",
-      "contentHash": "f9644b5478ca3129b8fa6db07120710be30a7c184328758e8bb7ce3f3c580ed6",
+      "contentHash": "f5e34263228baf73406daf3da8d7a149adca5772f047b6adb12d067cfdf87989",
       "functions": [
         {
           "name": "AiController",
@@ -895,7 +895,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/domain/dto/ChatMessageDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/domain/dto/ChatMessageDto.java",
-      "contentHash": "49d6b6c155e6d9ec7cf03289726777ac599afa1adcc88e0c26ba6ebe88bbcac4",
+      "contentHash": "e865d1d085a05bdd0a743eb1f2d548bb4440c125c7d2dc4b35c0756773752777",
       "functions": [],
       "classes": [
         {
@@ -934,7 +934,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/domain/dto/ChatRequest.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/domain/dto/ChatRequest.java",
-      "contentHash": "daecb2f9f60155d6954d70d9b955008cc0205a6ba4151beb5b45775deeb2b3f8",
+      "contentHash": "10b4b764d4a448e4d5181d62f0f82bc3b722fe6b0e69ef5db0a048fd3ae5bc8b",
       "functions": [],
       "classes": [
         {
@@ -1032,7 +1032,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/domain/dto/LocationDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/domain/dto/LocationDto.java",
-      "contentHash": "322b48ad0f7700221748d8a9b980493fdf633f1941b7b885e00a9d010549c428",
+      "contentHash": "15fd4af8436dabb47710fc3ef07f17b35f1a2115aa2fd208c3ff972bab3fd18b",
       "functions": [],
       "classes": [
         {
@@ -1091,7 +1091,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/domain/dto/SourceDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/domain/dto/SourceDto.java",
-      "contentHash": "6b9ea45c12bce88ee1125cfc75fc610ca3726aa1010cf85e246b005ebd2cc0df",
+      "contentHash": "993e32078df0e6324d796462069dc5d104d0a7135bb2a41ec9f15f625b1d6af6",
       "functions": [],
       "classes": [
         {
@@ -1111,7 +1111,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/domain/gemini/GeminiContent.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/domain/gemini/GeminiContent.java",
-      "contentHash": "8a7cdf8a4ea73b594b05b4e4738d8ee00202389cdaf0aea04e6f65070ced209b",
+      "contentHash": "e4798c370382aa34c5d1869462fd3a26a0e3674e05cef1bfa5277201e9d03c74",
       "functions": [
         {
           "name": "text",
@@ -1164,7 +1164,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/domain/gemini/GeminiFunctionCall.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/domain/gemini/GeminiFunctionCall.java",
-      "contentHash": "ca2302f592d983bebbbadf36ca2184388e2f1f646eab0c9b08bd0e6adf9d2c55",
+      "contentHash": "76d33afcb9da599a94b8178784403e326bc2c6bd84263581a5c708470cad866f",
       "functions": [],
       "classes": [
         {
@@ -1203,7 +1203,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/domain/gemini/GeminiFunctionResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/domain/gemini/GeminiFunctionResponse.java",
-      "contentHash": "f27cb023dd8692bc6da3b8d2c292b41cdbfac419276b2a40719040dbfa2682c2",
+      "contentHash": "b53037b8205e8c33f3199e31b7d3c1ab486782313cc971807099f921eed791fe",
       "functions": [],
       "classes": [
         {
@@ -1242,7 +1242,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/domain/gemini/GeminiPart.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/domain/gemini/GeminiPart.java",
-      "contentHash": "bc65c978f219f510a57c41f4d6c32a26093bd702c5211078f072fc09e2efb03c",
+      "contentHash": "0392b3b26849987c9ff358682c188ab20a0a406f99a8dcf841b0654e4860bd36",
       "functions": [
         {
           "name": "text",
@@ -1319,7 +1319,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/domain/gemini/GeminiRequest.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/domain/gemini/GeminiRequest.java",
-      "contentHash": "0a8f0364215790aa16fe81511aec15afc6b4291379151c2c7822402aa408892f",
+      "contentHash": "53a5ff2271d7ed9546d64f2c963b50629e43c0baa680f4b569390358c04c5bfe",
       "functions": [],
       "classes": [
         {
@@ -1358,7 +1358,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/domain/gemini/GeminiResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/domain/gemini/GeminiResponse.java",
-      "contentHash": "cb3100a8ce002bf6f641819aa9275cbf536ce45fc23aba159c73625094255004",
+      "contentHash": "57aba05df465890fc9a50ce34c8041dd0ada77b3ecb7eccb826630db2f940213",
       "functions": [
         {
           "name": "firstContent",
@@ -1402,7 +1402,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/mapper/ChatResultMapper.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/mapper/ChatResultMapper.java",
-      "contentHash": "9f4ca6747d38e42b50cec4dc1d31b610303f466a2baa71f7731b225db9ef8b54",
+      "contentHash": "34b982372f6bda1c0483f1cec449a1eb44d8a054153e7766e7efe022e7cc2802",
       "functions": [],
       "classes": [
         {
@@ -1695,7 +1695,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/service/AiChatService.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/service/AiChatService.java",
-      "contentHash": "57ee81b9b44e0f011907ee5a60e3a36d4f9ae91f71e1eeea45db5102004d652e",
+      "contentHash": "ddb848b41a0159a6baa290fd3172ef7b48607099e74a182861a22ab0e148e31a",
       "functions": [],
       "classes": [
         {
@@ -1736,7 +1736,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/service/ChatRateLimiter.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/service/ChatRateLimiter.java",
-      "contentHash": "c6a6248c788abd411e8fd8a2be2411ae7c916faea2852b5021e53db7b5b4e52e",
+      "contentHash": "803c3509932d02f144027086d26226397f26c747c6cb9325de6e9f2356fcbf96",
       "functions": [],
       "classes": [
         {
@@ -1765,7 +1765,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/service/impl/AiChatServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/service/impl/AiChatServiceImpl.java",
-      "contentHash": "b31e4038a1918a30d1fc54e238851e0847aec8c684b2512fab365c069072f995",
+      "contentHash": "d2a7ed15678614453692c84106a4f249d38873402e2c017507335e1374dd5ea1",
       "functions": [
         {
           "name": "AiChatServiceImpl",
@@ -2127,7 +2127,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/service/impl/InMemoryChatRateLimiter.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/service/impl/InMemoryChatRateLimiter.java",
-      "contentHash": "45200a80b3b8fa42b467ca870f98e09baab9e241a087952103a7ff50488d0bfb",
+      "contentHash": "3261863d60c9c43b18f70955423b40fffb22f07e09303bd1ce7cbe22ec1b6f0b",
       "functions": [
         {
           "name": "InMemoryChatRateLimiter",
@@ -2320,7 +2320,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/tool/AiTool.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/tool/AiTool.java",
-      "contentHash": "97bfb0277db9fe9873b56010e1c8459a9837cce787d123ecc04a1e1cb46ad29c",
+      "contentHash": "2fe143013371c52235281c84e8659ac7dd75769895c5eff772fd937e3b4044f4",
       "functions": [],
       "classes": [
         {
@@ -2357,7 +2357,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/tool/ToolArgs.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/tool/ToolArgs.java",
-      "contentHash": "cb08ed40c6d64f73622c89eb1748eb7a38b6209c0dc08b6b76ebd484c803b96b",
+      "contentHash": "5fbc71f71f0b9e20fc8f40793ecf82a74c8e9758c2e9fc3f317a4a274b8822cc",
       "functions": [
         {
           "name": "ToolArgs",
@@ -2600,7 +2600,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/tool/ToolException.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/tool/ToolException.java",
-      "contentHash": "f2652311009f6110f8fc9d9bd4abd917eb07b3caa4745fcbcb9dc1048b2335e2",
+      "contentHash": "8b2964f73cbbacd82982645b0c41f562291dedb3b5a2ddeeb18e0ca95c69aa16",
       "functions": [
         {
           "name": "ToolException",
@@ -2803,7 +2803,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/tool/impl/SearchEventsTool.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/tool/impl/SearchEventsTool.java",
-      "contentHash": "84af06fb1dc754574881f2bfda31f54fe40be8f072d0e21ffe00a8eb48402d53",
+      "contentHash": "0a52791564b614562e3e11cb4286ade3616d8680228ff730e0070825c89526be",
       "functions": [
         {
           "name": "SearchEventsTool",
@@ -2983,7 +2983,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/tool/impl/SearchPlacesTool.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/tool/impl/SearchPlacesTool.java",
-      "contentHash": "26435aec5fe95b6dd6580dbc54c849971949ba77ddbba79a23ed2352d26c1522",
+      "contentHash": "369433c855778098a778c7730b55d61c265881e79868842329c8016f3e15f459",
       "functions": [
         {
           "name": "SearchPlacesTool",
@@ -3242,7 +3242,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/ai/tool/impl/TransitInfoTool.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/ai/tool/impl/TransitInfoTool.java",
-      "contentHash": "e0b43aeb4bd50e53203ec15e3b9cab1985a4d2ad985b72fcdcaca442016cf127",
+      "contentHash": "0373e9bfc962c99f9e177541c4fe4fb592e3b5a5badfd339d5a4cd0ce75640eb",
       "functions": [
         {
           "name": "TransitInfoTool",
@@ -3465,7 +3465,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/cache/StaleCache.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/cache/StaleCache.java",
-      "contentHash": "ad64720156d2525375b2b0e254b2a38877029f8c35ac57fdf26240e4520d796d",
+      "contentHash": "3509c6132a39423d26e790f9e13c337f0587152c57ca52b563ee1d653ef91504",
       "functions": [
         {
           "name": "StaleCache",
@@ -3836,7 +3836,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/exception/ErrorCode.java",
-      "contentHash": "b9986644f29e7f43ce6ac480bffeb6c8940ed515351ae2ad11bf265885d563c2",
+      "contentHash": "b9cb4d76d2d89cb050e18a3adf473738e760081792515ae04728f526ac9bde71",
       "functions": [
         {
           "name": "ErrorCode",
@@ -4775,7 +4775,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/common/text/TextMatch.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/common/text/TextMatch.java",
-      "contentHash": "a41c733a3b096c2063e87caade1fec1a837a6933d651612c0cf5965d540191d3",
+      "contentHash": "61c80f4087318302e7c175e50e766b3e3af4dcdf3c5d4c07d39302c53328809c",
       "functions": [
         {
           "name": "TextMatch",
@@ -4848,7 +4848,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/config/SecurityConfig.java",
-      "contentHash": "338b23ab283c9a3672ff430ef03e8f62d9e804ad995720efbc80ee613914aeda",
+      "contentHash": "07d810e790dd4d85335b267fed7207a01f25d00b4bf14e39ce0469c4caa81d6a",
       "functions": [
         {
           "name": "securityFilterChain",
@@ -7334,7 +7334,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/events/domain/dto/EventDetail.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/EventDetail.java",
-      "contentHash": "45d58b78057f287ebcdd7d388a66050112bcea049b1fefec31ae3621cad28af6",
+      "contentHash": "316428befb7486e7417eedf42bc4ad3ef28bc8e649efcbc9a3e3ef7a0dbd3c1c",
       "functions": [],
       "classes": [
         {
@@ -7412,7 +7412,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSummary.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/events/domain/dto/EventSummary.java",
-      "contentHash": "1e7cb27bc16571861c35939a49b16d2ac588d03e266f9d3671e07358e5689125",
+      "contentHash": "a687545570c6e20cd52eb444849833337166fe1f24604f5cb391c1a8be2b1507",
       "functions": [],
       "classes": [
         {
@@ -7702,7 +7702,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/events/mapper/EventMapper.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/events/mapper/EventMapper.java",
-      "contentHash": "809e94d5022a69265f7b2fd2ecb2575ea9cd175201e29e1ff44a66287d8df99e",
+      "contentHash": "5d0e0740787bad90ebc5f902f8c50ab51e515803db3809ec30663567f3a3393a",
       "functions": [],
       "classes": [
         {
@@ -7763,7 +7763,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/events/mapper/impl/EventMapperImpl.java",
-      "contentHash": "f019ecbb87df4dfc153f25f54f22defc3fb164bcb6876f8e57c0e14390c60d83",
+      "contentHash": "6e0ff420082d7506b7ef77cfbf35dbc36f4b6125b89a85326620df981213e5f9",
       "functions": [
         {
           "name": "summary",
@@ -8602,7 +8602,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/events/service/impl/EventServiceImpl.java",
-      "contentHash": "fd01c4bddd69f706cacd55437df558d91dae2100221c543e83a61d9d8dc3b5d2",
+      "contentHash": "ad22de46c0f1e69571366cc75718e235adb25d849e93b101d29dbaf2a1c2a461",
       "functions": [
         {
           "name": "EventServiceImpl",
@@ -10098,7 +10098,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/domain/PriceItemType.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/PriceItemType.java",
-      "contentHash": "41e3d63e138612ab575d3e4f213da16eaa00ff5ff5ce8060f861c3201eb29aec",
+      "contentHash": "af1c8a0e9a332aa39a2774569a048847b925c57d9f857958994ee94194ab987b",
       "functions": [
         {
           "name": "parse",
@@ -10177,7 +10177,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceExploreCriteria.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceExploreCriteria.java",
-      "contentHash": "5a574df98c21b51f3171bc84a971cff764f403ba0ff3fa070e4f45ca7fb674fe",
+      "contentHash": "bad79c64a16c6f0e03f64ee8b7dfcd8e35f752b5261c83182abc7d52ad626102",
       "functions": [],
       "classes": [
         {
@@ -10222,7 +10222,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceInsightDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/dto/PlaceInsightDto.java",
-      "contentHash": "4a6a2cbaffd05470b1db8fde95700c06e79cfff31cb4efd33f39e55aa17eb267",
+      "contentHash": "d3755db3e56a41742d96b9156093193c261fade9a304bf56d3e1badfd1ffdf23",
       "functions": [],
       "classes": [
         {
@@ -10326,7 +10326,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/domain/dto/PriceDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/dto/PriceDto.java",
-      "contentHash": "5eccd71bf9dc5f22cecec5ed47ac654ae80be82470ee5704550eba0fd1868c53",
+      "contentHash": "34eea1888b71f47407b9326734523fb78f52a76fab6c3a76b1aae393a4ef364b",
       "functions": [],
       "classes": [
         {
@@ -10642,7 +10642,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/domain/entity/PlacePrice.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/domain/entity/PlacePrice.java",
-      "contentHash": "529f238eee518f542e725c7dfc961926713df072f98319e58ccb58d967389d3a",
+      "contentHash": "e7ebc39e40c2dff4cfb96090ae9ce76d02ff4e7b48ab642f99acfe97c5842e06",
       "functions": [
         {
           "name": "PlacePrice",
@@ -11160,7 +11160,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/places/repository/PlacePriceRepository.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/places/repository/PlacePriceRepository.java",
-      "contentHash": "5ff949714c95707436dc6ba3586c0708bac303eddce3cd68fc93c8b8d5ce687d",
+      "contentHash": "b349404668f4e43ddc81d9a867c539df21fc0bc51f074f33935f3ac82f8b4a8c",
       "functions": [],
       "classes": [
         {
@@ -13437,7 +13437,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/reviews/config/ReviewSettlementJob.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/reviews/config/ReviewSettlementJob.java",
-      "contentHash": "33cef5a11d9a8af77c5034938f0a2e9a15fbe3d86ea663cf8df5f3f58b6023f7",
+      "contentHash": "0cd7e66a5808c24a1848cab93c0066d82ef824fb03f5f769e134beb352779dc4",
       "functions": [
         {
           "name": "ReviewSettlementJob",
@@ -13524,7 +13524,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/reviews/controller/ReviewController.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/reviews/controller/ReviewController.java",
-      "contentHash": "b74b6179d43dbc012251710f7d700a39945a76803a70698dc7842c2d448cfdff",
+      "contentHash": "f3a06d9a2cb969fccda3e1b5427fb7709b912b8e9f654fabb5488b2a6ebf57e9",
       "functions": [
         {
           "name": "ReviewController",
@@ -13650,7 +13650,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/reviews/domain/ReviewRules.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/reviews/domain/ReviewRules.java",
-      "contentHash": "27a25a216c4ec4665547286ae1e687fa0b5ad132f78b4a9709353c48b7cf1973",
+      "contentHash": "34db04768d2559dd9100dd7bc20b9159df0e5f14964da4825525194e632152d9",
       "functions": [
         {
           "name": "ReviewRules",
@@ -13736,7 +13736,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/reviews/domain/dto/EventReviewsResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/reviews/domain/dto/EventReviewsResponse.java",
-      "contentHash": "36331c8e0b1b5743b5a73c345a39244bd8a810faff2be584592d4370c2cdabaa",
+      "contentHash": "09ea37ef4494994b568a6244e92148dee369ff4c0ba582d875334e85564c7518",
       "functions": [],
       "classes": [
         {
@@ -13769,7 +13769,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/reviews/domain/dto/RatingStats.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/reviews/domain/dto/RatingStats.java",
-      "contentHash": "6f88a1deefb0a58ff7f1551ef306e492c7cd4ea2d781bee9d2ac9041d3d9c505",
+      "contentHash": "d4568e8bc9f3d6b5aaf59ea207e6465dca1861548ea03eb96fefd61457c0b089",
       "functions": [
         {
           "name": "rounded",
@@ -13803,7 +13803,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/reviews/domain/dto/ReviewRequest.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/reviews/domain/dto/ReviewRequest.java",
-      "contentHash": "82b1f18df2608d4715de2cce2ae81f9d2981e721f103993476cf63061594e4e7",
+      "contentHash": "267efce68975857c775842042fcd0c06eea10d65b7aabe871e7168bd5c6d55bb",
       "functions": [],
       "classes": [
         {
@@ -13823,7 +13823,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/reviews/domain/dto/ReviewResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/reviews/domain/dto/ReviewResponse.java",
-      "contentHash": "6d5f47f919dfff89b73ad8061b38c9a061ee75dc0fbab87b6b27c68fef9e8e68",
+      "contentHash": "f10c63c17541f9ca603422669485c997a1a7ffeda8655a13db06e479b0696032",
       "functions": [],
       "classes": [
         {
@@ -13856,7 +13856,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/reviews/domain/entity/EventReview.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/reviews/domain/entity/EventReview.java",
-      "contentHash": "b5ba1af1b497f5ee4a5fe5c4e0e398cd65da338262417b00ae404bb0cb3b9f8f",
+      "contentHash": "1909fe1ad29534656a8f8d8ef4a13dd3bc2a56df46f025ec640f22437949226c",
       "functions": [],
       "classes": [
         {
@@ -13889,7 +13889,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/reviews/domain/entity/SettlementCandidate.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/reviews/domain/entity/SettlementCandidate.java",
-      "contentHash": "f8a8d9128a928fe14acdfb35e9feea978b4307ae29198900ac3a5636a23f70db",
+      "contentHash": "ac8e0b091b9679beea7c9faae1dab3fcd63df93f79c75443377fe515bb2a745d",
       "functions": [],
       "classes": [
         {
@@ -13922,7 +13922,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/reviews/mapper/ReviewMapper.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/reviews/mapper/ReviewMapper.java",
-      "contentHash": "3debbd110845cd56d6ee6f9e05a876c34666f4d05a2595b479571826176b7857",
+      "contentHash": "0b70f6586e943f8f21ca6ecfec080bfbea29421650f87f23a59b62b9ab3565c3",
       "functions": [],
       "classes": [
         {
@@ -13963,7 +13963,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/reviews/mapper/impl/ReviewMapperImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/reviews/mapper/impl/ReviewMapperImpl.java",
-      "contentHash": "15422ebabaee3420675e61d7b8df9b8002b98a133e6fb5f51c2e6b0683e16d27",
+      "contentHash": "e3f9bfaf66aaf4fc54aa640dc3decc13c4f2e52ea6282abf54559562873ca1c1",
       "functions": [
         {
           "name": "toResponse",
@@ -14028,7 +14028,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/reviews/repository/ReviewRepository.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/reviews/repository/ReviewRepository.java",
-      "contentHash": "4f275445dcca82f2c7b3682f226f14b217edc49cd549eacba057a4f3d3ee65e2",
+      "contentHash": "4a5ce01f4b672b4e815250b4c4cfcd58f4cceae7e7123aeb0dded8650e5d45de",
       "functions": [],
       "classes": [
         {
@@ -14107,7 +14107,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/reviews/repository/impl/ReviewRepositoryImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/reviews/repository/impl/ReviewRepositoryImpl.java",
-      "contentHash": "d47a6c19883656bc16e05ad982e6646d0457d95728eacf74dce1dd91f482f404",
+      "contentHash": "a45650d043ada68ec2a9a8a1a4afe52e98f01ab4058f792271c46f2953d982a2",
       "functions": [
         {
           "name": "ReviewRepositoryImpl",
@@ -14373,7 +14373,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/reviews/service/ReviewService.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/reviews/service/ReviewService.java",
-      "contentHash": "1e96820501979ec99a833a2d1cd9b4b41f38bdda4d1102260cfbac611ffe01a6",
+      "contentHash": "05c65a470a470581e6510b4aa905697700735c3627273c3a807596276b83ad2c",
       "functions": [],
       "classes": [
         {
@@ -14427,7 +14427,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/reviews/service/ReviewSettlementService.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/reviews/service/ReviewSettlementService.java",
-      "contentHash": "46bbf4d70723f414211ec6c9f3f2fad2b39334b66e2235194307aa32059c072f",
+      "contentHash": "e2bad3cb4cd1c3229590508cf4722513a7610bb118043e8797afffa8fd10726e",
       "functions": [],
       "classes": [
         {
@@ -14449,7 +14449,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/reviews/service/impl/ReviewServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/reviews/service/impl/ReviewServiceImpl.java",
-      "contentHash": "b41bae03df4f5e275742d54d0d984ffc017642e979b8f54fbd187e34b06854f9",
+      "contentHash": "c56869da41384638a766ded0938d28b831c346fbb2928d25adf791fa1967f298",
       "functions": [
         {
           "name": "ReviewServiceImpl",
@@ -14703,7 +14703,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/reviews/service/impl/ReviewSettlementServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/reviews/service/impl/ReviewSettlementServiceImpl.java",
-      "contentHash": "64543eacc6e88840206aa7ddb0d8338bdb2137b41eb0721a07682ed43e9ea845",
+      "contentHash": "7ed57bbd7a3440f9785133a912d3d853c70ecf71c675826c4038f819a0daefa4",
       "functions": [
         {
           "name": "ReviewSettlementServiceImpl",
@@ -16307,7 +16307,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/config/StptClientConfig.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/config/StptClientConfig.java",
-      "contentHash": "06170f7f0effe9b24159dbb5c11e07bff933502d378e924ff069ea5145a2c682",
+      "contentHash": "78b7b3bdaa711fdc12ff18f728a126fec183a013f9234c0d2e637d5021bfec19",
       "functions": [
         {
           "name": "stptRestClient",
@@ -16383,7 +16383,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/config/StptProperties.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/config/StptProperties.java",
-      "contentHash": "99176e60e0be742180b3652bd5d1f3af61cc0e0328b05dcd0f8c1ffc0b2f02f6",
+      "contentHash": "bea38ba5e6134b28814624040033138032cfba0566175453d7463a7d63131476",
       "functions": [],
       "classes": [
         {
@@ -16672,7 +16672,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/AlertDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/AlertDto.java",
-      "contentHash": "7ffd00818be4d2a911fc8622431f9e923472b2bd145991e53f564540156c9fd5",
+      "contentHash": "b46433281bf66b6f74154cc3f501737f27ae0e8a4d1029e0bc4c14df3374853e",
       "functions": [],
       "classes": [
         {
@@ -16692,7 +16692,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/ArrivalDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/ArrivalDto.java",
-      "contentHash": "3847c8a7b5e65fe8d4cf22b0d5e9554c615a5da61058596987b39ac2d76d38a0",
+      "contentHash": "f3cbf9cd8bd3cd800258b1e4dab675a830b186096a10abfe0329b7966b4bd221",
       "functions": [],
       "classes": [
         {
@@ -16719,7 +16719,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/ArrivalsResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/ArrivalsResponse.java",
-      "contentHash": "507886ed9aafcae69c924094e7fed02efe4edac9270a8134323a58df12e4d31a",
+      "contentHash": "4ea473335dc83e211b2f09da72e70bcc39934a0545c875fdd6d13c1f94573456",
       "functions": [],
       "classes": [
         {
@@ -16752,7 +16752,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/LastDepartureDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/LastDepartureDto.java",
-      "contentHash": "f604054e6d0b77e2616527a55a1d2f84d626940ad3972ed9ca6a19e9351ddc57",
+      "contentHash": "ec5bd76e27bcacd7a19166602914df72721899d5e2c5b7556bdf96675631412b",
       "functions": [],
       "classes": [
         {
@@ -16779,7 +16779,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/LastDeparturesResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/LastDeparturesResponse.java",
-      "contentHash": "22bbefb2bc4dc72eaae5a9c3fdd77d632a7b9627c09b4c622a6156e3301e6dde",
+      "contentHash": "46f023daefc462543d3be2b6d53bf28726f5afd3d65d160b05c7a57d328f4d41",
       "functions": [],
       "classes": [
         {
@@ -16806,7 +16806,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/NearestStopDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/NearestStopDto.java",
-      "contentHash": "e810ee4bcbac177d305b37052dc7bf8a2fe9131859630e72dcf6cc9e349610ee",
+      "contentHash": "a284c8aee99ab6042f186fa9f965d305ff929a4eba664cc4e46023d0f2b54915",
       "functions": [],
       "classes": [
         {
@@ -16853,7 +16853,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitRouteDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitRouteDto.java",
-      "contentHash": "72d44b661b52b5dac66c2fab5dbee1d62b9c03fd68d30c1ed45bf6171c1820ea",
+      "contentHash": "4fff6e1416d28de686470c9d5a3d5c123ca341faa5d951c5c5279a60e176087c",
       "functions": [],
       "classes": [
         {
@@ -16873,7 +16873,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitShapeDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitShapeDto.java",
-      "contentHash": "90cb81e823a23d0614943fb76831dac066effc33d24d9edbb7173c5f3303c998",
+      "contentHash": "eefdc34556cd2d8014e9e5fb405af43c2568c8a7da2fd60b8bf4f530bf5ea0ab",
       "functions": [],
       "classes": [
         {
@@ -16900,7 +16900,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitStopDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/TransitStopDto.java",
-      "contentHash": "666f2597a11340d05a00704fb8af4a7c384a15fc3347760402fe06a93c94d1de",
+      "contentHash": "141676cb6019baa0e073e850ad9e6703bf0a3cf32151d7b615ddb84383d45196",
       "functions": [],
       "classes": [
         {
@@ -16954,7 +16954,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/VehicleDto.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/VehicleDto.java",
-      "contentHash": "7825d364456fa9d0cbbad476fb6d3610b6013ec3ea3bc632469fb12900fbc97d",
+      "contentHash": "5b0122d1ac3e244a91b1f67b78780a61ff7d80ecc3efadc74eafdeff66d75867",
       "functions": [],
       "classes": [
         {
@@ -16981,7 +16981,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/VehiclesResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/VehiclesResponse.java",
-      "contentHash": "da845407969d493c22916e32269eb539447dc1ad174732ceeb3bc1da5930a584",
+      "contentHash": "d2b3d6c94bda0e2f9bbebab90042f34b78587f694e1b67ae05147368f3f1e86d",
       "functions": [],
       "classes": [
         {
@@ -17014,7 +17014,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/stpt/StptAlert.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/stpt/StptAlert.java",
-      "contentHash": "7de0d111175496e209f7c9f846347815d94f1383d5ed96eb45cd278052665fd5",
+      "contentHash": "776b8010535c1374bdc5375c581659ff1aa1f315976d0fda6fb735a80cd9c941",
       "functions": [],
       "classes": [
         {
@@ -17034,7 +17034,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/stpt/StptArrival.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/stpt/StptArrival.java",
-      "contentHash": "1f2dcb805c0f2b5f7518c22919cb0e683d06c9ac1bdaa0c25fedfe14cfce641e",
+      "contentHash": "b636ea3c4196e8b613e723f58f467f2c8c2f92ef02535c000e582161267876c8",
       "functions": [],
       "classes": [
         {
@@ -17061,7 +17061,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/stpt/StptRoute.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/stpt/StptRoute.java",
-      "contentHash": "acf19601ef980173c4fa5b395aec83197bcba4eb3f43bb918e193b29363fc088",
+      "contentHash": "7a5b90599b2049a7cec58a37e1ad59f568d001d96f8b1d80863b4f3832c1df5e",
       "functions": [],
       "classes": [
         {
@@ -17081,7 +17081,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/stpt/StptStop.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/stpt/StptStop.java",
-      "contentHash": "8b829d0f6bf25100a177fdeaa02de1630befed200632400d45ca276e732f0532",
+      "contentHash": "ecdfb76a475389a322373fc096cc27e2fdc9f6befd15f262e6e70aabbd6d9dee",
       "functions": [],
       "classes": [
         {
@@ -17108,7 +17108,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/dto/stpt/StptVehicle.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/dto/stpt/StptVehicle.java",
-      "contentHash": "15b4efb2c7b6fe2a6e60c3b6184b89c8e257bab21de6194c23c1ddf794d64e3c",
+      "contentHash": "e3af630033586d3a87291f0e7dda4153977dba9776323b31292f49a4e88463f1",
       "functions": [],
       "classes": [
         {
@@ -17128,7 +17128,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/model/RouteShape.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/model/RouteShape.java",
-      "contentHash": "a9e248aefe8dc13f6d2a428867ce52c5f4042a5e6c701351e04106bbc9ebda8c",
+      "contentHash": "f7409ce56c32a150fdfc00a1107033cddd5c9b8b479160ebd58eb04957f30b7b",
       "functions": [],
       "classes": [
         {
@@ -17161,7 +17161,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/domain/model/ScheduledDeparture.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/domain/model/ScheduledDeparture.java",
-      "contentHash": "7f5db426ce1419df75ec36cc422940b444b481545a34b7af05e78b3047dfbbcb",
+      "contentHash": "8654eea8f9ae625b2980278ad21a81985987beb6af067342dae65b0880085164",
       "functions": [],
       "classes": [
         {
@@ -17293,7 +17293,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/mapper/impl/PolylineEncoder.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/mapper/impl/PolylineEncoder.java",
-      "contentHash": "1248eeb8df2ecbdf82fd2f4b2031c994cd2b756f9f9bdb951c830c1c319cd360",
+      "contentHash": "3160ea2ba460a8ea6a13f58c3e02acb8eddbd045164aaf9a6d04579c5a213a9b",
       "functions": [
         {
           "name": "PolylineEncoder",
@@ -17638,7 +17638,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/repository/ShapeRepository.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/repository/ShapeRepository.java",
-      "contentHash": "db8f980a55d031dcf4296d784398edae4136c51a0329e315912d03fba7e4212f",
+      "contentHash": "7d3cd468b428ddabcafe81d843b898376ff10585761f8f4318f9e444e787f7f1",
       "functions": [],
       "classes": [
         {
@@ -17673,7 +17673,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/repository/TimetableRepository.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/repository/TimetableRepository.java",
-      "contentHash": "05b9f75be769abcfe1aac68f5fa59add92e00a71143cc5a2e19d613181642372",
+      "contentHash": "c73934c064d39d864999c2673fc7eb293633b41d2830a8f99d73d599142fe0ed",
       "functions": [],
       "classes": [
         {
@@ -17721,7 +17721,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/repository/impl/GtfsCsv.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/repository/impl/GtfsCsv.java",
-      "contentHash": "09af06756ebfc556636eb4dae533f85647c8b03db5fe5b994b1cdc7f40b8245c",
+      "contentHash": "43843f7ac4e8b5f9db47780d3fb551636494bac7f1f06359e533d88f32d347cb",
       "functions": [
         {
           "name": "GtfsCsv",
@@ -17822,7 +17822,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/transit/repository/impl/GtfsShapeRepository.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/repository/impl/GtfsShapeRepository.java",
-      "contentHash": "69cfc0655d3a0bfa53a715922b411925595319160eda7c8065980adfa7d35017",
+      "contentHash": "32838410f695d76e3ce503c4c22cf2d20a3a90c6ed4ef95440bf745e483519ff",
       "functions": [
         {
           "name": "GtfsShapeRepository",
@@ -17854,7 +17854,7 @@
           ],
           "returnType": "List<RouteShape>",
           "exported": false,
-          "lineCount": 67
+          "lineCount": 71
         },
         {
           "name": "stopSequencePaths",
@@ -17940,7 +17940,7 @@
             "loadAttempted"
           ],
           "exported": true,
-          "lineCount": 205
+          "lineCount": 209
         }
       ],
       "imports": [
@@ -18107,12 +18107,12 @@
         "shapes",
         "GtfsShapeRepository"
       ],
-      "totalLines": 240,
+      "totalLines": 245,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/transit/repository/impl/GtfsTimetableRepository.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/transit/repository/impl/GtfsTimetableRepository.java",
-      "contentHash": "add954be3bc1ebd9ff9f1bc6da2b18259abac7e1da63ac90925a2047c182f42d",
+      "contentHash": "8eff17a1980414429989829b9a514edba69cb4f324004639e9bbff36449434b5",
       "functions": [
         {
           "name": "GtfsTimetableRepository",
@@ -18382,6 +18382,97 @@
         "GtfsTimetableRepository"
       ],
       "totalLines": 244,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/main/java/com/unihack8/backend/transit/repository/impl/PathSimplifier.java": {
+      "filePath": "backend/src/main/java/com/unihack8/backend/transit/repository/impl/PathSimplifier.java",
+      "contentHash": "8afcb86591a1637f499190077620cc3d6d5695c3b75c9ce5171a5a28fc77dafe",
+      "functions": [
+        {
+          "name": "PathSimplifier",
+          "params": [],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "simplify",
+          "params": [
+            "points",
+            "toleranceMeters"
+          ],
+          "returnType": "List<GeoPoint>",
+          "exported": true,
+          "lineCount": 46
+        },
+        {
+          "name": "distanceToSegment",
+          "params": [
+            "px",
+            "py",
+            "ax",
+            "ay",
+            "bx",
+            "by"
+          ],
+          "returnType": "double",
+          "exported": false,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "PathSimplifier",
+          "methods": [
+            "PathSimplifier",
+            "simplify",
+            "distanceToSegment"
+          ],
+          "properties": [
+            "SHAPE_TOLERANCE_METERS",
+            "METERS_PER_DEGREE"
+          ],
+          "exported": true,
+          "lineCount": 69
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "java.util.ArrayDeque",
+          "specifiers": [
+            "ArrayDeque"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.Deque",
+          "specifiers": [
+            "Deque"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "SHAPE_TOLERANCE_METERS",
+        "simplify",
+        "PathSimplifier"
+      ],
+      "totalLines": 83,
       "hasStructuralAnalysis": true
     },
     "backend/src/main/java/com/unihack8/backend/transit/service/TransitService.java": {
@@ -19283,7 +19374,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/AttendedEventResponse.java",
-      "contentHash": "0cfb683d5ca56b6bf5b7b9218416603d800724fe8cbb2fc9eb66e9d95d88f7b4",
+      "contentHash": "a0ee0f4dd0a2319b861fb6158bd9b5c7861a50defb6f203a383fff16b04b4340",
       "functions": [],
       "classes": [
         {
@@ -19322,7 +19413,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/users/domain/dto/ProfileResponse.java",
-      "contentHash": "242a2287ac67b0af66100ae55da50f9065e3e23ecb8ebe8ddc6dfb62f9d25abd",
+      "contentHash": "71a85887adf601fa4539b5be39bbd66cb275ef1663c88892786f67e5a2f0dc55",
       "functions": [],
       "classes": [
         {
@@ -19559,7 +19650,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/users/mapper/ProfileMapper.java",
-      "contentHash": "9c9e11961f735c6c4cc4ffd1f9aeb93d47b59b7ff8caf3b62c72e526a4a75965",
+      "contentHash": "df7303ce5dffb036d02f97d3b3f4f9776b74ac28032d762ff2f54419e338637a",
       "functions": [],
       "classes": [
         {
@@ -19613,7 +19704,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/users/mapper/impl/ProfileMapperImpl.java",
-      "contentHash": "bffd2b3fdb2d569343802be11408766b59f7a9f7cfd601507025f381e83bc470",
+      "contentHash": "84e4abdaf5c177431df0d14b40aef8c2d06d55a2ee52aad828c8b89f235984bc",
       "functions": [
         {
           "name": "toResponse",
@@ -19702,7 +19793,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/users/repository/AttendedEventRepository.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/users/repository/AttendedEventRepository.java",
-      "contentHash": "29556cd4407c0daa65fb533d7d8c7c62a750f94a2dfa98dd057332d765c8694f",
+      "contentHash": "dc4e6fde22dfd7fc4faa5bff38a53b2fb74e21e18fffa38a99cbfbfd4d113dec",
       "functions": [],
       "classes": [
         {
@@ -19805,7 +19896,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/users/repository/impl/AttendedEventRepositoryImpl.java",
-      "contentHash": "5e0bfc5425046a037b846f02f8e6a3ecfefb99b9bcbbb320918379f0b6f5c71b",
+      "contentHash": "58b05f46779794c03e74069953b40297ccf4e3fb299bb7cbc65af11968a56443",
       "functions": [
         {
           "name": "AttendedEventRepositoryImpl",
@@ -19999,7 +20090,7 @@
     },
     "backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java": {
       "filePath": "backend/src/main/java/com/unihack8/backend/users/service/impl/UserServiceImpl.java",
-      "contentHash": "d6d861886b061edfd7f8126a4258f8ed28e5277a94a9e5ae22ffae06d59c835b",
+      "contentHash": "b39e169c351301993583e4728b9b3ad357266291fb1e316a8805afe4d61f5067",
       "functions": [
         {
           "name": "UserServiceImpl",
@@ -20292,7 +20383,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/ai/client/impl/GeminiRestClientTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/client/impl/GeminiRestClientTest.java",
-      "contentHash": "b2beea71228d2162764c0a95fb7cbea720dd28a926775c673d3d15c157e6b298",
+      "contentHash": "9e639721148434d79fc40515e086e00013b0d9278082231f29b4d5c569f1d144",
       "functions": [
         {
           "name": "stop",
@@ -20799,7 +20890,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/ai/mapper/impl/ChatResultMapperImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/mapper/impl/ChatResultMapperImplTest.java",
-      "contentHash": "cb3a30f2507971f2fadef02cc55200946b8a3f5f34b7d8785a328914e49df2f5",
+      "contentHash": "baa991c45619afef0c13a6db1579b5954aae9f0cb21827cad84360d857f1feb0",
       "functions": [
         {
           "name": "boldNamesInReplyOrder",
@@ -21424,7 +21515,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/ai/service/impl/InMemoryChatRateLimiterTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/service/impl/InMemoryChatRateLimiterTest.java",
-      "contentHash": "3dade5b332a46a26771d3ca474220310568352070e888589fd26362d2e9d7a4f",
+      "contentHash": "65b6c86bf197ff9609ea345277956160d796d2ecdfce8af551a58e2de23b0490",
       "functions": [
         {
           "name": "slidingMinuteWindow",
@@ -21868,7 +21959,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/ai/tool/impl/PlanRouteAndEventsToolTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/tool/impl/PlanRouteAndEventsToolTest.java",
-      "contentHash": "3332cbda3bd5fbc42189665b4fc7a126b81083145dfa3e2b0918b9a8cb0e38a9",
+      "contentHash": "d636f2c4cdafb91521b970d0477f91f4d02445e778628e727a15f197db923358",
       "functions": [
         {
           "name": "transitRoute",
@@ -22143,7 +22234,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/ai/tool/impl/SearchPlacesToolTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/tool/impl/SearchPlacesToolTest.java",
-      "contentHash": "a162710fdec78c4d33f198b7318d0d1a8768a6c901c6af094ba73a04936142a4",
+      "contentHash": "a12c862726e1dbda78e48580a0cc1c1a3ae2d30ea53c7ddbfaceb2543dd8cbae",
       "functions": [
         {
           "name": "passesCriteria",
@@ -22371,7 +22462,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/ai/tool/impl/TransitInfoToolTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/ai/tool/impl/TransitInfoToolTest.java",
-      "contentHash": "2fc6e41cb35e52b3574a05c82986698440cc06e66b80a423846356f3f5c57830",
+      "contentHash": "fb607e0dfcb89864f529995bf6329b52b6bc8b3c5b8a8f81e2f1f94c0d76eebf",
       "functions": [
         {
           "name": "lastTram",
@@ -22547,7 +22638,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/common/cache/StaleCacheTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/common/cache/StaleCacheTest.java",
-      "contentHash": "4a2890d1b5e3d5db0743c64f567ee0e79be151b558ec94f6878c38c2e33a6f19",
+      "contentHash": "86f80e59f4903548ebbbb5fccab127cef716358a30fb9e1463f01365162eb81d",
       "functions": [
         {
           "name": "freshValueIsServedFromCache",
@@ -23209,7 +23300,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/common/text/TextMatchTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/common/text/TextMatchTest.java",
-      "contentHash": "e201db871e617af05a098869e4eba9f30f21ff4ef66c52425972fcc51c396456",
+      "contentHash": "18f29266c28c78049054c8621fb97411238d6ff233550cb3bb63ce71ce093207",
       "functions": [
         {
           "name": "normalize",
@@ -24687,7 +24778,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/events/controller/EventControllerTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/events/controller/EventControllerTest.java",
-      "contentHash": "cef3f1daa4f59b6fcd9175e3146be7e829bf90c6ef87ffe1a1b89bffa97514e8",
+      "contentHash": "ed96475f810ba2d471a0d484a234e9f0fcb48f45e421ec968a8d07200e619a99",
       "functions": [
         {
           "name": "publicList",
@@ -24979,7 +25070,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/events/mapper/EventMapperImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/events/mapper/EventMapperImplTest.java",
-      "contentHash": "b918d0a8b41018e1191a3662cacca7d743c30587fee548aba4ca9da61ba1faaa",
+      "contentHash": "ef80c2d3fa94fb105f8c39c8d9a46c484947b7b14f6bdfb5f72a32aaa64d61ed",
       "functions": [
         {
           "name": "externalEventHasNoCapacityOrSpots",
@@ -25060,7 +25151,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/events/service/EventDatabaseIntegrationTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/events/service/EventDatabaseIntegrationTest.java",
-      "contentHash": "78d18f7afd1c5f8725371d1eec9d46ac498665c61ae9e014ca07c677b88d23de",
+      "contentHash": "897945daf8a437268d21a9b532c3c93d4cea9e4c20c776aa3d0cca1c3b6988e3",
       "functions": [
         {
           "name": "setUp",
@@ -25285,7 +25376,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/events/service/EventServiceImplTest.java",
-      "contentHash": "4e3f72915837bf4397b4e2aa7794b73adbb1d19bebc37f4ef4d9382741f2bc24",
+      "contentHash": "2d9dac4f9ee55193376f685a94db3fce1ab149437dae244982aeb355ae86092a",
       "functions": [
         {
           "name": "setUp",
@@ -26092,7 +26183,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/places/domain/OpeningHoursTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/places/domain/OpeningHoursTest.java",
-      "contentHash": "6972eedbc8eba13183d7835f12ac633f0474cc9b033ceae0ef5b9091a8ecdc28",
+      "contentHash": "cc1a753e6d90e1e2a419e88b678b7c1ec6d2a0a8514ac06d6cdc06ca8e62a9d7",
       "functions": [
         {
           "name": "weekdayAndWeekendRules",
@@ -27021,7 +27112,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/reliability/ReliabilityIntegrationTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/reliability/ReliabilityIntegrationTest.java",
-      "contentHash": "d0c2aa0ed3f822ad9e05c096cc5a4d5dbc341655981036e0966b5182d79dbf47",
+      "contentHash": "84e9cf16342e7144e4594e0067b3a7a330178cb74442edccd5ee6a64b34b8e63",
       "functions": [
         {
           "name": "setUp",
@@ -27491,7 +27582,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/reviews/ReviewIntegrationTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/reviews/ReviewIntegrationTest.java",
-      "contentHash": "d7181269320d720fc43fdf1188efc9a52e33672d66477da23af6da65787870bc",
+      "contentHash": "27cedc979504011675d32d7de78e0e16f7ba7ee58da229b1c97c32287765742e",
       "functions": [
         {
           "name": "setUp",
@@ -27810,7 +27901,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/reviews/domain/ReviewRulesTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/reviews/domain/ReviewRulesTest.java",
-      "contentHash": "c2293af82182fef591a90847004ef18c040ab68acbd13a136c077a5bf94fe700",
+      "contentHash": "d6d93c7253c63aa95fc9763f2b7ca7d057ba6984d08f76948a6440c77ee48f18",
       "functions": [
         {
           "name": "ratingPointsFollowTheAverage",
@@ -27880,7 +27971,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/reviews/service/ReviewServiceImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/reviews/service/ReviewServiceImplTest.java",
-      "contentHash": "43e49c61cad9718a4c527a40c792783c918228d2febccc3fbacdab97c44997ed",
+      "contentHash": "a9a162b76604b59272b2dc133244bdfb38101aaa899c6089689b9b1d2f78f687",
       "functions": [
         {
           "name": "setUp",
@@ -28238,7 +28329,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/reviews/support/ReviewTestSchema.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/reviews/support/ReviewTestSchema.java",
-      "contentHash": "3255fb08a114a1803dc497d9a0dd97764fdc594992a9907ccd5282048c1f0d3b",
+      "contentHash": "8b67810541e70b435aeab57fe05db2deeec3eeb271ba8a262597fd4666424cfd",
       "functions": [
         {
           "name": "ReviewTestSchema",
@@ -29358,7 +29449,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/support/MutableClock.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/support/MutableClock.java",
-      "contentHash": "db1338a4931c0d986c41b7afd281bfdf9e0071fd25d22901d34cee7053ad9769",
+      "contentHash": "8a346be858b0a80fbb80848156025eecb5be3d4ca6562b03ba4474afb26fca68",
       "functions": [
         {
           "name": "MutableClock",
@@ -30185,7 +30276,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/transit/mapper/impl/PolylineEncoderTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/transit/mapper/impl/PolylineEncoderTest.java",
-      "contentHash": "0081def9f070a7727ca097522c8dfc4fd0e3f24f65121c08fe918ee7be1e5c0f",
+      "contentHash": "bf37190c9d026b485a9f22cc7604537cf9ff1b6f74e3498d4761f91ee8401984",
       "functions": [
         {
           "name": "googleExample",
@@ -30464,7 +30555,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/transit/repository/impl/GtfsShapeRepositoryTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/transit/repository/impl/GtfsShapeRepositoryTest.java",
-      "contentHash": "8e91ccc45862a17abb28ba248127a55c1838e049ea2e2b4bbe9599f22827e368",
+      "contentHash": "0f02a6780c148dfde6963f996abf9f2ea1b49e80b374ac521ee3fd2afaee0565",
       "functions": [
         {
           "name": "zip",
@@ -30493,6 +30584,13 @@
           "lineCount": 28
         },
         {
+          "name": "shapesAreSimplified",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 19
+        },
+        {
           "name": "stopSequenceFallback",
           "params": [],
           "returnType": "void",
@@ -30518,7 +30616,7 @@
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 11
+          "lineCount": 14
         }
       ],
       "classes": [
@@ -30528,6 +30626,7 @@
             "zip",
             "files",
             "shapesFromShapesTxt",
+            "shapesAreSimplified",
             "stopSequenceFallback",
             "mixedShapesAndFallback",
             "missingFile",
@@ -30540,7 +30639,7 @@
             "dir"
           ],
           "exported": false,
-          "lineCount": 147
+          "lineCount": 172
         }
       ],
       "imports": [
@@ -30636,12 +30735,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 168,
+      "totalLines": 193,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/transit/repository/impl/GtfsTimetableRepositoryTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/transit/repository/impl/GtfsTimetableRepositoryTest.java",
-      "contentHash": "2a7683133673c34fbfcdfcb5ea079c6b9e163cca65e865d36eb254937aec78a8",
+      "contentHash": "61cb44a47230e5a1ebaeac48a6301e3717dd80c769b889064df6241d7f7ba5c3",
       "functions": [
         {
           "name": "setUp",
@@ -30840,6 +30939,91 @@
       ],
       "exports": [],
       "totalLines": 156,
+      "hasStructuralAnalysis": true
+    },
+    "backend/src/test/java/com/unihack8/backend/transit/repository/impl/PathSimplifierTest.java": {
+      "filePath": "backend/src/test/java/com/unihack8/backend/transit/repository/impl/PathSimplifierTest.java",
+      "contentHash": "4f72c7a453fedb0847b84f97e20382ddadd2307fac6e0ff8055639ec75886964",
+      "functions": [
+        {
+          "name": "straightLineKeepsOnlyItsEnds",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "keepsCornersAndDropsWiggles",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "droppedPointsStayWithinTolerance",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 23
+        },
+        {
+          "name": "shortPathsUnchanged",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "PathSimplifierTest",
+          "methods": [
+            "straightLineKeepsOnlyItsEnds",
+            "keepsCornersAndDropsWiggles",
+            "droppedPointsStayWithinTolerance",
+            "shortPathsUnchanged"
+          ],
+          "properties": [
+            "ONE_METER_LAT"
+          ],
+          "exported": false,
+          "lineCount": 59
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "com.unihack8.backend.common.geo.GeoPoint",
+          "specifiers": [
+            "GeoPoint"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 70,
       "hasStructuralAnalysis": true
     },
     "backend/src/test/java/com/unihack8/backend/transit/service/impl/TransitServiceImplTest.java": {
@@ -31410,7 +31594,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/users/controller/UserControllerTest.java",
-      "contentHash": "72d6b08387ad583f442e53e56f762c51cfb83bc9124546ec76f62cd972df2687",
+      "contentHash": "abf30480cc052cdc2147578c0d39008ed89a9b5136d2c6f0519c6250d628a395",
       "functions": [
         {
           "name": "readsOwnProfile",
@@ -31698,7 +31882,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/users/repository/AttendedEventRepositoryImplTest.java",
-      "contentHash": "83295005bbac16af9cadf87a24b88a6e7cf4f70e2334f949d74f2d8b21026792",
+      "contentHash": "80019fb1178c0b7365bac87c77d669b9e72fdc5d13bfa1cfe26b264e83ca42b3",
       "functions": [
         {
           "name": "setUp",
@@ -31989,7 +32173,7 @@
     },
     "backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java": {
       "filePath": "backend/src/test/java/com/unihack8/backend/users/service/UserServiceImplTest.java",
-      "contentHash": "8eef8b655d2b8349b2a44550e2ebd46921f6352bf4de9c49aecde1c4739341c2",
+      "contentHash": "f226630f4a86590fb37928b472bf2271952b2a28056ecaf3a10425692fcef261",
       "functions": [
         {
           "name": "setUp",
@@ -32309,7 +32493,7 @@
     },
     "backend/src/test/resources/application.properties": {
       "filePath": "backend/src/test/resources/application.properties",
-      "contentHash": "bd13ef844592a8c42636d75af761a1da0b78e8158daecf117483592e0417f234",
+      "contentHash": "9946a930f804def3edfe26e555e0a5cccd3ea68e26d7bd2599633124fc4c05ad",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -32399,7 +32583,7 @@
     },
     "docs/API.md": {
       "filePath": "docs/API.md",
-      "contentHash": "cbd0f4a769ae7e2ee540afb9bae3943a2a3b1583cae920745dbb090366addee6",
+      "contentHash": "b4eb971cd584522f06de8c82be24088d7a69de3bff341862a5a7fcdbde5f7762",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -32736,7 +32920,7 @@
     },
     "frontend/__tests__/api.config.test.ts": {
       "filePath": "frontend/__tests__/api.config.test.ts",
-      "contentHash": "1e508f5336154ddedd6c5efdde613ee891470cb627db9bd76e7b1e1838ce2660",
+      "contentHash": "8269cc45a3bca1a9c32cfa8742867e680a9e90d6637f3998d20a90dd957a6913",
       "functions": [],
       "classes": [],
       "imports": [
@@ -32809,7 +32993,7 @@
     },
     "frontend/__tests__/auth.provider.test.tsx": {
       "filePath": "frontend/__tests__/auth.provider.test.tsx",
-      "contentHash": "2fbc3b97e9dc595a7b1ea04b9bba4d33dbcdb4e39671834d54c4eb6cfd95b53f",
+      "contentHash": "c4e02ff03fd2f72083a8690683e75de0ae57c71d2f721581bf21097dc19a6be6",
       "functions": [
         {
           "name": "setup",
@@ -32868,7 +33052,7 @@
     },
     "frontend/__tests__/events.reviews.test.tsx": {
       "filePath": "frontend/__tests__/events.reviews.test.tsx",
-      "contentHash": "8c0df6bb050a0176baf351d077fa0b364f472c8372a90adfd550d8ae419932be",
+      "contentHash": "624f991b93092cc536258161a80b9566d9c4e318b52a953c052988042441a720",
       "functions": [],
       "classes": [],
       "imports": [
@@ -32920,7 +33104,7 @@
     },
     "frontend/__tests__/layout.root.test.tsx": {
       "filePath": "frontend/__tests__/layout.root.test.tsx",
-      "contentHash": "7acd042bb4cb53b547e353762e5d832989011dc82a1850bb2191d158fad481da",
+      "contentHash": "4ec4a516a9b45fb48535260034c6e523da3903ac8c79017f7583ad11f0503036",
       "functions": [],
       "classes": [],
       "imports": [
@@ -32996,7 +33180,7 @@
     },
     "frontend/__tests__/lib.format.test.ts": {
       "filePath": "frontend/__tests__/lib.format.test.ts",
-      "contentHash": "d8be12355d88b9a069d4d5439b76e4cdca074b20001a0be7c3a8c5811192bc4f",
+      "contentHash": "8b4a5d490bc85b703cf3acf865a2f904bd230874aa02d6b7b547b85d659a2d42",
       "functions": [],
       "classes": [],
       "imports": [
@@ -33093,7 +33277,7 @@
     },
     "frontend/__tests__/lib.polyline.test.ts": {
       "filePath": "frontend/__tests__/lib.polyline.test.ts",
-      "contentHash": "6d0f0bae8d1b82d19aba61df3702cea89c9c3d8672fde9131e95feca41c8f6bf",
+      "contentHash": "096e36ed0a81ced1832e0e96434363b641ec9df14c4c069e700a44f26df1e9c4",
       "functions": [],
       "classes": [],
       "imports": [
@@ -33224,7 +33408,7 @@
     },
     "frontend/__tests__/location.test.tsx": {
       "filePath": "frontend/__tests__/location.test.tsx",
-      "contentHash": "15a5733b179f808eab33440a5ee71e7875865a620cd0d6a3ebf59f4ae7e12733",
+      "contentHash": "eadd471d1f13fc4c595840f7472017f539c2761836d83e9a4e3f43f98828ad58",
       "functions": [
         {
           "name": "Probe",
@@ -33269,7 +33453,7 @@
     },
     "frontend/__tests__/map.directions.test.tsx": {
       "filePath": "frontend/__tests__/map.directions.test.tsx",
-      "contentHash": "f2d446cc8279aad70ebea39e6fdfb37e73edcbe6b4455ae46478998b09955a3c",
+      "contentHash": "afeaaf053492ea516ad517df1ce51328d24139fa31bc26954d3ddde3f6f61e48",
       "functions": [
         {
           "name": "plan",
@@ -33345,6 +33529,75 @@
       ],
       "exports": [],
       "totalLines": 118,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/__tests__/map.directionsFocus.test.tsx": {
+      "filePath": "frontend/__tests__/map.directionsFocus.test.tsx",
+      "contentHash": "3b1bf61c30094be7f15ab4e6ff3a79dd76f3442299ebb22a3cfef37f9072c0df",
+      "functions": [
+        {
+          "name": "moveTo",
+          "params": [
+            "span"
+          ],
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "longPress",
+          "params": [
+            "lat",
+            "lon"
+          ],
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "transportLayerMarkers",
+          "params": [],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "eventMarkers",
+          "params": [],
+          "exported": false,
+          "lineCount": 1
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@testing-library/react-native",
+          "specifiers": [
+            "act",
+            "fireEvent",
+            "screen",
+            "waitFor"
+          ]
+        },
+        {
+          "source": "@/app/(tabs)/map",
+          "specifiers": [
+            "MapScreen"
+          ]
+        },
+        {
+          "source": "@/features/map/mapFilters",
+          "specifiers": [
+            "INITIAL_MAP_FILTERS",
+            "visibleLayers"
+          ]
+        },
+        {
+          "source": "./testUtils",
+          "specifiers": [
+            "renderScreen"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 77,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/map.filters.test.tsx": {
@@ -33643,7 +33896,7 @@
     },
     "frontend/__tests__/map.liveTransit.test.tsx": {
       "filePath": "frontend/__tests__/map.liveTransit.test.tsx",
-      "contentHash": "7d2aaff6126f52fe7fb57aca038fff10f4364e8ba9e052200fb2f93095f90a25",
+      "contentHash": "85f980f9080897b2060e815afa3e5057b11f2866ade33b2009e328e73ce3ab7a",
       "functions": [
         {
           "name": "call",
@@ -33826,12 +34079,143 @@
         }
       ],
       "exports": [],
-      "totalLines": 416,
+      "totalLines": 418,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/__tests__/map.performance.test.tsx": {
+      "filePath": "frontend/__tests__/map.performance.test.tsx",
+      "contentHash": "4b63973bd1292bab7b235d01b4792d89a68fa24d3dd5782354d3f7cc085e1d09",
+      "functions": [
+        {
+          "name": "vehicle",
+          "params": [
+            "over"
+          ],
+          "returnType": "TransitVehicle",
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "vehicleMarkers",
+          "params": [],
+          "exported": false,
+          "lineCount": 1
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "QueryClientProvider"
+          ]
+        },
+        {
+          "source": "@testing-library/react-native",
+          "specifiers": [
+            "act",
+            "fireEvent",
+            "render",
+            "screen",
+            "waitFor"
+          ]
+        },
+        {
+          "source": "react",
+          "specifiers": [
+            "Profiler",
+            "useEffect"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/api/types.transit",
+          "specifiers": [
+            "TransitShape",
+            "TransitVehicle"
+          ]
+        },
+        {
+          "source": "@/features/directions/DirectionsLayer",
+          "specifiers": [
+            "DirectionsLayer"
+          ]
+        },
+        {
+          "source": "@/features/map/ClusterMarker",
+          "specifiers": [
+            "MARKER_TRACK_MS",
+            "pendingTrackingCount",
+            "scheduleTrackingOff",
+            "trackingTimerArmed",
+            "trackingTimerArms",
+            "useBriefViewTracking"
+          ]
+        },
+        {
+          "source": "@/features/map/MapContext",
+          "specifiers": [
+            "MapProvider",
+            "useMapContext",
+            "MapContextValue"
+          ]
+        },
+        {
+          "source": "@/features/transit/lines",
+          "specifiers": [
+            "* as lines"
+          ]
+        },
+        {
+          "source": "@/features/transit/TransitLayer",
+          "specifiers": [
+            "TransitLayer"
+          ]
+        },
+        {
+          "source": "@/features/transit/VehicleMarker",
+          "specifiers": [
+            "sameVehicleMarker",
+            "VehicleMarker"
+          ]
+        },
+        {
+          "source": "@/lib/bbox",
+          "specifiers": [
+            "Bbox"
+          ]
+        },
+        {
+          "source": "@/lib/queryClient",
+          "specifiers": [
+            "createQueryClient"
+          ]
+        },
+        {
+          "source": "@/lib/polyline",
+          "specifiers": [
+            "* as polyline"
+          ]
+        },
+        {
+          "source": "./testUtils",
+          "specifiers": [
+            "renderScreen"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 311,
       "hasStructuralAnalysis": true
     },
     "frontend/__tests__/map.shell.test.tsx": {
       "filePath": "frontend/__tests__/map.shell.test.tsx",
-      "contentHash": "9ae7f961ed10a3ec9a43ada335739007eb60b1f9cae8b7f0c114ea8ad409219a",
+      "contentHash": "3de0ed25625d1831ff4dcd9f976af9cac27f7cd20ac60c59ca98ad6c7d82cfb2",
       "functions": [
         {
           "name": "setup",
@@ -33986,9 +34370,174 @@
       "totalLines": 113,
       "hasStructuralAnalysis": true
     },
+    "frontend/__tests__/map.tripGuidance.test.tsx": {
+      "filePath": "frontend/__tests__/map.tripGuidance.test.tsx",
+      "contentHash": "c77d6cac9dc49014128661de88e1fa785270d017a20e9c875f73def03a0ff468",
+      "functions": [
+        {
+          "name": "leg",
+          "params": [
+            "mode",
+            "from",
+            "to",
+            "minutes",
+            "extra"
+          ],
+          "returnType": "RouteLeg",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "labels",
+          "params": [
+            "legs",
+            "dest"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "longPress",
+          "params": [
+            "lat",
+            "lon"
+          ],
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "stepLabel",
+          "params": [
+            "testID"
+          ],
+          "exported": false,
+          "lineCount": 1
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "QueryClientProvider"
+          ]
+        },
+        {
+          "source": "@testing-library/react-native",
+          "specifiers": [
+            "act",
+            "fireEvent",
+            "render",
+            "screen",
+            "waitFor",
+            "within"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "StyleSheet"
+          ]
+        },
+        {
+          "source": "@/api/types.routing",
+          "specifiers": [
+            "RouteLeg"
+          ]
+        },
+        {
+          "source": "@/api/types.routing",
+          "specifiers": [
+            "RoutePlan"
+          ]
+        },
+        {
+          "source": "@/api/types.transit",
+          "specifiers": [
+            "TransitRoute",
+            "TransitVehicle"
+          ]
+        },
+        {
+          "source": "@/app/(tabs)/map",
+          "specifiers": [
+            "MapScreen"
+          ]
+        },
+        {
+          "source": "@/features/directions/TripMarkers",
+          "specifiers": [
+            "TripStepMarker"
+          ]
+        },
+        {
+          "source": "@/features/directions/tripSteps",
+          "specifiers": [
+            "boardLabel",
+            "legLineColor",
+            "legStrokeColor",
+            "pathMidpoint",
+            "tripSteps"
+          ]
+        },
+        {
+          "source": "@/features/journey/navigation",
+          "specifiers": [
+            "routeParams"
+          ]
+        },
+        {
+          "source": "@/features/map/ClusterMarker",
+          "specifiers": [
+            "MARKER_TRACK_MS"
+          ]
+        },
+        {
+          "source": "@/features/transit/LegVehicles",
+          "specifiers": [
+            "approachingVehicleIds",
+            "LegVehicles"
+          ]
+        },
+        {
+          "source": "@/features/transit/lines",
+          "specifiers": [
+            "lineColor"
+          ]
+        },
+        {
+          "source": "@/features/transit/VehicleMarker",
+          "specifiers": [
+            "VehicleBadge"
+          ]
+        },
+        {
+          "source": "@/lib/polyline",
+          "specifiers": [
+            "encodePolyline"
+          ]
+        },
+        {
+          "source": "@test/mocks",
+          "specifiers": [
+            "* as mocks"
+          ]
+        },
+        {
+          "source": "./testUtils",
+          "specifiers": [
+            "renderScreen",
+            "setParams"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 278,
+      "hasStructuralAnalysis": true
+    },
     "frontend/__tests__/map.viewTracking.test.tsx": {
       "filePath": "frontend/__tests__/map.viewTracking.test.tsx",
-      "contentHash": "e67a76fd09e303846613144beda48dbc3fe45f311ea77fcb2ea2484e571e3e69",
+      "contentHash": "c27b91906fd675cef35ced50d15068c3f26cc3c19dc40f59bf3d461d4e0b7727",
       "functions": [
         {
           "name": "Probe",
@@ -34076,7 +34625,7 @@
     },
     "frontend/__tests__/mocks.reviews.test.ts": {
       "filePath": "frontend/__tests__/mocks.reviews.test.ts",
-      "contentHash": "91561a0ed31b6d0146241ef048941d1dba416aef3762c8fbab4bc1051ab0b734",
+      "contentHash": "040952a47cada684e62ad2647f1899f599308c26059cbf179e09fc1207e54b54",
       "functions": [
         {
           "name": "call",
@@ -34161,7 +34710,7 @@
     },
     "frontend/__tests__/network.offline.test.tsx": {
       "filePath": "frontend/__tests__/network.offline.test.tsx",
-      "contentHash": "8cef0ab5ae50cfa21b629d167d3a722691f415fcfa04f8278b250d7cfb2d89ec",
+      "contentHash": "3d0c80ab8889143b48121b431ec8886aaf0f94e12a8681cffe6eadf1f728d185",
       "functions": [],
       "classes": [],
       "imports": [
@@ -34211,7 +34760,7 @@
     },
     "frontend/__tests__/screens.auth.test.tsx": {
       "filePath": "frontend/__tests__/screens.auth.test.tsx",
-      "contentHash": "ae1c43b6bc979340b86a9828462223926616a7d90f0eaa12a59d4a8345ad3701",
+      "contentHash": "197df5b864a3038b4d4625de034cd662300076846184a8f366ea4fc082a4289e",
       "functions": [],
       "classes": [],
       "imports": [
@@ -34250,7 +34799,7 @@
     },
     "frontend/__tests__/screens.event.test.tsx": {
       "filePath": "frontend/__tests__/screens.event.test.tsx",
-      "contentHash": "230064f6482a28a7e901dcd96e982134f516034d6dcbfe6a7d2406d510299a17",
+      "contentHash": "9f0e8589ae610486db3e38318177f5c2d6bd60a1950a6d8dcf4c19df8d7ce2c7",
       "functions": [
         {
           "name": "confirmAlert",
@@ -34466,7 +35015,7 @@
     },
     "frontend/__tests__/screens.users.test.tsx": {
       "filePath": "frontend/__tests__/screens.users.test.tsx",
-      "contentHash": "e8b65dd578db474d9eeae84cd6c6ff6a790eded26c534baebbbd21e517ff46fa",
+      "contentHash": "1cb8f0dfb7995b56a2d7eb5eedc0e053ea7da30381e0b0d71307b216aee94b2d",
       "functions": [],
       "classes": [],
       "imports": [
@@ -34614,7 +35163,7 @@
     },
     "frontend/__tests__/users.reliabilityLine.test.tsx": {
       "filePath": "frontend/__tests__/users.reliabilityLine.test.tsx",
-      "contentHash": "f555ec7b0d4578406bd321876218600dd3e5be3e2019deab108b8ac6c3008706",
+      "contentHash": "9c888e65c42a76dca3d36a47b18249e3517ecde1012780d53ab99ea3da042f06",
       "functions": [],
       "classes": [],
       "imports": [
@@ -34689,7 +35238,7 @@
     },
     "frontend/package.json": {
       "filePath": "frontend/package.json",
-      "contentHash": "aa2624be42b4e856ec7e8eae3b2e22d3684395ab044439a97cfcad1dccddffe1",
+      "contentHash": "135d57c2f19740fb11b2c8d422c8e9c95e90ec8c704b5257b43483ae360588fd",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -34699,7 +35248,7 @@
     },
     "frontend/src/api/client.ts": {
       "filePath": "frontend/src/api/client.ts",
-      "contentHash": "18af7315ceddcfafe71b9d085fde6e5e3736b7f8fb8e506e379f1a361ea4d56f",
+      "contentHash": "2ddce8b74f16710b6888326165565eb974f7edc7b4ee1e38ec5eaccd9df79468",
       "functions": [
         {
           "name": "buildQuery",
@@ -35325,7 +35874,7 @@
     },
     "frontend/src/api/types.routing.ts": {
       "filePath": "frontend/src/api/types.routing.ts",
-      "contentHash": "d7d483ecd4ca82a3cc55a513328384300f4c199a186edc7126e607b1c96f2456",
+      "contentHash": "c5a0c5a13d791cb61a22a5c7fef6cac76828266969401512a84619254d4b60e0",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -35869,13 +36418,13 @@
     },
     "frontend/src/app/(tabs)/map.tsx": {
       "filePath": "frontend/src/app/(tabs)/map.tsx",
-      "contentHash": "547718d0c43a1f82424effa4cbc3e60e97db30103ab6ae008b21b4b35373344a",
+      "contentHash": "17fe70dd3b16d278789b31073fb328cb9d6defe0890372267613c1db0f63fbc7",
       "functions": [
         {
           "name": "MapBody",
           "params": [],
           "exported": false,
-          "lineCount": 206
+          "lineCount": 252
         },
         {
           "name": "MapScreen",
@@ -36002,6 +36551,7 @@
           "specifiers": [
             "INITIAL_MAP_FILTERS",
             "mapFiltersReducer",
+            "visibleLayers",
             "MapFilterAction"
           ]
         },
@@ -36084,7 +36634,7 @@
       "exports": [
         "MapScreen"
       ],
-      "totalLines": 295,
+      "totalLines": 341,
       "hasStructuralAnalysis": true
     },
     "frontend/src/app/(tabs)/profile.tsx": {
@@ -38153,7 +38703,7 @@
     },
     "frontend/src/features/directions/DirectionsLayer.tsx": {
       "filePath": "frontend/src/features/directions/DirectionsLayer.tsx",
-      "contentHash": "f23b4f31279ce3ab9adde9470a7d3ff89a4b9d05477c4a333b3a7a0759870f17",
+      "contentHash": "16ed21ad3ab70dfa9d064dec3ed1dade47d09682cf3aadd7b4570c71f5b58bf0",
       "functions": [
         {
           "name": "DirectionsLayer",
@@ -38161,11 +38711,21 @@
             "{ hiddenVehicleIds }"
           ],
           "exported": true,
-          "lineCount": 47
+          "lineCount": 46
         }
       ],
       "classes": [],
       "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "memo",
+            "useCallback",
+            "useEffect",
+            "useMemo",
+            "useRef"
+          ]
+        },
         {
           "source": "react-native-maps",
           "specifiers": [
@@ -38174,8 +38734,15 @@
           ]
         },
         {
+          "source": "@/api/types.routing",
+          "specifiers": [
+            "RouteLeg"
+          ]
+        },
+        {
           "source": "@/api/types.transit",
           "specifiers": [
+            "TransitRoute",
             "TransitVehicle"
           ]
         },
@@ -38198,6 +38765,12 @@
           ]
         },
         {
+          "source": "@/hooks/useTransit",
+          "specifiers": [
+            "useTransitRoutes"
+          ]
+        },
+        {
           "source": "@/lib/polyline",
           "specifiers": [
             "decodePolyline"
@@ -38214,12 +38787,26 @@
           "specifiers": [
             "useDirectionsMode"
           ]
+        },
+        {
+          "source": "./TripMarkers",
+          "specifiers": [
+            "TripMarkers"
+          ]
+        },
+        {
+          "source": "./tripSteps",
+          "specifiers": [
+            "legStrokeColor"
+          ]
         }
       ],
       "exports": [
+        "WALK_DASH",
+        "RouteLines",
         "DirectionsLayer"
       ],
-      "totalLines": 64,
+      "totalLines": 96,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/directions/DirectionsPanel.tsx": {
@@ -38402,6 +38989,258 @@
       "totalLines": 195,
       "hasStructuralAnalysis": true
     },
+    "frontend/src/features/directions/TripMarkers.tsx": {
+      "filePath": "frontend/src/features/directions/TripMarkers.tsx",
+      "contentHash": "ac1b61b6f13141ec5f1e64cb520e36553cff809c1a17988c1b7682eb3ed74f64",
+      "functions": [
+        {
+          "name": "TripStepMarkerBase",
+          "params": [
+            "{ step }"
+          ],
+          "exported": false,
+          "lineCount": 31
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "memo",
+            "useMemo"
+          ]
+        },
+        {
+          "source": "react-native",
+          "specifiers": [
+            "StyleSheet",
+            "View"
+          ]
+        },
+        {
+          "source": "react-native-maps",
+          "specifiers": [
+            "Marker"
+          ]
+        },
+        {
+          "source": "@/api/types.routing",
+          "specifiers": [
+            "RouteLeg"
+          ]
+        },
+        {
+          "source": "@/api/types.transit",
+          "specifiers": [
+            "TransitRoute"
+          ]
+        },
+        {
+          "source": "@/features/map/ClusterMarker",
+          "specifiers": [
+            "useBriefViewTracking"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "Icon"
+          ]
+        },
+        {
+          "source": "@/ui/Text",
+          "specifiers": [
+            "Text"
+          ]
+        },
+        {
+          "source": "@/ui/theme",
+          "specifiers": [
+            "colors",
+            "radius"
+          ]
+        },
+        {
+          "source": "./tripSteps",
+          "specifiers": [
+            "tripSteps",
+            "TripStep"
+          ]
+        }
+      ],
+      "exports": [
+        "TripStepMarker",
+        "TripMarkers"
+      ],
+      "totalLines": 99,
+      "hasStructuralAnalysis": true
+    },
+    "frontend/src/features/directions/tripSteps.ts": {
+      "filePath": "frontend/src/features/directions/tripSteps.ts",
+      "contentHash": "412131ec372fc84edb1463a27b68242ecad845268944c0d464396c9e62aeb22c",
+      "functions": [
+        {
+          "name": "modeName",
+          "params": [
+            "mode"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "modeIcon",
+          "params": [
+            "mode"
+          ],
+          "returnType": "IconName",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "pathMidpoint",
+          "params": [
+            "path"
+          ],
+          "returnType": "Coordinates | null",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "boardLabel",
+          "params": [
+            "leg"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "alightLabel",
+          "params": [
+            "leg"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "walkLabel",
+          "params": [
+            "leg",
+            "destinationName"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "legEnd",
+          "params": [
+            "leg",
+            "end"
+          ],
+          "returnType": "Coordinates | null",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "legLineColor",
+          "params": [
+            "leg",
+            "routes"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "tripSteps",
+          "params": [
+            "legs",
+            "destinationName",
+            "routes"
+          ],
+          "returnType": "TripStep[]",
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "legStrokeColor",
+          "params": [
+            "leg",
+            "walkColor",
+            "routes"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/api/types.routing",
+          "specifiers": [
+            "LegMode",
+            "RouteLeg"
+          ]
+        },
+        {
+          "source": "@/api/types.transit",
+          "specifiers": [
+            "TransitRoute"
+          ]
+        },
+        {
+          "source": "@/features/journey/progress",
+          "specifiers": [
+            "legPoints"
+          ]
+        },
+        {
+          "source": "@/features/transit/lines",
+          "specifiers": [
+            "lineColor",
+            "resolveLineId"
+          ]
+        },
+        {
+          "source": "@/lib/geo",
+          "specifiers": [
+            "distanceMeters",
+            "Coordinates"
+          ]
+        },
+        {
+          "source": "@/lib/time",
+          "specifiers": [
+            "formatTime",
+            "parseIso"
+          ]
+        },
+        {
+          "source": "@/ui/Icon",
+          "specifiers": [
+            "IconName"
+          ]
+        }
+      ],
+      "exports": [
+        "modeName",
+        "modeIcon",
+        "pathMidpoint",
+        "boardLabel",
+        "alightLabel",
+        "walkLabel",
+        "legLineColor",
+        "tripSteps",
+        "legStrokeColor"
+      ],
+      "totalLines": 121,
+      "hasStructuralAnalysis": true
+    },
     "frontend/src/features/events/DateTimeField.tsx": {
       "filePath": "frontend/src/features/events/DateTimeField.tsx",
       "contentHash": "929f57b36277fc643a573eb147dc47877a4d4f9f03eedda7022676ede5ff079b",
@@ -38543,7 +39382,7 @@
     },
     "frontend/src/features/events/EventCards.tsx": {
       "filePath": "frontend/src/features/events/EventCards.tsx",
-      "contentHash": "2fa5f6dd8e214849c0c489815db672c37881746ea131a7465ad6bb2963315257",
+      "contentHash": "1179a8e3ded25580e1d5576a24d5b90bebc24db7df70a8e039ef8b573f347586",
       "functions": [
         {
           "name": "openEvent",
@@ -38687,7 +39526,7 @@
     },
     "frontend/src/features/events/EventReviews.tsx": {
       "filePath": "frontend/src/features/events/EventReviews.tsx",
-      "contentHash": "40cc917dbf59d33baa4b9dd03aec57a0741eff8b87accc9305406ca8aea7573b",
+      "contentHash": "ef3a8e7ab10a2043e6b9cfe8ee03e14be2ff9619380722d6a844904d46d29748",
       "functions": [
         {
           "name": "EventReviews",
@@ -38954,7 +39793,7 @@
     },
     "frontend/src/features/events/ReviewForm.tsx": {
       "filePath": "frontend/src/features/events/ReviewForm.tsx",
-      "contentHash": "d7990780ab8ffe8cf68f0803f1cd8386354aeecf212cd8b198e1daeaf81ddac2",
+      "contentHash": "acd0b204628b2201def5cbbff939af0537e0cb8e26a0224807f04d776422bb5f",
       "functions": [
         {
           "name": "ReviewForm",
@@ -39026,7 +39865,7 @@
     },
     "frontend/src/features/events/ReviewList.tsx": {
       "filePath": "frontend/src/features/events/ReviewList.tsx",
-      "contentHash": "8014665d155fd2b688abc1c93507082c29d1d9ead588503f4b198e1c5c4c6df1",
+      "contentHash": "0aa15c4053f6c9d275c9d299f635b7b2d751209ab580b132bbab05e9f9215a42",
       "functions": [
         {
           "name": "ReviewList",
@@ -39099,7 +39938,7 @@
     },
     "frontend/src/features/events/StarRating.tsx": {
       "filePath": "frontend/src/features/events/StarRating.tsx",
-      "contentHash": "aa06b3cbc303fd1a43791f9ff10afdddfcc836e883733e8fc2297092a91771be",
+      "contentHash": "2d03d9bf4a4825678068950a95337208fb40884f60ba2eb0968d9656df40840a",
       "functions": [
         {
           "name": "starIcon",
@@ -39357,7 +40196,7 @@
     },
     "frontend/src/features/events/reviews.ts": {
       "filePath": "frontend/src/features/events/reviews.ts",
-      "contentHash": "139ebeb7a50b29d64b3932ed5e51f9899d033d9075416a3aad81bc92fe5a965e",
+      "contentHash": "cf708ea1861c519d47b1ff2ed1746c0b158d4cd94773f855b67521d4f5f838c2",
       "functions": [
         {
           "name": "formatRating",
@@ -39426,7 +40265,7 @@
     },
     "frontend/src/features/journey/JourneyPanel.tsx": {
       "filePath": "frontend/src/features/journey/JourneyPanel.tsx",
-      "contentHash": "5266bd194a0647fc01fc6fdaca0097c66493537054b724dfc3c2292131534ba5",
+      "contentHash": "28338df92b38b72454fb5ef43f3777f95b32fc9a4593231874a647c377b7fbca",
       "functions": [
         {
           "name": "JourneyLayer",
@@ -39434,7 +40273,7 @@
             "{ target, journey, hiddenVehicleIds }"
           ],
           "exported": true,
-          "lineCount": 40
+          "lineCount": 25
         },
         {
           "name": "JourneyBody",
@@ -39458,6 +40297,8 @@
         {
           "source": "react",
           "specifiers": [
+            "memo",
+            "useCallback",
             "useMemo"
           ]
         },
@@ -39476,8 +40317,15 @@
           ]
         },
         {
+          "source": "@/api/types.routing",
+          "specifiers": [
+            "RouteLeg"
+          ]
+        },
+        {
           "source": "@/api/types.transit",
           "specifiers": [
+            "TransitRoute",
             "TransitVehicle"
           ]
         },
@@ -39485,6 +40333,18 @@
           "source": "@/features/directions/DirectionsPanel",
           "specifiers": [
             "legIcon"
+          ]
+        },
+        {
+          "source": "@/features/directions/TripMarkers",
+          "specifiers": [
+            "TripMarkers"
+          ]
+        },
+        {
+          "source": "@/features/directions/tripSteps",
+          "specifiers": [
+            "legStrokeColor"
           ]
         },
         {
@@ -39497,6 +40357,12 @@
           "source": "@/features/transit/LegVehicles",
           "specifiers": [
             "LegVehicles"
+          ]
+        },
+        {
+          "source": "@/hooks/useTransit",
+          "specifiers": [
+            "useTransitRoutes"
           ]
         },
         {
@@ -39553,10 +40419,11 @@
         }
       ],
       "exports": [
+        "JourneyLines",
         "JourneyLayer",
         "JourneyPanel"
       ],
-      "totalLines": 166,
+      "totalLines": 184,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/journey/navigation.ts": {
@@ -39857,8 +40724,53 @@
     },
     "frontend/src/features/map/ClusterMarker.tsx": {
       "filePath": "frontend/src/features/map/ClusterMarker.tsx",
-      "contentHash": "40b50c98932c3dcdd1235f163accb8c14bc69df78d3f28e599ec6ffd288ca8cb",
+      "contentHash": "86b8f7c6089ced2f8fbe755608f6d68bbca26ce17a16237da52b3101782a321f",
       "functions": [
+        {
+          "name": "armAt",
+          "params": [
+            "due"
+          ],
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "flushTrackingOff",
+          "params": [],
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "scheduleTrackingOff",
+          "params": [
+            "cb",
+            "ms"
+          ],
+          "returnType": "() => void",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "trackingTimerArms",
+          "params": [],
+          "returnType": "number",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "trackingTimerArmed",
+          "params": [],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "pendingTrackingCount",
+          "params": [],
+          "returnType": "number",
+          "exported": true,
+          "lineCount": 3
+        },
         {
           "name": "useBriefViewTracking",
           "params": [
@@ -39866,7 +40778,7 @@
           ],
           "returnType": "boolean",
           "exported": true,
-          "lineCount": 9
+          "lineCount": 8
         },
         {
           "name": "ClusterMarker",
@@ -39914,15 +40826,20 @@
       ],
       "exports": [
         "MARKER_TRACK_MS",
+        "TRACK_BATCH_SLACK_MS",
+        "scheduleTrackingOff",
+        "trackingTimerArms",
+        "trackingTimerArmed",
+        "pendingTrackingCount",
         "useBriefViewTracking",
         "ClusterMarker"
       ],
-      "totalLines": 53,
+      "totalLines": 114,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/EventMarkers.tsx": {
       "filePath": "frontend/src/features/map/EventMarkers.tsx",
-      "contentHash": "298daf9970ddac19a0ff19ef99ae51d59e666bb0ec110593aa4ed359e536f1d5",
+      "contentHash": "394f74c037b784034cd398becc0899cdf5fd39d6932ac5e3ce7587a8b5699d29",
       "functions": [
         {
           "name": "EventPin",
@@ -39933,19 +40850,11 @@
           "lineCount": 16
         },
         {
-          "name": "EventMarker",
-          "params": [
-            "{ event, selected, showLabel, onSelect }"
-          ],
-          "exported": false,
-          "lineCount": 14
-        },
-        {
-          "name": "EventMarkers",
+          "name": "EventMarkersBase",
           "params": [
             "{ events, selectedId, showLabels, onSelect, bbox, onZoomTo }"
           ],
-          "exported": true,
+          "exported": false,
           "lineCount": 29
         }
       ],
@@ -39954,6 +40863,8 @@
         {
           "source": "react",
           "specifiers": [
+            "memo",
+            "useCallback",
             "useMemo"
           ]
         },
@@ -40026,7 +40937,7 @@
       "exports": [
         "EventMarkers"
       ],
-      "totalLines": 112,
+      "totalLines": 115,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/EventPanel.tsx": {
@@ -40097,7 +41008,7 @@
     },
     "frontend/src/features/map/MapContext.tsx": {
       "filePath": "frontend/src/features/map/MapContext.tsx",
-      "contentHash": "059ffcac755c40870fb40a5ccc73e2e75fc69a5bc73d6897e4375dc00cccc238",
+      "contentHash": "a3ea7bf6518960771ac04dc613db6a14c75a52c88463a68933344a3d6e91b08c",
       "functions": [
         {
           "name": "isTransitLayerSelection",
@@ -40122,7 +41033,7 @@
             "{ userPosition, initialBbox, children }"
           ],
           "exported": true,
-          "lineCount": 31
+          "lineCount": 36
         },
         {
           "name": "useMapContext",
@@ -40183,24 +41094,30 @@
         "MapProvider",
         "useMapContext"
       ],
-      "totalLines": 102,
+      "totalLines": 107,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/MapFilterBar.tsx": {
       "filePath": "frontend/src/features/map/MapFilterBar.tsx",
-      "contentHash": "f9d203be4e041c2f48bb294651009ed9d0c6a1bce6ad7de9d8b6598cffceba8a",
+      "contentHash": "976aadeb01ad93d4a8a0621d920c27073e94125a315c710dddf09976ff0e806c",
       "functions": [
         {
-          "name": "MapFilterBar",
+          "name": "MapFilterBarBase",
           "params": [
-            "{ filters, onChange }"
+            "{ filters, onChange, disabled = false }"
           ],
-          "exported": true,
-          "lineCount": 20
+          "exported": false,
+          "lineCount": 21
         }
       ],
       "classes": [],
       "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "memo"
+          ]
+        },
         {
           "source": "react-native",
           "specifiers": [
@@ -40239,12 +41156,12 @@
       "exports": [
         "MapFilterBar"
       ],
-      "totalLines": 41,
+      "totalLines": 48,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/MapPanel.tsx": {
       "filePath": "frontend/src/features/map/MapPanel.tsx",
-      "contentHash": "feb2c13b346fe567699beaaed24e4d773ab04fd425a1f17697e3e6ee7dc60925",
+      "contentHash": "5d061b7cea2f6773af35e379cb2790659d148e067440d5bd4795ec203c885d8a",
       "functions": [
         {
           "name": "PanelContent",
@@ -40255,14 +41172,20 @@
           "lineCount": 14
         },
         {
-          "name": "MapPanel",
+          "name": "MapPanelBase",
           "params": [],
-          "exported": true,
+          "exported": false,
           "lineCount": 14
         }
       ],
       "classes": [],
       "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "memo"
+          ]
+        },
         {
           "source": "react-native",
           "specifiers": [
@@ -40325,12 +41248,12 @@
       "exports": [
         "MapPanel"
       ],
-      "totalLines": 63,
+      "totalLines": 67,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/PlaceMarkers.tsx": {
       "filePath": "frontend/src/features/map/PlaceMarkers.tsx",
-      "contentHash": "35bd1c70c55daeb3a9f975882d7b0259ec19f857fe981fdac55102068305717b",
+      "contentHash": "6b46cccd238dddef0a789276aea70ddbdc37e2349d6f962b9d56a627c4c7a95a",
       "functions": [
         {
           "name": "PlacePin",
@@ -40341,12 +41264,12 @@
           "lineCount": 16
         },
         {
-          "name": "PlaceMarkers",
+          "name": "PlaceMarkersBase",
           "params": [
             "{ places, selectedId, showLabels, onSelect, bbox, onZoomTo }"
           ],
-          "exported": true,
-          "lineCount": 22
+          "exported": false,
+          "lineCount": 13
         }
       ],
       "classes": [],
@@ -40354,6 +41277,8 @@
         {
           "source": "react",
           "specifiers": [
+            "memo",
+            "useCallback",
             "useMemo"
           ]
         },
@@ -40423,7 +41348,7 @@
       "exports": [
         "PlaceMarkers"
       ],
-      "totalLines": 94,
+      "totalLines": 102,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/PlacePanel.tsx": {
@@ -40521,7 +41446,7 @@
     },
     "frontend/src/features/map/mapFilters.ts": {
       "filePath": "frontend/src/features/map/mapFilters.ts",
-      "contentHash": "519f0fa71a23d15dfa46890ca13bbd15bf46287d5b3a5b33e22c6a149e11f5e0",
+      "contentHash": "e9c8e3e35a54132c4559d1f6000d7be15d69a7e47dd74aa5e3929ac5de497c4b",
       "functions": [
         {
           "name": "allPlacesSelected",
@@ -40569,6 +41494,16 @@
           "returnType": "MapFilters",
           "exported": true,
           "lineCount": 20
+        },
+        {
+          "name": "visibleLayers",
+          "params": [
+            "f",
+            "showingDirections"
+          ],
+          "returnType": "MapFilters",
+          "exported": true,
+          "lineCount": 3
         }
       ],
       "classes": [],
@@ -40584,9 +41519,10 @@
         "INITIAL_MAP_FILTERS",
         "allPlacesSelected",
         "categorySelected",
-        "mapFiltersReducer"
+        "mapFiltersReducer",
+        "visibleLayers"
       ],
-      "totalLines": 64,
+      "totalLines": 71,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/map/placeCategories.ts": {
@@ -40715,7 +41651,7 @@
     },
     "frontend/src/features/transit/LegVehicles.tsx": {
       "filePath": "frontend/src/features/transit/LegVehicles.tsx",
-      "contentHash": "72be03b6058bcf2b35b393b44d2ceca961a31ca7ce58bb2df7eb5f401bc9b88f",
+      "contentHash": "3c4158489711eec1010dd27a67622f98d53939c7759f739d303b88b9eba54084",
       "functions": [
         {
           "name": "useLegVehicles",
@@ -40726,12 +41662,15 @@
           "lineCount": 6
         },
         {
-          "name": "LegVehicles",
+          "name": "approachingVehicleIds",
           "params": [
-            "{ legs, selectedId, hiddenIds, onSelect }"
+            "legs",
+            "vehicles",
+            "routes"
           ],
+          "returnType": "Set<string>",
           "exported": true,
-          "lineCount": 11
+          "lineCount": 10
         }
       ],
       "classes": [],
@@ -40739,7 +41678,11 @@
         {
           "source": "react",
           "specifiers": [
-            "useMemo"
+            "memo",
+            "useCallback",
+            "useEffect",
+            "useMemo",
+            "useRef"
           ]
         },
         {
@@ -40751,6 +41694,7 @@
         {
           "source": "@/api/types.transit",
           "specifiers": [
+            "TransitRoute",
             "TransitVehicle"
           ]
         },
@@ -40764,7 +41708,10 @@
         {
           "source": "./lines",
           "specifiers": [
-            "rideLegLines"
+            "nearestVehicle",
+            "resolveLineId",
+            "rideLegLines",
+            "vehiclesOfLine"
           ]
         },
         {
@@ -40776,9 +41723,10 @@
       ],
       "exports": [
         "useLegVehicles",
+        "approachingVehicleIds",
         "LegVehicles"
       ],
-      "totalLines": 40,
+      "totalLines": 73,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/transit/StopPanel.tsx": {
@@ -40892,23 +41840,15 @@
     },
     "frontend/src/features/transit/TransitLayer.tsx": {
       "filePath": "frontend/src/features/transit/TransitLayer.tsx",
-      "contentHash": "8c4a27d9c251e0ddd06177e2c18dcbe2e00c0212899cd8b8356740fd7ae0616d",
+      "contentHash": "33302816a93219c861130be53561e15e97b6c0b3e6b6dc29b597d89da950c8d8",
       "functions": [
         {
-          "name": "StopMarker",
+          "name": "TransitLayerBase",
           "params": [
-            "{ stop, selected, onPress }"
+            "{ stops, line, vehicles, shapes, bbox, selectedStopId, selectedVehicleId, onSelectStop, onSelectVehicle }"
           ],
           "exported": false,
-          "lineCount": 15
-        },
-        {
-          "name": "TransitLayer",
-          "params": [
-            "{ stops, line, vehicles, shapes, selectedStopId, selectedVehicleId, onSelectStop, onSelectVehicle }"
-          ],
-          "exported": true,
-          "lineCount": 36
+          "lineCount": 35
         }
       ],
       "classes": [],
@@ -40916,7 +41856,11 @@
         {
           "source": "react",
           "specifiers": [
-            "useMemo"
+            "memo",
+            "useCallback",
+            "useEffect",
+            "useMemo",
+            "useRef"
           ]
         },
         {
@@ -40949,6 +41893,12 @@
           ]
         },
         {
+          "source": "@/lib/bbox",
+          "specifiers": [
+            "Bbox"
+          ]
+        },
+        {
           "source": "@/lib/polyline",
           "specifiers": [
             "decodePolyline"
@@ -40965,8 +41915,10 @@
           "specifiers": [
             "decodeShapes",
             "sameLine",
+            "vehiclesInView",
             "vehiclesOfLine",
-            "withAlpha"
+            "withAlpha",
+            "DrawnShape"
           ]
         },
         {
@@ -40978,22 +41930,33 @@
       ],
       "exports": [
         "SHAPE_WIDTH",
+        "ShapeLines",
         "TransitLayer"
       ],
-      "totalLines": 94,
+      "totalLines": 124,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/transit/VehicleMarker.tsx": {
       "filePath": "frontend/src/features/transit/VehicleMarker.tsx",
-      "contentHash": "5187b7bbd57639adecbe087ba689800855c4464cf14e9ae2d640609fef7b1c47",
+      "contentHash": "5f9ae81e61b8bac585a39b0a38878497369e2e7b080d61b8f13c2bece834601e",
       "functions": [
         {
-          "name": "VehicleBadge",
+          "name": "VehicleBadgeBase",
           "params": [
             "{ vehicle, selected = false }"
           ],
-          "exported": true,
+          "exported": false,
           "lineCount": 15
+        },
+        {
+          "name": "sameBadge",
+          "params": [
+            "a",
+            "b"
+          ],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 3
         },
         {
           "name": "VehicleMarkerBase",
@@ -41001,7 +41964,17 @@
             "{ vehicle, selected = false, idPrefix = 'vehicle-marker', onPress }"
           ],
           "exported": false,
-          "lineCount": 15
+          "lineCount": 18
+        },
+        {
+          "name": "sameVehicleMarker",
+          "params": [
+            "prev",
+            "next"
+          ],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 11
         }
       ],
       "classes": [],
@@ -41009,7 +41982,9 @@
         {
           "source": "react",
           "specifiers": [
-            "memo"
+            "memo",
+            "useCallback",
+            "useMemo"
           ]
         },
         {
@@ -41060,10 +42035,12 @@
         }
       ],
       "exports": [
+        "sameBadge",
         "VehicleBadge",
+        "sameVehicleMarker",
         "VehicleMarker"
       ],
-      "totalLines": 73,
+      "totalLines": 106,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/transit/VehiclePanel.tsx": {
@@ -41196,7 +42173,7 @@
     },
     "frontend/src/features/transit/lines.ts": {
       "filePath": "frontend/src/features/transit/lines.ts",
-      "contentHash": "b7addd3568c5be8cd41922729258778acec1fec94d265650d957eb83e7583839",
+      "contentHash": "33242565c5d486e22abe03d881dab0615cb9a665d374b8775b8bdf60e38eac99",
       "functions": [
         {
           "name": "hash",
@@ -41285,6 +42262,17 @@
           "lineCount": 4
         },
         {
+          "name": "vehiclesInView",
+          "params": [
+            "vehicles",
+            "bbox",
+            "margin"
+          ],
+          "returnType": "TransitVehicle[]",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
           "name": "vehicleLineName",
           "params": [
             "v"
@@ -41353,6 +42341,12 @@
           ]
         },
         {
+          "source": "@/lib/bbox",
+          "specifiers": [
+            "Bbox"
+          ]
+        },
+        {
           "source": "@/lib/geo",
           "specifiers": [
             "distanceMeters",
@@ -41383,13 +42377,15 @@
         "resolveLineId",
         "rideLegLines",
         "vehiclesOfLine",
+        "VEHICLE_VIEW_MARGIN",
+        "vehiclesInView",
         "vehicleLineName",
         "relativeAge",
         "isReportOld",
         "nearestVehicle",
         "decodeShapes"
       ],
-      "totalLines": 185,
+      "totalLines": 200,
       "hasStructuralAnalysis": true
     },
     "frontend/src/features/users/MyEvents.tsx": {
@@ -42063,7 +43059,7 @@
     },
     "frontend/src/hooks/useMapEvents.ts": {
       "filePath": "frontend/src/hooks/useMapEvents.ts",
-      "contentHash": "8090f9776eca64306e41809e5d528cb017a5042ddb809bd6310e7a9ff42344d6",
+      "contentHash": "692dca5fc42cc78d19a03fd66bf6be2008d39be180330afd1727e152d5a646d4",
       "functions": [
         {
           "name": "clampBbox",
@@ -42495,7 +43491,7 @@
     },
     "frontend/src/lib/cluster.ts": {
       "filePath": "frontend/src/lib/cluster.ts",
-      "contentHash": "53c1059ee6fa9e822319d254d1421fdcc511f33ffe2b311cf1037731fac3ca04",
+      "contentHash": "4324c20bbe5cd832b641d4ff0e3b8c771a96fe1dd4bce57c4165052d76efbb17",
       "functions": [
         {
           "name": "clusterPoints",
@@ -42640,7 +43636,7 @@
     },
     "frontend/src/lib/network.ts": {
       "filePath": "frontend/src/lib/network.ts",
-      "contentHash": "932eb97b77994cda5afa204b34b8346a7ad5aa5a95d0afa37dc5e082d95f4384",
+      "contentHash": "1c68b0d851589218bc34481d0d6c9db8a90b3590fae0d9a0bff7f6b73aa78ba8",
       "functions": [
         {
           "name": "isOnline",
@@ -43137,7 +44133,7 @@
     },
     "frontend/src/ui/Chip.tsx": {
       "filePath": "frontend/src/ui/Chip.tsx",
-      "contentHash": "6a1903c24200ee95f31e0e30dd0af736f91a9d8d56e9b8dfee3590fd099060e4",
+      "contentHash": "f483e6efca39e62a42c1583b13e5ad115e034c7906d6b9c288a950b7f49c4dae",
       "functions": [
         {
           "name": "chipColors",
@@ -43153,7 +44149,8 @@
           "params": [
             "selected",
             "overMap",
-            "style"
+            "style",
+            "disabled"
           ],
           "exported": true,
           "lineCount": 4
@@ -43161,10 +44158,10 @@
         {
           "name": "Chip",
           "params": [
-            "{ label, selected = false, onPress, icon, style, overMap = false, testID }"
+            "{ label, selected = false, onPress, icon, style, overMap = false, disabled = false, testID }"
           ],
           "exported": true,
-          "lineCount": 18
+          "lineCount": 19
         },
         {
           "name": "StatusChip",
@@ -43215,7 +44212,7 @@
         "Chip",
         "StatusChip"
       ],
-      "totalLines": 90,
+      "totalLines": 94,
       "hasStructuralAnalysis": true
     },
     "frontend/src/ui/GlowBackground.tsx": {
@@ -44984,7 +45981,7 @@
     },
     "supabase/migrations/20261114000001_place_prices.sql": {
       "filePath": "supabase/migrations/20261114000001_place_prices.sql",
-      "contentHash": "e0b707002bbea87b2d749aaafc92385d292f2a4e14cb1a8d2f18d0dfc7f039ed",
+      "contentHash": "482d446d178227b112c9c69b994051532e16ad9ad686b975ced7a06f3a676259",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -45014,7 +46011,7 @@
     },
     "supabase/migrations/20261114000004_event_reviews.sql": {
       "filePath": "supabase/migrations/20261114000004_event_reviews.sql",
-      "contentHash": "e45439db265fc6a1160fdf3d009e4cf17b02cb7dc30a476619977dc5ecbc575b",
+      "contentHash": "cb118328b5e77145306a160aa10ef46551f63f9149f98fc369d724a057165494",
       "functions": [],
       "classes": [],
       "imports": [],
