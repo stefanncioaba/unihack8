@@ -35,10 +35,10 @@ export const transitKeys = {
   lastDepartures: (stopId: string) => ['transit', 'last-departures', stopId] as const,
 };
 
-/** Home page transit line near a position. */
+/** Home page transit line near a position (shows the next arrival, so refreshed every 30 s). */
 export function useTransitSummary(position: Coordinates) {
   const near = toNearParam(position);
-  return useQuery({ queryKey: transitKeys.summary(near), queryFn: () => getTransitSummary(near), refetchInterval: 60_000 });
+  return useQuery({ queryKey: transitKeys.summary(near), queryFn: () => getTransitSummary(near), refetchInterval: ARRIVALS_REFRESH_MS });
 }
 
 /** Active service alerts. */

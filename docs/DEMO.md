@@ -28,7 +28,7 @@ Everything runs on one laptop; phones open the app in Expo Go on the same Wi-Fi.
 
 | Time | Say | Show |
 |---|---|---|
-| 0:00–0:20 | "Timișoara has great places, events and trams, but the information is scattered across ten apps. We put it in one." | Home: transit strip ("Last tram 2 from … leaves at 23:46"), upcoming events. |
+| 0:00–0:20 | "Timișoara has great places, events and trams, but the information is scattered across ten apps. We put it in one." | Home: transit strip ("Next tram 2 at … arrives at 21:45 (in 4 min)", or "… It's the last one today."), upcoming events. |
 | 0:20–0:50 | "Everything is on one live map." | Map: category chips (cafés), tap a café; **Transit** chip → line 1 vehicles moving; tap a stop → next arrivals and last departure. |
 | 0:50–1:30 | "Ask it like a local friend." | AI: "where can I drink cheap coffee near me and how much will it cost?" → prices in lei, distances, cards → **Show on map** → **Directions** by tram. |
 | 1:30–2:30 | "Events with limited spots need people who actually come. Reliability points make no-shows visible." | Phone B joins phone A's event → ticket QR → phone A scans it → score +5. Show a profile with its history; mention −10 for no-shows and the organiser's ban button. |

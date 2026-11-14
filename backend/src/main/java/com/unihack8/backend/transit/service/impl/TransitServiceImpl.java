@@ -13,6 +13,7 @@ import com.unihack8.backend.transit.domain.dto.ArrivalsResponse;
 import com.unihack8.backend.transit.domain.dto.LastDepartureDto;
 import com.unihack8.backend.transit.domain.dto.LastDeparturesResponse;
 import com.unihack8.backend.transit.domain.dto.NearestStopDto;
+import com.unihack8.backend.transit.domain.dto.NextArrivalDto;
 import com.unihack8.backend.transit.domain.dto.TransitRouteDto;
 import com.unihack8.backend.transit.domain.dto.TransitShapeDto;
 import com.unihack8.backend.transit.domain.dto.TransitStopDto;
@@ -55,6 +56,8 @@ public class TransitServiceImpl implements TransitService {
     private static final String ALL = "all";
     private static final ZoneId CITY_ZONE = ZoneId.of("Europe/Bucharest");
     private static final DateTimeFormatter HOUR_MINUTE = DateTimeFormatter.ofPattern("HH:mm");
+    // A live arrival this close to (or after) the timetable's last departure is that last trip.
+    private static final Duration LAST_TRIP_TOLERANCE = Duration.ofMinutes(3);
     // Order of line types in GET /transit/routes.
     private static final List<String> TYPE_ORDER =
             List.of("TRAM", "TROLLEYBUS", "BUS", "EXPRESS", "METROPOLITAN", "BOAT");
@@ -256,7 +259,8 @@ public class TransitServiceImpl implements TransitService {
         return new LastDeparturesResponse(arrivals.stopId(), arrivals.stopName(), SOURCE_LIVE_ESTIMATE, departures);
     }
 
-    // Nearest stop, its last departures, alert count and a ready-to-show sentence.
+    // Nearest stop, its next arrival (flagged when it is the last one today), last departures,
+    // alert count and a ready-to-show sentence.
     @Override
     public TransitSummaryResponse summary(GeoPoint near, Locale locale) {
         StptStop nearest = allStops().stream()
@@ -264,13 +268,67 @@ public class TransitServiceImpl implements TransitService {
                 .orElseThrow(() -> ApiException.notFound("Stop"));
         NearestStopDto stop = new NearestStopDto(nearest.stopCode(), nearest.stopName(),
                 (int) Math.round(distance(near, nearest)));
-        List<LastDepartureDto> departures = lastDepartures(nearest.stopCode()).departures();
+        LastDeparturesResponse last = lastDepartures(nearest.stopCode());
+        NextArrivalDto next = nextArrival(nearest.stopCode(), last);
         boolean romanian = locale != null && "ro".equals(locale.getLanguage());
-        return new TransitSummaryResponse(stop, departures, activeAlertCount(),
-                message(stop.name(), departures, romanian));
+        String message = next != null
+                ? nextMessage(stop.name(), next, romanian)
+                : message(stop.name(), last.departures(), romanian);
+        return new TransitSummaryResponse(stop, next, last.departures(), activeAlertCount(), message);
     }
 
-    // "Last tram 2 from X leaves at 23:41" for the line that stops running first among those still running.
+    // Soonest arrival at the stop; null when none is known or STPT's arrivals are unavailable.
+    private NextArrivalDto nextArrival(String stopId, LastDeparturesResponse last) {
+        List<ArrivalDto> arrivals;
+        try {
+            arrivals = arrivals(stopId).arrivals();
+        } catch (ApiException e) {
+            return null;
+        }
+        Instant now = clock.instant();
+        return arrivals.stream()
+                .filter(a -> !a.arrivesAt().isBefore(now.minusSeconds(60)))
+                .min(Comparator.comparing(ArrivalDto::arrivesAt))
+                .map(a -> new NextArrivalDto(a.route(), a.headsign(), a.arrivesAt(), a.minutes(), a.live(),
+                        isLastTrip(a, last)))
+                .orElse(null);
+    }
+
+    // True when the timetable has no later trip of this line (same direction when the names match).
+    static boolean isLastTrip(ArrivalDto arrival, LastDeparturesResponse last) {
+        if (!SOURCE_TIMETABLE.equals(last.source())) {
+            return false; // the live estimate only sees the next hour or so, it cannot know the last trip
+        }
+        List<LastDepartureDto> sameLine = last.departures().stream()
+                .filter(d -> d.route().equalsIgnoreCase(arrival.route()))
+                .toList();
+        List<LastDepartureDto> sameDirection = sameLine.stream()
+                .filter(d -> d.headsign() != null && d.headsign().equalsIgnoreCase(arrival.headsign()))
+                .toList();
+        return (sameDirection.isEmpty() ? sameLine : sameDirection).stream()
+                .map(LastDepartureDto::lastDepartureAt)
+                .max(Comparator.naturalOrder())
+                .map(lastAt -> !arrival.arrivesAt().isBefore(lastAt.minus(LAST_TRIP_TOLERANCE)))
+                .orElse(false);
+    }
+
+    // "Next tram 9 at X arrives at 20:40 (in 5 min)", or "Last tram ... It's the last one today."
+    private String nextMessage(String stopName, NextArrivalDto next, boolean romanian) {
+        String time = HOUR_MINUTE.format(next.arrivesAt().atZone(CITY_ZONE));
+        String vehicle = vehicleWord(typeOf(next.route()), romanian);
+        String in = next.minutes() <= 0
+                ? (romanian ? "acum" : "now")
+                : (romanian ? "în " : "in ") + next.minutes() + " min";
+        if (romanian) {
+            return (next.last() ? "Ultimul " : "Următorul ") + vehicle + " " + next.route() + " în stația "
+                    + stopName + " sosește la " + time + " (" + in + ")"
+                    + (next.last() ? ". E ultimul de azi." : "");
+        }
+        return (next.last() ? "Last " : "Next ") + vehicle + " " + next.route() + " at " + stopName
+                + " arrives at " + time + " (" + in + ")" + (next.last() ? ". It's the last one today." : "");
+    }
+
+    // Fallback when no arrival is known: "Last tram 2 from X leaves at 23:41" for the line that stops running first among those still running.
     private String message(String stopName, List<LastDepartureDto> departures, boolean romanian) {
         if (departures.isEmpty()) {
             return romanian

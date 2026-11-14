@@ -525,16 +525,18 @@ Normally `TIMETABLE`: the last scheduled departure of each line and direction on
 ### `GET /transit/summary?near=45.7537,21.2257`
 
 The home page line. `message` is ready to show (Romanian when `Accept-Language` starts with `ro`, otherwise English). `near` is required.
-The message names the line from `lastDepartures` that stops earliest among those still running; when all have left it says there are no more departures tonight; with no departures at all it says none are known. If alerts cannot be loaded, `activeAlerts` is `0`.
+`nextArrival` is the soonest arrival at the nearest stop (`minutes` from now, `live` = tracked vehicle). `last: true` means the timetable has no later trip of that line (same direction) today; it is only set when `lastDepartures` comes from the timetable. The message then says it is the last one ("Last tram 9 at … arrives at 22:52 (in 2 min). It's the last one today."); otherwise "Next tram 2 at … arrives at 21:41 (in 4 min)".
+When no arrival is known (or STPT's arrivals are down) `nextArrival` is `null` and the message names the line from `lastDepartures` that stops earliest among those still running; when all have left it says there are no more departures tonight; with no departures at all it says none are known. If alerts cannot be loaded, `activeAlerts` is `0`.
 
 ```json
 {
   "nearestStop": { "id": "1", "name": "Dâmbovița (Ion Barac)", "distanceMeters": 230 },
+  "nextArrival": { "route": "2", "headsign": "Shopping City", "arrivesAt": "2026-11-14T19:45:00Z", "minutes": 4, "live": true, "last": false },
   "lastDepartures": [
     { "route": "2", "headsign": "Shopping City", "lastDepartureAt": "2026-11-14T21:41:00Z" }
   ],
   "activeAlerts": 1,
-  "message": "Last tram 2 from Dâmbovița (Ion Barac) leaves at 23:41"
+  "message": "Next tram 2 at Dâmbovița (Ion Barac) arrives at 21:45 (in 4 min)"
 }
 ```
 

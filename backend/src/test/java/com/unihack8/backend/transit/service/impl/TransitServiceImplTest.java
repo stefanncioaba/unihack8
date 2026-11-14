@@ -364,7 +364,9 @@ class TransitServiceImplTest {
         assertThat(r.nearestStop().id()).isEqualTo("1000");
         assertThat(r.nearestStop().distanceMeters()).isBetween(500, 1000);
         assertThat(r.activeAlerts()).isEqualTo(1);
-        assertThat(r.message()).isEqualTo("Last tram 2 from City of Mara (Lidl) leaves at 21:41");
+        assertThat(r.nextArrival().route()).isEqualTo("2");
+        assertThat(r.nextArrival().last()).isFalse(); // live estimate alone never claims "last"
+        assertThat(r.message()).isEqualTo("Next tram 2 at City of Mara (Lidl) arrives at 21:41 (in 66 min)");
     }
 
     // Romanian sentence; alerts down counts as 0 instead of failing the summary.
@@ -375,7 +377,7 @@ class TransitServiceImplTest {
 
         assertThat(r.nearestStop().id()).isEqualTo("1");
         assertThat(r.activeAlerts()).isZero();
-        assertThat(r.message()).isEqualTo("Ultimul tramvai 2 din Dâmbovița (Ion Barac) pleacă la 21:00");
+        assertThat(r.message()).isEqualTo("Următorul tramvai 9 în stația Dâmbovița (Ion Barac) sosește la 20:40 (în 5 min)");
     }
 
     // No arrivals known: a clear sentence instead of an error.
@@ -384,6 +386,7 @@ class TransitServiceImplTest {
         when(stpt.fetchArrivals("1000")).thenReturn(List.of());
         TransitSummaryResponse r = service.summary(new GeoPoint(45.7537, 21.2257), Locale.ENGLISH);
         assertThat(r.lastDepartures()).isEmpty();
+        assertThat(r.nextArrival()).isNull();
         assertThat(r.message()).isEqualTo("No departures known from City of Mara (Lidl) right now.");
     }
 
@@ -440,22 +443,65 @@ class TransitServiceImplTest {
         assertThat(service.lastDepartures("555").stopName()).isEqualTo("Gara de Nord");
     }
 
-    // Summary names the line that stops first among those still running; tram 9 at 22:52 here.
+    // Summary from the timetable over an evening: next arrival at the nearest stop, then "last one today", then nothing.
     @Test
     void summaryFromTimetable() {
         when(timetable.lastDepartures("1", LocalDate.of(2026, 11, 13))).thenReturn(Optional.of(List.of(
                 new ScheduledDeparture("9", "Piața Gh. Domășneanu", 22 * 3600 + 52 * 60),
                 new ScheduledDeparture("2", "Shopping City", 23 * 3600 + 46 * 60))));
+        GeoPoint here = new GeoPoint(45.7401, 21.1961);
+
+        TransitSummaryResponse r = service.summary(here, Locale.ENGLISH);
+        assertThat(r.nextArrival().route()).isEqualTo("9");
+        assertThat(r.nextArrival().last()).isFalse();
+        assertThat(r.message()).isEqualTo("Next tram 9 at Dâmbovița (Ion Barac) arrives at 20:40 (in 5 min)");
+
+        clock.advance(Duration.ofMinutes(135)); // 22:50 local: tram 9's last trip is 2 min away
+        when(stpt.fetchArrivals("1")).thenReturn(List.of(
+                new StptArrival("9", "tv", "Piața Gh. Domășneanu", "1040", List.of("22:52|2")),
+                new StptArrival("2", "tv", "Shopping City", null, List.of("23:10|20"))));
+        r = service.summary(here, Locale.ENGLISH);
+        assertThat(r.nextArrival().last()).isTrue();
+        assertThat(r.message()).isEqualTo(
+                "Last tram 9 at Dâmbovița (Ion Barac) arrives at 22:52 (in 2 min). It's the last one today.");
+        assertThat(service.summary(here, Locale.of("ro")).message()).isEqualTo(
+                "Ultimul tramvai 9 în stația Dâmbovița (Ion Barac) sosește la 22:52 (în 2 min). E ultimul de azi.");
+
+        clock.advance(Duration.ofMinutes(65)); // 23:55 local: everything has gone
+        when(stpt.fetchArrivals("1")).thenReturn(List.of());
+        r = service.summary(here, Locale.of("ro"));
+        assertThat(r.nextArrival()).isNull();
+        assertThat(r.message()).isEqualTo("Nu mai sunt plecări din Dâmbovița (Ion Barac) în seara asta.");
+    }
+
+    // STPT arrivals down but the timetable works: falls back to the last-departure sentence.
+    @Test
+    void summaryFallsBackToLastDepartureWhenArrivalsDown() {
+        when(timetable.lastDepartures("1", LocalDate.of(2026, 11, 13))).thenReturn(Optional.of(List.of(
+                new ScheduledDeparture("9", "Piața Gh. Domășneanu", 22 * 3600 + 52 * 60),
+                new ScheduledDeparture("2", "Shopping City", 23 * 3600 + 46 * 60))));
+        when(stpt.fetchArrivals("1")).thenThrow(new IllegalStateException("down"));
         TransitSummaryResponse r = service.summary(new GeoPoint(45.7401, 21.1961), Locale.ENGLISH);
+        assertThat(r.nextArrival()).isNull();
         assertThat(r.message()).isEqualTo("Last tram 9 from Dâmbovița (Ion Barac) leaves at 22:52");
+    }
 
-        clock.advance(Duration.ofMinutes(140)); // 22:55 local: tram 9 has gone
-        assertThat(service.summary(new GeoPoint(45.7401, 21.1961), Locale.ENGLISH).message())
-                .isEqualTo("Last tram 2 from Dâmbovița (Ion Barac) leaves at 23:46");
-
-        clock.advance(Duration.ofHours(1)); // 23:55 local: everything has gone
-        assertThat(service.summary(new GeoPoint(45.7401, 21.1961), Locale.of("ro")).message())
-                .isEqualTo("Nu mai sunt plecări din Dâmbovița (Ion Barac) în seara asta.");
+    // Last-trip check: same direction when the names match, otherwise the line's latest trip; small tolerance.
+    @Test
+    void lastTripDetection() {
+        LastDeparturesResponse timetableLast = new LastDeparturesResponse("1", "X", "TIMETABLE", List.of(
+                new LastDepartureDto("9", "Piața Gh. Domășneanu", Instant.parse("2026-11-13T20:52:00Z")),
+                new LastDepartureDto("9", "Calea Șagului", Instant.parse("2026-11-13T21:30:00Z"))));
+        java.util.function.Function<String, com.unihack8.backend.transit.domain.dto.ArrivalDto> at = (time) ->
+                new com.unihack8.backend.transit.domain.dto.ArrivalDto("9", "Piața Gh. Domășneanu",
+                        Instant.parse(time), 1, true);
+        assertThat(TransitServiceImpl.isLastTrip(at.apply("2026-11-13T20:50:00Z"), timetableLast)).isTrue();
+        assertThat(TransitServiceImpl.isLastTrip(at.apply("2026-11-13T20:30:00Z"), timetableLast)).isFalse();
+        assertThat(TransitServiceImpl.isLastTrip(
+                new com.unihack8.backend.transit.domain.dto.ArrivalDto("9", "Unknown name",
+                        Instant.parse("2026-11-13T20:52:00Z"), 1, true), timetableLast)).isFalse();
+        assertThat(TransitServiceImpl.isLastTrip(at.apply("2026-11-13T20:52:00Z"),
+                new LastDeparturesResponse("1", "X", "LIVE_ESTIMATE", timetableLast.departures()))).isFalse();
     }
 
     // Line names sort like people expect.
