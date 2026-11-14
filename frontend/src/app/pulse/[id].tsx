@@ -1,15 +1,18 @@
 // One neighbourhood's panel (opened by tapping its Pulse card): photo header, then tabs Events | Help.
 import { LinearGradient } from 'expo-linear-gradient';
-import { useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { FlatList, ImageBackground, Pressable, StyleSheet, View } from 'react-native';
 
 import { EventListItem } from '@/features/events/EventCards';
+import { HelpRequestRow } from '@/features/help/HelpCards';
 import { areaBbox, inArea } from '@/features/neighbourhoods/areas';
 import { neighbourhoodPhoto } from '@/features/neighbourhoods/photos';
 import { LEVEL_META } from '@/features/neighbourhoods/pulseFormat';
+import { useHelpBoard } from '@/hooks/useHelp';
 import { useEventsInArea } from '@/hooks/useMapEvents';
 import { useNeighbourhoodPulse } from '@/hooks/useNeighbourhoods';
+import { bboxParam } from '@/lib/bbox';
 import { StatusChip } from '@/ui/Chip';
 import { Screen } from '@/ui/Screen';
 import { ScreenHeader } from '@/ui/ScreenHeader';
@@ -52,9 +55,33 @@ function EventsTab({ areaId, areas }: { areaId: string; areas: Parameters<typeof
   return <FlatList data={events} keyExtractor={(e) => e.id} renderItem={({ item }) => <EventListItem event={item} />} contentContainerStyle={styles.list} testID="area-events" />;
 }
 
-/** Help requests in the area: filled in once the Neighbour Help Board is merged. */
-function HelpTab() {
-  return <EmptyState icon="hand-left-outline" title="Neighbour help" message="Help requests in this neighbourhood will show here." />;
+/** Open help requests in the area (Neighbour Help Board, PLAN 25), newest first; tap one to open it. */
+function HelpTab({ areaId, areas }: { areaId: string; areas: Parameters<typeof inArea>[2] }) {
+  const area = areas.find((a) => a.id === areaId)!;
+  const query = useHelpBoard({ bbox: bboxParam(areaBbox(area)) });
+  const requests = useMemo(() => (query.data ? inArea(query.data, areaId, areas) : []), [query.data, areaId, areas]);
+  if (query.isPending) return <LoadingState label="Loading help requests…" />;
+  if (query.isError) return <ErrorState error={query.error} onRetry={() => query.refetch()} />;
+  if (requests.length === 0) {
+    return (
+      <EmptyState
+        icon="hand-left-outline"
+        title="Nobody needs help here right now"
+        message="Ask your neighbours for a hand, or check back later."
+        actionLabel="Ask for help"
+        onAction={() => router.push('/help/new')}
+      />
+    );
+  }
+  return (
+    <FlatList
+      data={requests}
+      keyExtractor={(r) => r.id}
+      renderItem={({ item }) => <HelpRequestRow request={item} />}
+      contentContainerStyle={styles.list}
+      testID="area-help"
+    />
+  );
 }
 
 /** The neighbourhood panel screen. */
@@ -92,7 +119,7 @@ export default function NeighbourhoodScreen() {
         </ImageBackground>
       ) : null}
       <Tabs tab={tab} onChange={setTab} />
-      <View style={styles.body}>{tab === 'events' ? <EventsTab areaId={area.id} areas={pulse.data.areas} /> : <HelpTab />}</View>
+      <View style={styles.body}>{tab === 'events' ? <EventsTab areaId={area.id} areas={pulse.data.areas} /> : <HelpTab areaId={area.id} areas={pulse.data.areas} />}</View>
     </Screen>
   );
 }

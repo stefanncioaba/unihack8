@@ -154,8 +154,21 @@ describe('NeighbourhoodScreen (area panel)', () => {
     expect(await screen.findByText('Art walk through the old town')).toBeTruthy();
     expect(screen.getByText('Busy')).toBeTruthy();
     fireEvent.press(screen.getByTestId('area-tab-help'));
-    expect(await screen.findByText('Neighbour help')).toBeTruthy();
+    // Only open requests located in Cetate: not the one outside it, nor the one without a location.
+    expect(await screen.findByText('Fix a wobbly bike brake')).toBeTruthy();
+    expect(screen.queryByText('Borrow a ladder for 30 minutes')).toBeNull();
+    expect(screen.queryByText('Pick up a parcel from the post office')).toBeNull();
     expect(screen.queryByText('Art walk through the old town')).toBeNull();
+    fireEvent.press(screen.getByLabelText(/^Fix a wobbly bike brake/));
+    expect(mockRouter.push).toHaveBeenCalledWith(expect.stringMatching(/^\/help\//));
+  });
+
+  it('invites to ask for help when the area has no open requests', async () => {
+    setParams({ id: 'fabric', tab: 'help' });
+    renderScreen(<NeighbourhoodScreen />);
+    expect(await screen.findByText('Nobody needs help here right now')).toBeTruthy();
+    fireEvent.press(screen.getByText('Ask for help'));
+    expect(mockRouter.push).toHaveBeenCalledWith('/help/new');
   });
 
   it('says when the area is unknown', async () => {
