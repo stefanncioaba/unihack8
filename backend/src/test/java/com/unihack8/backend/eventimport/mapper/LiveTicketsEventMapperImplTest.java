@@ -131,6 +131,8 @@ class LiveTicketsEventMapperImplTest {
             "Mama Dansează                       | Cea mai tare petrecere | PARTY",
             "Board games night                   |                      | GAMES",
             "Degustare de vin                    |                      | FOOD",
+            "Ecologizare Parcul Rozelor          |                      | VOLUNTEER",
+            "Food drive for the winter           |                      | VOLUNTEER",
             "Mama Dansează                       |                      | OTHER"})
     void guessesCategory(String title, String description, String expected) {
         assertThat(LiveTicketsEventMapperImpl.guessCategory(title, description)).isEqualTo(expected);

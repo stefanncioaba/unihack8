@@ -3,7 +3,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { Alert, Linking, Pressable, StyleSheet, View } from 'react-native';
 
 import { friendlyError } from '@/api/errors';
-import { categoryMeta } from '@/features/events/categories';
+import { categoryMeta, VOLUNTEER_BONUS } from '@/features/events/categories';
 import { EventArt } from '@/features/events/EventArt';
 import { EventReviews } from '@/features/events/EventReviews';
 import { isFull, priceLabel, spotsLabel } from '@/features/events/format';
@@ -60,7 +60,7 @@ export default function EventDetailsScreen() {
   /** Warns about the late-cancel penalty before leaving. */
   function confirmLeave() {
     const late = minutesUntil(e.startsAt) < 120;
-    Alert.alert('Leave this event?', late ? 'Leaving less than 2 hours before the start costs 2 reliability points.' : 'You can join again later if there is space.', [
+    Alert.alert('Leave this event?', late ? 'Leaving less than 2 hours before the start costs 2 civic trust points.' : 'You can join again later if there is space.', [
       { text: 'Stay', style: 'cancel' },
       { text: 'Leave', style: 'destructive', onPress: () => leave.mutate() },
     ]);
@@ -110,6 +110,9 @@ export default function EventDetailsScreen() {
         {(e.venueName || e.address) && <InfoRow icon="location-outline">{[e.venueName, e.address].filter(Boolean).join(' · ')}</InfoRow>}
         {price && <InfoRow icon="pricetag-outline">{price}</InfoRow>}
         {spots && <InfoRow icon="people-outline">{spots}</InfoRow>}
+        {e.category === 'VOLUNTEER' && (
+          <InfoRow icon="leaf-outline">{`Volunteer action · +${VOLUNTEER_BONUS} bonus civic trust points on check-in`}</InfoRow>
+        )}
       </View>
 
       {e.lat !== null && e.lon !== null && (

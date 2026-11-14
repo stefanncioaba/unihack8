@@ -34,7 +34,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class EventServiceImpl implements EventService {
     private static final Set<String> CATEGORIES = Set.of("PARTY", "CONCERT", "THEATRE", "SPORT",
-            "GAMES", "FOOD", "ART", "MEETUP", "OTHER");
+            "GAMES", "FOOD", "ART", "MEETUP", "VOLUNTEER", "OTHER");
     private final EventRepository events;
     private final ParticipationRepository participants;
     private final ProfileRepository profiles;

@@ -37,6 +37,9 @@ public class LiveTicketsEventMapperImpl implements LiveTicketsEventMapper {
      * with a matching word wins, OTHER otherwise. Words match whole words only.
      */
     static final List<Map.Entry<String, List<String>>> CATEGORY_KEYWORDS = List.of(
+            Map.entry("VOLUNTEER", List.of("voluntariat", "voluntari", "volunteer", "volunteers", "volunteering",
+                    "ecologizare", "cleanup", "clean-up", "strangere de fonduri", "food drive", "caritabil",
+                    "charity", "donatii", "donare de sange")),
             Map.entry("THEATRE", List.of("teatru", "theatre", "theater", "spectacol", "stand-up", "standup",
                     "stand up", "comedy", "comedie", "opera", "balet", "ballet", "musical", "improv")),
             Map.entry("CONCERT", List.of("concert", "concerte", "live", "tour", "turneu", "album", "orchestra",

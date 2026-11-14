@@ -46,7 +46,7 @@ export default function SignUpScreen() {
   return (
     <AuthShell
       title="Create your account"
-      subtitle="Join events, build your reliability and meet people nearby."
+      subtitle="Join events, build your civic trust score and meet people nearby."
       footer={
         <>
           <Text tone="muted">Already have an account?</Text>

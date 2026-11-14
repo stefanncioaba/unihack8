@@ -31,6 +31,21 @@ describe('EventDetailsScreen', () => {
     expect(within(screen.getByTestId('participant-stella_99')).getByText('90')).toBeTruthy();
   });
 
+  it('marks a volunteer action with its check-in bonus', async () => {
+    setParams({ id: IDS.riverCleanup });
+    renderScreen(<EventDetailsScreen />);
+    expect(await screen.findByText('Bega riverbank cleanup')).toBeTruthy();
+    expect(screen.getByText('Volunteer')).toBeTruthy();
+    expect(screen.getByText(/\+5 bonus civic trust points on check-in/)).toBeTruthy();
+  });
+
+  it('does not show the volunteer bonus on other events', async () => {
+    setParams({ id: IDS.boardGames });
+    renderScreen(<EventDetailsScreen />);
+    await screen.findByText('Board games night');
+    expect(screen.queryByText(/bonus civic trust points/)).toBeNull();
+  });
+
   it('opens a participant profile and the organiser profile', async () => {
     setParams({ id: IDS.boardGames });
     renderScreen(<EventDetailsScreen />);
@@ -253,7 +268,7 @@ describe('ScanScreen', () => {
     await screen.findByTestId('camera-view');
     await scan('demo-ticket-stella');
     expect(await screen.findByText('stella_99 checked in')).toBeTruthy();
-    expect(screen.getByText(/\+5 reliability points/)).toBeTruthy();
+    expect(screen.getByText(/\+5 civic trust points/)).toBeTruthy();
   });
 
   it('reports an already scanned ticket after "Scan next"', async () => {

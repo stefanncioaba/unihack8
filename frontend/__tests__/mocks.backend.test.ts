@@ -1,6 +1,7 @@
 // The mock backend must behave like docs/API.md, because screens are built against it.
 import { ApiError } from '@/api/errors';
 import { mockRequest } from '@test/mocks';
+import { getState } from '@test/mocks/core';
 
 import { IDS } from './testUtils';
 
@@ -9,12 +10,12 @@ const call = (method: string, path: string, query: Record<string, unknown> = {},
 describe('mock backend: events', () => {
   it('lists upcoming events in start order with paging', async () => {
     const page0 = await call('GET', '/events', { size: 10 });
-    expect(page0).toMatchObject({ page: 0, size: 10, totalItems: 14, totalPages: 2 });
+    expect(page0).toMatchObject({ page: 0, size: 10, totalItems: 16, totalPages: 2 });
     expect(page0.items).toHaveLength(10);
     const starts = page0.items.map((e: any) => Date.parse(e.startsAt));
     expect([...starts].sort((a, b) => a - b)).toEqual(starts);
     const page1 = await call('GET', '/events', { size: 10, page: 1 });
-    expect(page1.items).toHaveLength(4);
+    expect(page1.items).toHaveLength(6);
   });
 
   it('filters by text, category (repeatable or comma-separated) and source', async () => {
@@ -109,6 +110,22 @@ describe('mock backend: create, participants, ban, check-in', () => {
     await expect(call('POST', path, {}, { token: 'garbage' })).rejects.toMatchObject({ code: 'TICKET_NOT_FOUND' });
     await expect(call('POST', `/events/${IDS.boardGames}/check-in`, {}, { token: 'x' })).rejects.toMatchObject({ code: 'NOT_ORGANIZER' });
     expect((await call('GET', `/users/${IDS.stella}`)).attendedEvents[0].id).toBe(IDS.sunsetRun);
+  });
+
+  it('gives a +5 volunteer bonus, logged separately, at a VOLUNTEER event', async () => {
+    getState().events.find((e) => e.id === IDS.sunsetRun)!.category = 'VOLUNTEER';
+    const ok = await call('POST', `/events/${IDS.sunsetRun}/check-in`, {}, { token: 'demo-ticket-stella' });
+    expect(ok).toMatchObject({ pointsChange: 10, user: { reliabilityScore: 100 } });
+    const log = await call('GET', `/users/${IDS.stella}/reliability`);
+    expect(log.entries.slice(0, 2).map((e: any) => [e.reason, e.pointsChange])).toEqual([
+      ['VOLUNTEER_BONUS', 5],
+      ['ATTENDED', 5],
+    ]);
+  });
+
+  it('lists volunteer actions under the VOLUNTEER category', async () => {
+    const page = await call('GET', '/events', { category: ['VOLUNTEER'] });
+    expect(page.items.map((e: any) => e.title).sort()).toEqual(['Bega riverbank cleanup', 'Winter food drive']);
   });
 });
 

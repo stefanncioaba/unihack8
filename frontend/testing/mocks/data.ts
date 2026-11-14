@@ -184,6 +184,9 @@ export function seed(): MockState {
     user(12, 'Language exchange', 'MEETUP', USER_IDS.andrei, null, 0, at(2, 19), 'Café Central', 45.7552, 21.2285),
     external(13, 'Vinyl party', 'PARTY', 'Fabrica', at(5, 23), [30, 50], 45.7473, 21.2412),
     external(14, 'Stand-up comedy show', 'THEATRE', 'Sala Capitol', at(6, 20), [70, 110], 45.7561, 21.2271),
+    // Volunteer actions: checking in gives a +5 civic trust bonus.
+    user(15, 'Bega riverbank cleanup', 'VOLUNTEER', USER_IDS.stella, 25, 9, at(3, 10), 'Parcul Rozelor', 45.7507, 21.2297),
+    user(16, 'Winter food drive', 'VOLUNTEER', USER_IDS.andrei, 15, 4, at(5, 11), 'Piața Victoriei', 45.7537, 21.2251),
     // Past events: hidden from lists, used for the "attended" history of profiles.
     user(101, 'Autumn photo walk', 'ART', USER_IDS.stefan, 10, 0, at(-10, 15), 'Parcul Rozelor', 45.7507, 21.2297, [
       { ...p(MOCK_ME_ID, 'ATTENDED', 'demo-ticket-me-101'), joinedAt: at(-11, 18) },

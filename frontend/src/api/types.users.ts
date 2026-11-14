@@ -7,8 +7,8 @@ export type JoinedEvent = { event: EventSummary; status: ParticipantStatus };
 /** My events: the ones I joined and the ones I organise (GET /users/me/events, PLAN 5.8). */
 export type MyEvents = { joined: JoinedEvent[]; organizing: EventSummary[] };
 
-/** Why the score changed (docs/API.md → GET /users/{id}/reliability). EVENT_RATING: the organiser's settlement from reviews (±). */
-export type ReliabilityReason = 'ATTENDED' | 'NO_SHOW' | 'LATE_CANCEL' | 'EVENT_RATING';
+/** Why the score changed (docs/API.md → GET /users/{id}/reliability). EVENT_RATING: the organiser's settlement from reviews (±). VOLUNTEER_BONUS: +5 on top of ATTENDED at a VOLUNTEER event. */
+export type ReliabilityReason = 'ATTENDED' | 'NO_SHOW' | 'LATE_CANCEL' | 'EVENT_RATING' | 'VOLUNTEER_BONUS';
 
 /** One line of the reliability history. `eventId` / `eventTitle` are null when the event was deleted. */
 export type ReliabilityEntry = {

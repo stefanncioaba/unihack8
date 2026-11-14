@@ -37,7 +37,7 @@ describe('PublicProfileScreen', () => {
     setParams({ id: IDS.stella });
     renderScreen(<PublicProfileScreen />);
     expect(await screen.findByText('stella_99')).toBeTruthy();
-    expect(screen.getByLabelText('Reliability score 90')).toBeTruthy();
+    expect(screen.getByLabelText('Civic trust score 90')).toBeTruthy();
     expect(screen.getByText('Events attended')).toBeTruthy();
     expect(screen.getByText('Autumn photo walk')).toBeTruthy();
     expect(screen.getByText('Retro gaming evening')).toBeTruthy();
@@ -92,7 +92,7 @@ describe('ProfileScreen', () => {
   it('shows my username, score and the default avatar', async () => {
     renderScreen(<ProfileScreen />);
     expect(await screen.findByText('demo_user')).toBeTruthy();
-    expect(screen.getByLabelText('Reliability score 100')).toBeTruthy();
+    expect(screen.getByLabelText('Civic trust score 100')).toBeTruthy();
     expect(screen.getByTestId('default-avatar')).toBeTruthy();
   });
 
