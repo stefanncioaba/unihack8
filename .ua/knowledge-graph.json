@@ -34,8 +34,8 @@
       "Jest"
     ],
     "description": "Hackathon mobile app for Timișoara (Connected Communities): Spring Boot API + Supabase + Expo app with events and QR reliability points, places map, live STPT transit, routing and an AI guide.",
-    "analyzedAt": "2026-11-14T17:31:12.056Z",
-    "gitCommitHash": "5848283da5dadc8b2ee1f133ba4f85d453180448"
+    "analyzedAt": "2026-11-14T17:46:55.934Z",
+    "gitCommitHash": "37e420d6f6e77e0562138b13960dbe63457d1b73"
   },
   "nodes": [
     {
@@ -31880,7 +31880,7 @@
       "type": "file",
       "name": "[id].tsx",
       "filePath": "frontend/src/app/pulse/[id].tsx",
-      "summary": "Neighbourhood panel screen opened from a Pulse card: photo header with level chip and an Events | Help tab switch; Events lists upcoming events inside the area, while the Help tab is currently a placeholder empty state for the area help requests.",
+      "summary": "Neighbourhood panel screen (opened from a Pulse card): photo, activity level and two tabs, Events (upcoming events in the area) and Help (the area's open Neighbour Help Board requests, tap to open, \"Ask for help\" when empty).",
       "tags": [
         "screen",
         "expo-router",
@@ -76751,6 +76751,20 @@
       "type": "calls",
       "direction": "forward",
       "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "file:frontend/src/features/help/HelpCards.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/app/pulse/[id].tsx",
+      "target": "file:frontend/src/hooks/useHelp.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
     }
   ],
   "layers": [
